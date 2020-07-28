@@ -36,7 +36,6 @@ export { default as Card } from './Card';
 export type { CardProps } from './Card';
 
 export { default as CardColumns } from './CardColumns';
-export { default as CardDeck } from './CardDeck';
 
 export { default as CardImg } from './CardImg';
 export type { CardImgProps } from './CardImg';

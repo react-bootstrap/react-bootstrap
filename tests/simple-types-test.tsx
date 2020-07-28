@@ -13,7 +13,6 @@ import {
   ButtonToolbar,
   Card,
   CardColumns,
-  CardDeck,
   CardGroup,
   Carousel,
   Container,
@@ -177,7 +176,6 @@ const MegaComponent = () => (
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>
       </Card>
-      <CardDeck as="div" bsPrefix="carddeck" style={style} />
       <CardGroup as="div" bsPrefix="cardgroup" style={style} />
     </CardColumns>
     <Carousel
