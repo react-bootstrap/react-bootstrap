@@ -22,7 +22,7 @@ export default function MasterDocsAlert() {
       deploymentDetails = `the ${netlify.branch} branch`;
     }
   }
-  return netlify ? (
+  return netlify && (
     <Container fluid>
       <Row>
         <Alert variant="warning" className="w-100">
@@ -34,5 +34,5 @@ export default function MasterDocsAlert() {
         </Alert>
       </Row>
     </Container>
-  ) : null;
+  );
 }
