@@ -3,25 +3,26 @@ import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-function MasterDocsAlert() {
+export default function MasterDocsAlert() {
+  const { netlify } = config;
   let deploymentDetails = null;
-  if (process.env.NETLIFY) {
-    if (process.env.PULL_REQUEST === 'true') {
+  if (netlify) {
+    if (netlify.pullRequest) {
       deploymentDetails = (
         <span>
           a{' '}
           <Alert.Link
-            href={`https://github.com/react-bootstrap/react-bootstrap/pull/${process.env.REVIEW_ID}`}
+            href={`https://github.com/react-bootstrap/react-bootstrap/pull/${netlify.reviewId}`}
           >
             pull request
           </Alert.Link>
         </span>
       );
     } else {
-      deploymentDetails = `the ${process.env.BRANCH} branch`;
+      deploymentDetails = `the ${netlify.branch} branch`;
     }
   }
-  return process.env.NETLIFY ? (
+  return netlify ? (
     <Container fluid>
       <Row>
         <Alert variant="warning" className="w-100">
@@ -35,5 +36,3 @@ function MasterDocsAlert() {
     </Container>
   ) : null;
 }
-
-export default MasterDocsAlert;
