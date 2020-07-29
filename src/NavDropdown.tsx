@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown from './Dropdown';
+import Dropdown, { DropdownProps } from './Dropdown';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavDropdownProps extends BsPrefixPropsWithChildren {
+export interface NavDropdownProps extends DropdownProps {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;
