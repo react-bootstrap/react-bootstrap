@@ -440,18 +440,12 @@ const MegaComponent = () => (
             bsPrefix="formcheckinput"
             style={style}
           />
-          <Form.Check.Label
-            htmlFor="for"
-            bsPrefix="formlabel"
-            bsCustomPrefix="formlabelcustom"
-            style={style}
-          />
+          <Form.Check.Label htmlFor="for" bsPrefix="formlabel" style={style} />
         </Form.Check>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect1">
         <Form.Label>Example select</Form.Label>
-        <Form.Control
-          as="select"
+        <Form.Select
           ref={React.createRef<HTMLSelectElement>()}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             return e;
@@ -462,17 +456,10 @@ const MegaComponent = () => (
           <option>3</option>
           <option>4</option>
           <option>5</option>
-        </Form.Control>
+        </Form.Select>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect2">
         <Form.Label column={false}>Example multiple select</Form.Label>
-        <Form.Control as="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Control>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlTextarea1">
         <Form.Label>Example textarea</Form.Label>

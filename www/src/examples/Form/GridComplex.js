@@ -29,10 +29,10 @@
 
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control as="select" defaultValue="Choose...">
+      <Form.Select defaultValue="Choose...">
         <option>Choose...</option>
         <option>...</option>
-      </Form.Control>
+      </Form.Select>
     </Form.Group>
 
     <Form.Group as={Col} controlId="formGridZip">

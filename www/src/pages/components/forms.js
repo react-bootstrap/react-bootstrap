@@ -24,7 +24,6 @@ import GridColSizes from '../../examples/Form/GridColSizes';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
 import Inline from '../../examples/Form/Inline';
-import InlineCustom from '../../examples/Form/InlineCustom';
 import InputReadOnly from '../../examples/Form/InputReadOnly';
 import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
@@ -32,9 +31,7 @@ import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
 import Range from '../../examples/Form/Range';
 import RangeCustom from '../../examples/Form/RangeCustom';
-import SelectCustom from '../../examples/Form/SelectCustom';
-import SelectCustomSize from '../../examples/Form/SelectCustomSize';
-import SelectCustomHtmlSize from '../../examples/Form/SelectCustomHtmlSize';
+import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
 import File from '../../examples/Form/File';
 import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
@@ -82,10 +79,10 @@ export default withLayout(function FormControlsSection({ data }) {
         Form controls
       </LinkedHeading>
       <p>
-        For textual form controls—like <code>input</code>s, <code>select</code>
-        s, and <code>textarea</code>s—use the <code>FormControl</code>{' '}
-        component. FormControl adds some additional styles for general
-        appearance, focus state, sizing, and more.
+        For textual form controls—like <code>input</code>s and{' '}
+        <code>textarea</code>s—use the <code>FormControl</code> component.
+        FormControl adds some additional styles for general appearance, focus
+        state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
       <p>
@@ -101,7 +98,6 @@ export default withLayout(function FormControlsSection({ data }) {
         respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
-      <ReactPlayground codeText={SelectSizes} />
       <LinkedHeading h="3" id="forms-input-readonly">
         Readonly
       </LinkedHeading>
@@ -177,6 +173,19 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
+
+      <LinkedHeading h="2" id="forms-select">
+        Select
+      </LinkedHeading>
+      <ReactPlayground codeText={SelectBasic} />
+      <LinkedHeading h="3" id="forms-select-sizes">
+        Sizing
+      </LinkedHeading>
+      <p>
+        You may also choose from small and large custom selects to match our
+        similarly sized text inputs.
+      </p>
+      <ReactPlayground codeText={SelectSizes} />
 
       <LinkedHeading h="2" id="forms-layout">
         Layout
@@ -305,8 +314,6 @@ export default withLayout(function FormControlsSection({ data }) {
         the <code>srOnly</code> prop.
       </p>
       <ReactPlayground codeText={Inline} />
-      <p>Custom form controls and selects are also supported.</p>
-      <ReactPlayground codeText={InlineCustom} />
       <Callout>
         <h5>Alternatives to hidden labels</h5>
         Assistive technologies such as screen readers will have trouble with
@@ -475,29 +482,6 @@ export default withLayout(function FormControlsSection({ data }) {
         encapsulates the above, in a very small component wrapper.
       </Callout>
 
-      <LinkedHeading h="3" id="forms-custom-select">
-        Select
-      </LinkedHeading>
-      <p>
-        For the <code>select</code> form control you can pass the{' '}
-        <code>custom</code> prop to get custom styling of the select element.
-        Custom styles are limited to the <code>select</code> initial appearance
-        and cannot modify the <code>option</code> styling due to browser
-        limitations.
-      </p>
-      <ReactPlayground codeText={SelectCustom} />
-      <h4>Sizing</h4>
-      <p>
-        The custom <code>select</code> element supports sizing.
-      </p>
-      <ReactPlayground codeText={SelectCustomSize} />
-      <h4>HTML size</h4>
-      <p>
-        You can also specify the visible options of your <code>select</code>{' '}
-        element.
-      </p>
-      <ReactPlayground codeText={SelectCustomHtmlSize} />
-
       <LinkedHeading h="3" id="forms-custom-range">
         Range
       </LinkedHeading>
@@ -602,6 +586,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
       <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
+      <ComponentApi metadata={data.FormSelect} exportedBy={data.Form} />
     </>
   );
 });
@@ -645,6 +630,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
+      ...ComponentApi_metadata
+    }
+    FormSelect: componentMetadata(displayName: { eq: "FormSelect" }) {
       ...ComponentApi_metadata
     }
   }
