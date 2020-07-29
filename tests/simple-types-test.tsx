@@ -417,7 +417,6 @@ const MegaComponent = () => (
         <Form.Check
           ref={React.createRef<HTMLInputElement>()}
           as="input"
-          custom
           disabled
           feedback="test"
           feedbackTooltip
@@ -429,18 +428,16 @@ const MegaComponent = () => (
           title="title"
           type="checkbox"
           bsPrefix="formcheck"
-          bsCustomPrefix="customcheck"
+          bsSwitchPrefix="formswitch"
           style={style}
         >
           <Form.Check.Input
             as="input"
             id="id"
             isInvalid
-            isStatic
             isValid
             type="radio"
             bsPrefix="formcheckinput"
-            bsCustomPrefix="customcheckinput"
             style={style}
           />
           <Form.Check.Label
