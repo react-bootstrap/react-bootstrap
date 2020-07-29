@@ -17,16 +17,6 @@ describe('<FormControl>', () => {
     mount(<FormControl as="textarea" />).assertSingle('textarea.form-control');
   });
 
-  it('should support select', () => {
-    mount(<FormControl as="select" />).assertSingle('select.form-control');
-  });
-
-  it('should support custom select', () => {
-    mount(<FormControl as="select" custom />)
-      .assertSingle('select.custom-select')
-      .assertNone('.form-control');
-  });
-
   it('should support type=file', () => {
     mount(<FormControl type="file" />)
       .assertSingle('[type="file"].form-control-file')

@@ -84,6 +84,9 @@ export type { FormLabelProps } from './FormLabel';
 export { default as FormText } from './FormText';
 export type { FormTextProps } from './FormText';
 
+export { default as FormSelect } from './FormSelect';
+export type { FormSelectProps } from './FormSelect';
+
 export { default as Container } from './Container';
 export type { ContainerProps } from './Container';
 

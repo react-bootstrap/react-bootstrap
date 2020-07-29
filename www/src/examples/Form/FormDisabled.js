@@ -6,9 +6,9 @@
     </Form.Group>
     <Form.Group>
       <Form.Label htmlFor="disabledSelect">Disabled select menu</Form.Label>
-      <Form.Control as="select" id="disabledSelect">
+      <Form.Select id="disabledSelect">
         <option>Disabled select</option>
-      </Form.Control>
+      </Form.Select>
     </Form.Group>
     <Form.Group>
       <Form.Check

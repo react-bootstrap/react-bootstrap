@@ -8,10 +8,7 @@ import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-type FormControlElement =
-  | HTMLInputElement
-  | HTMLSelectElement
-  | HTMLTextAreaElement;
+type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface FormControlProps extends BsPrefixProps {
   bsCustomPrefix?: string;
@@ -61,14 +58,13 @@ const propTypes = {
   /**
    * The size attribute of the underlying HTML element.
    * Specifies the visible width in characters if `as` is `'input'`.
-   * Specifies the number of visible options if `as` is `'select'`.
    */
   htmlSize: PropTypes.number,
 
   /**
    * The underlying HTML element to use when rendering the FormControl.
    *
-   * @type {('input'|'textarea'|'select'|elementType)}
+   * @type {('input'|'textarea'|elementType)}
    */
   as: PropTypes.elementType,
 
@@ -101,10 +97,10 @@ const propTypes = {
    * Use Bootstrap's custom form elements to replace the browser defaults
    * @type boolean
    */
-  custom: all(PropTypes.bool, ({ as, type, custom }) =>
-    custom === true && type !== 'range' && as !== 'select'
+  custom: all(PropTypes.bool, ({ type, custom }) =>
+    custom === true && type !== 'range'
       ? Error(
-          '`custom` can only be set to `true` when the input type is `range`, or  `select`',
+          '`custom` can only be set to `true` when the input type is `range`',
         )
       : null,
   ),
@@ -147,7 +143,7 @@ const FormControl: BsPrefixRefForwardingComponent<
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
-    }: FormControlProps,
+    },
     ref,
   ) => {
     const { controlId } = useContext(FormContext);
@@ -164,11 +160,6 @@ const FormControl: BsPrefixRefForwardingComponent<
       classes = { [`${bsPrefix}-file`]: true };
     } else if (type === 'range') {
       classes = { [`${bsPrefix}-range`]: true };
-    } else if (Component === 'select' && custom) {
-      classes = {
-        [`${bsPrefix}-select`]: true,
-        [`${bsPrefix}-select-${size}`]: size,
-      };
     } else {
       classes = {
         [bsPrefix]: true,

@@ -55,17 +55,17 @@ const formInstance = (
 
     <Form.Group controlId="Form.ControlsSelect">
       <Form.Label>Select</Form.Label>
-      <Form.Control as="select" placeholder="select">
+      <Form.Select placeholder="select">
         <option value="select">select</option>
         <option value="other">...</option>
-      </Form.Control>
+      </Form.Select>
     </Form.Group>
     <Form.Group controlId="Form.ControlsSelectMultiple">
       <Form.Label>Multiple select</Form.Label>
-      <Form.Control as="select" multiple>
+      <Form.Select multiple>
         <option value="select">select (multiple)</option>
         <option value="other">...</option>
-      </Form.Control>
+      </Form.Select>
     </Form.Group>
 
     <Form.Group controlId="Form.ControlsTextarea">

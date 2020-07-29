@@ -6,6 +6,7 @@ import FormFile from './FormFile';
 import FormControl from './FormControl';
 import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
+import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -30,6 +31,7 @@ type Form = BsPrefixRefForwardingComponent<'form', FormProps> & {
   Switch: typeof Switch;
   Label: typeof FormLabel;
   Text: typeof FormText;
+  Select: typeof FormSelect;
 };
 
 const propTypes = {
@@ -106,5 +108,6 @@ FormImpl.File = FormFile;
 FormImpl.Switch = Switch;
 FormImpl.Label = FormLabel;
 FormImpl.Text = FormText;
+FormImpl.Select = FormSelect;
 
 export default FormImpl;
