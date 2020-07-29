@@ -6,6 +6,7 @@ import FormFile from './FormFile';
 import FormControl from './FormControl';
 import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
+import FormRange from './FormRange';
 import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
@@ -31,6 +32,7 @@ type Form = BsPrefixRefForwardingComponent<'form', FormProps> & {
   Switch: typeof Switch;
   Label: typeof FormLabel;
   Text: typeof FormText;
+  Range: typeof FormRange;
   Select: typeof FormSelect;
 };
 
@@ -108,6 +110,7 @@ FormImpl.File = FormFile;
 FormImpl.Switch = Switch;
 FormImpl.Label = FormLabel;
 FormImpl.Text = FormText;
+FormImpl.Range = FormRange;
 FormImpl.Select = FormSelect;
 
 export default FormImpl;
