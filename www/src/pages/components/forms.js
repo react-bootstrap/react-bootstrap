@@ -30,7 +30,6 @@ import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
 import Range from '../../examples/Form/Range';
-import RangeCustom from '../../examples/Form/RangeCustom';
 import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
 import File from '../../examples/Form/File';
@@ -116,10 +115,6 @@ export default withLayout(function FormControlsSection({ data }) {
         default form field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
-      <LinkedHeading h="2" id="forms-range">
-        Range Inputs
-      </LinkedHeading>
-      <ReactPlayground codeText={Range} />
       <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
       </LinkedHeading>
@@ -156,11 +151,9 @@ export default withLayout(function FormControlsSection({ data }) {
         </strong>
       </p>
       <ReactPlayground codeText={NoLabels} />
-
       <LinkedHeading h="3" id="forms-check-api">
         Customizing FormCheck rendering
       </LinkedHeading>
-
       <p>
         When you need tighter control, or want to customize how the{' '}
         <code>FormCheck</code> component renders, it may better to use it's
@@ -173,7 +166,15 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
-
+      <LinkedHeading h="2" id="forms-range">
+        Range
+      </LinkedHeading>
+      Create custom <code>{'<input type="range">'}</code> controls with
+      <code>{'<FormRange>'}</code>. The track (the background) and thumb (the
+      value) are both styled to appear the same across browsers. As only Firefox
+      supports “filling” their track from the left or right of the thumb as a
+      means to visually indicate progress, we do not currently support it.
+      <ReactPlayground codeText={Range} />
       <LinkedHeading h="2" id="forms-select">
         Select
       </LinkedHeading>
@@ -186,7 +187,6 @@ export default withLayout(function FormControlsSection({ data }) {
         similarly sized text inputs.
       </p>
       <ReactPlayground codeText={SelectSizes} />
-
       <LinkedHeading h="2" id="forms-layout">
         Layout
       </LinkedHeading>
@@ -427,7 +427,6 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>{'<form>'}</code> element.
       </Callout>
       <ReactPlayground codeText={ValidationNative} />
-
       <LinkedHeading h="3" id="forms-validation-libraries">
         Form libraries and server-rendered styles
       </LinkedHeading>
@@ -440,7 +439,6 @@ export default withLayout(function FormControlsSection({ data }) {
         <a href="https://github.com/jaredpalmer/formik">Formik</a>.
       </p>
       <ReactPlayground codeText={ValidationFormik} />
-
       <LinkedHeading h="3" id="forms-validation-tooltips">
         Tooltips
       </LinkedHeading>
@@ -452,11 +450,9 @@ export default withLayout(function FormControlsSection({ data }) {
         but your project may require an alternative setup.
       </p>
       <ReactPlayground codeText={ValidationTooltips} />
-
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples
       </LinkedHeading>
-
       <LinkedHeading h="2" id="forms-custom">
         Custom forms
       </LinkedHeading>
@@ -466,7 +462,6 @@ export default withLayout(function FormControlsSection({ data }) {
         built on top of semantic and accessible markup, so they’re solid
         replacements for any default form control.
       </p>
-
       <LinkedHeading h="3" id="forms-custom-switch">
         Switches
       </LinkedHeading>
@@ -475,26 +470,11 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>type="switch"</code> to render a toggle switch. Switches also
         support the same customizable children as <code>{'<FormCheck>'}</code>.
       </p>
-
       <ReactPlayground codeText={Switch} />
       <Callout>
         You can also use the <code>{'<Form.Switch>'}</code> alias which
         encapsulates the above, in a very small component wrapper.
       </Callout>
-
-      <LinkedHeading h="3" id="forms-custom-range">
-        Range
-      </LinkedHeading>
-      <p>
-        For the <code>range</code> form control you can pass the{' '}
-        <code>custom</code> prop to get custom styling of the select element.
-        The track (the background) and thumb (the value) are both styled to
-        appear the same across browsers. As only IE and Firefox support
-        “filling” their track from the left or right of the thumb as a means to
-        visually indicate progress, we do not currently support it.
-      </p>
-      <ReactPlayground codeText={RangeCustom} />
-
       <LinkedHeading h="3" id="forms-custom-file">
         File
       </LinkedHeading>
@@ -509,7 +489,6 @@ export default withLayout(function FormControlsSection({ data }) {
         .
       </Callout>
       <ReactPlayground codeText={File} />
-
       <h4>Translating or customizing the strings with HTML</h4>
       <p>
         Bootstrap also provides a way to translate the “Browse” text in HTML
@@ -521,7 +500,6 @@ export default withLayout(function FormControlsSection({ data }) {
         unless the <code>custom</code> prop is set.
       </Callout>
       <ReactPlayground codeText={FileButtonTextHTML} />
-
       <h4>Translating or customizing the strings with SCSS</h4>
       <p>
         Please refer to the official{' '}
@@ -531,7 +509,6 @@ export default withLayout(function FormControlsSection({ data }) {
         . The <code>lang</code> prop can be used to pass the language.
       </p>
       <ReactPlayground codeText={FileButtonTextScss} />
-
       <h4>Customizing FormFile rendering</h4>
       <p>
         When you need tighter control, or want to customize how the{' '}
@@ -563,7 +540,6 @@ export default withLayout(function FormControlsSection({ data }) {
         </ul>
       </Callout>
       <ReactPlayground codeText={FileApi} />
-
       <LinkedHeading h="2" id="forms-api">
         API
       </LinkedHeading>
@@ -586,6 +562,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
       <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
+      <ComponentApi metadata={data.FormRange} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormSelect} exportedBy={data.Form} />
     </>
   );
@@ -630,6 +607,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
+      ...ComponentApi_metadata
+    }
+    FormRange: componentMetadata(displayName: { eq: "FormRange" }) {
       ...ComponentApi_metadata
     }
     FormSelect: componentMetadata(displayName: { eq: "FormSelect" }) {

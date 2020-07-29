@@ -393,7 +393,6 @@ const MegaComponent = () => (
         />
         <Form.Control
           as="input"
-          custom
           disabled
           htmlSize={1}
           id="id"
@@ -442,6 +441,15 @@ const MegaComponent = () => (
           />
           <Form.Check.Label htmlFor="for" bsPrefix="formlabel" style={style} />
         </Form.Check>
+        <Form.Range
+          bsPrefix="prefix"
+          ref={React.createRef<HTMLInputElement>()}
+          min={0}
+          max={100}
+          value={50}
+          className="class"
+          style={style}
+        />
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect1">
         <Form.Label>Example select</Form.Label>

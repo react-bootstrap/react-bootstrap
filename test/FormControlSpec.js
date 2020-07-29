@@ -23,18 +23,6 @@ describe('<FormControl>', () => {
       .assertNone('.form-control');
   });
 
-  it('should support type=range', () => {
-    mount(<FormControl type="range" />)
-      .assertSingle('[type="range"].form-control-range')
-      .assertNone('.form-control');
-  });
-
-  it('should support custom type=range', () => {
-    mount(<FormControl type="range" custom />)
-      .assertSingle('[type="range"].custom-range')
-      .assertNone('.form-control-range')
-      .assertNone('.form-control');
-  });
   it('should support plaintext inputs', () => {
     mount(<FormControl plaintext />).assertSingle(
       'input.form-control-plaintext',
