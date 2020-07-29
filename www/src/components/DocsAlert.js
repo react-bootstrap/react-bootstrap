@@ -11,7 +11,7 @@ export default function DocsAlert() {
         <Row>
           <Alert variant="warning" className="w-100">
             You are currently viewing the auto-generated docs from{' '}
-            {netlify.pullRequest ? (
+            {netlify.pullRequest === 'true' ? (
               <span>
                 a{' '}
                 <Alert.Link
@@ -21,7 +21,9 @@ export default function DocsAlert() {
                 </Alert.Link>
               </span>
             ) : (
-              <span>the {netlify.branch} branch</span>
+              <span>
+                the <b>{netlify.branch}</b> branch
+              </span>
             )}
             . The docs for the current release are available at{' '}
             <Alert.Link href="https://react-bootstrap.github.io/">
