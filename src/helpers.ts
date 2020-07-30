@@ -13,10 +13,6 @@ export interface BsPrefixAndClassNameOnlyProps {
   className?: string;
 }
 
-export interface BsCustomPrefixProps {
-  bsCustomPrefix?: string;
-}
-
 export interface BsPrefixProps<
   As extends React.ElementType = React.ElementType
 > extends BsPrefixAndClassNameOnlyProps {

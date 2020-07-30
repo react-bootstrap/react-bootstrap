@@ -9,6 +9,7 @@ import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
 import CheckInline from '../../examples/Form/CheckInline';
 import FormFile from '../../examples/Form/FormFile';
+import FormFileSizes from '../../examples/Form/FormFileSizes';
 import FormDisabled from '../../examples/Form/FormDisabled';
 import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
@@ -32,9 +33,6 @@ import Switch from '../../examples/Form/Switch';
 import Range from '../../examples/Form/Range';
 import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
-import File from '../../examples/Form/File';
-import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
-import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
 import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
@@ -84,10 +82,6 @@ export default withLayout(function FormControlsSection({ data }) {
         state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
-      <p>
-        For file inputs, use <code>Form.File</code>.
-      </p>
-      <ReactPlayground codeText={FormFile} />
       <LinkedHeading h="3" id="forms-input-sizes">
         Sizing
       </LinkedHeading>
@@ -166,6 +160,31 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
+      <LinkedHeading h="2" id="forms-file">
+        File
+      </LinkedHeading>
+      <ReactPlayground codeText={FormFile} />
+      <LinkedHeading h="3" id="forms-file-sizes">
+        Sizing
+      </LinkedHeading>
+      <p>
+        You may also choose from small and large file inputs to match our
+        similarly sized text inputs.
+      </p>
+      <ReactPlayground codeText={FormFileSizes} />
+      <h4>Customizing FormFile rendering</h4>
+      <p>
+        When you need tighter control, or want to customize how the{' '}
+        <code>FormFile</code> component renders, it may be better to use its
+        constituent parts directly.
+      </p>
+      <p>
+        By providing <code>children</code> to the <code>FormFile</code> and{' '}
+        <code>FormFileLabel</code> you can forgo the default rendering and
+        handle it yourself. (You can still provide an <code>id</code> to the{' '}
+        <code>FormFile</code> and have it propagate to the label and input).
+      </p>
+      <ReactPlayground codeText={FileApi} />
       <LinkedHeading h="2" id="forms-range">
         Range
       </LinkedHeading>
@@ -475,71 +494,6 @@ export default withLayout(function FormControlsSection({ data }) {
         You can also use the <code>{'<Form.Switch>'}</code> alias which
         encapsulates the above, in a very small component wrapper.
       </Callout>
-      <LinkedHeading h="3" id="forms-custom-file">
-        File
-      </LinkedHeading>
-      <p>A custom styled File uploader.</p>
-      <Callout>
-        The custom <code>FormFile</code> will by default not visibly display
-        your selected file. This requires additional JS. The recommended plugin
-        to animate custom file input is{' '}
-        <a href="https://www.npmjs.com/package/bs-custom-file-input">
-          bs-custom-file-input
-        </a>
-        .
-      </Callout>
-      <ReactPlayground codeText={File} />
-      <h4>Translating or customizing the strings with HTML</h4>
-      <p>
-        Bootstrap also provides a way to translate the “Browse” text in HTML
-        with the <code>data-browse</code> attribute which can be added to the
-        custom input label (example in Dutch):
-      </p>
-      <Callout>
-        Note that the <code>data-browse</code> attribute does not to anything
-        unless the <code>custom</code> prop is set.
-      </Callout>
-      <ReactPlayground codeText={FileButtonTextHTML} />
-      <h4>Translating or customizing the strings with SCSS</h4>
-      <p>
-        Please refer to the official{' '}
-        <a href="https://getbootstrap.com/docs/4.4/components/forms/#translating-or-customizing-the-strings-with-scss">
-          Bootstrap documentation for translating via SCSS
-        </a>
-        . The <code>lang</code> prop can be used to pass the language.
-      </p>
-      <ReactPlayground codeText={FileButtonTextScss} />
-      <h4>Customizing FormFile rendering</h4>
-      <p>
-        When you need tighter control, or want to customize how the{' '}
-        <code>FormFile</code> component renders, it may be better to use it's
-        constituent parts directly.
-      </p>
-      <p>
-        By providing <code>children</code> to the <code>FormFile</code> you can
-        forgo the default rendering and handle it yourself. (You can still
-        provide an <code>id</code> to the <code>FormFile</code> and have it
-        propagate to the label and input).
-      </p>
-      <Callout>
-        <p>
-          When customizing the <code>FormFile</code> rendering it is important
-          to note the order of the <code>label</code> and <code>input</code>{' '}
-          elements.
-        </p>
-        <ul>
-          <li>
-            If you are not setting the <code>custom</code> prop the
-            <code>label</code> should be before the <code>input</code>.
-          </li>
-          <li>
-            If you are setting the custom prop the <code>input</code> element
-            has to be placed before the <code>label</code> or the{' '}
-            <code>buttonText</code> prop will not work.
-          </li>
-        </ul>
-      </Callout>
-      <ReactPlayground codeText={FileApi} />
       <LinkedHeading h="2" id="forms-api">
         API
       </LinkedHeading>
