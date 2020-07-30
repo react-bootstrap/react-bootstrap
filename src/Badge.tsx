@@ -4,11 +4,12 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant } from './types';
+import { Color, Variant } from './types';
 
 export interface BadgeProps extends BsPrefixProps {
   variant?: Variant;
   pill?: boolean;
+  text?: Color;
 }
 
 type Badge = BsPrefixRefForwardingComponent<'span', BadgeProps>;
@@ -29,7 +30,12 @@ const propTypes = {
    * some additional horizontal padding
    */
   pill: PropTypes.bool.isRequired,
-
+  /**
+   * Sets card text color
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   */
+  text: PropTypes.string,
   /** @default span */
   as: PropTypes.elementType,
 };
@@ -44,6 +50,7 @@ const Badge: Badge = React.forwardRef(
       bsPrefix,
       variant,
       pill,
+      text,
       className,
       as: Component = 'span',
       ...props
@@ -58,8 +65,9 @@ const Badge: Badge = React.forwardRef(
         className={classNames(
           className,
           prefix,
-          pill && `${prefix}-pill`,
-          variant && `${prefix}-${variant}`,
+          pill && `rounded-pill`,
+          text && `text-${text}`,
+          variant && `bg-${variant}`,
         )}
       />
     );
