@@ -11,10 +11,7 @@ import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
 import { useBootstrapPrefix } from './ThemeProvider';
-import createWithBsPrefix from './createWithBsPrefix';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-
-const FormRow = createWithBsPrefix('form-row');
 
 export interface FormProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -24,7 +21,6 @@ export interface FormProps
 }
 
 type Form = BsPrefixRefForwardingComponent<'form', FormProps> & {
-  Row: typeof FormRow;
   Group: typeof FormGroup;
   Control: typeof FormControl;
   Check: typeof FormCheck;
@@ -102,7 +98,6 @@ FormImpl.displayName = 'Form';
 FormImpl.propTypes = propTypes;
 FormImpl.defaultProps = defaultProps;
 
-FormImpl.Row = FormRow;
 FormImpl.Group = FormGroup;
 FormImpl.Control = FormControl;
 FormImpl.Check = FormCheck;

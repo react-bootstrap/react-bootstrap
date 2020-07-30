@@ -31,7 +31,7 @@ function FormExample() {
         errors,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <Form.Row>
+          <Row>
             <Form.Group as={Col} md="4" controlId="validationFormik101">
               <Form.Label>First name</Form.Label>
               <Form.Control
@@ -75,8 +75,8 @@ function FormExample() {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-          </Form.Row>
-          <Form.Row>
+          </Row>
+          <Row>
             <Form.Group as={Col} md="6" controlId="validationFormik103">
               <Form.Label>City</Form.Label>
               <Form.Control
@@ -121,7 +121,7 @@ function FormExample() {
                 {errors.zip}
               </Form.Control.Feedback>
             </Form.Group>
-          </Form.Row>
+          </Row>
           <Form.Group>
             <Form.File
               className="position-relative"
