@@ -9,7 +9,7 @@ describe('<FormFile>', () => {
         id="foo"
         name="foo"
         label="My label"
-        buttonText="My browse"
+        button="My browse"
         className="my-file"
       />,
     );

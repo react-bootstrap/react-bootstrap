@@ -110,7 +110,7 @@ const FormFile: FormFile = (React.forwardRef(
       isInvalid = false,
       feedbackTooltip = false,
       feedback,
-      buttonText,
+      button,
       className,
       style,
       label,
@@ -153,7 +153,7 @@ const FormFile: FormFile = (React.forwardRef(
                 disabled={disabled}
                 as={inputAs}
               />
-              <FormFileLabel label={label} buttonText={buttonText} />
+              <FormFileLabel label={label} button={button} />
               {(isValid || isInvalid) && (
                 <Feedback
                   type={isValid ? 'valid' : 'invalid'}
