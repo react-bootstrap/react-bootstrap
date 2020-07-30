@@ -1,5 +1,5 @@
 <Form>
-  <Form.Row className="align-items-center">
+  <Row className="align-items-center">
     <Col xs="auto">
       <Form.Label htmlFor="inlineFormInput" srOnly>
         Name
@@ -34,5 +34,5 @@
         Submit
       </Button>
     </Col>
-  </Form.Row>
+  </Row>
 </Form>;

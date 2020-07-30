@@ -12,7 +12,6 @@ import FormFile from '../../examples/Form/FormFile';
 import FormDisabled from '../../examples/Form/FormDisabled';
 import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
-import FormRow from '../../examples/Form/FormRow';
 import FormText from '../../examples/Form/FormText';
 import FormTextInline from '../../examples/Form/FormTextInline';
 import FormLabelSizing from '../../examples/Form/FormLabelSizing';
@@ -221,25 +220,11 @@ export default withLayout(function FormControlsSection({ data }) {
         additional alignment options.
       </p>
       <ReactPlayground codeText={GridBasic} />
-      <LinkedHeading h="4" id="forms-layout-form-row">
-        Form row
-      </LinkedHeading>
-      <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
-        , a variation of the standard grid row that overrides the default column
-        gutters for tighter and more compact layouts.
-      </p>
-      <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
       <LinkedHeading h="4" id="horizontal-forms">
         Horizontal form
       </LinkedHeading>
-      <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
-        , a variation of the standard grid row that overrides the default column
-        gutters for tighter and more compact layouts.
-      </p>
       <ReactPlayground codeText={Horizontal} />
       <LinkedHeading h="4" id="horizontal-forms-label-sizing">
         Horizontal form label sizing
@@ -254,12 +239,11 @@ export default withLayout(function FormControlsSection({ data }) {
       </LinkedHeading>
       <p>
         As shown in the previous examples, our grid system allows you to place
-        any number of <code>{'<Col>'}</code>s within a <code>{'<Row>'}</code> or{' '}
-        <code>{'<Form.Row>'}</code>. They'll split the available width equally
-        between them. You may also pick a subset of your columns to take up more
-        or less space, while the remaining <code>{'<Col>'}</code>s equally split
-        the rest, with specific column classes like{' '}
-        <code>{'<Col xs={7}>'}</code>.
+        any number of <code>{'<Col>'}</code>s within a <code>{'<Row>'}</code>.
+        They'll split the available width equally between them. You may also
+        pick a subset of your columns to take up more or less space, while the
+        remaining <code>{'<Col>'}</code>s equally split the rest, with specific
+        column classes like <code>{'<Col xs={7}>'}</code>.
       </p>
       <ReactPlayground codeText={GridColSizes} />
       <LinkedHeading h="4" id="forms-auto-sizing">
@@ -544,7 +528,6 @@ export default withLayout(function FormControlsSection({ data }) {
         API
       </LinkedHeading>
       <ComponentApi metadata={data.Form} />
-      <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormText} exportedBy={data.Form} />
@@ -571,9 +554,6 @@ export default withLayout(function FormControlsSection({ data }) {
 export const query = graphql`
   query FormQuery {
     Form: componentMetadata(displayName: { eq: "Form" }) {
-      ...ComponentApi_metadata
-    }
-    FormRow: componentMetadata(displayName: { eq: "FormRow" }) {
       ...ComponentApi_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {

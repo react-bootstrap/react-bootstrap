@@ -365,7 +365,6 @@ const MegaComponent = () => (
       validated
       bsPrefix="form"
     >
-      <Form.Row as="div" bsPrefix="formrow" style={style} />
       <Form.Group
         ref={React.createRef<HTMLDivElement>()}
         as="div"
