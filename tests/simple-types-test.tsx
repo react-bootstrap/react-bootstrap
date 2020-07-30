@@ -500,34 +500,24 @@ const MegaComponent = () => (
         as="div"
         id="custom-file"
         label="Custom file input"
-        custom
-        data-browse="browse"
+        button="Browse custom"
         disabled
         feedback="feedback"
         feedbackTooltip
         inputAs="input"
         isInvalid
         isValid
-        lang="lang"
         bsPrefix="formfile"
-        bsCustomPrefix="formfilecustom"
+        size="sm"
         style={style}
       >
-        <Form.File.Label
-          data-browse="browse"
-          htmlFor="id"
-          bsPrefix="formfilelabel"
-          bsCustomPrefix="formfilelabelcustom"
-          style={style}
-        />
+        <Form.File.Label htmlFor="id" bsPrefix="formfilelabel" style={style} />
         <Form.File.Input
           as="input"
           id="id"
           isInvalid
           isValid
-          lang="en"
           bsPrefix="formfileinput"
-          bsCustomPrefix="formfileinputcustom"
           style={style}
         />
       </Form.File>
@@ -535,7 +525,6 @@ const MegaComponent = () => (
         ref={React.createRef<HTMLInputElement & FormFile>()}
         id="custom-file-ref"
         label="Custom file input"
-        custom
       />
 
       <Form.Switch label="Switch" disabled />
