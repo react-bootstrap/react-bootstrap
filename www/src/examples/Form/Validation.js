@@ -82,7 +82,7 @@
     </Form.Group>
   </Form>
 
-  <Form as="fieldset" inline>
+  <Form as="fieldset">
     <Form.Group controlId="formValidationWarning4" validationState="warning">
       <Form.Label>Input with warning</Form.Label> <Form.Control type="text" />
       <Form.Control />

@@ -13,7 +13,6 @@ import FormDisabled from '../../examples/Form/FormDisabled';
 import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
 import FormText from '../../examples/Form/FormText';
-import FormTextInline from '../../examples/Form/FormTextInline';
 import FormLabelSizing from '../../examples/Form/FormLabelSizing';
 import GridAutoSizing from '../../examples/Form/GridAutoSizing';
 import GridAutoSizingCustom from '../../examples/Form/GridAutoSizingCustom';
@@ -22,7 +21,6 @@ import GridBasic from '../../examples/Form/GridBasic';
 import GridColSizes from '../../examples/Form/GridColSizes';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
-import Inline from '../../examples/Form/Inline';
 import InputReadOnly from '../../examples/Form/InputReadOnly';
 import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
@@ -202,9 +200,8 @@ export default withLayout(function FormControlsSection({ data }) {
         The <code>FormGroup</code> component is the easiest way to add some
         structure to forms. It provides a flexible container for grouping of
         labels, controls, optional help text, and form validation messaging. By
-        default it only applies margin-bottom, but it picks up additional styles
-        in <code>{'<Form inline >'}</code> as needed. Use it with{' '}
-        <code>fieldset</code>s, <code>div</code>s, or nearly any other element.
+        default it only applies margin-bottom. Use it with <code>fieldset</code>
+        s, <code>div</code>s, or nearly any other element.
       </p>
       <p>
         You also add the <code>controlId</code> prop to accessibly wire the
@@ -266,51 +263,6 @@ export default withLayout(function FormControlsSection({ data }) {
         supported.
       </p>
       <ReactPlayground codeText={GridAutoSizingCustom} />
-      <LinkedHeading h="3" id="forms-inline">
-        Inline forms
-      </LinkedHeading>
-      <p>
-        Use the <code>inline</code> prop to display a series of labels, form
-        controls, and buttons on a single horizontal row. Form controls within
-        forms vary slightly from their default states.
-      </p>
-      <ul>
-        <li>
-          Controls are <code>display: flex</code>, collapsing any HTML white
-          space and allowing you to provide alignment control with spacing and
-          utilities.
-        </li>
-        <li>
-          Controls and input groups receive <code>width: auto</code> to override
-          the Bootstrap default <code>width: 100%</code>.
-        </li>
-        <li>
-          Controls{' '}
-          <b>only appear inline in viewports that are at least 576px wide</b> to
-          account for narrow viewports on mobile devices.
-        </li>
-      </ul>
-      <p>
-        You may need to manually address the width and alignment of individual
-        form controls with spacing utilities (as shown below). Lastly, be sure
-        to always include a <code>{'<Form.Label>'}</code> with each form
-        control, even if you need to hide it from non-screenreader visitors with
-        the <code>srOnly</code> prop.
-      </p>
-      <ReactPlayground codeText={Inline} />
-      <Callout>
-        <h5>Alternatives to hidden labels</h5>
-        Assistive technologies such as screen readers will have trouble with
-        your forms if you don’t include a label for every input. For these
-        inline forms, you can hide the labels using the <code>srOnly</code>{' '}
-        prop. There are further alternative methods of providing a label for
-        assistive technologies, such as the <code>aria-label</code>,{' '}
-        <code>aria-labelledby</code> or <code>title</code> attribute. If none of
-        these are present, assistive technologies may resort to using the{' '}
-        <code>placeholder</code> attribute, if present, but note that use of{' '}
-        <code>placeholder</code> as a replacement for other labelling methods is
-        not advised.
-      </Callout>
       <LinkedHeading h="2" id="forms-help-text">
         Help text
       </LinkedHeading>
@@ -333,12 +285,6 @@ export default withLayout(function FormControlsSection({ data }) {
         margin for easy spacing from the inputs above.
       </p>
       <ReactPlayground codeText={FormText} />
-      <p>
-        Inline text can use any typical inline HTML element (be it a{' '}
-        <code>{'<small>'}</code>, <code>{'<span>'}</code>, or something else)
-        with nothing more than a utility class.
-      </p>
-      <ReactPlayground codeText={FormTextInline} />
       <LinkedHeading h="2" id="forms-disabled">
         Disabled forms
       </LinkedHeading>
