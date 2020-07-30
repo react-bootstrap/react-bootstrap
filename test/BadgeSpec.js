@@ -7,7 +7,7 @@ describe('Badge', () => {
   it('Should render correctly', () => {
     expect(
       mount(
-        <Badge variant="primary" pill>
+        <Badge bg="primary" pill>
           Message
         </Badge>,
       )
@@ -18,7 +18,7 @@ describe('Badge', () => {
 
   it('should support custom `as`', () => {
     mount(
-      <Badge as="a" href="#" variant="primary" pill>
+      <Badge as="a" href="#" bg="primary" pill>
         Message
       </Badge>,
     ).assertSingle('a[href="#"]');

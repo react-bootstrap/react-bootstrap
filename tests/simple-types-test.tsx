@@ -93,7 +93,7 @@ const MegaComponent = () => (
     <Badge as="div" pill={false} style={style}>
       42
     </Badge>
-    <Badge as="a" href="#" variant="primary" pill>
+    <Badge as="a" href="#" bg="primary" pill>
       42
     </Badge>
     <Breadcrumb

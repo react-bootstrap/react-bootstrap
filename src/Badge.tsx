@@ -4,10 +4,10 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Color, Variant } from './types';
+import { Color } from './types';
 
 export interface BadgeProps extends BsPrefixProps {
-  variant?: Variant;
+  bg?: string;
   pill?: boolean;
   text?: Color;
 }
@@ -19,11 +19,12 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * The visual style of the badge
+   * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
+   * `light` and `dark` are common choices but any `bg-*` class is supported, including any custom ones you might define.
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   * Pairs nicely with the `variant` prop.
    */
-  variant: PropTypes.string,
+  bg: PropTypes.string,
 
   /**
    * Add the `pill` modifier to make badges more rounded with
@@ -48,7 +49,7 @@ const Badge: Badge = React.forwardRef(
   (
     {
       bsPrefix,
-      variant,
+      bg,
       pill,
       text,
       className,
@@ -67,7 +68,7 @@ const Badge: Badge = React.forwardRef(
           prefix,
           pill && `rounded-pill`,
           text && `text-${text}`,
-          variant && `bg-${variant}`,
+          bg && `bg-${bg}`,
         )}
       />
     );
