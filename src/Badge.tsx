@@ -31,7 +31,7 @@ const propTypes = {
    */
   pill: PropTypes.bool.isRequired,
   /**
-   * Sets card text color
+   * Sets badge text color
    *
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
    */
