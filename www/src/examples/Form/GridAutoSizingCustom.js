@@ -1,5 +1,5 @@
 <Form>
-  <Form.Row className="align-items-center">
+  <Row className="align-items-center">
     <Col xs="auto" className="my-1">
       <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
         Preference
@@ -22,5 +22,5 @@
     <Col xs="auto" className="my-1">
       <Button type="submit">Submit</Button>
     </Col>
-  </Form.Row>
+  </Row>
 </Form>;
