@@ -10,7 +10,6 @@ import NavbarBasic from '../../examples/Navbar/Basic';
 import NavbarBrand from '../../examples/Navbar/Brand';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
 import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
-import NavbarForm from '../../examples/Navbar/Form';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
 import ContainerOutside from '../../examples/Navbar/ContainerOutside';
 import ContainerInside from '../../examples/Navbar/ContainerInside';
@@ -66,11 +65,6 @@ export default withLayout(function NaπvbarSection({ data }) {
       <LinkedHeading h="2" id="navbars-form">
         Forms
       </LinkedHeading>
-      <p>
-        Use <code>{'<Form inline>'}</code> and your various form controls within
-        the Navbar. Align the contents as needed with utility classes.
-      </p>
-      <ReactPlayground codeText={NavbarForm} />
 
       <LinkedHeading h="2" id="navbars-text-link">
         Text and Non-nav links

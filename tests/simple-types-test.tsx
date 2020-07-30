@@ -361,7 +361,6 @@ const MegaComponent = () => (
     <Form
       ref={React.createRef<HTMLFormElement>()}
       as="form"
-      inline
       validated
       bsPrefix="form"
     >
