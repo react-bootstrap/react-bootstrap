@@ -4,10 +4,10 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Color } from './types';
+import { Color, Variant } from './types';
 
 export interface BadgeProps extends BsPrefixProps {
-  bg?: string;
+  bg?: Variant;
   pill?: boolean;
   text?: Color;
 }
@@ -19,8 +19,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
+   * The visual style of the badge
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
-   * `light` and `dark` are common choices but any `bg-*` class is supported, including any custom ones you might define.
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
    */
   bg: PropTypes.string,
 
