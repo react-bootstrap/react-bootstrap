@@ -16,7 +16,9 @@ export interface FormProps extends React.HTMLAttributes<HTMLElement>, AsProp {
   validated?: boolean;
 }
 
-type Form = {
+type Form = React.ForwardRefExoticComponent<
+  FormProps & React.RefAttributes<HTMLElement>
+> & {
   Group: typeof FormGroup;
   Control: typeof FormControl;
   Check: typeof FormCheck;
