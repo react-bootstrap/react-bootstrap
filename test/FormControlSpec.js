@@ -23,6 +23,12 @@ describe('<FormControl>', () => {
     );
   });
 
+  it('should support type=color', () => {
+    mount(<FormControl type="color" />).assertSingle(
+      'input.form-control.form-control-color',
+    );
+  });
+
   it('should use controlId for id', () => {
     mount(
       <FormGroup controlId="foo">
