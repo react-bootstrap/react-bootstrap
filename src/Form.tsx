@@ -10,16 +10,13 @@ import FormRange from './FormRange';
 import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
-import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { AsProp } from './helpers';
 
-export interface FormProps
-  extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixProps {
+export interface FormProps extends React.HTMLAttributes<HTMLElement>, AsProp {
   validated?: boolean;
 }
 
-type Form = BsPrefixRefForwardingComponent<'form', FormProps> & {
+type Form = {
   Group: typeof FormGroup;
   Control: typeof FormControl;
   Check: typeof FormCheck;
@@ -29,14 +26,12 @@ type Form = BsPrefixRefForwardingComponent<'form', FormProps> & {
   Text: typeof FormText;
   Range: typeof FormRange;
   Select: typeof FormSelect;
+  propTypes?: any;
+  defaultProps?: Partial<FormProps>;
+  displayName?: string;
 };
 
 const propTypes = {
-  /**
-   * @default {'form'}
-   */
-  bsPrefix: PropTypes.string,
-
   /**
    * The Form `ref` will be forwarded to the underlying element,
    * which means, unless it's rendered `as` a composite component,
@@ -58,7 +53,6 @@ const propTypes = {
 const FormImpl: Form = (React.forwardRef(
   (
     {
-      bsPrefix,
       className,
       validated,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -67,16 +61,11 @@ const FormImpl: Form = (React.forwardRef(
     }: FormProps,
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form');
     return (
       <Component
         {...props}
         ref={ref}
-        className={classNames(
-          className,
-          validated && 'was-validated',
-          bsPrefix,
-        )}
+        className={classNames(className, validated && 'was-validated')}
       />
     );
   },

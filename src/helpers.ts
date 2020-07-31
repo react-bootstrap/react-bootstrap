@@ -23,6 +23,10 @@ export interface BsPrefixProps<
   as?: As;
 }
 
+export interface AsProp<As extends React.ElementType = React.ElementType> {
+  as?: As;
+}
+
 export type BsPrefixPropsWithChildren<
   As extends React.ElementType = React.ElementType
 > = React.PropsWithChildren<BsPrefixProps<As>>;
