@@ -21,8 +21,6 @@ const propTypes = {
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
    * `light` and `dark` are common choices but any `bg-*` class is supported, including any custom ones you might define.
-   *
-   * Pairs nicely with the `variant` prop.
    */
   bg: PropTypes.string,
 
