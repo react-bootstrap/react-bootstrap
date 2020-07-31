@@ -124,10 +124,8 @@ function FormExample() {
           </Row>
           <Form.Group>
             <Form.File
-              className="position-relative"
               required
               name="file"
-              label="File"
               onChange={handleChange}
               isInvalid={!!errors.file}
               feedback={errors.file}

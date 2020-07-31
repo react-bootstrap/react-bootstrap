@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-import {
-  BsCustomPrefixProps,
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
-
-export interface FormFileInputProps extends BsPrefixProps, BsCustomPrefixProps {
+export interface FormFileInputProps extends BsPrefixProps {
   id?: string;
   isValid?: boolean;
   isInvalid?: boolean;
-  lang?: string;
 }
 type FormFileInput = BsPrefixRefForwardingComponent<
   'input',
@@ -49,9 +43,6 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool,
-
-  /** The language for the button when using custom file input and SCSS based strings */
-  lang: PropTypes.string,
 };
 
 const FormFileInput: FormFileInput = React.forwardRef(
@@ -59,33 +50,24 @@ const FormFileInput: FormFileInput = React.forwardRef(
     {
       id,
       bsPrefix,
-      bsCustomPrefix,
       className,
       isValid,
       isInvalid,
-      lang,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
     },
     ref,
   ) => {
-    const { controlId, custom } = useContext(FormContext);
-    const type = 'file';
-
-    const [prefix, defaultPrefix] = custom
-      ? [bsCustomPrefix, 'custom-file-input']
-      : [bsPrefix, 'form-control-file'];
-
-    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    const { controlId } = useContext(FormContext);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-file-input');
 
     return (
       <Component
         {...props}
         ref={ref}
         id={id || controlId}
-        type={type}
-        lang={lang}
+        type="file"
         className={classNames(
           className,
           bsPrefix,
