@@ -154,6 +154,7 @@ const FormControl: BsPrefixRefForwardingComponent<
           classes,
           isValid && `is-valid`,
           isInvalid && `is-invalid`,
+          type === 'color' && `${bsPrefix}-color`,
         )}
       />
     );

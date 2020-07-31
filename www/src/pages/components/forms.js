@@ -8,6 +8,7 @@ import FormBasic from '../../examples/Form/Basic';
 import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
 import CheckInline from '../../examples/Form/CheckInline';
+import ColorPicker from '../../examples/Form/ColorPicker';
 import FormFile from '../../examples/Form/FormFile';
 import FormFileSizes from '../../examples/Form/FormFileSizes';
 import FormDisabled from '../../examples/Form/FormDisabled';
@@ -106,6 +107,10 @@ export default withLayout(function FormControlsSection({ data }) {
         default form field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
+      <LinkedHeading h="3" id="forms-color">
+        Color
+      </LinkedHeading>
+      <ReactPlayground codeText={ColorPicker} />
       <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
       </LinkedHeading>
