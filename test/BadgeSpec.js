@@ -11,7 +11,7 @@ describe('Badge', () => {
           Message
         </Badge>,
       )
-        .assertSingle('span.badge.badge-primary.badge-pill')
+        .assertSingle('span.badge.bg-primary.rounded-pill')
         .text(),
     ).to.equal('Message');
   });
