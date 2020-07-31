@@ -4,10 +4,12 @@ on:
     branches:
       - master
       - bs3-dev
+      - bs5-dev
   pull_request:
     branches:
       - master
       - bs3-dev
+      - bs5-dev
 jobs:
   ci:
     name: CI
