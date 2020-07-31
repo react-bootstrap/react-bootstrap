@@ -17,12 +17,6 @@ describe('<FormControl>', () => {
     mount(<FormControl as="textarea" />).assertSingle('textarea.form-control');
   });
 
-  it('should support type=file', () => {
-    mount(<FormControl type="file" />)
-      .assertSingle('[type="file"].form-control-file')
-      .assertNone('.form-control');
-  });
-
   it('should support plaintext inputs', () => {
     mount(<FormControl plaintext />).assertSingle(
       'input.form-control-plaintext',

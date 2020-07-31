@@ -129,8 +129,6 @@ const FormControl: BsPrefixRefForwardingComponent<
     let classes;
     if (plaintext) {
       classes = { [`${bsPrefix}-plaintext`]: true };
-    } else if (type === 'file') {
-      classes = { [`${bsPrefix}-file`]: true };
     } else {
       classes = {
         [bsPrefix]: true,

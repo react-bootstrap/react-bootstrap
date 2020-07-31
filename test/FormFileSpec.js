@@ -5,17 +5,30 @@ import FormFile from '../src/FormFile';
 describe('<FormFile>', () => {
   it('should render correctly', () => {
     let wrapper = mount(
-      <FormFile id="foo" name="foo" label="My label" className="my-file" />,
+      <FormFile
+        id="foo"
+        name="foo"
+        label="My label"
+        button="My browse"
+        className="my-file"
+      />,
     );
 
     wrapper
       .assertSingle('div.form-file.my-file')
       .assertSingle('input[type="file"][name="foo"]');
 
+    wrapper.assertSingle('label.form-file-label[htmlFor="foo"]');
+
+    wrapper.assertSingle('span.form-file-text').text().should.equal('My label');
     wrapper
-      .assertSingle('label.form-file-label[htmlFor="foo"]')
+      .assertSingle('span.form-file-button')
       .text()
-      .should.equal('My label');
+      .should.equal('My browse');
+  });
+
+  it('should support size', () => {
+    mount(<FormFile size="sm" />).assertSingle('.form-file-sm');
   });
 
   it('should support isValid', () => {
@@ -42,30 +55,6 @@ describe('<FormFile>', () => {
     const instance = mount(<Container />).instance();
 
     expect(instance.input.tagName).to.equal('INPUT');
-  });
-
-  it('should supports custom', () => {
-    const wrapper = mount(<FormFile custom label="My label" />);
-
-    wrapper
-      .assertSingle('div.custom-file')
-      .assertSingle('input.custom-file-input');
-
-    wrapper.assertSingle('label.custom-file-label');
-  });
-
-  it('should supports lang when custom', () => {
-    const wrapper = mount(<FormFile custom lang="en" label="My label" />);
-
-    expect(wrapper.prop('lang')).to.equal('en');
-  });
-
-  it('should supports data-browse when custom', () => {
-    const wrapper = mount(
-      <FormFile custom data-browse="foo" label="My label" />,
-    );
-
-    expect(wrapper.prop('data-browse')).to.equal('foo');
   });
 
   it('should support "inputAs"', () => {
