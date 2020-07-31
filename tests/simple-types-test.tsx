@@ -526,6 +526,7 @@ const MegaComponent = () => (
       />
 
       <Form.Switch label="Switch" disabled />
+      <Form.Control type="color" />
     </Form>
     <Image fluid rounded roundedCircle thumbnail bsPrefix="img" style={style} />
     <div>
