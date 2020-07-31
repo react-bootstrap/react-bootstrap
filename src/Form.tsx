@@ -28,9 +28,6 @@ type Form = React.ForwardRefExoticComponent<
   Text: typeof FormText;
   Range: typeof FormRange;
   Select: typeof FormSelect;
-  propTypes?: any;
-  defaultProps?: Partial<FormProps>;
-  displayName?: string;
 };
 
 const propTypes = {
