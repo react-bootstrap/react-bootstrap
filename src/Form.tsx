@@ -71,7 +71,7 @@ const FormImpl: Form = (React.forwardRef(
 ) as unknown) as Form;
 
 FormImpl.displayName = 'Form';
-FormImpl.propTypes = propTypes;
+FormImpl.propTypes = propTypes as any;
 
 FormImpl.Group = FormGroup;
 FormImpl.Control = FormControl;
