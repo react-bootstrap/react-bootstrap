@@ -16,7 +16,9 @@ export interface FormProps extends React.HTMLAttributes<HTMLElement>, AsProp {
   validated?: boolean;
 }
 
-type Form = {
+type Form = React.ForwardRefExoticComponent<
+  FormProps & React.RefAttributes<HTMLElement>
+> & {
   Group: typeof FormGroup;
   Control: typeof FormControl;
   Check: typeof FormCheck;
@@ -26,9 +28,6 @@ type Form = {
   Text: typeof FormText;
   Range: typeof FormRange;
   Select: typeof FormSelect;
-  propTypes?: any;
-  defaultProps?: Partial<FormProps>;
-  displayName?: string;
 };
 
 const propTypes = {
@@ -72,7 +71,7 @@ const FormImpl: Form = (React.forwardRef(
 ) as unknown) as Form;
 
 FormImpl.displayName = 'Form';
-FormImpl.propTypes = propTypes;
+FormImpl.propTypes = propTypes as any;
 
 FormImpl.Group = FormGroup;
 FormImpl.Control = FormControl;

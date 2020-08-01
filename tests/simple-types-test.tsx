@@ -358,12 +358,7 @@ const MegaComponent = () => (
       style={style}
     />
     <Figure.Caption as="figcaption" bsPrefix="figurecaption" />
-    <Form
-      ref={React.createRef<HTMLFormElement>()}
-      as="form"
-      validated
-      bsPrefix="form"
-    >
+    <Form ref={React.createRef<HTMLFormElement>()} as="form" validated>
       <Form.Group
         ref={React.createRef<HTMLDivElement>()}
         as="div"
