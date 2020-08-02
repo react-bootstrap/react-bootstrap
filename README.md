@@ -1,6 +1,6 @@
 # React-Bootstrap
 
-> [Bootstrap 5][bootstrap] components built with [React][react].
+> **[Bootstrap 5][bootstrap]** components built with [React][react].
 
 [![GitHub Actions CI status][gh-actions-badge]][gh-actions]
 [![Travis CI Build status][travis-badge]][travis]
@@ -13,7 +13,7 @@
 
 See the [documentation][documentation] with live editable examples and API documention.
 
-To find the documentation for the latest Bootstrap 3 compatible release, [go here](https://react-bootstrap-v3.netlify.com).
+To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap-v3.netlify.app) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
 
 ### Migrating from Bootstrap 3 to Bootstrap 4
 
@@ -62,7 +62,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
 [discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
-[netlify-badge]: https://api.netlify.com/api/v1/badges/91501718-8820-4d69-b7fe-1616eff5914e/deploy-status
-[netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
+[netlify-badge]: https://api.netlify.com/api/v1/badges/f09d443f-11b2-4454-812b-0645aeaca824/deploy-status
+[netlify]: https://app.netlify.com/sites/react-bootstrap-v5/deploys
 [gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
 [gh-actions]: https://github.com/react-bootstrap/react-bootstrap/actions
