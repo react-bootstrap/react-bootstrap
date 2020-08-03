@@ -1,7 +1,5 @@
 <InputGroup className="mb-3">
-  <InputGroup.Prepend>
-    <InputGroup.Text>First and last name</InputGroup.Text>
-  </InputGroup.Prepend>
-  <FormControl />
-  <FormControl />
+  <InputGroup.Text>First and last name</InputGroup.Text>
+  <FormControl aria-label="First name" />
+  <FormControl aria-label="Last name" />
 </InputGroup>;
