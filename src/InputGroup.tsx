@@ -5,14 +5,11 @@ import React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
+import FormCheckInput from './FormCheckInput';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
 } from './helpers';
-
-const InputGroupAppend = createWithBsPrefix('input-group-append');
-
-const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
 
 const InputGroupText = createWithBsPrefix('input-group-text', {
   Component: 'span',
@@ -20,13 +17,13 @@ const InputGroupText = createWithBsPrefix('input-group-text', {
 
 const InputGroupCheckbox = (props) => (
   <InputGroupText>
-    <input type="checkbox" {...props} />
+    <FormCheckInput type="checkbox" {...props} />
   </InputGroupText>
 );
 
 const InputGroupRadio = (props) => (
   <InputGroupText>
-    <input type="radio" {...props} />
+    <FormCheckInput type="radio" {...props} />
   </InputGroupText>
 );
 
@@ -35,8 +32,6 @@ export interface InputGroupProps extends BsPrefixPropsWithChildren {
 }
 
 type InputGroupExtras = {
-  Append: typeof InputGroupAppend;
-  Prepend: typeof InputGroupPrepend;
   Text: typeof InputGroupText;
   Checkbox: typeof InputGroupCheckbox;
   Radio: typeof InputGroupRadio;
@@ -60,8 +55,6 @@ const propTypes = {
 
 /**
  *
- * @property {InputGroupAppend} Append
- * @property {InputGroupPrepend} Prepend
  * @property {InputGroupText} Text
  * @property {InputGroupRadio} Radio
  * @property {InputGroupCheckbox} Checkbox
@@ -102,8 +95,6 @@ const InputGroupWithExtras: InputGroup & InputGroupExtras = {
   Text: InputGroupText,
   Radio: InputGroupRadio,
   Checkbox: InputGroupCheckbox,
-  Append: InputGroupAppend,
-  Prepend: InputGroupPrepend,
 } as any;
 
 export default InputGroupWithExtras;

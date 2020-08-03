@@ -54,7 +54,10 @@ export default withLayout(function InputGroupSection({ data }) {
       <LinkedHeading h="2" id="input-group-multiple-addons">
         Multiple addons
       </LinkedHeading>
-      <p>Multiple add-ons are supported and can be mixed</p>
+      <p>
+        Multiple add-ons are supported and can be mixed with checkbox and radio
+        input versions.
+      </p>
       <ReactPlayground codeText={MultipleAddons} />
 
       <LinkedHeading h="2" id="input-group-buttons">
