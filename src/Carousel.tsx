@@ -250,6 +250,8 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     activeIndex || 0,
   );
 
+  const intervals = useRef<number[]>([]);
+
   if (!isSliding && activeIndex !== renderedActiveIndex) {
     if (nextDirectionRef.current) {
       setDirection(nextDirectionRef.current);
@@ -492,9 +494,15 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       return undefined;
     }
 
+    let chosenInterval = interval || undefined;
+
+    if (activeIndex !== undefined && intervals.current[activeIndex]) {
+      chosenInterval = intervals.current[activeIndex];
+    }
+
     intervalHandleRef.current = window.setInterval(
       document.visibilityState ? nextWhenVisible : next,
-      interval || undefined,
+      chosenInterval,
     );
 
     return () => {
@@ -502,7 +510,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         clearInterval(intervalHandleRef.current);
       }
     };
-  }, [shouldPlay, next, interval, nextWhenVisible]);
+  }, [shouldPlay, next, activeIndex, interval, nextWhenVisible]);
 
   const indicatorOnClicks = useMemo(
     () =>
@@ -547,6 +555,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       <div className={`${prefix}-inner`}>
         {map(children, (child, index) => {
           const isActive = index === renderedActiveIndex;
+          intervals.current[index] = child.props.interval as number;
 
           return slide ? (
             <Transition
