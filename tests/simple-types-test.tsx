@@ -754,9 +754,6 @@ const MegaComponent = () => (
         onSelect={noop}
         focusFirstItemOnShow
         navbar
-        href="#"
-        size="sm"
-        variant="light"
       >
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>

@@ -5,12 +5,10 @@ import Dropdown, { DropdownProps } from './Dropdown';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
-import { PropsFromToggle } from './DropdownToggle';
 
 export interface NavDropdownProps
   extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
-    React.PropsWithChildren<PropsFromToggle> {
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'> {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;
@@ -76,9 +74,6 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       disabled,
       active,
       renderMenuOnMount,
-      href,
-      size,
-      variant,
       ...props
     }: NavDropdownProps,
     ref,
@@ -91,9 +86,6 @@ const NavDropdown: NavDropdown = (React.forwardRef(
         disabled={disabled}
         childBsPrefix={bsPrefix}
         as={NavLink}
-        href={href}
-        size={size}
-        variant={variant}
       >
         {title}
       </Dropdown.Toggle>
