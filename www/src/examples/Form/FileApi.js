@@ -1,6 +1,6 @@
 <Form>
   <div className="mb-3">
-    <Form.File id="formcheck-api-custom" custom>
+    <Form.File id="formcheck-api-custom">
       <Form.File.Input isValid />
       <Form.File.Label>
         <Form.File.Text>Custom file input</Form.File.Text>

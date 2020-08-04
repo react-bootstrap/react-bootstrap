@@ -7,9 +7,7 @@
       <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
-      <InputGroup.Prepend>
-        <InputGroup.Text id="btnGroupAddon">@</InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text id="btnGroupAddon">@</InputGroup.Text>
       <FormControl
         type="text"
         placeholder="Input group example"
@@ -30,9 +28,7 @@
       <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
-      <InputGroup.Prepend>
-        <InputGroup.Text id="btnGroupAddon2">@</InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text id="btnGroupAddon2">@</InputGroup.Text>
       <FormControl
         type="text"
         placeholder="Input group example"

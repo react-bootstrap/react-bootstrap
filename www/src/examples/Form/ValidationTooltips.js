@@ -58,9 +58,7 @@ function FormExample() {
             <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
               <Form.Label>Username</Form.Label>
               <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                </InputGroup.Prepend>
+                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   type="text"
                   placeholder="Username"

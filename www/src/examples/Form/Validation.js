@@ -47,9 +47,7 @@
   <Form.Group controlId="formValidationWarning3" validationState="warning">
     <Form.Label>Input group with warning</Form.Label>
     <InputGroup>
-      <InputGroup.Prepend>
-        <InputGroup.Text>@</InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text>@</InputGroup.Text>
       <Form.Control type="text" />
     </InputGroup>
     <Form.Control />
@@ -72,9 +70,7 @@
       </Col>
       <Col xs={9}>
         <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>@</InputGroup.Text>
-          </InputGroup.Prepend>
+          <InputGroup.Text>@</InputGroup.Text>
           <Form.Control type="text" />
         </InputGroup>
         <Form.Control />
@@ -90,9 +86,7 @@
     <Form.Group controlId="formValidationError4" validationState="error">
       <Form.Label>Input group with error</Form.Label>{' '}
       <InputGroup>
-        <InputGroup.Prepend>
-          <InputGroup.Text>@</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>@</InputGroup.Text>
         <Form.Control type="text" />
       </InputGroup>
       <Form.Control />
