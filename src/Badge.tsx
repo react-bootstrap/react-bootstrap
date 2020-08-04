@@ -20,7 +20,6 @@ const propTypes = {
 
   /**
    * The visual style of the badge
-   * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
    *
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
    */
