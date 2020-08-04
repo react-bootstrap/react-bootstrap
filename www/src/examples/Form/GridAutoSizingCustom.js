@@ -16,7 +16,6 @@
         type="checkbox"
         id="customControlAutosizing"
         label="Remember my preference"
-        custom
       />
     </Col>
     <Col xs="auto" className="my-1">

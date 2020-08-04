@@ -3,7 +3,7 @@
   <Form.Control
     type="color"
     id="exampleColorInput"
-    value="#563d7c"
+    defaultValue="#563d7c"
     title="Choose your color"
   />
 </>;

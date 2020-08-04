@@ -15,9 +15,7 @@
         Username
       </Form.Label>
       <InputGroup className="mb-2">
-        <InputGroup.Prepend>
-          <InputGroup.Text>@</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>@</InputGroup.Text>
         <FormControl id="inlineFormInputGroup" placeholder="Username" />
       </InputGroup>
     </Col>
