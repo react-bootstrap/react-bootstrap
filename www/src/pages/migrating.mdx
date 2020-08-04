@@ -55,6 +55,12 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - dropped support for `type` supporting the `range` value in favor of FormRange.
 - add color picker
 
+### FormGroup
+
+- removed `bsPrefix`. The `.form-group` class is no longer supported in Bootstrap, 
+but this component is useful for passing `controlId` to labels and inputs. To handle
+spacing, use margin utilities instead.
+
 ### FormRow
 
 - removed. Use `Row` instead.

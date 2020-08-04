@@ -1,5 +1,5 @@
 <Form>
-  <Form.Group as={Row} controlId="formPlaintextEmail">
+  <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
     <Form.Label column sm="2">
       Email
     </Form.Label>
@@ -8,7 +8,7 @@
     </Col>
   </Form.Group>
 
-  <Form.Group as={Row} controlId="formPlaintextPassword">
+  <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
     <Form.Label column sm="2">
       Password
     </Form.Label>

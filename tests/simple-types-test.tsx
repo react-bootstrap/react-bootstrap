@@ -363,7 +363,6 @@ const MegaComponent = () => (
         ref={React.createRef<HTMLDivElement>()}
         as="div"
         controlId="exampleForm.ControlInput1"
-        bsPrefix="formgroup"
         style={style}
       >
         <Form.Label

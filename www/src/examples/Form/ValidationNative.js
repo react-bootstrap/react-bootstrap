@@ -13,7 +13,7 @@ function FormExample() {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Row>
+      <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="validationCustom01">
           <Form.Label>First name</Form.Label>
           <Form.Control
@@ -50,7 +50,7 @@ function FormExample() {
           </InputGroup>
         </Form.Group>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>City</Form.Label>
           <Form.Control type="text" placeholder="City" required />
@@ -73,7 +73,7 @@ function FormExample() {
           </Form.Control.Feedback>
         </Form.Group>
       </Row>
-      <Form.Group>
+      <Form.Group className="mb-3">
         <Form.Check
           required
           label="Agree to terms and conditions"
