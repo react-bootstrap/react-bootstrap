@@ -42,7 +42,6 @@ const OverflowWrapper = styled('div')`
   @import '../css/theme';
 
   @include media-breakpoint-up(md) {
-    overflow: hidden;
     display: block !important;
     height: 100% !important;
   }
@@ -56,8 +55,8 @@ const TableOfContents = styled('nav')`
   @include media-breakpoint-up(md) {
     height: 100% !important;
     overflow: auto;
-    margin-right: -40px;
-    padding-right: calc(40px + 1rem);
+    margin-right: -15px;
+    padding-right: calc(15px + 1rem);
   }
 `;
 
