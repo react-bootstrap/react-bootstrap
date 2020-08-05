@@ -18,6 +18,18 @@ describe('Row', () => {
     );
   });
 
+  it('Should allow auto as size', () => {
+    mount(<Row xs="auto" md="auto" />).assertSingle(
+      '.row-cols-md-auto.row-cols-auto',
+    );
+  });
+
+  it('Should allow auto as size in object form', () => {
+    mount(<Row xs={{ cols: 'auto' }} md={{ cols: 'auto' }} />).assertSingle(
+      '.row-cols-md-auto.row-cols-auto',
+    );
+  });
+
   it('uses "div" by default', () => {
     mount(
       <Row className="custom-class">
