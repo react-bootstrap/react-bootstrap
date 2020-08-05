@@ -15,7 +15,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 const FormRow = createWithBsPrefix('form-row');
 
 export interface FormProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends React.HTMLAttributes<HTMLFormElement>,
     BsPrefixProps {
   inline?: boolean;
   validated?: boolean;

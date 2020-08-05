@@ -746,6 +746,14 @@ const MegaComponent = () => (
         id="nav-dropdown"
         bsPrefix="prefix"
         style={style}
+        drop="up"
+        alignRight
+        show
+        flip={false}
+        onToggle={noop}
+        onSelect={noop}
+        focusFirstItemOnShow
+        navbar
       >
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
