@@ -1,4 +1,4 @@
-<Form.Group>
+<>
   <Form.Select size="lg">
     <option>Large select</option>
   </Form.Select>
@@ -10,4 +10,4 @@
   <Form.Select size="sm">
     <option>Small select</option>
   </Form.Select>
-</Form.Group>;
+</>;
