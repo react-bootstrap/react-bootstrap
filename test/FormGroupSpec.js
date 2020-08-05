@@ -15,14 +15,6 @@ describe('<FormGroup>', () => {
     ).assertSingle('.child1');
   });
 
-  it('renders with form-group class', () => {
-    mount(
-      <FormGroup>
-        <span />
-      </FormGroup>,
-    );
-  });
-
   it('provided controlId to label and control', () => {
     let wrapper = mount(
       <FormGroup controlId="my-control">

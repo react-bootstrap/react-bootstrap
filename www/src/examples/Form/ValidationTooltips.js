@@ -31,7 +31,7 @@ function FormExample() {
         errors,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <Row>
+          <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationFormik101">
               <Form.Label>First name</Form.Label>
               <Form.Control
@@ -74,7 +74,7 @@ function FormExample() {
               </InputGroup>
             </Form.Group>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="validationFormik103">
               <Form.Label>City</Form.Label>
               <Form.Control
@@ -120,7 +120,7 @@ function FormExample() {
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.File
               required
               name="file"
@@ -131,7 +131,7 @@ function FormExample() {
               feedbackTooltip
             />
           </Form.Group>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Check
               required
               name="terms"

@@ -1,4 +1,4 @@
-<Form.Group>
+<>
   <Row>
     <Form.Label column="lg" lg={2}>
       Large Text
@@ -25,4 +25,4 @@
       <Form.Control size="sm" type="text" placeholder="Small text" />
     </Col>
   </Row>
-</Form.Group>;
+</>;

@@ -1,26 +1,18 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FormGroupProps extends BsPrefixPropsWithChildren {
+export interface FormGroupProps
+  extends React.HTMLAttributes<HTMLElement>,
+    AsProp {
   controlId?: string;
 }
 
 type FormGroup = BsPrefixRefForwardingComponent<'div', FormGroupProps>;
 
 const propTypes = {
-  /**
-   * @default 'form-group'
-   */
-  bsPrefix: PropTypes.string,
-
   as: PropTypes.elementType,
 
   /**
@@ -42,8 +34,6 @@ const propTypes = {
 const FormGroup: FormGroup = React.forwardRef(
   (
     {
-      bsPrefix,
-      className,
       children,
       controlId,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -52,16 +42,11 @@ const FormGroup: FormGroup = React.forwardRef(
     },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');
     const context = useMemo(() => ({ controlId }), [controlId]);
 
     return (
       <FormContext.Provider value={context}>
-        <Component
-          {...props}
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-        >
+        <Component {...props} ref={ref}>
           {children}
         </Component>
       </FormContext.Provider>
