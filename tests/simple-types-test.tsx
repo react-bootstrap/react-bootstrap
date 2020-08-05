@@ -239,6 +239,8 @@ const MegaComponent = () => (
       </Carousel.Item>
     </Carousel>
     <Container as="div" fluid bsPrefix="container" style={style}>
+      <Row xs="auto" />
+      <Row xs={{ cols: 'auto' }} />
       <Row
         as="div"
         xs={1}

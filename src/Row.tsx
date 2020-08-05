@@ -22,7 +22,8 @@ type RowColWidth =
   | '9'
   | '10'
   | '11'
-  | '12';
+  | '12'
+  | 'auto';
 type RowColumns = RowColWidth | { cols?: RowColWidth };
 
 export interface RowProps extends BsPrefixPropsWithChildren {
@@ -57,37 +58,42 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * The number of columns that will fit next to each other on extra small devices (<576px)
+   * The number of columns that will fit next to each other on extra small devices (<576px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   xs: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on small devices (≥576px)
+   * The number of columns that will fit next to each other on small devices (≥576px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   sm: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on medium devices (≥768px)
+   * The number of columns that will fit next to each other on medium devices (≥768px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   md: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on large devices (≥992px)
+   * The number of columns that will fit next to each other on large devices (≥992px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   lg: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on extra large devices (≥1200px)
+   * The number of columns that will fit next to each other on extra large devices (≥1200px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   xl: rowColumns,
 };

@@ -159,7 +159,8 @@ export default withLayout(function GridSection({ data }) {
       <p>
         The <code>Row</code> lets you specify column widths across 5 breakpoint
         sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
-        the amount of columns that will fit next to each other.
+        the amount of columns that will fit next to each other. You can also
+        specify <code>auto</code> to set the columns to their natural widths.
       </p>
       <ReactPlayground
         codeText={GridRowColLayout}
