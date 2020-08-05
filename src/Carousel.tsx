@@ -250,12 +250,9 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     activeIndex || 0,
   );
 
-  let shouldClearNextDirection = false;
-
   if (!isSliding && activeIndex !== renderedActiveIndex) {
     if (nextDirectionRef.current) {
       setDirection(nextDirectionRef.current);
-      shouldClearNextDirection = true;
     } else {
       setDirection((activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev');
     }
@@ -268,7 +265,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
   }
 
   useEffect(() => {
-    if (shouldClearNextDirection) {
+    if (nextDirectionRef.current) {
       nextDirectionRef.current = null;
     }
   });
