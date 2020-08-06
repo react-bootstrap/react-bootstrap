@@ -340,7 +340,7 @@ describe('<Carousel>', () => {
       );
 
       const total = intervals.reduce((sum, current) => sum + current, 0);
-      clock.tick(total * 1.1);
+      clock.tick(total * 1.7);
 
       expect(onSelectSpy).to.have.been.calledThrice;
       expect(onSelectSpy.firstCall).to.have.been.calledWith(1);
