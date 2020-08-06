@@ -8,7 +8,7 @@ describe('ToggleButton', () => {
     const ref = React.createRef();
     mount(
       <div>
-        <ToggleButtonGroup.Button ref={ref} value={3}>
+        <ToggleButtonGroup.Button id="id" ref={ref} value={3}>
           Option 3
         </ToggleButtonGroup.Button>
       </div>,
@@ -20,29 +20,12 @@ describe('ToggleButton', () => {
   it('should add an inputRef', () => {
     const ref = React.createRef();
     mount(
-      <ToggleButtonGroup.Button inputRef={ref} value={3}>
+      <ToggleButtonGroup.Button id="id" inputRef={ref} value={3}>
         Option 3
       </ToggleButtonGroup.Button>,
     );
 
     ref.current.tagName.should.equal('INPUT');
-  });
-
-  it('should set focus state', () => {
-    const wrapper = mount(
-      <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>,
-    );
-
-    wrapper.find('input').simulate('focus');
-    wrapper.find('Button').hasClass('focus').should.equal(true);
-  });
-
-  it('should set blur state', () => {
-    const wrapper = mount(
-      <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>,
-    );
-    wrapper.find('input').simulate('blur');
-    wrapper.find('Button').hasClass('focus').should.equal(false);
   });
 });
 
@@ -50,9 +33,15 @@ describe('ToggleButtonGroup', () => {
   it('should render checkboxes', () => {
     mount(
       <ToggleButtonGroup type="checkbox">
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id1" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[type="checkbox"]')
@@ -62,9 +51,15 @@ describe('ToggleButtonGroup', () => {
   it('should render radios', () => {
     mount(
       <ToggleButtonGroup type="radio" name="items">
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id1" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[type="radio"]')
@@ -74,9 +69,15 @@ describe('ToggleButtonGroup', () => {
   it('should select initial values', () => {
     mount(
       <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]}>
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id1" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[checked=true]')
@@ -86,13 +87,15 @@ describe('ToggleButtonGroup', () => {
   it('should disable radios', () => {
     const wrapper = mount(
       <ToggleButtonGroup type="radio" name="items">
-        <ToggleButtonGroup.Button value={1} disabled>
+        <ToggleButtonGroup.Button id="id1" value={1} disabled>
           Option 1
         </ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2} disabled>
+        <ToggleButtonGroup.Button id="id2" value={2} disabled>
           Option 2
         </ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     );
 
@@ -105,9 +108,15 @@ describe('ToggleButtonGroup', () => {
     const spy = sinon.spy();
     mount(
       <ToggleButtonGroup type="checkbox" onChange={spy}>
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id1" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[type="checkbox"]')
@@ -121,9 +130,15 @@ describe('ToggleButtonGroup', () => {
     const spy = sinon.spy();
     mount(
       <ToggleButtonGroup type="radio" name="items" onChange={spy}>
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id1" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={3}>
+          Option 3
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[type="radio"]')
@@ -142,8 +157,12 @@ describe('ToggleButtonGroup', () => {
         defaultValue={[1, 2]}
         onChange={spy}
       >
-        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id2" value={1}>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button id="id3" value={2}>
+          Option 2
+        </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
     )
       .find('input[type="checkbox"]')
