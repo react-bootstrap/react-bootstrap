@@ -44,6 +44,7 @@ export interface ModalProps
   backdropClassName?: string;
   animation?: boolean;
   dialogClassName?: string;
+  contentClassName?: string;
   dialogAs?: React.ElementType;
   scrollable?: boolean;
 }
@@ -109,6 +110,11 @@ const propTypes = {
    * A css class to apply to the Modal dialog DOM node.
    */
   dialogClassName: PropTypes.string,
+
+  /**
+   * Add an optional extra class name to .modal-content
+   */
+  contentClassName: PropTypes.string,
 
   /**
    * A Component type that provides the modal content Markup. This is a useful
@@ -241,6 +247,7 @@ const Modal: Modal = (React.forwardRef(
       className,
       style,
       dialogClassName,
+      contentClassName,
       children,
       dialogAs: Dialog,
       'aria-labelledby': ariaLabelledby,
@@ -478,7 +485,9 @@ const Modal: Modal = (React.forwardRef(
           onMouseDown={handleDialogMouseDown}
           className={dialogClassName}
         >
-          {children}
+          <div className={classNames(`${bsPrefix}-content`, contentClassName)}>
+            {children}
+          </div>
         </Dialog>
       </div>
     );
