@@ -484,10 +484,9 @@ const Modal: Modal = (React.forwardRef(
           role="document"
           onMouseDown={handleDialogMouseDown}
           className={dialogClassName}
+          contentClassName={contentClassName}
         >
-          <div className={classNames(`${bsPrefix}-content`, contentClassName)}>
-            {children}
-          </div>
+          {children}
         </Dialog>
       </div>
     );

@@ -12,11 +12,13 @@ export interface ModalDialogProps
   size?: 'sm' | 'lg' | 'xl';
   centered?: boolean;
   scrollable?: boolean;
+  contentClassName?: string;
 }
 
 const propTypes = {
   /** @default 'modal' */
   bsPrefix: PropTypes.string,
+  contentClassName: PropTypes.string,
 
   /**
    * Render a large, extra large or small modal.
@@ -41,6 +43,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
     {
       bsPrefix,
       className,
+      contentClassName,
       centered,
       size,
       children,
@@ -64,7 +67,9 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
           scrollable && `${dialogClass}-scrollable`,
         )}
       >
-        {children}
+        <div className={classNames(`${bsPrefix}-content`, contentClassName)}>
+          {children}
+        </div>
       </div>
     );
   },
