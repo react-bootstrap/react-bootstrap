@@ -18,6 +18,7 @@ export interface DropdownToggleProps
   split?: boolean;
   childBsPrefix?: string;
   eventKey?: any; // TODO: fix this type
+  noCaret?: boolean;
 }
 
 type DropdownToggle = BsPrefixRefForwardingComponent<
@@ -47,6 +48,11 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
+   * Removes default .dropdown-toggle.
+   */
+  noCaret: PropTypes.bool,
+
+  /**
    * to passthrough to the underlying button or whatever from DropdownButton
    * @private
    */
@@ -63,11 +69,15 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
       childBsPrefix,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = Button,
+      noCaret,
       ...props
     }: DropdownToggleProps,
     ref,
   ) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
+    const prefix = useBootstrapPrefix(
+      bsPrefix,
+      noCaret ? '' : 'dropdown-toggle',
+    );
 
     if (childBsPrefix !== undefined) {
       (props as any).bsPrefix = childBsPrefix;

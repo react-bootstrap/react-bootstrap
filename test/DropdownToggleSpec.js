@@ -61,4 +61,15 @@ describe('<DropdownToggle>', () => {
       />,
     ).assertSingle('.my-custom-bsPrefix.btn');
   });
+
+  it('removes .dropdown-toggle', () => {
+    mount(
+      <DropdownToggle
+        noCaret={true}
+        open={false}
+        title="bsClass"
+        id="test-id"
+      />,
+    ).assertSingle('.btn');
+  });
 });
