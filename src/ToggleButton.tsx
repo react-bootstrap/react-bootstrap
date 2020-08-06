@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
-
+import React from 'react';
+import { useBootstrapPrefix } from './ThemeProvider';
 import Button, { ButtonProps } from './Button';
 import {
   BsPrefixAndClassNameOnlyProps,
@@ -26,6 +26,11 @@ const noop = () => undefined;
 
 const propTypes = {
   /**
+   * @default 'btn-check'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
    * The `<input>` element `type`
    */
   type: PropTypes.oneOf(['checkbox', 'radio']),
@@ -45,6 +50,11 @@ const propTypes = {
    * The disabled state of both the label and input
    */
   disabled: PropTypes.bool,
+
+  /**
+   * `id` is required for button clicks to toggle input.
+   */
+  id: PropTypes.string.isRequired,
 
   /**
    * A callback fired when the underlying input element changes. This is passed
@@ -68,6 +78,7 @@ const propTypes = {
 const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
   (
     {
+      bsPrefix,
       children,
       name,
       className,
@@ -76,35 +87,18 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
       onChange,
       value,
       disabled,
+      id,
       inputRef,
       ...props
     }: ToggleButtonProps,
     ref,
   ) => {
-    const [focused, setFocused] = useState(false);
-
-    const handleFocus = useCallback((e) => {
-      if (e.target.tagName === 'INPUT') setFocused(true);
-    }, []);
-
-    const handleBlur = useCallback((e) => {
-      if (e.target.tagName === 'INPUT') setFocused(false);
-    }, []);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'btn-check');
 
     return (
-      <Button
-        {...props}
-        ref={ref}
-        className={classNames(
-          className,
-          focused && 'focus',
-          disabled && 'disabled',
-        )}
-        type={undefined}
-        active={!!checked}
-        as="label"
-      >
+      <>
         <input
+          className={bsPrefix}
           name={name}
           type={type}
           value={value as any}
@@ -112,13 +106,20 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           onChange={onChange || noop}
+          id={id}
         />
-
-        {children}
-      </Button>
+        <Button
+          {...props}
+          ref={ref}
+          className={classNames(className, disabled && 'disabled')}
+          type={undefined}
+          as="label"
+          htmlFor={id}
+        >
+          {children}
+        </Button>
+      </>
     );
   },
 );
