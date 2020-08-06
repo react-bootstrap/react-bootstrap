@@ -136,7 +136,6 @@ const MegaComponent = () => (
         as="div"
         role="group"
         size="lg"
-        toggle
         vertical
         bsPrefix="btn-group"
         style={style}
