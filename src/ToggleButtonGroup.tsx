@@ -120,7 +120,7 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
     );
 
     return (
-      <ButtonGroup {...controlledProps} ref={ref as any} toggle>
+      <ButtonGroup {...controlledProps} ref={ref as any}>
         {map(children, (child) => {
           const values = getValues();
           const { value: childVal, onChange: childOnChange } = child.props;

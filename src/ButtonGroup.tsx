@@ -11,7 +11,6 @@ import {
 export interface ButtonGroupProps extends BsPrefixPropsWithChildren {
   role?: string;
   size?: 'sm' | 'lg';
-  toggle?: boolean;
   vertical?: boolean;
 }
 
@@ -34,13 +33,6 @@ const propTypes = {
   vertical: PropTypes.bool,
 
   /**
-   * Display as a button toggle group.
-   *
-   * (Generally it's better to use `ToggleButtonGroup` directly)
-   */
-  toggle: PropTypes.bool,
-
-  /**
    * An ARIA role describing the button group. Usually the default
    * "group" role is fine. An `aria-label` or `aria-labelledby`
    * prop is also recommended.
@@ -52,7 +44,6 @@ const propTypes = {
 
 const defaultProps = {
   vertical: false,
-  toggle: false,
   role: 'group',
 };
 
@@ -61,7 +52,6 @@ const ButtonGroup: ButtonGroup = React.forwardRef(
     {
       bsPrefix,
       size,
-      toggle,
       vertical,
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -83,7 +73,6 @@ const ButtonGroup: ButtonGroup = React.forwardRef(
           className,
           baseClass,
           size && `${prefix}-${size}`,
-          toggle && `${prefix}-toggle`,
         )}
       />
     );

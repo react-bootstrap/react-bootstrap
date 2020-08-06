@@ -30,14 +30,6 @@ describe('ButtonGroup', () => {
       .assertNone('.btn-group');
   });
 
-  it('Should add toggle variation', () => {
-    mount(
-      <ButtonGroup toggle>
-        <Button>Title</Button>
-      </ButtonGroup>,
-    ).assertSingle('.btn-group.btn-group-toggle');
-  });
-
   it('Should have div as default component', () => {
     mount(<ButtonGroup />).assertSingle('div');
   });
