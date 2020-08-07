@@ -998,6 +998,7 @@ const MegaComponent = () => (
       onChange={noop}
       value={[1]}
       style={style}
+      vertical
     >
       <ToggleButton
         value={1}

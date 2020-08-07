@@ -18,6 +18,7 @@ export interface ToggleButtonRadioProps<T> extends BsPrefixPropsWithChildren {
   value?: T;
   defaultValue?: T;
   onChange?: (value: T, event: any) => void;
+  vertical?: boolean;
 }
 
 export interface ToggleButtonCheckboxProps<T>
@@ -27,6 +28,7 @@ export interface ToggleButtonCheckboxProps<T>
   value?: T[];
   defaultValue?: T[];
   onChange?: (value: T[]) => void;
+  vertical?: boolean;
 }
 
 export type ToggleButtonGroupProps<T> =
@@ -69,6 +71,9 @@ const propTypes = {
    * of the buttons
    */
   type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+
+  /** Make the set of Buttons appear vertically stacked. */
+  vertical: PropTypes.bool,
 };
 
 const defaultProps = {
