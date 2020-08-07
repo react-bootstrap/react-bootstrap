@@ -505,7 +505,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
     intervalHandleRef.current = window.setInterval(
       document.visibilityState ? nextWhenVisible : next,
-      activeChildIntervalRef.current || interval || undefined,
+      activeChildIntervalRef.current ?? interval ?? undefined,
     );
 
     return () => {
