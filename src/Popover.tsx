@@ -109,7 +109,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
         )}
         {...props}
       >
-        <div className="arrow" {...arrowProps} />
+        <div className="popover-arrow" {...arrowProps} />
         {content ? <PopoverContent>{children}</PopoverContent> : children}
       </div>
     );
