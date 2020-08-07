@@ -58,7 +58,7 @@ describe('ToggleButtonGroup', () => {
 
     wrapper
       .assertSingle('.btn-group.btn-group-toggle')
-      .assertNone('btn-group-vertical');
+      .assertNone('.btn-group-vertical');
     wrapper.find('input[type="checkbox"]').length.should.equal(3);
   });
 
