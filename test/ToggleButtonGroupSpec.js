@@ -48,15 +48,18 @@ describe('ToggleButton', () => {
 
 describe('ToggleButtonGroup', () => {
   it('should render checkboxes', () => {
-    mount(
+    const wrapper = mount(
       <ToggleButtonGroup type="checkbox">
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[type="checkbox"]')
-      .length.should.equal(3);
+    );
+
+    wrapper
+      .assertSingle('.btn-group.btn-group-toggle')
+      .assertNone('btn-group-vertical');
+    wrapper.find('input[type="checkbox"]').length.should.equal(3);
   });
 
   it('should render checkboxes vertically', () => {
@@ -75,15 +78,18 @@ describe('ToggleButtonGroup', () => {
   });
 
   it('should render radios', () => {
-    mount(
+    const wrapper = mount(
       <ToggleButtonGroup type="radio" name="items">
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[type="radio"]')
-      .length.should.equal(3);
+    );
+
+    wrapper
+      .assertSingle('.btn-group.btn-group-toggle')
+      .assertNone('btn-group-vertical');
+    wrapper.find('input[type="radio"]').length.should.equal(3);
   });
 
   it('should render radios vertically', () => {

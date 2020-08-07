@@ -78,6 +78,7 @@ const propTypes = {
 
 const defaultProps = {
   type: 'radio',
+  vertical: false,
 };
 
 const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
@@ -88,6 +89,7 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
       name,
       value,
       onChange,
+      vertical,
       ...controlledProps
     } = useUncontrolled(props, {
       value: 'onChange',
@@ -125,7 +127,12 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
     );
 
     return (
-      <ButtonGroup {...controlledProps} ref={ref as any} toggle>
+      <ButtonGroup
+        {...controlledProps}
+        vertical={vertical}
+        ref={ref as any}
+        toggle
+      >
         {map(children, (child) => {
           const values = getValues();
           const { value: childVal, onChange: childOnChange } = child.props;
