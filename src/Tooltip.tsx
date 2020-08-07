@@ -115,7 +115,7 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
         )}
         {...props}
       >
-        <div className="arrow" {...arrowProps} />
+        <div className="tooltip-arrow" {...arrowProps} />
         <div className={`${bsPrefix}-inner`}>{children}</div>
       </div>
     );
