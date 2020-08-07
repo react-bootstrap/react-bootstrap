@@ -4,6 +4,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import CarouselControlled from '../../examples/Carousel/Controlled';
 import CarouselUncontrolled from '../../examples/Carousel/Uncontrolled';
+import IndividualIntervals from '../../examples/Carousel/IndividualIntervals';
 
 # Carousels
 
@@ -28,6 +29,13 @@ You can also _control_ the Carousel state, via the
 `activeIndex` prop and `onSelect` handler.
 
 <ReactPlayground codeText={CarouselControlled} />
+
+## Individual Item Intervals
+
+You can specify individual intervals for each carousel item via the `interval`
+prop.
+
+<ReactPlayground codeText={IndividualIntervals} />
 
 ## API
 

@@ -46,6 +46,8 @@ export { default as Carousel } from './Carousel';
 export type { CarouselProps } from './Carousel';
 
 export { default as CarouselItem } from './CarouselItem';
+export type { CarouselItemProps } from './CarouselItem';
+
 export { default as CloseButton } from './CloseButton';
 export type { CloseButtonProps } from './CloseButton';
 
