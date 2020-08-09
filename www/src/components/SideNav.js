@@ -107,7 +107,7 @@ const gettingStarted = [
   'support',
 ];
 
-const layout = ['grid'];
+const layout = ['box', 'grid'];
 
 const components = [
   'alerts',

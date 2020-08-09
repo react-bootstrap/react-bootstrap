@@ -1,0 +1,31 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import Basic from '../../examples/Box/Basic';
+
+# Box
+
+<p className="lead">
+  The Box component is a utility component specifically designed to be compatible
+  with all bootstrap utility classes, allowing you to handle everything you'll need
+  through React Bootstrap's API.
+</p>
+
+## Examples
+
+## Basic Examples
+
+<ReactPlayground codeText={Basic} />
+
+## API
+
+<ComponentApi metadata={props.data.Box} />
+
+export const query = graphql`
+  query BoxQuery {
+    Box: componentMetadata(displayName: { eq: "Box" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
