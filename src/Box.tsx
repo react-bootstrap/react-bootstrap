@@ -103,9 +103,48 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   flexWrapReverse: (breakpoint: Breakpoint) => {
     return generateBreakpoint('flex', breakpoint, 'wrap-reverse');
   },
+  flexShrinkZero: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'shrink-0');
+  },
+  flexShrinkOne: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'shrink-1');
+  },
+  flexGrowZero: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'grow-0');
+  },
+  flexGrowOne: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'grow-1');
+  },
+  orderZero: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '0');
+  },
+  orderOne: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '1');
+  },
+  orderTwo: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '2');
+  },
+  orderThree: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '3');
+  },
+  orderFour: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '4');
+  },
+  orderFive: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('order', breakpoint, '5');
+  },
 };
 
 const propTypes = {
+  as: elementType,
+
+  /**
+   *
+   * set a custom class name.
+   *
+   */
+  className: PropTypes.string,
+
   displayNone: PropTypes.oneOf(breakpointValues),
   displayInline: PropTypes.oneOf(breakpointValues),
   displayInlineBlock: PropTypes.oneOf(breakpointValues),
@@ -144,12 +183,18 @@ const propTypes = {
   flexWrap: PropTypes.oneOf(breakpointValues),
   flexNoWrap: PropTypes.oneOf(breakpointValues),
   flexWrapReverse: PropTypes.oneOf(breakpointValues),
-  /**
-   *
-   * custom class name
-   *
-   */
-  className: PropTypes.string,
+
+  flexShrinkZero: PropTypes.oneOf(breakpointValues),
+  flexShrinkOne: PropTypes.oneOf(breakpointValues),
+  flexGrowZero: PropTypes.oneOf(breakpointValues),
+  flexGrowOne: PropTypes.oneOf(breakpointValues),
+
+  orderZero: PropTypes.oneOf(breakpointValues),
+  orderOne: PropTypes.oneOf(breakpointValues),
+  orderTwo: PropTypes.oneOf(breakpointValues),
+  orderThree: PropTypes.oneOf(breakpointValues),
+  orderFour: PropTypes.oneOf(breakpointValues),
+  orderFive: PropTypes.oneOf(breakpointValues),
 
   /**
    *
@@ -164,8 +209,6 @@ const propTypes = {
    *
    */
   visible: PropTypes.bool,
-
-  as: elementType,
 };
 
 const defaultProps = {
@@ -213,6 +256,18 @@ export type BoxProps = AsProp &
     flexNoWrap: Breakpoint;
     flexWrapReverse: Breakpoint;
 
+    flexShrinkZero: Breakpoint;
+    flexShrinkOne: Breakpoint;
+    flexGrowZero: Breakpoint;
+    flexGrowOne: Breakpoint;
+
+    orderZero: Breakpoint;
+    orderOne: Breakpoint;
+    orderTwo: Breakpoint;
+    orderThree: Breakpoint;
+    orderFour: Breakpoint;
+    orderFive: Breakpoint;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -252,6 +307,16 @@ const Box = (React.forwardRef(
       flexWrap,
       flexNoWrap,
       flexWrapReverse,
+      flexShrinkZero,
+      flexShrinkOne,
+      flexGrowZero,
+      flexGrowOne,
+      orderZero,
+      orderOne,
+      orderTwo,
+      orderThree,
+      orderFour,
+      orderFive,
       justifyContentStart,
       justifyContentEnd,
       justifyContentCenter,
@@ -300,6 +365,16 @@ const Box = (React.forwardRef(
       justifyContentBetween,
       justifyContentAround,
       justifyContentEvenly,
+      flexShrinkZero,
+      flexShrinkOne,
+      flexGrowZero,
+      flexGrowOne,
+      orderZero,
+      orderOne,
+      orderTwo,
+      orderThree,
+      orderFour,
+      orderFive,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

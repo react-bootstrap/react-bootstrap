@@ -64,4 +64,17 @@ describe('<Box>', () => {
       .hasClass('justify-content-xxl-evenly')
       .should.equal(true);
   });
+  it('Should have flex grow utility', () => {
+    const component = shallow(<Box flexGrowZero />);
+    component.find('div').hasClass('flex-grow-0').should.equal(true);
+  });
+  it('Should have flex shrink utility', () => {
+    const component = shallow(<Box flexShrinkOne="lg" />);
+    console.log(component.debug());
+    component.find('div').hasClass('flex-lg-shrink-1').should.equal(true);
+  });
+  it('Should have order utility', () => {
+    const component = shallow(<Box orderThree="xl" />);
+    component.find('div').hasClass('order-xl-3').should.equal(true);
+  });
 });
