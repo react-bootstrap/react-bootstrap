@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
-const camelCaseToHyphen = (str) =>
+const camelCaseToHyphen = (str: string) =>
   str.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
 
-const flexAlign = ['start', 'end', 'center', 'baseline', 'stretch'];
+const hyphenToCamelCase = (str: string) =>
+  str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 
-const display = [
+const displayValues = [
   'none',
   'inline',
   'inline-block',
@@ -19,124 +20,130 @@ const display = [
   'table-row',
   'flex',
   'inline-flex',
-];
+] as const;
+type Display = typeof displayValues[number];
 
-const flexDirection = ['row', 'row-reverse', 'column', 'column-reverse'];
+const flexDirectionValues = ['row', 'row-reverse', 'column', 'column-reverse'];
 
-const flexWrap = ['nowrap', 'wrap', 'wrap-reverse'];
+const flexAlignValues = [
+  'start',
+  'end',
+  'center',
+  'baseline',
+  'stretch',
+] as const;
 
-const justifyContent = ['start', 'end', 'center', 'between', 'around'];
+const justifyContentValues = [
+  'start',
+  'end',
+  'center',
+  'between',
+  'around',
+  'evenly',
+] as const;
 
-const spaceUtilSizePropTypes = PropTypes.oneOfType([
-  PropTypes.number,
-  PropTypes.oneOf(['auto']),
-]);
+const breakpointValues = [true, 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+type Breakpoint = typeof breakpointValues[number];
 
-const spaceUtilPropTypes = PropTypes.oneOfType([
-  spaceUtilSizePropTypes,
-  PropTypes.shape({
-    /**
-     *
-     * the key is the side of spacing utility,
-     * t - for classes that set margin-top or padding-top
-     * b - for classes that set margin-bottom or padding-bottom
-     * l - for classes that set margin-left or padding-left
-     * r - for classes that set margin-right or padding-right
-     * x - for classes that set both *-left and *-right
-     * y - for classes that set both *-top and *-bottom
-     * all - for classes that set a margin or padding on all 4 sides of the element
-     * (because we cannot set "" as key, use "all" to represent blank side here)
-     * see the boostrap doc
-     * https://getbootstrap.com/docs/4.0/utilities/spacing/#how-it-works
-     *
-     */
-    t: spaceUtilSizePropTypes,
-    b: spaceUtilSizePropTypes,
-    l: spaceUtilSizePropTypes,
-    r: spaceUtilSizePropTypes,
-    x: spaceUtilSizePropTypes,
-    y: spaceUtilSizePropTypes,
-    all: spaceUtilSizePropTypes,
-  }),
-]);
+const generateBreakpoint = (
+  bsPrefix: string,
+  currentBreakpoint: string | true,
+  bsSuffix: string,
+) => {
+  const breakpointPrefix =
+    currentBreakpoint === true ? '' : `-${currentBreakpoint}`;
+  return `${bsPrefix}${breakpointPrefix}-${camelCaseToHyphen(bsSuffix)}`;
+};
 
-const breakpointPropTypes = PropTypes.shape({
-  /**
-   *
-   * display utility,
-   * see the boostrap doc
-   * https://getbootstrap.com/docs/4.0/utilities/display/
-   *
-   */
+const createUtility = (utilityPrefix, suffixes, genCallback) => {
+  return suffixes.reduce((builtObject, currentSuffix) => {
+    builtObject[
+      hyphenToCamelCase(`${utilityPrefix}-${currentSuffix}`)
+    ] = genCallback(currentSuffix);
+    return builtObject;
+  }, {});
+};
 
-  display: PropTypes.oneOf(display),
-
-  /**
-   *
-   * flex utilities,
-   * see the boostrap doc
-   * https://getbootstrap.com/docs/4.0/utilities/flex/
-   *
-   */
-
-  alignContent: PropTypes.oneOf(flexAlign),
-  alignItem: PropTypes.oneOf(flexAlign),
-  alignSelf: PropTypes.oneOf(flexAlign),
-  flexDirection: PropTypes.oneOf(flexDirection),
-  flexWrap: PropTypes.oneOf(flexWrap),
-  justifyContent: PropTypes.oneOf(justifyContent),
-  order: PropTypes.number,
-
-  /**
-   *
-   * spacing utilities,
-   * see the boostrap doc
-   * https://getbootstrap.com/docs/4.0/utilities/spacing/
-   * can be number , "auto", or object,
-   * if passing number or "auto" it will set spacing on all 4 sides of the element
-   *
-   */
-
-  m: spaceUtilPropTypes,
-  p: spaceUtilPropTypes,
-});
+const utilities: Record<string, (utilityValue: any) => string> = {
+  visible: (visible: boolean) => {
+    return visible ? 'visible' : 'invisible';
+  },
+  print: (print) => {
+    return `d-print-${print}`;
+  },
+  ...createUtility('display', displayValues, (suffix) => (breakpoint) =>
+    generateBreakpoint('d', breakpoint, suffix),
+  ),
+  ...createUtility(
+    'flex-direction',
+    flexDirectionValues,
+    (suffix) => (breakpoint) => generateBreakpoint('flex', breakpoint, suffix),
+  ),
+  ...createUtility('align-items', flexAlignValues, (suffix) => (breakpoint) =>
+    generateBreakpoint('align-items', breakpoint, suffix),
+  ),
+  ...createUtility('align-self', flexAlignValues, (suffix) => (breakpoint) =>
+    generateBreakpoint('align-self', breakpoint, suffix),
+  ),
+  ...createUtility(
+    'justify-content',
+    justifyContentValues,
+    (suffix) => (breakpoint) =>
+      generateBreakpoint('justify-content', breakpoint, suffix),
+  ),
+  flexFill: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'fill');
+  },
+  flexWrap: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'wrap');
+  },
+  flexNoWrap: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'no-wrap');
+  },
+  flexWrapReverse: (breakpoint: Breakpoint) => {
+    return generateBreakpoint('flex', breakpoint, 'wrap-reverse');
+  },
+};
 
 const propTypes = {
-  /**
-   *
-   * for Extra small devices Phones (<576px)
-   *
-   */
-  xs: breakpointPropTypes,
+  displayNone: PropTypes.oneOf(breakpointValues),
+  displayInline: PropTypes.oneOf(breakpointValues),
+  displayInlineBlock: PropTypes.oneOf(breakpointValues),
+  displayBlock: PropTypes.oneOf(breakpointValues),
+  displayTable: PropTypes.oneOf(breakpointValues),
+  displayTableCell: PropTypes.oneOf(breakpointValues),
+  displayTableRow: PropTypes.oneOf(breakpointValues),
+  displayFlex: PropTypes.oneOf(breakpointValues),
+  displayInlineFlex: PropTypes.oneOf(breakpointValues),
 
-  /**
-   *
-   * for Small devices Tablets (≥576px)
-   *
-   */
-  sm: breakpointPropTypes,
+  flexDirectionRow: PropTypes.oneOf(breakpointValues),
+  flexDirectionRowReverse: PropTypes.oneOf(breakpointValues),
+  flexDirectionColumn: PropTypes.oneOf(breakpointValues),
+  flexDirectionColumnReverse: PropTypes.oneOf(breakpointValues),
 
-  /**
-   *
-   * for Medium devices Desktops (≥768px)
-   *
-   */
-  md: breakpointPropTypes,
+  alignItemsStart: PropTypes.oneOf(breakpointValues),
+  alignItemsEnd: PropTypes.oneOf(breakpointValues),
+  alignItemsCenter: PropTypes.oneOf(breakpointValues),
+  alignItemsBaseline: PropTypes.oneOf(breakpointValues),
+  alignItemsStretch: PropTypes.oneOf(breakpointValues),
 
-  /**
-   *
-   * for Large devices Desktops (≥992px)
-   *
-   */
-  lg: breakpointPropTypes,
+  alignSelfStart: PropTypes.oneOf(breakpointValues),
+  alignSelfEnd: PropTypes.oneOf(breakpointValues),
+  alignSelfCenter: PropTypes.oneOf(breakpointValues),
+  alignSelfBaseline: PropTypes.oneOf(breakpointValues),
+  alignSelfStretch: PropTypes.oneOf(breakpointValues),
 
-  /**
-   *
-   * for Large devices Desktops (≥1200px)
-   *
-   */
-  xl: breakpointPropTypes,
+  justifyContentStart: PropTypes.oneOf(breakpointValues),
+  justifyContentEnd: PropTypes.oneOf(breakpointValues),
+  justifyContentCenter: PropTypes.oneOf(breakpointValues),
+  justifyContentBetween: PropTypes.oneOf(breakpointValues),
+  justifyContentAround: PropTypes.oneOf(breakpointValues),
+  justifyContentEvenly: PropTypes.oneOf(breakpointValues),
 
+  flexFill: PropTypes.oneOf(breakpointValues),
+  flexWrap: PropTypes.oneOf(breakpointValues),
+  flexNoWrap: PropTypes.oneOf(breakpointValues),
+  flexWrapReverse: PropTypes.oneOf(breakpointValues),
   /**
    *
    * custom class name
@@ -149,147 +156,160 @@ const propTypes = {
    * add `d-print-{display}` className on the element
    *
    */
-  print: PropTypes.oneOf(display),
+  print: PropTypes.oneOf(displayValues),
+
   /**
    *
    * add 'visible' or 'invisible' className on the element
    *
    */
   visible: PropTypes.bool,
+
   as: elementType,
 };
 
 const defaultProps = {
   className: '',
-  componentClass: 'div',
 };
 
-const buildVisibleClassName = (visible) => {
-  if (typeof visible !== 'boolean') {
-    return '';
-  }
-  return visible ? 'visible' : 'invisible';
-};
+export type BoxProps = AsProp &
+  Partial<{
+    displayNone: Breakpoint;
+    displayInline: Breakpoint;
+    displayInlineBlock: Breakpoint;
+    displayBlock: Breakpoint;
+    displayTable: Breakpoint;
+    displayTableCell: Breakpoint;
+    displayTableRow: Breakpoint;
+    displayFlex: Breakpoint;
+    displayInlineFlex: Breakpoint;
 
-const buildPrintClassName = (print) => {
-  if (!print) {
-    return '';
-  }
-  return `d-print-${print}`;
-};
+    flexDirectionRow: Breakpoint;
+    flexDirectionRowReverse: Breakpoint;
+    flexDirectionColumn: Breakpoint;
+    flexDirectionColumnReverse: Breakpoint;
 
-const buildSpacingClassName = ({ propName, bpAbbrev, value }) => {
-  if (typeof value === 'number' || value === 'auto') {
-    const size = value;
-    return `${propName}-${bpAbbrev}${size}`;
-  }
-  if (typeof value === 'object') {
-    const classNameList = Object.keys(value).map((side) => {
-      const size = value[side];
-      const prefix = side === 'all' ? propName : `${propName}${side}`;
-      return `${prefix}-${bpAbbrev}${size}`;
-    });
-    return classNames(classNameList);
-  }
-  return '';
-};
+    alignItemsStart: Breakpoint;
+    alignItemsEnd: Breakpoint;
+    alignItemsCenter: Breakpoint;
+    alignItemsBaseline: Breakpoint;
+    alignItemsStretch: Breakpoint;
 
-const buildBreakpointClassName = (breakpoint, breakpointProps) => {
-  if (typeof breakpointProps !== 'object') {
-    return '';
-  }
-  const bpAbbrev = breakpoint === 'xs' ? '' : `${breakpoint}-`;
-  const classNameList = Object.keys(breakpointProps).map((propName) => {
-    const value = breakpointProps[propName];
-    if (propName === 'm' || propName === 'p') {
-      return buildSpacingClassName({ propName, value, bpAbbrev });
-    }
-    const suffix = `-${bpAbbrev}${value}`;
-    let prefix = '';
-    if (propName === 'display') {
-      prefix = 'd';
-    } else if (propName === 'flexDirection' || propName === 'flexWrap') {
-      prefix = 'flex';
-    } else {
-      prefix = camelCaseToHyphen(propName);
-    }
-    return `${prefix}${suffix}`;
-  });
-  return classNames(classNameList);
-};
+    alignSelfStart: Breakpoint;
+    alignSelfEnd: Breakpoint;
+    alignSelfCenter: Breakpoint;
+    alignSelfBaseline: Breakpoint;
+    alignSelfStretch: Breakpoint;
 
-const buildLayoutClassName = (breakpoints) => {
-  const classNameList = Object.keys(breakpoints).map((bp) =>
-    buildBreakpointClassName(bp, breakpoints[bp]),
-  );
-  return classNames(classNameList);
-};
+    justifyContentStart: Breakpoint;
+    justifyContentEnd: Breakpoint;
+    justifyContentCenter: Breakpoint;
+    justifyContentBetween: Breakpoint;
+    justifyContentAround: Breakpoint;
+    justifyContentEvenly: Breakpoint;
 
-type SpaceUtilSizeTypes = number | 'auto';
+    flexFill: Breakpoint;
+    flexWrap: Breakpoint;
+    flexNoWrap: Breakpoint;
+    flexWrapReverse: Breakpoint;
 
-type SpaceUtilTypes =
-  | SpaceUtilSizeTypes
-  | {
-      t?: SpaceUtilSizeTypes;
-      b?: SpaceUtilSizeTypes;
-      l?: SpaceUtilSizeTypes;
-      r?: SpaceUtilSizeTypes;
-      x?: SpaceUtilSizeTypes;
-      y?: SpaceUtilSizeTypes;
-      all?: SpaceUtilSizeTypes;
-    };
-
-type BreakpointTypes = {
-  display?: typeof display[number];
-
-  alignContent?: typeof flexAlign[number];
-  alignItem?: typeof flexAlign[number];
-  alignSelf?: typeof flexAlign[number];
-  flexDirection?: typeof flexDirection[number];
-  flexWrap?: typeof flexWrap[number];
-  justifyContent?: typeof justifyContent[number];
-  order?: number;
-  m?: SpaceUtilTypes;
-  p?: SpaceUtilTypes;
-};
-
-export interface BoxProps extends AsProp {
-  xs?: BreakpointTypes;
-  sm?: BreakpointTypes;
-  md?: BreakpointTypes;
-  lg?: BreakpointTypes;
-  xl?: BreakpointTypes;
-
-  className?: string;
-  print?: typeof display[number];
-  visible?: boolean;
-}
+    className: string;
+    print: Display;
+    visible: boolean;
+  }>;
 
 type Box = BsPrefixRefForwardingComponent<'div', BoxProps>;
 
-const Box: Box = (React.forwardRef(
+const Box = (React.forwardRef(
   (
     {
-      className: customClassName,
+      className,
       as: Component = 'div',
+      displayNone,
+      displayInline,
+      displayInlineBlock,
+      displayBlock,
+      displayTable,
+      displayTableCell,
+      displayTableRow,
+      displayFlex,
+      displayInlineFlex,
+      flexDirectionRow,
+      flexDirectionRowReverse,
+      flexDirectionColumn,
+      flexDirectionColumnReverse,
+      alignItemsStart,
+      alignItemsEnd,
+      alignItemsCenter,
+      alignItemsBaseline,
+      alignItemsStretch,
+      alignSelfStart,
+      alignSelfEnd,
+      alignSelfCenter,
+      alignSelfBaseline,
+      alignSelfStretch,
+      flexFill,
+      flexWrap,
+      flexNoWrap,
+      flexWrapReverse,
+      justifyContentStart,
+      justifyContentEnd,
+      justifyContentCenter,
+      justifyContentBetween,
+      justifyContentAround,
+      justifyContentEvenly,
       print,
       visible,
-      xs,
-      sm,
-      md,
-      lg,
-      xl,
       ...props
     }: BoxProps,
     ref,
   ) => {
-    const className = classNames(
-      buildVisibleClassName(visible),
-      buildPrintClassName(print),
-      buildLayoutClassName({ xs, sm, md, lg, xl }),
-      customClassName,
+    const utilityProps = {
+      displayNone,
+      displayInline,
+      displayInlineBlock,
+      displayBlock,
+      displayTable,
+      displayTableCell,
+      displayTableRow,
+      displayFlex,
+      displayInlineFlex,
+      print,
+      visible,
+      flexDirectionRow,
+      flexDirectionRowReverse,
+      flexDirectionColumn,
+      flexDirectionColumnReverse,
+      alignItemsStart,
+      alignItemsEnd,
+      alignItemsCenter,
+      alignItemsBaseline,
+      alignItemsStretch,
+      alignSelfStart,
+      alignSelfEnd,
+      alignSelfCenter,
+      alignSelfBaseline,
+      alignSelfStretch,
+      flexFill,
+      flexWrap,
+      flexNoWrap,
+      flexWrapReverse,
+      justifyContentStart,
+      justifyContentEnd,
+      justifyContentCenter,
+      justifyContentBetween,
+      justifyContentAround,
+      justifyContentEvenly,
+    };
+    const finalClassName = classNames(
+      ...Object.entries(utilityProps)
+        .filter(([_, utilityValue]) => utilityValue !== undefined)
+        .map(([utilityName, utilityValue]) =>
+          utilities[utilityName](utilityValue),
+        ),
+      className,
     );
-    return <Component className={className} ref={ref} {...props} />;
+    return <Component ref={ref} className={finalClassName} {...props} />;
   },
 ) as unknown) as Box;
 
