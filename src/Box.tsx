@@ -253,7 +253,7 @@ type BreakpointTypes = {
   p?: SpaceUtilTypes;
 };
 
-export interface LayoutProps extends AsProp {
+export interface BoxProps extends AsProp {
   xs?: BreakpointTypes;
   sm?: BreakpointTypes;
   md?: BreakpointTypes;
@@ -265,9 +265,9 @@ export interface LayoutProps extends AsProp {
   visible?: boolean;
 }
 
-type Layout = BsPrefixRefForwardingComponent<'div', LayoutProps>;
+type Box = BsPrefixRefForwardingComponent<'div', BoxProps>;
 
-const Layout: Layout = (React.forwardRef(
+const Box: Box = (React.forwardRef(
   (
     {
       className: customClassName,
@@ -280,7 +280,7 @@ const Layout: Layout = (React.forwardRef(
       lg,
       xl,
       ...props
-    }: LayoutProps,
+    }: BoxProps,
     ref,
   ) => {
     const className = classNames(
@@ -291,10 +291,10 @@ const Layout: Layout = (React.forwardRef(
     );
     return <Component className={className} ref={ref} {...props} />;
   },
-) as unknown) as Layout;
+) as unknown) as Box;
 
-Layout.displayName = 'Layout';
-Layout.propTypes = propTypes;
-Layout.defaultProps = defaultProps;
+Box.displayName = 'Box';
+Box.propTypes = propTypes;
+Box.defaultProps = defaultProps;
 
-export default Layout;
+export default Box;
