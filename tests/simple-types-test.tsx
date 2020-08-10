@@ -999,6 +999,7 @@ const MegaComponent = () => (
       value={[1]}
       style={style}
       vertical
+      size="lg"
     >
       <ToggleButton
         value={1}

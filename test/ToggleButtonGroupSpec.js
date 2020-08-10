@@ -77,6 +77,36 @@ describe('ToggleButtonGroup', () => {
     wrapper.find('input[type="checkbox"]').length.should.equal(3);
   });
 
+  it('should render checkboxes vertically and small', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup type="checkbox" vertical size="sm">
+        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>,
+    );
+
+    wrapper
+      .assertSingle('.btn-group-vertical.btn-group-sm.btn-group-toggle')
+      .assertNone('.btn-group');
+    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+  });
+
+  it('should render checkboxes vertically and large', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup type="checkbox" vertical size="lg">
+        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>,
+    );
+
+    wrapper
+      .assertSingle('.btn-group-vertical.btn-group-lg.btn-group-toggle')
+      .assertNone('.btn-group');
+    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+  });
+
   it('should render radios', () => {
     const wrapper = mount(
       <ToggleButtonGroup type="radio" name="items">
@@ -103,6 +133,36 @@ describe('ToggleButtonGroup', () => {
 
     wrapper
       .assertSingle('.btn-group-vertical.btn-group-toggle')
+      .assertNone('.btn-group');
+    wrapper.find('input[type="radio"]').length.should.equal(3);
+  });
+
+  it('should render radios vertically and small', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup type="radio" name="items" vertical size="sm">
+        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>,
+    );
+
+    wrapper
+      .assertSingle('.btn-group-vertical.btn-group-sm.btn-group-toggle')
+      .assertNone('.btn-group');
+    wrapper.find('input[type="radio"]').length.should.equal(3);
+  });
+
+  it('should render radios vertically and large', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup type="radio" name="items" vertical size="lg">
+        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>,
+    );
+
+    wrapper
+      .assertSingle('.btn-group-vertical.btn-group-lg.btn-group-toggle')
       .assertNone('.btn-group');
     wrapper.find('input[type="radio"]').length.should.equal(3);
   });

@@ -5,30 +5,26 @@ import { useUncontrolled } from 'uncontrollable';
 
 import chainFunction from './createChainedFunction';
 import { map } from './ElementChildren';
-import ButtonGroup from './ButtonGroup';
+import ButtonGroup, { ButtonGroupProps } from './ButtonGroup';
 import ToggleButton from './ToggleButton';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ToggleButtonRadioProps<T> extends BsPrefixPropsWithChildren {
+export interface ToggleButtonRadioProps<T>
+  extends Omit<ButtonGroupProps, 'toggle'> {
   type?: 'radio';
   name: string;
   value?: T;
   defaultValue?: T;
   onChange?: (value: T, event: any) => void;
-  vertical?: boolean;
 }
 
 export interface ToggleButtonCheckboxProps<T>
-  extends BsPrefixPropsWithChildren {
+  extends Omit<ButtonGroupProps, 'toggle'> {
   type: 'checkbox';
   name?: string;
   value?: T[];
   defaultValue?: T[];
   onChange?: (value: T[]) => void;
-  vertical?: boolean;
 }
 
 export type ToggleButtonGroupProps<T> =
@@ -72,6 +68,13 @@ const propTypes = {
    */
   type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
 
+  /**
+   * Sets the size for all Buttons in the group.
+   *
+   * @type ('sm'|'lg')
+   */
+  size: PropTypes.string,
+
   /** Make the set of Buttons appear vertically stacked. */
   vertical: PropTypes.bool,
 };
@@ -89,7 +92,6 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
       name,
       value,
       onChange,
-      vertical,
       ...controlledProps
     } = useUncontrolled(props, {
       value: 'onChange',
@@ -127,12 +129,7 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
     );
 
     return (
-      <ButtonGroup
-        {...controlledProps}
-        vertical={vertical}
-        ref={ref as any}
-        toggle
-      >
+      <ButtonGroup {...controlledProps} ref={ref as any} toggle>
         {map(children, (child) => {
           const values = getValues();
           const { value: childVal, onChange: childOnChange } = child.props;
