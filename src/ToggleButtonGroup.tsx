@@ -5,14 +5,12 @@ import { useUncontrolled } from 'uncontrollable';
 
 import chainFunction from './createChainedFunction';
 import { map } from './ElementChildren';
-import ButtonGroup from './ButtonGroup';
+import ButtonGroup, { ButtonGroupProps } from './ButtonGroup';
 import ToggleButton from './ToggleButton';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ToggleButtonRadioProps<T> extends BsPrefixPropsWithChildren {
+export interface ToggleButtonRadioProps<T>
+  extends Omit<ButtonGroupProps, 'toggle'> {
   type?: 'radio';
   name: string;
   value?: T;
@@ -21,7 +19,7 @@ export interface ToggleButtonRadioProps<T> extends BsPrefixPropsWithChildren {
 }
 
 export interface ToggleButtonCheckboxProps<T>
-  extends BsPrefixPropsWithChildren {
+  extends Omit<ButtonGroupProps, 'toggle'> {
   type: 'checkbox';
   name?: string;
   value?: T[];
@@ -69,10 +67,21 @@ const propTypes = {
    * of the buttons
    */
   type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+
+  /**
+   * Sets the size for all Buttons in the group.
+   *
+   * @type ('sm'|'lg')
+   */
+  size: PropTypes.string,
+
+  /** Make the set of Buttons appear vertically stacked. */
+  vertical: PropTypes.bool,
 };
 
 const defaultProps = {
   type: 'radio',
+  vertical: false,
 };
 
 const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
