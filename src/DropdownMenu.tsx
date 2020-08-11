@@ -39,8 +39,6 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
-const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm'] as const;
-
 const alignDirection = PropTypes.oneOf(['left', 'right']);
 
 export const alignPropType = PropTypes.oneOfType([
@@ -146,7 +144,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     const alignClasses: string[] = [];
     if (align) {
       if (typeof align === 'object') {
-        DEVICE_SIZES.forEach((brkPoint) => {
+        Object.keys(align).forEach((brkPoint) => {
           const direction = align[brkPoint];
           if (direction) {
             alignRight = alignRight || direction === 'left';
