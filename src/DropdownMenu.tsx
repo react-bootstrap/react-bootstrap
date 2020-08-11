@@ -147,6 +147,9 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
         Object.keys(align).forEach((brkPoint) => {
           const direction = align[brkPoint];
           if (direction) {
+            // .dropdown-menu-right is required for responsively aligning
+            // left in addition to align left classes.
+            // Reuse alignRight to toggle the class below.
             alignRight = alignRight || direction === 'left';
             alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
           }
