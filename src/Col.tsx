@@ -23,7 +23,7 @@ type NumberAttr =
   | '11'
   | '12';
 
-type ColOrder = 'first' | 'last' | NumberAttr;
+type ColOrder = number | 'first' | 'last' | '1' | '2' | '3' | '4' | '5';
 type ColSize = boolean | 'auto' | NumberAttr;
 type ColSpec =
   | ColSize
