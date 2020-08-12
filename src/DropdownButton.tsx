@@ -3,17 +3,14 @@ import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, {
-  alignPropType,
-  ResponsiveAlignProp,
-} from './DropdownMenu';
+import DropdownMenu, { alignPropType, AlignType } from './DropdownMenu';
 
 export interface DropdownButtonProps
   extends DropdownProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
     React.PropsWithChildren<PropsFromToggle> {
   title: React.ReactNode;
-  menuAlign?: ResponsiveAlignProp;
+  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';

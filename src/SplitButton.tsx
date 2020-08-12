@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown from './Dropdown';
-import { alignPropType, ResponsiveAlignProp } from './DropdownMenu';
+import { alignPropType, AlignType } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
 import {
   BsPrefixPropsWithChildren,
@@ -15,7 +15,7 @@ export interface SplitButtonProps
   extends PropsFromToggle,
     BsPrefixPropsWithChildren {
   id: string | number;
-  menuAlign?: ResponsiveAlignProp;
+  menuAlign?: AlignType;
   menuRole?: string;
   onClick?: React.MouseEventHandler<this>;
   renderMenuOnMount?: boolean;

@@ -26,11 +26,13 @@ export type ResponsiveAlignProp =
   | { lg: AlignDirection }
   | { xl: AlignDirection };
 
+export type AlignType = AlignDirection | ResponsiveAlignProp;
+
 export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
-  align?: AlignDirection | ResponsiveAlignProp;
+  align?: AlignType;
   alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
