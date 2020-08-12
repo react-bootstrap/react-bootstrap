@@ -2,8 +2,8 @@
   <div>
     <DropdownButton
       as={ButtonGroup}
-      menuAlign={{ sm: 'left', md: 'right', lg: 'left', xl: 'right' }}
-      title="My Responsive Dropdown"
+      menuAlign={{ lg: 'right' }}
+      title="Left-aligned but right aligned when large screen"
       id="dropdown-menu-align-responsive-1"
     >
       <Dropdown.Item eventKey="1">Action 1</Dropdown.Item>
@@ -12,8 +12,8 @@
   </div>
   <div className="mt-2">
     <SplitButton
-      menuAlign={{ sm: 'left', md: 'right', lg: 'left', xl: 'right' }}
-      title="My Responsive Dropdown"
+      menuAlign={{ lg: 'left' }}
+      title="Right-aligned but left aligned when large screen"
       id="dropdown-menu-align-responsive-2"
     >
       <Dropdown.Item eventKey="1">Action 1</Dropdown.Item>

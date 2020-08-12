@@ -7,6 +7,7 @@ import {
   UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import warning from 'warning';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
@@ -19,12 +20,11 @@ import {
 
 export type AlignDirection = 'left' | 'right';
 
-export interface ResponsiveAlignProp {
-  sm?: AlignDirection;
-  md?: AlignDirection;
-  lg?: AlignDirection;
-  xl?: AlignDirection;
-}
+export type ResponsiveAlignProp =
+  | { sm: AlignDirection }
+  | { md: AlignDirection }
+  | { lg: AlignDirection }
+  | { xl: AlignDirection };
 
 export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
@@ -43,12 +43,10 @@ const alignDirection = PropTypes.oneOf(['left', 'right']);
 
 export const alignPropType = PropTypes.oneOfType([
   alignDirection,
-  PropTypes.shape({
-    sm: alignDirection,
-    md: alignDirection,
-    lg: alignDirection,
-    xl: alignDirection,
-  }),
+  PropTypes.shape({ sm: alignDirection }),
+  PropTypes.shape({ md: alignDirection }),
+  PropTypes.shape({ lg: alignDirection }),
+  PropTypes.shape({ xl: alignDirection }),
 ]);
 
 const propTypes = {
@@ -73,7 +71,7 @@ const propTypes = {
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
    *
-   * @type {"left"|"right"|{ sm: "left"|"right", md: "left"|"right", lg: "left"|"right", xl: "left"|"right" }}
+   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
    */
   align: alignPropType,
 
@@ -125,6 +123,8 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       bsPrefix,
       className,
       align,
+      // When we remove alignRight from API, use the var locally to toggle
+      // .dropdown-menu-right class below.
       alignRight,
       rootCloseEvent,
       flip,
@@ -144,16 +144,23 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     const alignClasses: string[] = [];
     if (align) {
       if (typeof align === 'object') {
-        Object.keys(align).forEach((brkPoint) => {
+        const keys = Object.keys(align);
+
+        warning(
+          keys.length === 1,
+          'There should only be 1 breakpoint when passing an object to `align`',
+        );
+
+        if (keys.length) {
+          const brkPoint = keys[0];
           const direction = align[brkPoint];
-          if (direction) {
-            // .dropdown-menu-right is required for responsively aligning
-            // left in addition to align left classes.
-            // Reuse alignRight to toggle the class below.
-            alignRight = alignRight || direction === 'left';
-            alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
-          }
-        });
+
+          // .dropdown-menu-right is required for responsively aligning
+          // left in addition to align left classes.
+          // Reuse alignRight to toggle the class below.
+          alignRight = direction === 'left';
+          alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
+        }
       } else if (align === 'right') {
         alignRight = true;
       }

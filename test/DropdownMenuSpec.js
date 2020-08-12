@@ -61,33 +61,20 @@ describe('<Dropdown.Menu>', () => {
 
   it('adds responsive left alignment classes', () => {
     mount(
-      <DropdownMenu
-        show
-        align={{ sm: 'left', md: 'left', lg: 'left', xl: 'left' }}
-      >
+      <DropdownMenu show align={{ lg: 'left' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     )
       .assertSingle('.dropdown-menu-right')
-      .assertSingle('.dropdown-menu-sm-left')
-      .assertSingle('.dropdown-menu-md-left')
-      .assertSingle('.dropdown-menu-lg-left')
-      .assertSingle('.dropdown-menu-xl-left');
+      .assertSingle('.dropdown-menu-lg-left');
   });
 
   it('adds responsive right alignment classes', () => {
     mount(
-      <DropdownMenu
-        show
-        align={{ sm: 'right', md: 'right', lg: 'right', xl: 'right' }}
-      >
+      <DropdownMenu show align={{ lg: 'right' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    )
-      .assertSingle('.dropdown-menu-sm-right')
-      .assertSingle('.dropdown-menu-md-right')
-      .assertSingle('.dropdown-menu-lg-right')
-      .assertSingle('.dropdown-menu-xl-right');
+    ).assertSingle('.dropdown-menu-lg-right');
   });
 
   // it.only('warns about bad refs', () => {

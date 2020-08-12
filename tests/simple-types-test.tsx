@@ -312,7 +312,7 @@ const MegaComponent = () => (
         show
         bsPrefix="dropdownmenu"
         style={style}
-        align={{ sm: 'left', md: 'right', lg: 'left', xl: 'right' }}
+        align={{ sm: 'left' }}
       >
         <Dropdown.Item
           active
@@ -348,7 +348,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
-      menuAlign={{ sm: 'left', md: 'right', lg: 'left', xl: 'right' }}
+      menuAlign={{ sm: 'left' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -922,7 +922,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
-      menuAlign={{ sm: 'left', md: 'right', lg: 'left', xl: 'right' }}
+      menuAlign={{ sm: 'left' }}
     />
     <Table
       id="id"
