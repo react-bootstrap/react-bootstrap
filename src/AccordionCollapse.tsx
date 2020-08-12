@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
+import SelectableContext from './SelectableContext';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AccordionCollapseProps
@@ -29,10 +30,14 @@ const AccordionCollapse: AccordionCollapse = React.forwardRef<typeof Collapse>(
   ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
     const contextEventKey = useContext(AccordionContext);
 
+    // Empty SelectableContext is to prevent elements in the collapse
+    // from collapsing the accordion when clicked.
     return (
-      <Collapse ref={ref} in={contextEventKey === eventKey} {...props}>
-        <div>{React.Children.only(children)}</div>
-      </Collapse>
+      <SelectableContext.Provider value={null}>
+        <Collapse ref={ref} in={contextEventKey === eventKey} {...props}>
+          <div>{React.Children.only(children)}</div>
+        </Collapse>
+      </SelectableContext.Provider>
     );
   },
 ) as any;
