@@ -45,7 +45,7 @@ const propTypes = {
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right", md: "left"|"right", lg: "left"|"right", xl: "left"|"right" }}
+   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
    */
   menuAlign: alignPropType,
 
