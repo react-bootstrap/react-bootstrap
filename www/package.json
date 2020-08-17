@@ -47,7 +47,7 @@
     "docsearch.js": "^2.6.3",
     "dom-helpers": "^5.2.0",
     "formik": "^2.1.5",
-    "gatsby": "^2.24.43",
+    "gatsby": "^2.24.47",
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-mdx": "^1.2.34",
@@ -61,7 +61,7 @@
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-4catalyzer": "^4.0.1",
     "import-sort-style-module": "^6.0.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "prismjs": "^1.21.0",
     "prop-types": "^15.7.2",
@@ -74,7 +74,7 @@
     "yup": "^0.29.3"
   },
   "resolutions": {
-    "@babel/core": "7.10.5",
-    "@babel/parser": "7.10.5"
+    "@babel/core": "7.11.1",
+    "@babel/parser": "7.11.3"
   }
 }
