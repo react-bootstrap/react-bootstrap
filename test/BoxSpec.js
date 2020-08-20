@@ -70,11 +70,26 @@ describe('<Box>', () => {
   });
   it('Should have flex shrink utility', () => {
     const component = shallow(<Box flexShrinkOne="lg" />);
-    console.log(component.debug());
     component.find('div').hasClass('flex-lg-shrink-1').should.equal(true);
   });
   it('Should have order utility', () => {
     const component = shallow(<Box orderThree="xl" />);
     component.find('div').hasClass('order-xl-3').should.equal(true);
+  });
+  it('Should have border utility', () => {
+    const component = shallow(<Box border />);
+    component.find('div').hasClass('border').should.equal(true);
+  });
+  it('Should have border zero utility', () => {
+    const component = shallow(<Box borderZero="right" />);
+    component.find('div').hasClass('border-right-0').should.equal(true);
+  });
+  it('Should have border color utility', () => {
+    const component = shallow(<Box borderColor="warning" />);
+    component.find('div').hasClass('border-warning').should.equal(true);
+  });
+  it('Should have border radius utility', () => {
+    const component = shallow(<Box borderRadius="lg" />);
+    component.find('div').hasClass('rounded-lg').should.equal(true);
   });
 });

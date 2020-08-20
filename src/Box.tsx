@@ -45,6 +45,25 @@ const justifyContentValues = [
 const breakpointValues = [true, 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 type Breakpoint = typeof breakpointValues[number];
 
+const borderValues = [true, 'top', 'right', 'bottom', 'left'] as const;
+type Border = typeof borderValues[number];
+
+const colorValues = [
+  'primary',
+  'secondary',
+  'success',
+  'danger',
+  'warning',
+  'info',
+  'light',
+  'dark',
+  'white',
+] as const;
+type Color = typeof colorValues[number];
+
+const radiusValues = [true, 'circle', 'pill', '0', 'sm', 'lg'] as const;
+type Radius = typeof radiusValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -133,6 +152,26 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   orderFive(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '5');
   },
+  border(border: Border | true) {
+    let suffix = `-${border}`;
+    if (border === true) {
+      suffix = '';
+    }
+    return `border${suffix}`;
+  },
+  borderZero(border: Border | true) {
+    let suffix = `-${border}`;
+    if (border === true) {
+      suffix = '';
+    }
+    return `border${suffix}-0`;
+  },
+  borderColor(color: Color) {
+    return `border-${color}`;
+  },
+  borderRadius(radius: Radius) {
+    return `rounded-${radius}`;
+  },
 };
 
 const propTypes = {
@@ -195,6 +234,11 @@ const propTypes = {
   orderThree: PropTypes.oneOf(breakpointValues),
   orderFour: PropTypes.oneOf(breakpointValues),
   orderFive: PropTypes.oneOf(breakpointValues),
+
+  border: PropTypes.oneOf(borderValues),
+  borderZero: PropTypes.oneOf(borderValues),
+  borderColor: PropTypes.oneOf(colorValues),
+  borderRadius: PropTypes.oneOf(radiusValues),
 
   /**
    *
@@ -268,6 +312,11 @@ export type BoxProps = AsProp &
     orderFour: Breakpoint;
     orderFive: Breakpoint;
 
+    border: Border;
+    borderZero: Border;
+    borderColor: Color;
+    borderRadius: Radius;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -323,6 +372,10 @@ const Box = (React.forwardRef(
       justifyContentBetween,
       justifyContentAround,
       justifyContentEvenly,
+      border,
+      borderZero,
+      borderColor,
+      borderRadius,
       print,
       visible,
       ...props
@@ -375,6 +428,10 @@ const Box = (React.forwardRef(
       orderThree,
       orderFour,
       orderFive,
+      border,
+      borderZero,
+      borderColor,
+      borderRadius,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)
