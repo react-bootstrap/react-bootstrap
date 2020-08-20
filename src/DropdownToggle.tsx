@@ -59,7 +59,6 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
       bsPrefix,
       split,
       className,
-      children,
       childBsPrefix,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = Button,
@@ -88,9 +87,7 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
         className={classNames(className, prefix, split && `${prefix}-split`)}
         {...toggleProps}
         {...props}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );
