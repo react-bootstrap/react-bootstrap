@@ -181,6 +181,27 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   bgColorGradient(color: Color) {
     return `bg-${color} bg-gradient`;
   },
+  floatLeft(breakpoint: Breakpoint) {
+    let suffix = `-${breakpoint}`;
+    if (breakpoint === true) {
+      suffix = '';
+    }
+    return `float${suffix}-left`;
+  },
+  floatRight(breakpoint: Breakpoint) {
+    let suffix = `-${breakpoint}`;
+    if (breakpoint === true) {
+      suffix = '';
+    }
+    return `float${suffix}-right`;
+  },
+  floatNone(breakpoint: Breakpoint) {
+    let suffix = `-${breakpoint}`;
+    if (breakpoint === true) {
+      suffix = '';
+    }
+    return `float${suffix}-none`;
+  },
 };
 
 const propTypes = {
@@ -252,6 +273,10 @@ const propTypes = {
   color: PropTypes.oneOf(colorValues),
   bgColor: PropTypes.oneOf(colorValues),
   bgColorGradient: PropTypes.oneOf(colorValues),
+
+  floatLeft: PropTypes.oneOf(breakpointValues),
+  floatRight: PropTypes.oneOf(breakpointValues),
+  floatNone: PropTypes.oneOf(breakpointValues),
 
   /**
    *
@@ -334,6 +359,10 @@ export type BoxProps = AsProp &
     bgColor: Color;
     bgColorGradient: Color;
 
+    floatLeft: Breakpoint;
+    floatRight: Breakpoint;
+    floatNone: Breakpoint;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -396,6 +425,9 @@ const Box = (React.forwardRef(
       color,
       bgColor,
       bgColorGradient,
+      floatLeft,
+      floatRight,
+      floatNone,
       print,
       visible,
       ...props
@@ -455,6 +487,9 @@ const Box = (React.forwardRef(
       color,
       bgColor,
       bgColorGradient,
+      floatLeft,
+      floatRight,
+      floatNone,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

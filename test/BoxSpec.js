@@ -105,4 +105,16 @@ describe('<Box>', () => {
     component.find('div').hasClass('bg-dark').should.equal(true);
     component.find('div').hasClass('bg-gradient').should.equal(true);
   });
+  it('Should have float left utility', () => {
+    const component = shallow(<Box floatLeft />);
+    component.find('div').hasClass('float-left').should.equal(true);
+  });
+  it('Should have float right utility', () => {
+    const component = shallow(<Box floatRight="xxl" />);
+    component.find('div').hasClass('float-xxl-right').should.equal(true);
+  });
+  it('Should have float none utility', () => {
+    const component = shallow(<Box floatNone="sm" />);
+    component.find('div').hasClass('float-sm-none').should.equal(true);
+  });
 });
