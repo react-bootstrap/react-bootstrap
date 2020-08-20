@@ -172,6 +172,15 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   borderRadius(radius: Radius) {
     return `rounded-${radius}`;
   },
+  color(color: Color) {
+    return `text-${color}`;
+  },
+  bgColor(color: Color) {
+    return `bg-${color}`;
+  },
+  bgColorGradient(color: Color) {
+    return `bg-${color} bg-gradient`;
+  },
 };
 
 const propTypes = {
@@ -239,6 +248,10 @@ const propTypes = {
   borderZero: PropTypes.oneOf(borderValues),
   borderColor: PropTypes.oneOf(colorValues),
   borderRadius: PropTypes.oneOf(radiusValues),
+
+  color: PropTypes.oneOf(colorValues),
+  bgColor: PropTypes.oneOf(colorValues),
+  bgColorGradient: PropTypes.oneOf(colorValues),
 
   /**
    *
@@ -317,6 +330,10 @@ export type BoxProps = AsProp &
     borderColor: Color;
     borderRadius: Radius;
 
+    color: Color;
+    bgColor: Color;
+    bgColorGradient: Color;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -376,6 +393,9 @@ const Box = (React.forwardRef(
       borderZero,
       borderColor,
       borderRadius,
+      color,
+      bgColor,
+      bgColorGradient,
       print,
       visible,
       ...props
@@ -432,6 +452,9 @@ const Box = (React.forwardRef(
       borderZero,
       borderColor,
       borderRadius,
+      color,
+      bgColor,
+      bgColorGradient,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

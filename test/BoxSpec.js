@@ -92,4 +92,17 @@ describe('<Box>', () => {
     const component = shallow(<Box borderRadius="lg" />);
     component.find('div').hasClass('rounded-lg').should.equal(true);
   });
+  it('Should have color utility', () => {
+    const component = shallow(<Box color="danger" />);
+    component.find('div').hasClass('text-danger').should.equal(true);
+  });
+  it('Should have background color utility', () => {
+    const component = shallow(<Box bgColor="info" />);
+    component.find('div').hasClass('bg-info').should.equal(true);
+  });
+  it('Should have background color gradient utility', () => {
+    const component = shallow(<Box bgColorGradient="dark" />);
+    component.find('div').hasClass('bg-dark').should.equal(true);
+    component.find('div').hasClass('bg-gradient').should.equal(true);
+  });
 });
