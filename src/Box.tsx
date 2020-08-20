@@ -64,6 +64,12 @@ type Color = typeof colorValues[number];
 const radiusValues = [true, 'circle', 'pill', '0', 'sm', 'lg'] as const;
 type Radius = typeof radiusValues[number];
 
+const userSelectValues = ['all', 'auto', 'none'] as const;
+type UserSelect = typeof userSelectValues[number];
+
+const peValues = ['none', 'auto'] as const;
+type Pe = typeof peValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -202,6 +208,12 @@ const utilities: Record<string, (utilityValue: any) => string> = {
     }
     return `float${suffix}-none`;
   },
+  userSelect(option: UserSelect) {
+    return `user-select-${option}`;
+  },
+  pe(option: Pe) {
+    return `pe-${option}`;
+  },
 };
 
 const propTypes = {
@@ -277,6 +289,9 @@ const propTypes = {
   floatLeft: PropTypes.oneOf(breakpointValues),
   floatRight: PropTypes.oneOf(breakpointValues),
   floatNone: PropTypes.oneOf(breakpointValues),
+
+  userSelect: PropTypes.oneOf(userSelectValues),
+  pe: PropTypes.oneOf(peValues),
 
   /**
    *
@@ -363,6 +378,9 @@ export type BoxProps = AsProp &
     floatRight: Breakpoint;
     floatNone: Breakpoint;
 
+    userSelect: UserSelect;
+    pe: Pe;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -428,6 +446,8 @@ const Box = (React.forwardRef(
       floatLeft,
       floatRight,
       floatNone,
+      userSelect,
+      pe,
       print,
       visible,
       ...props
@@ -490,6 +510,8 @@ const Box = (React.forwardRef(
       floatLeft,
       floatRight,
       floatNone,
+      userSelect,
+      pe,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

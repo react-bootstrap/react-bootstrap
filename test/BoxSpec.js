@@ -117,4 +117,12 @@ describe('<Box>', () => {
     const component = shallow(<Box floatNone="sm" />);
     component.find('div').hasClass('float-sm-none').should.equal(true);
   });
+  it('Should have text selection utility', () => {
+    const component = shallow(<Box userSelect="none" />);
+    component.find('div').hasClass('user-select-none').should.equal(true);
+  });
+  it('Should have pointer events utility', () => {
+    const component = shallow(<Box pe="auto" />);
+    component.find('div').hasClass('pe-auto').should.equal(true);
+  });
 });
