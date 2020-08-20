@@ -65,10 +65,10 @@ const createUtility = (utilityPrefix, suffixes, genCallback) => {
 };
 
 const utilities: Record<string, (utilityValue: any) => string> = {
-  visible: (visible: boolean) => {
+  visible(visible: boolean) {
     return visible ? 'visible' : 'invisible';
   },
-  print: (print) => {
+  print(print) {
     return `d-print-${print}`;
   },
   ...createUtility('display', displayValues, (suffix) => (breakpoint) =>
@@ -91,46 +91,46 @@ const utilities: Record<string, (utilityValue: any) => string> = {
     (suffix) => (breakpoint) =>
       generateBreakpoint('justify-content', breakpoint, suffix),
   ),
-  flexFill: (breakpoint: Breakpoint) => {
+  flexFill(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'fill');
   },
-  flexWrap: (breakpoint: Breakpoint) => {
+  flexWrap(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'wrap');
   },
-  flexNoWrap: (breakpoint: Breakpoint) => {
+  flexNoWrap(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'no-wrap');
   },
-  flexWrapReverse: (breakpoint: Breakpoint) => {
+  flexWrapReverse(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'wrap-reverse');
   },
-  flexShrinkZero: (breakpoint: Breakpoint) => {
+  flexShrinkZero(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'shrink-0');
   },
-  flexShrinkOne: (breakpoint: Breakpoint) => {
+  flexShrinkOne(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'shrink-1');
   },
-  flexGrowZero: (breakpoint: Breakpoint) => {
+  flexGrowZero(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'grow-0');
   },
-  flexGrowOne: (breakpoint: Breakpoint) => {
+  flexGrowOne(breakpoint: Breakpoint) {
     return generateBreakpoint('flex', breakpoint, 'grow-1');
   },
-  orderZero: (breakpoint: Breakpoint) => {
+  orderZero(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '0');
   },
-  orderOne: (breakpoint: Breakpoint) => {
+  orderOne(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '1');
   },
-  orderTwo: (breakpoint: Breakpoint) => {
+  orderTwo(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '2');
   },
-  orderThree: (breakpoint: Breakpoint) => {
+  orderThree(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '3');
   },
-  orderFour: (breakpoint: Breakpoint) => {
+  orderFour(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '4');
   },
-  orderFive: (breakpoint: Breakpoint) => {
+  orderFive(breakpoint: Breakpoint) {
     return generateBreakpoint('order', breakpoint, '5');
   },
 };
