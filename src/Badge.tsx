@@ -43,6 +43,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  bg: 'primary',
   pill: false,
 };
 

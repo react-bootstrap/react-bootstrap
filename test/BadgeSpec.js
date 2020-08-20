@@ -22,4 +22,17 @@ describe('Badge', () => {
       </Badge>,
     ).assertSingle('a[href="#"]');
   });
+
+  it('Should default to bg="primary"', () => {
+    mount(<Badge>Message</Badge>).assertSingle(`.bg-primary`);
+  });
+
+  it('Should use bg class', () => {
+    mount(<Badge bg="danger">Message</Badge>).assertSingle('.bg-danger');
+  });
+
+  it('Should not have bg class when bg=null', () => {
+    const wrapper = mount(<Badge bg={null}>Message</Badge>);
+    expect(wrapper.find('.bg-primary').length).to.equal(0);
+  });
 });
