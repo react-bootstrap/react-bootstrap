@@ -18,9 +18,11 @@ import {
   Carousel,
   Container,
   Col,
+  Collapse,
   Row,
   Dropdown,
   DropdownButton,
+  Fade,
   Figure,
   Form,
   FormFile,
@@ -59,6 +61,8 @@ const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Alert transition={Fade} />
+    <Alert transition={Collapse} />
     <Alert
       ref={React.createRef<HTMLDivElement>()}
       style={style}
@@ -66,7 +70,6 @@ const MegaComponent = () => (
       dismissible
       onClose={noop}
       show
-      // transition={} TODO
       variant="primary"
       bsPrefix="alert"
     >
