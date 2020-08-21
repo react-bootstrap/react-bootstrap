@@ -70,6 +70,9 @@ type UserSelect = typeof userSelectValues[number];
 const peValues = ['none', 'auto'] as const;
 type Pe = typeof peValues[number];
 
+const overflowValues = ['auto', 'hidden'] as const;
+type Overflow = typeof overflowValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -214,6 +217,9 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   pe(option: Pe) {
     return `pe-${option}`;
   },
+  overflow(option: Overflow) {
+    return `overflow-${option}`;
+  },
 };
 
 const propTypes = {
@@ -292,6 +298,8 @@ const propTypes = {
 
   userSelect: PropTypes.oneOf(userSelectValues),
   pe: PropTypes.oneOf(peValues),
+
+  overflow: PropTypes.oneOf(overflowValues),
 
   /**
    *
@@ -381,6 +389,8 @@ export type BoxProps = AsProp &
     userSelect: UserSelect;
     pe: Pe;
 
+    overflow: Overflow;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -447,6 +457,7 @@ const Box = (React.forwardRef(
       floatRight,
       floatNone,
       userSelect,
+      overflow,
       pe,
       print,
       visible,
@@ -512,6 +523,7 @@ const Box = (React.forwardRef(
       floatNone,
       userSelect,
       pe,
+      overflow,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

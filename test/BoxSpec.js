@@ -125,4 +125,8 @@ describe('<Box>', () => {
     const component = shallow(<Box pe="auto" />);
     component.find('div').hasClass('pe-auto').should.equal(true);
   });
+  it('Should have overflow utility', () => {
+    const component = shallow(<Box overflow="hidden" />);
+    component.find('div').hasClass('overflow-hidden').should.equal(true);
+  });
 });
