@@ -95,7 +95,8 @@ const DropdownItem: DropdownItem = React.forwardRef(
     const navContext = useContext(NavContext);
 
     const { activeKey } = navContext || {};
-    const key = makeEventKey(eventKey || null, href);
+    // TODO: Restrict eventKey to string in v5?
+    const key = makeEventKey(eventKey as any, href);
 
     const active =
       propActive == null && key != null
