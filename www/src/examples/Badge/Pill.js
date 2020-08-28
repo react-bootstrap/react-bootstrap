@@ -1,26 +1,26 @@
 <div>
-  <Badge pill variant="primary">
+  <Badge pill bg="primary">
     Primary
   </Badge>{' '}
-  <Badge pill variant="secondary">
+  <Badge pill bg="secondary">
     Secondary
   </Badge>{' '}
-  <Badge pill variant="success">
+  <Badge pill bg="success">
     Success
   </Badge>{' '}
-  <Badge pill variant="danger">
+  <Badge pill bg="danger">
     Danger
   </Badge>{' '}
-  <Badge pill variant="warning">
+  <Badge pill bg="warning" text="dark">
     Warning
   </Badge>{' '}
-  <Badge pill variant="info">
+  <Badge pill bg="info">
     Info
   </Badge>{' '}
-  <Badge pill variant="light">
+  <Badge pill bg="light" text="dark">
     Light
   </Badge>{' '}
-  <Badge pill variant="dark">
+  <Badge pill bg="dark">
     Dark
   </Badge>
 </div>;
