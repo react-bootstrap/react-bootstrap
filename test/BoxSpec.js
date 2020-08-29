@@ -129,4 +129,24 @@ describe('<Box>', () => {
     const component = shallow(<Box overflow="hidden" />);
     component.find('div').hasClass('overflow-hidden').should.equal(true);
   });
+  it('Should have position utility', () => {
+    const component = shallow(<Box position="absolute" />);
+    component.find('div').hasClass('position-absolute').should.equal(true);
+  });
+  it('Should have position utility', () => {
+    const component = shallow(<Box position="absolute" />);
+    component.find('div').hasClass('position-absolute').should.equal(true);
+  });
+  it('Should have shadow utility', () => {
+    const component = shallow(<Box shadow="sm" />);
+    component.find('div').hasClass('shadow-sm').should.equal(true);
+  });
+  it('Should have align utility', () => {
+    const component = shallow(<Box align="bottom" />);
+    component.find('div').hasClass('align-bottom').should.equal(true);
+  });
+  it('Should have align text utility', () => {
+    const component = shallow(<Box alignText="baseline" />);
+    component.find('div').hasClass('align-text-baseline').should.equal(true);
+  });
 });

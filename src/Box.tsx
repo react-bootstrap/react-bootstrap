@@ -73,6 +73,21 @@ type Pe = typeof peValues[number];
 const overflowValues = ['auto', 'hidden'] as const;
 type Overflow = typeof overflowValues[number];
 
+const positionValues = [
+  'static',
+  'relative',
+  'absolute',
+  'fixed',
+  'sticky',
+] as const;
+type Position = typeof positionValues[number];
+
+const shadowValues = ['none', 'sm', true, 'lg'] as const;
+type Shadow = typeof shadowValues[number];
+
+const alignmentValues = ['baseline', 'top', 'middle', 'bottom'] as const;
+type Alignment = typeof alignmentValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -220,6 +235,22 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   overflow(option: Overflow) {
     return `overflow-${option}`;
   },
+  position(position: Position) {
+    return `position-${position}`;
+  },
+  shadow(shadow: Shadow) {
+    let suffix = `-${shadow}`;
+    if (shadow === true) {
+      suffix = '';
+    }
+    return `shadow${suffix}`;
+  },
+  align(align: Alignment) {
+    return `align-${align}`;
+  },
+  alignText(align: Alignment) {
+    return `align-text-${align}`;
+  },
 };
 
 const propTypes = {
@@ -300,6 +331,13 @@ const propTypes = {
   pe: PropTypes.oneOf(peValues),
 
   overflow: PropTypes.oneOf(overflowValues),
+
+  position: PropTypes.oneOf(positionValues),
+
+  shadow: PropTypes.oneOf(shadowValues),
+
+  align: PropTypes.oneOf(alignmentValues),
+  alignText: PropTypes.oneOf(alignmentValues),
 
   /**
    *
@@ -391,6 +429,13 @@ export type BoxProps = AsProp &
 
     overflow: Overflow;
 
+    position: Position;
+
+    shadow: Shadow;
+
+    align: Alignment;
+    alignText: Alignment;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -458,6 +503,10 @@ const Box = (React.forwardRef(
       floatNone,
       userSelect,
       overflow,
+      position,
+      shadow,
+      align,
+      alignText,
       pe,
       print,
       visible,
@@ -522,6 +571,10 @@ const Box = (React.forwardRef(
       floatRight,
       floatNone,
       userSelect,
+      position,
+      shadow,
+      align,
+      alignText,
       pe,
       overflow,
     };
