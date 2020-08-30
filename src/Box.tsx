@@ -88,6 +88,9 @@ type Shadow = typeof shadowValues[number];
 const alignmentValues = ['baseline', 'top', 'middle', 'bottom'] as const;
 type Alignment = typeof alignmentValues[number];
 
+const sizingValues = ['25', '50', '75', '100', 'auto'] as const;
+type Sizing = typeof sizingValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -251,6 +254,30 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   alignText(align: Alignment) {
     return `align-text-${align}`;
   },
+  width(size: Sizing) {
+    return `w-${size}`;
+  },
+  height(size: Sizing) {
+    return `h-${size}`;
+  },
+  maxWidth() {
+    return `mw-100`;
+  },
+  maxHeight() {
+    return `mh-100`;
+  },
+  viewportWidth() {
+    return `vw-100`;
+  },
+  viewportHeight() {
+    return `vh-100`;
+  },
+  minViewportWidth() {
+    return `min-vw-100`;
+  },
+  minViewportHeight() {
+    return `min-vh-100`;
+  },
 };
 
 const propTypes = {
@@ -338,6 +365,15 @@ const propTypes = {
 
   align: PropTypes.oneOf(alignmentValues),
   alignText: PropTypes.oneOf(alignmentValues),
+
+  width: PropTypes.oneOf(sizingValues),
+  height: PropTypes.oneOf(sizingValues),
+  maxWidth: PropTypes.bool,
+  maxHeight: PropTypes.bool,
+  viewportWidth: PropTypes.bool,
+  viewportHeight: PropTypes.bool,
+  minViewportWidth: PropTypes.bool,
+  minViewportHeight: PropTypes.bool,
 
   /**
    *
@@ -436,6 +472,15 @@ export type BoxProps = AsProp &
     align: Alignment;
     alignText: Alignment;
 
+    width: Sizing;
+    height: Sizing;
+    maxWidth: boolean;
+    maxHeight: boolean;
+    viewportWidth: boolean;
+    viewportHeight: boolean;
+    minViewportWidth: boolean;
+    minViewportHeight: boolean;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -507,6 +552,14 @@ const Box = (React.forwardRef(
       shadow,
       align,
       alignText,
+      width,
+      height,
+      maxWidth,
+      maxHeight,
+      viewportWidth,
+      viewportHeight,
+      minViewportWidth,
+      minViewportHeight,
       pe,
       print,
       visible,
@@ -577,6 +630,14 @@ const Box = (React.forwardRef(
       alignText,
       pe,
       overflow,
+      width,
+      height,
+      maxWidth,
+      maxHeight,
+      viewportWidth,
+      viewportHeight,
+      minViewportWidth,
+      minViewportHeight,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)

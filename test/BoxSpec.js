@@ -149,4 +149,10 @@ describe('<Box>', () => {
     const component = shallow(<Box alignText="baseline" />);
     component.find('div').hasClass('align-text-baseline').should.equal(true);
   });
+  it('Should have sizing utilities', () => {
+    const component = shallow(<Box maxHeight minViewportWidth height="50" />);
+    component.find('div').hasClass('mh-100').should.equal(true);
+    component.find('div').hasClass('min-vw-100').should.equal(true);
+    component.find('div').hasClass('h-50').should.equal(true);
+  });
 });
