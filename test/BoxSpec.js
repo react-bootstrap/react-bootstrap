@@ -198,4 +198,20 @@ describe('<Box>', () => {
     const component = shallow(<Box textDecoration="none" />);
     component.find('div').hasClass('text-decoration-none').should.equal(true);
   });
+  it('Should have margin utilities', () => {
+    const component = shallow(
+      <Box marginAuto="xxl" marginBottomFour="sm" marginRightThree />,
+    );
+    component.find('div').hasClass('m-xxl-auto').should.equal(true);
+    component.find('div').hasClass('mb-sm-4').should.equal(true);
+    component.find('div').hasClass('mr-3').should.equal(true);
+  });
+  it('Should have padding utilities', () => {
+    const component = shallow(
+      <Box paddingLeftTwo="md" paddingXAuto paddingFive="lg" />,
+    );
+    component.find('div').hasClass('pl-md-2').should.equal(true);
+    component.find('div').hasClass('px-auto').should.equal(true);
+    component.find('div').hasClass('p-lg-5').should.equal(true);
+  });
 });
