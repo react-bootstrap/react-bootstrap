@@ -155,4 +155,47 @@ describe('<Box>', () => {
     component.find('div').hasClass('min-vw-100').should.equal(true);
     component.find('div').hasClass('h-50').should.equal(true);
   });
+  it('Should have text align utilities', () => {
+    const component = shallow(<Box textLeft="xl" textCenter="sm" textRight />);
+    component.find('div').hasClass('text-xl-left').should.equal(true);
+    component.find('div').hasClass('text-sm-center').should.equal(true);
+    component.find('div').hasClass('text-right').should.equal(true);
+  });
+  it('Should have text wrap utilities', () => {
+    const component = shallow(<Box textWrap textNoWrap />);
+    component.find('div').hasClass('text-wrap').should.equal(true);
+    component.find('div').hasClass('text-nowrap').should.equal(true);
+  });
+  it('Should have text break utility', () => {
+    const component = shallow(<Box textBreak />);
+    component.find('div').hasClass('text-break').should.equal(true);
+  });
+  it('Should have text transform utilities', () => {
+    const component = shallow(<Box textTransform="uppercase" />);
+    component.find('div').hasClass('text-uppercase').should.equal(true);
+  });
+  it('Should have font weight utilities', () => {
+    const component = shallow(<Box fontWeight="lighter" />);
+    component.find('div').hasClass('font-weight-lighter').should.equal(true);
+  });
+  it('Should have font style utilities', () => {
+    const component = shallow(<Box fontStyle="italic" />);
+    component.find('div').hasClass('font-italic').should.equal(true);
+  });
+  it('Should have line height utilities', () => {
+    const component = shallow(<Box lineHeight="base" />);
+    component.find('div').hasClass('lh-base').should.equal(true);
+  });
+  it('Should have monospace utility', () => {
+    const component = shallow(<Box fontMonospace />);
+    component.find('div').hasClass('font-monospace').should.equal(true);
+  });
+  it('Should have text reset utility', () => {
+    const component = shallow(<Box textReset />);
+    component.find('div').hasClass('text-reset').should.equal(true);
+  });
+  it('Should have text decoration utilities', () => {
+    const component = shallow(<Box textDecoration="none" />);
+    component.find('div').hasClass('text-decoration-none').should.equal(true);
+  });
 });

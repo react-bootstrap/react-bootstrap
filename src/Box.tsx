@@ -91,6 +91,27 @@ type Alignment = typeof alignmentValues[number];
 const sizingValues = ['25', '50', '75', '100', 'auto'] as const;
 type Sizing = typeof sizingValues[number];
 
+const textTransformValues = ['lowercase', 'uppercase', 'capitalize'] as const;
+type TextTransform = typeof textTransformValues[number];
+
+const fontWeightValues = [
+  'bold',
+  'bolder',
+  'normal',
+  'light',
+  'lighter',
+] as const;
+type FontWeight = typeof fontWeightValues[number];
+
+const fontStyleValues = ['italic', 'normal'] as const;
+type FontStyle = typeof fontStyleValues[number];
+
+const lineHeightValues = ['1', 'sm', 'base', 'lg'] as const;
+type LineHeight = typeof lineHeightValues[number];
+
+const textDecorationValues = ['underline', 'line-through', 'none'] as const;
+type TextDecoration = typeof textDecorationValues[number];
+
 const generateBreakpoint = (
   bsPrefix: string,
   currentBreakpoint: string | true,
@@ -278,6 +299,45 @@ const utilities: Record<string, (utilityValue: any) => string> = {
   minViewportHeight() {
     return `min-vh-100`;
   },
+  textLeft(breakpoint: Breakpoint) {
+    return generateBreakpoint('text', breakpoint, 'left');
+  },
+  textCenter(breakpoint: Breakpoint) {
+    return generateBreakpoint('text', breakpoint, 'center');
+  },
+  textRight(breakpoint: Breakpoint) {
+    return generateBreakpoint('text', breakpoint, 'right');
+  },
+  textWrap() {
+    return `text-wrap`;
+  },
+  textNoWrap() {
+    return `text-nowrap`;
+  },
+  textBreak() {
+    return `text-break`;
+  },
+  textTransform(transform: TextTransform) {
+    return `text-${transform}`;
+  },
+  fontWeight(weight: FontWeight) {
+    return `font-weight-${weight}`;
+  },
+  fontStyle(style: FontStyle) {
+    return `font-${style}`;
+  },
+  lineHeight(height: LineHeight) {
+    return `lh-${height}`;
+  },
+  fontMonospace() {
+    return `font-monospace`;
+  },
+  textReset() {
+    return `text-reset`;
+  },
+  textDecoration(decoration: TextDecoration) {
+    return `text-decoration-${decoration}`;
+  },
 };
 
 const propTypes = {
@@ -374,6 +434,20 @@ const propTypes = {
   viewportHeight: PropTypes.bool,
   minViewportWidth: PropTypes.bool,
   minViewportHeight: PropTypes.bool,
+
+  textLeft: PropTypes.oneOf(breakpointValues),
+  textCenter: PropTypes.oneOf(breakpointValues),
+  textRight: PropTypes.oneOf(breakpointValues),
+  textWrap: PropTypes.bool,
+  textNoWrap: PropTypes.bool,
+  textBreak: PropTypes.bool,
+  textTransform: PropTypes.oneOf(textTransformValues),
+  fontWeight: PropTypes.oneOf(fontWeightValues),
+  fontStyle: PropTypes.oneOf(fontStyleValues),
+  lineHeight: PropTypes.oneOf(lineHeightValues),
+  fontMonospace: PropTypes.bool,
+  textReset: PropTypes.bool,
+  textDecoration: PropTypes.oneOf(textDecorationValues),
 
   /**
    *
@@ -481,6 +555,20 @@ export type BoxProps = AsProp &
     minViewportWidth: boolean;
     minViewportHeight: boolean;
 
+    textLeft: Breakpoint;
+    textCenter: Breakpoint;
+    textRight: Breakpoint;
+    textWrap: boolean;
+    textNoWrap: boolean;
+    textBreak: boolean;
+    textTransform: TextTransform;
+    fontWeight: FontWeight;
+    fontStyle: FontStyle;
+    lineHeight: LineHeight;
+    fontMonospace: boolean;
+    textReset: boolean;
+    textDecoration: TextDecoration;
+
     className: string;
     print: Display;
     visible: boolean;
@@ -560,6 +648,19 @@ const Box = (React.forwardRef(
       viewportHeight,
       minViewportWidth,
       minViewportHeight,
+      textLeft,
+      textCenter,
+      textRight,
+      textWrap,
+      textNoWrap,
+      textBreak,
+      textTransform,
+      fontWeight,
+      fontStyle,
+      lineHeight,
+      fontMonospace,
+      textReset,
+      textDecoration,
       pe,
       print,
       visible,
@@ -638,6 +739,19 @@ const Box = (React.forwardRef(
       viewportHeight,
       minViewportWidth,
       minViewportHeight,
+      textLeft,
+      textCenter,
+      textRight,
+      textWrap,
+      textNoWrap,
+      textBreak,
+      textTransform,
+      fontWeight,
+      fontStyle,
+      lineHeight,
+      fontMonospace,
+      textReset,
+      textDecoration,
     };
     const finalClassName = classNames(
       ...Object.entries(utilityProps)
