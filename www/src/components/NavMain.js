@@ -137,7 +137,7 @@ function NavMain({ activePage }) {
             </Dropdown.Toggle>
             <Dropdown.Menu role="menu">
               <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
-                v0.32.4 (Bootstrap 3)
+                v0.33.1 (Bootstrap 3)
               </Dropdown.Item>
             </Dropdown.Menu>
           </StyledDropdown>
