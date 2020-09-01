@@ -315,6 +315,24 @@ describe('<Carousel>', () => {
       expect(onSelectSpy).to.have.been.calledOnce;
     });
 
+    it('should go through the items given the specified intervals', () => {
+      const onSelectSpy = sinon.spy();
+      mount(
+        <Carousel interval={1000} onSelect={onSelectSpy}>
+          <Carousel.Item interval={100}>Item 1 content</Carousel.Item>
+          <Carousel.Item>Item 2 content</Carousel.Item>
+        </Carousel>,
+      );
+
+      // should be long enough to handle false positive issues
+      // but short enough to not trigger auto-play to occur twice
+      // (since the interval for the second item should be `1000`)
+      clock.tick(200);
+
+      expect(onSelectSpy).to.have.been.calledOnce;
+      expect(onSelectSpy.firstCall).to.have.been.calledWith(1);
+    });
+
     it('should stop going through items on hover and continue afterwards', () => {
       const onSelectSpy = sinon.spy();
       const interval = 500;

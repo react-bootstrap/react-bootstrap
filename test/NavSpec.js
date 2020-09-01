@@ -3,6 +3,7 @@ import React from 'react';
 import Card from '../src/Card';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
+import NavDropdown from '../src/NavDropdown';
 import { shouldWarn } from './helpers';
 
 describe('<Nav>', () => {
@@ -84,7 +85,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.card-header-pills');
   });
 
-  it('should call on select when item is selected', (done) => {
+  it('should call onSelect when a Nav.Link is selected', (done) => {
     function handleSelect(key) {
       assert.equal(key, '2');
       done();
@@ -101,6 +102,22 @@ describe('<Nav>', () => {
       .find('a')
       .last()
       .simulate('click');
+  });
+
+  it('should call onSelect when a NavDropdown.Item is selected', () => {
+    const onSelectSpy = sinon.spy();
+
+    mount(
+      <Nav onSelect={onSelectSpy}>
+        <NavDropdown title="Dropdown" id="nav-dropdown-test" renderMenuOnMount>
+          <NavDropdown.Item eventKey={1}>Dropdown item</NavDropdown.Item>
+        </NavDropdown>
+      </Nav>,
+    )
+      .find('DropdownItem')
+      .simulate('click');
+
+    onSelectSpy.should.have.been.calledOnce;
   });
 
   it('should set the correct item active by href', () => {

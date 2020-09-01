@@ -41,6 +41,42 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('div.dropdown-menu');
   });
 
+  it('does not add any extra classes when align="left"', () => {
+    const wrapper = mount(
+      <DropdownMenu show align="left">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).find('DropdownMenu');
+
+    expect(wrapper.getDOMNode().className).to.equal('dropdown-menu show');
+  });
+
+  it('adds right align class when align="right"', () => {
+    mount(
+      <DropdownMenu show align="right">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('.dropdown-menu-right');
+  });
+
+  it('adds responsive left alignment classes', () => {
+    mount(
+      <DropdownMenu show align={{ lg: 'left' }}>
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    )
+      .assertSingle('.dropdown-menu-right')
+      .assertSingle('.dropdown-menu-lg-left');
+  });
+
+  it('adds responsive right alignment classes', () => {
+    mount(
+      <DropdownMenu show align={{ lg: 'right' }}>
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('.dropdown-menu-lg-right');
+  });
+
   // it.only('warns about bad refs', () => {
   //   class Parent extends React.Component {
   //     componentDidCatch() {}

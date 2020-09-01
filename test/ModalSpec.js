@@ -214,6 +214,15 @@ describe('<Modal>', () => {
     ).assertSingle('.modal-dialog.my-dialog');
   });
 
+  it('Should pass contentClassName to .modal-content', () => {
+    const noOp = () => {};
+    mount(
+      <Modal show contentClassName="my-content" onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>,
+    ).assertSingle('.modal-content.my-content');
+  });
+
   it('Should use dialogAs', () => {
     const noOp = () => {};
 

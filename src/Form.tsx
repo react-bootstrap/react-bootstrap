@@ -12,7 +12,9 @@ import FormText from './FormText';
 import Switch from './Switch';
 import { AsProp } from './helpers';
 
-export interface FormProps extends React.HTMLAttributes<HTMLElement>, AsProp {
+export interface FormProps
+  extends React.HTMLAttributes<HTMLFormElement>,
+    AsProp {
   validated?: boolean;
 }
 

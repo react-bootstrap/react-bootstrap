@@ -72,7 +72,7 @@ function handleMouseOverOut(
 const triggerType = PropTypes.oneOf(['click', 'hover', 'focus']);
 
 const propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 
   /**
    * Specify which action or actions trigger Overlay visibility
