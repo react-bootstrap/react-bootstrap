@@ -1,5 +1,6 @@
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useUpdateEffect from '@restart/hooks/useUpdateEffect';
+import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
@@ -16,7 +17,7 @@ import React, {
 import { useUncontrolled } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
-import { map } from './ElementChildren';
+import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
@@ -253,7 +254,6 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
   if (!isSliding && activeIndex !== renderedActiveIndex) {
     if (nextDirectionRef.current) {
       setDirection(nextDirectionRef.current);
-      nextDirectionRef.current = null;
     } else {
       setDirection((activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev');
     }
@@ -265,9 +265,25 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     setRenderedActiveIndex(activeIndex || 0);
   }
 
-  const numChildren = React.Children.toArray(children).filter(
-    React.isValidElement,
-  ).length;
+  useEffect(() => {
+    if (nextDirectionRef.current) {
+      nextDirectionRef.current = null;
+    }
+  });
+
+  let numChildren = 0;
+  let activeChildInterval: number | undefined;
+
+  // Iterate to grab all of the children's interval values
+  // (and count them, too)
+  forEach(children, (child, index) => {
+    ++numChildren;
+    if (index === activeIndex) {
+      activeChildInterval = child.props.interval as number | undefined;
+    }
+  });
+
+  const activeChildIntervalRef = useCommittedRef(activeChildInterval);
 
   const prev = useCallback(
     (event) => {
@@ -489,7 +505,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
     intervalHandleRef.current = window.setInterval(
       document.visibilityState ? nextWhenVisible : next,
-      interval || undefined,
+      activeChildIntervalRef.current ?? interval ?? undefined,
     );
 
     return () => {
@@ -497,7 +513,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         clearInterval(intervalHandleRef.current);
       }
     };
-  }, [shouldPlay, next, interval, nextWhenVisible]);
+  }, [shouldPlay, next, activeChildIntervalRef, interval, nextWhenVisible]);
 
   const indicatorOnClicks = useMemo(
     () =>

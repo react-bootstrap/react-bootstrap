@@ -89,7 +89,9 @@ const FormLabel: FormLabel = React.forwardRef(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
 
     let columnClass = 'col-form-label';
-    if (typeof column === 'string') columnClass = `${columnClass}-${column}`;
+    if (typeof column === 'string')
+      columnClass = `${columnClass} ${columnClass}-${column}`;
+
     const classes = classNames(
       className,
       bsPrefix,

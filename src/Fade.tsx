@@ -5,16 +5,18 @@ import React, { useCallback } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,
-  TransitionProps,
 } from 'react-transition-group/Transition';
+import { TransitionCallbacks } from './helpers';
 import triggerBrowserReflow from './triggerBrowserReflow';
 
-export interface FadeProps extends Omit<TransitionProps, 'addEndListener'> {
+export interface FadeProps extends TransitionCallbacks {
+  className?: string;
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   appear?: boolean;
   timeout?: number;
+  children: React.ReactElement;
 }
 
 const propTypes = {
@@ -86,7 +88,7 @@ const fadeStyles = {
 };
 
 const Fade = React.forwardRef<Transition<any>, FadeProps>(
-  ({ className, children, ...props }: FadeProps, ref) => {
+  ({ className, children, ...props }, ref) => {
     const handleEnter = useCallback(
       (node) => {
         triggerBrowserReflow(node);

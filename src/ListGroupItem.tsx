@@ -102,7 +102,8 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
       <AbstractNavItem
         ref={ref}
         {...props}
-        eventKey={makeEventKey(eventKey || null, props.href)}
+        // TODO: Restrict eventKey to string in v5?
+        eventKey={makeEventKey(eventKey as any, props.href)}
         // eslint-disable-next-line no-nested-ternary
         as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
         onClick={handleClick}

@@ -17,9 +17,11 @@ import {
   Carousel,
   Container,
   Col,
+  Collapse,
   Row,
   Dropdown,
   DropdownButton,
+  Fade,
   Figure,
   Form,
   FormFile,
@@ -57,6 +59,8 @@ const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Alert transition={Fade} />
+    <Alert transition={Collapse} />
     <Alert
       ref={React.createRef<HTMLDivElement>()}
       style={style}
@@ -64,7 +68,6 @@ const MegaComponent = () => (
       dismissible
       onClose={noop}
       show
-      // transition={} TODO
       variant="primary"
       bsPrefix="alert"
     >
@@ -310,6 +313,7 @@ const MegaComponent = () => (
         show
         bsPrefix="dropdownmenu"
         style={style}
+        align={{ sm: 'left' }}
       >
         <Dropdown.Item
           active
@@ -330,6 +334,8 @@ const MegaComponent = () => (
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
         <Dropdown.Divider as="div" bsPrefix="prefix" style={style} />
       </Dropdown.Menu>
+      <Dropdown.Menu align="left" />
+      <Dropdown.Menu align="right" />
     </Dropdown>
     <DropdownButton
       disabled
@@ -344,6 +350,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
+      menuAlign={{ sm: 'left' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -715,6 +722,14 @@ const MegaComponent = () => (
         id="nav-dropdown"
         bsPrefix="prefix"
         style={style}
+        drop="up"
+        alignRight
+        show
+        flip={false}
+        onToggle={noop}
+        onSelect={noop}
+        focusFirstItemOnShow
+        navbar
       >
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
@@ -890,6 +905,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
+      menuAlign={{ sm: 'left' }}
     />
     <Table
       id="id"
@@ -959,6 +975,8 @@ const MegaComponent = () => (
       onChange={noop}
       value={[1]}
       style={style}
+      vertical
+      size="lg"
     >
       <ToggleButton
         value={1}
