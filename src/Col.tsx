@@ -36,15 +36,10 @@ export interface ColProps extends BsPrefixPropsWithChildren {
   md?: ColSpec;
   lg?: ColSpec;
   xl?: ColSpec;
+  xxl?: ColSpec;
 }
 
-const DEVICE_SIZES = [
-  'xl' as const,
-  'lg' as const,
-  'md' as const,
-  'sm' as const,
-  'xs' as const,
-];
+const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const colSize = PropTypes.oneOfType([
   PropTypes.bool,
   PropTypes.number,
@@ -108,6 +103,13 @@ const propTypes = {
    * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   xl: column,
+
+  /**
+   * The number of columns to span on extra extra large devices (≥1400px)
+   *
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   */
+  xxl: column,
 };
 
 const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef(

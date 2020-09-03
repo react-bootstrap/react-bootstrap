@@ -9,14 +9,14 @@ import {
 } from './helpers';
 
 export interface ContainerProps extends BsPrefixPropsWithChildren {
-  fluid?: boolean | 'sm' | 'md' | 'lg' | 'xl';
+  fluid?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 }
 
 type Container = BsPrefixRefForwardingComponent<'div', ContainerProps>;
 
 const containerSizes = PropTypes.oneOfType([
   PropTypes.bool,
-  PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'xxl']),
 ]);
 
 const propTypes = {
@@ -27,7 +27,7 @@ const propTypes = {
 
   /**
    * Allow the Container to fill all of its available horizontal space.
-   * @type {(true|"sm"|"md"|"lg"|"xl")}
+   * @type {(true|"sm"|"md"|"lg"|"xl"|"xxl")}
    */
   fluid: containerSizes,
   /**

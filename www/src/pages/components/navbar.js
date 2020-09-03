@@ -102,9 +102,9 @@ export default withLayout(function NaπvbarSection({ data }) {
       <p>
         When the container is within your navbar, its horizontal padding is
         removed at breakpoints lower than your specified{' '}
-        <code>{`expand={'sm' | 'md' | 'lg' | 'xl'}`}</code> prop. This ensures
-        we’re not doubling up on padding unnecessarily on lower viewports when
-        your navbar is collapsed.
+        <code>{`expand={'sm' | 'md' | 'lg' | 'xl' | 'xxl'}`}</code> prop. This
+        ensures we’re not doubling up on padding unnecessarily on lower
+        viewports when your navbar is collapsed.
       </p>
       <ReactPlayground codeText={ContainerInside} />
 
