@@ -15,6 +15,7 @@ export interface FormFileInputProps extends BsPrefixProps, BsCustomPrefixProps {
   isValid?: boolean;
   isInvalid?: boolean;
   lang?: string;
+  onChange?: (event: any) => void;
 }
 type FormFileInput = BsPrefixRefForwardingComponent<
   'input',
@@ -52,6 +53,10 @@ const propTypes = {
 
   /** The language for the button when using custom file input and SCSS based strings */
   lang: PropTypes.string,
+
+  /** Called when the value of the input changes with an `event`.
+      `event.target` is the `<input type='file'>` component with the changed value, `event.target.files` is the current list of files */
+  onChange: PropTypes.func,
 };
 
 const FormFileInput: FormFileInput = React.forwardRef(
