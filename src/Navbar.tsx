@@ -23,7 +23,7 @@ const NavbarText = createWithBsPrefix('navbar-text', {
 
 export interface NavbarProps extends BsPrefixPropsWithChildren {
   variant?: 'light' | 'dark';
-  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl';
+  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
   fixed?: 'top' | 'bottom';
   sticky?: 'top' | 'bottom';
@@ -58,7 +58,7 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl']).isRequired,
+  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.

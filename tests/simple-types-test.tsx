@@ -250,11 +250,12 @@ const MegaComponent = () => (
         md={1}
         lg={1}
         xl={1}
+        xxl={1}
         noGutters
         bsPrefix="row"
         className="justify-content-md-center"
       >
-        <Col xs lg="2" bsPrefix="col">
+        <Col xs sm md lg="2" xl xxl bsPrefix="col">
           1 of 3
         </Col>
         <Col md="auto">Variable width content</Col>
@@ -656,11 +657,13 @@ const MegaComponent = () => (
     <Modal fullscreen="md-down" />
     <Modal fullscreen="lg-down" />
     <Modal fullscreen="xl-down" />
+    <Modal fullscreen="xxl-down" />
     <Modal.Dialog fullscreen />
     <Modal.Dialog fullscreen="sm-down" />
     <Modal.Dialog fullscreen="md-down" />
     <Modal.Dialog fullscreen="lg-down" />
     <Modal.Dialog fullscreen="xl-down" />
+    <Modal.Dialog fullscreen="xxl-down" />
     <Modal.Dialog
       centered
       scrollable

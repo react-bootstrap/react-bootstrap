@@ -33,11 +33,12 @@ export interface RowProps extends BsPrefixPropsWithChildren {
   md?: RowColumns;
   lg?: RowColumns;
   xl?: RowColumns;
+  xxl?: RowColumns;
 }
 
 type Row = BsPrefixRefForwardingComponent<'div', RowProps>;
 
-const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
+const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
 const rowColumns = PropTypes.oneOfType([
@@ -96,6 +97,14 @@ const propTypes = {
    * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   xl: rowColumns,
+
+  /**
+   * The number of columns that will fit next to each other on extra extra large devices (≥1400px).
+   * Use `auto` to give columns their natural widths.
+   *
+   * @type {(number|'auto'|{ cols: number|'auto' })}
+   */
+  xxl: rowColumns,
 };
 
 const defaultProps = {

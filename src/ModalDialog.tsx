@@ -10,7 +10,13 @@ export interface ModalDialogProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg' | 'xl';
-  fullscreen?: true | 'sm-down' | 'md-down' | 'lg-down' | 'xl-down';
+  fullscreen?:
+    | true
+    | 'sm-down'
+    | 'md-down'
+    | 'lg-down'
+    | 'xl-down'
+    | 'xxl-down';
   centered?: boolean;
   scrollable?: boolean;
   contentClassName?: string;
@@ -32,7 +38,7 @@ const propTypes = {
    * Renders a fullscreen modal. Specifying a breakpoint will render the modal
    * as fullscreen __below__ the breakpoint size.
    *
-   * @type (true|'sm-down'|'md-down'|'lg-down'|'xl-down')
+   * @type (true|'sm-down'|'md-down'|'lg-down'|'xl-down'|'xxl-down')
    */
   fullscreen: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
