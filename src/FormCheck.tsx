@@ -16,12 +16,10 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
-    Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
+    React.HTMLAttributes<HTMLInputElement> {
   bsCustomPrefix?: string;
-  id?: string;
   inline?: boolean;
   disabled?: boolean;
-  title?: string;
   label?: React.ReactNode;
   custom?: boolean;
   type?: FormCheckType;
@@ -65,7 +63,11 @@ const propTypes = {
    */
   as: PropTypes.elementType,
 
-  /** A HTML id attribute, necessary for proper form accessibility. */
+  /**
+   * A HTML id attribute, necessary for proper form accessibility.
+   *
+   * This is **required** when `type="switch"`.
+   */
   id: PropTypes.string,
 
   /**
@@ -81,9 +83,26 @@ const propTypes = {
    */
   children: PropTypes.node,
 
+  /**
+   * Groups controls horizontally with other `FormCheck`s.
+   */
   inline: PropTypes.bool,
+
+  /**
+   * Disables the control.
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * `title` attribute for the underlying `FormCheckLabel`.
+   */
   title: PropTypes.string,
+
+  /**
+   * Label for the control.
+   *
+   * This is **required** when `type="switch"`.
+   */
   label: PropTypes.node,
 
   /** Use Bootstrap's custom form elements to replace the browser defaults */
@@ -98,6 +117,14 @@ const propTypes = {
     ({ type, custom }) =>
       type === 'switch' && custom === false
         ? Error('`custom` cannot be set to `false` when the type is `switch`')
+        : null,
+    ({ type, label }) =>
+      type === 'switch' && !label
+        ? Error('`label` must be defined when the type is `switch`')
+        : null,
+    ({ type, id }) =>
+      type === 'switch' && !id
+        ? Error('`id` must be defined when the type is `switch`')
         : null,
   ),
 
