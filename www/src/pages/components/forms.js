@@ -495,10 +495,9 @@ export default withLayout(function FormControlsSection({ data }) {
       </Callout>
       <Callout theme="danger">
         <h5>Watch out!</h5>
-        You must specify both <code>label</code> and <code>id</code> props when
-        using switches. Bootstrap renders the control using the label and event
-        handlers are triggered by linking the label with the input via{' '}
-        <code>id</code>.
+        You must specify an <code>id</code> when using custom check controls or
+        switches. Event handlers are triggered by linking the label with the
+        input via <code>id</code>.
       </Callout>
 
       <h3>Inline</h3>

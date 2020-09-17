@@ -65,8 +65,10 @@ const propTypes = {
 
   /**
    * A HTML id attribute, necessary for proper form accessibility.
+   * An id is recommended for allowing label clicks to toggle the check control.
    *
-   * This is **required** when `type="switch"`.
+   * This is **required** for custom check controls or when `type="switch"` due to
+   * how they are rendered.
    */
   id: PropTypes.string,
 
@@ -100,13 +102,13 @@ const propTypes = {
 
   /**
    * Label for the control.
-   *
-   * This is **required** when `type="switch"`.
    */
   label: PropTypes.node,
 
   /** Use Bootstrap's custom form elements to replace the browser defaults */
-  custom: PropTypes.bool,
+  custom: all(PropTypes.bool, ({ custom, id }) =>
+    custom && !id ? Error('Custom check controls require an id to work') : null,
+  ),
 
   /**
    * The type of checkable.
@@ -117,10 +119,6 @@ const propTypes = {
     ({ type, custom }) =>
       type === 'switch' && custom === false
         ? Error('`custom` cannot be set to `false` when the type is `switch`')
-        : null,
-    ({ type, label }) =>
-      type === 'switch' && !label
-        ? Error('`label` must be defined when the type is `switch`')
         : null,
     ({ type, id }) =>
       type === 'switch' && !id
@@ -182,7 +180,7 @@ const FormCheck: FormCheck = (React.forwardRef(
       [controlId, custom, id],
     );
 
-    const hasLabel = label != null && label !== false && !children;
+    const hasLabel = custom || (label != null && label !== false && !children);
 
     const input = (
       <FormCheckInput

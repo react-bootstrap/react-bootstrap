@@ -81,8 +81,8 @@ describe('<FormCheck>', () => {
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
-  it('should supports custom', () => {
-    const wrapper = mount(<FormCheck custom label="My label" />);
+  it('should support custom', () => {
+    const wrapper = mount(<FormCheck custom label="My label" id="myid" />);
 
     wrapper
       .assertSingle('div.custom-control')
@@ -93,7 +93,9 @@ describe('<FormCheck>', () => {
   });
 
   it('should support custom with inline', () => {
-    const wrapper = mount(<FormCheck custom inline label="My label" />);
+    const wrapper = mount(
+      <FormCheck custom inline label="My label" id="myid" />,
+    );
     wrapper.assertSingle('div.custom-control-inline');
   });
 
