@@ -81,8 +81,8 @@ describe('<FormCheck>', () => {
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
-  it('should supports custom', () => {
-    const wrapper = mount(<FormCheck custom label="My label" />);
+  it('should support custom', () => {
+    const wrapper = mount(<FormCheck custom label="My label" id="myid" />);
 
     wrapper
       .assertSingle('div.custom-control')
@@ -93,12 +93,16 @@ describe('<FormCheck>', () => {
   });
 
   it('should support custom with inline', () => {
-    const wrapper = mount(<FormCheck custom inline label="My label" />);
+    const wrapper = mount(
+      <FormCheck custom inline label="My label" id="myid" />,
+    );
     wrapper.assertSingle('div.custom-control-inline');
   });
 
   it('should supports switches', () => {
-    let wrapper = mount(<FormCheck type="switch" label="My label" />);
+    let wrapper = mount(
+      <FormCheck type="switch" label="My label" id="switch-id" />,
+    );
 
     wrapper
       .assertSingle('div.custom-control')
@@ -108,7 +112,7 @@ describe('<FormCheck>', () => {
     wrapper.assertSingle('label.custom-control-label');
     wrapper.unmount();
 
-    wrapper = mount(<Switch label="My label" />);
+    wrapper = mount(<Switch label="My label" id="switch-id2" />);
 
     wrapper
       .assertSingle('div.custom-control')

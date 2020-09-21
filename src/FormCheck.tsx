@@ -16,12 +16,10 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
-    Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
+    React.HTMLAttributes<HTMLInputElement> {
   bsCustomPrefix?: string;
-  id?: string;
   inline?: boolean;
   disabled?: boolean;
-  title?: string;
   label?: React.ReactNode;
   custom?: boolean;
   type?: FormCheckType;
@@ -65,7 +63,13 @@ const propTypes = {
    */
   as: PropTypes.elementType,
 
-  /** A HTML id attribute, necessary for proper form accessibility. */
+  /**
+   * A HTML id attribute, necessary for proper form accessibility.
+   * An id is recommended for allowing label clicks to toggle the check control.
+   *
+   * This is **required** for custom check controls or when `type="switch"` due to
+   * how they are rendered.
+   */
   id: PropTypes.string,
 
   /**
@@ -81,13 +85,30 @@ const propTypes = {
    */
   children: PropTypes.node,
 
+  /**
+   * Groups controls horizontally with other `FormCheck`s.
+   */
   inline: PropTypes.bool,
+
+  /**
+   * Disables the control.
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * `title` attribute for the underlying `FormCheckLabel`.
+   */
   title: PropTypes.string,
+
+  /**
+   * Label for the control.
+   */
   label: PropTypes.node,
 
   /** Use Bootstrap's custom form elements to replace the browser defaults */
-  custom: PropTypes.bool,
+  custom: all(PropTypes.bool, ({ custom, id }) =>
+    custom && !id ? Error('Custom check controls require an id to work') : null,
+  ),
 
   /**
    * The type of checkable.
@@ -98,6 +119,10 @@ const propTypes = {
     ({ type, custom }) =>
       type === 'switch' && custom === false
         ? Error('`custom` cannot be set to `false` when the type is `switch`')
+        : null,
+    ({ type, id }) =>
+      type === 'switch' && !id
+        ? Error('`id` must be defined when the type is `switch`')
         : null,
   ),
 
@@ -155,7 +180,7 @@ const FormCheck: FormCheck = (React.forwardRef(
       [controlId, custom, id],
     );
 
-    const hasLabel = label != null && label !== false && !children;
+    const hasLabel = custom || (label != null && label !== false && !children);
 
     const input = (
       <FormCheckInput

@@ -493,6 +493,12 @@ export default withLayout(function FormControlsSection({ data }) {
         You can also use the <code>{'<Form.Switch>'}</code> alias which
         encapsulates the above, in a very small component wrapper.
       </Callout>
+      <Callout theme="danger">
+        <h5>Watch out!</h5>
+        You must specify an <code>id</code> when using custom check controls or
+        switches. Event handlers are triggered by linking the label with the
+        input via <code>id</code>.
+      </Callout>
 
       <h3>Inline</h3>
       <ReactPlayground codeText={CheckCustomInline} />
