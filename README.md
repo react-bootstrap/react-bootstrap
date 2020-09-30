@@ -11,7 +11,7 @@
 
 ## Docs
 
-See the [documentation][documentation] with live editable examples and API documention.
+See the [documentation][documentation] with live editable examples and API documentation.
 
 To find the documentation for the latest Bootstrap 3 compatible release, [go here](https://react-bootstrap-v3.netlify.com).
 
