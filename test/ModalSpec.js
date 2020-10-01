@@ -161,6 +161,15 @@ describe('<Modal>', () => {
     ).find('.modal-dialog.modal-sm');
   });
 
+  it('Should pass centered to the dialog', () => {
+    const noOp = () => {};
+    mount(
+      <Modal show centered onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>,
+    ).find('.modal-dialog.modal-dialog-centered');
+  });
+
   it('Should pass dialog style to the dialog', () => {
     const noOp = () => {};
     const dialog = mount(
