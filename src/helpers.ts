@@ -13,9 +13,8 @@ export interface BsPrefixAndClassNameOnlyProps {
   className?: string;
 }
 
-export interface BsPrefixProps<
-  As extends React.ElementType = React.ElementType
-> extends BsPrefixAndClassNameOnlyProps {
+export interface BsPrefixProps<As extends React.ElementType = React.ElementType>
+  extends BsPrefixAndClassNameOnlyProps {
   as?: As;
 }
 

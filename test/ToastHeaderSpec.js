@@ -11,4 +11,16 @@ describe('Toast.Header', () => {
       </Toast.Header>,
     ).assertSingle('div.toast-header strong');
   });
+
+  it('should render close button variant', () => {
+    const wrapper = mount(
+      <Toast.Header closeButton closeVariant="white">
+        <strong>content</strong>
+      </Toast.Header>,
+    );
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
+  });
 });

@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import CloseButton from './CloseButton';
+import CloseButton, { CloseButtonVariant } from './CloseButton';
 import ModalContext from './ModalContext';
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
@@ -12,6 +12,7 @@ export interface ModalHeaderProps
   extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
     React.ComponentProps<'div'> {
   closeLabel?: string;
+  closeVariant?: CloseButtonVariant;
   closeButton?: boolean;
   onHide?: () => void;
 }
@@ -25,6 +26,11 @@ const propTypes = {
    * readable.
    */
   closeLabel: PropTypes.string,
+
+  /**
+   * Sets the variant for close button.
+   */
+  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
 
   /**
    * Specify whether the Component should contain a close button
@@ -49,6 +55,7 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     {
       bsPrefix,
       closeLabel,
+      closeVariant,
       closeButton,
       onHide,
       className,
@@ -71,7 +78,11 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
         {children}
 
         {closeButton && (
-          <CloseButton label={closeLabel} onClick={handleClick} />
+          <CloseButton
+            aria-label={closeLabel}
+            variant={closeVariant}
+            onClick={handleClick}
+          />
         )}
       </div>
     );
