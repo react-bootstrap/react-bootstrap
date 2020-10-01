@@ -69,7 +69,7 @@ const propTypes = {
 
   /**
    * Render a large, extra large or small modal.
-   *
+   * When not provided, the modal is rendered with medium (default) size.
    * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
