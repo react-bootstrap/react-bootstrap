@@ -15,11 +15,9 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
-    Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
-  id?: string;
+    React.HTMLAttributes<HTMLInputElement> {
   inline?: boolean;
   disabled?: boolean;
-  title?: string;
   label?: React.ReactNode;
   type?: FormCheckType;
   isValid?: boolean;
@@ -63,7 +61,12 @@ const propTypes = {
    */
   as: PropTypes.elementType,
 
-  /** A HTML id attribute, necessary for proper form accessibility. */
+  /**
+   * A HTML id attribute, necessary for proper form accessibility.
+   * An id is recommended for allowing label clicks to toggle the check control.
+   *
+   * This is **required** when `type="switch"` due to how they are rendered.
+   */
   id: PropTypes.string,
 
   /**
@@ -79,9 +82,24 @@ const propTypes = {
    */
   children: PropTypes.node,
 
+  /**
+   * Groups controls horizontally with other `FormCheck`s.
+   */
   inline: PropTypes.bool,
+
+  /**
+   * Disables the control.
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * `title` attribute for the underlying `FormCheckLabel`.
+   */
   title: PropTypes.string,
+
+  /**
+   * Label for the control.
+   */
   label: PropTypes.node,
 
   /**
