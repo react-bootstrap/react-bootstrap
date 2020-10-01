@@ -1,4 +1,4 @@
-# React-Bootstrap - An Amazing Project
+# React-Bootstrap - A Great Project
 
 > [Bootstrap 4][bootstrap] components built with [React][react].
 
