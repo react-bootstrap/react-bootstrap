@@ -89,7 +89,9 @@ describe('<FormCheck>', () => {
   });
 
   it('should support switches', () => {
-    let wrapper = mount(<FormCheck type="switch" label="My label" />);
+    let wrapper = mount(
+      <FormCheck type="switch" label="My label" id="switch-id" />,
+    );
 
     wrapper
       .assertSingle('div.form-check')
@@ -99,7 +101,7 @@ describe('<FormCheck>', () => {
     wrapper.assertSingle('label.form-check-label');
     wrapper.unmount();
 
-    wrapper = mount(<Switch label="My label" />);
+    wrapper = mount(<Switch label="My label" id="switch-id2" />);
 
     wrapper
       .assertSingle('div.form-check')

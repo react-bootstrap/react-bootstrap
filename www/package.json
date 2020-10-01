@@ -40,7 +40,7 @@
     "@restart/hooks": "^0.3.25",
     "ast-types": "^0.13.4",
     "astroturf": "^0.10.4",
-    "bootstrap": "^5.0.0-alpha1",
+    "bootstrap": "^5.0.0-alpha2",
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",
     "copy-text-to-clipboard": "^2.2.0",
@@ -74,7 +74,7 @@
     "yup": "^0.29.3"
   },
   "resolutions": {
-    "@babel/core": "7.11.4",
-    "@babel/parser": "7.11.4"
+    "@babel/core": "7.10.5",
+    "@babel/parser": "7.10.5"
   }
 }

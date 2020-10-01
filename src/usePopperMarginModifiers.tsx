@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import hasClass from 'dom-helpers/hasClass';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 interface Margins {
   top: number;
@@ -25,17 +26,26 @@ export default function usePopperMarginModifiers(): [
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const margins = useRef<Margins | null>(null);
 
-  const callback = useCallback((overlay: HTMLDivElement) => {
-    if (
-      !overlay ||
-      !(hasClass(overlay, 'popover') || hasClass(overlay, 'dropdown-menu'))
-    )
-      return;
+  const popoverClass = useBootstrapPrefix(undefined, 'popover');
+  const dropdownMenuClass = useBootstrapPrefix(undefined, 'dropdown-menu');
 
-    margins.current = getMargins(overlay);
-    overlay.style.margin = '0';
-    overlayRef.current = overlay;
-  }, []);
+  const callback = useCallback(
+    (overlay: HTMLDivElement) => {
+      if (
+        !overlay ||
+        !(
+          hasClass(overlay, popoverClass) ||
+          hasClass(overlay, dropdownMenuClass)
+        )
+      )
+        return;
+
+      margins.current = getMargins(overlay);
+      overlay.style.margin = '0';
+      overlayRef.current = overlay;
+    },
+    [popoverClass, dropdownMenuClass],
+  );
 
   const offset = useMemo(() => {
     return {
@@ -73,7 +83,7 @@ export default function usePopperMarginModifiers(): [
         if (
           !overlayRef.current ||
           !state.elements.arrow ||
-          !hasClass(overlayRef.current, 'popover') ||
+          !hasClass(overlayRef.current, popoverClass) ||
           !state.modifiersData['arrow#persistent']
         ) {
           return undefined;
@@ -94,7 +104,7 @@ export default function usePopperMarginModifiers(): [
         };
       },
     };
-  }, []);
+  }, [popoverClass]);
 
   return [callback, [offset, popoverArrowMargins]];
 }
