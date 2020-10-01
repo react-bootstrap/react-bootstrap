@@ -15,7 +15,7 @@ describe('usePopperMarginModifiers', () => {
       </ThemeProvider>,
     );
 
-    const margin = wrapper.find('.arrow').getDOMNode().style.margin;
+    const margin = wrapper.find('.popover-arrow').getDOMNode().style.margin;
     assert.equal(margin, '0px');
   });
 });
