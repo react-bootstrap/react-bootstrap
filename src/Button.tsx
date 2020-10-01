@@ -106,7 +106,7 @@ const Button: Button = React.forwardRef(
       className,
       prefix,
       active && 'active',
-      `${prefix}-${variant}`,
+      variant && `${prefix}-${variant}`,
       block && `${prefix}-block`,
       size && `${prefix}-${size}`,
     );
