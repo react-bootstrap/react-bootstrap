@@ -26,6 +26,8 @@ import {
   BsPrefixRefForwardingComponent,
 } from './helpers';
 
+export type CarouselVariant = 'dark';
+
 export interface CarouselProps
   extends BsPrefixPropsWithChildren,
     Pick<
@@ -55,6 +57,7 @@ export interface CarouselProps
   prevLabel?: React.ReactNode;
   nextIcon?: React.ReactNode;
   nextLabel?: React.ReactNode;
+  variant?: CarouselVariant;
 }
 
 type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
@@ -165,6 +168,12 @@ const propTypes = {
    * Set to null to deactivate.
    */
   nextLabel: PropTypes.string,
+
+  /**
+   * Color variant that controls the colors of the controls, indicators
+   * and captions.
+   */
+  variant: PropTypes.oneOf<CarouselVariant>(['dark']),
 };
 
 const defaultProps = {
@@ -234,6 +243,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     prevLabel,
     nextIcon,
     nextLabel,
+    variant,
     className,
     children,
     ...props
@@ -541,6 +551,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         prefix,
         slide && 'slide',
         fade && `${prefix}-fade`,
+        variant && `${prefix}-${variant}`,
       )}
     >
       {indicators && (
