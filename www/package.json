@@ -38,7 +38,6 @@
     "@mdx-js/react": "^1.6.18",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.25",
-    "ast-types": "^0.14.2",
     "astroturf": "^0.10.4",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
@@ -74,7 +73,6 @@
     "yup": "^0.29.3"
   },
   "resolutions": {
-    "@babel/core": "7.11.6",
-    "@babel/parser": "7.11.5"
+    "ast-types": "^0.14.2"
   }
 }
