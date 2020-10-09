@@ -20,6 +20,7 @@ const DropdownHeader = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
 });
 const DropdownDivider = createWithBsPrefix('dropdown-divider', {
+  Component: 'hr',
   defaultProps: { role: 'separator' },
 });
 const DropdownItemText = createWithBsPrefix('dropdown-item-text', {

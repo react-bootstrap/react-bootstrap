@@ -77,6 +77,14 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('.dropdown-menu-lg-right');
   });
 
+  it('should render variant', () => {
+    mount(
+      <DropdownMenu show variant="dark">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('.dropdown-menu.dropdown-menu-dark');
+  });
+
   // it.only('warns about bad refs', () => {
   //   class Parent extends React.Component {
   //     componentDidCatch() {}

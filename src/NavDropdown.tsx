@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
+import { DropdownMenuVariant } from './DropdownMenu';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -16,6 +17,7 @@ export interface NavDropdownProps
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
+  menuVariant?: DropdownMenuVariant;
 }
 
 type NavDropdown = BsPrefixRefForwardingComponent<'div', NavDropdownProps> & {
@@ -58,6 +60,13 @@ const propTypes = {
    */
   rootCloseEvent: PropTypes.string,
 
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+
   /** @ignore */
   bsPrefix: PropTypes.string,
 };
@@ -74,6 +83,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       disabled,
       active,
       renderMenuOnMount,
+      menuVariant,
       ...props
     }: NavDropdownProps,
     ref,
@@ -94,6 +104,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
+        variant={menuVariant}
       >
         {children}
       </Dropdown.Menu>

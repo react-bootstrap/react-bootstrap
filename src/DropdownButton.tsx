@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, { alignPropType, AlignType } from './DropdownMenu';
+import DropdownMenu, {
+  alignPropType,
+  AlignType,
+  DropdownMenuVariant,
+} from './DropdownMenu';
 
 export interface DropdownButtonProps
   extends DropdownProps,
@@ -15,6 +19,7 @@ export interface DropdownButtonProps
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
+  menuVariant?: DropdownMenuVariant;
 }
 
 const propTypes = {
@@ -59,6 +64,13 @@ const propTypes = {
    */
   rootCloseEvent: PropTypes.string,
 
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+
   /** @ignore */
   bsPrefix: PropTypes.string,
   /** @ignore */
@@ -90,6 +102,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
       disabled,
       href,
       id,
+      menuVariant,
       ...props
     }: DropdownButtonProps,
     ref,
@@ -110,6 +123,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
+        variant={menuVariant}
       >
         {children}
       </DropdownMenu>
