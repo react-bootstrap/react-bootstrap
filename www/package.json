@@ -50,6 +50,7 @@
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.3.15",
     "gatsby-plugin-mdx": "^1.2.44",
+    "gatsby-plugin-react-helmet": "^3.3.14",
     "gatsby-plugin-sass": "^2.3.15",
     "gatsby-remark-prismjs": "^3.5.16",
     "gatsby-source-filesystem": "2.3.33",
@@ -67,6 +68,7 @@
     "react": "^16.13.1",
     "react-docgen": "^5.3.0",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-live": "^2.2.2",
     "remark-slug": "^6.0.0",
     "shakespeare-data": "^3.0.0",
@@ -74,9 +76,5 @@
   },
   "resolutions": {
     "ast-types": "^0.14.2"
-  },
-  "dependencies": {
-    "gatsby-plugin-react-helmet": "^3.3.14",
-    "react-helmet": "^6.1.0"
   }
 }
