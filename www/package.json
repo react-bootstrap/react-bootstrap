@@ -74,5 +74,9 @@
   },
   "resolutions": {
     "ast-types": "^0.14.2"
+  },
+  "dependencies": {
+    "gatsby-plugin-react-helmet": "^3.3.14",
+    "react-helmet": "^6.1.0"
   }
 }

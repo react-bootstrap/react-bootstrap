@@ -16,6 +16,8 @@ const styles = css`
   }
 `;
 
+import SEO from '../seo';
+
 const getMode = (className = '') => {
   const [, mode] = className.match(/language-(\w+)/) || [];
   return mode;
@@ -46,6 +48,7 @@ const propTypes = {
 function DefaultLayout({ children, location, grayscale = true }) {
   return (
     <div className={grayscale ? styles.gray : undefined}>
+      <SEO pathname={location.pathname} />
       <NavMain activePage={location.pathname} />
       <DocsAlert />
       <MDXProvider components={components}>{children}</MDXProvider>
