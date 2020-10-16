@@ -8,6 +8,7 @@ import Heading from '../components/Heading';
 import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
 import DocsAlert from '../components/DocsAlert';
+import SEO from '../seo';
 
 const styles = css`
   .gray > :not(:first-child) {
@@ -15,8 +16,6 @@ const styles = css`
     -webkit-filter: grayscale(100%);
   }
 `;
-
-import SEO from '../seo';
 
 const getMode = (className = '') => {
   const [, mode] = className.match(/language-(\w+)/) || [];
