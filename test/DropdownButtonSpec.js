@@ -48,6 +48,19 @@ describe('<DropdownButton>', () => {
     ).find('button.dropdown-toggle.btn-success.btn-sm');
   });
 
+  it('passes menuVariant to dropdown menu', () => {
+    const wrapper = mount(
+      <DropdownButton title="blah" menuVariant="dark" id="test">
+        <DropdownItem>Item 1</DropdownItem>
+      </DropdownButton>,
+    );
+
+    expect(wrapper.find('DropdownMenu').props()).to.have.property(
+      'variant',
+      'dark',
+    );
+  });
+
   it('forwards onSelect handler to DropdownItems', (done) => {
     const selectedEvents = [];
 

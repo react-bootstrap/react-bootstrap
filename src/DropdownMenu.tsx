@@ -28,6 +28,8 @@ export type ResponsiveAlignProp =
 
 export type AlignType = AlignDirection | ResponsiveAlignProp;
 
+export type DropdownMenuVariant = 'dark';
+
 export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
   renderOnMount?: boolean;
@@ -37,6 +39,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: UseDropdownMenuOptions['popperConfig'];
+  variant?: DropdownMenuVariant;
 }
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
@@ -108,6 +111,13 @@ const propTypes = {
    * A set of popper options and props passed directly to Popper.
    */
   popperConfig: PropTypes.object,
+
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  variant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
 };
 
 const defaultProps: Partial<DropdownMenuProps> = {
@@ -135,6 +145,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       popperConfig,
+      variant,
       ...props
     }: DropdownMenuProps,
     ref,
@@ -220,6 +231,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
           prefix,
           show && 'show',
           alignEnd && `${prefix}-right`,
+          variant && `${prefix}-${variant}`,
           ...alignClasses,
         )}
       />

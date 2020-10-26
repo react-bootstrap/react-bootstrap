@@ -18,6 +18,8 @@ import MenuHeaders from '../../examples/Dropdown/MenuHeaders';
 import SplitBasic from '../../examples/Dropdown/SplitBasic';
 import SplitVariants from '../../examples/Dropdown/SplitVariants';
 import DropdownVariants from '../../examples/Dropdown/Variants';
+import ButtonDark from '../../examples/Dropdown/ButtonDark';
+import NavbarDark from '../../examples/Dropdown/NavbarDark';
 
 import styles from '../../css/examples.module.scss';
 
@@ -87,11 +89,23 @@ convenience component.
 
 <ReactPlayground codeText={SplitVariants} />
 
-### Sizing
+## Sizing
 
 Dropdowns work with buttons of all sizes.
 
 <ReactPlayground codeText={DropdownButtonSizes} />
+
+## Dark dropdowns
+
+Opt into darker dropdowns to match a dark navbar or custom style by adding 
+`variant="dark"` onto an existing `DropdownMenu`. Alternatively, use
+`menuVariant="dark"` when using the `DropdownButton` component.
+
+<ReactPlayground codeText={ButtonDark} />
+
+Using `menuVariant="dark"` in a `NavDropdown`:
+
+<ReactPlayground codeText={NavbarDark} />
 
 ## Drop directions
 
