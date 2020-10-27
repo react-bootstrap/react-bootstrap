@@ -38,6 +38,7 @@
     "@mdx-js/react": "^1.6.19",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.25",
+    "ast-types": "^0.14.2",
     "astroturf": "^0.10.5",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
@@ -71,8 +72,5 @@
     "remark-slug": "^6.0.0",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.29.3"
-  },
-  "resolutions": {
-    "ast-types": "^0.14.2"
   }
 }
