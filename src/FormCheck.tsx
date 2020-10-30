@@ -16,7 +16,7 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
-    React.HTMLAttributes<HTMLInputElement> {
+    React.InputHTMLAttributes<HTMLInputElement> {
   bsCustomPrefix?: string;
   inline?: boolean;
   disabled?: boolean;
