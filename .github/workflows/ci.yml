@@ -25,12 +25,7 @@ jobs:
           node-version: 12.x
       - name: Update Brew (macOS)
         if: matrix.os == 'macOS-latest'
-        run: |
-          # Workaround https://github.com/actions/virtual-environments/issues/1811
-          brew untap local/homebrew-openssl
-          brew untap local/homebrew-python2
-          # End workaround
-          brew update
+        run: brew update
       - name: Install Chrome (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
         run: brew cask install google-chrome
