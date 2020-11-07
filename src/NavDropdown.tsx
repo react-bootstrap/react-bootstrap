@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
-import { alignPropType as DropdownMenuAlignPropType } from './DropdownMenu';
+import {
+  alignPropType as DropdownMenuAlignPropType,
+  AlignType as DropdownMenuAlignType,
+} from './DropdownMenu';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -14,7 +17,7 @@ export interface NavDropdownProps
   title: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
-  menuAlign?: string;
+  menuAlign?: DropdownMenuAlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
