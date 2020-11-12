@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
+import DocLink from '../../components/DocLink';
 import LinkedHeading from '../../components/LinkedHeading';
 import Callout from '../../components/Callout';
 import CodeBlock from '../../components/CodeBlock';
@@ -101,7 +102,7 @@ export default withLayout(function NaπvbarSection({ data }) {
         While not required, you can wrap the Navbar in a{' '}
         <code>{'<Container>'}</code> component to center it on a page, or add
         one within to only center the contents of a{' '}
-        <a href="#navbar-placement">fixed or static top navbar</a>.
+        <a href="#navbars-placement">fixed or static top navbar</a>.
       </p>
       <ReactPlayground codeText={ContainerOutside} />
 
@@ -119,8 +120,8 @@ export default withLayout(function NaπvbarSection({ data }) {
       </LinkedHeading>
       <p>
         You can use Bootstrap's{' '}
-        <a href={`${config.docUrl}/utilities/position/`}>position utilities</a>{' '}
-        to place navbars in non-static positions. Choose from fixed to the top,
+        <DocLink path="/utilities/position/">position utilities</DocLink> to
+        place navbars in non-static positions. Choose from fixed to the top,
         fixed to the bottom, or stickied to the top (scrolls with the page until
         it reaches the top, then stays there). Fixed navbars use{' '}
         <code>position: fixed</code>, meaning they’re pulled from the normal
