@@ -11,7 +11,7 @@ the [Contributing Guide](./CONTRIBUTING.md).
 New issues pop up every day. We need to identify urgent issues (such as nobody
 can use a component, or install React-Bootstrap), close and link duplicates,
 answer questions, etc. Please alert the
-[reactiflux#react-bootstrap](https://discord.gg/0ZcbPKXt5bXLs9XK) chat room of
+[reactiflux#react-bootstrap](https://discord.gg/reactiflux) chat room of
 the urgent issues.
 
 Some issues are opened that are just too vague to do anything about. If after
@@ -38,7 +38,7 @@ this will minimize trivial merge conflicts.
 If you are interested in becoming a react-bootstrap maintainer, start by
 reviewing issues and pull requests. Answer questions for those in need of
 troubleshooting. Join us in the
-[reactiflux#react-bootstrap](https://discord.gg/0ZcbPKXt5bXLs9XK) chat room.
+[reactiflux#react-bootstrap](https://discord.gg/reactiflux) chat room.
 Once we see you helping, either we will reach out and ask you if you want to
 join or you can ask one of the current maintainers to add you. We will try our
 best to be proactive in reaching out to those that are already helping out.

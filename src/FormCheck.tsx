@@ -15,7 +15,7 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
-    React.HTMLAttributes<HTMLInputElement> {
+    React.InputHTMLAttributes<HTMLInputElement> {
   inline?: boolean;
   disabled?: boolean;
   label?: React.ReactNode;

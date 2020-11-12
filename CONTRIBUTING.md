@@ -15,7 +15,7 @@ know.
 The issue tracker is the preferred channel for bug reports, features requests
 and submitting pull requests, but please respect the following restrictions:
 
-- Please do not use the issue tracker for personal support requests. Stack Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap) tag), [Discord](https://discord.gg/0ZcbPKXt5bXLs9XK), or [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap) are better places to get help.
+- Please do not use the issue tracker for personal support requests. Stack Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap) tag), [Discord](https://discord.gg/reactiflux), or [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap) are better places to get help.
 - Please do not open issues or pull requests regarding the code in React or Bootstrap (open them in their respective repositories).
 
 _Note: Occasionally issues are opened that are unclear, or we cannot verify them. When the issue author has not responded to our questions for verification within 7 days then we will close the issue._
