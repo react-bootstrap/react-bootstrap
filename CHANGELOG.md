@@ -1,3 +1,37 @@
+# [1.4.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.3.0...v1.4.0) (2020-10-21)
+
+
+### Bug Fixes
+
+* **Button:** display variant only when set ([#5458](https://github.com/react-bootstrap/react-bootstrap/issues/5458)) ([f963ab3](https://github.com/react-bootstrap/react-bootstrap/commit/f963ab39fe52b3d4c4d04360e26b2159c2b2b3c7)), closes [#5456](https://github.com/react-bootstrap/react-bootstrap/issues/5456)
+* **docs:** Move ast-types to resolutions ([#5467](https://github.com/react-bootstrap/react-bootstrap/issues/5467)) ([5a5c3eb](https://github.com/react-bootstrap/react-bootstrap/commit/5a5c3eb6dfc42f8a5f4b11e573f5c4288233d602))
+* **docs:** roll-back resolution versions ([5d8f394](https://github.com/react-bootstrap/react-bootstrap/commit/5d8f394016fd533af6a66f9bacf4b502bb30177a))
+* Allow falsy eventKeys in DropdownItem and ListGroupItem ([#5404](https://github.com/react-bootstrap/react-bootstrap/issues/5404)) ([f493a15](https://github.com/react-bootstrap/react-bootstrap/commit/f493a15027d47898b163d73aa794ca0bc6859b84))
+* popover arrow misaligned when class is prefixed ([#5416](https://github.com/react-bootstrap/react-bootstrap/issues/5416)) ([a0f404a](https://github.com/react-bootstrap/react-bootstrap/commit/a0f404a397c53341fd168df666408e40634aa791))
+* **Accordion:** Use empty SelectableContext to prevent dropdown from closing accordion ([#5201](https://github.com/react-bootstrap/react-bootstrap/issues/5201)) ([62a9d8b](https://github.com/react-bootstrap/react-bootstrap/commit/62a9d8b76fc7244ebb361d2fbbb27315c77d7a81))
+* **carousel:** prevent intervals from being 0 ([1d4294b](https://github.com/react-bootstrap/react-bootstrap/commit/1d4294b051c040f6bd222e4e2e19ae0051cb9309))
+* **carousel:** re-implement with committed ref ([c8edc2c](https://github.com/react-bootstrap/react-bootstrap/commit/c8edc2cb1b19870740836d1735e312782b954ff8))
+* **docs:** type mismatch with environment variable ([647b4ff](https://github.com/react-bootstrap/react-bootstrap/commit/647b4ff68608f14c8e8ca19bf70c7f70dc89d257))
+* **Fade:** fix TS props to work with TransitionType ([#5398](https://github.com/react-bootstrap/react-bootstrap/issues/5398)) ([79447a7](https://github.com/react-bootstrap/react-bootstrap/commit/79447a7ede3075701368c8c6e13ef9ef92e60464))
+* **FormLabel:** Add missing class for col label sizing ([#5382](https://github.com/react-bootstrap/react-bootstrap/issues/5382)) ([52e92fc](https://github.com/react-bootstrap/react-bootstrap/commit/52e92fc1433562f03fd600aae6147310640bae22))
+* **OverlayTrigger:** Add func as valid prop type for children ([#5393](https://github.com/react-bootstrap/react-bootstrap/issues/5393)) ([6d12869](https://github.com/react-bootstrap/react-bootstrap/commit/6d12869ea5e0aa6cfa886c8e0b816e308de0f2ef))
+* Fix clearing nextDirectionRef in <Carousel> ([#5322](https://github.com/react-bootstrap/react-bootstrap/issues/5322)) ([5c5ea8d](https://github.com/react-bootstrap/react-bootstrap/commit/5c5ea8d42741bc9ff1570740c8e04864a7bd93d3)), closes [#5319](https://github.com/react-bootstrap/react-bootstrap/issues/5319)
+
+
+### Features
+
+* **carousel:** add individual item intervals ([d4e12f0](https://github.com/react-bootstrap/react-bootstrap/commit/d4e12f08d0cfe3c6169d0d8642e0d5021f160824)), closes [#5305](https://github.com/react-bootstrap/react-bootstrap/issues/5305)
+* **carousel-item:** add prop type-checking for the interval prop ([c1c72e0](https://github.com/react-bootstrap/react-bootstrap/commit/c1c72e0fe8e8b7a843618f5dcfcac90589fdfab6))
+* **DropdownMenu:** Add responsive menu alignment ([#5307](https://github.com/react-bootstrap/react-bootstrap/issues/5307)) ([b5ec39e](https://github.com/react-bootstrap/react-bootstrap/commit/b5ec39e25291d165470e4087fc7db857e8c1e005))
+* **FormCheck:** Allow custom controls to render without a label ([#5427](https://github.com/react-bootstrap/react-bootstrap/issues/5427)) ([1ac7f50](https://github.com/react-bootstrap/react-bootstrap/commit/1ac7f5071ab81156af72fdac82819332527bb1d6))
+* **netlify:** inject netlify build environments into static site ([235946d](https://github.com/react-bootstrap/react-bootstrap/commit/235946de05473006bd3facee5c8b36e8ae8bf0d7))
+* **netlify:** more resilient netlify docs alert implementation ([02a71b1](https://github.com/react-bootstrap/react-bootstrap/commit/02a71b19c2e917d210760c381684d088a34b9259))
+* **ToggleButtonGroup:** Add vertical option ([#5371](https://github.com/react-bootstrap/react-bootstrap/issues/5371)) ([c049dac](https://github.com/react-bootstrap/react-bootstrap/commit/c049dac03e3c896d7a84305ae50bfa3ee1854cd3))
+
+
+
+
+
 # [1.3.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.2...v1.3.0) (2020-07-23)
 
 

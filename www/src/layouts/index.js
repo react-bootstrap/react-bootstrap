@@ -8,6 +8,7 @@ import Heading from '../components/Heading';
 import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
 import DocsAlert from '../components/DocsAlert';
+import SEO from '../seo';
 
 const styles = css`
   .gray > :not(:first-child) {
@@ -46,6 +47,7 @@ const propTypes = {
 function DefaultLayout({ children, location, grayscale = true }) {
   return (
     <div className={grayscale ? styles.gray : undefined}>
+      <SEO pathname={location.pathname} />
       <NavMain activePage={location.pathname} />
       <DocsAlert />
       <MDXProvider components={components}>{children}</MDXProvider>

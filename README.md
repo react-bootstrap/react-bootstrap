@@ -11,7 +11,7 @@
 
 ## Docs
 
-See the [documentation][documentation] with live editable examples and API documention.
+See the [documentation][documentation] with live editable examples and API documentation.
 
 To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap-v3.netlify.app) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
 
@@ -61,7 +61,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [codecov-badge]: https://img.shields.io/codecov/c/github/react-bootstrap/react-bootstrap/master.svg
 [codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
-[discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
+[discord]: https://discord.gg/reactiflux
 [netlify-badge]: https://api.netlify.com/api/v1/badges/f09d443f-11b2-4454-812b-0645aeaca824/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap-v5/deploys
 [gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
