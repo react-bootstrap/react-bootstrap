@@ -10,7 +10,6 @@ import CheckApi from '../../examples/Form/CheckApi';
 import CheckInline from '../../examples/Form/CheckInline';
 import ColorPicker from '../../examples/Form/ColorPicker';
 import FormFile from '../../examples/Form/FormFile';
-import FormFileSizes from '../../examples/Form/FormFileSizes';
 import FormDisabled from '../../examples/Form/FormDisabled';
 import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
@@ -31,7 +30,6 @@ import Switch from '../../examples/Form/Switch';
 import Range from '../../examples/Form/Range';
 import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
-import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
@@ -107,6 +105,10 @@ export default withLayout(function FormControlsSection({ data }) {
         default form field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
+      <LinkedHeading h="3" id="forms-file">
+        File input
+      </LinkedHeading>
+      <ReactPlayground codeText={FormFile} />
       <LinkedHeading h="3" id="forms-color">
         Color
       </LinkedHeading>
@@ -162,31 +164,6 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
-      <LinkedHeading h="2" id="forms-file">
-        File
-      </LinkedHeading>
-      <ReactPlayground codeText={FormFile} />
-      <LinkedHeading h="3" id="forms-file-sizes">
-        Sizing
-      </LinkedHeading>
-      <p>
-        You may also choose from small and large file inputs to match our
-        similarly sized text inputs.
-      </p>
-      <ReactPlayground codeText={FormFileSizes} />
-      <h4>Customizing FormFile rendering</h4>
-      <p>
-        When you need tighter control, or want to customize how the{' '}
-        <code>FormFile</code> component renders, it may be better to use its
-        constituent parts directly.
-      </p>
-      <p>
-        By providing <code>children</code> to the <code>FormFile</code> and{' '}
-        <code>FormFileLabel</code> you can forgo the default rendering and
-        handle it yourself. (You can still provide an <code>id</code> to the{' '}
-        <code>FormFile</code> and have it propagate to the label and input).
-      </p>
-      <ReactPlayground codeText={FileApi} />
       <LinkedHeading h="2" id="forms-range">
         Range
       </LinkedHeading>
@@ -447,9 +424,6 @@ export default withLayout(function FormControlsSection({ data }) {
         metadata={data.FormCheckLabel}
         exportedBy={data.FormCheck}
       />
-      <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
-      <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
-      <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
       <ComponentApi metadata={data.FormRange} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormSelect} exportedBy={data.Form} />
     </>
@@ -476,9 +450,6 @@ export const query = graphql`
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
       ...ComponentApi_metadata
     }
-    FormFile: componentMetadata(displayName: { eq: "FormFile" }) {
-      ...ComponentApi_metadata
-    }
     FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
       ...ComponentApi_metadata
     }
@@ -486,12 +457,6 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
-      ...ComponentApi_metadata
-    }
-    FormFileInput: componentMetadata(displayName: { eq: "FormFileInput" }) {
-      ...ComponentApi_metadata
-    }
-    FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
       ...ComponentApi_metadata
     }
     FormRange: componentMetadata(displayName: { eq: "FormRange" }) {
