@@ -17,7 +17,7 @@ export interface ProgressBarProps
   srOnly?: boolean;
   striped?: boolean;
   animated?: boolean;
-  variant?: 'success' | 'danger' | 'warning' | 'info' | string;
+  variant?: 'success' | 'danger' | 'warning' | 'info' | (string & {});
   isChild?: boolean;
 }
 
