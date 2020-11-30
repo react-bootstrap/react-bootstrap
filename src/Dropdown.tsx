@@ -39,6 +39,7 @@ export interface DropdownProps extends BsPrefixPropsWithChildren {
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
+  escDisabled?: boolean;
 }
 
 type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
@@ -118,10 +119,18 @@ const propTypes = {
 
   /** @private */
   navbar: PropTypes.bool,
+
+  /**
+   * Disables the behavior of pressing the key 'Escape' when the Dropdown is opened.
+   *
+   * The default value is `false`.
+   */
+  escDisabled: PropTypes.bool,
 };
 
 const defaultProps = {
   navbar: false,
+  escDisabled: false,
 };
 
 const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
@@ -137,6 +146,7 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
     navbar: _4,
+    escDisabled,
     ...props
   } = useUncontrolled(pProps, { show: 'onToggle' });
 
@@ -145,7 +155,16 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
+      const isEsc = event.type === 'keydown' && event.key === 'Escape';
+      if (
+        (event.type === 'click' && event.currentTarget === document) ||
+        (isEsc && event.currentTarget)
+      ) {
+        source = 'rootClose';
+      }
+      if (!nextShow && isEsc && escDisabled) {
+        return;
+      }
       if (onToggle) {
         onToggle(nextShow, event, { source });
       }

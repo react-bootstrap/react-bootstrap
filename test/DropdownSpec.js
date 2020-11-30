@@ -259,6 +259,18 @@ describe('<Dropdown>', () => {
     });
   });
 
+  it('disables closing dropdown when pressing Escape', () => {
+    const wrapper = mount(<Dropdown escDisabled>{dropdownChildren}</Dropdown>);
+    wrapper.assertNone('.show');
+    wrapper
+      .find('button')
+      .simulate('keyDown', { key: 'ArrowDown' })
+      .simulate('keyDown', { key: 'Escape' });
+    wrapper.assertSingle('.dropdown.show');
+    wrapper.assertSingle('.dropdown-menu.show');
+    wrapper.assertSingle('button[aria-expanded=true]');
+  });
+
   it('should use each components bsPrefix', () => {
     const wrapper = mount(
       <Dropdown defaultShow bsPrefix="my-dropdown">
