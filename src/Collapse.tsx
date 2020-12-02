@@ -12,11 +12,14 @@ import Transition, {
 import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 type Dimension = 'height' | 'width';
 
 export interface CollapseProps extends TransitionCallbacks {
   className?: string;
+  bsCollapsePrefix?: string;
+  bsCollapsingPrefix?: string;
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
@@ -49,13 +52,6 @@ function getDefaultDimensionValue(
     parseInt(css(elem, margins[1]), 10)
   );
 }
-
-const collapseStyles = {
-  [EXITED]: 'collapse',
-  [EXITING]: 'collapsing',
-  [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse show',
-};
 
 const propTypes = {
   /**
@@ -152,6 +148,8 @@ const defaultProps = {
 const Collapse = React.forwardRef(
   (
     {
+      bsCollapsePrefix,
+      bsCollapsingPrefix,
       onEnter,
       onEntering,
       onEntered,
@@ -168,6 +166,19 @@ const Collapse = React.forwardRef(
     /* Compute dimension */
     const computedDimension =
       typeof dimension === 'function' ? dimension() : dimension;
+
+    const collapsePrefix = useBootstrapPrefix(bsCollapsePrefix, 'collapse');
+    const collapsingPrefix = useBootstrapPrefix(
+      bsCollapsingPrefix,
+      'collapsing',
+    );
+
+    const collapseStyles = {
+      [EXITED]: collapsePrefix,
+      [EXITING]: collapsingPrefix,
+      [ENTERING]: collapsingPrefix,
+      [ENTERED]: `${collapsePrefix} show`,
+    };
 
     /* -- Expanding -- */
     const handleEnter = useMemo(
