@@ -118,7 +118,7 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
     const alert = (
       <div
         role="alert"
-        {...(Transition ? props : undefined)}
+        {...(!Transition ? props : undefined)}
         ref={ref}
         className={classNames(
           className,
