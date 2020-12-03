@@ -124,7 +124,7 @@ function renderTab(classNames) {
         {title}
       </NavItem>
     );
-  }
+  };
 }
 
 const Tabs = (props: TabsProps) => {

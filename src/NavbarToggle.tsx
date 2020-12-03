@@ -47,7 +47,6 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
   (
     {
       bsPrefix,
-      classNameMap,
       className,
       children,
       label,
@@ -59,7 +58,7 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     const { onToggle, expanded } = useContext(NavbarContext) || {};
 

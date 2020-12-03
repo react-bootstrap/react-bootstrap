@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import {
   BsCustomPrefixProps,
@@ -47,6 +46,7 @@ const FormFileLabel: FormFileLabel = React.forwardRef<
     ? [bsCustomPrefix, 'custom-file-label']
     : [bsPrefix, 'form-file-label'];
 
+  const classNames = useClassNameMapper();
   bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
   return (

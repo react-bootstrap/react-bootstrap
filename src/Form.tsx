@@ -74,7 +74,6 @@ const FormImpl: Form = (React.forwardRef(
   (
     {
       bsPrefix,
-      classNameMap,
       inline,
       className,
       validated,
@@ -85,7 +84,7 @@ const FormImpl: Form = (React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
     return (
       <Component
         {...props}

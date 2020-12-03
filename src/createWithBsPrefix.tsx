@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
 import React from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
@@ -29,6 +28,7 @@ export default function createWithBsPrefix<
       ref,
     ) => {
       const resolvedPrefix = useBootstrapPrefix(bsPrefix, prefix);
+      const classNames = useClassNameMapper();
       return (
         <Tag
           ref={ref}

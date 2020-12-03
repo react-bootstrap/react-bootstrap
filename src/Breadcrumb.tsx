@@ -46,7 +46,6 @@ const Breadcrumb: Breadcrumb = (React.forwardRef(
     {
       bsPrefix,
       className,
-      classNameMap,
       listProps,
       children,
       label,
@@ -57,10 +56,15 @@ const Breadcrumb: Breadcrumb = (React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     return (
-      <Component aria-label={label} className={classNames(className)} ref={ref} {...props}>
+      <Component
+        aria-label={label}
+        className={classNames(className)}
+        ref={ref}
+        {...props}
+      >
         <ol {...listProps} className={classNames(prefix, listProps?.className)}>
           {children}
         </ol>

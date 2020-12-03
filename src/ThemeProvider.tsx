@@ -1,14 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useMemo } from 'react';
-import classNames from './createClassNames';
+import createClassNames, { ClassNamesFnWrapper } from './createClassNames';
 
 export interface ThemeProviderProps {
-  prefixes: Record<string, unknown>;
-  classNameMap: Record<string, string>,
-  // createClassNameMapper: classMap => classNames(classMap, item => item),
+  prefixes: Record<string, string>;
+  classNameMap: Record<string, string>;
+  createClassNameMapper(
+    classNameMap: Record<string, string>,
+  ): ClassNamesFnWrapper;
 }
 
-const ThemeContext = React.createContext({});
+const defaultThemeContext: ThemeProviderProps = {
+  prefixes: {},
+  classNameMap: {},
+  createClassNameMapper(classMap) {
+    return createClassNames(classMap, {}, (item) => item);
+  },
+};
+
+const ThemeContext = React.createContext(defaultThemeContext);
 const { Consumer, Provider } = ThemeContext;
 
 function ThemeProvider({
@@ -22,14 +32,8 @@ function ThemeProvider({
     classNameMap,
   ]);
 
-  const createClassNameMapper = localClassNameMap =>
-    classNames(
-      {
-        ...globalClassNameMap,
-        ...localClassNameMap,
-      },
-      classNameConverter,
-    );
+  const createClassNameMapper = (localClassNameMap) =>
+    createClassNames(localClassNameMap, globalClassNameMap, classNameConverter);
 
   return (
     <Provider
@@ -45,7 +49,7 @@ function ThemeProvider({
 }
 
 ThemeProvider.propTypes = {
-  prefixes: PropTypes.object,
+  prefixes: PropTypes.object.isRequired,
   /**
    * A map of class names. The key's of the map should be
    * the Bootstrap class names used by the react-bootstrap components.
@@ -70,7 +74,9 @@ export function useBootstrapPrefix(
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
 
-export function useClassNameMapper(localClassNameMap) {
+export function useClassNameMapper(
+  localClassNameMap: Record<string, string> = {},
+): ClassNamesFnWrapper {
   const { createClassNameMapper } = useContext(ThemeContext);
   return createClassNameMapper(localClassNameMap);
 }

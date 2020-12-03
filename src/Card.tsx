@@ -53,11 +53,6 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * ClassName mapping
-   */
-  classNameMap: PropTypes.object,
-
-  /**
    * Sets card background
    *
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
@@ -95,7 +90,6 @@ const Card: Card = (React.forwardRef(
   (
     {
       bsPrefix,
-      classNameMap,
       className,
       bg,
       text,
@@ -109,7 +103,7 @@ const Card: Card = (React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
     const cardContext = useMemo(
       () => ({
         cardHeaderBsPrefix: `${prefix}-header`,

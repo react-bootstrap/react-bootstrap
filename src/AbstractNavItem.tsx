@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import { useClassNameMapper } from './ThemeProvider';
 
 import warning from 'warning';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
+import { useClassNameMapper } from './ThemeProvider';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 // TODO: check this

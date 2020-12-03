@@ -28,11 +28,6 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  /**
-   * ClassName mapping
-   */
-  classNameMap: PropTypes.object,
-
   as: PropTypes.elementType,
 
   /**
@@ -131,7 +126,6 @@ function useTabContext(props: TabPaneProps) {
 const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
   const {
     bsPrefix,
-    classNameMap,
     className,
     active,
     onEnter,
@@ -150,7 +144,7 @@ const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
   } = useTabContext(props);
 
   const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
-  const classNames = useClassNameMapper(classNameMap);
+  const classNames = useClassNameMapper();
 
   if (!active && !Transition && unmountOnExit) return null;
 

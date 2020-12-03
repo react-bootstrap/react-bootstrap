@@ -55,20 +55,11 @@ const defaultProps = {
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   (
-    {
-      bsPrefix,
-      className,
-      classNameMap,
-      fluid,
-      rounded,
-      roundedCircle,
-      thumbnail,
-      ...props
-    },
+    { bsPrefix, className, fluid, rounded, roundedCircle, thumbnail, ...props },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     const classes = classNames(
       fluid && `${bsPrefix}-fluid`,

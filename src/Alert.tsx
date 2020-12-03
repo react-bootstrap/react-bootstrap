@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import Fade from './Fade';
 import CloseButton from './CloseButton';
 import { Variant } from './types';
@@ -109,6 +108,7 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
     });
 
     const prefix = useBootstrapPrefix(bsPrefix, 'alert');
+    const classNames = useClassNameMapper();
     const handleClose = useEventCallback((e) => {
       if (onClose) {
         onClose(false, e);

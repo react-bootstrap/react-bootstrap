@@ -81,7 +81,6 @@ const DropdownItem: DropdownItem = React.forwardRef(
   (
     {
       bsPrefix,
-      classNameMap,
       className,
       children,
       eventKey,
@@ -96,7 +95,7 @@ const DropdownItem: DropdownItem = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
     const onSelectCtx = useContext(SelectableContext);
     const navContext = useContext(NavContext);
 

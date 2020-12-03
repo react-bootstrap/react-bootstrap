@@ -132,7 +132,6 @@ const defaultProps = {
 const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
   const {
     bsPrefix,
-    classNameMap,
     drop,
     show,
     className,
@@ -148,7 +147,7 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const onSelectCtx = useContext(SelectableContext);
   const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
-  const classNames = useClassNameMapper(classNameMap);
+  const classNames = useClassNameMapper();
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {

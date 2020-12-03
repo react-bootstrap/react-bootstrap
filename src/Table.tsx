@@ -26,11 +26,6 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * ClassName mapping
-   */
-  classNameMap: PropTypes.object,
-
-  /**
    * Adds zebra-striping to any table row within the `<tbody>`.
    */
   striped: PropTypes.bool,
@@ -78,7 +73,6 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
   (
     {
       bsPrefix,
-      classNameMap,
       className,
       striped,
       bordered,
@@ -92,7 +86,7 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
     const classes = classNames(
       className,
       decoratedBsPrefix,

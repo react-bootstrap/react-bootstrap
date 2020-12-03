@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
 import {
   BsPrefixPropsWithChildren,
@@ -49,6 +48,7 @@ const Pagination: Pagination = (React.forwardRef<
   PaginationProps
 >(({ bsPrefix, className, children, size, ...props }: PaginationProps, ref) => {
   const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
+  const classNames = useClassNameMapper();
   return (
     <ul
       ref={ref}

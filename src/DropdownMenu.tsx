@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import {
@@ -9,7 +8,7 @@ import {
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import warning from 'warning';
 import NavbarContext from './NavbarContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import usePopperMarginModifiers from './usePopperMarginModifiers';
 import {
@@ -141,6 +140,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
+    const classNames = useClassNameMapper();
     const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
     const alignClasses: string[] = [];

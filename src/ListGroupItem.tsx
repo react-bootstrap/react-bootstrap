@@ -83,7 +83,7 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     const handleClick = useCallback(
       (event) => {

@@ -24,7 +24,7 @@ const NavbarCollapse = React.forwardRef(
       <NavbarContext.Consumer>
         {(context) => (
           <Collapse in={!!(context && context.expanded)} {...props}>
-            <div ref={ref as any} className={bsPrefix}>
+            <div ref={ref as any} className={classNames(bsPrefix)}>
               {children}
             </div>
           </Collapse>

@@ -28,11 +28,6 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * ClassName mapping
-   */
-  classNameMap: PropTypes.object,
-
-  /**
    * An html id attribute, necessary for accessibility
    * @type {string|number}
    * @required
@@ -91,7 +86,6 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       bsPrefix,
-      classNameMap,
       placement,
       className,
       style,
@@ -104,7 +98,7 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     const [primaryPlacement] = placement?.split('-') || [];
 

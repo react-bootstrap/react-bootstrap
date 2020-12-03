@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -78,6 +77,7 @@ const BreadcrumbItem: BreadcrumbItem = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

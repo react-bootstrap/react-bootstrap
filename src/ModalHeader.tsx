@@ -19,11 +19,6 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * ClassName mapping
-   */
-  classNameMap: PropTypes.object,
-
-  /**
    * Provides an accessible label for the close
    * button. It is used for Assistive Technology when the label text is not
    * readable.
@@ -52,7 +47,6 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   (
     {
       bsPrefix,
-      classNameMap,
       closeLabel,
       closeButton,
       onHide,
@@ -63,7 +57,7 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');
-    const classNames = useClassNameMapper(classNameMap);
+    const classNames = useClassNameMapper();
 
     const context = useContext(ModalContext);
 

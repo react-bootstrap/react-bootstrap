@@ -47,7 +47,6 @@ const Accordion = (React.forwardRef((props: AccordionProps, ref) => {
     bsPrefix,
     children,
     className,
-    classNameMap,
     onSelect,
     ...controlledProps
   } = useUncontrolled(props, {

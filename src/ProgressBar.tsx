@@ -220,7 +220,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
                 variant,
               },
               ref,
-            classNames
+              classNames,
             )}
       </div>
     );
