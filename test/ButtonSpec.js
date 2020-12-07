@@ -86,10 +86,6 @@ describe('<Button>', () => {
     ).assertSingle(`a.disabled`);
   });
 
-  it('Should have block class', () => {
-    mount(<Button block>Title</Button>).assertSingle(`.btn-block`);
-  });
-
   it('Should apply variant class', () => {
     mount(<Button variant="danger">Title</Button>).assertSingle(`.btn-danger`);
   });
