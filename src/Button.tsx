@@ -16,7 +16,6 @@ export interface ButtonProps
   extends React.HTMLAttributes<HTMLElement>,
     BsPrefixPropsWithChildren {
   active?: boolean;
-  block?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
   type?: ButtonType;
@@ -54,9 +53,6 @@ const propTypes = {
    */
   size: PropTypes.string,
 
-  /** Spans the full width of the Button parent */
-  block: PropTypes.bool,
-
   /** Manually set the visual state of the button to `:active` */
   active: PropTypes.bool,
 
@@ -93,7 +89,6 @@ const Button: Button = React.forwardRef(
       size,
       active,
       className,
-      block,
       type,
       as,
       ...props
@@ -107,7 +102,6 @@ const Button: Button = React.forwardRef(
       prefix,
       active && 'active',
       variant && `${prefix}-${variant}`,
-      block && `${prefix}-block`,
       size && `${prefix}-${size}`,
     );
 
