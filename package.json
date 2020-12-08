@@ -113,7 +113,7 @@
     "eslint-plugin-mocha": "^8.0.0",
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
-    "execa": "^4.1.0",
+    "execa": "^5.0.0",
     "fs-extra": "^9.0.1",
     "husky": "^4.3.5",
     "karma": "^5.2.3",
