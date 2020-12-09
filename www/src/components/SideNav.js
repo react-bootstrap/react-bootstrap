@@ -117,6 +117,7 @@ const components = [
   'button-group',
   'cards',
   'carousel',
+  'close-button',
   'dropdowns',
   'forms',
   'input-group',

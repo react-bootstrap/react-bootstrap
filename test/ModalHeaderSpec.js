@@ -24,4 +24,12 @@ describe('Modal.Header', () => {
 
     expect(onHideSpy).to.have.been.called;
   });
+
+  it('should render close button variant', () => {
+    const wrapper = mount(<Modal.Header closeButton closeVariant="white" />);
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
+  });
 });

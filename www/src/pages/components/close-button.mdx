@@ -1,0 +1,51 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import CloseButtonBasic from '../../examples/CloseButton/Basic';
+import CloseButtonDisabled from '../../examples/CloseButton/Disabled';
+import CloseButtonVariants from '../../examples/CloseButton/Variants';
+import CloseButtonLabelled from '../../examples/CloseButton/Labelled';
+
+
+# Close Button
+
+A generic close button for dismissing content such as modals and alerts.
+
+<ReactPlayground codeText={CloseButtonBasic} />
+
+## Disabled state
+
+Bootstrap adds relevant styling to a disabled close button to prevent user
+interactions.
+
+<ReactPlayground codeText={CloseButtonDisabled} />
+
+## Variants
+
+Change the default dark color to white using `variant="white"`.
+
+<ReactPlayground codeText={CloseButtonVariants} />
+
+## Accessibility
+
+To ensure the maximum accessibility for Close Button components, it is
+recommended that you provide relevant text for screen readers.  The example
+below provides an example of accessible usage of this component by way of the
+`aria-label` property.
+
+<ReactPlayground codeText={CloseButtonLabelled} />
+
+## API
+
+<ComponentApi metadata={props.data.metadata} />
+
+
+export const query = graphql`
+  query CloseButton {
+    metadata: componentMetadata(displayName: { eq: "CloseButton" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;

@@ -129,7 +129,7 @@ describe('<Modal>', () => {
         <strong>Message</strong>
       </Modal>,
     )
-      .find('.close')
+      .find('.btn-close')
       .simulate('click');
   });
 

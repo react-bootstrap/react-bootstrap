@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import CloseButton from './CloseButton';
+import CloseButton, { CloseButtonVariant } from './CloseButton';
 import ToastContext from './ToastContext';
 import {
   BsPrefixAndClassNameOnlyProps,
@@ -14,6 +14,7 @@ import {
 export interface ToastHeaderProps
   extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
   closeLabel?: string;
+  closeVariant?: CloseButtonVariant;
   closeButton?: boolean;
 }
 
@@ -28,6 +29,11 @@ const propTypes = {
    * readable.
    */
   closeLabel: PropTypes.string,
+
+  /**
+   * Sets the variant for close button.
+   */
+  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
 
   /**
    * Specify whether the Component should contain a close button
@@ -48,6 +54,7 @@ const ToastHeader: ToastHeader = React.forwardRef<
     {
       bsPrefix,
       closeLabel,
+      closeVariant,
       closeButton,
       className,
       children,
@@ -71,7 +78,8 @@ const ToastHeader: ToastHeader = React.forwardRef<
 
         {closeButton && (
           <CloseButton
-            label={closeLabel}
+            aria-label={closeLabel}
+            variant={closeVariant}
             onClick={handleClick}
             className="ml-2 mb-1"
             data-dismiss="toast"

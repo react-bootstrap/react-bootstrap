@@ -65,6 +65,18 @@ describe('<Alert>', () => {
     expect(wrapper.isEmptyRender()).to.be.true;
   });
 
+  it('should render close button variant', () => {
+    const wrapper = mount(
+      <Alert dismissible closeVariant="white">
+        Message
+      </Alert>,
+    );
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
+  });
+
   describe('Web Accessibility', () => {
     it('Should have alert role', () => {
       mount(<Alert>Message</Alert>).assertSingle('[role="alert"]');

@@ -6,7 +6,7 @@ import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
-import CloseButton from './CloseButton';
+import CloseButton, { CloseButtonVariant } from './CloseButton';
 import { Variant } from './types';
 import divWithClassName from './divWithClassName';
 import createWithBsPrefix from './createWithBsPrefix';
@@ -20,6 +20,7 @@ export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
   show?: boolean;
   onClose?: (a: any, b: any) => void;
   closeLabel?: string;
+  closeVariant?: CloseButtonVariant;
   transition?: TransitionType;
 }
 
@@ -78,6 +79,11 @@ const propTypes = {
   closeLabel: PropTypes.string,
 
   /**
+   * Sets the variant for close button.
+   */
+  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
+
+  /**
    * Animate the alert dismissal. Defaults to using `<Fade>` animation or use
    * `false` to disable. A custom `react-transition-group` Transition can also
    * be provided.
@@ -97,6 +103,7 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
       bsPrefix,
       show,
       closeLabel,
+      closeVariant,
       className,
       children,
       variant,
@@ -128,7 +135,11 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
         )}
       >
         {dismissible && (
-          <CloseButton onClick={handleClose} label={closeLabel} />
+          <CloseButton
+            onClick={handleClose}
+            aria-label={closeLabel}
+            variant={closeVariant}
+          />
         )}
         {children}
       </div>
