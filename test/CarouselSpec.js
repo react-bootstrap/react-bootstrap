@@ -65,6 +65,14 @@ describe('<Carousel>', () => {
     wrapper.find('.carousel-indicators li').first().simulate('click');
   });
 
+  it('should render variant', () => {
+    mount(
+      <Carousel activeIndex={1} interval={null} variant="dark">
+        {items}
+      </Carousel>,
+    ).assertSingle('.carousel.carousel-dark');
+  });
+
   describe('ref testing', () => {
     let clock;
 
