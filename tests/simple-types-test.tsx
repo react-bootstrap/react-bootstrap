@@ -24,7 +24,6 @@ import {
   Fade,
   Figure,
   Form,
-  FormFile,
   FormControl,
   Image,
   InputGroup,
@@ -497,37 +496,6 @@ const MegaComponent = () => (
           <Form.Control type="text" placeholder="Hoizontal" />
         </Col>
       </Form.Group>
-      <Form.File
-        as="div"
-        id="custom-file"
-        label="Custom file input"
-        button="Browse custom"
-        disabled
-        feedback="feedback"
-        feedbackTooltip
-        inputAs="input"
-        isInvalid
-        isValid
-        bsPrefix="formfile"
-        size="sm"
-        style={style}
-      >
-        <Form.File.Label htmlFor="id" bsPrefix="formfilelabel" style={style} />
-        <Form.File.Input
-          as="input"
-          id="id"
-          isInvalid
-          isValid
-          bsPrefix="formfileinput"
-          style={style}
-        />
-      </Form.File>
-      <Form.File
-        ref={React.createRef<HTMLInputElement & FormFile>()}
-        id="custom-file-ref"
-        label="Custom file input"
-      />
-
       <Form.Switch label="Switch" disabled />
       <Form.Control type="color" />
     </Form>
