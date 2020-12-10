@@ -81,21 +81,17 @@ const MegaComponent = () => (
       bsPrefix="accordion"
       style={style}
     >
-      <Card>
-        <Card.Header>
-          <Accordion.Toggle as="div" eventKey="0" onClick={noop} style={style}>
-            Click me!
-          </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey="0" style={style}>
-          <Card.Body>Hello! I am the body</Card.Body>
-        </Accordion.Collapse>
-      </Card>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header as="div" onClick={noop} style={style}>
+          Click me!
+        </Accordion.Header>
+        <Accordion.Body>Body</Accordion.Body>
+      </Accordion.Item>
     </Accordion>
     <Badge as="div" pill={false} style={style}>
       42
     </Badge>
-    <Badge as="a" href="#" variant="primary" pill>
+    <Badge as="a" href="#" bg="primary" pill>
       42
     </Badge>
     <Breadcrumb
@@ -121,7 +117,6 @@ const MegaComponent = () => (
     <Button
       active={false}
       as="a"
-      block={false}
       disabled={false}
       href="#"
       size="lg"

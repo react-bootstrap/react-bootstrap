@@ -6,21 +6,20 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import Basic from '../../examples/Accordion/Basic';
 import AllCollapse from '../../examples/Accordion/AllCollapse';
-import EntireHeaderClickable from '../../examples/Accordion/EntireHeaderClickable';
+import Flush from '../../examples/Accordion/Flush';
 import CustomToggle from '../../examples/Accordion/CustomToggle.js';
 import ContextAwareToggle from '../../examples/Accordion/ContextAwareToggle.js';
 
 # Accordion
 
 <p className="lead">
-  Accordions provide a way to restrict Card components to only open one at a
-  time.
+  Build vertically collapsing accordions in combination with the Collapse
+  component.
 </p>
 
 ## Examples
 
-Accordions use Card components to provide styling of the Accordion components.
-Use AccordionToggle to provide a button that switches between each AccordionCollapse component.
+Click the accordions below to expand/collapse the accordion content.
 
 ### Basic Example
 
@@ -28,42 +27,63 @@ Use AccordionToggle to provide a button that switches between each AccordionColl
 
 ### Fully Collapsed State
 
-If you want your Accordion to start in a fully-collapsed state, then simply don't pass in a `defaultActiveKey` prop to `Accordion`.
+If you want your `Accordion` to start in a fully-collapsed state, then simply don't pass in a `defaultActiveKey` prop to `Accordion`.
 
 <ReactPlayground codeText={AllCollapse} />
 
-### Entire Header Clickable
+### Flush
 
-Each of the Card components in the Accordion can have their entire header clickable, by setting the AccordionToggle's
-underlying component to be a CardHeader component.
+Add `flush` to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.
 
-<ReactPlayground codeText={EntireHeaderClickable} />
+<ReactPlayground codeText={Flush} />
+
+## Custom Accordions
+
+You can still create card-based accordions like those in Bootstrap 4. You can hook 
+into the Accordion toggle functionality via `useAccordionButton` to make custom
+toggle components.
 
 ### Custom Toggle
-
-You can now hook into the Accordion toggle functionality via `useAccordionToggle` to make custom toggle components.
 
 <ReactPlayground codeText={CustomToggle} />
 
 ### Custom Toggle with Expansion Awareness
 
 You may wish to have different styles for the toggle if it's associated section is expanded,
- this can be achieved with a custom toggle that is context aware and also takes advantage of the `useAccordionToggle` hook.
+this can be achieved with a custom toggle that is context aware and also takes advantage of the `useAccordionButton` hook.
 
 <ReactPlayground codeText={ContextAwareToggle} />
 
 ## API
 
 <ComponentApi metadata={props.data.Accordion} />
-<ComponentApi metadata={props.data.AccordionToggle} exportedBy={props.data.Accordion} />
-<ComponentApi metadata={props.data.AccordionCollapse} exportedBy={props.data.Accordion} />
+<ComponentApi
+  metadata={props.data.AccordionItem}
+  exportedBy={props.data.Accordion}
+/>
+<ComponentApi
+  metadata={props.data.AccordionHeader}
+  exportedBy={props.data.Accordion}
+/>
+<ComponentApi
+  metadata={props.data.AccordionBody}
+  exportedBy={props.data.Accordion}
+/>
+<ComponentApi
+  metadata={props.data.AccordionButton}
+  exportedBy={props.data.Accordion}
+/>
+<ComponentApi
+  metadata={props.data.AccordionCollapse}
+  exportedBy={props.data.Accordion}
+/>
 
-### useAccordionToggle
+### useAccordionButton
 
 ```js
-import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
-const decoratedOnClick = useAccordionToggle(eventKey, onClick);
+const decoratedOnClick = useAccordionButton(eventKey, onClick);
 ```
 
 export const query = graphql`
@@ -71,7 +91,16 @@ export const query = graphql`
     Accordion: componentMetadata(displayName: { eq: "Accordion" }) {
       ...ComponentApi_metadata
     }
-    AccordionToggle: componentMetadata(displayName: { eq: "AccordionToggle" }) {
+    AccordionItem: componentMetadata(displayName: { eq: "AccordionItem" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionHeader: componentMetadata(displayName: { eq: "AccordionHeader" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionBody: componentMetadata(displayName: { eq: "AccordionBody" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionButton: componentMetadata(displayName: { eq: "AccordionButton" }) {
       ...ComponentApi_metadata
     }
     AccordionCollapse: componentMetadata(
