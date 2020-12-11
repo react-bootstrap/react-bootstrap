@@ -1,0 +1,55 @@
+import classNames from 'classnames';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { useBootstrapPrefix } from './ThemeProvider';
+import AccordionCollapse from './AccordionCollapse';
+import AccordionItemContext from './AccordionItemContext';
+import {
+  BsPrefixRefForwardingComponent,
+  BsPrefixPropsWithChildren,
+} from './helpers';
+
+export interface AccordionBodyProps
+  extends BsPrefixPropsWithChildren,
+    React.HTMLAttributes<HTMLElement> {}
+
+type AccordionBody = BsPrefixRefForwardingComponent<'div', AccordionBodyProps>;
+
+const propTypes = {
+  /** Set a custom element for this component */
+  as: PropTypes.elementType,
+
+  /** @default 'accordion-body' */
+  bsPrefix: PropTypes.string,
+};
+
+const AccordionBody: AccordionBody = React.forwardRef(
+  (
+    {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      bsPrefix,
+      className,
+      ...props
+    }: AccordionBodyProps,
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-body');
+    const { eventKey } = useContext(AccordionItemContext);
+
+    return (
+      <AccordionCollapse eventKey={eventKey}>
+        <Component
+          ref={ref}
+          {...props}
+          className={classNames(className, bsPrefix)}
+        />
+      </AccordionCollapse>
+    );
+  },
+);
+
+AccordionBody.propTypes = propTypes;
+AccordionBody.displayName = 'AccordionBody';
+
+export default AccordionBody;

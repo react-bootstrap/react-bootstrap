@@ -68,7 +68,7 @@
 
     "ThemeProvider": false,
 
-    "useAccordionToggle": false,
+    "useAccordionButton": false,
     "AccordionContext": false,
 
     "mountNode": false,

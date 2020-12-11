@@ -1,13 +1,17 @@
+import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
-import SelectableContext from './SelectableContext';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixRefForwardingComponent,
+  BsPrefixAndClassNameOnlyProps,
+} from './helpers';
 
 export interface AccordionCollapseProps
-  extends React.PropsWithChildren<CollapseProps> {
+  extends BsPrefixAndClassNameOnlyProps,
+    CollapseProps {
   eventKey: string;
 }
 
@@ -27,17 +31,28 @@ const propTypes = {
 };
 
 const AccordionCollapse: AccordionCollapse = React.forwardRef<typeof Collapse>(
-  ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
-    const contextEventKey = useContext(AccordionContext);
+  (
+    {
+      bsPrefix,
+      className,
+      children,
+      eventKey,
+      ...props
+    }: AccordionCollapseProps,
+    ref,
+  ) => {
+    const { activeEventKey } = useContext(AccordionContext);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
 
-    // Empty SelectableContext is to prevent elements in the collapse
-    // from collapsing the accordion when clicked.
     return (
-      <SelectableContext.Provider value={null}>
-        <Collapse ref={ref} in={contextEventKey === eventKey} {...props}>
-          <div>{React.Children.only(children)}</div>
-        </Collapse>
-      </SelectableContext.Provider>
+      <Collapse
+        ref={ref}
+        in={activeEventKey === eventKey}
+        {...props}
+        className={classNames(className, bsPrefix)}
+      >
+        <div>{React.Children.only(children)}</div>
+      </Collapse>
     );
   },
 ) as any;

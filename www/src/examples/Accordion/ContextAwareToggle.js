@@ -1,12 +1,12 @@
 function ContextAwareToggle({ children, eventKey, callback }) {
-  const currentEventKey = useContext(AccordionContext);
+  const { activeEventKey } = useContext(AccordionContext);
 
-  const decoratedOnClick = useAccordionToggle(
+  const decoratedOnClick = useAccordionButton(
     eventKey,
     () => callback && callback(eventKey),
   );
 
-  const isCurrentEventKey = currentEventKey === eventKey;
+  const isCurrentEventKey = activeEventKey === eventKey;
 
   return (
     <button
