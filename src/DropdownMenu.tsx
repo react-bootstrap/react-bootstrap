@@ -215,10 +215,11 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       (menuProps as any).alignRight = alignEnd;
     }
 
+    let style = (props as any).style;
     if (placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
-      (props as any).style = { ...(props as any).style, ...menuProps.style };
+      style = { ...(props as any).style, ...menuProps.style };
       props['x-placement'] = placement;
     }
 
@@ -226,6 +227,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       <Component
         {...props}
         {...menuProps}
+        style={style}
         className={classNames(
           className,
           prefix,

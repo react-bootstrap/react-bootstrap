@@ -496,7 +496,6 @@ const Modal: Modal = (React.forwardRef(
         // @ts-ignore */}
         <Dialog
           {...props}
-          role="document"
           onMouseDown={handleDialogMouseDown}
           className={dialogClassName}
           contentClassName={contentClassName}
