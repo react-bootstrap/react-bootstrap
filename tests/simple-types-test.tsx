@@ -795,8 +795,8 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
       >
-        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-        <strong className="mr-auto">Bootstrap</strong>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
         <small>11 mins ago</small>
       </Toast.Header>
       <Toast.Body as="div" bsPrefix="prefix" id="id" style={style}>
