@@ -46,8 +46,8 @@
     "copy-text-to-clipboard": "^2.2.0",
     "docsearch.js": "^2.6.3",
     "dom-helpers": "^5.2.0",
-    "formik": "^2.2.5",
-    "gatsby": "^2.28.1",
+    "formik": "^2.2.6",
+    "gatsby": "^2.28.2",
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.6.0",
     "gatsby-plugin-mdx": "^1.6.0",
@@ -73,6 +73,6 @@
     "react-live": "^2.2.3",
     "remark-slug": "^6.0.0",
     "shakespeare-data": "^3.0.0",
-    "yup": "^0.31.1"
+    "yup": "^0.32.8"
   }
 }
