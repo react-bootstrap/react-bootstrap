@@ -81,7 +81,7 @@ const ToastHeader: ToastHeader = React.forwardRef<
             aria-label={closeLabel}
             variant={closeVariant}
             onClick={handleClick}
-            className="ml-2 mb-1"
+            className="ms-2 mb-1"
             data-dismiss="toast"
           />
         )}
