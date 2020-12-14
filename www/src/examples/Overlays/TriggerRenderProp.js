@@ -14,7 +14,7 @@ render(
           roundedCircle
           src="holder.js/20x20?text=J&bg=28a745&fg=FFF"
         />
-        <span className="ml-1">Hover to see</span>
+        <span className="ms-1">Hover to see</span>
       </Button>
     )}
   </OverlayTrigger>,

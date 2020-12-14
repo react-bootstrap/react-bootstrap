@@ -14,8 +14,8 @@
     }}
   >
     <Toast.Header>
-      <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-      <strong className="mr-auto">Bootstrap</strong>
+      <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+      <strong className="me-auto">Bootstrap</strong>
       <small>just now</small>
     </Toast.Header>
     <Toast.Body>See? Just like this.</Toast.Body>

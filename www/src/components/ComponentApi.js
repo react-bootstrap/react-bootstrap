@@ -30,7 +30,7 @@ function ComponentApi({ heading, metadata, exportedBy }) {
             <span className="text-monospace">{name}</span>
           </Anchor>
 
-          <span className="ml-auto" />
+          <span className="ms-auto" />
           <LinkToSource component={importName} />
         </div>
       </Heading>
