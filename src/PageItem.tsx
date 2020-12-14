@@ -29,6 +29,9 @@ const propTypes = {
 
   /** An accessible label indicating the active state.. */
   activeLabel: PropTypes.string,
+
+  /** A callback function for when this component is clicked */
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
