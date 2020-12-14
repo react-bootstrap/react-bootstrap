@@ -46,8 +46,8 @@ export interface CarouselProps
   activeIndex?: number;
   onSelect?: (eventKey: number, event: Record<string, unknown> | null) => void;
   defaultActiveIndex?: number;
-  onSlide?: (eventKey: number, direction: 'left' | 'right') => void;
-  onSlid?: (eventKey: number, direction: 'left' | 'right') => void;
+  onSlide?: (eventKey: number, direction: 'start' | 'end') => void;
+  onSlid?: (eventKey: number, direction: 'start' | 'end') => void;
   interval?: number | null;
   keyboard?: boolean;
   pause?: 'hover' | false;
@@ -352,7 +352,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     }
   });
 
-  const slideDirection = direction === 'next' ? 'left' : 'right';
+  const slideDirection = direction === 'next' ? 'start' : 'end';
 
   useUpdateEffect(() => {
     if (slide) {
