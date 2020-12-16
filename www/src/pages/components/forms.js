@@ -5,6 +5,11 @@ import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import FormBasic from '../../examples/Form/Basic';
+import FormFloatingBasic from '../../examples/Form/FormFloatingBasic';
+import FormFloatingCustom from '../../examples/Form/FormFloatingCustom';
+import FormFloatingLayout from '../../examples/Form/FormFloatingLayout';
+import FormFloatingSelect from '../../examples/Form/FormFloatingSelect';
+import FormFloatingTextarea from '../../examples/Form/FormFloatingTextarea';
 import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
 import CheckInline from '../../examples/Form/CheckInline';
@@ -185,6 +190,56 @@ export default withLayout(function FormControlsSection({ data }) {
         similarly sized text inputs.
       </p>
       <ReactPlayground codeText={SelectSizes} />
+      <LinkedHeading h="2" id="forms-floating-labels">
+        Floating labels
+      </LinkedHeading>
+      <p>
+        Wrap a <code>{'<Form.Control>'}</code> element in{' '}
+        <code>{'<FloatingLabel>'}</code> to enable floating labels with
+        Bootstrap’s textual form fields. A <code>placeholder</code> is required
+        on each <code>{'<Form.Control>'}</code> as our method of CSS-only
+        floating labels uses the <code>:placeholder-shown</code> pseudo-element.
+      </p>
+      <ReactPlayground codeText={FormFloatingBasic} />
+      <LinkedHeading h="3" id="forms-floating-labels-textarea">
+        Textareas
+      </LinkedHeading>
+      <p>
+        By default, <code>{'<textarea>'}</code>s will be the same height as{' '}
+        <code>{'<input>'}</code>s. To set a custom height on your{' '}
+        <code>{'<textarea>'}</code>, do not use the <code>rows</code> attribute.
+        Instead, set an explicit <code>height</code> (either inline or via
+        custom CSS).
+      </p>
+      <ReactPlayground codeText={FormFloatingTextarea} />
+      <LinkedHeading h="3" id="forms-floating-labels-select">
+        Selects
+      </LinkedHeading>
+      <p>
+        Other than <code>{'<Form.Control>'}</code>, floating labels are only
+        available on <code>{'<Form.Select>'}</code>s. They work in the same way,
+        but unlike <code>{'<input>'}</code>s, they’ll always show the{' '}
+        <code>{'<label>'}</code> in its floated state.
+      </p>
+      <ReactPlayground codeText={FormFloatingSelect} />
+      <LinkedHeading h="3" id="forms-floating-labels-layout">
+        Layout
+      </LinkedHeading>
+      <p>
+        When working with the Bootstrap grid system, be sure to place form
+        elements within column classes.
+      </p>
+      <ReactPlayground codeText={FormFloatingLayout} />
+      <LinkedHeading h="3" id="forms-floating-labels-customize">
+        Customizing rendering
+      </LinkedHeading>
+      <p>
+        If you need greater control over the rendering, use the{' '}
+        <code>{'<FormFloating>'}</code> component to wrap your input and label.
+        Also note that the <code>{'<Form.Control>'}</code> must come first so we
+        can utilize a sibling selector (e.g., ~).
+      </p>
+      <ReactPlayground codeText={FormFloatingCustom} />
       <LinkedHeading h="2" id="forms-layout">
         Layout
       </LinkedHeading>
@@ -410,6 +465,7 @@ export default withLayout(function FormControlsSection({ data }) {
         API
       </LinkedHeading>
       <ComponentApi metadata={data.Form} />
+      <ComponentApi metadata={data.FormFloating} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormText} exportedBy={data.Form} />
@@ -426,6 +482,7 @@ export default withLayout(function FormControlsSection({ data }) {
       />
       <ComponentApi metadata={data.FormRange} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormSelect} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FloatingLabel} />
     </>
   );
 });
@@ -433,6 +490,9 @@ export default withLayout(function FormControlsSection({ data }) {
 export const query = graphql`
   query FormQuery {
     Form: componentMetadata(displayName: { eq: "Form" }) {
+      ...ComponentApi_metadata
+    }
+    FormFloating: componentMetadata(displayName: { eq: "FormFloating" }) {
       ...ComponentApi_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {
@@ -463,6 +523,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     FormSelect: componentMetadata(displayName: { eq: "FormSelect" }) {
+      ...ComponentApi_metadata
+    }
+    FloatingLabel: componentMetadata(displayName: { eq: "FloatingLabel" }) {
       ...ComponentApi_metadata
     }
   }
