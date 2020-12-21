@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
-import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
@@ -60,6 +59,8 @@ const propTypes = {
 
   /** @ignore */
   bsPrefix: PropTypes.string,
+
+  as: PropTypes.elementType,
 };
 
 const NavDropdown: NavDropdown = (React.forwardRef(
@@ -74,11 +75,12 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       disabled,
       active,
       renderMenuOnMount,
+      as = 'div',
       ...props
     }: NavDropdownProps,
     ref,
   ) => (
-    <Dropdown ref={ref} {...props} as={NavItem}>
+    <Dropdown ref={ref} {...props} as={as}>
       <Dropdown.Toggle
         id={id}
         eventKey={null}
