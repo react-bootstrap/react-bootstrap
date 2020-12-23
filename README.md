@@ -61,7 +61,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [codecov-badge]: https://img.shields.io/codecov/c/github/react-bootstrap/react-bootstrap/master.svg
 [codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
-[discord]: https://discord.gg/reactiflux
+[discord]: https://discord.gg/AKfs9vpvRW
 [netlify-badge]: https://api.netlify.com/api/v1/badges/91501718-8820-4d69-b7fe-1616eff5914e/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
 [gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
