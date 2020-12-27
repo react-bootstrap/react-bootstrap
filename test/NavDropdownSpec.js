@@ -68,5 +68,6 @@ describe('<NavDropdown>', () => {
     );
 
     wrapper.assertSingle('li');
+    wrapper.assertSingle('li.nav-item');
   });
 });
