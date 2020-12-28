@@ -17,7 +17,7 @@ export interface ToggleButtonProps
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value: unknown;
-  inputRef?: React.LegacyRef<'input'>;
+  inputRef?: React.LegacyRef<'input'> | React.RefObject<HTMLInputElement>;
 }
 
 type ToggleButton = BsPrefixComponentClass<'button', ToggleButtonProps>;
