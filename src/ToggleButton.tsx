@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-
 import Button, { ButtonProps } from './Button';
 import {
   BsPrefixAndClassNameOnlyProps,
@@ -56,7 +55,7 @@ const propTypes = {
    * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.oneOf([
+  value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.number,
@@ -66,7 +65,7 @@ const propTypes = {
    * A ref attached to the `<input>` element
    * @type {ReactRef}
    */
-  inputRef: PropTypes.oneOf([
+  inputRef: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(HTMLInputElement) }),
