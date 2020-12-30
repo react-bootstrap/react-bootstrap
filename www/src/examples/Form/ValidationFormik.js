@@ -18,6 +18,7 @@ function FormExample() {
       initialValues={{
         firstName: 'Mark',
         lastName: 'Otto',
+        terms: false
       }}
     >
       {({
