@@ -937,6 +937,13 @@ const MegaComponent = () => (
       bsPrefix="splitbutton"
       style={style}
       menuAlign={{ sm: 'left' }}
+      drop="up"
+      onSelect={noop}
+      flip
+      alignRight
+      onToggle={noop}
+      focusFirstItemOnShow="keyboard"
+      navbar
     />
     <Table
       id="id"
