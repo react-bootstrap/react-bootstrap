@@ -2,7 +2,6 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
-import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
@@ -19,7 +18,7 @@ import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import {
   BsPrefixPropsWithChildren,
@@ -180,10 +179,10 @@ const defaultProps = {
   wrap: true,
   touch: true,
 
-  prevIcon: <span aria-hidden="true" className="carousel-control-prev-icon" />,
+  prevIcon: undefined,
   prevLabel: 'Previous',
 
-  nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
+  nextIcon: undefined,
   nextLabel: 'Next',
 };
 
@@ -242,6 +241,21 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
   });
 
   const prefix = useBootstrapPrefix(bsPrefix, 'carousel');
+  const classNames = useClassNameMapper();
+
+  const prevIconComponent = prevIcon || (
+    <span
+      aria-hidden="true"
+      className={classNames('carousel-control-prev-icon')}
+    />
+  );
+
+  const nextIconComponent = nextIcon || (
+    <span
+      aria-hidden="true"
+      className={classNames('carousel-control-next-icon')}
+    />
+  );
 
   const nextDirectionRef = useRef<string | null>(null);
   const [direction, setDirection] = useState('next');
@@ -544,18 +558,20 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       )}
     >
       {indicators && (
-        <ol className={`${prefix}-indicators`}>
+        <ol className={classNames(`${prefix}-indicators`)}>
           {map(children, (_child, index) => (
             <li
               key={index}
-              className={index === renderedActiveIndex ? 'active' : undefined}
+              className={classNames(
+                index === renderedActiveIndex ? 'active' : undefined,
+              )}
               onClick={indicatorOnClicks ? indicatorOnClicks[index] : undefined}
             />
           ))}
         </ol>
       )}
 
-      <div className={`${prefix}-inner`}>
+      <div className={classNames(`${prefix}-inner`)}>
         {map(children, (child, index) => {
           const isActive = index === renderedActiveIndex;
 
@@ -592,15 +608,25 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       {controls && (
         <>
           {(wrap || activeIndex !== 0) && (
-            <SafeAnchor className={`${prefix}-control-prev`} onClick={prev}>
-              {prevIcon}
-              {prevLabel && <span className="sr-only">{prevLabel}</span>}
+            <SafeAnchor
+              className={classNames(`${prefix}-control-prev`)}
+              onClick={prev}
+            >
+              {prevIconComponent}
+              {prevLabel && (
+                <span className={classNames('sr-only')}>{prevLabel}</span>
+              )}
             </SafeAnchor>
           )}
           {(wrap || activeIndex !== numChildren - 1) && (
-            <SafeAnchor className={`${prefix}-control-next`} onClick={next}>
-              {nextIcon}
-              {nextLabel && <span className="sr-only">{nextLabel}</span>}
+            <SafeAnchor
+              className={classNames(`${prefix}-control-next`)}
+              onClick={next}
+            >
+              {nextIconComponent}
+              {nextLabel && (
+                <span className={classNames('sr-only')}>{nextLabel}</span>
+              )}
             </SafeAnchor>
           )}
         </>

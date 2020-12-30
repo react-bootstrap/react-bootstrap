@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useUncontrolled } from 'uncontrollable';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';
 import AccordionCollapse from './AccordionCollapse';
@@ -54,6 +53,7 @@ const Accordion = (React.forwardRef((props: AccordionProps, ref) => {
     activeKey: 'onSelect',
   });
 
+  const classNames = useClassNameMapper();
   const finalClassName = classNames(
     className,
     useBootstrapPrefix(bsPrefix, 'accordion'),

@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -53,6 +52,7 @@ const FormGroup: FormGroup = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');
+    const classNames = useClassNameMapper();
     const context = useMemo(() => ({ controlId }), [controlId]);
 
     return (

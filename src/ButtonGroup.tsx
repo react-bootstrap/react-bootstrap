@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -71,6 +70,7 @@ const ButtonGroup: ButtonGroup = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
+    const classNames = useClassNameMapper();
     let baseClass = prefix;
 
     if (vertical) baseClass = `${prefix}-vertical`;

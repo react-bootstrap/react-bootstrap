@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import { useClassNameMapper } from './ThemeProvider';
 
 export interface CloseButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,18 +17,21 @@ const defaultProps = {
 };
 
 const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label, onClick, className, ...props }: CloseButtonProps, ref) => (
-    <button
-      ref={ref}
-      type="button"
-      className={classNames('close', className)}
-      onClick={onClick}
-      {...props}
-    >
-      <span aria-hidden="true">&times;</span>
-      <span className="sr-only">{label}</span>
-    </button>
-  ),
+  ({ label, onClick, className, ...props }: CloseButtonProps, ref) => {
+    const classNames = useClassNameMapper();
+    return (
+      <button
+        ref={ref}
+        type="button"
+        className={classNames('close', className)}
+        onClick={onClick}
+        {...props}
+      >
+        <span aria-hidden="true">&times;</span>
+        <span className={classNames('sr-only')}>{label}</span>
+      </button>
+    );
+  },
 );
 
 CloseButton.displayName = 'CloseButton';

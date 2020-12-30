@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import { BsPrefixProps } from './helpers';
 
@@ -37,6 +36,7 @@ const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
       : [bsPrefix, 'form-check-label'];
 
     bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    const classNames = useClassNameMapper();
 
     return (
       <label // eslint-disable-line jsx-a11y/label-has-associated-control

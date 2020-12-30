@@ -62,4 +62,52 @@ describe('<ThemeProvider>', () => {
 
     expect(ref).to.equal(wrapper.find('Foo').instance());
   });
+
+  it('should provide classNameMap', () => {
+    const wrapper = mount(
+      <ThemeProvider
+        classNameMap={{
+          btn: 'someMappedClassNameForBtn',
+          'btn-primary': 'someMappedClassNameForBtnPrimary',
+        }}
+      >
+        <div>
+          <Button variant="primary">My label</Button>
+          <Foo />
+        </div>
+      </ThemeProvider>,
+    );
+
+    wrapper.assertSingle(
+      'button.someMappedClassNameForBtn.someMappedClassNameForBtnPrimary',
+    );
+  });
+
+  it('should use prop classNameMap first', () => {
+    const wrapper = mount(
+      <ThemeProvider
+        classNameMap={{
+          btn: 'globalMappedClassNameForBtn',
+          'btn-primary': 'globalMappedClassNameForBtnPrimary',
+        }}
+      >
+        <div>
+          <Button
+            variant="primary"
+            classNameMap={{
+              btn: 'localMappedClassNameForBtn',
+              'btn-primary': 'localMappedClassNameForBtnPrimary',
+            }}
+          >
+            My label
+          </Button>
+          <Foo />
+        </div>
+      </ThemeProvider>,
+    );
+
+    wrapper.assertSingle(
+      'button.localMappedClassNameForBtn.localMappedClassNameForBtnPrimary',
+    );
+  });
 });

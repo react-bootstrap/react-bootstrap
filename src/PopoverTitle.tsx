@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -32,6 +31,7 @@ const PopoverTitle: PopoverTitle = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'popover-header');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

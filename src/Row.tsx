@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -111,6 +110,7 @@ const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
     const sizePrefix = `${decoratedBsPrefix}-cols`;
     const classes: string[] = [];
+    const classNames = useClassNameMapper();
 
     DEVICE_SIZES.forEach((brkPoint) => {
       const propValue = props[brkPoint];

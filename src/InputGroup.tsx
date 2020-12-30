@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -79,6 +78,7 @@ const InputGroup: InputGroup = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'input-group');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

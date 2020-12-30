@@ -10,6 +10,7 @@ import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
 } from './helpers';
+import { useClassNameMapper } from './ThemeProvider';
 
 export interface SplitButtonProps
   extends PropsFromToggle,
@@ -137,7 +138,9 @@ const SplitButton: SplitButton = React.forwardRef(
         disabled={props.disabled}
         childBsPrefix={bsPrefix}
       >
-        <span className="sr-only">{toggleLabel}</span>
+        <span className={useClassNameMapper()('sr-only')}>
+          {toggleLabel}
+        </span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu

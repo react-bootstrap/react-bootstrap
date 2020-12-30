@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import CloseButton from './CloseButton';
 import ModalContext from './ModalContext';
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
@@ -58,6 +57,7 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');
+    const classNames = useClassNameMapper();
 
     const context = useContext(ModalContext);
 

@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -32,6 +31,7 @@ const TabContent: TabContent = React.forwardRef(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'tab-content');
+    const classNames = useClassNameMapper();
     return (
       <Component
         ref={ref}

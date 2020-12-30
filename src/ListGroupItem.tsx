@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import AbstractNavItem from './AbstractNavItem';
 import { makeEventKey } from './SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
@@ -84,6 +83,7 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
+    const classNames = useClassNameMapper();
 
     const handleClick = useCallback(
       (event) => {

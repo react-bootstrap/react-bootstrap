@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import React from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import {
   BsPrefixPropsWithChildren,
@@ -67,6 +66,7 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
+    const classNames = useClassNameMapper();
 
     if (childBsPrefix !== undefined) {
       (props as any).bsPrefix = childBsPrefix;

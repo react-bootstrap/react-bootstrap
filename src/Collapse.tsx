@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import css from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
@@ -12,6 +11,7 @@ import Transition, {
 import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
+import { useClassNameMapper } from './ThemeProvider';
 
 type Dimension = 'height' | 'width';
 
@@ -165,6 +165,8 @@ const Collapse = React.forwardRef(
     }: CollapseProps,
     ref,
   ) => {
+    const classNames = useClassNameMapper();
+
     /* Compute dimension */
     const computedDimension =
       typeof dimension === 'function' ? dimension() : dimension;

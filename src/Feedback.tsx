@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { useClassNameMapper } from './ThemeProvider';
 
 export interface FeedbackProps extends BsPrefixProps {
   className?: string;
@@ -37,16 +37,19 @@ const Feedback: Feedback = React.forwardRef(
       ...props
     }: FeedbackProps,
     ref,
-  ) => (
-    <Component
-      {...props}
-      ref={ref}
-      className={classNames(
-        className,
-        `${type}-${tooltip ? 'tooltip' : 'feedback'}`,
-      )}
-    />
-  ),
+  ) => {
+    const classNames = useClassNameMapper();
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(
+          className,
+          `${type}-${tooltip ? 'tooltip' : 'feedback'}`,
+        )}
+      />
+    );
+  },
 );
 
 Feedback.displayName = 'Feedback';

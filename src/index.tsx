@@ -185,7 +185,7 @@ export type { TabPaneProps } from './TabPane';
 export { default as Tabs } from './Tabs';
 export type { TabsProps } from './Tabs';
 
-export { default as ThemeProvider } from './ThemeProvider';
+export { default as ThemeProvider, useClassNameMapper } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 
 export { default as Toast } from './Toast';

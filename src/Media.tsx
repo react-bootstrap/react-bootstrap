@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const MediaBody = createWithBsPrefix('media-body');
@@ -28,6 +27,7 @@ const Media: Media = (React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'media');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

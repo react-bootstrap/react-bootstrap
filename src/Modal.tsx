@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import addEventListener from 'dom-helpers/addEventListener';
 import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
@@ -27,7 +26,7 @@ import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 export interface ModalProps
   extends Omit<
@@ -289,6 +288,7 @@ const Modal: Modal = (React.forwardRef(
     const handleHide = useEventCallback(onHide);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
+    const classNames = useClassNameMapper();
 
     useImperativeHandle(
       ref,
@@ -482,8 +482,8 @@ const Modal: Modal = (React.forwardRef(
         <Dialog
           {...props}
           onMouseDown={handleDialogMouseDown}
-          className={dialogClassName}
-          contentClassName={contentClassName}
+          className={classNames(dialogClassName)}
+          contentClassName={classNames(contentClassName)}
         >
           {children}
         </Dialog>
@@ -512,7 +512,7 @@ const Modal: Modal = (React.forwardRef(
           onExiting={onExiting}
           onExited={handleExited}
           manager={getModalManager()}
-          containerClassName={`${bsPrefix}-open`}
+          containerClassName={classNames(`${bsPrefix}-open`)}
           transition={animation ? DialogTransition : undefined}
           backdropTransition={animation ? BackdropTransition : undefined}
           renderBackdrop={renderBackdrop}

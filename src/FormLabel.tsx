@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import warning from 'warning';
 
 import Col, { ColProps } from './Col';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -87,6 +86,7 @@ const FormLabel: FormLabel = React.forwardRef(
     const { controlId } = useContext(FormContext);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
+    const classNames = useClassNameMapper();
 
     let columnClass = 'col-form-label';
     if (typeof column === 'string')

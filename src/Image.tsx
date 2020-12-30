@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
@@ -20,6 +19,12 @@ export const propTypes = {
    * @default 'img'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
+
   /**
    * Sets image as fluid image.
    */
@@ -54,6 +59,7 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
+    const classNames = useClassNameMapper();
 
     const classes = classNames(
       fluid && `${bsPrefix}-fluid`,

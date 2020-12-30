@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavbarBrandProps extends BsPrefixProps {
@@ -29,6 +28,7 @@ const propTypes = {
 const NavbarBrand: NavbarBrand = React.forwardRef(
   ({ bsPrefix, className, as, ...props }: NavbarBrandProps, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-brand');
+    const classNames = useClassNameMapper();
 
     const Component = as || (props.href ? 'a' : 'span');
 

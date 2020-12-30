@@ -1,5 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { ReactNode } from 'react';
 import {
@@ -8,6 +7,7 @@ import {
 } from './helpers';
 
 import SafeAnchor from './SafeAnchor';
+import { useClassNameMapper } from './ThemeProvider';
 
 export interface PageItemProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -54,16 +54,21 @@ const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
     ref,
   ) => {
     const Component = active || disabled ? 'span' : SafeAnchor;
+    const classNames = useClassNameMapper();
     return (
       <li
         ref={ref}
         style={style}
         className={classNames(className, 'page-item', { active, disabled })}
       >
-        <Component className="page-link" disabled={disabled} {...props}>
+        <Component
+          className={classNames('page-link')}
+          disabled={disabled}
+          {...props}
+        >
           {children}
           {active && activeLabel && (
-            <span className="sr-only">{activeLabel}</span>
+            <span className={classNames('sr-only')}>{activeLabel}</span>
           )}
         </Component>
       </li>
@@ -79,10 +84,12 @@ export default PageItem;
 
 function createButton(name: string, defaultValue: ReactNode, label = name) {
   function Button({ children, ...props }: PageItemProps) {
+    const classNames = useClassNameMapper();
+
     return (
       <PageItem {...props}>
         <span aria-hidden="true">{children || defaultValue}</span>
-        <span className="sr-only">{label}</span>
+        <span className={classNames('sr-only')}>{label}</span>
       </PageItem>
     );
   }

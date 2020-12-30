@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import { map } from './ElementChildren';
 import { BsPrefixPropsWithChildren } from './helpers';
@@ -152,6 +151,7 @@ function renderProgressBar(
     ...props
   }: ProgressBarProps,
   ref,
+  classNames,
 ) {
   return (
     <div
@@ -168,7 +168,7 @@ function renderProgressBar(
       aria-valuemin={min}
       aria-valuemax={max}
     >
-      {srOnly ? <span className="sr-only">{label}</span> : label}
+      {srOnly ? <span className={classNames('sr-only')}>{label}</span> : label}
     </div>
   );
 }
@@ -178,9 +178,10 @@ renderProgressBar.propTypes = propTypes;
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
   ({ isChild, ...props }: ProgressBarProps, ref) => {
     props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
+    const classNames = useClassNameMapper();
 
     if (isChild) {
-      return renderProgressBar(props, ref);
+      return renderProgressBar(props, ref, classNames);
     }
 
     const {
@@ -219,6 +220,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
                 variant,
               },
               ref,
+              classNames,
             )}
       </div>
     );

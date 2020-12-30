@@ -12,6 +12,7 @@ import TabContent from './TabContent';
 import TabPane from './TabPane';
 
 import { forEach, map } from './ElementChildren';
+import { useClassNameMapper } from './ThemeProvider';
 import { SelectCallback, TransitionType } from './helpers';
 
 export interface TabsProps extends React.PropsWithChildren<unknown> {
@@ -105,23 +106,25 @@ function getDefaultActiveKey(children) {
   return defaultActiveKey;
 }
 
-function renderTab(child) {
-  const { title, eventKey, disabled, tabClassName, id } = child.props;
-  if (title == null) {
-    return null;
-  }
+function renderTab(classNames) {
+  return function renderTabWithClass(child) {
+    const { title, eventKey, disabled, tabClassName, id } = child.props;
+    if (title == null) {
+      return null;
+    }
 
-  return (
-    <NavItem
-      as={NavLink}
-      eventKey={eventKey}
-      disabled={disabled}
-      id={id}
-      className={tabClassName}
-    >
-      {title}
-    </NavItem>
-  );
+    return (
+      <NavItem
+        as={NavLink}
+        eventKey={eventKey}
+        disabled={disabled}
+        id={id}
+        className={classNames(tabClassName)}
+      >
+        {title}
+      </NavItem>
+    );
+  };
 }
 
 const Tabs = (props: TabsProps) => {
@@ -138,6 +141,8 @@ const Tabs = (props: TabsProps) => {
     activeKey: 'onSelect',
   });
 
+  const classNames = useClassNameMapper();
+
   return (
     <TabContainer
       id={id}
@@ -148,7 +153,7 @@ const Tabs = (props: TabsProps) => {
       unmountOnExit={unmountOnExit}
     >
       <Nav {...controlledProps} role="tablist" as="nav">
-        {map(children, renderTab)}
+        {map(children, renderTab(classNames))}
       </Nav>
 
       <TabContent>

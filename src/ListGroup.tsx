@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 
 import { useUncontrolled } from 'uncontrollable';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
 import {
@@ -73,6 +72,7 @@ const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
   });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
+  const classNames = useClassNameMapper();
 
   let horizontalVariant;
   if (horizontal) {

@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import SelectableContext, { makeEventKey } from './SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import NavContext from './NavContext';
 import SafeAnchor from './SafeAnchor';
 import {
@@ -30,6 +29,11 @@ type DropdownItem = BsPrefixRefForwardingComponent<
 const propTypes = {
   /** @default 'dropdown-item' */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
 
   /**
    * Highlight the menu item as active.
@@ -91,6 +95,7 @@ const DropdownItem: DropdownItem = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
+    const classNames = useClassNameMapper();
     const onSelectCtx = useContext(SelectableContext);
     const navContext = useContext(NavContext);
 

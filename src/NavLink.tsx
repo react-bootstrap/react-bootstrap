@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 import AbstractNavItem from './AbstractNavItem';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -86,6 +85,7 @@ const NavLink: NavLink = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
+    const classNames = useClassNameMapper();
     return (
       <AbstractNavItem
         {...props}

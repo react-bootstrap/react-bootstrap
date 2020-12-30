@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverContent from './PopoverContent';
 import { ArrowProps, Placement } from './Overlay';
@@ -95,6 +94,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
     const [primaryPlacement] = placement?.split('-') || [];
+    const classNames = useClassNameMapper();
 
     return (
       <div
@@ -109,7 +109,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
         )}
         {...props}
       >
-        <div className="arrow" {...arrowProps} />
+        <div className={classNames('arrow')} {...arrowProps} />
         {content ? <PopoverContent>{children}</PopoverContent> : children}
       </div>
     );
