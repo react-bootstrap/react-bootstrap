@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import Dropdown, { DropdownProps } from './Dropdown';
-import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
@@ -62,8 +61,6 @@ const propTypes = {
 
   /** @ignore */
   bsPrefix: PropTypes.string,
-
-  as: PropTypes.elementType,
 };
 
 const NavDropdown: NavDropdown = (React.forwardRef(
@@ -83,14 +80,13 @@ const NavDropdown: NavDropdown = (React.forwardRef(
     }: NavDropdownProps,
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
+    const toBsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
 
     return (
       <Dropdown
         ref={ref}
         {...props}
-        as={props.as ? props.as : NavItem}
-        className={classNames(className, bsPrefix)}
+        className={classNames(className, toBsPrefix)}
       >
         <Dropdown.Toggle
           id={id}
