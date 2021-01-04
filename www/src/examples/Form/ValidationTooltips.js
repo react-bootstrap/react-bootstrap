@@ -1,14 +1,14 @@
 const { Formik } = formik;
 
-const schema = yup.object({
+const schema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   username: yup.string().required(),
   city: yup.string().required(),
   state: yup.string().required(),
   zip: yup.string().required(),
-  file: yup.string().required(),
-  terms: yup.bool().required(),
+  file: yup.mixed().required(),
+  terms: yup.bool().required().oneOf([true], "terms must be accepted"),
 });
 
 function FormExample() {
@@ -19,6 +19,12 @@ function FormExample() {
       initialValues={{
         firstName: 'Mark',
         lastName: 'Otto',
+        username: '',
+        city: '',
+        state: '',
+        zip: '',
+        file: null,
+        terms: false,
       }}
     >
       {({
