@@ -7,7 +7,7 @@
       id="inputPassword6"
       aria-describedby="passwordHelpInline"
     />
-    <Form.Text id="passwordHelpBlock" muted>
+    <Form.Text id="passwordHelpInline" muted>
       Must be 8-20 characters long.
     </Form.Text>
   </Form.Group>
