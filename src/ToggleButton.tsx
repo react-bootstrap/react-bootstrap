@@ -65,10 +65,7 @@ const propTypes = {
    * A ref attached to the `<input>` element
    * @type {ReactRef}
    */
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-  ]),
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
