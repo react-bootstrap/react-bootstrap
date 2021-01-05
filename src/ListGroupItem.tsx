@@ -114,7 +114,6 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
         // eslint-disable-next-line no-nested-ternary
         as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
         onClick={handleClick}
-        disabled={disabled}
         className={classNames(
           className,
           bsPrefix,
