@@ -66,9 +66,8 @@ const propTypes = {
    * @type {ReactRef}
    */
   inputRef: PropTypes.oneOfType([
-    PropTypes.string,
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(HTMLInputElement) }),
+    PropTypes.object,
   ]),
 };
 
