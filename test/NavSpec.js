@@ -171,14 +171,14 @@ describe('<Nav>', () => {
 
     afterEach(() => wrapper.unmount());
 
-    it('only the active tab should be focusable', () => {
+    it('should not allow focusing on disabled tabs', () => {
       const links = wrapper.find('a').map((n) => n.getDOMNode());
 
       expect(links[0].getAttribute('tabindex')).to.not.equal('-1');
       expect(links[1].getAttribute('tabindex')).to.equal('-1');
-      expect(links[2].getAttribute('tabindex')).to.equal('-1');
+      expect(links[2].getAttribute('tabindex')).to.not.equal('-1');
       expect(links[3].getAttribute('tabindex')).to.equal('-1');
-      expect(links[4].getAttribute('tabindex')).to.equal('-1');
+      expect(links[4].getAttribute('tabindex')).to.not.equal('-1');
     });
 
     it('should focus the next tab on arrow key', () => {

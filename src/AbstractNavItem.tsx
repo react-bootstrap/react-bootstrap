@@ -93,8 +93,11 @@ const AbstractNavItem: AbstractNavItem = React.forwardRef(
     }
 
     if (props.role === 'tab') {
-      props.tabIndex = isActive ? props.tabIndex : -1;
       props['aria-selected'] = isActive;
+    }
+
+    if (props.disabled) {
+      props.tabIndex = -1;
     }
 
     const handleOnclick = useEventCallback((e) => {
