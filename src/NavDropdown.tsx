@@ -80,13 +80,13 @@ const NavDropdown: NavDropdown = (React.forwardRef(
     }: NavDropdownProps,
     ref,
   ) => {
-    const toBsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
+    const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
     return (
       <Dropdown
         ref={ref}
         {...props}
-        className={classNames(className, toBsPrefix)}
+        className={classNames(className, navItemPrefix)}
       >
         <Dropdown.Toggle
           id={id}
