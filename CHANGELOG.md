@@ -1,3 +1,21 @@
+## [1.4.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.4.0...v1.4.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* **Carousel:** fix pause not working properly with touch devices ([#5435](https://github.com/react-bootstrap/react-bootstrap/issues/5435)) ([5a5d636](https://github.com/react-bootstrap/react-bootstrap/commit/5a5d636a85b758b37571f811970529bbb694d3a4))
+* fix types for DropdownButton and SplitButton ([#5589](https://github.com/react-bootstrap/react-bootstrap/issues/5589)) ([df6024b](https://github.com/react-bootstrap/react-bootstrap/commit/df6024bc975dfdf2d7d679977dc7033e4c80df99))
+* Prevent focus on disabled nav items or list group items only ([#5593](https://github.com/react-bootstrap/react-bootstrap/issues/5593)) ([198931d](https://github.com/react-bootstrap/react-bootstrap/commit/198931d240b640142ad70828218ca4e53c2b2f16))
+* **Alert:** Properly spread props when `transition={false}` ([#5545](https://github.com/react-bootstrap/react-bootstrap/issues/5545)) ([1352a87](https://github.com/react-bootstrap/react-bootstrap/commit/1352a8735d0718e2d9cd292e49f04295e99d76a8))
+* **DropdownMenu:** Fix base styles being overridden by popper styles ([#5466](https://github.com/react-bootstrap/react-bootstrap/issues/5466)) ([aec9151](https://github.com/react-bootstrap/react-bootstrap/commit/aec91515dfd03c5913e70e267947d55ece09b656))
+* **Modal:** Remove role="document" from ModalDialog ([#5529](https://github.com/react-bootstrap/react-bootstrap/issues/5529)) ([af3453a](https://github.com/react-bootstrap/react-bootstrap/commit/af3453ab113ccee7ea799278ff2c50e617221793))
+* **types:** inherit FormCheckTypes from React.InputHTMLAttributes ([#5497](https://github.com/react-bootstrap/react-bootstrap/issues/5497)) ([4b257b6](https://github.com/react-bootstrap/react-bootstrap/commit/4b257b6eeab71f53404aed108ee6e0ef99101325))
+* **types:** Set @types/react to >=16.9.35 ([#5542](https://github.com/react-bootstrap/react-bootstrap/issues/5542)) ([d337c95](https://github.com/react-bootstrap/react-bootstrap/commit/d337c9525217df80ec69dd8d63d383c56beeacd7))
+
+
+
+
+
 # [1.4.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.3.0...v1.4.0) (2020-10-21)
 
 
