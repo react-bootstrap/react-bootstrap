@@ -245,7 +245,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
   const nextDirectionRef = useRef<string | null>(null);
   const [direction, setDirection] = useState('next');
-
+  const [paused, setPaused] = useState(false);
   const [isSliding, setIsSliding] = useState(false);
   const [renderedActiveIndex, setRenderedActiveIndex] = useState<number>(
     activeIndex || 0,
@@ -403,12 +403,10 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     [keyboard, onKeyDown, prev, next],
   );
 
-  const [pausedOnHover, setPausedOnHover] = useState(false);
-
   const handleMouseOver = useCallback(
     (event) => {
       if (pause === 'hover') {
-        setPausedOnHover(true);
+        setPaused(true);
       }
 
       if (onMouseOver) {
@@ -420,7 +418,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
   const handleMouseOut = useCallback(
     (event) => {
-      setPausedOnHover(false);
+      setPaused(false);
 
       if (onMouseOut) {
         onMouseOut(event);
@@ -431,7 +429,6 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
   const touchStartXRef = useRef(0);
   const touchDeltaXRef = useRef(0);
-  const [pausedOnTouch, setPausedOnTouch] = useState(false);
   const touchUnpauseTimeout = useTimeout();
 
   const handleTouchStart = useCallback(
@@ -439,15 +436,15 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       touchStartXRef.current = event.touches[0].clientX;
       touchDeltaXRef.current = 0;
 
-      if (touch) {
-        setPausedOnTouch(true);
+      if (pause === 'hover') {
+        setPaused(true);
       }
 
       if (onTouchStart) {
         onTouchStart(event);
       }
     },
-    [touch, onTouchStart],
+    [pause, onTouchStart],
   );
 
   const handleTouchMove = useCallback(
@@ -471,30 +468,29 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       if (touch) {
         const touchDeltaX = touchDeltaXRef.current;
 
-        if (Math.abs(touchDeltaX) <= SWIPE_THRESHOLD) {
-          return;
-        }
-
-        if (touchDeltaX > 0) {
-          prev(event);
-        } else {
-          next(event);
+        if (Math.abs(touchDeltaX) > SWIPE_THRESHOLD) {
+          if (touchDeltaX > 0) {
+            prev(event);
+          } else {
+            next(event);
+          }
         }
       }
 
-      touchUnpauseTimeout.set(() => {
-        setPausedOnTouch(false);
-      }, interval || undefined);
+      if (pause === 'hover') {
+        touchUnpauseTimeout.set(() => {
+          setPaused(false);
+        }, interval || undefined);
+      }
 
       if (onTouchEnd) {
         onTouchEnd(event);
       }
     },
-    [touch, prev, next, touchUnpauseTimeout, interval, onTouchEnd],
+    [touch, pause, prev, next, touchUnpauseTimeout, interval, onTouchEnd],
   );
 
-  const shouldPlay =
-    interval != null && !pausedOnHover && !pausedOnTouch && !isSliding;
+  const shouldPlay = interval != null && !paused && !isSliding;
 
   const intervalHandleRef = useRef<number | null>();
 
