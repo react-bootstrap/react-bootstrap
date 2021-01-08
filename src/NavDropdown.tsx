@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
+import {
+  alignPropType as DropdownMenuAlignPropType,
+  AlignType as DropdownMenuAlignType,
+} from './DropdownMenu';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -13,6 +17,7 @@ export interface NavDropdownProps
   title: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
+  menuAlign?: DropdownMenuAlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -39,6 +44,17 @@ const propTypes = {
   /** The content of the non-toggle Button.  */
   title: PropTypes.node.isRequired,
 
+  /**
+   * Aligns the dropdown menu to the specified side of the container. You can also align
+   * the menu responsively for breakpoints starting at `sm` and up. The alignment
+   * direction will affect the specified breakpoint or larger.
+   *
+   * *Note: Using responsive alignment will disable Popper usage for positioning.*
+   *
+   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   */
+  menuAlign: DropdownMenuAlignPropType,
+
   /** Disables the toggle NavLink  */
   disabled: PropTypes.bool,
 
@@ -62,6 +78,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
+const defaultProps: Partial<NavDropdownProps> = {
+  menuAlign: 'left',
+};
+
 const NavDropdown: NavDropdown = (React.forwardRef(
   (
     {
@@ -71,6 +91,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       bsPrefix,
       rootCloseEvent,
       menuRole,
+      menuAlign,
       disabled,
       active,
       renderMenuOnMount,
@@ -92,6 +113,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
 
       <Dropdown.Menu
         role={menuRole}
+        align={menuAlign}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
       >
@@ -103,6 +125,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
+NavDropdown.defaultProps = defaultProps;
 NavDropdown.Item = Dropdown.Item;
 NavDropdown.ItemText = Dropdown.ItemText;
 NavDropdown.Divider = Dropdown.Divider;
