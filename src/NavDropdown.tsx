@@ -80,6 +80,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
     }: NavDropdownProps,
     ref,
   ) => {
+    /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
     const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
     return (
