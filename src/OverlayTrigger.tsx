@@ -2,7 +2,6 @@ import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
 import React, { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
-import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
@@ -34,12 +33,6 @@ export interface OverlayTriggerProps
 
   target?: never;
   onHide?: never;
-}
-
-class RefHolder extends React.Component {
-  render() {
-    return this.props.children;
-  }
 }
 
 function normalizeDelay(delay?: OverlayDelay) {
@@ -198,11 +191,6 @@ function OverlayTrigger({
       ? React.Children.only(children).props
       : ({} as any);
 
-  const getTarget = useCallback(
-    () => safeFindDOMNode(triggerNodeRef.current),
-    [],
-  );
-
   const handleShow = useCallback(() => {
     timeout.clear();
     hoverStateRef.current = 'show';
@@ -290,15 +278,12 @@ function OverlayTrigger({
     triggerProps.onMouseOut = handleMouseOut;
   }
 
+  triggerProps.ref = triggerNodeRef;
   return (
     <>
-      {typeof children === 'function' ? (
-        children({ ...triggerProps, ref: triggerNodeRef })
-      ) : (
-        <RefHolder ref={triggerNodeRef}>
-          {cloneElement(children as any, triggerProps)}
-        </RefHolder>
-      )}
+      {typeof children === 'function'
+        ? children(triggerProps)
+        : cloneElement(children as any, triggerProps)}
       <Overlay
         {...props}
         show={show}
@@ -306,7 +291,7 @@ function OverlayTrigger({
         flip={flip}
         placement={placement}
         popperConfig={popperConfig}
-        target={getTarget as any}
+        target={triggerNodeRef.current}
       >
         {overlay}
       </Overlay>
