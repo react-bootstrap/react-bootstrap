@@ -1,8 +1,9 @@
+import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useBootstrapPrefix } from './ThemeProvider';
 import Dropdown, { DropdownProps } from './Dropdown';
-import NavItem from './NavItem';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
@@ -69,6 +70,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       title,
       children,
       bsPrefix,
+      className,
       rootCloseEvent,
       menuRole,
       disabled,
@@ -77,28 +79,37 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       ...props
     }: NavDropdownProps,
     ref,
-  ) => (
-    <Dropdown ref={ref} {...props} as={NavItem}>
-      <Dropdown.Toggle
-        id={id}
-        eventKey={null}
-        active={active}
-        disabled={disabled}
-        childBsPrefix={bsPrefix}
-        as={NavLink}
-      >
-        {title}
-      </Dropdown.Toggle>
+  ) => {
+    /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
+    const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
-      <Dropdown.Menu
-        role={menuRole}
-        renderOnMount={renderMenuOnMount}
-        rootCloseEvent={rootCloseEvent}
+    return (
+      <Dropdown
+        ref={ref}
+        {...props}
+        className={classNames(className, navItemPrefix)}
       >
-        {children}
-      </Dropdown.Menu>
-    </Dropdown>
-  ),
+        <Dropdown.Toggle
+          id={id}
+          eventKey={null}
+          active={active}
+          disabled={disabled}
+          childBsPrefix={bsPrefix}
+          as={NavLink}
+        >
+          {title}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu
+          role={menuRole}
+          renderOnMount={renderMenuOnMount}
+          rootCloseEvent={rootCloseEvent}
+        >
+          {children}
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  },
 ) as unknown) as NavDropdown;
 
 NavDropdown.displayName = 'NavDropdown';
