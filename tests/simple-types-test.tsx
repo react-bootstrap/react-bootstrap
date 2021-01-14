@@ -55,12 +55,40 @@ const style: React.CSSProperties = {
   color: 'red',
 };
 
+class ClassComponent extends React.Component {
+  render() {
+    return <div>abc</div>;
+  }
+}
+
+const FunctionComponent: React.FC = () => {
+  return <div>abc</div>;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Fade>
+      <div>abc</div>
+    </Fade>
+    <Fade>
+      <ClassComponent />
+    </Fade>
+    <Fade>
+      <FunctionComponent />
+    </Fade>
+    <Collapse>
+      <div>abc</div>
+    </Collapse>
+    <Collapse>
+      <ClassComponent />
+    </Collapse>
+    <Collapse>
+      <FunctionComponent />
+    </Collapse>
     <Alert transition={Fade} />
     <Alert transition={Collapse} />
     <Alert
