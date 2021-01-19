@@ -51,8 +51,24 @@ import {
   Toast,
 } from '../src';
 
+import { CarouselRef } from '../src/Carousel';
+
 const style: React.CSSProperties = {
   color: 'red',
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const RefTest = () => {
+  const carouselRef = React.useRef<CarouselRef>();
+  carouselRef?.current?.element;
+  carouselRef?.current?.prev();
+  carouselRef?.current?.next();
+
+  return (
+    <>
+      <Carousel ref={carouselRef} />
+    </>
+  );
 };
 
 class ClassComponent extends React.Component {
