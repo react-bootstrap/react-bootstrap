@@ -36,7 +36,7 @@ function FormExample() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
           <Form.Label>Username</Form.Label>
-          <InputGroup>
+          <InputGroup hasValidation>
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
             </InputGroup.Prepend>
