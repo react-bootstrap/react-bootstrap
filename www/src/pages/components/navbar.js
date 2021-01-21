@@ -12,6 +12,7 @@ import NavbarBrand from '../../examples/Navbar/Brand';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
 import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
 import NavbarForm from '../../examples/Navbar/Form';
+import NavScroll from '../../examples/Navbar/NavScroll';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
 import ContainerOutside from '../../examples/Navbar/ContainerOutside';
 import ContainerInside from '../../examples/Navbar/ContainerInside';
@@ -152,6 +153,18 @@ export default withLayout(function NaπvbarSection({ data }) {
 
       <h3 className="h4">Sticky bottom</h3>
       <CodeBlock codeText={` <Navbar sticky="bottom" />`} />
+
+      <LinkedHeading h="2" id="navbars-nav-scroll">
+        Scrolling
+      </LinkedHeading>
+      <p>
+        You can use the <code>navbarScroll</code> prop in a{' '}
+        <code>{'<Nav>'}</code> to enable vertical scrolling within the
+        toggleable contents of a collapsed navbar. See the{' '}
+        <DocLink path="/components/navbar/#scrolling">Bootstrap docs</DocLink>{' '}
+        for more information.
+      </p>
+      <ReactPlayground codeText={NavScroll} />
 
       <LinkedHeading h="2" id="navbars-mobile-friendly">
         Responsive behaviors
