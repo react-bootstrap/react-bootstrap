@@ -8,7 +8,7 @@ const schema = yup.object().shape({
   state: yup.string().required(),
   zip: yup.string().required(),
   file: yup.mixed().required(),
-  terms: yup.bool().required().oneOf([true], "terms must be accepted"),
+  terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
 });
 
 function FormExample() {
@@ -63,7 +63,7 @@ function FormExample() {
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
               <Form.Label>Username</Form.Label>
-              <InputGroup>
+              <InputGroup hasValidation>
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 </InputGroup.Prepend>
