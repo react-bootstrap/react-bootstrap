@@ -205,6 +205,7 @@ function Overlay({
             ...overlayProps,
             placement,
             show,
+            className: !transition && show && 'show',
             popper,
             arrowProps,
           });
