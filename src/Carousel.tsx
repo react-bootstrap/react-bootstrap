@@ -26,6 +26,12 @@ import {
   BsPrefixRefForwardingComponent,
 } from './helpers';
 
+export interface CarouselRef {
+  element: HTMLElement;
+  prev: (e?: React.SyntheticEvent) => void;
+  next: (e?: React.SyntheticEvent) => void;
+}
+
 export interface CarouselProps
   extends BsPrefixPropsWithChildren,
     Pick<
@@ -55,6 +61,7 @@ export interface CarouselProps
   prevLabel?: React.ReactNode;
   nextIcon?: React.ReactNode;
   nextLabel?: React.ReactNode;
+  ref?: React.Ref<CarouselRef>;
 }
 
 type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
