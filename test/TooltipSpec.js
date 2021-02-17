@@ -10,7 +10,7 @@ describe('Tooltip', () => {
         <strong>Tooltip Content</strong>
       </Tooltip>,
     ).assertSingle(
-      '.tooltip[x-placement="right"][role="tooltip"].bs-tooltip-right strong',
+      '.tooltip[x-placement="right"][role="tooltip"].bs-tooltip-end strong',
     );
   });
 });

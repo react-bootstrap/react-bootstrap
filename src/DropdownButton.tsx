@@ -9,10 +9,16 @@ import DropdownMenu, {
   DropdownMenuVariant,
 } from './DropdownMenu';
 
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
+
 export interface DropdownButtonProps
   extends DropdownProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
-    React.PropsWithChildren<PropsFromToggle> {
+    PropsFromToggle,
+    BsPrefixPropsWithChildren {
   title: React.ReactNode;
   menuAlign?: AlignType;
   menuRole?: string;
@@ -21,6 +27,11 @@ export interface DropdownButtonProps
   bsPrefix?: string;
   menuVariant?: DropdownMenuVariant;
 }
+
+type DropdownButton = BsPrefixRefForwardingComponent<
+  'div',
+  DropdownButtonProps
+>;
 
 const propTypes = {
   /**
@@ -47,7 +58,7 @@ const propTypes = {
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
    */
   menuAlign: alignPropType,
 
@@ -81,13 +92,17 @@ const propTypes = {
 
 /**
  * A convenience component for simple or general use dropdowns. Renders a `Button` toggle and all `children`
- * are passed directly to the default `Dropdown.Menu`.
+ * are passed directly to the default `Dropdown.Menu`. This component accepts all of
+ * [`Dropdown`'s props](#dropdown-props).
  *
  * _All unknown props are passed through to the `Dropdown` component._ Only
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
- * along with menu related props are passed to the `Dropdown.Menu`
+ * along with menu-related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
+const DropdownButton: DropdownButton = React.forwardRef<
+  HTMLDivElement,
+  DropdownButtonProps
+>(
   (
     {
       title,
@@ -104,7 +119,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
       id,
       menuVariant,
       ...props
-    }: DropdownButtonProps,
+    },
     ref,
   ) => (
     <Dropdown ref={ref} {...props}>

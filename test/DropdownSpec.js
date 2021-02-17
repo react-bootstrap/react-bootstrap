@@ -36,20 +36,20 @@ describe('<Dropdown>', () => {
     node.className.should.match(/\bdropup\b/);
   });
 
-  it('renders div with dropright class', () => {
+  it('renders div with dropend class', () => {
     mount(
-      <Dropdown title="Dropup" drop="right">
+      <Dropdown title="Dropend" drop="end">
         {dropdownChildren}
       </Dropdown>,
-    ).assertSingle('.dropright');
+    ).assertSingle('.dropend');
   });
 
-  it('renders div with dropleft class', () => {
+  it('renders div with dropstart class', () => {
     mount(
-      <Dropdown title="Dropup" drop="left">
+      <Dropdown title="Dropstart" drop="start">
         {dropdownChildren}
       </Dropdown>,
-    ).assertSingle('.dropleft');
+    ).assertSingle('.dropstart');
   });
 
   it('renders toggle with Dropdown.Toggle', () => {

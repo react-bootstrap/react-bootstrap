@@ -63,7 +63,7 @@
   <Card>
     <Card.Img src="holder.js/100px160" />
   </Card>
-  <Card className="text-right">
+  <Card className="text-end">
     <blockquote className="blockquote mb-0 card-body">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere

@@ -48,7 +48,23 @@ const propTypes = {
    *
    * > This is generally provided by the `Overlay` component positioning the popover
    */
-  placement: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
+  placement: PropTypes.oneOf([
+    'auto-start',
+    'auto',
+    'auto-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-end',
+    'bottom',
+    'bottom-start',
+    'left-end',
+    'left',
+    'left-start',
+  ]),
 
   /**
    * An Overlay injected set of props for positioning the popover arrow.
@@ -95,6 +111,12 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
     const [primaryPlacement] = placement?.split('-') || [];
+    let bsDirection = primaryPlacement;
+    if (primaryPlacement === 'left') {
+      bsDirection = 'start';
+    } else if (primaryPlacement === 'right') {
+      bsDirection = 'end';
+    }
 
     return (
       <div
@@ -105,7 +127,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
         className={classNames(
           className,
           decoratedBsPrefix,
-          primaryPlacement && `bs-popover-${primaryPlacement}`,
+          primaryPlacement && `bs-popover-${bsDirection}`,
         )}
         {...props}
       >

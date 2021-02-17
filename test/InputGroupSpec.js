@@ -13,6 +13,10 @@ describe('<InputGroup>', () => {
     mount(<InputGroup size="sm" />).assertSingle('.input-group-sm');
   });
 
+  it('Should render hasValidation correctly', () => {
+    mount(<InputGroup hasValidation />).assertSingle('.has-validation');
+  });
+
   describe('<Checkbox>', () => {
     it('Should forward props to underlying input element', () => {
       const name = 'foobar';

@@ -1,6 +1,6 @@
 <>
   <ButtonToolbar className="mb-3" aria-label="Toolbar with Button groups">
-    <ButtonGroup className="mr-2" aria-label="First group">
+    <ButtonGroup className="me-2" aria-label="First group">
       <Button variant="secondary">1</Button>{' '}
       <Button variant="secondary">2</Button>{' '}
       <Button variant="secondary">3</Button>{' '}

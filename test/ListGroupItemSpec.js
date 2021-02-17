@@ -28,6 +28,18 @@ describe('<ListGroupItem>', () => {
     mount(<ListGroupItem as="span" />).assertSingle('span.list-group-item');
   });
 
+  it('should not be focusable when disabled', () => {
+    const wrapper = mount(<ListGroupItem disabled />);
+    const node = wrapper.find('.list-group-item').first().getDOMNode();
+    expect(node.getAttribute('tabindex')).to.equal('-1');
+  });
+
+  it('should respect user-specified tabIndex', () => {
+    const wrapper = mount(<ListGroupItem disabled tabIndex={4} />);
+    const node = wrapper.find('.list-group-item').first().getDOMNode();
+    expect(node.getAttribute('tabindex')).to.equal('4');
+  });
+
   describe('actions', () => {
     it('renders a button', () => {
       mount(<ListGroupItem action />).assertSingle(

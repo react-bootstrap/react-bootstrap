@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
+import { DropDirection } from 'react-overlays/DropdownContext';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import DropdownItem from './DropdownItem';
@@ -28,7 +29,7 @@ const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
 });
 
 export interface DropdownProps extends BsPrefixPropsWithChildren {
-  drop?: 'up' | 'left' | 'right' | 'down';
+  drop?: 'up' | 'start' | 'end' | 'down';
   alignRight?: boolean;
   show?: boolean;
   flip?: boolean;
@@ -57,7 +58,7 @@ const propTypes = {
   /**
    * Determines the direction and location of the Menu in relation to it's Toggle.
    */
-  drop: PropTypes.oneOf(['up', 'left', 'right', 'down']),
+  drop: PropTypes.oneOf(['up', 'start', 'end', 'down']),
 
   as: PropTypes.elementType,
 
@@ -159,10 +160,18 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
     handleToggle(false, event, 'select');
   });
 
+  // TODO RTL: Flip directions based on RTL setting.
+  let direction: DropDirection = drop as DropDirection;
+  if (drop === 'start') {
+    direction = 'left';
+  } else if (drop === 'end') {
+    direction = 'right';
+  }
+
   return (
     <SelectableContext.Provider value={handleSelect}>
       <BaseDropdown
-        drop={drop}
+        drop={direction}
         show={show}
         alignEnd={alignRight}
         onToggle={handleToggle}
@@ -179,8 +188,8 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
               show && 'show',
               (!drop || drop === 'down') && prefix,
               drop === 'up' && 'dropup',
-              drop === 'right' && 'dropright',
-              drop === 'left' && 'dropleft',
+              drop === 'end' && 'dropend',
+              drop === 'start' && 'dropstart',
             )}
           />
         )}

@@ -109,7 +109,7 @@ export default withLayout(
                 <BrandButton
                   size="lg"
                   variant="brand"
-                  className="mr-3 px-5"
+                  className="me-3 px-5"
                   href="/getting-started/introduction"
                 >
                   Get started

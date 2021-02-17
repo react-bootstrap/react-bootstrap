@@ -34,7 +34,7 @@ const propTypes = {
   role: PropTypes.string,
 
   href: PropTypes.string,
-  tabIndex: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   eventKey: PropTypes.any,
   onclick: PropTypes.func,
 
@@ -93,7 +93,10 @@ const AbstractNavItem: AbstractNavItem = React.forwardRef(
     }
 
     if (props.role === 'tab') {
-      props.tabIndex = isActive ? props.tabIndex : -1;
+      if (props.disabled) {
+        props.tabIndex = -1;
+        props['aria-disabled'] = true;
+      }
       props['aria-selected'] = isActive;
     }
 
