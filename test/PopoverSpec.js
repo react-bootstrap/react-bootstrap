@@ -13,7 +13,7 @@ describe('Popover', () => {
         </Popover.Content>
       </Popover>,
     ).assertSingle(
-      '.popover[x-placement="right"][role="tooltip"].bs-popover-right strong',
+      '.popover[x-placement="right"][role="tooltip"].bs-popover-end strong',
     );
   });
 });

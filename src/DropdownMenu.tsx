@@ -18,7 +18,7 @@ import {
   SelectCallback,
 } from './helpers';
 
-export type AlignDirection = 'left' | 'right';
+export type AlignDirection = 'start' | 'end';
 
 export type ResponsiveAlignProp =
   | { sm: AlignDirection }
@@ -44,7 +44,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
-const alignDirection = PropTypes.oneOf(['left', 'right']);
+const alignDirection = PropTypes.oneOf<AlignDirection>(['start', 'end']);
 
 export const alignPropType = PropTypes.oneOfType([
   alignDirection,
@@ -76,14 +76,14 @@ const propTypes = {
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
    */
   align: alignPropType,
 
   /**
    * Aligns the Dropdown menu to the right of it's container.
    *
-   * @deprecated Use align="right"
+   * @deprecated Use align="end"
    */
   alignRight: PropTypes.bool,
 
@@ -121,7 +121,7 @@ const propTypes = {
 };
 
 const defaultProps: Partial<DropdownMenuProps> = {
-  align: 'left',
+  align: 'start',
   alignRight: false,
   flip: true,
 };
@@ -136,7 +136,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       className,
       align,
       // When we remove alignRight from API, use the var locally to toggle
-      // .dropdown-menu-right class below.
+      // .dropdown-menu-end class below.
       alignRight,
       rootCloseEvent,
       flip,
@@ -166,15 +166,15 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
 
         if (keys.length) {
           const brkPoint = keys[0];
-          const direction = align[brkPoint];
+          const direction: AlignDirection = align[brkPoint];
 
-          // .dropdown-menu-right is required for responsively aligning
+          // .dropdown-menu-end is required for responsively aligning
           // left in addition to align left classes.
           // Reuse alignRight to toggle the class below.
-          alignRight = direction === 'left';
+          alignRight = direction === 'start';
           alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
         }
-      } else if (align === 'right') {
+      } else if (align === 'end') {
         alignRight = true;
       }
     }
@@ -232,7 +232,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
           className,
           prefix,
           show && 'show',
-          alignEnd && `${prefix}-right`,
+          alignEnd && `${prefix}-end`,
           variant && `${prefix}-${variant}`,
           ...alignClasses,
         )}

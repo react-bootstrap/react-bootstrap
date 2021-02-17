@@ -128,8 +128,8 @@ Feel free to style further with custom CSS or text utilities.
 ## Menu alignment
 
 By default, a dropdown menu is aligned to the left, but you can switch
-it by passing `right` to the `align` prop on a `<DropdownMenu>` or passing 
-`right` to the `menuAlign` prop on the `<DropdownButton>` or `<SplitButton>`
+it by passing `end` to the `align` prop on a `<DropdownMenu>` or passing 
+`end` to the `menuAlign` prop on the `<DropdownButton>` or `<SplitButton>`
 as seen below.
 
 <ReactPlayground codeText={MenuAlignRight} />
@@ -138,8 +138,7 @@ as seen below.
 
 If you want to use responsive menu alignment, pass an object to the `align` prop 
 on the `<DropdownMenu>` or the `menuAlign` prop on the `<DropdownButton>` and 
-`<SplitButton>`. You can specify the directions `left` or `right` for 
-the various breakpoints.
+`<SplitButton>`. You can specify `start` or `end` for the various breakpoints.
 
 <Callout theme="danger" title="Warning">
   Using responsive alignment will disable Popper usage so any dynamic positioning 

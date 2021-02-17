@@ -352,7 +352,7 @@ const MegaComponent = () => (
         show
         bsPrefix="dropdownmenu"
         style={style}
-        align={{ sm: 'left' }}
+        align={{ sm: 'start' }}
       >
         <Dropdown.Item
           active
@@ -373,8 +373,8 @@ const MegaComponent = () => (
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
         <Dropdown.Divider as="div" bsPrefix="prefix" style={style} />
       </Dropdown.Menu>
-      <Dropdown.Menu align="left" />
-      <Dropdown.Menu align="right" />
+      <Dropdown.Menu align="start" />
+      <Dropdown.Menu align="end" />
     </Dropdown>
     <DropdownButton
       disabled
@@ -389,7 +389,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
-      menuAlign={{ sm: 'left' }}
+      menuAlign={{ sm: 'start' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -839,8 +839,8 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
       >
-        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-        <strong className="mr-auto">Bootstrap</strong>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
         <small>11 mins ago</small>
       </Toast.Header>
       <Toast.Body as="div" bsPrefix="prefix" id="id" style={style}>
@@ -915,7 +915,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
-      menuAlign={{ sm: 'left' }}
+      menuAlign={{ sm: 'start' }}
       drop="up"
       onSelect={noop}
       flip

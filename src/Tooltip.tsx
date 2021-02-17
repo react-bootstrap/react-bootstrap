@@ -101,6 +101,12 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
 
     const [primaryPlacement] = placement?.split('-') || [];
+    let bsDirection = primaryPlacement;
+    if (primaryPlacement === 'left') {
+      bsDirection = 'start';
+    } else if (primaryPlacement === 'right') {
+      bsDirection = 'end';
+    }
 
     return (
       <div
@@ -108,11 +114,7 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
         style={style}
         role="tooltip"
         x-placement={primaryPlacement}
-        className={classNames(
-          className,
-          bsPrefix,
-          `bs-tooltip-${primaryPlacement}`,
-        )}
+        className={classNames(className, bsPrefix, `bs-tooltip-${bsDirection}`)}
         {...props}
       >
         <div className="tooltip-arrow" {...arrowProps} />
