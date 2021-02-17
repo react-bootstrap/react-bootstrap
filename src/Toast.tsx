@@ -72,7 +72,7 @@ const Toast: BsPrefixRefForwardingComponent<
       transition: Transition = Fade,
       show = true,
       animation = true,
-      delay = 3000,
+      delay = 5000,
       autohide = false,
       onClose,
       ...props

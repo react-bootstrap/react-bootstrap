@@ -32,6 +32,7 @@ import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
+import ValidationInputGroup from '../../examples/Form/ValidationInputGroup';
 import ValidationNative from '../../examples/Form/ValidationNative';
 import ValidationTooltips from '../../examples/Form/ValidationTooltips';
 import withLayout from '../../withLayout';
@@ -381,6 +382,15 @@ export default withLayout(function FormControlsSection({ data }) {
         but your project may require an alternative setup.
       </p>
       <ReactPlayground codeText={ValidationTooltips} />
+      <LinkedHeading h="3" id="forms-validation-input-group">
+        Input group validation
+      </LinkedHeading>
+      <p>
+        To properly show rounded corners in an <code>{'<InputGroup>'}</code>{' '}
+        with validation, the <code>{'<InputGroup>'}</code> requires the{' '}
+        <code>hasValidation</code> prop.
+      </p>
+      <ReactPlayground codeText={ValidationInputGroup} />
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples
       </LinkedHeading>

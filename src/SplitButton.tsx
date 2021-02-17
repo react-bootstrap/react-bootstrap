@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
-import Dropdown from './Dropdown';
+import Dropdown, { DropdownProps } from './Dropdown';
 import { alignPropType, AlignType } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixPropsWithChildren } from './helpers';
 
 export interface SplitButtonProps
-  extends PropsFromToggle,
+  extends DropdownProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title' | 'id'>,
+    PropsFromToggle,
     BsPrefixPropsWithChildren {
   id: string | number;
   menuAlign?: AlignType;
   menuRole?: string;
-  onClick?: React.MouseEventHandler<this>;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   target?: string;
@@ -25,8 +23,6 @@ export interface SplitButtonProps
   toggleLabel?: string;
   type?: ButtonType;
 }
-
-type SplitButton = BsPrefixRefForwardingComponent<'div', SplitButtonProps>;
 
 const propTypes = {
   /**
@@ -94,7 +90,17 @@ const defaultProps = {
   type: 'button',
 };
 
-const SplitButton: SplitButton = React.forwardRef(
+/**
+ * A convenience component for simple or general use split button dropdowns. Renders a
+ * `ButtonGroup` containing a `Button` and a `Button` toggle for the `Dropdown`. All `children`
+ * are passed directly to the default `Dropdown.Menu`. This component accepts all of [`Dropdown`'s
+ * props](#dropdown-props).
+ *
+ * _All unknown props are passed through to the `Dropdown` component._
+ * The Button `variant`, `size` and `bsPrefix` props are passed to the button and toggle,
+ * and menu-related props are passed to the `Dropdown.Menu`
+ */
+const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
   (
     {
       id,
@@ -113,7 +119,7 @@ const SplitButton: SplitButton = React.forwardRef(
       renderMenuOnMount,
       rootCloseEvent,
       ...props
-    }: SplitButtonProps,
+    },
     ref,
   ) => (
     <Dropdown ref={ref} {...props} as={ButtonGroup}>
@@ -152,7 +158,7 @@ const SplitButton: SplitButton = React.forwardRef(
   ),
 );
 
-SplitButton.propTypes = propTypes;
+SplitButton.propTypes = propTypes as any;
 SplitButton.defaultProps = defaultProps;
 SplitButton.displayName = 'SplitButton';
 
