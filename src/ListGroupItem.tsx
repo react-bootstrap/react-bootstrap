@@ -8,7 +8,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
-export interface ListGroupItemProps extends BsPrefixProps {
+export interface ListGroupItemProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+    BsPrefixProps {
   action?: boolean;
   active?: boolean;
   disabled?: boolean;
@@ -97,6 +99,11 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
       },
       [disabled, onClick],
     );
+
+    if (disabled && props.tabIndex === undefined) {
+      props.tabIndex = -1;
+      props['aria-disabled'] = true;
+    }
 
     return (
       <AbstractNavItem

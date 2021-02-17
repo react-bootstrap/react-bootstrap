@@ -1,6 +1,7 @@
 const { cleanDoclets } = require('gatsby-transformer-react-docgen/doclets');
 const path = require('path');
 const remarkSlug = require('remark-slug');
+const Fiber = require('fibers');
 
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 
@@ -62,7 +63,14 @@ module.exports = {
       },
     },
     'gatsby-plugin-catch-links',
-    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        sassOptions: {
+          fiber: Fiber,
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-astroturf',
       options: { extension: '.module.scss' },

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/css';
-import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import Transition, {
@@ -9,6 +8,7 @@ import Transition, {
   EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
+import transitionEndListener from './transitionEndListener';
 import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
@@ -221,7 +221,7 @@ const Collapse = React.forwardRef(
       <Transition
         // @ts-ignore
         ref={ref}
-        addEndListener={transitionEnd}
+        addEndListener={transitionEndListener}
         {...props}
         aria-expanded={props.role ? props.in : null}
         onEnter={handleEnter}
