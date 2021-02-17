@@ -60,6 +60,16 @@ describe('<NavDropdown>', () => {
     wrapper.assertSingle('a#test-id');
   });
 
+  it('should support as as prop', () => {
+    const wrapper = mount(
+      <NavDropdown as="li" id="test-id" title="title">
+        <DropdownItem eventKey="1">Item 1</DropdownItem>
+      </NavDropdown>,
+    );
+
+    wrapper.assertSingle('li.nav-item');
+  });
+
   it('passes menuVariant to dropdown menu', () => {
     const wrapper = mount(
       <NavDropdown title="blah" menuVariant="dark" id="test">

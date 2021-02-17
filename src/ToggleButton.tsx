@@ -16,8 +16,8 @@ export interface ToggleButtonProps
   checked?: boolean;
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  value: unknown;
-  inputRef?: React.LegacyRef<'input'>;
+  value: string | ReadonlyArray<string> | number;
+  inputRef?: React.LegacyRef<HTMLInputElement>;
 }
 
 type ToggleButton = BsPrefixComponentClass<'button', ToggleButtonProps>;
@@ -66,13 +66,17 @@ const propTypes = {
    * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.any.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+  ]).isRequired,
 
   /**
    * A ref attached to the `<input>` element
    * @type {ReactRef}
    */
-  inputRef: PropTypes.any,
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 const ToggleButton = React.forwardRef<any, ToggleButtonProps>(

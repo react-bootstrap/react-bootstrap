@@ -69,6 +69,7 @@ export type TransitionComponent = React.ComponentType<
   {
     in?: boolean;
     appear?: boolean;
+    children: React.ReactElement;
   } & TransitionCallbacks
 >;
 
