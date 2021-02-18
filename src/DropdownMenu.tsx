@@ -11,7 +11,6 @@ import warning from 'warning';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import usePopperMarginModifiers from './usePopperMarginModifiers';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -152,7 +151,6 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-    const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
     const alignClasses: string[] = [];
     if (align) {
@@ -192,18 +190,13 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       show: showProps,
       alignEnd: alignRight,
       usePopper: !isNavbar && alignClasses.length === 0,
-      popperConfig: {
-        ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
-      },
+      offset: [0, 2],
+      popperConfig,
     }) as UseDropdownMenuValueHack;
 
     menuProps.ref = useMergedRefs(
-      popperRef,
-      useMergedRefs(
-        useWrappedRefWithWarning(ref, 'DropdownMenu'),
-        menuProps.ref,
-      ),
+      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+      menuProps.ref,
     );
 
     if (!hasShown && !renderOnMount) return null;
