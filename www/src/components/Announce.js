@@ -13,7 +13,7 @@ class Announce extends React.Component {
       <div
         {...props}
         role="alert"
-        className="sr-only"
+        className="visually-hidden"
         aria-live={assertive ? 'assertive' : 'polite'}
       >
         {children}

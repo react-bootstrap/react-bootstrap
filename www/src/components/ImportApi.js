@@ -46,7 +46,7 @@ const CopyImport = ({ name }) => {
     >
       <Link onClick={handleCopy} className="js-search-exclude">
         <FontAwesomeIcon icon={faCopy} />
-        <span className="sr-only">{`Copy import code for the ${name} component`}</span>
+        <span className="visually-hidden">{`Copy import code for the ${name} component`}</span>
       </Link>
     </OverlayTrigger>
   );

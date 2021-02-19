@@ -417,7 +417,7 @@ const MegaComponent = () => (
           as="div"
           column="sm"
           htmlFor="id"
-          srOnly
+          visuallyHidden
           bsPrefix="formlabel"
           style={style}
         >
@@ -895,7 +895,13 @@ const MegaComponent = () => (
       <ProgressBar striped animated variant="info" now={20} />
       <ProgressBar striped variant="warning" now={60} />
       <ProgressBar striped variant="danger" now={80} />
-      <ProgressBar id="id" label="label" srOnly bsPrefix="prefix" style={style}>
+      <ProgressBar
+        id="id"
+        label="label"
+        visuallyHidden
+        bsPrefix="prefix"
+        style={style}
+      >
         <ProgressBar isChild />
       </ProgressBar>
     </div>

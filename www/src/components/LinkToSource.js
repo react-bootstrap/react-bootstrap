@@ -26,7 +26,7 @@ export default (props) => {
     >
       <Link href={linkToComponentOnGitHub} className="js-search-exclude">
         <FontAwesomeIcon icon={faCode} />
-        <span className="sr-only">view source file</span>
+        <span className="visually-hidden">view source file</span>
       </Link>
     </OverlayTrigger>
   );

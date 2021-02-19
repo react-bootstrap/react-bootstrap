@@ -63,7 +63,7 @@ const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
         <Component className="page-link" disabled={disabled} {...props}>
           {children}
           {active && activeLabel && (
-            <span className="sr-only">{activeLabel}</span>
+            <span className="visually-hidden">{activeLabel}</span>
           )}
         </Component>
       </li>
@@ -82,7 +82,7 @@ function createButton(name: string, defaultValue: ReactNode, label = name) {
     return (
       <PageItem {...props}>
         <span aria-hidden="true">{children || defaultValue}</span>
-        <span className="sr-only">{label}</span>
+        <span className="visually-hidden">{label}</span>
       </PageItem>
     );
   }

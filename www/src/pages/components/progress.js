@@ -45,7 +45,7 @@ export default withLayout(function ProgressBarSection({ data }) {
         Screenreader only label
       </LinkedHeading>
       <p>
-        Add a <code>srOnly</code> prop to hide the label visually.
+        Add a <code>visuallyHidden</code> prop to hide the label visually.
       </p>
       <ReactPlayground codeText={ProgressBarScreenreaderLabel} />
 
