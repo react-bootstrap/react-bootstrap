@@ -608,13 +608,17 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
           {(wrap || activeIndex !== 0) && (
             <SafeAnchor className={`${prefix}-control-prev`} onClick={prev}>
               {prevIcon}
-              {prevLabel && <span className="sr-only">{prevLabel}</span>}
+              {prevLabel && (
+                <span className="visually-hidden">{prevLabel}</span>
+              )}
             </SafeAnchor>
           )}
           {(wrap || activeIndex !== numChildren - 1) && (
             <SafeAnchor className={`${prefix}-control-next`} onClick={next}>
               {nextIcon}
-              {nextLabel && <span className="sr-only">{nextLabel}</span>}
+              {nextLabel && (
+                <span className="visually-hidden">{nextLabel}</span>
+              )}
             </SafeAnchor>
           )}
         </>

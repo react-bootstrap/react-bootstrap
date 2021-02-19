@@ -13,7 +13,7 @@ import {
 
 interface FormLabelBaseProps extends BsPrefixPropsWithChildren {
   htmlFor?: string;
-  srOnly?: boolean;
+  visuallyHidden?: boolean;
 }
 
 export interface FormLabelOwnProps extends FormLabelBaseProps {
@@ -59,7 +59,7 @@ const propTypes = {
    * Hides the label visually while still allowing it to be
    * read by assistive technologies.
    */
-  srOnly: PropTypes.bool,
+  visuallyHidden: PropTypes.bool,
 
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -67,7 +67,7 @@ const propTypes = {
 
 const defaultProps = {
   column: false,
-  srOnly: false,
+  visuallyHidden: false,
 };
 
 const FormLabel: FormLabel = React.forwardRef(
@@ -77,7 +77,7 @@ const FormLabel: FormLabel = React.forwardRef(
       as: Component = 'label',
       bsPrefix,
       column,
-      srOnly,
+      visuallyHidden,
       className,
       htmlFor,
       ...props
@@ -95,7 +95,7 @@ const FormLabel: FormLabel = React.forwardRef(
     const classes = classNames(
       className,
       bsPrefix,
-      srOnly && 'sr-only',
+      visuallyHidden && 'visually-hidden',
       column && columnClass,
     );
 

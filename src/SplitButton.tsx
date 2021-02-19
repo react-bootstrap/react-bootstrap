@@ -143,7 +143,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
         disabled={props.disabled}
         childBsPrefix={bsPrefix}
       >
-        <span className="sr-only">{toggleLabel}</span>
+        <span className="visually-hidden">{toggleLabel}</span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu

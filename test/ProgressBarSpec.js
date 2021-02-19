@@ -83,12 +83,12 @@ describe('<ProgressBar>', () => {
         min={0}
         max={10}
         now={5}
-        srOnly
+        visuallyHidden
         variant="success"
         label="progress bar label"
       />,
     )
-      .find('.sr-only')
+      .find('.visually-hidden')
       .getDOMNode();
 
     assert.equal(node.textContent, 'progress bar label');
@@ -106,8 +106,14 @@ describe('<ProgressBar>', () => {
     const customLabel = <strong className="special-label">My label</strong>;
 
     mount(
-      <ProgressBar min={0} max={10} now={5} label={customLabel} srOnly />,
-    ).find('.sr-only .special-label');
+      <ProgressBar
+        min={0}
+        max={10}
+        now={5}
+        label={customLabel}
+        visuallyHidden
+      />,
+    ).find('.visually-hidden .special-label');
   });
 
   it('Should show striped bar', () => {
