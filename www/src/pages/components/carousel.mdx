@@ -4,6 +4,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import CarouselControlled from '../../examples/Carousel/Controlled';
 import CarouselUncontrolled from '../../examples/Carousel/Uncontrolled';
+import CarouselFade from '../../examples/Carousel/CarouselFade';
 import IndividualIntervals from '../../examples/Carousel/IndividualIntervals';
 
 # Carousels
@@ -29,6 +30,12 @@ You can also _control_ the Carousel state, via the
 `activeIndex` prop and `onSelect` handler.
 
 <ReactPlayground codeText={CarouselControlled} />
+
+## Crossfade
+
+Add the `fade` prop to your carousel to animate slides with a fade transition instead of a slide.
+
+<ReactPlayground codeText={CarouselFade} />
 
 ## Individual Item Intervals
 
