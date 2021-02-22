@@ -116,7 +116,7 @@
     "execa": "^5.0.0",
     "fs-extra": "^9.1.0",
     "husky": "^4.3.8",
-    "karma": "^5.2.3",
+    "karma": "^6.1.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
     "karma-coverage": "^2.0.3",
