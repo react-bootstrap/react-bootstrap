@@ -3,7 +3,6 @@ import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
-import transitionEnd from 'dom-helpers/transitionEnd';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import React, {
@@ -20,6 +19,7 @@ import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
+import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import {
   BsPrefixPropsWithChildren,
@@ -567,7 +567,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
               in={isActive}
               onEnter={isActive ? handleEnter : undefined}
               onEntered={isActive ? handleEntered : undefined}
-              addEndListener={transitionEnd}
+              addEndListener={transitionEndListener}
             >
               {(status) =>
                 React.cloneElement(child, {
