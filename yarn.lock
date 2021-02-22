@@ -3906,13 +3906,13 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-4catalyzer-typescript@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-4catalyzer-typescript/-/eslint-config-4catalyzer-typescript-2.0.4.tgz#407b58df26582fe34894287ebd76c8e51e5b48c0"
-  integrity sha512-hHlDDvRuYcRqFh3z1D5qlcr4e4WGFNHI0DpErOHCyZxvw06BFy/y+ZRd2BYLLjmGZqMLx/ro3fTkjUyTmUuXQQ==
+eslint-config-4catalyzer-typescript@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-4catalyzer-typescript/-/eslint-config-4catalyzer-typescript-3.0.3.tgz#273024d8f28e3f542ceb4437483b1f5a222e9eb1"
+  integrity sha512-lh0T28VL9oR/eADZxFqAZuoJshCd5f4JxUTqIKNKNGBpJLO//+drPOxhYl1KyVn+rSGiqXOf+sfueu7yyL70Pw==
   dependencies:
     babel-eslint "^10.0.3"
-    eslint-import-resolver-typescript "^2.2.1"
+    eslint-import-resolver-typescript "^2.3.0"
 
 eslint-config-airbnb-base@^14.2.1:
   version "14.2.1"
@@ -3947,10 +3947,10 @@ eslint-import-resolver-node@^0.3.4:
     debug "^2.6.9"
     resolve "^1.13.1"
 
-eslint-import-resolver-typescript@^2.2.1:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.3.0.tgz#0870988098bc6c6419c87705e6b42bee89425445"
-  integrity sha512-MHSXvmj5e0SGOOBhBbt7C+fWj1bJbtSYFAD85Xeg8nvUtuooTod2HQb8bfhE9f5QyyNxEfgzqOYFCvmdDIcCuw==
+eslint-import-resolver-typescript@^2.3.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.4.0.tgz#ec1e7063ebe807f0362a7320543aaed6fe1100e1"
+  integrity sha512-useJKURidCcldRLCNKWemr1fFQL1SzB3G4a0li6lFGvlc5xGe1hY343bvG07cbpCzPuM/lK19FIJB3XGFSkplA==
   dependencies:
     debug "^4.1.1"
     glob "^7.1.6"
