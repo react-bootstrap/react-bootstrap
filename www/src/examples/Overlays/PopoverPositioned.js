@@ -7,9 +7,9 @@
       overlay={
         <Popover id={`popover-positioned-${placement}`}>
           <Popover.Title as="h3">{`Popover ${placement}`}</Popover.Title>
-          <Popover.Content>
+          <Popover.Body>
             <strong>Holy guacamole!</strong> Check this info.
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
       }
     >
