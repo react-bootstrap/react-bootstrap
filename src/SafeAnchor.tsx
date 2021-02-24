@@ -64,9 +64,7 @@ const SafeAnchor: BsPrefixRefForwardingComponent<
         return;
       }
 
-      if (onClick) {
-        onClick(event);
-      }
+      onClick?.(event);
     };
 
     const handleKeyDown = (event) => {

@@ -77,7 +77,6 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
   (
     {
       bsPrefix,
-      children,
       name,
       className,
       checked,
@@ -114,9 +113,7 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
           type={undefined}
           as="label"
           htmlFor={id}
-        >
-          {children}
-        </Button>
+        />
       </>
     );
   },

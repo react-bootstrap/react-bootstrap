@@ -50,7 +50,6 @@ const Accordion: BsPrefixRefForwardingComponent<
     as: Component = 'div',
     activeKey,
     bsPrefix,
-    children,
     className,
     onSelect,
     flush,
@@ -74,9 +73,7 @@ const Accordion: BsPrefixRefForwardingComponent<
         ref={ref}
         {...controlledProps}
         className={classNames(className, prefix, flush && `${prefix}-flush`)}
-      >
-        {children}
-      </Component>
+      />
     </AccordionContext.Provider>
   );
 });

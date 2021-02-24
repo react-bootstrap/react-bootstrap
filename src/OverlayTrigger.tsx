@@ -250,7 +250,7 @@ function OverlayTrigger({
   const handleClick = useCallback(
     (...args: any[]) => {
       setShow(!show);
-      if (onClick) onClick(...args);
+      onClick?.(...args);
     },
     [onClick, setShow, show],
   );

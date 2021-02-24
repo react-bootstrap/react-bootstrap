@@ -35,7 +35,6 @@ const FormGroup: BsPrefixRefForwardingComponent<
 > = React.forwardRef(
   (
     {
-      children,
       controlId,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -47,9 +46,7 @@ const FormGroup: BsPrefixRefForwardingComponent<
 
     return (
       <FormContext.Provider value={context}>
-        <Component {...props} ref={ref}>
-          {children}
-        </Component>
+        <Component {...props} ref={ref} />
       </FormContext.Provider>
     );
   },

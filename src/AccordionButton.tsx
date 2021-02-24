@@ -54,7 +54,6 @@ const AccordionButton: BsPrefixRefForwardingComponent<
       as: Component = 'button',
       bsPrefix,
       className,
-      children,
       onClick,
       ...props
     },
@@ -80,9 +79,7 @@ const AccordionButton: BsPrefixRefForwardingComponent<
           bsPrefix,
           eventKey !== activeEventKey && 'collapsed',
         )}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );

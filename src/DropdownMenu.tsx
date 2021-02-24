@@ -218,11 +218,11 @@ const DropdownMenu: BsPrefixRefForwardingComponent<
       (menuProps as any).alignRight = alignEnd;
     }
 
-    let style = (props as any).style;
+    let style = props.style;
     if (placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
-      style = { ...(props as any).style, ...menuProps.style };
+      style = { ...props.style, ...menuProps.style };
       props['x-placement'] = placement;
     }
 

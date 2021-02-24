@@ -26,7 +26,6 @@ const PopoverContent: BsPrefixRefForwardingComponent<
       as: Component = 'div',
       bsPrefix,
       className,
-      children,
       ...props
     },
     ref,
@@ -38,9 +37,7 @@ const PopoverContent: BsPrefixRefForwardingComponent<
         ref={ref}
         {...props}
         className={classNames(className, bsPrefix)}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );

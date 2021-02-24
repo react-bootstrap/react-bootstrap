@@ -77,7 +77,6 @@ const DropdownItem: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       className,
-      children,
       eventKey,
       disabled,
       href,
@@ -106,9 +105,9 @@ const DropdownItem: BsPrefixRefForwardingComponent<
       // SafeAnchor handles the disabled case, but we handle it here
       // for other components
       if (disabled) return;
-      if (onClick) onClick(event);
-      if (onSelectCtx) onSelectCtx(key, event);
-      if (onSelect) onSelect(key, event);
+      onClick?.(event);
+      onSelectCtx?.(key, event);
+      onSelect?.(key, event);
     });
 
     return (
@@ -126,9 +125,7 @@ const DropdownItem: BsPrefixRefForwardingComponent<
           disabled && 'disabled',
         )}
         onClick={handleClick}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );
