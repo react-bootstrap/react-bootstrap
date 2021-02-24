@@ -21,30 +21,19 @@ import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type CarouselVariant = 'dark';
 
 export interface CarouselRef {
-  element: HTMLElement;
+  element?: HTMLElement;
   prev: (e?: React.SyntheticEvent) => void;
   next: (e?: React.SyntheticEvent) => void;
 }
 
 export interface CarouselProps
-  extends BsPrefixPropsWithChildren,
-    Pick<
-      React.DOMAttributes<HTMLElement>,
-      | 'onKeyDown'
-      | 'onMouseOver'
-      | 'onMouseOut'
-      | 'onTouchStart'
-      | 'onTouchMove'
-      | 'onTouchEnd'
-    > {
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   slide?: boolean;
   fade?: boolean;
   controls?: boolean;
@@ -66,11 +55,6 @@ export interface CarouselProps
   ref?: React.Ref<CarouselRef>;
   variant?: CarouselVariant;
 }
-
-type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
-  Caption: typeof CarouselCaption;
-  Item: typeof CarouselItem;
-};
 
 const SWIPE_THRESHOLD = 40;
 
@@ -222,7 +206,10 @@ function isVisible(element) {
   );
 }
 
-function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
+const Carousel: BsPrefixRefForwardingComponent<
+  'div',
+  CarouselProps
+> = React.forwardRef<CarouselRef, CarouselProps>((uncontrolledProps, ref) => {
   const {
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
@@ -348,9 +335,13 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     }
   });
 
-  const elementRef = useRef();
+  const elementRef = useRef<HTMLElement>();
 
-  useImperativeHandle(ref, () => ({ element: elementRef.current, prev, next }));
+  useImperativeHandle(ref, () => ({
+    element: elementRef.current,
+    prev,
+    next,
+  }));
 
   // This is used in the setInterval, so it should not invalidate.
   const nextWhenVisible = useEventCallback(() => {
@@ -625,17 +616,13 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       )}
     </Component>
   );
-}
-
-const Carousel: Carousel = (React.forwardRef(
-  CarouselFunc,
-) as unknown) as Carousel;
+});
 
 Carousel.displayName = 'Carousel';
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;
 
-Carousel.Caption = CarouselCaption;
-Carousel.Item = CarouselItem;
-
-export default Carousel;
+export default Object.assign(Carousel, {
+  Caption: CarouselCaption,
+  Item: CarouselItem,
+});

@@ -9,8 +9,8 @@ import ModalContext from './ModalContext';
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
-    React.ComponentProps<'div'> {
+  extends BsPrefixAndClassNameOnlyProps,
+    React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeVariant?: CloseButtonVariant;
   closeButton?: boolean;

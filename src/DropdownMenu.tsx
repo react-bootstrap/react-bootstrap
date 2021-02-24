@@ -13,7 +13,7 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import usePopperMarginModifiers from './usePopperMarginModifiers';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
@@ -30,7 +30,9 @@ export type AlignType = AlignDirection | ResponsiveAlignProp;
 
 export type DropdownMenuVariant = 'dark';
 
-export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
+export interface DropdownMenuProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
@@ -41,8 +43,6 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   popperConfig?: UseDropdownMenuOptions['popperConfig'];
   variant?: DropdownMenuVariant;
 }
-
-type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
 const alignDirection = PropTypes.oneOf<AlignDirection>(['start', 'end']);
 
@@ -129,7 +129,10 @@ const defaultProps: Partial<DropdownMenuProps> = {
 // TODO: remove this hack
 type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
 
-const DropdownMenu: DropdownMenu = React.forwardRef(
+const DropdownMenu: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownMenuProps
+> = React.forwardRef<HTMLElement, DropdownMenuProps>(
   (
     {
       bsPrefix,
@@ -147,7 +150,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       popperConfig,
       variant,
       ...props
-    }: DropdownMenuProps,
+    },
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);

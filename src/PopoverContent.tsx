@@ -2,17 +2,11 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-type PopoverContentProps = BsPrefixPropsWithChildren;
-
-type PopoverContent = BsPrefixRefForwardingComponent<
-  'div',
-  PopoverContentProps
->;
+export interface PopoverContentProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -22,7 +16,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const PopoverContent: PopoverContent = React.forwardRef(
+const PopoverContent: BsPrefixRefForwardingComponent<
+  'div',
+  PopoverContentProps
+> = React.forwardRef<HTMLElement, PopoverContentProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -31,7 +28,7 @@ const PopoverContent: PopoverContent = React.forwardRef(
       className,
       children,
       ...props
-    }: PopoverContentProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'popover-body');

@@ -2,16 +2,13 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CarouselItemProps extends BsPrefixPropsWithChildren {
+export interface CarouselItemProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   interval?: number;
 }
-
-type CarouselItem = BsPrefixRefForwardingComponent<'div', CarouselItemProps>;
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -24,29 +21,27 @@ const propTypes = {
   interval: PropTypes.number,
 };
 
-const CarouselItem = (React.forwardRef(
+const CarouselItem: BsPrefixRefForwardingComponent<
+  'div',
+  CarouselItemProps
+> = React.forwardRef<HTMLElement, CarouselItemProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       bsPrefix,
-      children,
       className,
       ...props
-    }: CarouselItemProps,
+    },
     ref,
   ) => {
     const finalClassName = classNames(
       className,
       useBootstrapPrefix(bsPrefix, 'carousel-item'),
     );
-    return (
-      <Component ref={ref} {...props} className={finalClassName}>
-        {children}
-      </Component>
-    );
+    return <Component ref={ref} {...props} className={finalClassName} />;
   },
-) as unknown) as CarouselItem;
+);
 
 CarouselItem.displayName = 'CarouselItem';
 CarouselItem.propTypes = propTypes;

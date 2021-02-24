@@ -2,14 +2,11 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface FormRangeProps
   extends BsPrefixAndClassNameOnlyProps,
-    React.InputHTMLAttributes<HTMLInputElement> {}
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {}
 
 const propTypes = {
   /**
@@ -27,7 +24,7 @@ const propTypes = {
    * */
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.string.isRequired),
     PropTypes.number,
   ]),
 
@@ -35,10 +32,7 @@ const propTypes = {
   onChange: PropTypes.func,
 };
 
-const FormRange: BsPrefixRefForwardingComponent<
-  'input',
-  FormRangeProps
-> = React.forwardRef<HTMLInputElement, FormRangeProps>(
+const FormRange = React.forwardRef<HTMLInputElement, FormRangeProps>(
   ({ bsPrefix, className, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-range');
 

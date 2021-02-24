@@ -3,10 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type NumberAttr =
   | number
@@ -30,7 +27,9 @@ type ColSpec =
   | ColSize
   | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
 
-export interface ColProps extends BsPrefixPropsWithChildren {
+export interface ColProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   xs?: ColSpec;
   sm?: ColSpec;
   md?: ColSpec;
@@ -112,9 +111,12 @@ const propTypes = {
   xxl: column,
 };
 
-const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef(
+const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
+  HTMLElement,
+  ColProps
+>(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'div', ...props }: ColProps, ref) => {
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
     const spans: string[] = [];
     const classes: string[] = [];

@@ -24,7 +24,6 @@ export interface ButtonProps
   target?: any;
 }
 
-type Button = BsPrefixRefForwardingComponent<'button', ButtonProps>;
 export type CommonButtonProps = 'href' | 'size' | 'variant' | 'disabled';
 
 const propTypes = {
@@ -81,20 +80,11 @@ const defaultProps = {
   disabled: false,
 };
 
-const Button: Button = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      variant,
-      size,
-      active,
-      className,
-      type,
-      as,
-      ...props
-    }: ButtonProps,
-    ref,
-  ) => {
+const Button: BsPrefixRefForwardingComponent<
+  'button',
+  ButtonProps
+> = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ bsPrefix, variant, size, active, className, type, as, ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'btn');
 
     const classes = classNames(
@@ -116,18 +106,12 @@ const Button: Button = React.forwardRef(
       );
     }
 
-    if (ref) {
-      (props as any).ref = ref;
-    }
-
-    if (type) {
-      (props as any).type = type;
-    } else if (!as) {
-      (props as any).type = 'button';
+    if (!type && !as) {
+      type = 'button';
     }
 
     const Component = as || 'button';
-    return <Component {...props} className={classes} />;
+    return <Component {...props} ref={ref} type={type} className={classes} />;
   },
 );
 

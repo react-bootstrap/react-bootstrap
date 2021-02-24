@@ -9,8 +9,7 @@ import { PropsFromToggle } from './DropdownToggle';
 import { BsPrefixPropsWithChildren } from './helpers';
 
 export interface SplitButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title' | 'id'>,
+  extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
     BsPrefixPropsWithChildren {
   id: string | number;
