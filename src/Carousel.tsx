@@ -305,10 +305,7 @@ const Carousel: BsPrefixRefForwardingComponent<
       }
 
       nextDirectionRef.current = 'prev';
-
-      if (onSelect) {
-        onSelect(nextActiveIndex, event);
-      }
+      onSelect?.(nextActiveIndex, event);
     },
     [isSliding, renderedActiveIndex, onSelect, wrap, numChildren],
   );
@@ -330,9 +327,7 @@ const Carousel: BsPrefixRefForwardingComponent<
 
     nextDirectionRef.current = 'next';
 
-    if (onSelect) {
-      onSelect(nextActiveIndex, event);
-    }
+    onSelect?.(nextActiveIndex, event);
   });
 
   const elementRef = useRef<HTMLElement>();
@@ -358,12 +353,8 @@ const Carousel: BsPrefixRefForwardingComponent<
       return;
     }
 
-    if (onSlide) {
-      onSlide(renderedActiveIndex, slideDirection);
-    }
-    if (onSlid) {
-      onSlid(renderedActiveIndex, slideDirection);
-    }
+    onSlide?.(renderedActiveIndex, slideDirection);
+    onSlid?.(renderedActiveIndex, slideDirection);
   }, [renderedActiveIndex]);
 
   const orderClassName = `${prefix}-item-${direction}`;
@@ -373,9 +364,7 @@ const Carousel: BsPrefixRefForwardingComponent<
     (node) => {
       triggerBrowserReflow(node);
 
-      if (onSlide) {
-        onSlide(renderedActiveIndex, slideDirection);
-      }
+      onSlide?.(renderedActiveIndex, slideDirection);
     },
     [onSlide, renderedActiveIndex, slideDirection],
   );
@@ -383,9 +372,7 @@ const Carousel: BsPrefixRefForwardingComponent<
   const handleEntered = useCallback(() => {
     setIsSliding(false);
 
-    if (onSlid) {
-      onSlid(renderedActiveIndex, slideDirection);
-    }
+    onSlid?.(renderedActiveIndex, slideDirection);
   }, [onSlid, renderedActiveIndex, slideDirection]);
 
   const handleKeyDown = useCallback(
@@ -404,9 +391,7 @@ const Carousel: BsPrefixRefForwardingComponent<
         }
       }
 
-      if (onKeyDown) {
-        onKeyDown(event);
-      }
+      onKeyDown?.(event);
     },
     [keyboard, onKeyDown, prev, next],
   );
@@ -417,9 +402,7 @@ const Carousel: BsPrefixRefForwardingComponent<
         setPaused(true);
       }
 
-      if (onMouseOver) {
-        onMouseOver(event);
-      }
+      onMouseOver?.(event);
     },
     [pause, onMouseOver],
   );
@@ -428,9 +411,7 @@ const Carousel: BsPrefixRefForwardingComponent<
     (event) => {
       setPaused(false);
 
-      if (onMouseOut) {
-        onMouseOut(event);
-      }
+      onMouseOut?.(event);
     },
     [onMouseOut],
   );
@@ -448,9 +429,7 @@ const Carousel: BsPrefixRefForwardingComponent<
         setPaused(true);
       }
 
-      if (onTouchStart) {
-        onTouchStart(event);
-      }
+      onTouchStart?.(event);
     },
     [pause, onTouchStart],
   );
@@ -464,9 +443,7 @@ const Carousel: BsPrefixRefForwardingComponent<
           event.touches[0].clientX - touchStartXRef.current;
       }
 
-      if (onTouchMove) {
-        onTouchMove(event);
-      }
+      onTouchMove?.(event);
     },
     [onTouchMove],
   );
@@ -491,9 +468,7 @@ const Carousel: BsPrefixRefForwardingComponent<
         }, interval || undefined);
       }
 
-      if (onTouchEnd) {
-        onTouchEnd(event);
-      }
+      onTouchEnd?.(event);
     },
     [touch, pause, prev, next, touchUnpauseTimeout, interval, onTouchEnd],
   );
@@ -523,9 +498,7 @@ const Carousel: BsPrefixRefForwardingComponent<
     () =>
       indicators &&
       Array.from({ length: numChildren }, (_, index) => (event) => {
-        if (onSelect) {
-          onSelect(index, event);
-        }
+        onSelect?.(index, event);
       }),
     [indicators, numChildren, onSelect],
   );

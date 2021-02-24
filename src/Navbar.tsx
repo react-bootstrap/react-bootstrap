@@ -157,7 +157,6 @@ const Navbar: BsPrefixRefForwardingComponent<
     fixed,
     sticky,
     className,
-    children,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'nav',
     expanded,
@@ -173,11 +172,9 @@ const Navbar: BsPrefixRefForwardingComponent<
 
   const handleCollapse = useCallback<SelectCallback>(
     (...args) => {
-      if (onSelect) onSelect(...args);
+      onSelect?.(...args);
       if (collapseOnSelect && expanded) {
-        if (onToggle) {
-          onToggle(false);
-        }
+        onToggle?.(false);
       }
     },
     [onSelect, collapseOnSelect, expanded, onToggle],
@@ -194,7 +191,7 @@ const Navbar: BsPrefixRefForwardingComponent<
 
   const navbarContext = useMemo<NavbarContextType>(
     () => ({
-      onToggle: () => onToggle && onToggle(!expanded),
+      onToggle: () => onToggle?.(!expanded),
       bsPrefix,
       expanded: !!expanded,
     }),
@@ -216,9 +213,7 @@ const Navbar: BsPrefixRefForwardingComponent<
             sticky && `sticky-${sticky}`,
             fixed && `fixed-${fixed}`,
           )}
-        >
-          {children}
-        </Component>
+        />
       </SelectableContext.Provider>
     </NavbarContext.Provider>
   );

@@ -37,7 +37,7 @@ const propTypes = {
  * @property {PageItem} Last
  */
 const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
-  ({ bsPrefix, className, children, size, ...props }, ref) => {
+  ({ bsPrefix, className, size, ...props }, ref) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
     return (
       <ul
@@ -48,9 +48,7 @@ const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
           decoratedBsPrefix,
           size && `${decoratedBsPrefix}-${size}`,
         )}
-      >
-        {children}
-      </ul>
+      />
     );
   },
 );

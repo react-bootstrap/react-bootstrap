@@ -77,7 +77,7 @@ const AbstractNav: BsPrefixRefForwardingComponent<
 
     const listNode = useRef<HTMLElement>(null);
 
-    const getNextActiveChild = (offset) => {
+    const getNextActiveChild = (offset: number) => {
       const currentListNode = listNode.current;
       if (!currentListNode) return null;
 
@@ -96,12 +96,12 @@ const AbstractNav: BsPrefixRefForwardingComponent<
 
     const handleSelect = (key, event) => {
       if (key == null) return;
-      if (onSelect) onSelect(key, event);
-      if (parentOnSelect) parentOnSelect(key, event);
+      onSelect?.(key, event);
+      parentOnSelect?.(key, event);
     };
 
     const handleKeyDown = (event) => {
-      if (onKeyDown) onKeyDown(event);
+      onKeyDown?.(event);
 
       let nextActiveChild;
       switch (event.key) {
@@ -130,7 +130,7 @@ const AbstractNav: BsPrefixRefForwardingComponent<
           '[data-rb-event-key].active',
         );
 
-        if (activeChild) activeChild.focus();
+        activeChild?.focus();
       }
 
       needsRefocusRef.current = false;

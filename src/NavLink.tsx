@@ -64,20 +64,14 @@ const NavLink: BsPrefixRefForwardingComponent<
   'a',
   NavLinkProps
 > = React.forwardRef<HTMLElement, NavLinkProps>(
-  (
-    { bsPrefix, disabled, className, href, eventKey, onSelect, as, ...props },
-    ref,
-  ) => {
+  ({ bsPrefix, disabled, className, as, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
     return (
       <AbstractNavItem
         {...props}
-        href={href}
         ref={ref}
-        eventKey={eventKey}
         as={as as any}
         disabled={disabled}
-        onSelect={onSelect}
         className={classNames(className, bsPrefix, disabled && 'disabled')}
       />
     );

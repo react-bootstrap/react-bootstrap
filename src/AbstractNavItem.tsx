@@ -88,10 +88,10 @@ const AbstractNavItem: BsPrefixRefForwardingComponent<
     }
 
     const handleOnclick = useEventCallback((e) => {
-      if (onClick) onClick(e);
+      onClick?.(e);
       if (navKey == null) return;
-      if (onSelect) onSelect(navKey, e);
-      if (parentOnSelect) parentOnSelect(navKey, e);
+      onSelect?.(navKey, e);
+      parentOnSelect?.(navKey, e);
     });
 
     return (

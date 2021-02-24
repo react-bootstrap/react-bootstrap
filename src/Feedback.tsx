@@ -39,7 +39,7 @@ const Feedback: BsPrefixRefForwardingComponent<
       type = 'valid',
       tooltip = false,
       ...props
-    }: FeedbackProps,
+    },
     ref,
   ) => (
     <Component

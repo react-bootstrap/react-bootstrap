@@ -69,8 +69,8 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     const context = useContext(ModalContext);
 
     const handleClick = useEventCallback(() => {
-      if (context) context.onHide();
-      if (onHide) onHide();
+      context?.onHide();
+      onHide?.();
     });
 
     return (

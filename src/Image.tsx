@@ -54,19 +54,19 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
-
-    const classes = classNames(
-      fluid && `${bsPrefix}-fluid`,
-      rounded && `rounded`,
-      roundedCircle && `rounded-circle`,
-      thumbnail && `${bsPrefix}-thumbnail`,
-    );
-
     return (
       <img // eslint-disable-line jsx-a11y/alt-text
         ref={ref}
         {...props}
-        className={classNames(className, classes)}
+        className={classNames(
+          className,
+          classNames(
+            fluid && `${bsPrefix}-fluid`,
+            rounded && `rounded`,
+            roundedCircle && `rounded-circle`,
+            thumbnail && `${bsPrefix}-thumbnail`,
+          ),
+        )}
       />
     );
   },

@@ -70,7 +70,6 @@ const Toast: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       className,
-      children,
       transition: Transition = Fade,
       show = true,
       animation = true,
@@ -128,9 +127,7 @@ const Toast: BsPrefixRefForwardingComponent<
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-      >
-        {children}
-      </div>
+      />
     );
 
     return (

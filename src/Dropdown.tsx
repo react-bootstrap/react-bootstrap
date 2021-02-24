@@ -144,15 +144,13 @@ const Dropdown: BsPrefixRefForwardingComponent<
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
       if (event.currentTarget === document) source = 'rootClose';
-      if (onToggle) {
-        onToggle(nextShow, event, { source });
-      }
+      onToggle?.(nextShow, event, { source });
     },
   );
 
   const handleSelect = useEventCallback((key, event) => {
-    if (onSelectCtx) onSelectCtx(key, event);
-    if (onSelect) onSelect(key, event);
+    onSelectCtx?.(key, event);
+    onSelect?.(key, event);
     handleToggle(false, event, 'select');
   });
 

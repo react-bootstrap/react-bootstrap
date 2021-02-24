@@ -354,10 +354,7 @@ const Modal: BsPrefixRefForwardingComponent<
 
     useWillUnmount(() => {
       removeEventListener(window as any, 'resize', handleWindowResize);
-
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
+      removeStaticModalAnimationRef.current?.();
     });
 
     // We prevent the modal from closing during a drag by detecting where the
@@ -427,15 +424,12 @@ const Modal: BsPrefixRefForwardingComponent<
     };
 
     const handleExit = (node, ...args) => {
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
-
-      if (onExit) onExit(node, ...args);
+      removeStaticModalAnimationRef.current?.();
+      onExit?.(node, ...args);
     };
 
     const handleEntering = (node, ...args) => {
-      if (onEntering) onEntering(node, ...args);
+      onEntering?.(node, ...args);
 
       // FIXME: This should work even when animation is disabled.
       addEventListener(window as any, 'resize', handleWindowResize);
@@ -443,7 +437,7 @@ const Modal: BsPrefixRefForwardingComponent<
 
     const handleExited = (node, ...args) => {
       if (node) node.style.display = ''; // RHL removes it sometimes
-      if (onExited) onExited(...args);
+      onExited?.(...args);
 
       // FIXME: This should work even when animation is disabled.
       removeEventListener(window as any, 'resize', handleWindowResize);

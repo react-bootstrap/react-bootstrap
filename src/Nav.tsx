@@ -121,7 +121,6 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
     justify,
     navbar,
     className,
-    children,
     activeKey,
     ...props
   } = useUncontrolled(uncontrolledProps, { activeKey: 'onSelect' });
@@ -156,9 +155,7 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
         [`${bsPrefix}-justified`]: justify,
       })}
       {...props}
-    >
-      {children}
-    </AbstractNav>
+    />
   );
 });
 
