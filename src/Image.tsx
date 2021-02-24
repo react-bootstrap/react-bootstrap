@@ -60,12 +60,10 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
         {...props}
         className={classNames(
           className,
-          classNames(
-            fluid && `${bsPrefix}-fluid`,
-            rounded && `rounded`,
-            roundedCircle && `rounded-circle`,
-            thumbnail && `${bsPrefix}-thumbnail`,
-          ),
+          fluid && `${bsPrefix}-fluid`,
+          rounded && `rounded`,
+          roundedCircle && `rounded-circle`,
+          thumbnail && `${bsPrefix}-thumbnail`,
         )}
       />
     );
