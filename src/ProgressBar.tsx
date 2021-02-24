@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 import { map } from './ElementChildren';
-import { BsPrefixPropsWithChildren } from './helpers';
+import { BsPrefixProps } from './helpers';
 
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   min?: number;
   now?: number;
   max?: number;

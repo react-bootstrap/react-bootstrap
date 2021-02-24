@@ -7,26 +7,21 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface DropdownToggleProps
-  extends BsPrefixPropsWithChildren,
-    ButtonProps {
+export interface DropdownToggleProps extends ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
   eventKey?: any; // TODO: fix this type
 }
 
-type DropdownToggle = BsPrefixRefForwardingComponent<
+type DropdownToggleComponent = BsPrefixRefForwardingComponent<
   'button',
   DropdownToggleProps
 >;
 
 export type PropsFromToggle = Partial<
-  Pick<React.ComponentPropsWithRef<DropdownToggle>, CommonButtonProps>
+  Pick<React.ComponentPropsWithRef<DropdownToggleComponent>, CommonButtonProps>
 >;
 
 const propTypes = {
@@ -53,7 +48,7 @@ const propTypes = {
   childBsPrefix: PropTypes.string,
 };
 
-const DropdownToggle: DropdownToggle = React.forwardRef(
+const DropdownToggle: DropdownToggleComponent = React.forwardRef(
   (
     {
       bsPrefix,

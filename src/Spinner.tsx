@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixPropsWithChildren } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   animation: 'border' | 'grow';
   role?: string;
   size?: 'sm';
@@ -59,7 +59,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const Spinner = React.forwardRef(
+const Spinner: BsPrefixRefForwardingComponent<
+  'div',
+  SpinnerProps
+> = React.forwardRef<HTMLElement, SpinnerProps>(
   (
     {
       bsPrefix,
@@ -71,7 +74,7 @@ const Spinner = React.forwardRef(
       as: Component = 'div',
       className,
       ...props
-    }: SpinnerProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');

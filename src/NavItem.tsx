@@ -3,16 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavItemProps extends BsPrefixPropsWithChildren {
-  role?: string;
-}
-
-type NavItem = BsPrefixRefForwardingComponent<'div', NavItemProps>;
+export interface NavItemProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {
   /**
@@ -26,18 +21,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const NavItem: NavItem = React.forwardRef(
+const NavItem: BsPrefixRefForwardingComponent<
+  'div',
+  NavItemProps
+> = React.forwardRef<HTMLElement, NavItemProps>(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  (
-    {
-      bsPrefix,
-      className,
-      children,
-      as: Component = 'div',
-      ...props
-    }: NavItemProps,
-    ref,
-  ) => {
+  ({ bsPrefix, className, children, as: Component = 'div', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
 
     return (

@@ -2,23 +2,18 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { ReactNode } from 'react';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 import SafeAnchor from './SafeAnchor';
 
 export interface PageItemProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;
   href?: string;
 }
-
-type PageItem = BsPrefixRefForwardingComponent<'li', PageItemProps>;
 
 const propTypes = {
   /** Disables the PageItem */
@@ -40,7 +35,10 @@ const defaultProps = {
   activeLabel: '(current)',
 };
 
-const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
+const PageItem: BsPrefixRefForwardingComponent<
+  'li',
+  PageItemProps
+> = React.forwardRef<HTMLLIElement, PageItemProps>(
   (
     {
       active,

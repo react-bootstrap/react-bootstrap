@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-type TabContentProps = BsPrefixPropsWithChildren;
-type TabContent = BsPrefixRefForwardingComponent<'div', TabContentProps>;
+export interface TabContentProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {
   /**
@@ -20,7 +18,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const TabContent: TabContent = React.forwardRef(
+const TabContent: BsPrefixRefForwardingComponent<
+  'div',
+  TabContentProps
+> = React.forwardRef<HTMLElement, TabContentProps>(
   (
     {
       bsPrefix,
@@ -28,7 +29,7 @@ const TabContent: TabContent = React.forwardRef(
       as: Component = 'div',
       className,
       ...props
-    }: TabContentProps,
+    },
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'tab-content');

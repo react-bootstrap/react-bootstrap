@@ -6,14 +6,11 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverContent from './PopoverContent';
 import { ArrowProps, Placement } from './Overlay';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps } from './helpers';
 
 export interface PopoverProps
-  extends React.ComponentPropsWithoutRef<'div'>,
-    BsPrefixPropsWithChildren {
+  extends React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixProps {
   id: string;
   placement?: Placement;
   title?: string;
@@ -22,11 +19,6 @@ export interface PopoverProps
   popper?: any;
   show?: boolean;
 }
-
-type Popover = BsPrefixRefForwardingComponent<'div', PopoverProps> & {
-  Title: typeof PopoverTitle;
-  Content: typeof PopoverContent;
-};
 
 const propTypes = {
   /**
@@ -48,7 +40,7 @@ const propTypes = {
    *
    * > This is generally provided by the `Overlay` component positioning the popover
    */
-  placement: PropTypes.oneOf([
+  placement: PropTypes.oneOf<Placement>([
     'auto-start',
     'auto',
     'auto-end',
@@ -89,11 +81,11 @@ const propTypes = {
   show: PropTypes.bool,
 };
 
-const defaultProps = {
+const defaultProps: Partial<PopoverProps> = {
   placement: 'right',
 };
 
-const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
+const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       bsPrefix,
@@ -106,7 +98,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
       popper: _,
       show: _1,
       ...props
-    }: PopoverProps,
+    },
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
@@ -136,12 +128,12 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
       </div>
     );
   },
-) as unknown) as Popover;
+);
 
-Popover.propTypes = propTypes;
-Popover.defaultProps = defaultProps as any;
+Popover.propTypes = propTypes as any;
+Popover.defaultProps = defaultProps;
 
-Popover.Title = PopoverTitle;
-Popover.Content = PopoverContent;
-
-export default Popover;
+export default Object.assign(Popover, {
+  Title: PopoverTitle,
+  Content: PopoverContent,
+});

@@ -6,10 +6,8 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface CardImgProps extends BsPrefixProps {
-  variant?: 'top' | 'bottom' | null;
+  variant?: 'top' | 'bottom';
 }
-
-type CardImg = BsPrefixRefForwardingComponent<'img', CardImgProps>;
 
 const propTypes = {
   /**
@@ -23,16 +21,15 @@ const propTypes = {
    *
    * @type {('top'|'bottom')}
    */
-  variant: PropTypes.oneOf(['top', 'bottom', null]),
+  variant: PropTypes.oneOf(['top', 'bottom']),
 
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: null,
-};
-
-const CardImg: CardImg = React.forwardRef(
+const CardImg: BsPrefixRefForwardingComponent<
+  'img',
+  CardImgProps
+> = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
     {
@@ -60,6 +57,5 @@ const CardImg: CardImg = React.forwardRef(
 );
 CardImg.displayName = 'CardImg';
 CardImg.propTypes = propTypes;
-CardImg.defaultProps = defaultProps;
 
 export default CardImg;

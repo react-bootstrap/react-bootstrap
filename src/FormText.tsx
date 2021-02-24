@@ -7,11 +7,11 @@ import { useBootstrapPrefix } from './ThemeProvider';
 
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FormTextProps extends BsPrefixProps {
+export interface FormTextProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   muted?: boolean;
 }
-
-type FormText = BsPrefixRefForwardingComponent<'small', FormTextProps>;
 
 const propTypes = {
   /** @default 'form-text' */
@@ -35,7 +35,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const FormText: FormText = React.forwardRef(
+const FormText: BsPrefixRefForwardingComponent<
+  'small',
+  FormTextProps
+> = React.forwardRef<HTMLElement, FormTextProps>(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, as: Component = 'small', muted, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');

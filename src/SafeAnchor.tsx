@@ -13,8 +13,6 @@ export interface SafeAnchorProps
   tabIndex?: number;
 }
 
-type SafeAnchor = BsPrefixRefForwardingComponent<'a', SafeAnchorProps>;
-
 const propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
@@ -40,7 +38,10 @@ function isTrivialHref(href) {
  * button its accessible. It also emulates input `disabled` behavior for
  * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
  */
-const SafeAnchor: SafeAnchor = React.forwardRef(
+const SafeAnchor: BsPrefixRefForwardingComponent<
+  'a',
+  SafeAnchorProps
+> = React.forwardRef<HTMLElement, SafeAnchorProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595

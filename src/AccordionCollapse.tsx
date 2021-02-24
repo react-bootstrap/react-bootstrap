@@ -15,11 +15,6 @@ export interface AccordionCollapseProps
   eventKey: string;
 }
 
-type AccordionCollapse = BsPrefixRefForwardingComponent<
-  'div',
-  AccordionCollapseProps
->;
-
 const propTypes = {
   /**
    * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
@@ -30,17 +25,11 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse: AccordionCollapse = React.forwardRef<typeof Collapse>(
-  (
-    {
-      bsPrefix,
-      className,
-      children,
-      eventKey,
-      ...props
-    }: AccordionCollapseProps,
-    ref,
-  ) => {
+const AccordionCollapse: BsPrefixRefForwardingComponent<
+  'div',
+  AccordionCollapseProps
+> = React.forwardRef<typeof Collapse, AccordionCollapseProps>(
+  ({ bsPrefix, className, children, eventKey, ...props }, ref) => {
     const { activeEventKey } = useContext(AccordionContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
 

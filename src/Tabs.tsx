@@ -14,7 +14,8 @@ import TabPane from './TabPane';
 import { forEach, map } from './ElementChildren';
 import { SelectCallback, TransitionType } from './helpers';
 
-export interface TabsProps extends React.PropsWithChildren<unknown> {
+export interface TabsProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   activeKey?: unknown;
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;
@@ -166,8 +167,8 @@ const Tabs = (props: TabsProps) => {
   );
 };
 
-Tabs.propTypes = propTypes as any;
-Tabs.defaultProps = defaultProps as any;
+Tabs.propTypes = propTypes;
+Tabs.defaultProps = defaultProps;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

@@ -13,8 +13,6 @@ export interface AccordionBodyProps
   extends BsPrefixPropsWithChildren,
     React.HTMLAttributes<HTMLElement> {}
 
-type AccordionBody = BsPrefixRefForwardingComponent<'div', AccordionBodyProps>;
-
 const propTypes = {
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -23,7 +21,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const AccordionBody: AccordionBody = React.forwardRef(
+const AccordionBody: BsPrefixRefForwardingComponent<
+  'div',
+  AccordionBodyProps
+> = React.forwardRef<HTMLElement, AccordionBodyProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -31,7 +32,7 @@ const AccordionBody: AccordionBody = React.forwardRef(
       bsPrefix,
       className,
       ...props
-    }: AccordionBodyProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-body');

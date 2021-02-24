@@ -10,8 +10,6 @@ export interface FormGroupProps
   controlId?: string;
 }
 
-type FormGroup = BsPrefixRefForwardingComponent<'div', FormGroupProps>;
-
 const propTypes = {
   as: PropTypes.elementType,
 
@@ -31,7 +29,10 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const FormGroup: FormGroup = React.forwardRef(
+const FormGroup: BsPrefixRefForwardingComponent<
+  'div',
+  FormGroupProps
+> = React.forwardRef(
   (
     {
       children,

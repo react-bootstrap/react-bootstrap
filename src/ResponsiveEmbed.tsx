@@ -3,20 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps } from './helpers';
 
-export interface ResponsiveEmbedProps extends BsPrefixPropsWithChildren {
+export type AspectRadio = '21by9' | '16by9' | '4by3' | '1by1';
+
+export interface ResponsiveEmbedProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactChild;
-  aspectRatio?: '21by9' | '16by9' | '4by3' | '1by1';
+  aspectRatio?: AspectRadio;
 }
-
-type ResponsiveEmbed = BsPrefixRefForwardingComponent<
-  'div',
-  ResponsiveEmbedProps
->;
 
 const propTypes = {
   /**
@@ -32,27 +28,15 @@ const propTypes = {
   /**
    * Set the aspect ration of the embed
    */
-  aspectRatio: PropTypes.oneOf(['21by9', '16by9', '4by3', '1by1']),
+  aspectRatio: PropTypes.oneOf<AspectRadio>(['21by9', '16by9', '4by3', '1by1']),
 };
 
 const defaultProps = {
   aspectRatio: '1by1' as const,
 };
 
-const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
-  HTMLDivElement,
-  ResponsiveEmbedProps
->(
-  (
-    {
-      bsPrefix,
-      className,
-      children,
-      aspectRatio,
-      ...props
-    }: ResponsiveEmbedProps,
-    ref,
-  ) => {
+const ResponsiveEmbed = React.forwardRef<HTMLDivElement, ResponsiveEmbedProps>(
+  ({ bsPrefix, className, children, aspectRatio, ...props }, ref) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'embed-responsive');
     const child = React.Children.only(children);
     return (

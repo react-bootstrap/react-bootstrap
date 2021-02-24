@@ -7,17 +7,14 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
-export interface FormCheckInputProps extends BsPrefixProps {
+export interface FormCheckInputProps
+  extends BsPrefixProps,
+    React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   type?: FormCheckInputType;
   isValid?: boolean;
   isInvalid?: boolean;
 }
-
-type FormCheckInput = BsPrefixRefForwardingComponent<
-  'input',
-  FormCheckInputProps
->;
 
 const propTypes = {
   /**
@@ -45,7 +42,10 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormCheckInput: FormCheckInput = React.forwardRef(
+const FormCheckInput: BsPrefixRefForwardingComponent<
+  'input',
+  FormCheckInputProps
+> = React.forwardRef<HTMLInputElement, FormCheckInputProps>(
   (
     {
       id,
@@ -57,7 +57,7 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
-    }: FormCheckInputProps,
+    },
     ref,
   ) => {
     const { controlId } = useContext(FormContext);

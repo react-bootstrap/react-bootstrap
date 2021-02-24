@@ -56,16 +56,6 @@ export interface ModalProps
   scrollable?: boolean;
 }
 
-type Modal = BsPrefixRefForwardingComponent<'div', ModalProps> & {
-  Body: typeof ModalBody;
-  Header: typeof ModalHeader;
-  Title: typeof ModalTitle;
-  Footer: typeof ModalFooter;
-  Dialog: typeof ModalDialog;
-  TRANSITION_DURATION: number;
-  BACKDROP_TRANSITION_DURATION: number;
-};
-
 let manager;
 
 const propTypes = {
@@ -254,8 +244,10 @@ function BackdropTransition(props) {
 }
 
 /* eslint-enable no-use-before-define */
-
-const Modal: Modal = (React.forwardRef(
+const Modal: BsPrefixRefForwardingComponent<
+  'div',
+  ModalProps
+> = React.forwardRef(
   (
     {
       bsPrefix,
@@ -536,19 +528,18 @@ const Modal: Modal = (React.forwardRef(
       </ModalContext.Provider>
     );
   },
-) as unknown) as Modal;
+);
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
 Modal.defaultProps = defaultProps;
 
-Modal.Body = ModalBody;
-Modal.Header = ModalHeader;
-Modal.Title = ModalTitle;
-Modal.Footer = ModalFooter;
-Modal.Dialog = ModalDialog;
-
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
-
-export default Modal;
+export default Object.assign(Modal, {
+  Body: ModalBody,
+  Header: ModalHeader,
+  Title: ModalTitle,
+  Footer: ModalFooter,
+  Dialog: ModalDialog,
+  TRANSITION_DURATION: 300,
+  BACKDROP_TRANSITION_DURATION: 150,
+});

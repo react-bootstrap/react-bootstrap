@@ -31,7 +31,7 @@ const propTypes = {
 };
 
 // TODO: is this correct?
-interface AbstractNavProps {
+interface AbstractNavProps extends React.HTMLAttributes<HTMLElement> {
   activeKey?: any;
   as?: React.ElementType;
   getControlledId?: any;
@@ -42,9 +42,10 @@ interface AbstractNavProps {
   role?: string;
 }
 
-type AbstractNav = BsPrefixRefForwardingComponent<'ul', AbstractNavProps>;
-
-const AbstractNav: AbstractNav = React.forwardRef(
+const AbstractNav: BsPrefixRefForwardingComponent<
+  'ul',
+  AbstractNavProps
+> = React.forwardRef<HTMLElement, AbstractNavProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -54,7 +55,7 @@ const AbstractNav: AbstractNav = React.forwardRef(
       role,
       onKeyDown,
       ...props
-    }: AbstractNavProps,
+    },
     ref,
   ) => {
     // A ref and forceUpdate for refocus, b/c we only want to trigger when needed
