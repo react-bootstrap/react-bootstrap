@@ -1,6 +1,6 @@
 const popover = (position) => (
   <Popover id={`popover-positioned-scrolling-${position}`}>
-    <Popover.Title as="h3">{`Popover ${position}`}</Popover.Title>
+    <Popover.Header as="h3">{`Popover ${position}`}</Popover.Header>
     <Popover.Body>
       <strong>Holy guacamole!</strong> Check this info.
     </Popover.Body>

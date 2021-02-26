@@ -143,7 +143,7 @@ export type { PaginationProps } from './Pagination';
 export { default as Popover } from './Popover';
 export type { PopoverProps } from './Popover';
 
-export { default as PopoverTitle } from './PopoverTitle';
+export { default as PopoverHeader } from './PopoverHeader';
 export { default as PopoverBody } from './PopoverBody';
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';

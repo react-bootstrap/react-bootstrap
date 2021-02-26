@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
-import PopoverTitle from './PopoverTitle';
+import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
 import { ArrowProps, Placement } from './Overlay';
 import { BsPrefixProps } from './helpers';
@@ -134,6 +134,6 @@ Popover.propTypes = propTypes as any;
 Popover.defaultProps = defaultProps;
 
 export default Object.assign(Popover, {
-  Title: PopoverTitle,
+  Header: PopoverHeader,
   Body: PopoverBody,
 });
