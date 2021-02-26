@@ -15,11 +15,6 @@ export interface AccordionButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     BsPrefixPropsWithChildren {}
 
-type AccordionButton = BsPrefixRefForwardingComponent<
-  'div',
-  AccordionButtonProps
->;
-
 const propTypes = {
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -49,17 +44,19 @@ export function useAccordionButton(
   };
 }
 
-const AccordionButton: AccordionButton = React.forwardRef(
+const AccordionButton: BsPrefixRefForwardingComponent<
+  'div',
+  AccordionButtonProps
+> = React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'button',
       bsPrefix,
       className,
-      children,
       onClick,
       ...props
-    }: AccordionButtonProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-button');
@@ -82,9 +79,7 @@ const AccordionButton: AccordionButton = React.forwardRef(
           bsPrefix,
           eventKey !== activeEventKey && 'collapsed',
         )}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );

@@ -417,7 +417,7 @@ const MegaComponent = () => (
           as="div"
           column="sm"
           htmlFor="id"
-          srOnly
+          visuallyHidden
           bsPrefix="formlabel"
           style={style}
         >
@@ -886,16 +886,22 @@ const MegaComponent = () => (
       <Popover.Title as="div" bsPrefix="prefix" style={style}>
         Popover title
       </Popover.Title>
-      <Popover.Content as="div" bsPrefix="prefix" style={style}>
+      <Popover.Body as="div" bsPrefix="prefix" style={style}>
         <strong>Popover Content</strong>
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
     <div>
       <ProgressBar striped variant="success" min={-10} now={40} max={200} />
       <ProgressBar striped animated variant="info" now={20} />
       <ProgressBar striped variant="warning" now={60} />
       <ProgressBar striped variant="danger" now={80} />
-      <ProgressBar id="id" label="label" srOnly bsPrefix="prefix" style={style}>
+      <ProgressBar
+        id="id"
+        label="label"
+        visuallyHidden
+        bsPrefix="prefix"
+        style={style}
+      >
         <ProgressBar isChild />
       </ProgressBar>
     </div>

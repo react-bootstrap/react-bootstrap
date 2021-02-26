@@ -8,9 +8,9 @@ describe('Popover', () => {
     mount(
       <Popover id="test-popover">
         <Popover.Title>Popover title</Popover.Title>
-        <Popover.Content>
+        <Popover.Body>
           <strong>Popover Content</strong>
-        </Popover.Content>
+        </Popover.Body>
       </Popover>,
     ).assertSingle(
       '.popover[x-placement="right"][role="tooltip"].bs-popover-end strong',

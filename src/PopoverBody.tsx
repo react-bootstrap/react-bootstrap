@@ -1,3 +1,3 @@
 import createWithBsPrefix from './createWithBsPrefix';
 
-export default createWithBsPrefix('nav-item');
+export default createWithBsPrefix('popover-body');

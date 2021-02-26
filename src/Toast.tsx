@@ -9,12 +9,14 @@ import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   TransitionComponent,
 } from './helpers';
 
-export interface ToastProps extends BsPrefixPropsWithChildren {
+export interface ToastProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   animation?: boolean;
   autohide?: boolean;
   delay?: number;
@@ -68,7 +70,6 @@ const Toast: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       className,
-      children,
       transition: Transition = Fade,
       show = true,
       animation = true,
@@ -126,9 +127,7 @@ const Toast: BsPrefixRefForwardingComponent<
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-      >
-        {children}
-      </div>
+      />
     );
 
     return (

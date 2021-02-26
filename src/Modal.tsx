@@ -56,16 +56,6 @@ export interface ModalProps
   scrollable?: boolean;
 }
 
-type Modal = BsPrefixRefForwardingComponent<'div', ModalProps> & {
-  Body: typeof ModalBody;
-  Header: typeof ModalHeader;
-  Title: typeof ModalTitle;
-  Footer: typeof ModalFooter;
-  Dialog: typeof ModalDialog;
-  TRANSITION_DURATION: number;
-  BACKDROP_TRANSITION_DURATION: number;
-};
-
 let manager;
 
 const propTypes = {
@@ -254,8 +244,10 @@ function BackdropTransition(props) {
 }
 
 /* eslint-enable no-use-before-define */
-
-const Modal: Modal = (React.forwardRef(
+const Modal: BsPrefixRefForwardingComponent<
+  'div',
+  ModalProps
+> = React.forwardRef(
   (
     {
       bsPrefix,
@@ -362,10 +354,7 @@ const Modal: Modal = (React.forwardRef(
 
     useWillUnmount(() => {
       removeEventListener(window as any, 'resize', handleWindowResize);
-
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
+      removeStaticModalAnimationRef.current?.();
     });
 
     // We prevent the modal from closing during a drag by detecting where the
@@ -435,15 +424,12 @@ const Modal: Modal = (React.forwardRef(
     };
 
     const handleExit = (node, ...args) => {
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
-
-      if (onExit) onExit(node, ...args);
+      removeStaticModalAnimationRef.current?.();
+      onExit?.(node, ...args);
     };
 
     const handleEntering = (node, ...args) => {
-      if (onEntering) onEntering(node, ...args);
+      onEntering?.(node, ...args);
 
       // FIXME: This should work even when animation is disabled.
       addEventListener(window as any, 'resize', handleWindowResize);
@@ -451,7 +437,7 @@ const Modal: Modal = (React.forwardRef(
 
     const handleExited = (node, ...args) => {
       if (node) node.style.display = ''; // RHL removes it sometimes
-      if (onExited) onExited(...args);
+      onExited?.(...args);
 
       // FIXME: This should work even when animation is disabled.
       removeEventListener(window as any, 'resize', handleWindowResize);
@@ -536,19 +522,18 @@ const Modal: Modal = (React.forwardRef(
       </ModalContext.Provider>
     );
   },
-) as unknown) as Modal;
+);
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
 Modal.defaultProps = defaultProps;
 
-Modal.Body = ModalBody;
-Modal.Header = ModalHeader;
-Modal.Title = ModalTitle;
-Modal.Footer = ModalFooter;
-Modal.Dialog = ModalDialog;
-
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
-
-export default Modal;
+export default Object.assign(Modal, {
+  Body: ModalBody,
+  Header: ModalHeader,
+  Title: ModalTitle,
+  Footer: ModalFooter,
+  Dialog: ModalDialog,
+  TRANSITION_DURATION: 300,
+  BACKDROP_TRANSITION_DURATION: 150,
+});

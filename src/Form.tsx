@@ -9,26 +9,13 @@ import FormRange from './FormRange';
 import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
-import { AsProp } from './helpers';
+import { BsPrefixRefForwardingComponent, AsProp } from './helpers';
 
 export interface FormProps
-  extends React.HTMLAttributes<HTMLFormElement>,
+  extends React.FormHTMLAttributes<HTMLFormElement>,
     AsProp {
   validated?: boolean;
 }
-
-type Form = React.ForwardRefExoticComponent<
-  FormProps & React.RefAttributes<HTMLElement>
-> & {
-  Group: typeof FormGroup;
-  Control: typeof FormControl;
-  Check: typeof FormCheck;
-  Switch: typeof Switch;
-  Label: typeof FormLabel;
-  Text: typeof FormText;
-  Range: typeof FormRange;
-  Select: typeof FormSelect;
-};
 
 const propTypes = {
   /**
@@ -49,7 +36,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const FormImpl: Form = (React.forwardRef(
+const Form: BsPrefixRefForwardingComponent<
+  'form',
+  FormProps
+> = React.forwardRef<HTMLFormElement, FormProps>(
   (
     {
       className,
@@ -57,7 +47,7 @@ const FormImpl: Form = (React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'form',
       ...props
-    }: FormProps,
+    },
     ref,
   ) => {
     return (
@@ -68,18 +58,18 @@ const FormImpl: Form = (React.forwardRef(
       />
     );
   },
-) as unknown) as Form;
+);
 
-FormImpl.displayName = 'Form';
-FormImpl.propTypes = propTypes as any;
+Form.displayName = 'Form';
+Form.propTypes = propTypes as any;
 
-FormImpl.Group = FormGroup;
-FormImpl.Control = FormControl;
-FormImpl.Check = FormCheck;
-FormImpl.Switch = Switch;
-FormImpl.Label = FormLabel;
-FormImpl.Text = FormText;
-FormImpl.Range = FormRange;
-FormImpl.Select = FormSelect;
-
-export default FormImpl;
+export default Object.assign(Form, {
+  Group: FormGroup,
+  Control: FormControl,
+  Check: FormCheck,
+  Switch,
+  Label: FormLabel,
+  Text: FormText,
+  Range: FormRange,
+  Select: FormSelect,
+});

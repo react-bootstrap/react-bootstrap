@@ -12,7 +12,7 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
 import SelectableContext from './SelectableContext';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
@@ -21,7 +21,9 @@ const NavbarText = createWithBsPrefix('navbar-text', {
   Component: 'span',
 });
 
-export interface NavbarProps extends BsPrefixPropsWithChildren {
+export interface NavbarProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'light' | 'dark';
   expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
@@ -31,15 +33,7 @@ export interface NavbarProps extends BsPrefixPropsWithChildren {
   onSelect?: SelectCallback;
   collapseOnSelect?: boolean;
   expanded?: boolean;
-  role?: string;
 }
-
-type Navbar = BsPrefixRefForwardingComponent<'nav', NavbarProps> & {
-  Brand: typeof NavbarBrand;
-  Collapse: typeof NavbarCollapse;
-  Text: typeof NavbarText;
-  Toggle: typeof NavbarToggle;
-};
 
 const propTypes = {
   /** @default 'navbar' */
@@ -151,7 +145,10 @@ const defaultProps = {
   collapseOnSelect: false,
 };
 
-const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
+const Navbar: BsPrefixRefForwardingComponent<
+  'nav',
+  NavbarProps
+> = React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
   const {
     bsPrefix: initialBsPrefix,
     expand,
@@ -160,7 +157,6 @@ const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
     fixed,
     sticky,
     className,
-    children,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'nav',
     expanded,
@@ -176,11 +172,9 @@ const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
 
   const handleCollapse = useCallback<SelectCallback>(
     (...args) => {
-      if (onSelect) onSelect(...args);
+      onSelect?.(...args);
       if (collapseOnSelect && expanded) {
-        if (onToggle) {
-          onToggle(false);
-        }
+        onToggle?.(false);
       }
     },
     [onSelect, collapseOnSelect, expanded, onToggle],
@@ -197,7 +191,7 @@ const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
 
   const navbarContext = useMemo<NavbarContextType>(
     () => ({
-      onToggle: () => onToggle && onToggle(!expanded),
+      onToggle: () => onToggle?.(!expanded),
       bsPrefix,
       expanded: !!expanded,
     }),
@@ -219,21 +213,19 @@ const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
             sticky && `sticky-${sticky}`,
             fixed && `fixed-${fixed}`,
           )}
-        >
-          {children}
-        </Component>
+        />
       </SelectableContext.Provider>
     </NavbarContext.Provider>
   );
-}) as unknown) as Navbar;
+});
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
 Navbar.displayName = 'Navbar';
 
-Navbar.Brand = NavbarBrand;
-Navbar.Toggle = NavbarToggle;
-Navbar.Collapse = NavbarCollapse;
-Navbar.Text = NavbarText;
-
-export default Navbar;
+export default Object.assign(Navbar, {
+  Brand: NavbarBrand,
+  Toggle: NavbarToggle,
+  Collapse: NavbarCollapse,
+  Text: NavbarText,
+});

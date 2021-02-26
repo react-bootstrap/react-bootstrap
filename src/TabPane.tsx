@@ -13,15 +13,16 @@ import {
   TransitionType,
 } from './helpers';
 
-export interface TabPaneProps extends TransitionCallbacks, BsPrefixProps {
+export interface TabPaneProps
+  extends TransitionCallbacks,
+    BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   eventKey?: any;
   active?: boolean;
   transition?: TransitionType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
-
-type TabPane = BsPrefixRefForwardingComponent<'div', TabPaneProps>;
 
 const propTypes = {
   /**
@@ -124,7 +125,10 @@ function useTabContext(props: TabPaneProps) {
   };
 }
 
-const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
+const TabPane: BsPrefixRefForwardingComponent<
+  'div',
+  TabPaneProps
+> = React.forwardRef<HTMLElement, TabPaneProps>((props, ref) => {
   const {
     bsPrefix,
     className,

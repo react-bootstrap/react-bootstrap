@@ -21,9 +21,9 @@ function Example() {
       >
         <Popover id="popover-contained">
           <Popover.Title as="h3">Popover bottom</Popover.Title>
-          <Popover.Content>
+          <Popover.Body>
             <strong>Holy guacamole!</strong> Check this info.
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
       </Overlay>
     </div>

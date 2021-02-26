@@ -20,8 +20,6 @@ export interface ListGroupItemProps
   variant?: Variant;
 }
 
-type ListGroupItem = BsPrefixRefForwardingComponent<'a', ListGroupItemProps>;
-
 const propTypes = {
   /**
    * @default 'list-group-item'
@@ -69,7 +67,10 @@ const defaultProps = {
   disabled: false,
 };
 
-const ListGroupItem: ListGroupItem = React.forwardRef(
+const ListGroupItem: BsPrefixRefForwardingComponent<
+  'a',
+  ListGroupItemProps
+> = React.forwardRef<HTMLElement, ListGroupItemProps>(
   (
     {
       bsPrefix,
@@ -95,7 +96,7 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
           return;
         }
 
-        if (onClick) onClick(event);
+        onClick?.(event);
       },
       [disabled, onClick],
     );

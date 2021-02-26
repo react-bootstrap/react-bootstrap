@@ -9,8 +9,7 @@ import { PropsFromToggle } from './DropdownToggle';
 import { BsPrefixPropsWithChildren } from './helpers';
 
 export interface SplitButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title' | 'id'>,
+  extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
     BsPrefixPropsWithChildren {
   id: string | number;
@@ -143,7 +142,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
         disabled={props.disabled}
         childBsPrefix={bsPrefix}
       >
-        <span className="sr-only">{toggleLabel}</span>
+        <span className="visually-hidden">{toggleLabel}</span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu

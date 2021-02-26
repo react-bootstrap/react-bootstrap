@@ -124,7 +124,6 @@ export { default as NavDropdown } from './NavDropdown';
 export type { NavDropdownProps } from './NavDropdown';
 
 export { default as NavItem } from './NavItem';
-export type { NavItemProps } from './NavItem';
 
 export { default as NavLink } from './NavLink';
 export type { NavLinkProps } from './NavLink';
@@ -145,7 +144,7 @@ export { default as Popover } from './Popover';
 export type { PopoverProps } from './Popover';
 
 export { default as PopoverTitle } from './PopoverTitle';
-export { default as PopoverContent } from './PopoverContent';
+export { default as PopoverBody } from './PopoverBody';
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
 

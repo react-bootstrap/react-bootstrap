@@ -4,24 +4,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
-import AbstractNavItem from './AbstractNavItem';
+import AbstractNavItem, { AbstractNavItemProps } from './AbstractNavItem';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavLinkProps extends BsPrefixPropsWithChildren {
-  active?: boolean;
-  disabled?: boolean;
-  role?: string;
-  href?: string;
-  onSelect?: SelectCallback;
-  eventKey?: unknown;
-}
-
-type NavLink = BsPrefixRefForwardingComponent<'a', NavLinkProps>;
+export interface NavLinkProps
+  extends BsPrefixProps,
+    Omit<AbstractNavItemProps, 'as'> {}
 
 const propTypes = {
   /**
@@ -71,30 +60,18 @@ const defaultProps = {
   as: SafeAnchor,
 };
 
-const NavLink: NavLink = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      disabled,
-      className,
-      href,
-      eventKey,
-      onSelect,
-      as,
-      ...props
-    }: NavLinkProps,
-    ref,
-  ) => {
+const NavLink: BsPrefixRefForwardingComponent<
+  'a',
+  NavLinkProps
+> = React.forwardRef<HTMLElement, NavLinkProps>(
+  ({ bsPrefix, disabled, className, as, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
     return (
       <AbstractNavItem
         {...props}
-        href={href}
         ref={ref}
-        eventKey={eventKey}
         as={as as any}
         disabled={disabled}
-        onSelect={onSelect}
         className={classNames(className, bsPrefix, disabled && 'disabled')}
       />
     );

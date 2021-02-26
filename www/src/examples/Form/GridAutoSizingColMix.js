@@ -1,13 +1,13 @@
 <Form>
   <Row className="align-items-center">
     <Col sm={3} className="my-1">
-      <Form.Label htmlFor="inlineFormInputName" srOnly>
+      <Form.Label htmlFor="inlineFormInputName" visuallyHidden>
         Name
       </Form.Label>
       <Form.Control id="inlineFormInputName" placeholder="Jane Doe" />
     </Col>
     <Col sm={3} className="my-1">
-      <Form.Label htmlFor="inlineFormInputGroupUsername" srOnly>
+      <Form.Label htmlFor="inlineFormInputGroupUsername" visuallyHidden>
         Username
       </Form.Label>
       <InputGroup>
