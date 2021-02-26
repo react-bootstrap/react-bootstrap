@@ -886,9 +886,9 @@ const MegaComponent = () => (
       <Popover.Title as="div" bsPrefix="prefix" style={style}>
         Popover title
       </Popover.Title>
-      <Popover.Content as="div" bsPrefix="prefix" style={style}>
+      <Popover.Body as="div" bsPrefix="prefix" style={style}>
         <strong>Popover Content</strong>
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
     <div>
       <ProgressBar striped variant="success" min={-10} now={40} max={200} />

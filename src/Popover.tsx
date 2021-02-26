@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
-import PopoverContent from './PopoverContent';
+import PopoverBody from './PopoverBody';
 import { ArrowProps, Placement } from './Overlay';
 import { BsPrefixProps } from './helpers';
 
@@ -15,7 +15,7 @@ export interface PopoverProps
   placement?: Placement;
   title?: string;
   arrowProps?: ArrowProps;
-  content?: boolean;
+  body?: boolean;
   popper?: any;
   show?: boolean;
 }
@@ -69,10 +69,10 @@ const propTypes = {
   }),
 
   /**
-   * When this prop is set, it creates a Popover with a Popover.Content inside
+   * When this prop is set, it creates a Popover with a Popover.Body inside
    * passing the children directly to it
    */
-  content: PropTypes.bool,
+  body: PropTypes.bool,
 
   /** @private */
   popper: PropTypes.object,
@@ -93,7 +93,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
       className,
       style,
       children,
-      content,
+      body,
       arrowProps,
       popper: _,
       show: _1,
@@ -124,7 +124,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
         {...props}
       >
         <div className="popover-arrow" {...arrowProps} />
-        {content ? <PopoverContent>{children}</PopoverContent> : children}
+        {body ? <PopoverBody>{children}</PopoverBody> : children}
       </div>
     );
   },
@@ -135,5 +135,5 @@ Popover.defaultProps = defaultProps;
 
 export default Object.assign(Popover, {
   Title: PopoverTitle,
-  Content: PopoverContent,
+  Body: PopoverBody,
 });
