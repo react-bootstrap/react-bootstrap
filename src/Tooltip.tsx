@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
-
-import { ArrowProps, Placement } from './Overlay';
+import { ArrowProps, Placement } from './types';
 import { BsPrefixProps } from './helpers';
 
 export interface TooltipProps

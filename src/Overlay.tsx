@@ -9,13 +9,7 @@ import { componentOrElement, elementType } from 'prop-types-extra';
 import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
 import { TransitionType } from './helpers';
-
-export type Placement = import('react-overlays/usePopper').Placement;
-
-export type ArrowProps = {
-  ref: React.RefCallback<HTMLElement>;
-  style: React.CSSProperties;
-};
+import { ArrowProps, Placement } from './types';
 
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;
