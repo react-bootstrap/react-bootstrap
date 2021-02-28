@@ -5,7 +5,7 @@ import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverBody from './PopoverBody';
-import { ArrowProps, Placement } from './Overlay';
+import { ArrowProps, Placement } from './types';
 import { BsPrefixProps } from './helpers';
 
 export interface PopoverProps
@@ -136,4 +136,8 @@ Popover.defaultProps = defaultProps;
 export default Object.assign(Popover, {
   Title: PopoverTitle,
   Body: PopoverBody,
+
+  // Default popover offset.
+  // https://github.com/twbs/bootstrap/blob/5c32767e0e0dbac2d934bcdee03719a65d3f1187/js/src/popover.js#L28
+  POPPER_OFFSET: [0, 8] as const,
 });

@@ -6,16 +6,10 @@ import BaseOverlay, {
 } from 'react-overlays/Overlay';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
-import usePopperMarginModifiers from './usePopperMarginModifiers';
+import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
 import { TransitionType } from './helpers';
-
-export type Placement = import('react-overlays/usePopper').Placement;
-
-export type ArrowProps = {
-  ref: React.RefCallback<HTMLElement>;
-  style: React.CSSProperties;
-};
+import { ArrowProps, Placement } from './types';
 
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;
@@ -166,7 +160,7 @@ function Overlay({
   ...outerProps
 }: OverlayProps) {
   const popperRef = useRef({});
-  const [ref, marginModifiers] = usePopperMarginModifiers();
+  const [ref, modifiers] = useOverlayOffset();
 
   const actualTransition = transition === true ? Fade : transition || null;
 
@@ -176,7 +170,7 @@ function Overlay({
       ref={ref}
       popperConfig={{
         ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig.modifiers || []),
+        modifiers: modifiers.concat(popperConfig.modifiers || []),
       }}
       transition={actualTransition as any}
     >
