@@ -7,7 +7,7 @@ describe('Popover', () => {
   it('Should output a popover title and content', () => {
     mount(
       <Popover id="test-popover">
-        <Popover.Title>Popover title</Popover.Title>
+        <Popover.Header>Popover title</Popover.Header>
         <Popover.Body>
           <strong>Popover Content</strong>
         </Popover.Body>

@@ -230,7 +230,7 @@ export default withLayout(function TooltipSection({ data }) {
       <ComponentApi metadata={data.Tooltip} />
       <ComponentApi metadata={data.Popover} />
       <ComponentApi metadata={data.PopoverBody} />
-      <ComponentApi metadata={data.PopoverTitle} />
+      <ComponentApi metadata={data.PopoverHeader} />
     </>
   );
 });
@@ -246,7 +246,7 @@ export const query = graphql`
     PopoverBody: componentMetadata(displayName: { eq: "PopoverBody" }) {
       ...ComponentApi_metadata
     }
-    PopoverTitle: componentMetadata(displayName: { eq: "PopoverTitle" }) {
+    PopoverHeader: componentMetadata(displayName: { eq: "PopoverHeader" }) {
       ...ComponentApi_metadata
     }
     Overlay: componentMetadata(displayName: { eq: "Overlay" }) {
