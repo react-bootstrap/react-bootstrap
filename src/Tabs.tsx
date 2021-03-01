@@ -155,9 +155,14 @@ const Tabs = (props: TabsProps) => {
         {map(children, (child) => {
           const childProps = { ...child.props };
 
-          delete childProps.title;
-          delete childProps.disabled;
-          delete childProps.tabClassName;
+          const invalidProps = [
+            'title',
+            'disabled',
+            'tabClassName',
+            'mdxType',
+            'originalType',
+          ];
+          invalidProps.map((prop) => delete childProps[prop]);
 
           return <TabPane {...childProps} />;
         })}
