@@ -2,12 +2,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 import Transition, {
+  TransitionStatus,
   ENTERED,
   ENTERING,
 } from 'react-transition-group/Transition';
 import transitionEndListener from './transitionEndListener';
 import { TransitionCallbacks } from './helpers';
 import triggerBrowserReflow from './triggerBrowserReflow';
+import TransitionWrapper from './TransitionWrapper';
 
 export interface FadeProps extends TransitionCallbacks {
   className?: string;
@@ -92,19 +94,20 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
     const handleEnter = useCallback(
       (node) => {
         triggerBrowserReflow(node);
-        if (props.onEnter) props.onEnter(node);
+        props.onEnter?.(node);
       },
       [props],
     );
 
     return (
-      <Transition
+      <TransitionWrapper
         ref={ref}
         addEndListener={transitionEndListener}
         {...props}
         onEnter={handleEnter}
+        childRef={(children as any).ref}
       >
-        {(status, innerProps) =>
+        {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
             ...innerProps,
             className: classNames(
@@ -115,7 +118,7 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
             ),
           })
         }
-      </Transition>
+      </TransitionWrapper>
     );
   },
 );

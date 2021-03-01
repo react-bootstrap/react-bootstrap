@@ -5,6 +5,7 @@ import useTimeout from '@restart/hooks/useTimeout';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
@@ -34,12 +35,6 @@ export interface OverlayTriggerProps
 
   target?: never;
   onHide?: never;
-}
-
-class RefHolder extends React.Component {
-  render() {
-    return this.props.children;
-  }
 }
 
 function normalizeDelay(delay?: OverlayDelay) {
@@ -186,6 +181,10 @@ function OverlayTrigger({
   ...props
 }: OverlayTriggerProps) {
   const triggerNodeRef = useRef(null);
+  const mergedRef = useMergedRefs<unknown>(
+    triggerNodeRef,
+    (children as any).ref,
+  );
   const timeout = useTimeout();
   const hoverStateRef = useRef<string>('');
 
@@ -198,10 +197,9 @@ function OverlayTrigger({
       ? React.Children.only(children).props
       : ({} as any);
 
-  const getTarget = useCallback(
-    () => safeFindDOMNode(triggerNodeRef.current),
-    [],
-  );
+  const attachRef = (r: React.ComponentClass | Element | null | undefined) => {
+    mergedRef(safeFindDOMNode(r));
+  };
 
   const handleShow = useCallback(() => {
     timeout.clear();
@@ -270,7 +268,9 @@ function OverlayTrigger({
   );
 
   const triggers: string[] = trigger == null ? [] : [].concat(trigger as any);
-  const triggerProps: any = {};
+  const triggerProps: any = {
+    ref: attachRef,
+  };
 
   if (triggers.indexOf('click') !== -1) {
     triggerProps.onClick = handleClick;
@@ -292,13 +292,9 @@ function OverlayTrigger({
 
   return (
     <>
-      {typeof children === 'function' ? (
-        children({ ...triggerProps, ref: triggerNodeRef })
-      ) : (
-        <RefHolder ref={triggerNodeRef}>
-          {cloneElement(children as any, triggerProps)}
-        </RefHolder>
-      )}
+      {typeof children === 'function'
+        ? children(triggerProps)
+        : cloneElement(children, triggerProps)}
       <Overlay
         {...props}
         show={show}
@@ -306,7 +302,7 @@ function OverlayTrigger({
         flip={flip}
         placement={placement}
         popperConfig={popperConfig}
-        target={getTarget as any}
+        target={triggerNodeRef.current}
       >
         {overlay}
       </Overlay>

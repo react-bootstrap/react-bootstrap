@@ -10,6 +10,20 @@ describe('<Carousel>', () => {
     <Carousel.Item key={3}>Item 3 content</Carousel.Item>,
   ];
 
+  it('should not throw an error with StrictMode', () => {
+    const ref = React.createRef();
+
+    mount(
+      <React.StrictMode>
+        <Carousel ref={ref} interval={null}>
+          {items}
+        </Carousel>
+      </React.StrictMode>,
+    );
+
+    ref.current.next();
+  });
+
   it('should show the first item by default and render all', () => {
     const wrapper = mount(<Carousel>{items}</Carousel>);
 
