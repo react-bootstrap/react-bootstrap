@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Transition } from 'react-transition-group';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
@@ -28,7 +29,7 @@ const propTypes = {
 const AccordionCollapse: BsPrefixRefForwardingComponent<
   'div',
   AccordionCollapseProps
-> = React.forwardRef<typeof Collapse, AccordionCollapseProps>(
+> = React.forwardRef<Transition<any>, AccordionCollapseProps>(
   ({ bsPrefix, className, children, eventKey, ...props }, ref) => {
     const { activeEventKey } = useContext(AccordionContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
