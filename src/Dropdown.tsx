@@ -145,7 +145,11 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
+      if (
+        event.currentTarget === document &&
+        (source !== 'keydown' || event.key === 'Escape')
+      )
+        source = 'rootClose';
       if (onToggle) {
         onToggle(nextShow, event, { source });
       }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import {
   useDropdownMenu,
-  UseDropdownMenuValue,
   UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
@@ -116,8 +115,8 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-// TODO: remove this hack
-type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
+// // TODO: remove this hack
+// type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
 
 const DropdownMenu: DropdownMenu = React.forwardRef(
   (
@@ -168,14 +167,10 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       }
     }
 
-    const {
-      hasShown,
-      placement,
-      show,
-      alignEnd,
-      close,
-      props: menuProps,
-    } = useDropdownMenu({
+    const [
+      menuProps,
+      { hasShown, popper, show, alignEnd, toggle },
+    ] = useDropdownMenu({
       flip,
       rootCloseEvent,
       show: showProps,
@@ -185,7 +180,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
         ...popperConfig,
         modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
       },
-    }) as UseDropdownMenuValueHack;
+    });
 
     menuProps.ref = useMergedRefs(
       popperRef,
@@ -200,16 +195,16 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
       (menuProps as any).show = show;
-      (menuProps as any).close = close;
+      (menuProps as any).close = () => toggle?.(false);
       (menuProps as any).alignRight = alignEnd;
     }
 
     let style = (props as any).style;
-    if (placement) {
+    if (popper?.placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
       style = { ...(props as any).style, ...menuProps.style };
-      props['x-placement'] = placement;
+      props['x-placement'] = popper.placement;
     }
 
     return (
