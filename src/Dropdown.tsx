@@ -168,21 +168,18 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
         focusFirstItemOnShow={focusFirstItemOnShow}
         itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
       >
-        {({ props: dropdownProps }) => (
-          <Component
-            {...props}
-            {...dropdownProps}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'right' && 'dropright',
-              drop === 'left' && 'dropleft',
-            )}
-          />
-        )}
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(
+            className,
+            show && 'show',
+            (!drop || drop === 'down') && prefix,
+            drop === 'up' && 'dropup',
+            drop === 'right' && 'dropright',
+            drop === 'left' && 'dropleft',
+          )}
+        />
       </BaseDropdown>
     </SelectableContext.Provider>
   );
