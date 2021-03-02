@@ -115,8 +115,6 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-// // TODO: remove this hack
-// type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
 
 const DropdownMenu: DropdownMenu = React.forwardRef(
   (
