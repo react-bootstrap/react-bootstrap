@@ -75,7 +75,7 @@
     "invariant": "^2.2.4",
     "prop-types": "^15.7.2",
     "prop-types-extra": "^1.1.0",
-    "react-overlays": "^4.1.1",
+    "react-overlays": "^5.0.0",
     "react-transition-group": "^4.4.1",
     "uncontrollable": "^7.0.0",
     "warning": "^4.0.3"
@@ -133,6 +133,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-test-renderer": "^16.14.0",
+    "simulant": "^0.2.2",
     "sinon": "^9.2.4",
     "sinon-chai": "^3.5.0",
     "typescript": "^4.1.5",
