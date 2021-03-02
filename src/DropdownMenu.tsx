@@ -115,7 +115,6 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-
 const DropdownMenu: DropdownMenu = React.forwardRef(
   (
     {
