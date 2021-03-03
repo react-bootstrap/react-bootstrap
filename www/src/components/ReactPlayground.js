@@ -3,13 +3,8 @@ import classNames from 'classnames';
 import qsa from 'dom-helpers/querySelectorAll';
 import * as formik from 'formik';
 import PropTypes from 'prop-types';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import * as React from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import {

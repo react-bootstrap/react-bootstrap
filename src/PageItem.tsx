@@ -1,7 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import * as React from 'react';
+import { ReactNode } from 'react';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 import SafeAnchor from './SafeAnchor';

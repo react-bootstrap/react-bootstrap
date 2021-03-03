@@ -9,7 +9,8 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import useWillUnmount from '@restart/hooks/useWillUnmount';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
-import React, {
+import * as React from 'react';
+import {
   useCallback,
   useImperativeHandle,
   useMemo,

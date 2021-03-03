@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import React from 'react';
+import * as React from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';

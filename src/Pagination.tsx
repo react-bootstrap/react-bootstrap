@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';

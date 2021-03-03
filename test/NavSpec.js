@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import Card from '../src/Card';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';

@@ -1,6 +1,7 @@
 import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
-import React, { cloneElement, useCallback, useRef } from 'react';
+import * as React from 'react';
+import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';

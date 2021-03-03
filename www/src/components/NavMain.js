@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';

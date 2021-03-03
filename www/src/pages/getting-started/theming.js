@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Callout from '../../components/Callout';
 import LinkedHeading from '../../components/LinkedHeading';

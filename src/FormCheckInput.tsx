@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';

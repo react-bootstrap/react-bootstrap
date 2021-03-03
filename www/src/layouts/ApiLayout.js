@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import Main from '../components/Main';
 import Default from './index';

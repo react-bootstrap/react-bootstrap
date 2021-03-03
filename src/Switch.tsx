@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FormCheck, { FormCheckProps } from './FormCheck';
 import { BsPrefixRefForwardingComponent } from './helpers';
 

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useCallback, useMemo } from 'react';
+import * as React from 'react';
+import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';

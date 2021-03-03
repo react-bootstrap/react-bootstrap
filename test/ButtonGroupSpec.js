@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
