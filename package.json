@@ -94,7 +94,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-istanbul": "^6.0.0",
-    "chai": "^4.3.0",
+    "chai": "^4.3.3",
     "chalk": "^4.1.0",
     "cherry-pick": "^0.5.0",
     "codecov": "^3.8.1",
@@ -115,7 +115,7 @@
     "eslint-plugin-react": "^7.22.0",
     "execa": "^5.0.0",
     "fs-extra": "^9.1.0",
-    "husky": "^4.0.0",
+    "husky": "^4.3.8",
     "karma": "^6.1.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
@@ -138,7 +138,7 @@
     "sinon-chai": "^3.5.0",
     "stream-browserify": "^3.0.0",
     "typescript": "^4.2.2",
-    "webpack": "^5.24.2"
+    "webpack": "^5.24.3"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
