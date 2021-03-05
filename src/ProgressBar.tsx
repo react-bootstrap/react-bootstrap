@@ -46,6 +46,7 @@ function onlyProgressBar(props, propName, componentName): Error | null {
      *
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const element = <ProgressBar />;
     if (child.type === element.type) return;
 
