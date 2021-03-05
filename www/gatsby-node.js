@@ -55,6 +55,12 @@ exports.onCreateBabelConfig = ({ actions }) => {
       root: path.resolve(__dirname, '../'),
     },
   });
+  actions.setBabelPlugin({
+    name: '@babel/plugin-transform-react-jsx',
+    options: {
+      runtime: 'automatic',
+    },
+  });
 };
 
 exports.createPages = ({ actions }) => {
