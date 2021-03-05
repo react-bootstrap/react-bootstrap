@@ -90,6 +90,10 @@ const NAV_LINKS = [
     link: '/components/alerts',
     title: 'Components',
   },
+  {
+    link: '/premium-themes/',
+    title: 'Premium Themes',
+  },
 ];
 
 const propTypes = {
