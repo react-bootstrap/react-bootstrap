@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import simulant from 'simulant';
 import Dropdown from '../src/Dropdown';

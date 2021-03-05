@@ -1,4 +1,5 @@
-import React, { useImperativeHandle } from 'react';
+import * as React from 'react';
+import { useImperativeHandle } from 'react';
 import { mount } from 'enzyme';
 
 import Popover from '../src/Popover';

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import FormCheck from './FormCheck';
 import FormControl from './FormControl';
 import FormGroup from './FormGroup';

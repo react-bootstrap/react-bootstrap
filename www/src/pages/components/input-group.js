@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';

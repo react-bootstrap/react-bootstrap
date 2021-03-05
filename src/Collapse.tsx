@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/css';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,

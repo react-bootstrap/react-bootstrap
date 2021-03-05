@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';

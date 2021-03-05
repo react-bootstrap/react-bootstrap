@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
-import React from 'react';
+import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixRefForwardingComponent } from './helpers';
 

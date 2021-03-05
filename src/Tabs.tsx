@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';

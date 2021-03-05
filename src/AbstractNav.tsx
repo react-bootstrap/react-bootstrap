@@ -1,6 +1,7 @@
 import qsa from 'dom-helpers/querySelectorAll';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useRef } from 'react';
+import * as React from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import useForceUpdate from '@restart/hooks/useForceUpdate';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavContext from './NavContext';
