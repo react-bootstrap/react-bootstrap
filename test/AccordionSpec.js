@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Accordion from '../src/Accordion';

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { css } from 'astroturf';
 import { stripIndent } from 'common-tags';
-import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';

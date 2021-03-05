@@ -1,6 +1,5 @@
 import { graphql } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
-import * as React from 'react';
 import Anchor from './Anchor';
 import Heading from './Heading';
 import ImportApi from './ImportApi';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'astroturf';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';

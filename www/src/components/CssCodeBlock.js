@@ -1,4 +1,3 @@
-import * as React from 'react';
 import CodeBlock from './CodeBlock';
 
 const propTypes = {};

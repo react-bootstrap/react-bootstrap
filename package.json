@@ -67,7 +67,7 @@
     "@types/classnames": "^2.2.10",
     "@types/invariant": "^2.2.33",
     "@types/prop-types": "^15.7.3",
-    "@types/react": ">=16.9.35",
+    "@types/react": ">=16.14.4",
     "@types/react-transition-group": "^4.4.0",
     "@types/warning": "^3.0.0",
     "classnames": "^2.2.6",
@@ -87,8 +87,8 @@
     "@babel/core": "^7.12.13",
     "@babel/preset-typescript": "^7.12.13",
     "@babel/register": "^7.12.13",
-    "@react-bootstrap/babel-preset": "^1.2.0",
-    "@react-bootstrap/eslint-config": "^1.3.2",
+    "@react-bootstrap/babel-preset": "^2.0.0",
+    "@react-bootstrap/eslint-config": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
     "babel-eslint": "^10.1.0",
@@ -139,8 +139,8 @@
     "webpack": "^4.46.0"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.14.0",
+    "react-dom": ">=16.14.0"
   },
   "publishConfig": {
     "directory": "lib"

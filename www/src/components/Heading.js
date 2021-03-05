@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useEffect } from 'react';
 import classNames from 'classnames';
 import mapContextToProps from '@restart/context/mapContextToProps';

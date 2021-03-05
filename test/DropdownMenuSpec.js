@@ -1,5 +1,4 @@
 import { mount } from 'enzyme';
-import * as React from 'react';
 import DropdownItem from '../src/DropdownItem';
 import DropdownMenu from '../src/DropdownMenu';
 

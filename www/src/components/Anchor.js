@@ -1,4 +1,3 @@
-import * as React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { css } from 'astroturf';

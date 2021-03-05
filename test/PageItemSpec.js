@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
 
 import PageItem, { First } from '../src/PageItem';
