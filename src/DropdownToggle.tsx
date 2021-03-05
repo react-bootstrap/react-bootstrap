@@ -67,7 +67,7 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
       (props as any).bsPrefix = childBsPrefix;
     }
 
-    const [toggleProps, { toggle }] = useDropdownToggle();
+    const [toggleProps] = useDropdownToggle();
 
     toggleProps.ref = useMergedRefs(
       toggleProps.ref,
@@ -78,7 +78,6 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        onClick={toggle}
         className={classNames(className, prefix, split && `${prefix}-split`)}
         {...toggleProps}
         {...props}
