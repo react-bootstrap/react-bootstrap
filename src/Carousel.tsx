@@ -70,7 +70,7 @@ const propTypes = {
    */
   slide: PropTypes.bool,
 
-  /** Cross fade slides instead of the default slide animation */
+  /** Animates slides with a crossfade animation instead of the default slide animation */
   fade: PropTypes.bool,
 
   /**

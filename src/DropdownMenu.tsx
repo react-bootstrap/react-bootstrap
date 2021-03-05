@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import {
   useDropdownMenu,
-  UseDropdownMenuValue,
   UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
@@ -125,9 +124,6 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-// TODO: remove this hack
-type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
-
 const DropdownMenu: BsPrefixRefForwardingComponent<
   'div',
   DropdownMenuProps
@@ -180,14 +176,10 @@ const DropdownMenu: BsPrefixRefForwardingComponent<
       }
     }
 
-    const {
-      hasShown,
-      placement,
-      show,
-      alignEnd,
-      close,
-      props: menuProps,
-    } = useDropdownMenu({
+    const [
+      menuProps,
+      { hasShown, popper, show, alignEnd, toggle },
+    ] = useDropdownMenu({
       flip,
       rootCloseEvent,
       show: showProps,
@@ -195,7 +187,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<
       usePopper: !isNavbar && alignClasses.length === 0,
       offset: [0, 2],
       popperConfig,
-    }) as UseDropdownMenuValueHack;
+    });
 
     menuProps.ref = useMergedRefs(
       useWrappedRefWithWarning(ref, 'DropdownMenu'),
@@ -207,16 +199,16 @@ const DropdownMenu: BsPrefixRefForwardingComponent<
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
       (menuProps as any).show = show;
-      (menuProps as any).close = close;
+      (menuProps as any).close = () => toggle?.(false);
       (menuProps as any).alignRight = alignEnd;
     }
 
     let style = props.style;
-    if (placement) {
+    if (popper?.placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
       style = { ...props.style, ...menuProps.style };
-      props['x-placement'] = placement;
+      props['x-placement'] = popper.placement;
     }
 
     return (
