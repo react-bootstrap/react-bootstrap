@@ -49,15 +49,13 @@ const Form: BsPrefixRefForwardingComponent<
       ...props
     },
     ref,
-  ) => {
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        className={classNames(className, validated && 'was-validated')}
-      />
-    );
-  },
+  ) => (
+    <Component
+      {...props}
+      ref={ref}
+      className={classNames(className, validated && 'was-validated')}
+    />
+  ),
 );
 
 Form.displayName = 'Form';
