@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Carousel from '../src/Carousel';
@@ -219,7 +219,7 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    const labels = wrapper.find('.sr-only');
+    const labels = wrapper.find('.visually-hidden');
 
     expect(labels).to.have.lengthOf(2);
     expect(labels.at(0).text()).to.equal('Previous awesomeness');
@@ -240,7 +240,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      expect(wrapper.find('.sr-only')).to.have.lengthOf(
+      expect(wrapper.find('.visually-hidden')).to.have.lengthOf(
         0,
         `should not render labels for value ${falsyValue}`,
       );

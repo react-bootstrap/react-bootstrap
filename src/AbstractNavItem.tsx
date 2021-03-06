@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import warning from 'warning';
@@ -9,24 +10,16 @@ import SelectableContext, { makeEventKey } from './SelectableContext';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 // TODO: check this
-interface AbstractNavItemProps {
+export interface AbstractNavItemProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   active?: boolean;
   as: React.ElementType;
-  className?: string;
   disabled?: boolean;
   eventKey?: any; // TODO: especially fix this
   href?: string;
-  role?: string;
-  id?: string;
   tabIndex?: number;
-  onClick?: (e: any) => void;
   onSelect?: (navKey: string, e: any) => void;
 }
-
-type AbstractNavItem = BsPrefixRefForwardingComponent<
-  'div',
-  AbstractNavItemProps
->;
 
 const propTypes = {
   id: PropTypes.string,
@@ -49,17 +42,12 @@ const defaultProps = {
   disabled: false,
 };
 
-const AbstractNavItem: AbstractNavItem = React.forwardRef(
+const AbstractNavItem: BsPrefixRefForwardingComponent<
+  'div',
+  AbstractNavItemProps
+> = React.forwardRef<HTMLElement, AbstractNavItemProps>(
   (
-    {
-      active,
-      className,
-      eventKey,
-      onSelect,
-      onClick,
-      as: Component,
-      ...props
-    }: AbstractNavItemProps,
+    { active, className, eventKey, onSelect, onClick, as: Component, ...props },
     ref,
   ) => {
     const navKey = makeEventKey(eventKey, props.href);
@@ -101,10 +89,10 @@ const AbstractNavItem: AbstractNavItem = React.forwardRef(
     }
 
     const handleOnclick = useEventCallback((e) => {
-      if (onClick) onClick(e);
+      onClick?.(e);
       if (navKey == null) return;
-      if (onSelect) onSelect(navKey, e);
-      if (parentOnSelect) parentOnSelect(navKey, e);
+      onSelect?.(navKey, e);
+      parentOnSelect?.(navKey, e);
     });
 
     return (

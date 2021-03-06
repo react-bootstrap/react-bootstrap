@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
 import { DropDirection } from 'react-overlays/DropdownContext';
 import { useUncontrolled } from 'uncontrollable';
@@ -12,7 +13,7 @@ import SelectableContext from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
@@ -28,29 +29,22 @@ const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
   Component: 'span',
 });
 
-export interface DropdownProps extends BsPrefixPropsWithChildren {
+export interface DropdownProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   drop?: 'up' | 'start' | 'end' | 'down';
   alignRight?: boolean;
   show?: boolean;
   flip?: boolean;
   onToggle?: (
     isOpen: boolean,
-    event: React.SyntheticEvent<Dropdown>,
+    event: React.SyntheticEvent,
     metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
   ) => void;
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
 }
-
-type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
-  Toggle: typeof DropdownToggle;
-  Menu: typeof DropdownMenu;
-  Item: typeof DropdownItem;
-  ItemText: typeof DropdownItemText;
-  Divider: typeof DropdownDivider;
-  Header: typeof DropdownHeader;
-};
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -126,7 +120,10 @@ const defaultProps = {
   navbar: false,
 };
 
-const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
+const Dropdown: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownProps
+> = React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
   const {
     bsPrefix,
     drop,
@@ -147,16 +144,18 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
-      if (onToggle) {
-        onToggle(nextShow, event, { source });
-      }
+      if (
+        event.currentTarget === document &&
+        (source !== 'keydown' || event.key === 'Escape')
+      )
+        source = 'rootClose';
+      onToggle?.(nextShow, event, { source });
     },
   );
 
   const handleSelect = useEventCallback((key, event) => {
-    if (onSelectCtx) onSelectCtx(key, event);
-    if (onSelect) onSelect(key, event);
+    onSelectCtx?.(key, event);
+    onSelect?.(key, event);
     handleToggle(false, event, 'select');
   });
 
@@ -178,35 +177,32 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
         focusFirstItemOnShow={focusFirstItemOnShow}
         itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
       >
-        {({ props: dropdownProps }) => (
-          <Component
-            {...props}
-            {...dropdownProps}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'end' && 'dropend',
-              drop === 'start' && 'dropstart',
-            )}
-          />
-        )}
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(
+            className,
+            show && 'show',
+            (!drop || drop === 'down') && prefix,
+            drop === 'up' && 'dropup',
+            drop === 'end' && 'dropend',
+            drop === 'start' && 'dropstart',
+          )}
+        />
       </BaseDropdown>
     </SelectableContext.Provider>
   );
-}) as unknown) as Dropdown;
+});
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-Dropdown.Divider = DropdownDivider;
-Dropdown.Header = DropdownHeader;
-Dropdown.Item = DropdownItem;
-Dropdown.ItemText = DropdownItemText;
-Dropdown.Menu = DropdownMenu;
-Dropdown.Toggle = DropdownToggle;
-
-export default Dropdown;
+export default Object.assign(Dropdown, {
+  Toggle: DropdownToggle,
+  Menu: DropdownMenu,
+  Item: DropdownItem,
+  ItemText: DropdownItemText,
+  Divider: DropdownDivider,
+  Header: DropdownHeader,
+});

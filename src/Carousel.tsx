@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
-import React, {
+import * as React from 'react';
+import {
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -21,30 +22,19 @@ import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type CarouselVariant = 'dark';
 
 export interface CarouselRef {
-  element: HTMLElement;
+  element?: HTMLElement;
   prev: (e?: React.SyntheticEvent) => void;
   next: (e?: React.SyntheticEvent) => void;
 }
 
 export interface CarouselProps
-  extends BsPrefixPropsWithChildren,
-    Pick<
-      React.DOMAttributes<HTMLElement>,
-      | 'onKeyDown'
-      | 'onMouseOver'
-      | 'onMouseOut'
-      | 'onTouchStart'
-      | 'onTouchMove'
-      | 'onTouchEnd'
-    > {
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   slide?: boolean;
   fade?: boolean;
   controls?: boolean;
@@ -67,11 +57,6 @@ export interface CarouselProps
   variant?: CarouselVariant;
 }
 
-type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
-  Caption: typeof CarouselCaption;
-  Item: typeof CarouselItem;
-};
-
 const SWIPE_THRESHOLD = 40;
 
 const propTypes = {
@@ -86,7 +71,7 @@ const propTypes = {
    */
   slide: PropTypes.bool,
 
-  /** Cross fade slides instead of the default slide animation */
+  /** Animates slides with a crossfade animation instead of the default slide animation */
   fade: PropTypes.bool,
 
   /**
@@ -222,7 +207,10 @@ function isVisible(element) {
   );
 }
 
-function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
+const Carousel: BsPrefixRefForwardingComponent<
+  'div',
+  CarouselProps
+> = React.forwardRef<CarouselRef, CarouselProps>((uncontrolledProps, ref) => {
   const {
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
@@ -318,10 +306,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       }
 
       nextDirectionRef.current = 'prev';
-
-      if (onSelect) {
-        onSelect(nextActiveIndex, event);
-      }
+      onSelect?.(nextActiveIndex, event);
     },
     [isSliding, renderedActiveIndex, onSelect, wrap, numChildren],
   );
@@ -343,14 +328,16 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
 
     nextDirectionRef.current = 'next';
 
-    if (onSelect) {
-      onSelect(nextActiveIndex, event);
-    }
+    onSelect?.(nextActiveIndex, event);
   });
 
-  const elementRef = useRef();
+  const elementRef = useRef<HTMLElement>();
 
-  useImperativeHandle(ref, () => ({ element: elementRef.current, prev, next }));
+  useImperativeHandle(ref, () => ({
+    element: elementRef.current,
+    prev,
+    next,
+  }));
 
   // This is used in the setInterval, so it should not invalidate.
   const nextWhenVisible = useEventCallback(() => {
@@ -367,12 +354,8 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
       return;
     }
 
-    if (onSlide) {
-      onSlide(renderedActiveIndex, slideDirection);
-    }
-    if (onSlid) {
-      onSlid(renderedActiveIndex, slideDirection);
-    }
+    onSlide?.(renderedActiveIndex, slideDirection);
+    onSlid?.(renderedActiveIndex, slideDirection);
   }, [renderedActiveIndex]);
 
   const orderClassName = `${prefix}-item-${direction}`;
@@ -382,9 +365,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     (node) => {
       triggerBrowserReflow(node);
 
-      if (onSlide) {
-        onSlide(renderedActiveIndex, slideDirection);
-      }
+      onSlide?.(renderedActiveIndex, slideDirection);
     },
     [onSlide, renderedActiveIndex, slideDirection],
   );
@@ -392,9 +373,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
   const handleEntered = useCallback(() => {
     setIsSliding(false);
 
-    if (onSlid) {
-      onSlid(renderedActiveIndex, slideDirection);
-    }
+    onSlid?.(renderedActiveIndex, slideDirection);
   }, [onSlid, renderedActiveIndex, slideDirection]);
 
   const handleKeyDown = useCallback(
@@ -413,9 +392,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         }
       }
 
-      if (onKeyDown) {
-        onKeyDown(event);
-      }
+      onKeyDown?.(event);
     },
     [keyboard, onKeyDown, prev, next],
   );
@@ -426,9 +403,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         setPaused(true);
       }
 
-      if (onMouseOver) {
-        onMouseOver(event);
-      }
+      onMouseOver?.(event);
     },
     [pause, onMouseOver],
   );
@@ -437,9 +412,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     (event) => {
       setPaused(false);
 
-      if (onMouseOut) {
-        onMouseOut(event);
-      }
+      onMouseOut?.(event);
     },
     [onMouseOut],
   );
@@ -457,9 +430,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         setPaused(true);
       }
 
-      if (onTouchStart) {
-        onTouchStart(event);
-      }
+      onTouchStart?.(event);
     },
     [pause, onTouchStart],
   );
@@ -473,9 +444,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
           event.touches[0].clientX - touchStartXRef.current;
       }
 
-      if (onTouchMove) {
-        onTouchMove(event);
-      }
+      onTouchMove?.(event);
     },
     [onTouchMove],
   );
@@ -500,9 +469,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
         }, interval || undefined);
       }
 
-      if (onTouchEnd) {
-        onTouchEnd(event);
-      }
+      onTouchEnd?.(event);
     },
     [touch, pause, prev, next, touchUnpauseTimeout, interval, onTouchEnd],
   );
@@ -532,9 +499,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     () =>
       indicators &&
       Array.from({ length: numChildren }, (_, index) => (event) => {
-        if (onSelect) {
-          onSelect(index, event);
-        }
+        onSelect?.(index, event);
       }),
     [indicators, numChildren, onSelect],
   );
@@ -608,30 +573,30 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
           {(wrap || activeIndex !== 0) && (
             <SafeAnchor className={`${prefix}-control-prev`} onClick={prev}>
               {prevIcon}
-              {prevLabel && <span className="sr-only">{prevLabel}</span>}
+              {prevLabel && (
+                <span className="visually-hidden">{prevLabel}</span>
+              )}
             </SafeAnchor>
           )}
           {(wrap || activeIndex !== numChildren - 1) && (
             <SafeAnchor className={`${prefix}-control-next`} onClick={next}>
               {nextIcon}
-              {nextLabel && <span className="sr-only">{nextLabel}</span>}
+              {nextLabel && (
+                <span className="visually-hidden">{nextLabel}</span>
+              )}
             </SafeAnchor>
           )}
         </>
       )}
     </Component>
   );
-}
-
-const Carousel: Carousel = (React.forwardRef(
-  CarouselFunc,
-) as unknown) as Carousel;
+});
 
 Carousel.displayName = 'Carousel';
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;
 
-Carousel.Caption = CarouselCaption;
-Carousel.Item = CarouselItem;
-
-export default Carousel;
+export default Object.assign(Carousel, {
+  Caption: CarouselCaption,
+  Item: CarouselItem,
+});

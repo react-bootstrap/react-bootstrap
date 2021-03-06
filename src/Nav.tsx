@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import all from 'prop-types-extra/lib/all';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -12,12 +13,14 @@ import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
 
-export interface NavProps extends BsPrefixPropsWithChildren {
+export interface NavProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
@@ -26,15 +29,8 @@ export interface NavProps extends BsPrefixPropsWithChildren {
   fill?: boolean;
   justify?: boolean;
   onSelect?: SelectCallback;
-  role?: string;
   navbar?: boolean;
-  onKeyDown?: React.KeyboardEventHandler<this>;
 }
-
-type Nav = BsPrefixRefForwardingComponent<'div', NavProps> & {
-  Item: typeof NavItem;
-  Link: typeof NavLink;
-};
 
 const propTypes = {
   /**
@@ -114,7 +110,10 @@ const defaultProps = {
   fill: false,
 };
 
-const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
+const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
+  HTMLElement,
+  NavProps
+>((uncontrolledProps, ref) => {
   const {
     as = 'div',
     bsPrefix: initialBsPrefix,
@@ -123,7 +122,6 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
     justify,
     navbar,
     className,
-    children,
     activeKey,
     ...props
   } = useUncontrolled(uncontrolledProps, { activeKey: 'onSelect' });
@@ -158,17 +156,15 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
         [`${bsPrefix}-justified`]: justify,
       })}
       {...props}
-    >
-      {children}
-    </AbstractNav>
+    />
   );
-}) as unknown) as Nav;
+});
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
 Nav.defaultProps = defaultProps;
 
-Nav.Item = NavItem;
-Nav.Link = NavLink;
-
-export default Nav;
+export default Object.assign(Nav, {
+  Item: NavItem,
+  Link: NavLink,
+});

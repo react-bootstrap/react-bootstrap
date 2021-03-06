@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import {
   useDropdownMenu,
-  UseDropdownMenuValue,
   UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
@@ -11,9 +11,8 @@ import warning from 'warning';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import usePopperMarginModifiers from './usePopperMarginModifiers';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
@@ -30,7 +29,9 @@ export type AlignType = AlignDirection | ResponsiveAlignProp;
 
 export type DropdownMenuVariant = 'dark';
 
-export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
+export interface DropdownMenuProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
@@ -41,8 +42,6 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   popperConfig?: UseDropdownMenuOptions['popperConfig'];
   variant?: DropdownMenuVariant;
 }
-
-type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
 const alignDirection = PropTypes.oneOf<AlignDirection>(['start', 'end']);
 
@@ -126,10 +125,10 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-// TODO: remove this hack
-type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
-
-const DropdownMenu: DropdownMenu = React.forwardRef(
+const DropdownMenu: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownMenuProps
+> = React.forwardRef<HTMLElement, DropdownMenuProps>(
   (
     {
       bsPrefix,
@@ -147,12 +146,11 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       popperConfig,
       variant,
       ...props
-    }: DropdownMenuProps,
+    },
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-    const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
     const alignClasses: string[] = [];
     if (align) {
@@ -179,31 +177,22 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       }
     }
 
-    const {
-      hasShown,
-      placement,
-      show,
-      alignEnd,
-      close,
-      props: menuProps,
-    } = useDropdownMenu({
+    const [
+      menuProps,
+      { hasShown, popper, show, alignEnd, toggle },
+    ] = useDropdownMenu({
       flip,
       rootCloseEvent,
       show: showProps,
       alignEnd: alignRight,
       usePopper: !isNavbar && alignClasses.length === 0,
-      popperConfig: {
-        ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
-      },
-    }) as UseDropdownMenuValueHack;
+      offset: [0, 2],
+      popperConfig,
+    });
 
     menuProps.ref = useMergedRefs(
-      popperRef,
-      useMergedRefs(
-        useWrappedRefWithWarning(ref, 'DropdownMenu'),
-        menuProps.ref,
-      ),
+      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+      menuProps.ref,
     );
 
     if (!hasShown && !renderOnMount) return null;
@@ -211,16 +200,16 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
       (menuProps as any).show = show;
-      (menuProps as any).close = close;
+      (menuProps as any).close = () => toggle?.(false);
       (menuProps as any).alignRight = alignEnd;
     }
 
-    let style = (props as any).style;
-    if (placement) {
+    let style = props.style;
+    if (popper?.placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
-      style = { ...(props as any).style, ...menuProps.style };
-      props['x-placement'] = placement;
+      style = { ...props.style, ...menuProps.style };
+      props['x-placement'] = popper.placement;
     }
 
     return (

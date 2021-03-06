@@ -1,24 +1,21 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton, { CloseButtonVariant } from './CloseButton';
 import ToastContext from './ToastContext';
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface ToastHeaderProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
+  extends BsPrefixAndClassNameOnlyProps,
+    React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeVariant?: CloseButtonVariant;
   closeButton?: boolean;
 }
-
-type ToastHeader = BsPrefixRefForwardingComponent<'div', ToastHeaderProps>;
 
 const propTypes = {
   bsPrefix: PropTypes.string,
@@ -46,10 +43,7 @@ const defaultProps = {
   closeButton: true,
 };
 
-const ToastHeader: ToastHeader = React.forwardRef<
-  HTMLDivElement,
-  ToastHeaderProps
->(
+const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
   (
     {
       bsPrefix,
@@ -67,9 +61,7 @@ const ToastHeader: ToastHeader = React.forwardRef<
     const context = useContext(ToastContext);
 
     const handleClick = useEventCallback((e) => {
-      if (context && context.onClose) {
-        context.onClose(e);
-      }
+      context?.onClose?.(e);
     });
 
     return (

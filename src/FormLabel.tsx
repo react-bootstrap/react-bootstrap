@@ -1,19 +1,19 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import warning from 'warning';
 
 import Col, { ColProps } from './Col';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-interface FormLabelBaseProps extends BsPrefixPropsWithChildren {
+interface FormLabelBaseProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   htmlFor?: string;
-  srOnly?: boolean;
+  visuallyHidden?: boolean;
 }
 
 export interface FormLabelOwnProps extends FormLabelBaseProps {
@@ -25,8 +25,6 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
 }
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
-
-type FormLabel = BsPrefixRefForwardingComponent<'label', FormLabelProps>;
 
 const propTypes = {
   /**
@@ -59,7 +57,7 @@ const propTypes = {
    * Hides the label visually while still allowing it to be
    * read by assistive technologies.
    */
-  srOnly: PropTypes.bool,
+  visuallyHidden: PropTypes.bool,
 
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -67,17 +65,20 @@ const propTypes = {
 
 const defaultProps = {
   column: false,
-  srOnly: false,
+  visuallyHidden: false,
 };
 
-const FormLabel: FormLabel = React.forwardRef(
+const FormLabel: BsPrefixRefForwardingComponent<
+  'label',
+  FormLabelProps
+> = React.forwardRef<HTMLElement, FormLabelProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'label',
       bsPrefix,
       column,
-      srOnly,
+      visuallyHidden,
       className,
       htmlFor,
       ...props
@@ -95,7 +96,7 @@ const FormLabel: FormLabel = React.forwardRef(
     const classes = classNames(
       className,
       bsPrefix,
-      srOnly && 'sr-only',
+      visuallyHidden && 'visually-hidden',
       column && columnClass,
     );
 

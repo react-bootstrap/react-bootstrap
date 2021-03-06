@@ -1,6 +1,7 @@
 import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
-import React, { cloneElement, useCallback, useRef } from 'react';
+import * as React from 'react';
+import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
@@ -56,6 +57,7 @@ function normalizeDelay(delay?: OverlayDelay) {
 // for cases when the trigger is disabled and mouseOut/Over can cause flicker
 // moving from one child element to another.
 function handleMouseOverOut(
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   handler: (...args: [React.MouseEvent, ...any[]]) => any,
   args: [React.MouseEvent, ...any[]],
   relatedNative: 'fromElement' | 'toElement',
@@ -250,7 +252,7 @@ function OverlayTrigger({
   const handleClick = useCallback(
     (...args: any[]) => {
       setShow(!show);
-      if (onClick) onClick(...args);
+      onClick?.(...args);
     },
     [onClick, setShow, show],
   );

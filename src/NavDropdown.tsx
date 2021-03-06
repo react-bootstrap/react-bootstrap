@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -9,8 +9,7 @@ import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavDropdownProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'> {
+  extends Omit<DropdownProps, 'onSelect' | 'title'> {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;
@@ -20,13 +19,6 @@ export interface NavDropdownProps
   rootCloseEvent?: 'click' | 'mousedown';
   menuVariant?: DropdownMenuVariant;
 }
-
-type NavDropdown = BsPrefixRefForwardingComponent<'div', NavDropdownProps> & {
-  Item: typeof Dropdown.Item;
-  ItemText: typeof Dropdown.ItemText;
-  Divider: typeof Dropdown.Divider;
-  Header: typeof Dropdown.Header;
-};
 
 const propTypes = {
   /**
@@ -72,7 +64,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const NavDropdown: NavDropdown = (React.forwardRef(
+const NavDropdown: BsPrefixRefForwardingComponent<
+  'div',
+  NavDropdownProps
+> = React.forwardRef(
   (
     {
       id,
@@ -121,13 +116,14 @@ const NavDropdown: NavDropdown = (React.forwardRef(
       </Dropdown>
     );
   },
-) as unknown) as NavDropdown;
+);
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
-NavDropdown.Item = Dropdown.Item;
-NavDropdown.ItemText = Dropdown.ItemText;
-NavDropdown.Divider = Dropdown.Divider;
-NavDropdown.Header = Dropdown.Header;
 
-export default NavDropdown;
+export default Object.assign(NavDropdown, {
+  Item: Dropdown.Item,
+  ItemText: Dropdown.ItemText,
+  Divider: Dropdown.Divider,
+  Header: Dropdown.Header,
+});

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
@@ -13,7 +13,7 @@ import createWithBsPrefix from './createWithBsPrefix';
 import SafeAnchor from './SafeAnchor';
 import { TransitionType } from './helpers';
 
-export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   bsPrefix?: string;
   variant?: Variant;
   dismissible?: boolean;
@@ -34,11 +34,6 @@ const AlertHeading = createWithBsPrefix('alert-heading', {
 const AlertLink = createWithBsPrefix('alert-link', {
   Component: SafeAnchor,
 });
-
-type Alert = React.ForwardRefExoticComponent<AlertProps> & {
-  Link: typeof AlertLink;
-  Heading: typeof AlertHeading;
-};
 
 const propTypes = {
   /**
@@ -97,7 +92,7 @@ const defaultProps = {
   closeLabel: 'Close alert',
 };
 
-const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (uncontrolledProps: AlertProps, ref) => {
     const {
       bsPrefix,
@@ -153,12 +148,13 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
       </Transition>
     );
   },
-) as unknown) as Alert;
+);
 
 Alert.displayName = 'Alert';
-Alert.defaultProps = defaultProps as any;
+Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
-Alert.Link = AlertLink;
-Alert.Heading = AlertHeading;
 
-export default Alert;
+export default Object.assign(Alert, {
+  Link: AlertLink,
+  Heading: AlertHeading,
+});

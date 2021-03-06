@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
@@ -9,29 +9,19 @@ import DropdownMenu, {
   DropdownMenuVariant,
 } from './DropdownMenu';
 
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
+  extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   title: React.ReactNode;
   menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  bsPrefix?: string;
   menuVariant?: DropdownMenuVariant;
 }
-
-type DropdownButton = BsPrefixRefForwardingComponent<
-  'div',
-  DropdownButtonProps
->;
 
 const propTypes = {
   /**
@@ -99,10 +89,10 @@ const propTypes = {
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
  * along with menu-related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton: DropdownButton = React.forwardRef<
-  HTMLDivElement,
+const DropdownButton: BsPrefixRefForwardingComponent<
+  'div',
   DropdownButtonProps
->(
+> = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
   (
     {
       title,
@@ -147,6 +137,6 @@ const DropdownButton: DropdownButton = React.forwardRef<
 );
 
 DropdownButton.displayName = 'DropdownButton';
-DropdownButton.propTypes = propTypes as any;
+DropdownButton.propTypes = propTypes;
 
 export default DropdownButton;

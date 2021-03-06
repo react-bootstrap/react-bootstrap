@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import SelectableContext, { makeEventKey } from './SelectableContext';
@@ -8,24 +9,20 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import NavContext from './NavContext';
 import SafeAnchor from './SafeAnchor';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
 
-export interface DropdownItemProps extends BsPrefixPropsWithChildren {
+export interface DropdownItemProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   active?: boolean;
   disabled?: boolean;
   eventKey?: string;
   href?: string;
-  onClick?: React.MouseEventHandler<this>;
   onSelect?: SelectCallback;
 }
-
-type DropdownItem = BsPrefixRefForwardingComponent<
-  typeof SafeAnchor,
-  DropdownItemProps
->;
 
 const propTypes = {
   /** @default 'dropdown-item' */
@@ -73,12 +70,14 @@ const defaultProps = {
   disabled: false,
 };
 
-const DropdownItem: DropdownItem = React.forwardRef(
+const DropdownItem: BsPrefixRefForwardingComponent<
+  typeof SafeAnchor,
+  DropdownItemProps
+> = React.forwardRef(
   (
     {
       bsPrefix,
       className,
-      children,
       eventKey,
       disabled,
       href,
@@ -107,9 +106,9 @@ const DropdownItem: DropdownItem = React.forwardRef(
       // SafeAnchor handles the disabled case, but we handle it here
       // for other components
       if (disabled) return;
-      if (onClick) onClick(event);
-      if (onSelectCtx) onSelectCtx(key, event);
-      if (onSelect) onSelect(key, event);
+      onClick?.(event);
+      onSelectCtx?.(key, event);
+      onSelect?.(key, event);
     });
 
     return (
@@ -127,9 +126,7 @@ const DropdownItem: DropdownItem = React.forwardRef(
           disabled && 'disabled',
         )}
         onClick={handleClick}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );

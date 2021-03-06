@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -55,7 +54,7 @@ const StyledNavbar = styled(Navbar).attrs({
 `;
 
 const SkipToContentLink = styled('a')`
-  composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 me-2 from global;
+  composes: visually-hidden visually-hidden-focusable bg-primary text-white px-4 py-2 me-2 from global;
 `;
 
 const StyledNavLink = styled(Nav.Link)`
@@ -157,7 +156,7 @@ function NavMain({ activePage }) {
               rel="noopener noreferrer"
             >
               <FontAwesomeIcon icon={faGithub} size="lg" />
-              <span className="sr-only">Github</span>
+              <span className="visually-hidden">Github</span>
             </StyledNavLink>
           </OverlayTrigger>
           <OverlayTrigger
@@ -171,7 +170,7 @@ function NavMain({ activePage }) {
               rel="noopener noreferrer"
             >
               <FontAwesomeIcon icon={faDiscord} size="lg" />
-              <span className="sr-only">Discord</span>
+              <span className="visually-hidden">Discord</span>
             </StyledNavLink>
           </OverlayTrigger>
         </Nav>

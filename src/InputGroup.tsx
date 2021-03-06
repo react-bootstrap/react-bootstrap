@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import React from 'react';
+import * as React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -32,14 +32,6 @@ export interface InputGroupProps extends BsPrefixPropsWithChildren {
   hasValidation?: boolean;
 }
 
-type InputGroupExtras = {
-  Text: typeof InputGroupText;
-  Checkbox: typeof InputGroupCheckbox;
-  Radio: typeof InputGroupRadio;
-};
-
-type InputGroup = BsPrefixRefForwardingComponent<'div', InputGroupProps>;
-
 const propTypes = {
   /** @default 'input-group' */
   bsPrefix: PropTypes.string,
@@ -67,7 +59,10 @@ const propTypes = {
  * @property {InputGroupRadio} Radio
  * @property {InputGroupCheckbox} Checkbox
  */
-const InputGroup: InputGroup = React.forwardRef(
+const InputGroup: BsPrefixRefForwardingComponent<
+  'div',
+  InputGroupProps
+> = React.forwardRef<HTMLElement, InputGroupProps>(
   (
     {
       bsPrefix,
@@ -100,11 +95,8 @@ const InputGroup: InputGroup = React.forwardRef(
 InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';
 
-const InputGroupWithExtras: InputGroup & InputGroupExtras = {
-  ...InputGroup,
+export default Object.assign(InputGroup, {
   Text: InputGroupText,
   Radio: InputGroupRadio,
   Checkbox: InputGroupCheckbox,
-} as any;
-
-export default InputGroupWithExtras;
+});

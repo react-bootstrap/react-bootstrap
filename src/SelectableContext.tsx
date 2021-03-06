@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 // TODO (apparently this is a bare "onSelect"?)
 type SelectableContextType = (key: string | null, event: any) => void;

@@ -28,8 +28,19 @@ beforeEach(() => {
   sinon.stub(console, 'error').callsFake((msg, ...args) => {
     let expected = false;
 
+    // When using the new JSX transform, React uses a different checkPropTypes
+    // function that exists within react-jsx-dev-runtime.development.js that
+    // sends in a string message with args. In contrast, without the JSX transform,
+    // React (react.development.js) uses checkPropTypes from the prop-types package
+    // and this formats the string prior to calling console.error.
+    // We're going to need to format the string ourselves and check it.
+    let formattedStr = msg;
+    if (args.length) {
+      formattedStr = Util.format(msg, ...args);
+    }
+
     console.error.expected.forEach((about) => {
-      if (msg.indexOf(about) !== -1) {
+      if (formattedStr.indexOf(about) !== -1) {
         console.error.warned[about] = true;
         expected = true;
       }
@@ -40,7 +51,7 @@ beforeEach(() => {
     }
 
     console.error.threw = true;
-    throw new Error(Util.format(msg, ...args));
+    throw new Error(formattedStr);
   });
 
   console.error.expected = [];

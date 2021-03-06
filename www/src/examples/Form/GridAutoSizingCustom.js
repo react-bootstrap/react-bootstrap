@@ -1,7 +1,11 @@
 <Form>
   <Row className="align-items-center">
     <Col xs="auto" className="my-1">
-      <Form.Label className="me-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
+      <Form.Label
+        className="me-sm-2"
+        htmlFor="inlineFormCustomSelect"
+        visuallyHidden
+      >
         Preference
       </Form.Label>
       <Form.Select className="me-sm-2" id="inlineFormCustomSelect">

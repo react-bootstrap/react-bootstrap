@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/css';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,
@@ -230,8 +231,8 @@ const Collapse = React.forwardRef(
         onExit={handleExit}
         onExiting={handleExiting}
       >
-        {(state, innerProps) => {
-          return React.cloneElement(children as any, {
+        {(state, innerProps) =>
+          React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               className,
@@ -239,8 +240,8 @@ const Collapse = React.forwardRef(
               collapseStyles[state],
               computedDimension === 'width' && 'width',
             ),
-          });
-        }}
+          })
+        }
       </Transition>
     );
   },

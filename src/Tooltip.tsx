@@ -1,26 +1,20 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
-
-import { ArrowProps, Placement } from './Overlay';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { ArrowProps, Placement } from './types';
+import { BsPrefixProps } from './helpers';
 
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   id: string;
   placement?: Placement;
   arrowProps?: ArrowProps;
   show?: boolean;
   popper?: any;
 }
-
-type Tooltip = BsPrefixRefForwardingComponent<'div', TooltipProps>;
 
 const propTypes = {
   /**
@@ -83,7 +77,7 @@ const defaultProps = {
   placement: 'right',
 };
 
-const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
+const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       bsPrefix,
@@ -124,7 +118,7 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   },
 );
 
-Tooltip.propTypes = propTypes;
+Tooltip.propTypes = propTypes as any;
 Tooltip.defaultProps = defaultProps as any;
 Tooltip.displayName = 'Tooltip';
 
