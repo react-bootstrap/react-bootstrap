@@ -1,11 +1,8 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type ToastPosition =
   | 'top-start'
@@ -19,15 +16,10 @@ export type ToastPosition =
   | 'bottom-end';
 
 export interface ToastContainerProps
-  extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   position?: ToastPosition;
 }
-
-type ToastContainer = BsPrefixRefForwardingComponent<
-  'div',
-  ToastContainerProps
->;
 
 const propTypes = {
   /**
@@ -63,10 +55,10 @@ const positionClasses = {
   'bottom-end': 'bottom-0 end-0',
 };
 
-const ToastContainer: ToastContainer = React.forwardRef<
-  HTMLDivElement,
+const ToastContainer: BsPrefixRefForwardingComponent<
+  'div',
   ToastContainerProps
->(
+> = React.forwardRef<HTMLDivElement, ToastContainerProps>(
   (
     {
       bsPrefix,
