@@ -10,6 +10,7 @@ import FormRange from './FormRange';
 import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
+import FloatingLabel from './FloatingLabel';
 import { BsPrefixRefForwardingComponent, AsProp } from './helpers';
 
 export interface FormProps
@@ -65,11 +66,12 @@ Form.propTypes = propTypes as any;
 export default Object.assign(Form, {
   Group: FormGroup,
   Control: FormControl,
+  Floating: FormFloating,
   Check: FormCheck,
   Switch,
   Label: FormLabel,
   Text: FormText,
   Range: FormRange,
   Select: FormSelect,
-  FloatingLabel: FormFloating,
+  FloatingLabel,
 });
