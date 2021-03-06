@@ -231,8 +231,8 @@ const Collapse = React.forwardRef(
         onExit={handleExit}
         onExiting={handleExiting}
       >
-        {(state, innerProps) => {
-          return React.cloneElement(children as any, {
+        {(state, innerProps) =>
+          React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               className,
@@ -240,8 +240,8 @@ const Collapse = React.forwardRef(
               collapseStyles[state],
               computedDimension === 'width' && 'width',
             ),
-          });
-        }}
+          })
+        }
       </Transition>
     );
   },
