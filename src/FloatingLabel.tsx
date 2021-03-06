@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import FormGroup, { FormGroupProps } from './FormGroup';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
