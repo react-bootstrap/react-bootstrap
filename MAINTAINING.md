@@ -11,7 +11,7 @@ the [Contributing Guide](./CONTRIBUTING.md).
 New issues pop up every day. We need to identify urgent issues (such as nobody
 can use a component, or install React-Bootstrap), close and link duplicates,
 answer questions, etc. Please alert the
-[reactiflux#react-bootstrap](https://discord.gg/reactiflux) chat room of
+[reactiflux#react-bootstrap](https://discord.gg/AKfs9vpvRW) chat room of
 the urgent issues.
 
 Some issues are opened that are just too vague to do anything about. If after
@@ -38,7 +38,7 @@ this will minimize trivial merge conflicts.
 If you are interested in becoming a react-bootstrap maintainer, start by
 reviewing issues and pull requests. Answer questions for those in need of
 troubleshooting. Join us in the
-[reactiflux#react-bootstrap](https://discord.gg/reactiflux) chat room.
+[reactiflux#react-bootstrap](https://discord.gg/AKfs9vpvRW) chat room.
 Once we see you helping, either we will reach out and ask you if you want to
 join or you can ask one of the current maintainers to add you. We will try our
 best to be proactive in reaching out to those that are already helping out.
@@ -55,15 +55,14 @@ less active when you don't. If you get a new job and get busy, that's alright.
 
 Releases should include documentation, git tag, bower package preparation and
 finally the actual npm module publish. We have all of this automated by running
-`npm run release`. __PLEASE DO NOT RUN `npm
-publish` BY ITSELF__. The `release-script` will do that. We want to prevent issues
+`npm run release`. **PLEASE DO NOT RUN `npm publish` BY ITSELF**. The `release-script` will do that. We want to prevent issues
 like [#325](https://github.com/react-bootstrap/react-bootstrap/issues/325) and
 [#218](https://github.com/react-bootstrap/react-bootstrap/issues/218) from ever
 happening again. In order to run the `release-script` you will need permission to
 publish the package to npm. Those with this permission are in the [publishers
 team](https://github.com/orgs/react-bootstrap/teams/publishers)
 
-*Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish.*
+_Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish._
 
 Example usages of the `release-script`:
 
@@ -76,13 +75,16 @@ $ npm run release minor -- --preid beta --run  Use both bump and preid for first
 $ npm run release -- --preid beta --run        For follow on prereleases of the next version just use this
 ```
 
-*Note additional `--` double-dash. It is important.*
+_Note additional `--` double-dash. It is important._
 
 Or if you have this line
+
 ```sh
 export PATH="./node_modules/.bin:$PATH"
 ```
+
 in your shell config, then you can run it just as:
+
 ```bash
 $ release patch // without "--run" it will run in "dry run" mode
 $ release patch --run
@@ -115,27 +117,30 @@ that you start from that tag.
 To live patch the documentation in between release follow these steps
 
 0. Find the latest documentation release.
-  - Check the latest release tag (lets say `v0.22.1`).
-  - Look for a docs-release tag for that version ex: `v0.22.1-docs.X`
-  - If one exists, check-it-out. If not checkout the latest release tag.
-  - *Note: Checkout the tag and not master directly because some live
-   documentation changes on master that could related to new components
-   or updates for the upcoming release*
+
+- Check the latest release tag (lets say `v0.22.1`).
+- Look for a docs-release tag for that version ex: `v0.22.1-docs.X`
+- If one exists, check-it-out. If not checkout the latest release tag.
+- _Note: Checkout the tag and not master directly because some live
+  documentation changes on master that could related to new components
+  or updates for the upcoming release_
+
 0. Create a new branch from there (for example `git checkout -b docs/v0.22.1`)
-0. Cherry-pick the commits you want to include in the live update
-`git cherry-pick <commit-ish>...`
-0. Use the
+1. Cherry-pick the commits you want to include in the live update
+   `git cherry-pick <commit-ish>...`
+2. Use the
+
 ```bash
 $ npm run release -- --only-docs --run
 // or
 $ release --only-docs --run
 ```
+
 to push and tag to the documentation repository.
 
-*Note: The branch name you checkout to cherry-picked the commit is not enforced.
+_Note: The branch name you checkout to cherry-picked the commit is not enforced.
 Though keeping similar names ex: `docs/<version>` helps finding the branch
-easily.*
-
+easily._
 
 ### Check everything is OK before releasing
 
@@ -143,8 +148,10 @@ Release tools are run in "dry run" mode by default.
 It prevents `danger` steps (`git push`, `npm publish` etc) from accidental running.
 
 You can use it
+
 - to learn how releasing tools are working.
 - to ensure there are no side issues before you release anything.
+
 ```bash
 $ npm run release -- --only-docs
 $ npm run release major

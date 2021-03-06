@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import InputGroup from '../src/InputGroup';
@@ -11,6 +10,10 @@ describe('<InputGroup>', () => {
 
   it('Should render size correctly', () => {
     mount(<InputGroup size="sm" />).assertSingle('.input-group-sm');
+  });
+
+  it('Should render hasValidation correctly', () => {
+    mount(<InputGroup hasValidation />).assertSingle('.has-validation');
   });
 
   describe('<Checkbox>', () => {

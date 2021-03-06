@@ -1,5 +1,3 @@
-import React from 'react';
-
 function PageHeader({ title, subTitle }) {
   return (
     <div className="bs-docs-header" id="content">

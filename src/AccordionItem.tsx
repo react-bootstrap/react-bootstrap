@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionItemContext, {
@@ -16,8 +17,6 @@ export interface AccordionItemProps
   eventKey: string;
 }
 
-type AccordionItem = BsPrefixRefForwardingComponent<'div', AccordionItemProps>;
-
 const propTypes = {
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -32,7 +31,10 @@ const propTypes = {
   eventKey: PropTypes.string.isRequired,
 };
 
-const AccordionItem: AccordionItem = React.forwardRef(
+const AccordionItem: BsPrefixRefForwardingComponent<
+  'div',
+  AccordionItemProps
+> = React.forwardRef<HTMLElement, AccordionItemProps>(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -41,7 +43,7 @@ const AccordionItem: AccordionItem = React.forwardRef(
       className,
       eventKey,
       ...props
-    }: AccordionItemProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-item');

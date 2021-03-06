@@ -1,20 +1,18 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext, useMemo } from 'react';
+import * as React from 'react';
+import { useContext, useMemo } from 'react';
 import Feedback from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
-  extends BsPrefixPropsWithChildren,
+  extends BsPrefixProps,
     React.InputHTMLAttributes<HTMLInputElement> {
   inline?: boolean;
   disabled?: boolean;
@@ -26,11 +24,6 @@ export interface FormCheckProps
   feedback?: React.ReactNode;
   bsSwitchPrefix?: string;
 }
-
-type FormCheck = BsPrefixRefForwardingComponent<'input', FormCheckProps> & {
-  Input: typeof FormCheckInput;
-  Label: typeof FormCheckLabel;
-};
 
 const propTypes = {
   /**
@@ -121,7 +114,10 @@ const propTypes = {
   feedback: PropTypes.node,
 };
 
-const FormCheck: FormCheck = (React.forwardRef(
+const FormCheck: BsPrefixRefForwardingComponent<
+  'input',
+  FormCheckProps
+> = React.forwardRef<HTMLInputElement, FormCheckProps>(
   (
     {
       id,
@@ -142,7 +138,7 @@ const FormCheck: FormCheck = (React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'input',
       ...props
-    }: FormCheckProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
@@ -201,12 +197,12 @@ const FormCheck: FormCheck = (React.forwardRef(
       </FormContext.Provider>
     );
   },
-) as unknown) as FormCheck;
+);
 
 FormCheck.displayName = 'FormCheck';
 FormCheck.propTypes = propTypes;
 
-FormCheck.Input = FormCheckInput;
-FormCheck.Label = FormCheckLabel;
-
-export default FormCheck;
+export default Object.assign(FormCheck, {
+  Input: FormCheckInput,
+  Label: FormCheckLabel,
+});

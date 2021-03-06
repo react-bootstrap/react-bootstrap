@@ -3,20 +3,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import FormGroup, { FormGroupProps } from './FormGroup';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-export interface FloatingLabelProps
-  extends FormGroupProps,
-    BsPrefixPropsWithChildren {
+export interface FloatingLabelProps extends FormGroupProps, BsPrefixProps {
   controlId?: string;
   label: React.ReactNode;
 }
-
-type FloatingLabel = BsPrefixRefForwardingComponent<'div', FloatingLabelProps>;
 
 const propTypes = {
   as: PropTypes.elementType,
@@ -32,7 +25,10 @@ const propTypes = {
   label: PropTypes.node.isRequired,
 };
 
-const FloatingLabel: FloatingLabel = React.forwardRef(
+const FloatingLabel: BsPrefixRefForwardingComponent<
+  'div',
+  FloatingLabelProps
+> = React.forwardRef(
   ({ bsPrefix, className, children, controlId, label, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-floating');
 

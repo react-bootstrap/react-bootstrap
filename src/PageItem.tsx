@@ -1,24 +1,20 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import * as React from 'react';
+import { ReactNode } from 'react';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 import SafeAnchor from './SafeAnchor';
 
 export interface PageItemProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;
   href?: string;
 }
-
-type PageItem = BsPrefixRefForwardingComponent<'li', PageItemProps>;
 
 const propTypes = {
   /** Disables the PageItem */
@@ -29,6 +25,9 @@ const propTypes = {
 
   /** An accessible label indicating the active state.. */
   activeLabel: PropTypes.string,
+
+  /** A callback function for when this component is clicked */
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
@@ -37,7 +36,10 @@ const defaultProps = {
   activeLabel: '(current)',
 };
 
-const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
+const PageItem: BsPrefixRefForwardingComponent<
+  'li',
+  PageItemProps
+> = React.forwardRef<HTMLLIElement, PageItemProps>(
   (
     {
       active,
@@ -60,7 +62,7 @@ const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
         <Component className="page-link" disabled={disabled} {...props}>
           {children}
           {active && activeLabel && (
-            <span className="sr-only">{activeLabel}</span>
+            <span className="visually-hidden">{activeLabel}</span>
           )}
         </Component>
       </li>
@@ -79,7 +81,7 @@ function createButton(name: string, defaultValue: ReactNode, label = name) {
     return (
       <PageItem {...props}>
         <span aria-hidden="true">{children || defaultValue}</span>
-        <span className="sr-only">{label}</span>
+        <span className="visually-hidden">{label}</span>
       </PageItem>
     );
   }

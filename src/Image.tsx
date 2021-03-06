@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -54,19 +54,17 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
-
-    const classes = classNames(
-      fluid && `${bsPrefix}-fluid`,
-      rounded && `rounded`,
-      roundedCircle && `rounded-circle`,
-      thumbnail && `${bsPrefix}-thumbnail`,
-    );
-
     return (
       <img // eslint-disable-line jsx-a11y/alt-text
         ref={ref}
         {...props}
-        className={classNames(className, classes)}
+        className={classNames(
+          className,
+          fluid && `${bsPrefix}-fluid`,
+          rounded && `rounded`,
+          roundedCircle && `rounded-circle`,
+          thumbnail && `${bsPrefix}-thumbnail`,
+        )}
       />
     );
   },

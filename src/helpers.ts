@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
@@ -69,6 +69,7 @@ export type TransitionComponent = React.ComponentType<
   {
     in?: boolean;
     appear?: boolean;
+    children: React.ReactElement;
   } & TransitionCallbacks
 >;
 

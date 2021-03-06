@@ -1,20 +1,16 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ButtonGroupProps extends BsPrefixPropsWithChildren {
-  role?: string;
+export interface ButtonGroupProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   size?: 'sm' | 'lg';
   vertical?: boolean;
 }
-
-type ButtonGroup = BsPrefixRefForwardingComponent<'div', ButtonGroupProps>;
 
 const propTypes = {
   /**
@@ -47,7 +43,10 @@ const defaultProps = {
   role: 'group',
 };
 
-const ButtonGroup: ButtonGroup = React.forwardRef(
+const ButtonGroup: BsPrefixRefForwardingComponent<
+  'div',
+  ButtonGroupProps
+> = React.forwardRef(
   (
     {
       bsPrefix,

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import React from 'react';
+import * as React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -29,26 +29,26 @@ const InputGroupRadio = (props) => (
 
 export interface InputGroupProps extends BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg';
+  hasValidation?: boolean;
 }
-
-type InputGroupExtras = {
-  Text: typeof InputGroupText;
-  Checkbox: typeof InputGroupCheckbox;
-  Radio: typeof InputGroupRadio;
-};
-
-type InputGroup = BsPrefixRefForwardingComponent<'div', InputGroupProps>;
 
 const propTypes = {
   /** @default 'input-group' */
   bsPrefix: PropTypes.string,
 
   /**
-   * Control the size of buttons and form elements from the top-level .
+   * Control the size of buttons and form elements from the top-level.
    *
    * @type {('sm'|'lg')}
    */
   size: PropTypes.string,
+
+  /**
+   * Handles the input's rounded corners when using form validation.
+   *
+   * Use this when your input group contains both an input and feedback element.
+   */
+  hasValidation: PropTypes.bool,
 
   as: PropTypes.elementType,
 };
@@ -59,11 +59,15 @@ const propTypes = {
  * @property {InputGroupRadio} Radio
  * @property {InputGroupCheckbox} Checkbox
  */
-const InputGroup: InputGroup = React.forwardRef(
+const InputGroup: BsPrefixRefForwardingComponent<
+  'div',
+  InputGroupProps
+> = React.forwardRef<HTMLElement, InputGroupProps>(
   (
     {
       bsPrefix,
       size,
+      hasValidation,
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -81,6 +85,7 @@ const InputGroup: InputGroup = React.forwardRef(
           className,
           bsPrefix,
           size && `${bsPrefix}-${size}`,
+          hasValidation && 'has-validation',
         )}
       />
     );
@@ -90,11 +95,8 @@ const InputGroup: InputGroup = React.forwardRef(
 InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';
 
-const InputGroupWithExtras: InputGroup & InputGroupExtras = {
-  ...InputGroup,
+export default Object.assign(InputGroup, {
   Text: InputGroupText,
   Radio: InputGroupRadio,
   Checkbox: InputGroupCheckbox,
-} as any;
-
-export default InputGroupWithExtras;
+});

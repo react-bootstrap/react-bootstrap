@@ -1,13 +1,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import React from 'react';
+import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type RowColWidth =
   | number
@@ -26,7 +23,9 @@ type RowColWidth =
   | 'auto';
 type RowColumns = RowColWidth | { cols?: RowColWidth };
 
-export interface RowProps extends BsPrefixPropsWithChildren {
+export interface RowProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   noGutters?: boolean;
   xs?: RowColumns;
   sm?: RowColumns;
@@ -35,8 +34,6 @@ export interface RowProps extends BsPrefixPropsWithChildren {
   xl?: RowColumns;
   xxl?: RowColumns;
 }
-
-type Row = BsPrefixRefForwardingComponent<'div', RowProps>;
 
 const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -111,7 +108,10 @@ const defaultProps = {
   noGutters: false,
 };
 
-const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
+const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
+  HTMLDivElement,
+  RowProps
+>(
   (
     {
       bsPrefix,

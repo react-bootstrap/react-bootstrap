@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 
@@ -14,17 +14,15 @@ import {
   SelectCallback,
 } from './helpers';
 
-export interface ListGroupProps extends BsPrefixProps {
+export interface ListGroupProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   activeKey?: unknown;
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;
 }
-
-type ListGroup = BsPrefixRefForwardingComponent<'div', ListGroupProps> & {
-  Item: typeof ListGroupItem;
-};
 
 const propTypes = {
   /**
@@ -37,7 +35,7 @@ const propTypes = {
    *
    * @type {('flush')}
    */
-  variant: PropTypes.oneOf(['flush', undefined]),
+  variant: PropTypes.oneOf(['flush']),
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
@@ -46,7 +44,7 @@ const propTypes = {
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
    * @type {(true|'sm'|'md'|'lg'|'xl'|'xxl')}
    */
-  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl', undefined]),
+  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']),
 
   /**
    * You can use a custom element type for this component.
@@ -54,12 +52,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  horizontal: undefined,
-};
-
-const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
+const ListGroup: BsPrefixRefForwardingComponent<
+  'div',
+  ListGroupProps
+> = React.forwardRef<HTMLElement, ListGroupProps>((props, ref) => {
   const {
     className,
     bsPrefix: initialBsPrefix,
@@ -74,12 +70,10 @@ const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
 
-  let horizontalVariant;
+  let horizontalVariant: string | undefined;
   if (horizontal) {
     horizontalVariant =
       horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
-  } else {
-    horizontalVariant = null;
   }
 
   warning(
@@ -100,12 +94,11 @@ const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
       )}
     />
   );
-}) as unknown) as ListGroup;
+});
 
 ListGroup.propTypes = propTypes;
-ListGroup.defaultProps = defaultProps;
 ListGroup.displayName = 'ListGroup';
 
-ListGroup.Item = ListGroupItem;
-
-export default ListGroup;
+export default Object.assign(ListGroup, {
+  Item: ListGroupItem,
+});

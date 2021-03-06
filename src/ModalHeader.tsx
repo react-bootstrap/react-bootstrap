@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -9,8 +10,8 @@ import ModalContext from './ModalContext';
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
-    React.ComponentProps<'div'> {
+  extends BsPrefixAndClassNameOnlyProps,
+    React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeVariant?: CloseButtonVariant;
   closeButton?: boolean;
@@ -69,8 +70,8 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     const context = useContext(ModalContext);
 
     const handleClick = useEventCallback(() => {
-      if (context) context.onHide();
-      if (onHide) onHide();
+      context?.onHide();
+      onHide?.();
     });
 
     return (

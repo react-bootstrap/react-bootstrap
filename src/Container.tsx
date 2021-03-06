@@ -1,18 +1,15 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ContainerProps extends BsPrefixPropsWithChildren {
+export interface ContainerProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   fluid?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 }
-
-type Container = BsPrefixRefForwardingComponent<'div', ContainerProps>;
 
 const containerSizes = PropTypes.oneOfType([
   PropTypes.bool,
@@ -40,7 +37,10 @@ const defaultProps = {
   fluid: false,
 };
 
-const Container: Container = React.forwardRef(
+const Container: BsPrefixRefForwardingComponent<
+  'div',
+  ContainerProps
+> = React.forwardRef<HTMLElement, ContainerProps>(
   (
     {
       bsPrefix,
@@ -49,7 +49,7 @@ const Container: Container = React.forwardRef(
       as: Component = 'div',
       className,
       ...props
-    }: ContainerProps,
+    },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');

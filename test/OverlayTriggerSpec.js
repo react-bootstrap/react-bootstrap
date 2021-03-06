@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
@@ -37,6 +37,27 @@ describe('<OverlayTrigger>', () => {
     wrapper.find('button').simulate('click');
 
     wrapper.assertSingle('div.test');
+  });
+
+  it('Should show the tooltip when transitions are disabled', () => {
+    const overlay = ({ className, ...props }) => (
+      <Div {...props} className={`${className} test`} />
+    );
+    const wrapper = mount(
+      <OverlayTrigger
+        transition={false}
+        trigger={['hover', 'focus']}
+        overlay={overlay}
+      >
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+
+    wrapper.assertNone('.test');
+
+    wrapper.find('button').simulate('focus');
+
+    wrapper.assertSingle('div.test.show');
   });
 
   it('Should call OverlayTrigger onClick prop to child', () => {

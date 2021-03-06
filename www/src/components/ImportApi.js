@@ -2,7 +2,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'astroturf';
 import copy from 'copy-text-to-clipboard';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
@@ -46,7 +46,7 @@ const CopyImport = ({ name }) => {
     >
       <Link onClick={handleCopy} className="js-search-exclude">
         <FontAwesomeIcon icon={faCopy} />
-        <span className="sr-only">{`Copy import code for the ${name} component`}</span>
+        <span className="visually-hidden">{`Copy import code for the ${name} component`}</span>
       </Link>
     </OverlayTrigger>
   );

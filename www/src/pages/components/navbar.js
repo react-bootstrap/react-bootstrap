@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 
 import DocLink from '../../components/DocLink';
 import LinkedHeading from '../../components/LinkedHeading';
@@ -143,9 +142,6 @@ export default withLayout(function NaπvbarSection({ data }) {
 
       <h3 className="h4">Sticky top</h3>
       <CodeBlock codeText={` <Navbar sticky="top" />`} />
-
-      <h3 className="h4">Sticky bottom</h3>
-      <CodeBlock codeText={` <Navbar sticky="bottom" />`} />
 
       <LinkedHeading h="2" id="navbars-mobile-friendly">
         Responsive behaviors

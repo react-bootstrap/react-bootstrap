@@ -1,6 +1,6 @@
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import FormControl from 'react-bootstrap/FormControl';
 
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
 const MenuButton = styled(Button).attrs({ variant: 'link' })`
-  composes: p-0 d-md-none ml-3 from global;
+  composes: p-0 d-md-none ms-3 from global;
 
   line-height: 1;
   color: #212529;
@@ -119,10 +119,10 @@ const components = [
   'carousel',
   'close-button',
   'dropdowns',
+  'figures',
   'forms',
   'input-group',
   'images',
-  'figures',
   'list-group',
   'modal',
   'navs',

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import {
   useDropdownMenu,
-  UseDropdownMenuValue,
   UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
@@ -11,14 +11,13 @@ import warning from 'warning';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import usePopperMarginModifiers from './usePopperMarginModifiers';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
 
-export type AlignDirection = 'left' | 'right';
+export type AlignDirection = 'start' | 'end';
 
 export type ResponsiveAlignProp =
   | { sm: AlignDirection }
@@ -30,7 +29,9 @@ export type AlignType = AlignDirection | ResponsiveAlignProp;
 
 export type DropdownMenuVariant = 'dark';
 
-export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
+export interface DropdownMenuProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
@@ -42,9 +43,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   variant?: DropdownMenuVariant;
 }
 
-type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
-
-const alignDirection = PropTypes.oneOf(['left', 'right']);
+const alignDirection = PropTypes.oneOf<AlignDirection>(['start', 'end']);
 
 export const alignPropType = PropTypes.oneOfType([
   alignDirection,
@@ -76,14 +75,14 @@ const propTypes = {
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
    */
   align: alignPropType,
 
   /**
    * Aligns the Dropdown menu to the right of it's container.
    *
-   * @deprecated Use align="right"
+   * @deprecated Use align="end"
    */
   alignRight: PropTypes.bool,
 
@@ -121,22 +120,22 @@ const propTypes = {
 };
 
 const defaultProps: Partial<DropdownMenuProps> = {
-  align: 'left',
+  align: 'start',
   alignRight: false,
   flip: true,
 };
 
-// TODO: remove this hack
-type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
-
-const DropdownMenu: DropdownMenu = React.forwardRef(
+const DropdownMenu: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownMenuProps
+> = React.forwardRef<HTMLElement, DropdownMenuProps>(
   (
     {
       bsPrefix,
       className,
       align,
       // When we remove alignRight from API, use the var locally to toggle
-      // .dropdown-menu-right class below.
+      // .dropdown-menu-end class below.
       alignRight,
       rootCloseEvent,
       flip,
@@ -147,12 +146,11 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       popperConfig,
       variant,
       ...props
-    }: DropdownMenuProps,
+    },
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-    const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
     const alignClasses: string[] = [];
     if (align) {
@@ -166,44 +164,35 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
 
         if (keys.length) {
           const brkPoint = keys[0];
-          const direction = align[brkPoint];
+          const direction: AlignDirection = align[brkPoint];
 
-          // .dropdown-menu-right is required for responsively aligning
+          // .dropdown-menu-end is required for responsively aligning
           // left in addition to align left classes.
           // Reuse alignRight to toggle the class below.
-          alignRight = direction === 'left';
+          alignRight = direction === 'start';
           alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
         }
-      } else if (align === 'right') {
+      } else if (align === 'end') {
         alignRight = true;
       }
     }
 
-    const {
-      hasShown,
-      placement,
-      show,
-      alignEnd,
-      close,
-      props: menuProps,
-    } = useDropdownMenu({
+    const [
+      menuProps,
+      { hasShown, popper, show, alignEnd, toggle },
+    ] = useDropdownMenu({
       flip,
       rootCloseEvent,
       show: showProps,
       alignEnd: alignRight,
       usePopper: !isNavbar && alignClasses.length === 0,
-      popperConfig: {
-        ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
-      },
-    }) as UseDropdownMenuValueHack;
+      offset: [0, 2],
+      popperConfig,
+    });
 
     menuProps.ref = useMergedRefs(
-      popperRef,
-      useMergedRefs(
-        useWrappedRefWithWarning(ref, 'DropdownMenu'),
-        menuProps.ref,
-      ),
+      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+      menuProps.ref,
     );
 
     if (!hasShown && !renderOnMount) return null;
@@ -211,16 +200,16 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
       (menuProps as any).show = show;
-      (menuProps as any).close = close;
+      (menuProps as any).close = () => toggle?.(false);
       (menuProps as any).alignRight = alignEnd;
     }
 
-    let style = (props as any).style;
-    if (placement) {
+    let style = props.style;
+    if (popper?.placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
-      style = { ...(props as any).style, ...menuProps.style };
-      props['x-placement'] = placement;
+      style = { ...props.style, ...menuProps.style };
+      props['x-placement'] = popper.placement;
     }
 
     return (
@@ -232,7 +221,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
           className,
           prefix,
           show && 'show',
-          alignEnd && `${prefix}-right`,
+          alignEnd && `${prefix}-end`,
           variant && `${prefix}-${variant}`,
           ...alignClasses,
         )}

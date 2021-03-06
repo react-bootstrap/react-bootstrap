@@ -1,32 +1,27 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import React from 'react';
+import * as React from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface DropdownToggleProps
-  extends BsPrefixPropsWithChildren,
-    ButtonProps {
+export interface DropdownToggleProps extends ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
   eventKey?: any; // TODO: fix this type
 }
 
-type DropdownToggle = BsPrefixRefForwardingComponent<
+type DropdownToggleComponent = BsPrefixRefForwardingComponent<
   'button',
   DropdownToggleProps
 >;
 
 export type PropsFromToggle = Partial<
-  Pick<React.ComponentPropsWithRef<DropdownToggle>, CommonButtonProps>
+  Pick<React.ComponentPropsWithRef<DropdownToggleComponent>, CommonButtonProps>
 >;
 
 const propTypes = {
@@ -53,7 +48,7 @@ const propTypes = {
   childBsPrefix: PropTypes.string,
 };
 
-const DropdownToggle: DropdownToggle = React.forwardRef(
+const DropdownToggle: DropdownToggleComponent = React.forwardRef(
   (
     {
       bsPrefix,
@@ -72,7 +67,7 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
       (props as any).bsPrefix = childBsPrefix;
     }
 
-    const [toggleProps, { toggle }] = useDropdownToggle();
+    const [toggleProps] = useDropdownToggle();
 
     toggleProps.ref = useMergedRefs(
       toggleProps.ref,
@@ -83,7 +78,6 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        onClick={toggle}
         className={classNames(className, prefix, split && `${prefix}-split`)}
         {...toggleProps}
         {...props}

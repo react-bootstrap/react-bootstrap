@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Carousel from '../src/Carousel';
@@ -108,7 +108,7 @@ describe('<Carousel>', () => {
     it(`should call ${eventName} with previous index and direction`, (done) => {
       function onEvent(index, direction) {
         expect(index).to.equal(0);
-        expect(direction).to.equal('right');
+        expect(direction).to.equal('end');
 
         done();
       }
@@ -130,7 +130,7 @@ describe('<Carousel>', () => {
       function onEvent(index, direction) {
         const lastPossibleIndex = items.length - 1;
         expect(index).to.equal(lastPossibleIndex);
-        expect(direction).to.equal('left');
+        expect(direction).to.equal('start');
 
         done();
       }
@@ -219,7 +219,7 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    const labels = wrapper.find('.sr-only');
+    const labels = wrapper.find('.visually-hidden');
 
     expect(labels).to.have.lengthOf(2);
     expect(labels.at(0).text()).to.equal('Previous awesomeness');
@@ -240,7 +240,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      expect(wrapper.find('.sr-only')).to.have.lengthOf(
+      expect(wrapper.find('.visually-hidden')).to.have.lengthOf(
         0,
         `should not render labels for value ${falsyValue}`,
       );

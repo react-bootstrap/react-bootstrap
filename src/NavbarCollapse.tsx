@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Collapse, { CollapseProps } from './Collapse';
@@ -16,19 +17,17 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const NavbarCollapse = React.forwardRef(
-  ({ children, bsPrefix, ...props }: NavbarCollapseProps, ref) => {
+const NavbarCollapse = React.forwardRef<HTMLDivElement, NavbarCollapseProps>(
+  ({ children, bsPrefix, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-collapse');
+    const context = useContext(NavbarContext);
+
     return (
-      <NavbarContext.Consumer>
-        {(context) => (
-          <Collapse in={!!(context && context.expanded)} {...props}>
-            <div ref={ref as any} className={bsPrefix}>
-              {children}
-            </div>
-          </Collapse>
-        )}
-      </NavbarContext.Consumer>
+      <Collapse in={!!(context && context.expanded)} {...props}>
+        <div ref={ref} className={bsPrefix}>
+          {children}
+        </div>
+      </Collapse>
     );
   },
 );

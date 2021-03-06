@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useCallback } from 'react';
+import * as React from 'react';
+import { useEffect, useMemo, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -9,12 +10,14 @@ import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   TransitionComponent,
 } from './helpers';
 
-export interface ToastProps extends BsPrefixPropsWithChildren {
+export interface ToastProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   animation?: boolean;
   autohide?: boolean;
   delay?: number;
@@ -68,11 +71,10 @@ const Toast: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       className,
-      children,
       transition: Transition = Fade,
       show = true,
       animation = true,
-      delay = 3000,
+      delay = 5000,
       autohide = false,
       onClose,
       ...props
@@ -126,9 +128,7 @@ const Toast: BsPrefixRefForwardingComponent<
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-      >
-        {children}
-      </div>
+      />
     );
 
     return (

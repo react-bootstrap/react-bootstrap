@@ -1,26 +1,18 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps } from './helpers';
 
-export interface PaginationProps extends BsPrefixPropsWithChildren {
+type PaginationSize = 'sm' | 'lg';
+
+export interface PaginationProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLUListElement> {
   size?: 'sm' | 'lg';
 }
-
-type Pagination = BsPrefixRefForwardingComponent<'ul', PaginationProps> & {
-  First: typeof First;
-  Prev: typeof Prev;
-  Ellipsis: typeof Ellipsis;
-  Item: typeof PageItem;
-  Next: typeof Next;
-  Last: typeof Last;
-};
 
 const propTypes = {
   /**
@@ -33,7 +25,7 @@ const propTypes = {
    *
    * @type {('sm'|'lg')}
    */
-  size: PropTypes.string,
+  size: PropTypes.oneOf<PaginationSize>(['sm', 'lg']),
 };
 
 /**
@@ -44,33 +36,31 @@ const propTypes = {
  * @property {PageItem} Next
  * @property {PageItem} Last
  */
-const Pagination: Pagination = (React.forwardRef<
-  HTMLUListElement,
-  PaginationProps
->(({ bsPrefix, className, children, size, ...props }: PaginationProps, ref) => {
-  const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
-  return (
-    <ul
-      ref={ref}
-      {...props}
-      className={classNames(
-        className,
-        decoratedBsPrefix,
-        size && `${decoratedBsPrefix}-${size}`,
-      )}
-    >
-      {children}
-    </ul>
-  );
-}) as unknown) as Pagination;
+const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
+  ({ bsPrefix, className, size, ...props }, ref) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
+    return (
+      <ul
+        ref={ref}
+        {...props}
+        className={classNames(
+          className,
+          decoratedBsPrefix,
+          size && `${decoratedBsPrefix}-${size}`,
+        )}
+      />
+    );
+  },
+);
 
 Pagination.propTypes = propTypes;
+Pagination.displayName = 'Pagination';
 
-Pagination.First = First;
-Pagination.Prev = Prev;
-Pagination.Ellipsis = Ellipsis;
-Pagination.Item = PageItem;
-Pagination.Next = Next;
-Pagination.Last = Last;
-
-export default Pagination;
+export default Object.assign(Pagination, {
+  First,
+  Prev,
+  Ellipsis,
+  Item: PageItem,
+  Next,
+  Last,
+});

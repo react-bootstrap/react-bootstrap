@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
@@ -9,16 +9,17 @@ import DropdownMenu, {
   DropdownMenuVariant,
 } from './DropdownMenu';
 
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+
 export interface DropdownButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
-    React.PropsWithChildren<PropsFromToggle> {
+  extends Omit<DropdownProps, 'title'>,
+    PropsFromToggle,
+    BsPrefixProps {
   title: React.ReactNode;
   menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  bsPrefix?: string;
   menuVariant?: DropdownMenuVariant;
 }
 
@@ -47,7 +48,7 @@ const propTypes = {
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
    */
   menuAlign: alignPropType,
 
@@ -81,13 +82,17 @@ const propTypes = {
 
 /**
  * A convenience component for simple or general use dropdowns. Renders a `Button` toggle and all `children`
- * are passed directly to the default `Dropdown.Menu`.
+ * are passed directly to the default `Dropdown.Menu`. This component accepts all of
+ * [`Dropdown`'s props](#dropdown-props).
  *
  * _All unknown props are passed through to the `Dropdown` component._ Only
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
- * along with menu related props are passed to the `Dropdown.Menu`
+ * along with menu-related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
+const DropdownButton: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownButtonProps
+> = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
   (
     {
       title,
@@ -104,7 +109,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
       id,
       menuVariant,
       ...props
-    }: DropdownButtonProps,
+    },
     ref,
   ) => (
     <Dropdown ref={ref} {...props}>
@@ -132,6 +137,6 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
 );
 
 DropdownButton.displayName = 'DropdownButton';
-DropdownButton.propTypes = propTypes as any;
+DropdownButton.propTypes = propTypes;
 
 export default DropdownButton;

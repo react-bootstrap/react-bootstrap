@@ -32,6 +32,8 @@ module.exports = (config) => {
       resolve: {
         symlinks: false,
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        // for Enzyme/Cheerio
+        fallback: { stream: require.resolve('stream-browserify') },
       },
       plugins: [
         new DefinePlugin({
@@ -39,7 +41,7 @@ module.exports = (config) => {
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
       ],
-      devtool: 'cheap-module-inline-source-map',
+      devtool: 'inline-cheap-module-source-map',
       stats: 'minimal',
     },
 

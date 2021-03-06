@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
@@ -9,7 +10,9 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
-export interface FormControlProps extends BsPrefixProps {
+export interface FormControlProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<FormControlElement> {
   htmlSize?: number;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
@@ -103,7 +106,7 @@ const propTypes = {
 const FormControl: BsPrefixRefForwardingComponent<
   'input',
   FormControlProps
-> = React.forwardRef(
+> = React.forwardRef<FormControlElement, FormControlProps>(
   (
     {
       bsPrefix,

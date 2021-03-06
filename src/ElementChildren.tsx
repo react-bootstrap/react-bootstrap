@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 /**
  * Iterates through children that are typically specified as `props.children`,

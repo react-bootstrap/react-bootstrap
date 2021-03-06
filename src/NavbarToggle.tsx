@@ -1,21 +1,18 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavbarToggleProps extends BsPrefixPropsWithChildren {
+export interface NavbarToggleProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   label?: string;
-  onClick?: React.MouseEventHandler;
 }
-
-type NavbarToggle = BsPrefixRefForwardingComponent<'button', NavbarToggleProps>;
 
 const propTypes = {
   /** @default 'navbar-toggler' */
@@ -39,7 +36,10 @@ const defaultProps = {
   label: 'Toggle navigation',
 };
 
-const NavbarToggle: NavbarToggle = React.forwardRef(
+const NavbarToggle: BsPrefixRefForwardingComponent<
+  'button',
+  NavbarToggleProps
+> = React.forwardRef<HTMLElement, NavbarToggleProps>(
   (
     {
       bsPrefix,
@@ -50,7 +50,7 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
       as: Component = 'button',
       onClick,
       ...props
-    }: NavbarToggleProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');

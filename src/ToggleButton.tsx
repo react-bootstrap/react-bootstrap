@@ -1,26 +1,20 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Button, { ButtonProps } from './Button';
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixComponentClass,
-} from './helpers';
 
-export interface ToggleButtonProps
-  extends ButtonProps,
-    React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
-  type?: 'checkbox' | 'radio';
+export type ToggleButtonType = 'checkbox' | 'radio';
+
+export interface ToggleButtonProps extends ButtonProps {
+  type?: ToggleButtonType;
   name?: string;
   checked?: boolean;
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  value: unknown;
-  inputRef?: React.LegacyRef<'input'>;
+  value: string | ReadonlyArray<string> | number;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
-
-type ToggleButton = BsPrefixComponentClass<'button', ToggleButtonProps>;
 
 const noop = () => undefined;
 
@@ -33,7 +27,7 @@ const propTypes = {
   /**
    * The `<input>` element `type`
    */
-  type: PropTypes.oneOf(['checkbox', 'radio']),
+  type: PropTypes.oneOf<ToggleButtonType>(['checkbox', 'radio']),
 
   /**
    * The HTML input name, used to group like checkboxes or radio buttons together
@@ -66,20 +60,23 @@ const propTypes = {
    * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.any.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string.isRequired),
+    PropTypes.number,
+  ]).isRequired,
 
   /**
    * A ref attached to the `<input>` element
    * @type {ReactRef}
    */
-  inputRef: PropTypes.any,
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.any]),
 };
 
-const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
+const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
   (
     {
       bsPrefix,
-      children,
       name,
       className,
       checked,
@@ -90,7 +87,7 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
       id,
       inputRef,
       ...props
-    }: ToggleButtonProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'btn-check');
@@ -101,8 +98,8 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
           className={bsPrefix}
           name={name}
           type={type}
-          value={value as any}
-          ref={inputRef as any}
+          value={value}
+          ref={inputRef}
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
@@ -116,15 +113,13 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
           type={undefined}
           as="label"
           htmlFor={id}
-        >
-          {children}
-        </Button>
+        />
       </>
     );
   },
 );
 
-ToggleButton.propTypes = propTypes as any;
+ToggleButton.propTypes = propTypes;
 ToggleButton.displayName = 'ToggleButton';
 
 export default ToggleButton;

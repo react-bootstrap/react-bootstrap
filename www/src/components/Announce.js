@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 const propTypes = {
@@ -13,7 +13,7 @@ class Announce extends React.Component {
       <div
         {...props}
         role="alert"
-        className="sr-only"
+        className="visually-hidden"
         aria-live={assertive ? 'assertive' : 'polite'}
       >
         {children}

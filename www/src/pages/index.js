@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -109,7 +109,7 @@ export default withLayout(
                 <BrandButton
                   size="lg"
                   variant="brand"
-                  className="mr-3 px-5"
+                  className="me-3 px-5"
                   href="/getting-started/introduction"
                 >
                   Get started

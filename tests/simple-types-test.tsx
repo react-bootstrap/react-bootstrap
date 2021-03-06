@@ -48,9 +48,34 @@ import {
   Toast,
 } from '../src';
 
+import { CarouselRef } from '../src/Carousel';
+
 const style: React.CSSProperties = {
   color: 'red',
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const RefTest = () => {
+  const carouselRef = React.useRef<CarouselRef>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  carouselRef?.current?.element;
+  carouselRef?.current?.prev();
+  carouselRef?.current?.next();
+
+  return (
+    <>
+      <Carousel ref={carouselRef} />
+    </>
+  );
+};
+
+class ClassComponent extends React.Component {
+  render() {
+    return <div>abc</div>;
+  }
+}
+
+const FunctionComponent: React.FC = () => <div>abc</div>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
@@ -58,6 +83,24 @@ const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Fade>
+      <div>abc</div>
+    </Fade>
+    <Fade>
+      <ClassComponent />
+    </Fade>
+    <Fade>
+      <FunctionComponent />
+    </Fade>
+    <Collapse>
+      <div>abc</div>
+    </Collapse>
+    <Collapse>
+      <ClassComponent />
+    </Collapse>
+    <Collapse>
+      <FunctionComponent />
+    </Collapse>
     <Alert transition={Fade} />
     <Alert transition={Collapse} />
     <Alert
@@ -211,7 +254,7 @@ const MegaComponent = () => (
         <img
           className="d-block w-100"
           src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Third slide"
+          alt="Second slide"
         />
 
         <Carousel.Caption>
@@ -308,7 +351,7 @@ const MegaComponent = () => (
         show
         bsPrefix="dropdownmenu"
         style={style}
-        align={{ sm: 'left' }}
+        align={{ sm: 'start' }}
       >
         <Dropdown.Item
           active
@@ -329,8 +372,8 @@ const MegaComponent = () => (
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
         <Dropdown.Divider as="div" bsPrefix="prefix" style={style} />
       </Dropdown.Menu>
-      <Dropdown.Menu align="left" />
-      <Dropdown.Menu align="right" />
+      <Dropdown.Menu align="start" />
+      <Dropdown.Menu align="end" />
     </Dropdown>
     <DropdownButton
       disabled
@@ -345,7 +388,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
-      menuAlign={{ sm: 'left' }}
+      menuAlign={{ sm: 'start' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -373,7 +416,7 @@ const MegaComponent = () => (
           as="div"
           column="sm"
           htmlFor="id"
-          srOnly
+          visuallyHidden
           bsPrefix="formlabel"
           style={style}
         >
@@ -401,10 +444,10 @@ const MegaComponent = () => (
           bsPrefix="formcontrol"
           placeholder="name@example.com"
           ref={React.createRef<HTMLInputElement>()}
-          onChange={(e) => {
+          onChange={(e) =>
             // $ExpectType ChangeEvent<FormControlElement>
-            return e;
-          }}
+            e
+          }
           style={style}
         />
         <FormControl.Feedback as="div" tooltip type="valid" style={style} />
@@ -450,9 +493,7 @@ const MegaComponent = () => (
         <Form.Label>Example select</Form.Label>
         <Form.Select
           ref={React.createRef<HTMLSelectElement>()}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => e}
         >
           <option>1</option>
           <option>2</option>
@@ -470,9 +511,7 @@ const MegaComponent = () => (
           as="textarea"
           rows={3}
           ref={React.createRef<HTMLTextAreaElement>()}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => e}
         />
       </Form.Group>
       <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
@@ -795,8 +834,8 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
       >
-        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-        <strong className="mr-auto">Bootstrap</strong>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
         <small>11 mins ago</small>
       </Toast.Header>
       <Toast.Body as="div" bsPrefix="prefix" id="id" style={style}>
@@ -832,26 +871,32 @@ const MegaComponent = () => (
     </Pagination>
     <Popover
       id="test-popover"
-      content
+      body
       placement="auto"
       popper={{}}
       show
       bsPrefix="popover"
       style={style}
     >
-      <Popover.Title as="div" bsPrefix="prefix" style={style}>
+      <Popover.Header as="div" bsPrefix="prefix" style={style}>
         Popover title
-      </Popover.Title>
-      <Popover.Content as="div" bsPrefix="prefix" style={style}>
+      </Popover.Header>
+      <Popover.Body as="div" bsPrefix="prefix" style={style}>
         <strong>Popover Content</strong>
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
     <div>
       <ProgressBar striped variant="success" min={-10} now={40} max={200} />
       <ProgressBar striped animated variant="info" now={20} />
       <ProgressBar striped variant="warning" now={60} />
       <ProgressBar striped variant="danger" now={80} />
-      <ProgressBar id="id" label="label" srOnly bsPrefix="prefix" style={style}>
+      <ProgressBar
+        id="id"
+        label="label"
+        visuallyHidden
+        bsPrefix="prefix"
+        style={style}
+      >
         <ProgressBar isChild />
       </ProgressBar>
     </div>
@@ -871,7 +916,14 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
-      menuAlign={{ sm: 'left' }}
+      menuAlign={{ sm: 'start' }}
+      drop="up"
+      onSelect={noop}
+      flip
+      alignRight
+      onToggle={noop}
+      focusFirstItemOnShow="keyboard"
+      navbar
     />
     <Table
       id="id"

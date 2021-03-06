@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import DropdownButton from '../src/DropdownButton';
 import DropdownItem from '../src/DropdownItem';

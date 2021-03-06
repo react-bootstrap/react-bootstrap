@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 
 import FormContext from './FormContext';
 import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
@@ -9,8 +10,6 @@ export interface FormGroupProps
     AsProp {
   controlId?: string;
 }
-
-type FormGroup = BsPrefixRefForwardingComponent<'div', FormGroupProps>;
 
 const propTypes = {
   as: PropTypes.elementType,
@@ -31,10 +30,12 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const FormGroup: FormGroup = React.forwardRef(
+const FormGroup: BsPrefixRefForwardingComponent<
+  'div',
+  FormGroupProps
+> = React.forwardRef(
   (
     {
-      children,
       controlId,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -46,9 +47,7 @@ const FormGroup: FormGroup = React.forwardRef(
 
     return (
       <FormContext.Provider value={context}>
-        <Component {...props} ref={ref}>
-          {children}
-        </Component>
+        <Component {...props} ref={ref} />
       </FormContext.Provider>
     );
   },

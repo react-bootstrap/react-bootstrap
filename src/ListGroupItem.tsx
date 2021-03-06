@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useCallback } from 'react';
+import * as React from 'react';
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import AbstractNavItem from './AbstractNavItem';
@@ -8,7 +9,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
-export interface ListGroupItemProps extends BsPrefixProps {
+export interface ListGroupItemProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+    BsPrefixProps {
   action?: boolean;
   active?: boolean;
   disabled?: boolean;
@@ -17,8 +20,6 @@ export interface ListGroupItemProps extends BsPrefixProps {
   onClick?: React.MouseEventHandler;
   variant?: Variant;
 }
-
-type ListGroupItem = BsPrefixRefForwardingComponent<'a', ListGroupItemProps>;
 
 const propTypes = {
   /**
@@ -67,7 +68,10 @@ const defaultProps = {
   disabled: false,
 };
 
-const ListGroupItem: ListGroupItem = React.forwardRef(
+const ListGroupItem: BsPrefixRefForwardingComponent<
+  'a',
+  ListGroupItemProps
+> = React.forwardRef<HTMLElement, ListGroupItemProps>(
   (
     {
       bsPrefix,
@@ -93,10 +97,15 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
           return;
         }
 
-        if (onClick) onClick(event);
+        onClick?.(event);
       },
       [disabled, onClick],
     );
+
+    if (disabled && props.tabIndex === undefined) {
+      props.tabIndex = -1;
+      props['aria-disabled'] = true;
+    }
 
     return (
       <AbstractNavItem
