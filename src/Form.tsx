@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import FormCheck from './FormCheck';
 import FormControl from './FormControl';
 import FormGroup from './FormGroup';
@@ -49,15 +49,13 @@ const Form: BsPrefixRefForwardingComponent<
       ...props
     },
     ref,
-  ) => {
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        className={classNames(className, validated && 'was-validated')}
-      />
-    );
-  },
+  ) => (
+    <Component
+      {...props}
+      ref={ref}
+      className={classNames(className, validated && 'was-validated')}
+    />
+  ),
 );
 
 Form.displayName = 'Form';

@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 import { css } from 'astroturf';
 
 import LinkedHeading from '../../components/LinkedHeading';

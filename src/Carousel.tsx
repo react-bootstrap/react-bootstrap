@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
-import React, {
+import * as React from 'react';
+import {
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -71,7 +72,7 @@ const propTypes = {
    */
   slide: PropTypes.bool,
 
-  /** Cross fade slides instead of the default slide animation */
+  /** Animates slides with a crossfade animation instead of the default slide animation */
   fade: PropTypes.bool,
 
   /**

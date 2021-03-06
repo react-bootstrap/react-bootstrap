@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import { css } from 'astroturf';
 import NavMain from '../components/NavMain';

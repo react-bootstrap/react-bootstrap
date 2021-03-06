@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import React from 'react';
+import * as React from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
@@ -67,7 +67,7 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
       (props as any).bsPrefix = childBsPrefix;
     }
 
-    const [toggleProps, { toggle }] = useDropdownToggle();
+    const [toggleProps] = useDropdownToggle();
 
     toggleProps.ref = useMergedRefs(
       toggleProps.ref,
@@ -78,7 +78,6 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        onClick={toggle}
         className={classNames(className, prefix, split && `${prefix}-split`)}
         {...toggleProps}
         {...props}

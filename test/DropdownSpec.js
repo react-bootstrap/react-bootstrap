@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import simulant from 'simulant';
 import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown>', () => {
@@ -247,14 +248,17 @@ describe('<Dropdown>', () => {
       const spy = sinon.spy();
       const wrapper = mount(
         <Dropdown onToggle={spy}>{dropdownChildren}</Dropdown>,
+        { attachTo: focusableContainer },
       );
 
-      wrapper.find('button').simulate('keyDown', { key: 'ArrowDown' });
+      simulant.fire(wrapper.find('button').getDOMNode(), 'keydown', {
+        key: 'ArrowDown',
+      });
 
       expect(spy).to.have.been.calledOnce;
       expect(spy.getCall(0).args.length).to.equal(3);
       expect(spy.getCall(0).args[0]).to.equal(true);
-      expect(spy.getCall(0).args[1]).to.be.an('object');
+      expect(spy.getCall(0).args[1]).to.be.an('event');
       assert.deepEqual(spy.getCall(0).args[2], { source: 'keydown' });
     });
   });

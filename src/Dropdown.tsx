@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
 import { DropDirection } from 'react-overlays/DropdownContext';
 import { useUncontrolled } from 'uncontrollable';
@@ -143,7 +144,11 @@ const Dropdown: BsPrefixRefForwardingComponent<
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
+      if (
+        event.currentTarget === document &&
+        (source !== 'keydown' || event.key === 'Escape')
+      )
+        source = 'rootClose';
       onToggle?.(nextShow, event, { source });
     },
   );
@@ -172,21 +177,18 @@ const Dropdown: BsPrefixRefForwardingComponent<
         focusFirstItemOnShow={focusFirstItemOnShow}
         itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
       >
-        {({ props: dropdownProps }) => (
-          <Component
-            {...props}
-            {...dropdownProps}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'end' && 'dropend',
-              drop === 'start' && 'dropstart',
-            )}
-          />
-        )}
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(
+            className,
+            show && 'show',
+            (!drop || drop === 'down') && prefix,
+            drop === 'up' && 'dropup',
+            drop === 'end' && 'dropend',
+            drop === 'start' && 'dropstart',
+          )}
+        />
       </BaseDropdown>
     </SelectableContext.Provider>
   );

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
+import * as React from 'react';
+import { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -45,6 +46,7 @@ function onlyProgressBar(props, propName, componentName): Error | null {
      *
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const element = <ProgressBar />;
     if (child.type === element.type) return;
 

@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 import PropTypes, { Validator } from 'prop-types';
 import { useUncontrolled } from 'uncontrollable';
 

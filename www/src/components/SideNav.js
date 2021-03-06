@@ -1,6 +1,6 @@
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import FormControl from 'react-bootstrap/FormControl';
 
