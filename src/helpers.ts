@@ -8,23 +8,17 @@ export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
 > &
   P;
 
-export interface BsPrefixAndClassNameOnlyProps {
+export interface BsPrefixOnlyProps {
   bsPrefix?: string;
-  className?: string;
-}
-
-export interface BsPrefixProps<As extends React.ElementType = React.ElementType>
-  extends BsPrefixAndClassNameOnlyProps {
-  as?: As;
 }
 
 export interface AsProp<As extends React.ElementType = React.ElementType> {
   as?: As;
 }
 
-export type BsPrefixPropsWithChildren<
-  As extends React.ElementType = React.ElementType
-> = React.PropsWithChildren<BsPrefixProps<As>>;
+export interface BsPrefixProps<As extends React.ElementType = React.ElementType>
+  extends BsPrefixOnlyProps,
+    AsProp<As> {}
 
 export interface BsPrefixRefForwardingComponent<
   TInitial extends React.ElementType,

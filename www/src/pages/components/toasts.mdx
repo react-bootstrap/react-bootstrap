@@ -41,7 +41,7 @@ When you have multiple toasts, we default to vertically stacking them in a reada
 
 ### Placement
 
-Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle.
+Place toasts by setting a `position` in a `ToastContainer`. The top right is often used for notifications, as is the top middle.
 
 <ReactPlayground codeText={ToastPlacement} />
 
@@ -60,6 +60,7 @@ A Toast can also automatically hide after X milliseconds. For that, use the `aut
 <ComponentApi metadata={props.data.Toast} />
 <ComponentApi metadata={props.data.ToastHeader}/>
 <ComponentApi metadata={props.data.ToastBody}/>
+<ComponentApi metadata={props.data.ToastContainer} />
 
 export const query = graphql`
   query ToastQuery {
@@ -70,6 +71,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     ToastBody: componentMetadata(displayName: { eq: "ToastBody" }) {
+      ...ComponentApi_metadata
+    }
+    ToastContainer: componentMetadata(displayName: { eq: "ToastContainer" }) {
       ...ComponentApi_metadata
     }
   }

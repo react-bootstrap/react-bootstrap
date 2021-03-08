@@ -7,10 +7,10 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton, { CloseButtonVariant } from './CloseButton';
 import ToastContext from './ToastContext';
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface ToastHeaderProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeVariant?: CloseButtonVariant;
@@ -73,7 +73,6 @@ const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
             aria-label={closeLabel}
             variant={closeVariant}
             onClick={handleClick}
-            className="ms-2 mb-1"
             data-dismiss="toast"
           />
         )}

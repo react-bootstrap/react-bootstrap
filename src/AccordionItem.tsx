@@ -6,13 +6,10 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionItemContext, {
   AccordionItemContextValue,
 } from './AccordionItemContext';
-import {
-  BsPrefixRefForwardingComponent,
-  BsPrefixPropsWithChildren,
-} from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionItemProps
-  extends BsPrefixPropsWithChildren,
+  extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
   eventKey: string;
 }

@@ -194,6 +194,9 @@ export { default as ToastBody } from './ToastBody';
 export { default as ToastHeader } from './ToastHeader';
 export type { ToastHeaderProps } from './ToastHeader';
 
+export { default as ToastContainer } from './ToastContainer';
+export type { ToastContainerProps } from './ToastContainer';
+
 export { default as ToggleButton } from './ToggleButton';
 export type { ToggleButtonProps } from './ToggleButton';
 

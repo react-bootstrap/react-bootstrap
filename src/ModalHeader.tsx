@@ -7,10 +7,10 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton, { CloseButtonVariant } from './CloseButton';
 import ModalContext from './ModalContext';
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeVariant?: CloseButtonVariant;

@@ -5,13 +5,10 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionCollapse from './AccordionCollapse';
 import AccordionItemContext from './AccordionItemContext';
-import {
-  BsPrefixRefForwardingComponent,
-  BsPrefixPropsWithChildren,
-} from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionBodyProps
-  extends BsPrefixPropsWithChildren,
+  extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {

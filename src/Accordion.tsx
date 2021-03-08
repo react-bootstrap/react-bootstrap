@@ -11,14 +11,14 @@ import AccordionContext from './AccordionContext';
 import AccordionHeader from './AccordionHeader';
 import AccordionItem from './AccordionItem';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
 
 export interface AccordionProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   activeKey?: string;
   defaultActiveKey?: string;
   onSelect?: SelectCallback;

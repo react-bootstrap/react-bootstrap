@@ -4,7 +4,7 @@ import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
-import Transition from 'react-transition-group/Transition';
+import { TransitionStatus } from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import {
@@ -23,6 +23,7 @@ import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import TransitionWrapper from './TransitionWrapper';
 
 export type CarouselVariant = 'dark';
 
@@ -539,14 +540,18 @@ const Carousel: BsPrefixRefForwardingComponent<
           const isActive = index === renderedActiveIndex;
 
           return slide ? (
-            <Transition
+            <TransitionWrapper
               in={isActive}
               onEnter={isActive ? handleEnter : undefined}
               onEntered={isActive ? handleEntered : undefined}
               addEndListener={transitionEnd}
             >
-              {(status) =>
+              {(
+                status: TransitionStatus,
+                innerProps: Record<string, unknown>,
+              ) =>
                 React.cloneElement(child, {
+                  ...innerProps,
                   className: classNames(
                     child.props.className,
                     isActive && status !== 'entered' && orderClassName,
@@ -556,7 +561,7 @@ const Carousel: BsPrefixRefForwardingComponent<
                   ),
                 })
               }
-            </Transition>
+            </TransitionWrapper>
           ) : (
             React.cloneElement(child, {
               className: classNames(
