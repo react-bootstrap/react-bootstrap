@@ -1,23 +1,15 @@
 <div
   aria-live="polite"
   aria-atomic="true"
-  style={{
-    position: 'relative',
-    minHeight: '200px',
-  }}
+  className="bg-dark position-relative"
+  style={{ minHeight: '240px' }}
 >
-  <div
-    style={{
-      position: 'absolute',
-      top: 0,
-      right: 0,
-    }}
-  >
+  <ToastContainer position="top-end" className="p-3">
     <Toast>
       <Toast.Header>
         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
         <strong className="me-auto">Bootstrap</strong>
-        <small>just now</small>
+        <small className="text-muted">just now</small>
       </Toast.Header>
       <Toast.Body>See? Just like this.</Toast.Body>
     </Toast>
@@ -25,9 +17,9 @@
       <Toast.Header>
         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
         <strong className="me-auto">Bootstrap</strong>
-        <small>2 seconds ago</small>
+        <small className="text-muted">2 seconds ago</small>
       </Toast.Header>
       <Toast.Body>Heads up, toasts will stack automatically</Toast.Body>
     </Toast>
-  </div>
+  </ToastContainer>
 </div>;
