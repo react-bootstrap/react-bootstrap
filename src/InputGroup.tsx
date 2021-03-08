@@ -6,10 +6,7 @@ import * as React from 'react';
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
 import FormCheckInput from './FormCheckInput';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const InputGroupText = createWithBsPrefix('input-group-text', {
   Component: 'span',
@@ -27,7 +24,9 @@ const InputGroupRadio = (props) => (
   </InputGroupText>
 );
 
-export interface InputGroupProps extends BsPrefixPropsWithChildren {
+export interface InputGroupProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   size?: 'sm' | 'lg';
   hasValidation?: boolean;
 }

@@ -2,13 +2,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixOnlyProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormSelectProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     React.HTMLAttributes<HTMLSelectElement> {
   htmlSize?: number;
   size?: 'sm' | 'lg';

@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardImgProps extends BsPrefixProps {
+export interface CardImgProps
+  extends BsPrefixProps,
+    React.ImgHTMLAttributes<HTMLImageElement> {
   variant?: 'top' | 'bottom';
 }
 

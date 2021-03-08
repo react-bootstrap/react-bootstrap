@@ -3,10 +3,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface TableProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     React.TableHTMLAttributes<HTMLTableElement> {
   striped?: boolean;
   bordered?: boolean;
