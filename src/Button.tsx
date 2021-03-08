@@ -4,17 +4,14 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { ButtonVariant } from './types';
 
 export type ButtonType = 'button' | 'reset' | 'submit' | string;
 
 export interface ButtonProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   active?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';

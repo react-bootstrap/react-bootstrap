@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface FormRangeProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {}
 
 const propTypes = {

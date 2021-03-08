@@ -4,17 +4,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 type EventHandler = React.EventHandler<React.SyntheticEvent>;
 
 export interface AccordionButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    BsPrefixPropsWithChildren {}
+    BsPrefixProps {}
 
 const propTypes = {
   /** Set a custom element for this component */

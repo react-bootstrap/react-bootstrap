@@ -6,13 +6,10 @@ import { Transition } from 'react-transition-group';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
-import {
-  BsPrefixRefForwardingComponent,
-  BsPrefixAndClassNameOnlyProps,
-} from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixOnlyProps } from './helpers';
 
 export interface AccordionCollapseProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     CollapseProps {
   eventKey: string;
 }

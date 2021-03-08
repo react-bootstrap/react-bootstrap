@@ -3,13 +3,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionButton from './AccordionButton';
-import {
-  BsPrefixRefForwardingComponent,
-  BsPrefixPropsWithChildren,
-} from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionHeaderProps
-  extends BsPrefixPropsWithChildren,
+  extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {

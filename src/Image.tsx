@@ -3,11 +3,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface ImageProps
-  extends BsPrefixAndClassNameOnlyProps,
+  extends BsPrefixOnlyProps,
     React.ImgHTMLAttributes<HTMLImageElement> {
   fluid?: boolean;
   rounded?: boolean;

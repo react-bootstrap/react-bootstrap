@@ -6,12 +6,12 @@ import ButtonGroup from './ButtonGroup';
 import Dropdown, { DropdownProps } from './Dropdown';
 import { alignPropType, AlignType } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
-import { BsPrefixPropsWithChildren } from './helpers';
+import { BsPrefixProps } from './helpers';
 
 export interface SplitButtonProps
   extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   id: string | number;
   menuAlign?: AlignType;
   menuRole?: string;
