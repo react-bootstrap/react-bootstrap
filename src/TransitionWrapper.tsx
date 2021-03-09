@@ -45,14 +45,15 @@ const TransitionWrapper = React.forwardRef<
       mergedRef(safeFindDOMNode(r));
     };
 
-    const normalize = (
-      callback?: (node: HTMLElement, param: unknown) => void,
-    ) => (param: unknown) => {
+    const normalize = (callback?: (node: HTMLElement, param: any) => void) => (
+      param: any,
+    ) => {
       if (callback && nodeRef.current) {
         callback(nodeRef.current, param);
       }
     };
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     const handleEnter = useCallback(normalize(onEnter), [onEnter]);
     const handleEntering = useCallback(normalize(onEntering), [onEntering]);
     const handleEntered = useCallback(normalize(onEntered), [onEntered]);
@@ -62,6 +63,7 @@ const TransitionWrapper = React.forwardRef<
     const handleAddEndListener = useCallback(normalize(addEndListener), [
       addEndListener,
     ]);
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     return (
       <Transition
