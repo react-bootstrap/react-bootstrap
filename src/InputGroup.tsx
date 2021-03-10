@@ -2,10 +2,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
+import { useMemo } from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
 import FormCheckInput from './FormCheckInput';
+import InputGroupContext from './InputGroupContext';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const InputGroupText = createWithBsPrefix('input-group-text', {
@@ -76,17 +78,23 @@ const InputGroup: BsPrefixRefForwardingComponent<
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'input-group');
 
+    // Intentionally an empty object. Used in detecting if a dropdown
+    // exists under an input group.
+    const contextValue = useMemo(() => ({}), []);
+
     return (
-      <Component
-        ref={ref}
-        {...props}
-        className={classNames(
-          className,
-          bsPrefix,
-          size && `${bsPrefix}-${size}`,
-          hasValidation && 'has-validation',
-        )}
-      />
+      <InputGroupContext.Provider value={contextValue}>
+        <Component
+          ref={ref}
+          {...props}
+          className={classNames(
+            className,
+            bsPrefix,
+            size && `${bsPrefix}-${size}`,
+            hasValidation && 'has-validation',
+          )}
+        />
+      </InputGroupContext.Provider>
     );
   },
 );

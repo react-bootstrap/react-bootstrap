@@ -2,9 +2,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import * as React from 'react';
+import { useContext } from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
+import DropdownContext from 'react-overlays/DropdownContext';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
+import InputGroupContext from './InputGroupContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -61,6 +64,8 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
+    const dropdownContext = useContext(DropdownContext);
+    const isInputGroup = useContext(InputGroupContext);
 
     if (childBsPrefix !== undefined) {
       (props as any).bsPrefix = childBsPrefix;
@@ -77,7 +82,12 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        className={classNames(className, prefix, split && `${prefix}-split`)}
+        className={classNames(
+          className,
+          prefix,
+          split && `${prefix}-split`,
+          !!isInputGroup && dropdownContext?.show && 'show',
+        )}
         {...toggleProps}
         {...props}
       />

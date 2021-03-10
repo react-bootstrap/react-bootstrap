@@ -3,6 +3,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import simulant from 'simulant';
 import Dropdown from '../src/Dropdown';
+import InputGroup from '../src/InputGroup';
 
 describe('<Dropdown>', () => {
   const dropdownChildren = [
@@ -303,5 +304,33 @@ describe('<Dropdown>', () => {
         <Dropdown.Item>Example Item</Dropdown.Item>
       </Dropdown.Menu>,
     ).assertSingle('#custom-component');
+  });
+
+  describe('InputGroup Dropdowns', () => {
+    it('should not render a .dropdown element when inside input group', () => {
+      const wrapper = mount(
+        <InputGroup>
+          <Dropdown>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      );
+
+      expect(wrapper.find('.dropdown').length).to.equal(0);
+    });
+
+    it('should render .show on the dropdown toggle', () => {
+      mount(
+        <InputGroup>
+          <Dropdown show>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      ).assertSingle('button.dropdown-toggle.show');
+    });
+
+    it('should always render dropdown menu even if renderOnMount=false', () => {
+      mount(
+        <InputGroup>
+          <Dropdown renderOnMount={false}>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      ).assertSingle('div.dropdown-menu');
+    });
   });
 });

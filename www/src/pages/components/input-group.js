@@ -9,6 +9,7 @@ import Buttons from '../../examples/InputGroup/Buttons';
 import Checkboxes from '../../examples/InputGroup/Checkboxes';
 import MultipleAddons from '../../examples/InputGroup/MultipleAddons';
 import MultipleInputs from '../../examples/InputGroup/MultipleInputs';
+import SegmentedButtonDropdowns from '../../examples/InputGroup/SegmentedButtonDropdowns';
 import Sizes from '../../examples/InputGroup/Sizes';
 import withLayout from '../../withLayout';
 
@@ -67,6 +68,11 @@ export default withLayout(function InputGroupSection({ data }) {
         Buttons with Dropdowns
       </LinkedHeading>
       <ReactPlayground codeText={ButtonDropdowns} />
+
+      <LinkedHeading h="2" id="input-group-segmented-buttons">
+        Segmented buttons
+      </LinkedHeading>
+      <ReactPlayground codeText={SegmentedButtonDropdowns} />
 
       <LinkedHeading h="2" id="input-group-api">
         API
