@@ -139,7 +139,7 @@ const components = [
   'toasts',
 ];
 
-const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
+const utilities = ['transitions', 'ratio', 'react-overlays'];
 
 // We need to configure this
 function attachSearch(ref) {

@@ -160,8 +160,8 @@ export { default as PopoverBody } from './PopoverBody';
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
 
-export { default as ResponsiveEmbed } from './ResponsiveEmbed';
-export type { ResponsiveEmbedProps } from './ResponsiveEmbed';
+export { default as Ratio } from './Ratio';
+export type { RatioProps } from './Ratio';
 
 export { default as Row } from './Row';
 export type { RowProps } from './Row';
