@@ -46,12 +46,8 @@
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "cross-env NODE_ENV=test-server mocha test/server/*Spec.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test-node": "cross-env NODE_ENV=test-server mocha test/server/*Spec.js",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --fix"
