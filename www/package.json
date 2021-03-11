@@ -48,7 +48,7 @@
     "dom-helpers": "^5.2.0",
     "fibers": "^5.0.0",
     "formik": "^2.2.6",
-    "gatsby": "^2.32.9",
+    "gatsby": "^2.32.11",
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.10.0",
     "gatsby-plugin-mdx": "^1.10.1",
