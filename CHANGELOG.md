@@ -1,3 +1,14 @@
+## [1.5.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.1...v1.5.2) (2021-03-11)
+
+
+### Bug Fixes
+
+* **Carousel:** fix crossfade animation ([#5671](https://github.com/react-bootstrap/react-bootstrap/issues/5671)) ([a24ab44](https://github.com/react-bootstrap/react-bootstrap/commit/a24ab44b0c80b38ad2efd9762f47a833cc2cf0ad))
+
+
+
+
+
 ## [1.5.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.0...v1.5.1) (2021-03-02)
 
 
