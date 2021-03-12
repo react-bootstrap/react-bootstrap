@@ -3,7 +3,6 @@ import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
-import transitionEnd from 'dom-helpers/transitionEnd';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import * as React from 'react';
@@ -21,6 +20,7 @@ import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
+import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
@@ -544,7 +544,7 @@ const Carousel: BsPrefixRefForwardingComponent<
               in={isActive}
               onEnter={isActive ? handleEnter : undefined}
               onEntered={isActive ? handleEntered : undefined}
-              addEndListener={transitionEnd}
+              addEndListener={transitionEndListener}
             >
               {(
                 status: TransitionStatus,
