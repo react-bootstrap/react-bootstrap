@@ -8,7 +8,7 @@ import { useUncontrolled } from 'uncontrollable';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import CardContext from './CardContext';
+import CardHeaderContext from './CardHeaderContext';
 import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
@@ -133,13 +133,13 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
   let isNavbar = false;
 
   const navbarContext = useContext(NavbarContext);
-  const cardContext = useContext(CardContext);
+  const cardHeaderContext = useContext(CardHeaderContext);
 
   if (navbarContext) {
     navbarBsPrefix = navbarContext.bsPrefix;
     isNavbar = navbar == null ? true : navbar;
-  } else if (cardContext) {
-    ({ cardHeaderBsPrefix } = cardContext);
+  } else if (cardHeaderContext) {
+    ({ cardHeaderBsPrefix } = cardHeaderContext);
   }
 
   return (

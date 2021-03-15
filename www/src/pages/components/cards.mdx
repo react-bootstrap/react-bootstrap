@@ -144,8 +144,14 @@ Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control 
 
 <ComponentApi metadata={props.data.Card} />
 <ComponentApi metadata={props.data.CardBody} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardFooter} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardHeader} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImg} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImgOverlay} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardLink} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardSubtitle} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardText} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardTitle} exportedBy={props.data.Card} />
 
 <ComponentApi metadata={props.data.CardGroup} />
 <ComponentApi metadata={props.data.CardColumns} />
@@ -159,10 +165,28 @@ export const query = graphql`
     CardBody: componentMetadata(displayName: { eq: "CardBody" }) {
       ...ComponentApi_metadata
     }
+    CardFooter: componentMetadata(displayName: { eq: "CardFooter" }) {
+      ...ComponentApi_metadata
+    }
+    CardHeader: componentMetadata(displayName: { eq: "CardHeader" }) {
+      ...ComponentApi_metadata
+    }
     CardImg: componentMetadata(displayName: { eq: "CardImg" }) {
       ...ComponentApi_metadata
     }
     CardImgOverlay: componentMetadata(displayName: { eq: "CardImgOverlay" }) {
+      ...ComponentApi_metadata
+    }
+    CardLink: componentMetadata(displayName: { eq: "CardLink" }) {
+      ...ComponentApi_metadata
+    }
+    CardSubtitle: componentMetadata(displayName: { eq: "CardSubtitle" }) {
+      ...ComponentApi_metadata
+    }
+    CardText: componentMetadata(displayName: { eq: "CardText" }) {
+      ...ComponentApi_metadata
+    }
+    CardTitle: componentMetadata(displayName: { eq: "CardTitle" }) {
       ...ComponentApi_metadata
     }
     CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {
