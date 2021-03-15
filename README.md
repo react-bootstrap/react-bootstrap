@@ -13,7 +13,7 @@
 
 See the [documentation][documentation] with live editable examples and API documentation.
 
-To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap-v3.netlify.app) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
+To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap.github.io) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
 
 ### Migrating from Bootstrap 3 to Bootstrap 4
 

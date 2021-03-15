@@ -97,7 +97,7 @@ export default withLayout(
     render() {
       return (
         <main id="rb-docs-content">
-          <MastHead fluid>
+          <MastHead>
             <Content>
               <Heading>React Bootstrap</Heading>
               <SubHeading>
