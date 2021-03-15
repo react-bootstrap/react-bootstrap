@@ -12,26 +12,22 @@ export interface TabProps extends React.ComponentPropsWithRef<typeof TabPane> {
   tabClassName?: string;
 }
 
-/* eslint-disable react/require-render-return, react/no-unused-prop-types */
-class Tab extends React.Component<TabProps> {
-  static propTypes = {
-    title: PropTypes.node.isRequired,
-  };
+const propTypes = {
+  title: PropTypes.node.isRequired,
+};
 
-  public static Container = TabContainer;
+const Tab: React.FC<TabProps> = () => {
+  throw new Error(
+    'ReactBootstrap: The `Tab` component is not meant to be rendered! ' +
+      "It's an abstract component that is only valid as a direct Child of the `Tabs` Component. " +
+      'For custom tabs components use TabPane and TabsContainer directly',
+  );
+};
 
-  public static Content = TabContent;
+Tab.propTypes = propTypes;
 
-  public static Pane = TabPane;
-
-  render() {
-    throw new Error(
-      'ReactBootstrap: The `Tab` component is not meant to be rendered! ' +
-        "It's an abstract component that is only valid as a direct Child of the `Tabs` Component. " +
-        'For custom tabs components use TabPane and TabsContainer directly',
-    );
-    return null;
-  }
-}
-
-export default Tab;
+export default Object.assign(Tab, {
+  Container: TabContainer,
+  Content: TabContent,
+  Pane: TabPane,
+});
