@@ -32,7 +32,7 @@
     "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
   },
   "scripts": {
-    "bootstrap": "yarn && yarn --cwd www",
+    "bootstrap": "yarn --network-timeout 60000 && yarn --cwd www --network-timeout 60000",
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www build",
     "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
