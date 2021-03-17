@@ -1,4 +1,9 @@
-<Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
+<Tabs
+  defaultActiveKey="home"
+  transition={false}
+  id="noanim-tab-example"
+  className="mb-3"
+>
   <Tab eventKey="home" title="Home">
     <Sonnet />
   </Tab>

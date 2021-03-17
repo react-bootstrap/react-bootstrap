@@ -12,8 +12,24 @@ export interface TabProps extends Omit<TabPaneProps, 'title'> {
   tabClassName?: string;
 }
 
+/* eslint-disable react/no-unused-prop-types */
 const propTypes = {
+  eventKey: PropTypes.string,
+
+  /**
+   * Content for the tab title.
+   */
   title: PropTypes.node.isRequired,
+
+  /**
+   * The disabled state of the tab.
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Class to pass to the underlying nav link.
+   */
+  tabClassName: PropTypes.string,
 };
 
 const Tab: React.FC<TabProps> = () => {
@@ -22,6 +38,8 @@ const Tab: React.FC<TabProps> = () => {
       "It's an abstract component that is only valid as a direct Child of the `Tabs` Component. " +
       'For custom tabs components use TabPane and TabsContainer directly',
   );
+  // Needed otherwise docs error out.
+  return <></>;
 };
 
 Tab.propTypes = propTypes;

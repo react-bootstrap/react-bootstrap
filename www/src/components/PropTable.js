@@ -185,7 +185,7 @@ class PropTable extends React.Component {
       return null;
     }
 
-    return <Badge>required</Badge>;
+    return <Badge text="danger">required</Badge>;
   }
 
   render() {
