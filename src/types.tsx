@@ -37,3 +37,5 @@ export type ArrowProps = {
   ref: React.RefCallback<HTMLElement>;
   style: React.CSSProperties;
 };
+
+export type EventKey = string | number;

@@ -4,9 +4,10 @@ import * as React from 'react';
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane, { TabPaneProps } from './TabPane';
+import { EventKey } from './types';
 
 export interface TabProps extends Omit<TabPaneProps, 'title'> {
-  eventKey?: string;
+  eventKey?: EventKey;
   title: React.ReactNode;
   disabled?: boolean;
   tabClassName?: string;
@@ -14,7 +15,7 @@ export interface TabProps extends Omit<TabPaneProps, 'title'> {
 
 /* eslint-disable react/no-unused-prop-types */
 const propTypes = {
-  eventKey: PropTypes.string,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Content for the tab title.

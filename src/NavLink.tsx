@@ -46,10 +46,10 @@ const propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Uniquely idenifies the `NavItem` amongst its siblings,
+   * Uniquely identifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /** @default 'a' */
   as: PropTypes.elementType,

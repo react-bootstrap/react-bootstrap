@@ -8,14 +8,14 @@ import warning from 'warning';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import { BsPrefixRefForwardingComponent } from './helpers';
+import { EventKey } from './types';
 
-// TODO: check this
 export interface AbstractNavItemProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   active?: boolean;
   as: React.ElementType;
   disabled?: boolean;
-  eventKey?: any; // TODO: especially fix this
+  eventKey?: EventKey;
   href?: string;
   tabIndex?: number;
   onSelect?: (navKey: string, e: any) => void;
@@ -28,7 +28,7 @@ const propTypes = {
 
   href: PropTypes.string,
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onclick: PropTypes.func,
 
   as: PropTypes.any,

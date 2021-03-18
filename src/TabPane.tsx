@@ -13,12 +13,13 @@ import {
   TransitionCallbacks,
   TransitionType,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface TabPaneProps
   extends TransitionCallbacks,
     BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  eventKey?: any;
+  eventKey?: EventKey;
   active?: boolean;
   transition?: TransitionType;
   mountOnEnter?: boolean;
@@ -36,7 +37,7 @@ const propTypes = {
   /**
    * A key that associates the `TabPane` with it's controlling `NavLink`.
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Toggles the active state of the TabPane, this is generally controlled by a
