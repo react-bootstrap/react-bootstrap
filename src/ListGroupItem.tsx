@@ -4,10 +4,9 @@ import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import AbstractNavItem from './AbstractNavItem';
-import { makeEventKey } from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant } from './types';
+import { Variant, EventKey } from './types';
 
 export interface ListGroupItemProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
@@ -15,7 +14,7 @@ export interface ListGroupItemProps
   action?: boolean;
   active?: boolean;
   disabled?: boolean;
-  eventKey?: string;
+  eventKey?: EventKey;
   href?: string;
   onClick?: React.MouseEventHandler;
   variant?: Variant;
@@ -47,7 +46,7 @@ const propTypes = {
    */
   disabled: PropTypes.bool,
 
-  eventKey: PropTypes.string,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   onClick: PropTypes.func,
 
@@ -81,7 +80,6 @@ const ListGroupItem: BsPrefixRefForwardingComponent<
       variant,
       action,
       as,
-      eventKey,
       onClick,
       ...props
     },
@@ -111,8 +109,6 @@ const ListGroupItem: BsPrefixRefForwardingComponent<
       <AbstractNavItem
         ref={ref}
         {...props}
-        // TODO: Restrict eventKey to string in v5?
-        eventKey={makeEventKey(eventKey as any, props.href)}
         // eslint-disable-next-line no-nested-ternary
         as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
         onClick={handleClick}
