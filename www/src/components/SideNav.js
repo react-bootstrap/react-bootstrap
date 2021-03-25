@@ -127,6 +127,7 @@ const components = [
   'modal',
   'navs',
   'navbar',
+  'offcanvas',
   'overlays',
   'pagination',
   'popovers',
