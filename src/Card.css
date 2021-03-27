@@ -1,0 +1,82 @@
+body {
+    background-image: url("https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: 'Roboto Mono', monospace;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: -10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 45px 0 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+i.fa{
+    font-size: 1.5rem;
+    transition: all .3s ease-in-out;
+}
+
+i.fa:hover {
+    transform: scale(1.2);
+    color: hotpink;
+}
+
+.card {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(142 142 142 / 10%);
+    border: 1px solid;
+    border-color: #fff8 transparent transparent #fff8;
+    border-radius: 8px;
+    box-shadow: 1em 1em 0.5em #0008;
+    transform-style: preserve-3d;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+}
+
+.card .user-img {
+    background-image: url("https://media-exp1.licdn.com/dms/image/C4D03AQGTjisRUZue0A/profile-displayphoto-shrink_800_800/0/1525812704149?e=1622073600&v=beta&t=yUgFiKu3oLPtfL5tOij1syOSfOqsDiSax0wd0UcpuHc");
+    background-size: contain;
+    width: 160px;
+    border-radius: 50%;
+    height: 160px;
+    margin: auto;
+    border: 1px solid white;
+    margin-top: -135px;
+}
+
+.card .front,
+.card .back {
+  backface-visibility: hidden;
+  padding: 3rem;
+  height: 100%;
+  backdrop-filter: blur(0.2em);
+}
+
+.card .back {
+  position: absolute;
+  top: 0;
+  transform: rotateY(180deg);
+}
+
+.card .back .user-img {
+    background-image: None;
+}
