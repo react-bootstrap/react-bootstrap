@@ -8,7 +8,7 @@ const SelectableContext = React.createContext<SelectableContextType | null>(
 );
 
 export const makeEventKey = (
-  eventKey: string | null,
+  eventKey?: string | number | null,
   href: string | null = null,
 ): string | null => {
   if (eventKey != null) return String(eventKey);

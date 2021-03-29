@@ -30,3 +30,5 @@ export type Color =
   | 'light'
   | 'white'
   | 'muted';
+
+export type EventKey = string | number;
