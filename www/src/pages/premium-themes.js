@@ -28,12 +28,12 @@ const Content = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 450px;
+  min-height: 28rem;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 50rem;
 
   @media (max-width: 800px) {
-    padding: 0 40px;
+    padding: 0 2.5rem;
     text-align: center;
   }
 `;
@@ -58,7 +58,7 @@ const FeatureCard = styled(Card)`
   @import '../css/theme';
 
   composes: border-0 shadow from global;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 `;
 
 const themeProviders = [
