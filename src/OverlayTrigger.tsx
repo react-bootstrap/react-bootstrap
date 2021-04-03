@@ -31,6 +31,7 @@ export interface OverlayTriggerProps
   onToggle?: (nextShow: boolean) => void;
   flip?: boolean;
   overlay: OverlayChildren;
+  placement?: string;
 
   target?: never;
   onHide?: never;
