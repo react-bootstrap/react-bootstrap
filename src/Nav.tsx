@@ -8,7 +8,7 @@ import { useUncontrolled } from 'uncontrollable';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import CardContext from './CardContext';
+import CardHeaderContext from './CardHeaderContext';
 import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
@@ -17,6 +17,7 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface NavProps
   extends BsPrefixProps,
@@ -24,8 +25,8 @@ export interface NavProps
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
   onSelect?: SelectCallback;
@@ -52,10 +53,8 @@ const propTypes = {
 
   /**
    * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
-   *
-   * @type {string}
    */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Have all `NavItem`s proportionately fill all available width.
@@ -133,13 +132,13 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
   let isNavbar = false;
 
   const navbarContext = useContext(NavbarContext);
-  const cardContext = useContext(CardContext);
+  const cardHeaderContext = useContext(CardHeaderContext);
 
   if (navbarContext) {
     navbarBsPrefix = navbarContext.bsPrefix;
     isNavbar = navbar == null ? true : navbar;
-  } else if (cardContext) {
-    ({ cardHeaderBsPrefix } = cardContext);
+  } else if (cardHeaderContext) {
+    ({ cardHeaderBsPrefix } = cardHeaderContext);
   }
 
   return (

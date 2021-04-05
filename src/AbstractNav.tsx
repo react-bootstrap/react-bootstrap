@@ -7,13 +7,14 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import TabContext from './TabContext';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import { BsPrefixRefForwardingComponent, SelectCallback } from './helpers';
+import { EventKey } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 const propTypes = {
-  onSelect: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
 
   as: PropTypes.elementType,
 
@@ -24,23 +25,15 @@ const propTypes = {
   /** @private */
   parentOnSelect: PropTypes.func,
   /** @private */
-  getControlledId: PropTypes.func,
-  /** @private */
-  getControllerId: PropTypes.func,
-  /** @private */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-// TODO: is this correct?
-interface AbstractNavProps extends React.HTMLAttributes<HTMLElement> {
-  activeKey?: any;
+interface AbstractNavProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+  activeKey?: EventKey;
   as?: React.ElementType;
-  getControlledId?: any;
-  getControllerId?: any;
-  onKeyDown?: any;
-  onSelect?: any;
-  parentOnSelect?: any;
-  role?: string;
+  onSelect?: SelectCallback;
+  parentOnSelect?: SelectCallback;
 }
 
 const AbstractNav: BsPrefixRefForwardingComponent<

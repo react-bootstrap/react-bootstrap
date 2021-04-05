@@ -12,7 +12,6 @@ import { BsPrefixRefForwardingComponent } from './helpers';
 export interface DropdownToggleProps extends ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
-  eventKey?: any; // TODO: fix this type
 }
 
 type DropdownToggleComponent = BsPrefixRefForwardingComponent<

@@ -133,6 +133,13 @@ export { default as NavItem } from './NavItem';
 export { default as NavLink } from './NavLink';
 export type { NavLinkProps } from './NavLink';
 
+export { default as Offcanvas } from './Offcanvas';
+export type { OffcanvasProps } from './Offcanvas';
+export { default as OffcanvasHeader } from './OffcanvasHeader';
+export type { OffcanvasHeaderProps } from './OffcanvasHeader';
+export { default as OffcanvasTitle } from './OffcanvasTitle';
+export { default as OffcanvasBody } from './OffcanvasBody';
+
 export { default as Overlay } from './Overlay';
 export type { OverlayProps } from './Overlay';
 

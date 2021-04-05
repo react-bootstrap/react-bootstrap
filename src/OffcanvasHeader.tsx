@@ -8,13 +8,13 @@ import AbstractModalHeader, {
 } from './AbstractModalHeader';
 import { BsPrefixOnlyProps } from './helpers';
 
-export interface ModalHeaderProps
+export interface OffcanvasHeaderProps
   extends AbstractModalHeaderProps,
     BsPrefixOnlyProps {}
 
 const propTypes = {
   /**
-   * @default 'modal-header'
+   * @default 'offcanvas-header'
    */
   bsPrefix: PropTypes.string,
 
@@ -37,8 +37,8 @@ const propTypes = {
 
   /**
    * A Callback fired when the close button is clicked. If used directly inside
-   * a Modal component, the onHide will automatically be propagated up to the
-   * parent Modal `onHide`.
+   * a Offcanvas component, the onHide will automatically be propagated up to the
+   * parent Offcanvas `onHide`.
    */
   onHide: PropTypes.func,
 };
@@ -48,9 +48,9 @@ const defaultProps = {
   closeButton: false,
 };
 
-const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
+const OffcanvasHeader = React.forwardRef<HTMLDivElement, OffcanvasHeaderProps>(
   ({ bsPrefix, className, ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas-header');
     return (
       <AbstractModalHeader
         ref={ref}
@@ -61,8 +61,8 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   },
 );
 
-ModalHeader.displayName = 'ModalHeader';
-ModalHeader.propTypes = propTypes;
-ModalHeader.defaultProps = defaultProps;
+OffcanvasHeader.displayName = 'OffcanvasHeader';
+OffcanvasHeader.propTypes = propTypes;
+OffcanvasHeader.defaultProps = defaultProps;
 
-export default ModalHeader;
+export default OffcanvasHeader;

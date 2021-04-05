@@ -13,13 +13,14 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface DropdownItemProps
   extends BsPrefixProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   active?: boolean;
   disabled?: boolean;
-  eventKey?: string;
+  eventKey?: EventKey;
   href?: string;
   onSelect?: SelectCallback;
 }
@@ -41,7 +42,7 @@ const propTypes = {
   /**
    * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * HTML `href` attribute corresponding to `a.href`.
@@ -94,8 +95,7 @@ const DropdownItem: BsPrefixRefForwardingComponent<
     const navContext = useContext(NavContext);
 
     const { activeKey } = navContext || {};
-    // TODO: Restrict eventKey to string in v5?
-    const key = makeEventKey(eventKey as any, href);
+    const key = makeEventKey(eventKey, href);
 
     const active =
       propActive == null && key != null

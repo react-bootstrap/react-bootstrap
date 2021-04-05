@@ -13,14 +13,15 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface ListGroupProps
   extends BsPrefixProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   onSelect?: SelectCallback;
 }
 

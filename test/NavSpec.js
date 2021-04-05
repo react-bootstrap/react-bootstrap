@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import Card from '../src/Card';
+import CardHeader from '../src/CardHeader';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 import NavDropdown from '../src/NavDropdown';
@@ -73,14 +73,14 @@ describe('<Nav>', () => {
     ).assertSingle('div.navbar-nav');
   });
 
-  it('should be card aware', () => {
+  it('should be card header aware', () => {
     mount(
-      <Card>
+      <CardHeader>
         <Nav variant="pills">
           <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
           <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
         </Nav>
-      </Card>,
+      </CardHeader>,
     ).assertSingle('div.card-header-pills');
   });
 

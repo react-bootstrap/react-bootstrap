@@ -6,16 +6,17 @@ import { useUncontrolled } from 'uncontrollable';
 import TabContext, { TabContextType } from './TabContext';
 import SelectableContext from './SelectableContext';
 import { SelectCallback, TransitionType } from './helpers';
+import { EventKey } from './types';
 
 export interface TabContainerProps extends React.PropsWithChildren<unknown> {
   id?: string;
   transition?: TransitionType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
-  generateChildId?: (eventKey: unknown, type: 'tab' | 'pane') => string;
+  generateChildId?: (eventKey: EventKey, type: 'tab' | 'pane') => string;
   onSelect?: SelectCallback;
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
 }
 
 const validateId: Validator<string> = (props, ...args) => {
@@ -93,7 +94,7 @@ const propTypes = {
    *
    * @controllable onSelect
    */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const TabContainer = (props: TabContainerProps) => {
@@ -111,7 +112,7 @@ const TabContainer = (props: TabContainerProps) => {
   const generateChildId = useMemo(
     () =>
       generateCustomChildId ||
-      ((key, type) => (id ? `${id}-${type}-${key}` : null)),
+      ((key: EventKey, type: string) => (id ? `${id}-${type}-${key}` : null)),
     [id, generateCustomChildId],
   );
 
@@ -122,8 +123,8 @@ const TabContainer = (props: TabContainerProps) => {
       transition,
       mountOnEnter: mountOnEnter || false,
       unmountOnExit: unmountOnExit || false,
-      getControlledId: (key) => generateChildId(key, 'tabpane'),
-      getControllerId: (key) => generateChildId(key, 'tab'),
+      getControlledId: (key: EventKey) => generateChildId(key, 'tabpane'),
+      getControllerId: (key: EventKey) => generateChildId(key, 'tab'),
     }),
     [
       onSelect,

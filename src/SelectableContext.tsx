@@ -1,14 +1,10 @@
 import * as React from 'react';
+import { SelectCallback } from './helpers';
 
-// TODO (apparently this is a bare "onSelect"?)
-type SelectableContextType = (key: string | null, event: any) => void;
-
-const SelectableContext = React.createContext<SelectableContextType | null>(
-  null,
-);
+const SelectableContext = React.createContext<SelectCallback | null>(null);
 
 export const makeEventKey = (
-  eventKey: string | null,
+  eventKey?: string | number | null,
   href: string | null = null,
 ): string | null => {
   if (eventKey != null) return String(eventKey);

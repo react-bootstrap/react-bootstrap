@@ -6,19 +6,13 @@ import removeEventListener from 'dom-helpers/removeEventListener';
 import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 import useWillUnmount from '@restart/hooks/useWillUnmount';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import {
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
-import warning from 'warning';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
@@ -283,7 +277,7 @@ const Modal: BsPrefixRefForwardingComponent<
       backdropClassName,
       manager: propsManager,
       ...props
-    }: ModalProps,
+    },
     ref,
   ) => {
     const [modalStyle, setStyle] = useState({});
@@ -294,23 +288,10 @@ const Modal: BsPrefixRefForwardingComponent<
 
     // TODO: what's this type
     const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
+    const mergedRef = useMergedRefs(ref, setModalRef);
     const handleHide = useEventCallback(onHide);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
-
-    useImperativeHandle(
-      ref,
-      () => ({
-        get _modal() {
-          warning(
-            false,
-            'Accessing `_modal` is not supported and will be removed in a future release',
-          );
-          return modal;
-        },
-      }),
-      [modal],
-    );
 
     const modalContext = useMemo(
       () => ({
@@ -421,7 +402,7 @@ const Modal: BsPrefixRefForwardingComponent<
         updateDialogStyle(node);
       }
 
-      if (onEnter) onEnter(node, ...args);
+      onEnter?.(node, ...args);
     };
 
     const handleExit = (node, ...args) => {
@@ -496,7 +477,7 @@ const Modal: BsPrefixRefForwardingComponent<
       <ModalContext.Provider value={modalContext}>
         <BaseModal
           show={show}
-          ref={setModalRef}
+          ref={mergedRef}
           backdrop={backdrop}
           container={container}
           keyboard // Always set true - see handleEscapeKeyDown
