@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
 import { DropDirection } from 'react-overlays/DropdownContext';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import DropdownContext from './DropdownContext';
 import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
@@ -17,6 +18,7 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { AlignType, alignPropType } from './types';
 
 const DropdownHeader = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
@@ -33,7 +35,7 @@ export interface DropdownProps
   extends BsPrefixProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   drop?: 'up' | 'start' | 'end' | 'down';
-  alignRight?: boolean;
+  align?: AlignType;
   show?: boolean;
   flip?: boolean;
   onToggle?: (
@@ -57,9 +59,15 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * Align the menu to the right side of the Dropdown toggle
+   * Aligns the dropdown menu to the specified side of the Dropdown toggle. You can
+   * also align the menu responsively for breakpoints starting at `sm` and up.
+   * The alignment direction will affect the specified breakpoint or larger.
+   *
+   * *Note: Using responsive alignment will disable Popper usage for positioning.*
+   *
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  alignRight: PropTypes.bool,
+  align: alignPropType,
 
   /**
    * Whether or not the Dropdown is visible.
@@ -116,8 +124,9 @@ const propTypes = {
   navbar: PropTypes.bool,
 };
 
-const defaultProps = {
+const defaultProps: Partial<DropdownProps> = {
   navbar: false,
+  align: 'start',
 };
 
 const Dropdown: BsPrefixRefForwardingComponent<
@@ -129,7 +138,7 @@ const Dropdown: BsPrefixRefForwardingComponent<
     drop,
     show,
     className,
-    alignRight,
+    align,
     onSelect,
     onToggle,
     focusFirstItemOnShow,
@@ -167,30 +176,39 @@ const Dropdown: BsPrefixRefForwardingComponent<
     direction = 'right';
   }
 
+  const contextValue = useMemo(
+    () => ({
+      align,
+    }),
+    [align],
+  );
+
   return (
-    <SelectableContext.Provider value={handleSelect}>
-      <BaseDropdown
-        drop={direction}
-        show={show}
-        alignEnd={alignRight}
-        onToggle={handleToggle}
-        focusFirstItemOnShow={focusFirstItemOnShow}
-        itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
-      >
-        <Component
-          {...props}
-          ref={ref}
-          className={classNames(
-            className,
-            show && 'show',
-            (!drop || drop === 'down') && prefix,
-            drop === 'up' && 'dropup',
-            drop === 'end' && 'dropend',
-            drop === 'start' && 'dropstart',
-          )}
-        />
-      </BaseDropdown>
-    </SelectableContext.Provider>
+    <DropdownContext.Provider value={contextValue}>
+      <SelectableContext.Provider value={handleSelect}>
+        <BaseDropdown
+          drop={direction}
+          show={show}
+          alignEnd={align === 'end'}
+          onToggle={handleToggle}
+          focusFirstItemOnShow={focusFirstItemOnShow}
+          itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
+        >
+          <Component
+            {...props}
+            ref={ref}
+            className={classNames(
+              className,
+              show && 'show',
+              (!drop || drop === 'down') && prefix,
+              drop === 'up' && 'dropup',
+              drop === 'end' && 'dropend',
+              drop === 'start' && 'dropstart',
+            )}
+          />
+        </BaseDropdown>
+      </SelectableContext.Provider>
+    </DropdownContext.Provider>
   );
 });
 

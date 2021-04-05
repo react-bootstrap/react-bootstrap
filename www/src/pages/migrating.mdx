@@ -55,6 +55,13 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 ### Dropdown
 - dropdown dividers use `hr` by default instead of `div`.
 - Alignment values `left` and `right` changed to `start` and `end` respectively.
+- Removed `alignRight`. Use `align="end"` instead.
+
+### DropdownButton
+- Removed `menuAlign` prop in favor of `align`.
+
+### DropdownMenu
+- Removed `alignRight`. Use `align="end"` instead.
 
 ### Form
 
@@ -63,7 +70,7 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 
 ### FormCheck
 
-- deprecated `bsCustomPrefix` and `custom` in favor of `bsSwitchPrefix`.
+- removed `bsCustomPrefix` and `custom` in favor of `bsSwitchPrefix`.
 
 #### FormCheckInput
 
@@ -112,6 +119,10 @@ spacing, use margin utilities instead.
 ### PopoverTitle
 
 - renamed to PopoverHeader to match class name.
+
+### SplitButton
+
+- Removed `menuAlign` prop in favor of `align`. 
 
 ### Toast
 

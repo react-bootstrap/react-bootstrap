@@ -317,7 +317,7 @@ const MegaComponent = () => (
     </Container>
     <Container fluid="sm" />
     <Dropdown
-      alignRight
+      align="end"
       as="div"
       drop="up"
       flip
@@ -341,7 +341,6 @@ const MegaComponent = () => (
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        alignRight
         as="div"
         flip
         onSelect={noop}
@@ -388,7 +387,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
-      menuAlign={{ sm: 'start' }}
+      align={{ sm: 'start' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -728,7 +727,7 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
         drop="up"
-        alignRight
+        align="end"
         show
         flip={false}
         onToggle={noop}
@@ -916,11 +915,10 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
-      menuAlign={{ sm: 'start' }}
+      align={{ sm: 'start' }}
       drop="up"
       onSelect={noop}
       flip
-      alignRight
       onToggle={noop}
       focusFirstItemOnShow="keyboard"
       navbar

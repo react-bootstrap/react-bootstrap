@@ -3,20 +3,15 @@ import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, {
-  alignPropType,
-  AlignType,
-  DropdownMenuVariant,
-} from './DropdownMenu';
-
+import DropdownMenu, { DropdownMenuVariant } from './DropdownMenu';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { alignPropType } from './types';
 
 export interface DropdownButtonProps
   extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
     BsPrefixProps {
   title: React.ReactNode;
-  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -44,13 +39,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively.
+   * Aligns the dropdown menu.
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  menuAlign: alignPropType,
+  align: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -101,7 +96,6 @@ const DropdownButton: BsPrefixRefForwardingComponent<
       rootCloseEvent,
       variant,
       size,
-      menuAlign,
       menuRole,
       renderMenuOnMount,
       disabled,
@@ -124,7 +118,6 @@ const DropdownButton: BsPrefixRefForwardingComponent<
         {title}
       </DropdownToggle>
       <DropdownMenu
-        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}

@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown, { DropdownProps } from './Dropdown';
-import { alignPropType, AlignType } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
 import { BsPrefixProps } from './helpers';
+import { alignPropType } from './types';
 
 export interface SplitButtonProps
   extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
     BsPrefixProps {
   id: string | number;
-  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -55,13 +54,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively.
+   * Aligns the dropdown menu.
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  menuAlign: alignPropType,
+  align: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -113,7 +112,6 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       onClick,
       href,
       target,
-      menuAlign,
       menuRole,
       renderMenuOnMount,
       rootCloseEvent,
@@ -146,7 +144,6 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
