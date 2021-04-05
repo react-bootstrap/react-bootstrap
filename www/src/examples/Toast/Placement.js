@@ -18,6 +18,6 @@
       <strong className="mr-auto">Bootstrap</strong>
       <small>just now</small>
     </Toast.Header>
-    <Toast.Body>See? Just like this.</Toast.Body>
+    <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
   </Toast>
 </div>;
