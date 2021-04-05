@@ -57,6 +57,7 @@ const style: React.CSSProperties = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const RefTest = () => {
   const carouselRef = React.useRef<CarouselRef>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   carouselRef?.current?.element;
   carouselRef?.current?.prev();
   carouselRef?.current?.next();
@@ -74,9 +75,7 @@ class ClassComponent extends React.Component {
   }
 }
 
-const FunctionComponent: React.FC = () => {
-  return <div>abc</div>;
-};
+const FunctionComponent: React.FC = () => <div>abc</div>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
@@ -445,10 +444,10 @@ const MegaComponent = () => (
           bsPrefix="formcontrol"
           placeholder="name@example.com"
           ref={React.createRef<HTMLInputElement>()}
-          onChange={(e) => {
+          onChange={(e) =>
             // $ExpectType ChangeEvent<FormControlElement>
-            return e;
-          }}
+            e
+          }
           style={style}
         />
         <FormControl.Feedback as="div" tooltip type="valid" style={style} />
@@ -494,9 +493,7 @@ const MegaComponent = () => (
         <Form.Label>Example select</Form.Label>
         <Form.Select
           ref={React.createRef<HTMLSelectElement>()}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => e}
         >
           <option>1</option>
           <option>2</option>
@@ -514,9 +511,7 @@ const MegaComponent = () => (
           as="textarea"
           rows={3}
           ref={React.createRef<HTMLTextAreaElement>()}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => e}
         />
       </Form.Group>
       <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
@@ -876,7 +871,7 @@ const MegaComponent = () => (
     </Pagination>
     <Popover
       id="test-popover"
-      content
+      body
       placement="auto"
       popper={{}}
       show
