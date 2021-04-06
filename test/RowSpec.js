@@ -42,6 +42,6 @@ describe('Row', () => {
   });
 
   it('Should render no-gutters correctly', () => {
-    mount(<Row noGutters />).assertSingle('.row.no-gutters');
+    mount(<Row noGutters />).assertSingle('.row.g-0');
   });
 });

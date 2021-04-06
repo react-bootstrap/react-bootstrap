@@ -150,7 +150,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
         className={classNames(
           className,
           decoratedBsPrefix,
-          noGutters && 'no-gutters',
+          noGutters && 'g-0',
           ...classes,
         )}
       />
