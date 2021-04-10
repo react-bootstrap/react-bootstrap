@@ -26,7 +26,6 @@ type RowColumns = RowColWidth | { cols?: RowColWidth };
 export interface RowProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  noGutters?: boolean;
   xs?: RowColumns;
   sm?: RowColumns;
   md?: RowColumns;
