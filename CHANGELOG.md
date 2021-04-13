@@ -1,3 +1,20 @@
+# [2.0.0-alpha.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* **Nav:** add .card-header-* only if nested in card header ([#5720](https://github.com/react-bootstrap/react-bootstrap/issues/5720)) ([793e857](https://github.com/react-bootstrap/react-bootstrap/commit/793e857f852e5c799a12c203192eb3e1eeda7b33))
+* **types:** fix types for event key ([#5727](https://github.com/react-bootstrap/react-bootstrap/issues/5727)) ([6260997](https://github.com/react-bootstrap/react-bootstrap/commit/62609973722e5769b968eb62913b4f5708df00fc))
+
+
+### Features
+
+* **v5:** add Offcanvas component ([#5738](https://github.com/react-bootstrap/react-bootstrap/issues/5738)) ([0a9eb37](https://github.com/react-bootstrap/react-bootstrap/commit/0a9eb37e86c7430f4bcf02775a380672de8ba19f))
+
+
+
+
+
 # [2.0.0-alpha.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.2...v2.0.0-alpha.0) (2021-03-13)
 
 
