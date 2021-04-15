@@ -13,12 +13,13 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface ListGroupProps extends BsPrefixProps {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   onSelect?: SelectCallback;
 }
 

@@ -11,6 +11,7 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface NavLinkProps extends BsPrefixPropsWithChildren {
   active?: boolean;
@@ -18,7 +19,7 @@ export interface NavLinkProps extends BsPrefixPropsWithChildren {
   role?: string;
   href?: string;
   onSelect?: SelectCallback;
-  eventKey?: unknown;
+  eventKey?: EventKey;
 }
 
 type NavLink = BsPrefixRefForwardingComponent<'a', NavLinkProps>;
@@ -60,7 +61,7 @@ const propTypes = {
    * Uniquely idenifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /** @default 'a' */
   as: PropTypes.elementType,

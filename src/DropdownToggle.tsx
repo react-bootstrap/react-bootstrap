@@ -17,7 +17,6 @@ export interface DropdownToggleProps
     ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
-  eventKey?: any; // TODO: fix this type
 }
 
 type DropdownToggle = BsPrefixRefForwardingComponent<

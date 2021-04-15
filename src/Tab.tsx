@@ -4,9 +4,10 @@ import React from 'react';
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
+import { EventKey } from './types';
 
 export interface TabProps extends React.ComponentPropsWithRef<typeof TabPane> {
-  eventKey?: string;
+  eventKey?: EventKey;
   title: React.ReactNode;
   disabled?: boolean;
   tabClassName?: string;
@@ -16,6 +17,7 @@ export interface TabProps extends React.ComponentPropsWithRef<typeof TabPane> {
 class Tab extends React.Component<TabProps> {
   static propTypes = {
     title: PropTypes.node.isRequired,
+    eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   public static Container = TabContainer;
