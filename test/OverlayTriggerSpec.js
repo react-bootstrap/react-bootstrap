@@ -149,7 +149,7 @@ describe('<OverlayTrigger>', () => {
     ReactTestUtils.Simulate.click(overlayTrigger);
   });
 
-  it('Should forward requested context', () => {
+  it('Should forward requested legacy context', () => {
     const contextTypes = {
       key: PropTypes.string
     };
@@ -179,6 +179,38 @@ describe('<OverlayTrigger>', () => {
       }
     }
     ContextHolder.childContextTypes = contextTypes;
+
+    const instance = ReactTestUtils.renderIntoDocument(<ContextHolder />);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
+    ReactTestUtils.Simulate.click(overlayTrigger);
+
+    contextSpy.calledWith('value').should.be.true;
+  });
+
+  it('Should mount overlay in current tree to allow access to context', () => {
+    const Context = React.createContext();
+    const contextSpy = sinon.spy();
+
+    class ContextReader extends React.Component {
+      static contextType = Context;
+
+      render() {
+        contextSpy(this.context.key);
+        return <div />;
+      }
+    }
+
+    class ContextHolder extends React.Component {
+      render() {
+        return (
+          <Context.Provider value={{ key: 'value' }}>
+            <OverlayTrigger trigger="click" overlay={<ContextReader />}>
+              <button>button</button>
+            </OverlayTrigger>
+          </Context.Provider>
+        );
+      }
+    }
 
     const instance = ReactTestUtils.renderIntoDocument(<ContextHolder />);
     const overlayTrigger = ReactDOM.findDOMNode(instance);
