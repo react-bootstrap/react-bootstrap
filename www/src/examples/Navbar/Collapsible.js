@@ -3,7 +3,6 @@
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
-    <Container>
     <Nav className="me-auto">
       <Nav.Link href="#features">Features</Nav.Link>
       <Nav.Link href="#pricing">Pricing</Nav.Link>
@@ -21,7 +20,6 @@
         Dank memes
       </Nav.Link>
     </Nav>
-    </Container>
   </Navbar.Collapse>
   </Container>
 </Navbar>;
