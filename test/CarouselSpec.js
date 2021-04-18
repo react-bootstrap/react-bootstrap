@@ -31,7 +31,7 @@ describe('<Carousel>', () => {
 
     expect(carouselItems.at(0).is('.active')).to.be.true;
     expect(carouselItems.at(1).is('.active')).to.be.false;
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       items.length,
     );
   });
@@ -60,7 +60,7 @@ describe('<Carousel>', () => {
 
     expect(carouselItems.at(0).is('.active')).to.be.true;
     expect(carouselItems.at(0).text()).to.equal('Item 1 content');
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(2);
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(2);
   });
 
   it('should call onSelect when indicator selected', (done) => {
@@ -76,7 +76,23 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper.find('.carousel-indicators li').first().simulate('click');
+    wrapper.find('.carousel-indicators button').first().simulate('click');
+  });
+
+  it('should render custom indicator labels', () => {
+    const labels = ['custom1', 'custom2', 'custom3'];
+
+    const wrapper = mount(
+      <Carousel activeIndex={1} interval={null} indicatorLabels={labels}>
+        {items}
+      </Carousel>,
+    );
+
+    const indicators = wrapper.find('.carousel-indicators button');
+    for (let i = 0; i < labels.length; i++) {
+      const node = indicators.at(i).getDOMNode();
+      expect(node.getAttribute('aria-label')).to.equal(labels[i]);
+    }
   });
 
   it('should render variant', () => {
@@ -137,7 +153,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper.find('.carousel-indicators li').first().simulate('click');
+      wrapper.find('.carousel-indicators button').first().simulate('click');
     });
 
     it(`should call ${eventName} with next index and direction`, (done) => {
@@ -159,7 +175,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper.find('.carousel-indicators li').last().simulate('click');
+      wrapper.find('.carousel-indicators button').last().simulate('click');
     });
   });
 
@@ -289,7 +305,7 @@ describe('<Carousel>', () => {
       <Carousel defaultActiveIndex={items.length - 1}>{items}</Carousel>,
     );
 
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       items.length,
     );
 
@@ -297,7 +313,7 @@ describe('<Carousel>', () => {
 
     wrapper.setProps({ children: fewerItems });
 
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       fewerItems.length,
     );
     expect(wrapper.find('div.carousel-item')).to.have.lengthOf(
