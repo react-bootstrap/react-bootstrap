@@ -45,7 +45,7 @@
     "common-tags": "^1.8.0",
     "copy-text-to-clipboard": "^3.0.1",
     "docsearch.js": "^2.6.3",
-    "dom-helpers": "^5.2.0",
+    "dom-helpers": "^5.2.1",
     "fibers": "^5.0.0",
     "formik": "^2.2.6",
     "gatsby": "^2.32.12",
@@ -72,7 +72,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.2.3",
     "remark-slug": "^6.0.0",
-    "sass": "^1.32.8",
+    "sass": "^1.32.12",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.9"
   }
