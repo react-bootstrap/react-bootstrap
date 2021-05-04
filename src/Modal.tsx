@@ -41,6 +41,7 @@ export interface ModalProps
   size?: 'sm' | 'lg' | 'xl';
   bsPrefix?: string;
   centered?: boolean;
+  backdrop?: boolean | 'static';
   backdropClassName?: string;
   animation?: boolean;
   dialogClassName?: string;
