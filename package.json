@@ -60,7 +60,6 @@
     "@babel/runtime": "^7.13.8",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.26",
-    "@types/classnames": "^2.2.10",
     "@types/invariant": "^2.2.33",
     "@types/prop-types": "^15.7.3",
     "@types/react": ">=16.9.35",
