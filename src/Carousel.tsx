@@ -3,7 +3,6 @@ import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
-import transitionEnd from 'dom-helpers/transitionEnd';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import React, {
@@ -20,11 +19,18 @@ import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
+import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
 } from './helpers';
+
+export interface CarouselRef {
+  element: HTMLElement;
+  prev: (e?: React.SyntheticEvent) => void;
+  next: (e?: React.SyntheticEvent) => void;
+}
 
 export interface CarouselProps
   extends BsPrefixPropsWithChildren,
@@ -55,6 +61,7 @@ export interface CarouselProps
   prevLabel?: React.ReactNode;
   nextIcon?: React.ReactNode;
   nextLabel?: React.ReactNode;
+  ref?: React.Ref<CarouselRef>;
 }
 
 type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
@@ -76,7 +83,7 @@ const propTypes = {
    */
   slide: PropTypes.bool,
 
-  /** Cross fade slides instead of the default slide animation */
+  /** Animates slides with a crossfade animation instead of the default slide animation */
   fade: PropTypes.bool,
 
   /**
@@ -560,7 +567,7 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
               in={isActive}
               onEnter={isActive ? handleEnter : undefined}
               onEntered={isActive ? handleEntered : undefined}
-              addEndListener={transitionEnd}
+              addEndListener={transitionEndListener}
             >
               {(status) =>
                 React.cloneElement(child, {

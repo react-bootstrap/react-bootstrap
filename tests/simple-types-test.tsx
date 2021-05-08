@@ -51,8 +51,34 @@ import {
   Toast,
 } from '../src';
 
+import { CarouselRef } from '../src/Carousel';
+
 const style: React.CSSProperties = {
   color: 'red',
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const RefTest = () => {
+  const carouselRef = React.useRef<CarouselRef>();
+  carouselRef?.current?.element;
+  carouselRef?.current?.prev();
+  carouselRef?.current?.next();
+
+  return (
+    <>
+      <Carousel ref={carouselRef} />
+    </>
+  );
+};
+
+class ClassComponent extends React.Component {
+  render() {
+    return <div>abc</div>;
+  }
+}
+
+const FunctionComponent: React.FC = () => {
+  return <div>abc</div>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -61,6 +87,24 @@ const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Fade>
+      <div>abc</div>
+    </Fade>
+    <Fade>
+      <ClassComponent />
+    </Fade>
+    <Fade>
+      <FunctionComponent />
+    </Fade>
+    <Collapse>
+      <div>abc</div>
+    </Collapse>
+    <Collapse>
+      <ClassComponent />
+    </Collapse>
+    <Collapse>
+      <FunctionComponent />
+    </Collapse>
     <Alert transition={Fade} />
     <Alert transition={Collapse} />
     <Alert
@@ -221,7 +265,7 @@ const MegaComponent = () => (
         <img
           className="d-block w-100"
           src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Third slide"
+          alt="Second slide"
         />
 
         <Carousel.Caption>

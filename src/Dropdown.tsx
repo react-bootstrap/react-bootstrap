@@ -145,7 +145,11 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
+      if (
+        event.currentTarget === document &&
+        (source !== 'keydown' || event.key === 'Escape')
+      )
+        source = 'rootClose';
       if (onToggle) {
         onToggle(nextShow, event, { source });
       }
@@ -168,21 +172,18 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
         focusFirstItemOnShow={focusFirstItemOnShow}
         itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
       >
-        {({ props: dropdownProps }) => (
-          <Component
-            {...props}
-            {...dropdownProps}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'right' && 'dropright',
-              drop === 'left' && 'dropleft',
-            )}
-          />
-        )}
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(
+            className,
+            show && 'show',
+            (!drop || drop === 'down') && prefix,
+            drop === 'up' && 'dropup',
+            drop === 'right' && 'dropright',
+            drop === 'left' && 'dropleft',
+          )}
+        />
       </BaseDropdown>
     </SelectableContext.Provider>
   );

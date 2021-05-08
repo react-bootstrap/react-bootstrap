@@ -16,13 +16,14 @@ import {
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
+import { EventKey } from './types';
 
 export interface NavProps extends BsPrefixPropsWithChildren {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
   onSelect?: SelectCallback;
@@ -60,7 +61,7 @@ const propTypes = {
    *
    * @type {string}
    */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Have all `NavItem`s proportionately fill all available width.

@@ -17,7 +17,6 @@ export interface DropdownToggleProps
     ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
-  eventKey?: any; // TODO: fix this type
 }
 
 type DropdownToggle = BsPrefixRefForwardingComponent<
@@ -72,7 +71,7 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
       (props as any).bsPrefix = childBsPrefix;
     }
 
-    const [toggleProps, { toggle }] = useDropdownToggle();
+    const [toggleProps] = useDropdownToggle();
 
     toggleProps.ref = useMergedRefs(
       toggleProps.ref,
@@ -83,7 +82,6 @@ const DropdownToggle: DropdownToggle = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        onClick={toggle}
         className={classNames(className, prefix, split && `${prefix}-split`)}
         {...toggleProps}
         {...props}

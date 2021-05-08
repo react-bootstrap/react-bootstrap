@@ -7,6 +7,7 @@ import warning from 'warning';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import { BsPrefixRefForwardingComponent } from './helpers';
+import { EventKey } from './types';
 
 // TODO: check this
 interface AbstractNavItemProps {
@@ -14,7 +15,7 @@ interface AbstractNavItemProps {
   as: React.ElementType;
   className?: string;
   disabled?: boolean;
-  eventKey?: any; // TODO: especially fix this
+  eventKey?: EventKey;
   href?: string;
   role?: string;
   id?: string;

@@ -13,10 +13,11 @@ import TabPane from './TabPane';
 
 import { forEach, map } from './ElementChildren';
 import { SelectCallback, TransitionType } from './helpers';
+import { EventKey } from './types';
 
 export interface TabsProps extends React.PropsWithChildren<unknown> {
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   onSelect?: SelectCallback;
   variant?: 'tabs' | 'pills';
   transition?: TransitionType;
@@ -31,9 +32,9 @@ const propTypes = {
    *
    * @controllable onSelect
    */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** The default active key that is selected on start */
-  defaultActiveKey: PropTypes.any,
+  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Navigation style
