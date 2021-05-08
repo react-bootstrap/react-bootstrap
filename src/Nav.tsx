@@ -29,6 +29,7 @@ export interface NavProps extends BsPrefixPropsWithChildren {
   onSelect?: SelectCallback;
   role?: string;
   navbar?: boolean;
+  navbarScroll?: boolean;
   onKeyDown?: React.KeyboardEventHandler<this>;
 }
 
@@ -104,6 +105,11 @@ const propTypes = {
    */
   navbar: PropTypes.bool,
 
+  /**
+   * Enable vertical scrolling within the toggleable contents of a collapsed Navbar.
+   */
+  navbarScroll: PropTypes.bool,
+
   as: PropTypes.elementType,
 
   /** @private */
@@ -123,6 +129,7 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
     fill,
     justify,
     navbar,
+    navbarScroll,
     className,
     children,
     activeKey,
@@ -153,6 +160,7 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
       className={classNames(className, {
         [bsPrefix]: !isNavbar,
         [`${navbarBsPrefix}-nav`]: isNavbar,
+        [`${navbarBsPrefix}-nav-scroll`]: isNavbar && navbarScroll,
         [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
         [`${bsPrefix}-${variant}`]: !!variant,
         [`${bsPrefix}-fill`]: fill,
