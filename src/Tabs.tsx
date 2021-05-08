@@ -114,14 +114,17 @@ function renderTab(child) {
   }
 
   return (
-    <NavItem
-      as={NavLink}
-      eventKey={eventKey}
-      disabled={disabled}
-      id={id}
-      className={tabClassName}
-    >
-      {title}
+    <NavItem as="li" role="presentation">
+      <NavLink
+        as="button"
+        type="button"
+        eventKey={eventKey}
+        disabled={disabled}
+        id={id}
+        className={tabClassName}
+      >
+        {title}
+      </NavLink>
     </NavItem>
   );
 }
@@ -149,7 +152,7 @@ const Tabs = (props: TabsProps) => {
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
-      <Nav {...controlledProps} role="tablist" as="nav">
+      <Nav {...controlledProps} role="tablist" as="ul">
         {map(children, renderTab)}
       </Nav>
 
