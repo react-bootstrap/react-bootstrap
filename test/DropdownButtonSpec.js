@@ -27,16 +27,16 @@ describe('<DropdownButton>', () => {
     ).assertSingle('.dropdown-menu a.dropdown-item');
   });
 
-  it('forwards alignRight to the Dropdown', () => {
+  it('forwards align="end" to the Dropdown', () => {
     mount(
-      <DropdownButton alignRight title="blah" id="test-id">
+      <DropdownButton align="end" title="blah" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
     )
       .find('Dropdown')
       .first()
       .props()
-      .alignRight.should.equal(true);
+      .align.should.equal('end');
   });
 
   it('passes variant and size to the toggle', () => {

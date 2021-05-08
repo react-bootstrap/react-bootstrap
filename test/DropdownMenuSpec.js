@@ -24,9 +24,9 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('div.new-fancy-class');
   });
 
-  it('applies alignRight', () => {
+  it('applies align="end"', () => {
     mount(
-      <DropdownMenu show alignRight>
+      <DropdownMenu show align="end">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     ).assertSingle('.dropdown-menu-end');
@@ -73,7 +73,9 @@ describe('<Dropdown.Menu>', () => {
       <DropdownMenu show align={{ lg: 'end' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-lg-end');
+    )
+      .assertSingle('.dropdown-menu-lg-end')
+      .assertSingle('[data-bs-popper="static"]');
   });
 
   it('should render variant', () => {

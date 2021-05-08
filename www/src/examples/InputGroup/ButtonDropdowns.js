@@ -21,7 +21,7 @@
       variant="outline-secondary"
       title="Dropdown"
       id="input-group-dropdown-2"
-      alignRight
+      align="end"
     >
       <Dropdown.Item href="#">Action</Dropdown.Item>
       <Dropdown.Item href="#">Another action</Dropdown.Item>
@@ -48,7 +48,7 @@
       variant="outline-secondary"
       title="Dropdown"
       id="input-group-dropdown-4"
-      alignRight
+      align="end"
     >
       <Dropdown.Item href="#">Action</Dropdown.Item>
       <Dropdown.Item href="#">Another action</Dropdown.Item>

@@ -1,5 +1,5 @@
 <DropdownButton
-  menuAlign="end"
+  align="end"
   title="Dropdown right"
   id="dropdown-menu-align-right"
 >

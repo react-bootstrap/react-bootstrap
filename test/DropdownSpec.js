@@ -66,15 +66,15 @@ describe('<Dropdown>', () => {
     buttonNode.getAttribute('id').should.be.ok;
   });
 
-  it('forwards alignRight to menu', () => {
+  it('forwards align="end" to menu', () => {
     const Menu = React.forwardRef(
-      ({ show: _, close: _1, alignRight, ...props }, ref) => (
-        <div {...props} data-align-right={alignRight} ref={ref} />
+      ({ show: _, close: _1, align, ...props }, ref) => (
+        <div {...props} data-align={align} ref={ref} />
       ),
     );
 
     mount(
-      <Dropdown alignRight show>
+      <Dropdown align="end" show>
         <Dropdown.Toggle id="test-id" key="toggle">
           Child Title
         </Dropdown.Toggle>
@@ -83,7 +83,7 @@ describe('<Dropdown>', () => {
           <Dropdown.Item>Item 1</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>,
-    ).assertSingle('div[data-align-right=true]');
+    ).assertSingle('div[data-align="end"]');
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space
@@ -293,8 +293,6 @@ describe('<Dropdown>', () => {
           show,
           // eslint-disable-next-line no-unused-vars
           close,
-          // eslint-disable-next-line no-unused-vars
-          alignRight,
           ...props
         },
         ref,
