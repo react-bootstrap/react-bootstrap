@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^10.0.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "toposort": "^2.0.2"
   },
   "peerDependencies": {
