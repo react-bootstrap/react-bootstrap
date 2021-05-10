@@ -19,7 +19,7 @@ import {
 } from './helpers';
 import { AlignType, AlignDirection, alignPropType } from './types';
 
-export type DropdownMenuVariant = 'dark';
+export type DropdownMenuVariant = 'dark' | string;
 
 export interface DropdownMenuProps
   extends BsPrefixProps,
@@ -90,7 +90,7 @@ const propTypes = {
    *
    * Omitting this will use the default light color.
    */
-  variant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+  variant: PropTypes.string,
 };
 
 const defaultProps: Partial<DropdownMenuProps> = {
