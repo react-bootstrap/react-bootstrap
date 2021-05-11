@@ -1,3 +1,20 @@
+# [1.6.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.2...v1.6.0) (2021-05-11)
+
+
+### Bug Fixes
+
+* **Popover:** fix arrow alignment when running Popper >= 2.84 ([#5774](https://github.com/react-bootstrap/react-bootstrap/issues/5774)) ([da85f30](https://github.com/react-bootstrap/react-bootstrap/commit/da85f30f985870183f09835ac49d0fac075587d6))
+* **types:** fix types for event key ([700e944](https://github.com/react-bootstrap/react-bootstrap/commit/700e944de72072106f1ca50a9b797512dfa95009))
+
+
+### Features
+
+* **Nav:** Add navbarScroll prop ([#5620](https://github.com/react-bootstrap/react-bootstrap/issues/5620)) ([d9c1bb7](https://github.com/react-bootstrap/react-bootstrap/commit/d9c1bb78412e42e6f6add1cc19b83cce48f2830e))
+
+
+
+
+
 ## [1.5.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.1...v1.5.2) (2021-03-11)
 
 
