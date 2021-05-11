@@ -73,6 +73,21 @@ describe('<Nav>', () => {
     ).assertSingle('div.navbar-nav');
   });
 
+  it('should handle navbarScroll only if within navbar', () => {
+    mount(
+      <Navbar>
+        <Nav navbarScroll />
+      </Navbar>,
+    ).assertSingle('div.navbar-nav.navbar-nav-scroll');
+  });
+
+  it('should not add navbarScroll when not within navbar', () => {
+    const wrapper = mount(<Nav navbarScroll />);
+
+    const nav = wrapper.find('div.nav');
+    expect(nav.hasClass('navbar-nav-scroll')).to.not.be.true;
+  });
+
   it('should be card header aware', () => {
     mount(
       <CardHeader>

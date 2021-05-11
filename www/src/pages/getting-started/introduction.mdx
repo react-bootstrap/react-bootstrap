@@ -1,4 +1,5 @@
 import Callout from '../../components/Callout';
+import CodeBlock from '../../components/CodeBlock';
 import BrowserGlobalsCodeBlock from '../../components/BrowserGlobalsCodeBlock';
 import CssCodeBlock from '../../components/CssCodeBlock';
 import DocLink from '../../components/DocLink';
@@ -16,9 +17,7 @@ If you plan on customizing the Bootstrap Sass files, or don't want
 to use a CDN for the stylesheet, it may be helpful to
 install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLink> as well.
 
-```
-npm install react-bootstrap bootstrap
-```
+<CodeBlock codeText={`npm install react-bootstrap bootstrap@${config.bootstrapVersion}`} />
 
 ## Importing Components
 
