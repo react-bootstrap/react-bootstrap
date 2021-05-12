@@ -31,6 +31,7 @@ export interface NavProps
   justify?: boolean;
   onSelect?: SelectCallback;
   navbar?: boolean;
+  navbarScroll?: boolean;
 }
 
 const propTypes = {
@@ -98,6 +99,11 @@ const propTypes = {
    */
   navbar: PropTypes.bool,
 
+  /**
+   * Enable vertical scrolling within the toggleable contents of a collapsed Navbar.
+   */
+  navbarScroll: PropTypes.bool,
+
   as: PropTypes.elementType,
 
   /** @private */
@@ -120,6 +126,7 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
     fill,
     justify,
     navbar,
+    navbarScroll,
     className,
     activeKey,
     ...props
@@ -149,6 +156,7 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
       className={classNames(className, {
         [bsPrefix]: !isNavbar,
         [`${navbarBsPrefix}-nav`]: isNavbar,
+        [`${navbarBsPrefix}-nav-scroll`]: isNavbar && navbarScroll,
         [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
         [`${bsPrefix}-${variant}`]: !!variant,
         [`${bsPrefix}-fill`]: fill,
