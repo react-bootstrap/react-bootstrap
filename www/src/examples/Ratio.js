@@ -1,5 +1,5 @@
 <div style={{ width: 660, height: 'auto' }}>
-  <ResponsiveEmbed aspectRatio="16by9">
+  <Ratio aspectRatio="16x9">
     <embed type="image/svg+xml" src="/TheresaKnott_castle.svg" />
-  </ResponsiveEmbed>
+  </Ratio>
 </div>;
