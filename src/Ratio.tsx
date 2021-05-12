@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps } from './helpers';
 
-export type AspectRatio = '1x1' | '4x3' | '16x9' | '21x9';
+export type AspectRatio = '1x1' | '4x3' | '16x9' | '21x9' | string;
 
 export interface RatioProps
   extends BsPrefixProps,
@@ -26,13 +26,10 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 
   /**
-   * Set the aspect ration of the embed. A fraction or a percentage can also
+   * Set the aspect ratio of the embed. A fraction or a percentage can also
    * be used to create custom aspect ratios.
    */
-  aspectRatio: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<AspectRatio>(['1x1', '4x3', '16x9', '21x9']),
-  ]),
+  aspectRatio: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 const defaultProps = {
