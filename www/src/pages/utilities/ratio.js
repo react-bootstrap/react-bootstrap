@@ -1,11 +1,14 @@
 import { graphql } from 'gatsby';
 
-import DocLink from '../../components/DocLink';
 import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
-import Ratio from '../../examples/Ratio';
+import RatioCustom from '../../examples/Ratio/Custom';
+import RatioDefault from '../../examples/Ratio/Default';
+import RatioExample from '../../examples/Ratio/Example';
 import withLayout from '../../withLayout';
+
+import styles from '../../css/examples.module.scss';
 
 export default withLayout(function RatioSection({ data }) {
   return (
@@ -36,18 +39,36 @@ export default withLayout(function RatioSection({ data }) {
         You don't need to include <code>frameborder="0"</code> in your{' '}
         <code>iframe</code>s.
       </p>
-      <p>
-        The aspect ratio is controlled via the <code>aspectRatio</code> prop.
-        For custom ratios see{' '}
-        <DocLink path="/helpers/ratio/#custom-ratios">
-          Bootstrap's docs.
-        </DocLink>
-      </p>
 
       <LinkedHeading h="2" id="ratio-example">
         Example
       </LinkedHeading>
-      <ReactPlayground codeText={Ratio} />
+      <ReactPlayground codeText={RatioExample} />
+
+      <LinkedHeading h="2" id="aspect-ratios">
+        Aspect ratios
+      </LinkedHeading>
+      <p>
+        Aspect ratios can be customized using <code>aspectRatio</code>. By
+        default the following <code>aspectRatio</code> values are provided:
+      </p>
+      <ReactPlayground
+        codeText={RatioDefault}
+        exampleClassName={styles.ratioExamples}
+      />
+
+      <LinkedHeading h="2" id="custom-ratios">
+        Custom
+      </LinkedHeading>
+      <p>
+        Create custom aspect ratios by passing a number to{' '}
+        <code>aspectRatio</code> instead of using the above pre-defined values.
+        You can use either a fraction or percentage to define the custom ratio.
+      </p>
+      <ReactPlayground
+        codeText={RatioCustom}
+        exampleClassName={styles.ratioExamples}
+      />
 
       <LinkedHeading h="3" id="ratio-props">
         API

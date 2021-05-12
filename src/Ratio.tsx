@@ -11,7 +11,7 @@ export interface RatioProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactChild;
-  aspectRatio?: AspectRatio;
+  aspectRatio?: AspectRatio | number;
 }
 
 const propTypes = {
@@ -26,26 +26,44 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 
   /**
-   * Set the aspect ration of the embed
+   * Set the aspect ration of the embed. A fraction or a percentage can also
+   * be used to create custom aspect ratios.
    */
-  aspectRatio: PropTypes.oneOf<AspectRatio>(['1x1', '4x3', '16x9', '21x9']),
+  aspectRatio: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf<AspectRatio>(['1x1', '4x3', '16x9', '21x9']),
+  ]),
 };
 
 const defaultProps = {
   aspectRatio: '1x1' as const,
 };
 
+function toPercent(num: number): string {
+  if (num <= 0 || num > 100) return '100%';
+  if (num < 1) return `${num * 100}%`;
+  return `${num}%`;
+}
+
 const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
-  ({ bsPrefix, className, children, aspectRatio, ...props }, ref) => {
+  ({ bsPrefix, className, children, aspectRatio, style, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'ratio');
+    const isCustomRatio = typeof aspectRatio === 'number';
+
     return (
       <div
         ref={ref}
         {...props}
+        style={{
+          ...style,
+          ...(isCustomRatio && {
+            '--bs-aspect-ratio': toPercent(aspectRatio as number),
+          }),
+        }}
         className={classNames(
           bsPrefix,
           className,
-          aspectRatio && `${bsPrefix}-${aspectRatio}`,
+          !isCustomRatio && `${bsPrefix}-${aspectRatio}`,
         )}
       >
         {React.Children.only(children)}

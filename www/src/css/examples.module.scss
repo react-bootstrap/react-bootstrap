@@ -4,6 +4,23 @@
   max-width: 400px;
 }
 
+.ratio-examples {
+  :global(.ratio) {
+    display: inline-block;
+    width: 10rem;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-right: 5px;
+  
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 .static-dropdown-menu {
   composes: clearfix from global;
 
