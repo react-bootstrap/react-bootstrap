@@ -40,7 +40,7 @@
     "@restart/hooks": "^0.3.26",
     "ast-types": "^0.14.2",
     "astroturf": "^0.10.5",
-    "bootstrap": "^5.0.0-beta3",
+    "bootstrap": "^5.0.0",
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",
     "copy-text-to-clipboard": "^3.0.1",
