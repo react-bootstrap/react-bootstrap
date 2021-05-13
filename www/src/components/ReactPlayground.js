@@ -122,6 +122,21 @@ function Preview({ showCode, className }) {
       theme: 'gray',
       images: qsa(exampleRef.current, 'img'),
     });
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+          hjs.run({
+            theme: 'gray',
+            images: qsa(exampleRef.current, 'img'),
+          });
+        }
+      });
+    });
+    observer.observe(exampleRef.current, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+
   }, [hjs, live.element]);
 
   const handleClick = useCallback((e) => {
