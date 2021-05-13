@@ -63,3 +63,5 @@ export const alignPropType = PropTypes.oneOfType([
   PropTypes.shape({ xl: alignDirection }),
   PropTypes.shape({ xxl: alignDirection }),
 ]);
+
+export type RootCloseEvent = 'click' | 'mousedown';
