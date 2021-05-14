@@ -10,6 +10,7 @@ import DropdownContext from './DropdownContext';
 import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
+import InputGroupContext from './InputGroupContext';
 import SelectableContext from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
@@ -149,6 +150,7 @@ const Dropdown: BsPrefixRefForwardingComponent<
   } = useUncontrolled(pProps, { show: 'onToggle' });
 
   const onSelectCtx = useContext(SelectableContext);
+  const isInputGroup = useContext(InputGroupContext);
   const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
 
   const handleToggle = useEventCallback(
@@ -194,18 +196,22 @@ const Dropdown: BsPrefixRefForwardingComponent<
           focusFirstItemOnShow={focusFirstItemOnShow}
           itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
         >
-          <Component
-            {...props}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'end' && 'dropend',
-              drop === 'start' && 'dropstart',
-            )}
-          />
+          {isInputGroup ? (
+            props.children
+          ) : (
+            <Component
+              {...props}
+              ref={ref}
+              className={classNames(
+                className,
+                show && 'show',
+                (!drop || drop === 'down') && prefix,
+                drop === 'up' && 'dropup',
+                drop === 'end' && 'dropend',
+                drop === 'start' && 'dropstart',
+              )}
+            />
+          )}
         </BaseDropdown>
       </SelectableContext.Provider>
     </DropdownContext.Provider>
