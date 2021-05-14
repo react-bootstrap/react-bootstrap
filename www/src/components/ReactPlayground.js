@@ -21,6 +21,7 @@ import {
 } from 'react-live';
 import * as yup from 'yup';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
+import useMutationObserver from '@restart/hooks/useMutationObserver';
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
 
@@ -122,8 +123,11 @@ function Preview({ showCode, className }) {
       theme: 'gray',
       images: qsa(exampleRef.current, 'img'),
     });
+  }, [hjs, live.element]);
 
-    const observer = new MutationObserver((mutations) => {
+  useMutationObserver(exampleRef.current, {
+    childList: true, subtree: true },
+    (mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.addedNodes.length > 0) {
           hjs.run({
@@ -133,11 +137,6 @@ function Preview({ showCode, className }) {
         }
       });
     });
-    observer.observe(exampleRef.current, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
-
-  }, [hjs, live.element]);
 
   const handleClick = useCallback((e) => {
     if (e.target.tagName === 'A') {
