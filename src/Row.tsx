@@ -101,9 +101,7 @@ const propTypes = {
   xxl: rowColumns,
 };
 
-const defaultProps = {
-  noGutters: false,
-};
+const defaultProps = {};
 
 const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
   HTMLDivElement,
@@ -113,7 +111,6 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
     {
       bsPrefix,
       className,
-      noGutters,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
@@ -144,11 +141,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
       <Component
         ref={ref}
         {...props}
-        className={classNames(
-          className,
-          decoratedBsPrefix,
-          ...classes,
-        )}
+        className={classNames(className, decoratedBsPrefix, ...classes)}
       />
     );
   },
