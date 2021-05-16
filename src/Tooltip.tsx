@@ -24,12 +24,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
+  id: isRequiredForA11y(PropTypes.string),
 
   /**
    * Sets the direction the Tooltip is positioned towards.

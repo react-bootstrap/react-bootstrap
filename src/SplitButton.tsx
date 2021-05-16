@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown, { DropdownProps } from './Dropdown';
@@ -12,7 +12,7 @@ export interface SplitButtonProps
   extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
     BsPrefixProps {
-  id: string | number;
+  id: string;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -25,10 +25,10 @@ export interface SplitButtonProps
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: PropTypes.any,
+  id: isRequiredForA11y(PropTypes.string),
 
   /**
    * Accessible label for the toggle; the value of `title` if not specified.
@@ -134,7 +134,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       </Button>
       <Dropdown.Toggle
         split
-        id={id ? id.toString() : undefined}
+        id={id}
         size={size}
         variant={variant}
         disabled={props.disabled}

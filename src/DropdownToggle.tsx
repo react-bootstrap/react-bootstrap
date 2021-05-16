@@ -13,6 +13,7 @@ import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownToggleProps extends ButtonProps {
+  id: string;
   split?: boolean;
   childBsPrefix?: string;
 }
@@ -34,10 +35,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(PropTypes.any),
+  id: isRequiredForA11y(PropTypes.string),
 
   split: PropTypes.bool,
 

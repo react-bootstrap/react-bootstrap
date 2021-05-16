@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
 import DropdownMenu, { DropdownMenuVariant } from './DropdownMenu';
@@ -11,6 +11,7 @@ export interface DropdownButtonProps
   extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
     BsPrefixProps {
+  id: string;
   title: React.ReactNode;
   menuRole?: string;
   renderMenuOnMount?: boolean;
@@ -21,10 +22,10 @@ export interface DropdownButtonProps
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: PropTypes.any,
+  id: isRequiredForA11y(PropTypes.string),
 
   /** An `href` passed to the Toggle component */
   href: PropTypes.string,

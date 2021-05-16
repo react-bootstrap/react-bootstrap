@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useUncontrolled } from 'uncontrollable';
 
 import Nav from './Nav';
@@ -22,7 +22,7 @@ export interface TabsProps
   onSelect?: SelectCallback;
   variant?: 'tabs' | 'pills';
   transition?: TransitionType;
-  id?: string;
+  id: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
@@ -58,12 +58,10 @@ const propTypes = {
   ]),
 
   /**
-   * HTML id attribute, required if no `generateChildId` prop
-   * is specified.
-   *
+   * An html id attribute, necessary for accessibility
    * @type {string}
    */
-  id: requiredForA11y(PropTypes.string),
+  id: isRequiredForA11y(PropTypes.string),
 
   /**
    * Callback fired when a Tab is selected.
