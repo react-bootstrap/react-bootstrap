@@ -101,7 +101,6 @@ const propTypes = {
   xxl: rowColumns,
 };
 
-const defaultProps = {};
 
 const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
   HTMLDivElement,
@@ -149,6 +148,5 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
 
 Row.displayName = 'Row';
 Row.propTypes = propTypes;
-Row.defaultProps = defaultProps;
 
 export default Row;
