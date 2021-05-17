@@ -10,6 +10,7 @@ import BaseModal, {
 } from 'react-overlays/Modal';
 import ModalManager from 'react-overlays/ModalManager';
 import useRootClose from 'react-overlays/useRootClose';
+import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
@@ -48,7 +49,7 @@ const propTypes = {
   backdrop: PropTypes.bool,
 
   /**
-   * Add an optional extra class name to .offcanvas-backdrop.
+   * Add an optional extra class name to .modal-backdrop.
    */
   backdropClassName: PropTypes.string,
 
@@ -171,136 +172,147 @@ function DialogTransition(props) {
   return <OffcanvasToggling {...props} />;
 }
 
-const Offcanvas: BsPrefixRefForwardingComponent<
-  'div',
-  OffcanvasProps
-> = React.forwardRef<ModalHandle, OffcanvasProps>(
-  (
-    {
-      bsPrefix,
-      className,
-      children,
-      'aria-labelledby': ariaLabelledby,
-      placement,
+function BackdropTransition(props) {
+  return <Fade {...props} />;
+}
 
-      /* BaseModal props */
+const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
+  React.forwardRef<ModalHandle, OffcanvasProps>(
+    (
+      {
+        bsPrefix,
+        className,
+        children,
+        'aria-labelledby': ariaLabelledby,
+        placement,
 
-      show,
-      backdrop,
-      keyboard,
-      scroll,
-      onEscapeKeyDown,
-      onShow,
-      onHide,
-      container,
-      autoFocus,
-      enforceFocus,
-      restoreFocus,
-      restoreFocusOptions,
-      onEntered,
-      onExit,
-      onExiting,
-      onEnter,
-      onEntering,
-      onExited,
-      backdropClassName,
-      manager: propsManager,
-      ...props
-    },
-    ref,
-  ) => {
-    const [dialogElement, setDialogElement] = useCallbackRef<HTMLElement>();
-    const modalManager = useRef<ModalManager>();
-    const handleHide = useEventCallback(onHide);
+        /* BaseModal props */
 
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
+        show,
+        backdrop,
+        keyboard,
+        scroll,
+        onEscapeKeyDown,
+        onShow,
+        onHide,
+        container,
+        autoFocus,
+        enforceFocus,
+        restoreFocus,
+        restoreFocusOptions,
+        onEntered,
+        onExit,
+        onExiting,
+        onEnter,
+        onEntering,
+        onExited,
+        backdropClassName,
+        manager: propsManager,
+        ...props
+      },
+      ref,
+    ) => {
+      const [dialogElement, setDialogElement] = useCallbackRef<HTMLElement>();
+      const modalManager = useRef<ModalManager>();
+      const handleHide = useEventCallback(onHide);
 
-    // If there's a backdrop, let BaseModal handle closing.
-    useRootClose(dialogElement, handleHide, {
-      disabled: backdrop,
-    });
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
+      const modalBsPrefix = useBootstrapPrefix(undefined, 'modal');
 
-    const modalContext = useMemo(
-      () => ({
-        onHide: handleHide,
-      }),
-      [handleHide],
-    );
+      // If there's a backdrop, let BaseModal handle closing.
+      useRootClose(dialogElement, handleHide, {
+        disabled: backdrop,
+      });
 
-    function getModalManager() {
-      if (propsManager) return propsManager;
-      if (!modalManager.current)
-        modalManager.current = new ModalManager({
-          handleContainerOverflow: !scroll,
-        });
-      return modalManager.current;
-    }
+      const modalContext = useMemo(
+        () => ({
+          onHide: handleHide,
+        }),
+        [handleHide],
+      );
 
-    const handleEnter = (node, ...args) => {
-      if (node) node.style.visibility = 'visible';
-      onEnter?.(node, ...args);
-      setDialogElement(node);
-    };
+      function getModalManager() {
+        if (propsManager) return propsManager;
+        if (!modalManager.current)
+          modalManager.current = new ModalManager({
+            handleContainerOverflow: !scroll,
+          });
+        return modalManager.current;
+      }
 
-    const handleExited = (node, ...args) => {
-      if (node) node.style.visibility = '';
-      onExited?.(...args);
-      setDialogElement(null);
-    };
+      const handleEnter = (node, ...args) => {
+        if (node) node.style.visibility = 'visible';
+        onEnter?.(node, ...args);
+        setDialogElement(node);
+      };
 
-    const renderBackdrop = useCallback(
-      (backdropProps) => (
+      const handleExited = (node, ...args) => {
+        if (node) node.style.visibility = '';
+        onExited?.(...args);
+        setDialogElement(null);
+      };
+
+      const renderBackdrop = useCallback(
+        (backdropProps) => (
+          <div
+            {...backdropProps}
+            className={classNames(
+              `${modalBsPrefix}-backdrop`,
+              backdropClassName,
+            )}
+          />
+        ),
+        [backdropClassName, modalBsPrefix],
+      );
+
+      const renderDialog = (dialogProps) => (
         <div
-          {...backdropProps}
-          className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
-        />
-      ),
-      [backdropClassName, bsPrefix],
-    );
+          role="dialog"
+          {...dialogProps}
+          {...props}
+          className={classNames(
+            className,
+            bsPrefix,
+            `${bsPrefix}-${placement}`,
+          )}
+          aria-labelledby={ariaLabelledby}
+        >
+          {children}
+        </div>
+      );
 
-    const renderDialog = (dialogProps) => (
-      <div
-        role="dialog"
-        {...dialogProps}
-        {...props}
-        className={classNames(className, bsPrefix, `${bsPrefix}-${placement}`)}
-        aria-labelledby={ariaLabelledby}
-      >
-        {children}
-      </div>
-    );
-
-    return (
-      <ModalContext.Provider value={modalContext}>
-        <BaseModal
-          show={show}
-          ref={ref}
-          backdrop={backdrop}
-          container={container}
-          keyboard={keyboard}
-          autoFocus={autoFocus}
-          enforceFocus={enforceFocus}
-          restoreFocus={restoreFocus}
-          restoreFocusOptions={restoreFocusOptions}
-          onEscapeKeyDown={onEscapeKeyDown}
-          onShow={onShow}
-          onHide={onHide}
-          onEnter={handleEnter}
-          onEntering={onEntering}
-          onEntered={onEntered}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={handleExited}
-          manager={getModalManager()}
-          containerClassName={`${bsPrefix}-open`}
-          transition={DialogTransition}
-          renderBackdrop={renderBackdrop}
-          renderDialog={renderDialog}
-        />
-      </ModalContext.Provider>
-    );
-  },
-);
+      return (
+        <ModalContext.Provider value={modalContext}>
+          <BaseModal
+            show={show}
+            ref={ref}
+            backdrop={backdrop}
+            container={container}
+            keyboard={keyboard}
+            autoFocus={autoFocus}
+            enforceFocus={enforceFocus}
+            restoreFocus={restoreFocus}
+            restoreFocusOptions={restoreFocusOptions}
+            onEscapeKeyDown={onEscapeKeyDown}
+            onShow={onShow}
+            onHide={onHide}
+            onEnter={handleEnter}
+            onEntering={onEntering}
+            onEntered={onEntered}
+            onExit={onExit}
+            onExiting={onExiting}
+            onExited={handleExited}
+            manager={getModalManager()}
+            containerClassName={`${bsPrefix}-open`}
+            transition={DialogTransition}
+            backdropTransition={BackdropTransition}
+            renderBackdrop={renderBackdrop}
+            renderDialog={renderDialog}
+          />
+        </ModalContext.Provider>
+      );
+    },
+  );
 
 Offcanvas.displayName = 'Offcanvas';
 Offcanvas.propTypes = propTypes;
