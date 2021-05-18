@@ -40,4 +40,4 @@ describe('Row', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<Row as="section" />).assertSingle('section.row');
   });
-
+});
