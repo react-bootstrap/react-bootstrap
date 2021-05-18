@@ -26,7 +26,6 @@ type RowColumns = RowColWidth | { cols?: RowColWidth };
 export interface RowProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  noGutters?: boolean;
   xs?: RowColumns;
   sm?: RowColumns;
   md?: RowColumns;
@@ -51,8 +50,6 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
-  noGutters: PropTypes.bool.isRequired,
   as: PropTypes.elementType,
 
   /**
@@ -104,9 +101,6 @@ const propTypes = {
   xxl: rowColumns,
 };
 
-const defaultProps = {
-  noGutters: false,
-};
 
 const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
   HTMLDivElement,
@@ -116,7 +110,6 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
     {
       bsPrefix,
       className,
-      noGutters,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
@@ -147,12 +140,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
       <Component
         ref={ref}
         {...props}
-        className={classNames(
-          className,
-          decoratedBsPrefix,
-          noGutters && 'no-gutters',
-          ...classes,
-        )}
+        className={classNames(className, decoratedBsPrefix, ...classes)}
       />
     );
   },
@@ -160,6 +148,5 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
 
 Row.displayName = 'Row';
 Row.propTypes = propTypes;
-Row.defaultProps = defaultProps;
 
 export default Row;
