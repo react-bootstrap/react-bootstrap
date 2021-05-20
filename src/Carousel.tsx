@@ -40,6 +40,7 @@ export interface CarouselProps
   fade?: boolean;
   controls?: boolean;
   indicators?: boolean;
+  indicatorLabels?: string[];
   activeIndex?: number;
   onSelect?: (eventKey: number, event: Record<string, unknown> | null) => void;
   defaultActiveIndex?: number;
@@ -84,6 +85,11 @@ const propTypes = {
    * Show a set of slide position indicators
    */
   indicators: PropTypes.bool,
+
+  /**
+   * An array of labels for the indicators. Defaults to "Slide #" if not provided.
+   */
+  indicatorLabels: PropTypes.array,
 
   /**
    * Controls the current visible slide
@@ -174,7 +180,7 @@ const defaultProps = {
   fade: false,
   controls: true,
   indicators: true,
-
+  indicatorLabels: [],
   defaultActiveIndex: 0,
   interval: 5000,
   keyboard: true,
@@ -220,6 +226,7 @@ const Carousel: BsPrefixRefForwardingComponent<
     fade,
     controls,
     indicators,
+    indicatorLabels,
     activeIndex,
     onSelect,
     onSlide,
@@ -524,15 +531,23 @@ const Carousel: BsPrefixRefForwardingComponent<
       )}
     >
       {indicators && (
-        <ol className={`${prefix}-indicators`}>
-          {map(children, (_child, index) => (
-            <li
+        <div className={`${prefix}-indicators`}>
+          {map(children, (_, index) => (
+            <button
               key={index}
+              type="button"
+              data-bs-target="" // Bootstrap requires this in their css.
+              aria-label={
+                indicatorLabels?.length
+                  ? indicatorLabels[index]
+                  : `Slide ${index + 1}`
+              }
               className={index === renderedActiveIndex ? 'active' : undefined}
               onClick={indicatorOnClicks ? indicatorOnClicks[index] : undefined}
+              aria-current={index === renderedActiveIndex}
             />
           ))}
-        </ol>
+        </div>
       )}
 
       <div className={`${prefix}-inner`}>
