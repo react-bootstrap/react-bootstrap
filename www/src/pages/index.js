@@ -86,7 +86,7 @@ const ButtonToolbar = styled('div')`
     & > * {
       width: 100%;
       max-width: 300px;
-      margin: 1rem;
+      margin: 0.1rem;
     }
   }
 `;
