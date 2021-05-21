@@ -101,7 +101,6 @@ const propTypes = {
   xxl: rowColumns,
 };
 
-
 const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
   HTMLDivElement,
   RowProps

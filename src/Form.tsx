@@ -38,27 +38,25 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const Form: BsPrefixRefForwardingComponent<
-  'form',
-  FormProps
-> = React.forwardRef<HTMLFormElement, FormProps>(
-  (
-    {
-      className,
-      validated,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'form',
-      ...props
-    },
-    ref,
-  ) => (
-    <Component
-      {...props}
-      ref={ref}
-      className={classNames(className, validated && 'was-validated')}
-    />
-  ),
-);
+const Form: BsPrefixRefForwardingComponent<'form', FormProps> =
+  React.forwardRef<HTMLFormElement, FormProps>(
+    (
+      {
+        className,
+        validated,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'form',
+        ...props
+      },
+      ref,
+    ) => (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, validated && 'was-validated')}
+      />
+    ),
+  );
 
 Form.displayName = 'Form';
 Form.propTypes = propTypes as any;

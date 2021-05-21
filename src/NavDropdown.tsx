@@ -64,59 +64,57 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const NavDropdown: BsPrefixRefForwardingComponent<
-  'div',
-  NavDropdownProps
-> = React.forwardRef(
-  (
-    {
-      id,
-      title,
-      children,
-      bsPrefix,
-      className,
-      rootCloseEvent,
-      menuRole,
-      disabled,
-      active,
-      renderMenuOnMount,
-      menuVariant,
-      ...props
-    }: NavDropdownProps,
-    ref,
-  ) => {
-    /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
-    const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
+const NavDropdown: BsPrefixRefForwardingComponent<'div', NavDropdownProps> =
+  React.forwardRef(
+    (
+      {
+        id,
+        title,
+        children,
+        bsPrefix,
+        className,
+        rootCloseEvent,
+        menuRole,
+        disabled,
+        active,
+        renderMenuOnMount,
+        menuVariant,
+        ...props
+      }: NavDropdownProps,
+      ref,
+    ) => {
+      /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
+      const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
-    return (
-      <Dropdown
-        ref={ref}
-        {...props}
-        className={classNames(className, navItemPrefix)}
-      >
-        <Dropdown.Toggle
-          id={id}
-          eventKey={null}
-          active={active}
-          disabled={disabled}
-          childBsPrefix={bsPrefix}
-          as={NavLink}
+      return (
+        <Dropdown
+          ref={ref}
+          {...props}
+          className={classNames(className, navItemPrefix)}
         >
-          {title}
-        </Dropdown.Toggle>
+          <Dropdown.Toggle
+            id={id}
+            eventKey={null}
+            active={active}
+            disabled={disabled}
+            childBsPrefix={bsPrefix}
+            as={NavLink}
+          >
+            {title}
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu
-          role={menuRole}
-          renderOnMount={renderMenuOnMount}
-          rootCloseEvent={rootCloseEvent}
-          variant={menuVariant}
-        >
-          {children}
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  },
-);
+          <Dropdown.Menu
+            role={menuRole}
+            renderOnMount={renderMenuOnMount}
+            rootCloseEvent={rootCloseEvent}
+            variant={menuVariant}
+          >
+            {children}
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+    },
+  );
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;

@@ -114,90 +114,88 @@ const propTypes = {
   feedback: PropTypes.node,
 };
 
-const FormCheck: BsPrefixRefForwardingComponent<
-  'input',
-  FormCheckProps
-> = React.forwardRef<HTMLInputElement, FormCheckProps>(
-  (
-    {
-      id,
-      bsPrefix,
-      bsSwitchPrefix,
-      inline = false,
-      disabled = false,
-      isValid = false,
-      isInvalid = false,
-      feedbackTooltip = false,
-      feedback,
-      className,
-      style,
-      title = '',
-      type = 'checkbox',
-      label,
-      children,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as = 'input',
-      ...props
+const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
+  React.forwardRef<HTMLInputElement, FormCheckProps>(
+    (
+      {
+        id,
+        bsPrefix,
+        bsSwitchPrefix,
+        inline = false,
+        disabled = false,
+        isValid = false,
+        isInvalid = false,
+        feedbackTooltip = false,
+        feedback,
+        className,
+        style,
+        title = '',
+        type = 'checkbox',
+        label,
+        children,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as = 'input',
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
+      bsSwitchPrefix = useBootstrapPrefix(bsSwitchPrefix, 'form-switch');
+
+      const { controlId } = useContext(FormContext);
+      const innerFormContext = useMemo(
+        () => ({
+          controlId: id || controlId,
+        }),
+        [controlId, id],
+      );
+
+      const hasLabel = label != null && label !== false && !children;
+
+      const input = (
+        <FormCheckInput
+          {...props}
+          type={type === 'switch' ? 'checkbox' : type}
+          ref={ref}
+          isValid={isValid}
+          isInvalid={isInvalid}
+          disabled={disabled}
+          as={as}
+        />
+      );
+
+      return (
+        <FormContext.Provider value={innerFormContext}>
+          <div
+            style={style}
+            className={classNames(
+              className,
+              label && bsPrefix,
+              inline && `${bsPrefix}-inline`,
+              type === 'switch' && bsSwitchPrefix,
+            )}
+          >
+            {children || (
+              <>
+                {input}
+                {hasLabel && (
+                  <FormCheckLabel title={title}>{label}</FormCheckLabel>
+                )}
+                {(isValid || isInvalid) && (
+                  <Feedback
+                    type={isValid ? 'valid' : 'invalid'}
+                    tooltip={feedbackTooltip}
+                  >
+                    {feedback}
+                  </Feedback>
+                )}
+              </>
+            )}
+          </div>
+        </FormContext.Provider>
+      );
     },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
-    bsSwitchPrefix = useBootstrapPrefix(bsSwitchPrefix, 'form-switch');
-
-    const { controlId } = useContext(FormContext);
-    const innerFormContext = useMemo(
-      () => ({
-        controlId: id || controlId,
-      }),
-      [controlId, id],
-    );
-
-    const hasLabel = label != null && label !== false && !children;
-
-    const input = (
-      <FormCheckInput
-        {...props}
-        type={type === 'switch' ? 'checkbox' : type}
-        ref={ref}
-        isValid={isValid}
-        isInvalid={isInvalid}
-        disabled={disabled}
-        as={as}
-      />
-    );
-
-    return (
-      <FormContext.Provider value={innerFormContext}>
-        <div
-          style={style}
-          className={classNames(
-            className,
-            label && bsPrefix,
-            inline && `${bsPrefix}-inline`,
-            type === 'switch' && bsSwitchPrefix,
-          )}
-        >
-          {children || (
-            <>
-              {input}
-              {hasLabel && (
-                <FormCheckLabel title={title}>{label}</FormCheckLabel>
-              )}
-              {(isValid || isInvalid) && (
-                <Feedback
-                  type={isValid ? 'valid' : 'invalid'}
-                  tooltip={feedbackTooltip}
-                >
-                  {feedback}
-                </Feedback>
-              )}
-            </>
-          )}
-        </div>
-      </FormContext.Provider>
-    );
-  },
-);
+  );
 
 FormCheck.displayName = 'FormCheck';
 FormCheck.propTypes = propTypes;

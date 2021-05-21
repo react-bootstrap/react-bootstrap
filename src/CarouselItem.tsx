@@ -21,27 +21,25 @@ const propTypes = {
   interval: PropTypes.number,
 };
 
-const CarouselItem: BsPrefixRefForwardingComponent<
-  'div',
-  CarouselItemProps
-> = React.forwardRef<HTMLElement, CarouselItemProps>(
-  (
-    {
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      bsPrefix,
-      className,
-      ...props
+const CarouselItem: BsPrefixRefForwardingComponent<'div', CarouselItemProps> =
+  React.forwardRef<HTMLElement, CarouselItemProps>(
+    (
+      {
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        bsPrefix,
+        className,
+        ...props
+      },
+      ref,
+    ) => {
+      const finalClassName = classNames(
+        className,
+        useBootstrapPrefix(bsPrefix, 'carousel-item'),
+      );
+      return <Component ref={ref} {...props} className={finalClassName} />;
     },
-    ref,
-  ) => {
-    const finalClassName = classNames(
-      className,
-      useBootstrapPrefix(bsPrefix, 'carousel-item'),
-    );
-    return <Component ref={ref} {...props} className={finalClassName} />;
-  },
-);
+  );
 
 CarouselItem.displayName = 'CarouselItem';
 CarouselItem.propTypes = propTypes;

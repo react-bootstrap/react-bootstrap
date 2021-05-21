@@ -28,40 +28,38 @@ const propTypes = {
   eventKey: PropTypes.string.isRequired,
 };
 
-const AccordionItem: BsPrefixRefForwardingComponent<
-  'div',
-  AccordionItemProps
-> = React.forwardRef<HTMLElement, AccordionItemProps>(
-  (
-    {
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      bsPrefix,
-      className,
-      eventKey,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-item');
-    const contextValue = useMemo<AccordionItemContextValue>(
-      () => ({
+const AccordionItem: BsPrefixRefForwardingComponent<'div', AccordionItemProps> =
+  React.forwardRef<HTMLElement, AccordionItemProps>(
+    (
+      {
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        bsPrefix,
+        className,
         eventKey,
-      }),
-      [eventKey],
-    );
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-item');
+      const contextValue = useMemo<AccordionItemContextValue>(
+        () => ({
+          eventKey,
+        }),
+        [eventKey],
+      );
 
-    return (
-      <AccordionItemContext.Provider value={contextValue}>
-        <Component
-          ref={ref}
-          {...props}
-          className={classNames(className, bsPrefix)}
-        />
-      </AccordionItemContext.Provider>
-    );
-  },
-);
+      return (
+        <AccordionItemContext.Provider value={contextValue}>
+          <Component
+            ref={ref}
+            {...props}
+            className={classNames(className, bsPrefix)}
+          />
+        </AccordionItemContext.Provider>
+      );
+    },
+  );
 
 AccordionItem.propTypes = propTypes;
 AccordionItem.displayName = 'AccordionItem';

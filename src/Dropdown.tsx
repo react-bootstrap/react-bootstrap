@@ -130,93 +130,91 @@ const defaultProps: Partial<DropdownProps> = {
   align: 'start',
 };
 
-const Dropdown: BsPrefixRefForwardingComponent<
-  'div',
-  DropdownProps
-> = React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
-  const {
-    bsPrefix,
-    drop,
-    show,
-    className,
-    align,
-    onSelect,
-    onToggle,
-    focusFirstItemOnShow,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'div',
-    navbar: _4,
-    ...props
-  } = useUncontrolled(pProps, { show: 'onToggle' });
-
-  const onSelectCtx = useContext(SelectableContext);
-  const isInputGroup = useContext(InputGroupContext);
-  const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
-
-  const handleToggle = useEventCallback(
-    (nextShow, event, source = event.type) => {
-      if (
-        event.currentTarget === document &&
-        (source !== 'keydown' || event.key === 'Escape')
-      )
-        source = 'rootClose';
-      onToggle?.(nextShow, event, { source });
-    },
-  );
-
-  const handleSelect = useEventCallback((key, event) => {
-    onSelectCtx?.(key, event);
-    onSelect?.(key, event);
-    handleToggle(false, event, 'select');
-  });
-
-  // TODO RTL: Flip directions based on RTL setting.
-  let direction: DropDirection = drop as DropDirection;
-  if (drop === 'start') {
-    direction = 'left';
-  } else if (drop === 'end') {
-    direction = 'right';
-  }
-
-  const contextValue = useMemo(
-    () => ({
+const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
+  React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
+    const {
+      bsPrefix,
+      drop,
+      show,
+      className,
       align,
-    }),
-    [align],
-  );
+      onSelect,
+      onToggle,
+      focusFirstItemOnShow,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      navbar: _4,
+      ...props
+    } = useUncontrolled(pProps, { show: 'onToggle' });
 
-  return (
-    <DropdownContext.Provider value={contextValue}>
-      <SelectableContext.Provider value={handleSelect}>
-        <BaseDropdown
-          drop={direction}
-          show={show}
-          alignEnd={align === 'end'}
-          onToggle={handleToggle}
-          focusFirstItemOnShow={focusFirstItemOnShow}
-          itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
-        >
-          {isInputGroup ? (
-            props.children
-          ) : (
-            <Component
-              {...props}
-              ref={ref}
-              className={classNames(
-                className,
-                show && 'show',
-                (!drop || drop === 'down') && prefix,
-                drop === 'up' && 'dropup',
-                drop === 'end' && 'dropend',
-                drop === 'start' && 'dropstart',
-              )}
-            />
-          )}
-        </BaseDropdown>
-      </SelectableContext.Provider>
-    </DropdownContext.Provider>
-  );
-});
+    const onSelectCtx = useContext(SelectableContext);
+    const isInputGroup = useContext(InputGroupContext);
+    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+
+    const handleToggle = useEventCallback(
+      (nextShow, event, source = event.type) => {
+        if (
+          event.currentTarget === document &&
+          (source !== 'keydown' || event.key === 'Escape')
+        )
+          source = 'rootClose';
+        onToggle?.(nextShow, event, { source });
+      },
+    );
+
+    const handleSelect = useEventCallback((key, event) => {
+      onSelectCtx?.(key, event);
+      onSelect?.(key, event);
+      handleToggle(false, event, 'select');
+    });
+
+    // TODO RTL: Flip directions based on RTL setting.
+    let direction: DropDirection = drop as DropDirection;
+    if (drop === 'start') {
+      direction = 'left';
+    } else if (drop === 'end') {
+      direction = 'right';
+    }
+
+    const contextValue = useMemo(
+      () => ({
+        align,
+      }),
+      [align],
+    );
+
+    return (
+      <DropdownContext.Provider value={contextValue}>
+        <SelectableContext.Provider value={handleSelect}>
+          <BaseDropdown
+            drop={direction}
+            show={show}
+            alignEnd={align === 'end'}
+            onToggle={handleToggle}
+            focusFirstItemOnShow={focusFirstItemOnShow}
+            itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
+          >
+            {isInputGroup ? (
+              props.children
+            ) : (
+              <Component
+                {...props}
+                ref={ref}
+                className={classNames(
+                  className,
+                  show && 'show',
+                  (!drop || drop === 'down') && prefix,
+                  drop === 'up' && 'dropup',
+                  drop === 'end' && 'dropend',
+                  drop === 'start' && 'dropstart',
+                )}
+              />
+            )}
+          </BaseDropdown>
+        </SelectableContext.Provider>
+      </DropdownContext.Provider>
+    );
+  });
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;

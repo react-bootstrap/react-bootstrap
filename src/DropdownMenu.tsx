@@ -98,113 +98,109 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
-const DropdownMenu: BsPrefixRefForwardingComponent<
-  'div',
-  DropdownMenuProps
-> = React.forwardRef<HTMLElement, DropdownMenuProps>(
-  (
-    {
-      bsPrefix,
-      className,
-      align,
-      rootCloseEvent,
-      flip,
-      show: showProps,
-      renderOnMount,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      popperConfig,
-      variant,
-      ...props
-    },
-    ref,
-  ) => {
-    let alignRight = false;
-    const isNavbar = useContext(NavbarContext);
-    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-    const { align: contextAlign } = useContext(DropdownContext);
-    align = align || contextAlign;
-    const isInputGroup = useContext(InputGroupContext);
+const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
+  React.forwardRef<HTMLElement, DropdownMenuProps>(
+    (
+      {
+        bsPrefix,
+        className,
+        align,
+        rootCloseEvent,
+        flip,
+        show: showProps,
+        renderOnMount,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        popperConfig,
+        variant,
+        ...props
+      },
+      ref,
+    ) => {
+      let alignRight = false;
+      const isNavbar = useContext(NavbarContext);
+      const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
+      const { align: contextAlign } = useContext(DropdownContext);
+      align = align || contextAlign;
+      const isInputGroup = useContext(InputGroupContext);
 
-    const alignClasses: string[] = [];
-    if (align) {
-      if (typeof align === 'object') {
-        const keys = Object.keys(align);
+      const alignClasses: string[] = [];
+      if (align) {
+        if (typeof align === 'object') {
+          const keys = Object.keys(align);
 
-        warning(
-          keys.length === 1,
-          'There should only be 1 breakpoint when passing an object to `align`',
-        );
+          warning(
+            keys.length === 1,
+            'There should only be 1 breakpoint when passing an object to `align`',
+          );
 
-        if (keys.length) {
-          const brkPoint = keys[0];
-          const direction: AlignDirection = align[brkPoint];
+          if (keys.length) {
+            const brkPoint = keys[0];
+            const direction: AlignDirection = align[brkPoint];
 
-          // .dropdown-menu-end is required for responsively aligning
-          // left in addition to align left classes.
-          // Reuse alignRight to toggle the class below.
-          alignRight = direction === 'start';
-          alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
+            // .dropdown-menu-end is required for responsively aligning
+            // left in addition to align left classes.
+            // Reuse alignRight to toggle the class below.
+            alignRight = direction === 'start';
+            alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
+          }
+        } else if (align === 'end') {
+          alignRight = true;
         }
-      } else if (align === 'end') {
-        alignRight = true;
       }
-    }
 
-    const [
-      menuProps,
-      { hasShown, popper, show, alignEnd, toggle },
-    ] = useDropdownMenu({
-      flip,
-      rootCloseEvent,
-      show: showProps,
-      alignEnd: alignRight,
-      usePopper: !isNavbar && alignClasses.length === 0,
-      offset: [0, 2],
-      popperConfig,
-    });
+      const [menuProps, { hasShown, popper, show, alignEnd, toggle }] =
+        useDropdownMenu({
+          flip,
+          rootCloseEvent,
+          show: showProps,
+          alignEnd: alignRight,
+          usePopper: !isNavbar && alignClasses.length === 0,
+          offset: [0, 2],
+          popperConfig,
+        });
 
-    menuProps.ref = useMergedRefs(
-      useWrappedRefWithWarning(ref, 'DropdownMenu'),
-      menuProps.ref,
-    );
+      menuProps.ref = useMergedRefs(
+        useWrappedRefWithWarning(ref, 'DropdownMenu'),
+        menuProps.ref,
+      );
 
-    if (!hasShown && !renderOnMount && !isInputGroup) return null;
+      if (!hasShown && !renderOnMount && !isInputGroup) return null;
 
-    // For custom components provide additional, non-DOM, props;
-    if (typeof Component !== 'string') {
-      menuProps.show = show;
-      menuProps.close = () => toggle?.(false);
-      menuProps.align = align;
-    }
+      // For custom components provide additional, non-DOM, props;
+      if (typeof Component !== 'string') {
+        menuProps.show = show;
+        menuProps.close = () => toggle?.(false);
+        menuProps.align = align;
+      }
 
-    let style = props.style;
-    if (popper?.placement) {
-      // we don't need the default popper style,
-      // menus are display: none when not shown.
-      style = { ...props.style, ...menuProps.style };
-      props['x-placement'] = popper.placement;
-    }
+      let style = props.style;
+      if (popper?.placement) {
+        // we don't need the default popper style,
+        // menus are display: none when not shown.
+        style = { ...props.style, ...menuProps.style };
+        props['x-placement'] = popper.placement;
+      }
 
-    return (
-      <Component
-        {...props}
-        {...menuProps}
-        style={style}
-        // Bootstrap css requires this data attrib to style responsive menus.
-        {...(alignClasses.length && { 'data-bs-popper': 'static' })}
-        className={classNames(
-          className,
-          prefix,
-          show && 'show',
-          alignEnd && `${prefix}-end`,
-          variant && `${prefix}-${variant}`,
-          ...alignClasses,
-        )}
-      />
-    );
-  },
-);
+      return (
+        <Component
+          {...props}
+          {...menuProps}
+          style={style}
+          // Bootstrap css requires this data attrib to style responsive menus.
+          {...(alignClasses.length && { 'data-bs-popper': 'static' })}
+          className={classNames(
+            className,
+            prefix,
+            show && 'show',
+            alignEnd && `${prefix}-end`,
+            variant && `${prefix}-${variant}`,
+            ...alignClasses,
+          )}
+        />
+      );
+    },
+  );
 
 DropdownMenu.displayName = 'DropdownMenu';
 DropdownMenu.propTypes = propTypes;

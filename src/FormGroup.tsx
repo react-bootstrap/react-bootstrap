@@ -30,28 +30,26 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const FormGroup: BsPrefixRefForwardingComponent<
-  'div',
-  FormGroupProps
-> = React.forwardRef(
-  (
-    {
-      controlId,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      ...props
-    },
-    ref,
-  ) => {
-    const context = useMemo(() => ({ controlId }), [controlId]);
+const FormGroup: BsPrefixRefForwardingComponent<'div', FormGroupProps> =
+  React.forwardRef(
+    (
+      {
+        controlId,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        ...props
+      },
+      ref,
+    ) => {
+      const context = useMemo(() => ({ controlId }), [controlId]);
 
-    return (
-      <FormContext.Provider value={context}>
-        <Component {...props} ref={ref} />
-      </FormContext.Provider>
-    );
-  },
-);
+      return (
+        <FormContext.Provider value={context}>
+          <Component {...props} ref={ref} />
+        </FormContext.Provider>
+      );
+    },
+  );
 
 FormGroup.displayName = 'FormGroup';
 FormGroup.propTypes = propTypes;

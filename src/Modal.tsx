@@ -239,272 +239,273 @@ function BackdropTransition(props) {
 }
 
 /* eslint-enable no-use-before-define */
-const Modal: BsPrefixRefForwardingComponent<
-  'div',
-  ModalProps
-> = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      className,
-      style,
-      dialogClassName,
-      contentClassName,
-      children,
-      dialogAs: Dialog,
-      'aria-labelledby': ariaLabelledby,
+const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
+  React.forwardRef(
+    (
+      {
+        bsPrefix,
+        className,
+        style,
+        dialogClassName,
+        contentClassName,
+        children,
+        dialogAs: Dialog,
+        'aria-labelledby': ariaLabelledby,
 
-      /* BaseModal props */
+        /* BaseModal props */
 
-      show,
-      animation,
-      backdrop,
-      keyboard,
-      onEscapeKeyDown,
-      onShow,
-      onHide,
-      container,
-      autoFocus,
-      enforceFocus,
-      restoreFocus,
-      restoreFocusOptions,
-      onEntered,
-      onExit,
-      onExiting,
-      onEnter,
-      onEntering,
-      onExited,
-      backdropClassName,
-      manager: propsManager,
-      ...props
-    },
-    ref,
-  ) => {
-    const [modalStyle, setStyle] = useState({});
-    const [animateStaticModal, setAnimateStaticModal] = useState(false);
-    const waitingForMouseUpRef = useRef(false);
-    const ignoreBackdropClickRef = useRef(false);
-    const removeStaticModalAnimationRef = useRef<(() => void) | null>(null);
+        show,
+        animation,
+        backdrop,
+        keyboard,
+        onEscapeKeyDown,
+        onShow,
+        onHide,
+        container,
+        autoFocus,
+        enforceFocus,
+        restoreFocus,
+        restoreFocusOptions,
+        onEntered,
+        onExit,
+        onExiting,
+        onEnter,
+        onEntering,
+        onExited,
+        backdropClassName,
+        manager: propsManager,
+        ...props
+      },
+      ref,
+    ) => {
+      const [modalStyle, setStyle] = useState({});
+      const [animateStaticModal, setAnimateStaticModal] = useState(false);
+      const waitingForMouseUpRef = useRef(false);
+      const ignoreBackdropClickRef = useRef(false);
+      const removeStaticModalAnimationRef = useRef<(() => void) | null>(null);
 
-    // TODO: what's this type
-    const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
-    const mergedRef = useMergedRefs(ref, setModalRef);
-    const handleHide = useEventCallback(onHide);
+      // TODO: what's this type
+      const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
+      const mergedRef = useMergedRefs(ref, setModalRef);
+      const handleHide = useEventCallback(onHide);
 
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
 
-    const modalContext = useMemo(
-      () => ({
-        onHide: handleHide,
-      }),
-      [handleHide],
-    );
-
-    function getModalManager() {
-      if (propsManager) return propsManager;
-      if (!manager) manager = new BootstrapModalManager();
-      return manager;
-    }
-
-    function updateDialogStyle(node) {
-      if (!canUseDOM) return;
-
-      const containerIsOverflowing = getModalManager().isContainerOverflowing(
-        modal,
+      const modalContext = useMemo(
+        () => ({
+          onHide: handleHide,
+        }),
+        [handleHide],
       );
 
-      const modalIsOverflowing =
-        node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
+      function getModalManager() {
+        if (propsManager) return propsManager;
+        if (!manager) manager = new BootstrapModalManager();
+        return manager;
+      }
 
-      setStyle({
-        paddingRight:
-          containerIsOverflowing && !modalIsOverflowing
-            ? getScrollbarSize()
-            : undefined,
-        paddingLeft:
-          !containerIsOverflowing && modalIsOverflowing
-            ? getScrollbarSize()
-            : undefined,
+      function updateDialogStyle(node) {
+        if (!canUseDOM) return;
+
+        const containerIsOverflowing =
+          getModalManager().isContainerOverflowing(modal);
+
+        const modalIsOverflowing =
+          node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
+
+        setStyle({
+          paddingRight:
+            containerIsOverflowing && !modalIsOverflowing
+              ? getScrollbarSize()
+              : undefined,
+          paddingLeft:
+            !containerIsOverflowing && modalIsOverflowing
+              ? getScrollbarSize()
+              : undefined,
+        });
+      }
+
+      const handleWindowResize = useEventCallback(() => {
+        if (modal) {
+          updateDialogStyle(modal.dialog);
+        }
       });
-    }
 
-    const handleWindowResize = useEventCallback(() => {
-      if (modal) {
-        updateDialogStyle(modal.dialog);
-      }
-    });
+      useWillUnmount(() => {
+        removeEventListener(window as any, 'resize', handleWindowResize);
+        removeStaticModalAnimationRef.current?.();
+      });
 
-    useWillUnmount(() => {
-      removeEventListener(window as any, 'resize', handleWindowResize);
-      removeStaticModalAnimationRef.current?.();
-    });
+      // We prevent the modal from closing during a drag by detecting where the
+      // the click originates from. If it starts in the modal and then ends outside
+      // don't close.
+      const handleDialogMouseDown = () => {
+        waitingForMouseUpRef.current = true;
+      };
 
-    // We prevent the modal from closing during a drag by detecting where the
-    // the click originates from. If it starts in the modal and then ends outside
-    // don't close.
-    const handleDialogMouseDown = () => {
-      waitingForMouseUpRef.current = true;
-    };
+      const handleMouseUp = (e) => {
+        if (
+          waitingForMouseUpRef.current &&
+          modal &&
+          e.target === modal.dialog
+        ) {
+          ignoreBackdropClickRef.current = true;
+        }
+        waitingForMouseUpRef.current = false;
+      };
 
-    const handleMouseUp = (e) => {
-      if (waitingForMouseUpRef.current && modal && e.target === modal.dialog) {
-        ignoreBackdropClickRef.current = true;
-      }
-      waitingForMouseUpRef.current = false;
-    };
+      const handleStaticModalAnimation = () => {
+        setAnimateStaticModal(true);
+        removeStaticModalAnimationRef.current = transitionEnd(
+          modal!.dialog,
+          () => {
+            setAnimateStaticModal(false);
+          },
+        );
+      };
 
-    const handleStaticModalAnimation = () => {
-      setAnimateStaticModal(true);
-      removeStaticModalAnimationRef.current = transitionEnd(
-        modal!.dialog,
-        () => {
-          setAnimateStaticModal(false);
-        },
-      );
-    };
+      const handleStaticBackdropClick = (e) => {
+        if (e.target !== e.currentTarget) {
+          return;
+        }
 
-    const handleStaticBackdropClick = (e) => {
-      if (e.target !== e.currentTarget) {
-        return;
-      }
-
-      handleStaticModalAnimation();
-    };
-
-    const handleClick = (e) => {
-      if (backdrop === 'static') {
-        handleStaticBackdropClick(e);
-        return;
-      }
-
-      if (ignoreBackdropClickRef.current || e.target !== e.currentTarget) {
-        ignoreBackdropClickRef.current = false;
-        return;
-      }
-
-      onHide();
-    };
-
-    const handleEscapeKeyDown = (e) => {
-      if (!keyboard && backdrop === 'static') {
-        // Call preventDefault to stop modal from closing in react-overlays,
-        // then play our animation.
-        e.preventDefault();
         handleStaticModalAnimation();
-      } else if (keyboard && onEscapeKeyDown) {
-        onEscapeKeyDown(e);
+      };
+
+      const handleClick = (e) => {
+        if (backdrop === 'static') {
+          handleStaticBackdropClick(e);
+          return;
+        }
+
+        if (ignoreBackdropClickRef.current || e.target !== e.currentTarget) {
+          ignoreBackdropClickRef.current = false;
+          return;
+        }
+
+        onHide();
+      };
+
+      const handleEscapeKeyDown = (e) => {
+        if (!keyboard && backdrop === 'static') {
+          // Call preventDefault to stop modal from closing in react-overlays,
+          // then play our animation.
+          e.preventDefault();
+          handleStaticModalAnimation();
+        } else if (keyboard && onEscapeKeyDown) {
+          onEscapeKeyDown(e);
+        }
+      };
+
+      const handleEnter = (node, ...args) => {
+        if (node) {
+          node.style.display = 'block';
+          updateDialogStyle(node);
+        }
+
+        onEnter?.(node, ...args);
+      };
+
+      const handleExit = (node, ...args) => {
+        removeStaticModalAnimationRef.current?.();
+        onExit?.(node, ...args);
+      };
+
+      const handleEntering = (node, ...args) => {
+        onEntering?.(node, ...args);
+
+        // FIXME: This should work even when animation is disabled.
+        addEventListener(window as any, 'resize', handleWindowResize);
+      };
+
+      const handleExited = (node, ...args) => {
+        if (node) node.style.display = ''; // RHL removes it sometimes
+        onExited?.(...args);
+
+        // FIXME: This should work even when animation is disabled.
+        removeEventListener(window as any, 'resize', handleWindowResize);
+      };
+
+      const renderBackdrop = useCallback(
+        (backdropProps) => (
+          <div
+            {...backdropProps}
+            className={classNames(
+              `${bsPrefix}-backdrop`,
+              backdropClassName,
+              !animation && 'show',
+            )}
+          />
+        ),
+        [animation, backdropClassName, bsPrefix],
+      );
+
+      const baseModalStyle = { ...style, ...modalStyle };
+
+      // Sets `display` always block when `animation` is false
+      if (!animation) {
+        baseModalStyle.display = 'block';
       }
-    };
 
-    const handleEnter = (node, ...args) => {
-      if (node) {
-        node.style.display = 'block';
-        updateDialogStyle(node);
-      }
-
-      onEnter?.(node, ...args);
-    };
-
-    const handleExit = (node, ...args) => {
-      removeStaticModalAnimationRef.current?.();
-      onExit?.(node, ...args);
-    };
-
-    const handleEntering = (node, ...args) => {
-      onEntering?.(node, ...args);
-
-      // FIXME: This should work even when animation is disabled.
-      addEventListener(window as any, 'resize', handleWindowResize);
-    };
-
-    const handleExited = (node, ...args) => {
-      if (node) node.style.display = ''; // RHL removes it sometimes
-      onExited?.(...args);
-
-      // FIXME: This should work even when animation is disabled.
-      removeEventListener(window as any, 'resize', handleWindowResize);
-    };
-
-    const renderBackdrop = useCallback(
-      (backdropProps) => (
+      const renderDialog = (dialogProps) => (
         <div
-          {...backdropProps}
+          role="dialog"
+          {...dialogProps}
+          style={baseModalStyle}
           className={classNames(
-            `${bsPrefix}-backdrop`,
-            backdropClassName,
-            !animation && 'show',
+            className,
+            bsPrefix,
+            animateStaticModal && `${bsPrefix}-static`,
           )}
-        />
-      ),
-      [animation, backdropClassName, bsPrefix],
-    );
-
-    const baseModalStyle = { ...style, ...modalStyle };
-
-    // Sets `display` always block when `animation` is false
-    if (!animation) {
-      baseModalStyle.display = 'block';
-    }
-
-    const renderDialog = (dialogProps) => (
-      <div
-        role="dialog"
-        {...dialogProps}
-        style={baseModalStyle}
-        className={classNames(
-          className,
-          bsPrefix,
-          animateStaticModal && `${bsPrefix}-static`,
-        )}
-        onClick={backdrop ? handleClick : undefined}
-        onMouseUp={handleMouseUp}
-        aria-labelledby={ariaLabelledby}
-      >
-        {/*
-        // @ts-ignore */}
-        <Dialog
-          {...props}
-          onMouseDown={handleDialogMouseDown}
-          className={dialogClassName}
-          contentClassName={contentClassName}
+          onClick={backdrop ? handleClick : undefined}
+          onMouseUp={handleMouseUp}
+          aria-labelledby={ariaLabelledby}
         >
-          {children}
-        </Dialog>
-      </div>
-    );
+          {/*
+        // @ts-ignore */}
+          <Dialog
+            {...props}
+            onMouseDown={handleDialogMouseDown}
+            className={dialogClassName}
+            contentClassName={contentClassName}
+          >
+            {children}
+          </Dialog>
+        </div>
+      );
 
-    return (
-      <ModalContext.Provider value={modalContext}>
-        <BaseModal
-          show={show}
-          ref={mergedRef}
-          backdrop={backdrop}
-          container={container}
-          keyboard // Always set true - see handleEscapeKeyDown
-          autoFocus={autoFocus}
-          enforceFocus={enforceFocus}
-          restoreFocus={restoreFocus}
-          restoreFocusOptions={restoreFocusOptions}
-          onEscapeKeyDown={handleEscapeKeyDown}
-          onShow={onShow}
-          onHide={onHide}
-          onEnter={handleEnter}
-          onEntering={handleEntering}
-          onEntered={onEntered}
-          onExit={handleExit}
-          onExiting={onExiting}
-          onExited={handleExited}
-          manager={getModalManager()}
-          containerClassName={`${bsPrefix}-open`}
-          transition={animation ? DialogTransition : undefined}
-          backdropTransition={animation ? BackdropTransition : undefined}
-          renderBackdrop={renderBackdrop}
-          renderDialog={renderDialog}
-        />
-      </ModalContext.Provider>
-    );
-  },
-);
+      return (
+        <ModalContext.Provider value={modalContext}>
+          <BaseModal
+            show={show}
+            ref={mergedRef}
+            backdrop={backdrop}
+            container={container}
+            keyboard // Always set true - see handleEscapeKeyDown
+            autoFocus={autoFocus}
+            enforceFocus={enforceFocus}
+            restoreFocus={restoreFocus}
+            restoreFocusOptions={restoreFocusOptions}
+            onEscapeKeyDown={handleEscapeKeyDown}
+            onShow={onShow}
+            onHide={onHide}
+            onEnter={handleEnter}
+            onEntering={handleEntering}
+            onEntered={onEntered}
+            onExit={handleExit}
+            onExiting={onExiting}
+            onExited={handleExited}
+            manager={getModalManager()}
+            containerClassName={`${bsPrefix}-open`}
+            transition={animation ? DialogTransition : undefined}
+            backdropTransition={animation ? BackdropTransition : undefined}
+            renderBackdrop={renderBackdrop}
+            renderDialog={renderDialog}
+          />
+        </ModalContext.Provider>
+      );
+    },
+  );
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;

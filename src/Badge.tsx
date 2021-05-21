@@ -46,30 +46,28 @@ const defaultProps = {
   pill: false,
 };
 
-const Badge: BsPrefixRefForwardingComponent<
-  'span',
-  BadgeProps
-> = React.forwardRef<HTMLElement, BadgeProps>(
-  (
-    { bsPrefix, bg, pill, text, className, as: Component = 'span', ...props },
-    ref,
-  ) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'badge');
-    return (
-      <Component
-        ref={ref}
-        {...props}
-        className={classNames(
-          className,
-          prefix,
-          pill && `rounded-pill`,
-          text && `text-${text}`,
-          bg && `bg-${bg}`,
-        )}
-      />
-    );
-  },
-);
+const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
+  React.forwardRef<HTMLElement, BadgeProps>(
+    (
+      { bsPrefix, bg, pill, text, className, as: Component = 'span', ...props },
+      ref,
+    ) => {
+      const prefix = useBootstrapPrefix(bsPrefix, 'badge');
+      return (
+        <Component
+          ref={ref}
+          {...props}
+          className={classNames(
+            className,
+            prefix,
+            pill && `rounded-pill`,
+            text && `text-${text}`,
+            bg && `bg-${bg}`,
+          )}
+        />
+      );
+    },
+  );
 
 Badge.displayName = 'Badge';
 Badge.propTypes = propTypes;
