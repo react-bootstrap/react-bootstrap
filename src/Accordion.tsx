@@ -42,42 +42,40 @@ const propTypes = {
   flush: PropTypes.bool,
 };
 
-const Accordion: BsPrefixRefForwardingComponent<
-  'div',
-  AccordionProps
-> = React.forwardRef<HTMLElement, AccordionProps>((props, ref) => {
-  const {
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'div',
-    activeKey,
-    bsPrefix,
-    className,
-    onSelect,
-    flush,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    activeKey: 'onSelect',
-  });
-
-  const prefix = useBootstrapPrefix(bsPrefix, 'accordion');
-  const contextValue = useMemo(
-    () => ({
-      activeEventKey: activeKey,
+const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
+  React.forwardRef<HTMLElement, AccordionProps>((props, ref) => {
+    const {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      activeKey,
+      bsPrefix,
+      className,
       onSelect,
-    }),
-    [activeKey, onSelect],
-  );
+      flush,
+      ...controlledProps
+    } = useUncontrolled(props, {
+      activeKey: 'onSelect',
+    });
 
-  return (
-    <AccordionContext.Provider value={contextValue}>
-      <Component
-        ref={ref}
-        {...controlledProps}
-        className={classNames(className, prefix, flush && `${prefix}-flush`)}
-      />
-    </AccordionContext.Provider>
-  );
-});
+    const prefix = useBootstrapPrefix(bsPrefix, 'accordion');
+    const contextValue = useMemo(
+      () => ({
+        activeEventKey: activeKey,
+        onSelect,
+      }),
+      [activeKey, onSelect],
+    );
+
+    return (
+      <AccordionContext.Provider value={contextValue}>
+        <Component
+          ref={ref}
+          {...controlledProps}
+          className={classNames(className, prefix, flush && `${prefix}-flush`)}
+        />
+      </AccordionContext.Provider>
+    );
+  });
 
 Accordion.displayName = 'Accordion';
 Accordion.propTypes = propTypes;

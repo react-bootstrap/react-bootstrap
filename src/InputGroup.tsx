@@ -60,44 +60,42 @@ const propTypes = {
  * @property {InputGroupRadio} Radio
  * @property {InputGroupCheckbox} Checkbox
  */
-const InputGroup: BsPrefixRefForwardingComponent<
-  'div',
-  InputGroupProps
-> = React.forwardRef<HTMLElement, InputGroupProps>(
-  (
-    {
-      bsPrefix,
-      size,
-      hasValidation,
-      className,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      ...props
+const InputGroup: BsPrefixRefForwardingComponent<'div', InputGroupProps> =
+  React.forwardRef<HTMLElement, InputGroupProps>(
+    (
+      {
+        bsPrefix,
+        size,
+        hasValidation,
+        className,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'input-group');
+
+      // Intentionally an empty object. Used in detecting if a dropdown
+      // exists under an input group.
+      const contextValue = useMemo(() => ({}), []);
+
+      return (
+        <InputGroupContext.Provider value={contextValue}>
+          <Component
+            ref={ref}
+            {...props}
+            className={classNames(
+              className,
+              bsPrefix,
+              size && `${bsPrefix}-${size}`,
+              hasValidation && 'has-validation',
+            )}
+          />
+        </InputGroupContext.Provider>
+      );
     },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'input-group');
-
-    // Intentionally an empty object. Used in detecting if a dropdown
-    // exists under an input group.
-    const contextValue = useMemo(() => ({}), []);
-
-    return (
-      <InputGroupContext.Provider value={contextValue}>
-        <Component
-          ref={ref}
-          {...props}
-          className={classNames(
-            className,
-            bsPrefix,
-            size && `${bsPrefix}-${size}`,
-            hasValidation && 'has-validation',
-          )}
-        />
-      </InputGroupContext.Provider>
-    );
-  },
-);
+  );
 
 InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';

@@ -84,16 +84,10 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
   'a',
   ToggleButtonGroupProps<any>
 > = React.forwardRef<HTMLElement, ToggleButtonGroupProps<any>>((props, ref) => {
-  const {
-    children,
-    type,
-    name,
-    value,
-    onChange,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    value: 'onChange',
-  });
+  const { children, type, name, value, onChange, ...controlledProps } =
+    useUncontrolled(props, {
+      value: 'onChange',
+    });
 
   const getValues: () => any[] = () => (value == null ? [] : [].concat(value));
 

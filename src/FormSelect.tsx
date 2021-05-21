@@ -56,40 +56,38 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormSelect: BsPrefixRefForwardingComponent<
-  'select',
-  FormSelectProps
-> = React.forwardRef<HTMLSelectElement, FormSelectProps>(
-  (
-    {
-      bsPrefix,
-      size,
-      htmlSize,
-      className,
-      isValid = false,
-      isInvalid = false,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-select');
+const FormSelect: BsPrefixRefForwardingComponent<'select', FormSelectProps> =
+  React.forwardRef<HTMLSelectElement, FormSelectProps>(
+    (
+      {
+        bsPrefix,
+        size,
+        htmlSize,
+        className,
+        isValid = false,
+        isInvalid = false,
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'form-select');
 
-    return (
-      <select
-        {...props}
-        size={htmlSize}
-        ref={ref}
-        className={classNames(
-          className,
-          bsPrefix,
-          size && `${bsPrefix}-${size}`,
-          isValid && `is-valid`,
-          isInvalid && `is-invalid`,
-        )}
-      />
-    );
-  },
-);
+      return (
+        <select
+          {...props}
+          size={htmlSize}
+          ref={ref}
+          className={classNames(
+            className,
+            bsPrefix,
+            size && `${bsPrefix}-${size}`,
+            isValid && `is-valid`,
+            isInvalid && `is-invalid`,
+          )}
+        />
+      );
+    },
+  );
 
 FormSelect.displayName = 'FormSelect';
 FormSelect.propTypes = propTypes;

@@ -53,49 +53,47 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const ListGroup: BsPrefixRefForwardingComponent<
-  'div',
-  ListGroupProps
-> = React.forwardRef<HTMLElement, ListGroupProps>((props, ref) => {
-  const {
-    className,
-    bsPrefix: initialBsPrefix,
-    variant,
-    horizontal,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as = 'div',
-    ...controlledProps
-  } = useUncontrolled(props, {
-    activeKey: 'onSelect',
+const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
+  React.forwardRef<HTMLElement, ListGroupProps>((props, ref) => {
+    const {
+      className,
+      bsPrefix: initialBsPrefix,
+      variant,
+      horizontal,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as = 'div',
+      ...controlledProps
+    } = useUncontrolled(props, {
+      activeKey: 'onSelect',
+    });
+
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
+
+    let horizontalVariant: string | undefined;
+    if (horizontal) {
+      horizontalVariant =
+        horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
+    }
+
+    warning(
+      !(horizontal && variant === 'flush'),
+      '`variant="flush"` and `horizontal` should not be used together.',
+    );
+
+    return (
+      <AbstractNav
+        ref={ref}
+        {...controlledProps}
+        as={as}
+        className={classNames(
+          className,
+          bsPrefix,
+          variant && `${bsPrefix}-${variant}`,
+          horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
+        )}
+      />
+    );
   });
-
-  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
-
-  let horizontalVariant: string | undefined;
-  if (horizontal) {
-    horizontalVariant =
-      horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
-  }
-
-  warning(
-    !(horizontal && variant === 'flush'),
-    '`variant="flush"` and `horizontal` should not be used together.',
-  );
-
-  return (
-    <AbstractNav
-      ref={ref}
-      {...controlledProps}
-      as={as}
-      className={classNames(
-        className,
-        bsPrefix,
-        variant && `${bsPrefix}-${variant}`,
-        horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
-      )}
-    />
-  );
-});
 
 ListGroup.propTypes = propTypes;
 ListGroup.displayName = 'ListGroup';

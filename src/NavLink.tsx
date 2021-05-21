@@ -60,23 +60,21 @@ const defaultProps = {
   as: SafeAnchor,
 };
 
-const NavLink: BsPrefixRefForwardingComponent<
-  'a',
-  NavLinkProps
-> = React.forwardRef<HTMLElement, NavLinkProps>(
-  ({ bsPrefix, disabled, className, as, ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
-    return (
-      <AbstractNavItem
-        {...props}
-        ref={ref}
-        as={as as any}
-        disabled={disabled}
-        className={classNames(className, bsPrefix, disabled && 'disabled')}
-      />
-    );
-  },
-);
+const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
+  React.forwardRef<HTMLElement, NavLinkProps>(
+    ({ bsPrefix, disabled, className, as, ...props }, ref) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
+      return (
+        <AbstractNavItem
+          {...props}
+          ref={ref}
+          as={as as any}
+          disabled={disabled}
+          className={classNames(className, bsPrefix, disabled && 'disabled')}
+        />
+      );
+    },
+  );
 
 NavLink.displayName = 'NavLink';
 NavLink.propTypes = propTypes;

@@ -77,40 +77,41 @@ const defaultProps = {
   disabled: false,
 };
 
-const Button: BsPrefixRefForwardingComponent<
-  'button',
-  ButtonProps
-> = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ bsPrefix, variant, size, active, className, type, as, ...props }, ref) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'btn');
+const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
+  React.forwardRef<HTMLButtonElement, ButtonProps>(
+    (
+      { bsPrefix, variant, size, active, className, type, as, ...props },
+      ref,
+    ) => {
+      const prefix = useBootstrapPrefix(bsPrefix, 'btn');
 
-    const classes = classNames(
-      className,
-      prefix,
-      active && 'active',
-      variant && `${prefix}-${variant}`,
-      size && `${prefix}-${size}`,
-    );
-
-    if (props.href) {
-      return (
-        <SafeAnchor
-          {...props}
-          as={as}
-          ref={ref}
-          className={classNames(classes, props.disabled && 'disabled')}
-        />
+      const classes = classNames(
+        className,
+        prefix,
+        active && 'active',
+        variant && `${prefix}-${variant}`,
+        size && `${prefix}-${size}`,
       );
-    }
 
-    if (!type && !as) {
-      type = 'button';
-    }
+      if (props.href) {
+        return (
+          <SafeAnchor
+            {...props}
+            as={as}
+            ref={ref}
+            className={classNames(classes, props.disabled && 'disabled')}
+          />
+        );
+      }
 
-    const Component = as || 'button';
-    return <Component {...props} ref={ref} type={type} className={classes} />;
-  },
-);
+      if (!type && !as) {
+        type = 'button';
+      }
+
+      const Component = as || 'button';
+      return <Component {...props} ref={ref} type={type} className={classes} />;
+    },
+  );
 
 Button.displayName = 'Button';
 Button.propTypes = propTypes;

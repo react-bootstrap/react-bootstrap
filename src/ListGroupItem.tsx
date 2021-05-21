@@ -67,63 +67,61 @@ const defaultProps = {
   disabled: false,
 };
 
-const ListGroupItem: BsPrefixRefForwardingComponent<
-  'a',
-  ListGroupItemProps
-> = React.forwardRef<HTMLElement, ListGroupItemProps>(
-  (
-    {
-      bsPrefix,
-      active,
-      disabled,
-      className,
-      variant,
-      action,
-      as,
-      onClick,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
-
-    const handleClick = useCallback(
-      (event) => {
-        if (disabled) {
-          event.preventDefault();
-          event.stopPropagation();
-          return;
-        }
-
-        onClick?.(event);
+const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
+  React.forwardRef<HTMLElement, ListGroupItemProps>(
+    (
+      {
+        bsPrefix,
+        active,
+        disabled,
+        className,
+        variant,
+        action,
+        as,
+        onClick,
+        ...props
       },
-      [disabled, onClick],
-    );
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
 
-    if (disabled && props.tabIndex === undefined) {
-      props.tabIndex = -1;
-      props['aria-disabled'] = true;
-    }
+      const handleClick = useCallback(
+        (event) => {
+          if (disabled) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+          }
 
-    return (
-      <AbstractNavItem
-        ref={ref}
-        {...props}
-        // eslint-disable-next-line no-nested-ternary
-        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
-        onClick={handleClick}
-        className={classNames(
-          className,
-          bsPrefix,
-          active && 'active',
-          disabled && 'disabled',
-          variant && `${bsPrefix}-${variant}`,
-          action && `${bsPrefix}-action`,
-        )}
-      />
-    );
-  },
-);
+          onClick?.(event);
+        },
+        [disabled, onClick],
+      );
+
+      if (disabled && props.tabIndex === undefined) {
+        props.tabIndex = -1;
+        props['aria-disabled'] = true;
+      }
+
+      return (
+        <AbstractNavItem
+          ref={ref}
+          {...props}
+          // eslint-disable-next-line no-nested-ternary
+          as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+          onClick={handleClick}
+          className={classNames(
+            className,
+            bsPrefix,
+            active && 'active',
+            disabled && 'disabled',
+            variant && `${bsPrefix}-${variant}`,
+            action && `${bsPrefix}-action`,
+          )}
+        />
+      );
+    },
+  );
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.defaultProps = defaultProps;
