@@ -93,18 +93,6 @@ describe('SafeAnchor', () => {
       .should.equal('test');
   });
 
-  it('set role=button with no provided href', () => {
-    shallow(<SafeAnchor />)
-      .find('a')
-      .prop('role')
-      .should.equal('button');
-
-    shallow(<SafeAnchor href="#" />)
-      .find('a')
-      .prop('role')
-      .should.equal('button');
-  });
-
   it('sets no role with provided href', () => {
     expect(
       shallow(<SafeAnchor href="http://google.com" />)
