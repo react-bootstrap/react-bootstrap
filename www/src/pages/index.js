@@ -84,7 +84,7 @@ const ButtonToolbar = styled('div')`
     margin: -1rem;
 
     & > * {
-      width: 100%;
+      width: calc(100% - 2rem);
       max-width: 300px;
       margin: 1rem;
     }
