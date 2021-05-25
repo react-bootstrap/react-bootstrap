@@ -111,6 +111,33 @@ describe('<OverlayTrigger>', () => {
     wrapper.assertSingle('div.test');
   });
 
+  it('Should show after mouseover trigger', (done) => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const wrapper = mount(
+        <OverlayTrigger overlay={<Div className="test" />}>
+          <span>hover me</span>
+        </OverlayTrigger>,
+      );
+
+      wrapper.assertNone('.test');
+
+      wrapper.find('span').simulate('mouseover');
+
+      wrapper.assertSingle('div.test');
+
+      wrapper.find('span').simulate('mouseout');
+
+      clock.tick(50);
+
+      wrapper.assertNone('.test');
+    } finally {
+      clock.restore();
+      done();
+    }
+  });
+
   it('Should not set aria-describedby if the state is not show', () => {
     const [button] = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
