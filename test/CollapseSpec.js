@@ -37,6 +37,21 @@ describe('<Collapse>', () => {
     mount(<Component>Panel content</Component>).assertSingle('.collapse');
   });
 
+  it('Should allow a custom collapse prefix', () => {
+    mount(
+      <Component bsCollapsePrefix="my-collapse">Panel content</Component>,
+    ).assertSingle('.my-collapse');
+  });
+
+  it('Should allow a custom collapse prefix', () => {
+    wrapper = mount(
+      <Component bsCollapsingPrefix="my-collapsing">Panel content</Component>,
+    );
+    wrapper.setState({ in: true });
+
+    assert.equal(wrapper.getDOMNode().className, 'my-collapsing');
+  });
+
   describe('from collapsed to expanded', () => {
     beforeEach(() => {
       wrapper = mount(<Component>Panel content</Component>);
