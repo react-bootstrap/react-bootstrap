@@ -106,7 +106,13 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
 
       if (column)
         return (
-          <Col as="label" className={classes} htmlFor={htmlFor} {...props} />
+          <Col
+            ref={ref as React.ForwardedRef<HTMLLabelElement>}
+            as="label"
+            className={classes}
+            htmlFor={htmlFor}
+            {...props}
+          />
         );
 
       return (

@@ -71,6 +71,27 @@ describe('<FormLabel>', () => {
     expect(instance.input.tagName).to.equal('LABEL');
   });
 
+  it('should support ref forwarding when rendered as a Col', () => {
+    class Container extends React.Component {
+      render() {
+        return (
+          <FormGroup controlId="foo">
+            <FormLabel
+              type="text"
+              column
+              ref={(ref) => {
+                this.input = ref;
+              }}
+            />
+          </FormGroup>
+        );
+      }
+    }
+
+    const instance = mount(<Container />).instance();
+    expect(instance.input.tagName).to.equal('LABEL');
+  });
+
   it('accepts as prop', () => {
     mount(<FormLabel as="legend">body</FormLabel>).assertSingle('legend');
   });
