@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import FormLabel from '../src/FormLabel';
@@ -35,9 +35,9 @@ describe('<FormLabel>', () => {
     ).assertSingle('label[htmlFor="foo"].col-sm-4.col-form-label');
   });
 
-  it('should respect srOnly', () => {
-    mount(<FormLabel srOnly>Label</FormLabel>).assertSingle(
-      'label.form-label.sr-only',
+  it('should respect visuallyHidden', () => {
+    mount(<FormLabel visuallyHidden>Label</FormLabel>).assertSingle(
+      'label.form-label.visually-hidden',
     );
   });
 

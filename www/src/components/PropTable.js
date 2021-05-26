@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import capitalize from 'lodash/capitalize';
 import sortBy from 'lodash/sortBy';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import Badge from 'react-bootstrap/Badge';
 import Table from 'react-bootstrap/Table';
 
@@ -185,7 +185,7 @@ class PropTable extends React.Component {
       return null;
     }
 
-    return <Badge>required</Badge>;
+    return <Badge text="danger">required</Badge>;
   }
 
   render() {

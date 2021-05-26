@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useCallback, useMemo } from 'react';
+import * as React from 'react';
+import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
@@ -12,7 +13,7 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
 import SelectableContext from './SelectableContext';
 import {
-  BsPrefixPropsWithChildren,
+  BsPrefixProps,
   BsPrefixRefForwardingComponent,
   SelectCallback,
 } from './helpers';
@@ -21,9 +22,11 @@ const NavbarText = createWithBsPrefix('navbar-text', {
   Component: 'span',
 });
 
-export interface NavbarProps extends BsPrefixPropsWithChildren {
+export interface NavbarProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'light' | 'dark';
-  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl';
+  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
   fixed?: 'top' | 'bottom';
   sticky?: 'top';
@@ -31,15 +34,7 @@ export interface NavbarProps extends BsPrefixPropsWithChildren {
   onSelect?: SelectCallback;
   collapseOnSelect?: boolean;
   expanded?: boolean;
-  role?: string;
 }
-
-type Navbar = BsPrefixRefForwardingComponent<'nav', NavbarProps> & {
-  Brand: typeof NavbarBrand;
-  Collapse: typeof NavbarCollapse;
-  Text: typeof NavbarText;
-  Toggle: typeof NavbarToggle;
-};
 
 const propTypes = {
   /** @default 'navbar' */
@@ -58,7 +53,7 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl']).isRequired,
+  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
@@ -151,89 +146,85 @@ const defaultProps = {
   collapseOnSelect: false,
 };
 
-const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
-  const {
-    bsPrefix: initialBsPrefix,
-    expand,
-    variant,
-    bg,
-    fixed,
-    sticky,
-    className,
-    children,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'nav',
-    expanded,
-    onToggle,
-    onSelect,
-    collapseOnSelect,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    expanded: 'onToggle',
-  });
+const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
+  React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
+    const {
+      bsPrefix: initialBsPrefix,
+      expand,
+      variant,
+      bg,
+      fixed,
+      sticky,
+      className,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'nav',
+      expanded,
+      onToggle,
+      onSelect,
+      collapseOnSelect,
+      ...controlledProps
+    } = useUncontrolled(props, {
+      expanded: 'onToggle',
+    });
 
-  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'navbar');
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'navbar');
 
-  const handleCollapse = useCallback<SelectCallback>(
-    (...args) => {
-      if (onSelect) onSelect(...args);
-      if (collapseOnSelect && expanded) {
-        if (onToggle) {
-          onToggle(false);
+    const handleCollapse = useCallback<SelectCallback>(
+      (...args) => {
+        onSelect?.(...args);
+        if (collapseOnSelect && expanded) {
+          onToggle?.(false);
         }
-      }
-    },
-    [onSelect, collapseOnSelect, expanded, onToggle],
-  );
+      },
+      [onSelect, collapseOnSelect, expanded, onToggle],
+    );
 
-  // will result in some false positives but that seems better
-  // than false negatives. strict `undefined` check allows explicit
-  // "nulling" of the role if the user really doesn't want one
-  if (controlledProps.role === undefined && Component !== 'nav') {
-    controlledProps.role = 'navigation';
-  }
-  let expandClass = `${bsPrefix}-expand`;
-  if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
+    // will result in some false positives but that seems better
+    // than false negatives. strict `undefined` check allows explicit
+    // "nulling" of the role if the user really doesn't want one
+    if (controlledProps.role === undefined && Component !== 'nav') {
+      controlledProps.role = 'navigation';
+    }
+    let expandClass = `${bsPrefix}-expand`;
+    if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
 
-  const navbarContext = useMemo<NavbarContextType>(
-    () => ({
-      onToggle: () => onToggle && onToggle(!expanded),
-      bsPrefix,
-      expanded: !!expanded,
-    }),
-    [bsPrefix, expanded, onToggle],
-  );
+    const navbarContext = useMemo<NavbarContextType>(
+      () => ({
+        onToggle: () => onToggle?.(!expanded),
+        bsPrefix,
+        expanded: !!expanded,
+      }),
+      [bsPrefix, expanded, onToggle],
+    );
 
-  return (
-    <NavbarContext.Provider value={navbarContext}>
-      <SelectableContext.Provider value={handleCollapse}>
-        <Component
-          ref={ref}
-          {...controlledProps}
-          className={classNames(
-            className,
-            bsPrefix,
-            expand && expandClass,
-            variant && `${bsPrefix}-${variant}`,
-            bg && `bg-${bg}`,
-            sticky && `sticky-${sticky}`,
-            fixed && `fixed-${fixed}`,
-          )}
-        >
-          {children}
-        </Component>
-      </SelectableContext.Provider>
-    </NavbarContext.Provider>
-  );
-}) as unknown) as Navbar;
+    return (
+      <NavbarContext.Provider value={navbarContext}>
+        <SelectableContext.Provider value={handleCollapse}>
+          <Component
+            ref={ref}
+            {...controlledProps}
+            className={classNames(
+              className,
+              bsPrefix,
+              expand && expandClass,
+              variant && `${bsPrefix}-${variant}`,
+              bg && `bg-${bg}`,
+              sticky && `sticky-${sticky}`,
+              fixed && `fixed-${fixed}`,
+            )}
+          />
+        </SelectableContext.Provider>
+      </NavbarContext.Provider>
+    );
+  });
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
 Navbar.displayName = 'Navbar';
 
-Navbar.Brand = NavbarBrand;
-Navbar.Toggle = NavbarToggle;
-Navbar.Collapse = NavbarCollapse;
-Navbar.Text = NavbarText;
-
-export default Navbar;
+export default Object.assign(Navbar, {
+  Brand: NavbarBrand,
+  Toggle: NavbarToggle,
+  Collapse: NavbarCollapse,
+  Text: NavbarText,
+});

@@ -1,30 +1,22 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, { alignPropType, AlignType } from './DropdownMenu';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import DropdownMenu, { DropdownMenuVariant } from './DropdownMenu';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { alignPropType } from './types';
 
 export interface DropdownButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
+  extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   title: React.ReactNode;
-  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
+  menuVariant?: DropdownMenuVariant;
 }
-
-type DropdownButton = BsPrefixRefForwardingComponent<
-  'div',
-  DropdownButtonProps
->;
 
 const propTypes = {
   /**
@@ -47,13 +39,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively.
+   * Aligns the dropdown menu.
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  menuAlign: alignPropType,
+  align: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -67,6 +59,13 @@ const propTypes = {
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    */
   rootCloseEvent: PropTypes.string,
+
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
 
   /** @ignore */
   bsPrefix: PropTypes.string,
@@ -85,10 +84,10 @@ const propTypes = {
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
  * along with menu-related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton: DropdownButton = React.forwardRef<
-  HTMLDivElement,
+const DropdownButton: BsPrefixRefForwardingComponent<
+  'div',
   DropdownButtonProps
->(
+> = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
   (
     {
       title,
@@ -97,12 +96,12 @@ const DropdownButton: DropdownButton = React.forwardRef<
       rootCloseEvent,
       variant,
       size,
-      menuAlign,
       menuRole,
       renderMenuOnMount,
       disabled,
       href,
       id,
+      menuVariant,
       ...props
     },
     ref,
@@ -119,10 +118,10 @@ const DropdownButton: DropdownButton = React.forwardRef<
         {title}
       </DropdownToggle>
       <DropdownMenu
-        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
+        variant={menuVariant}
       >
         {children}
       </DropdownMenu>
@@ -131,6 +130,6 @@ const DropdownButton: DropdownButton = React.forwardRef<
 );
 
 DropdownButton.displayName = 'DropdownButton';
-DropdownButton.propTypes = propTypes as any;
+DropdownButton.propTypes = propTypes;
 
 export default DropdownButton;

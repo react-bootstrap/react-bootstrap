@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import Tab from '../src/Tab';
@@ -20,7 +19,7 @@ describe('<Tabs>', () => {
     );
 
     wrapper.assertSingle('TabPane[eventKey=1] .active');
-    wrapper.assertSingle('NavLink[eventKey=1] a.active');
+    wrapper.assertSingle('NavLink[eventKey=1] button.active');
   });
 
   it('should get defaultActiveKey (if null) from first child tab with eventKey', () => {
@@ -35,7 +34,7 @@ describe('<Tabs>', () => {
       </Tabs>,
     );
     wrapper.assertSingle('TabPane[eventKey=1] .active');
-    wrapper.assertSingle('NavLink[eventKey=1] a.active');
+    wrapper.assertSingle('NavLink[eventKey=1] button.active');
   });
 
   it('Should allow tab to have React components', () => {
@@ -50,7 +49,7 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('NavLink a .special-tab');
+    ).assertSingle('NavLink button .special-tab');
   });
 
   it('Should call onSelect when tab is selected', (done) => {
@@ -69,7 +68,7 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     )
-      .find('NavLink[eventKey="2"] a')
+      .find('NavLink[eventKey="2"] button')
       .simulate('click');
   });
 
@@ -85,8 +84,8 @@ describe('<Tabs>', () => {
       </Tabs>,
     );
 
-    wrapper.assertSingle('a.nav-link.tcustom');
-    wrapper.assertNone('a.nav-link.custom');
+    wrapper.assertSingle('button.nav-link.tcustom');
+    wrapper.assertNone('button.nav-link.custom');
     wrapper.assertSingle('div.tab-pane.custom#test-tabpane-1');
   });
 
@@ -100,7 +99,7 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('nav.nav-pills');
+    ).assertSingle('ul.nav-pills');
   });
 
   it('Should pass disabled to Nav', () => {
@@ -113,7 +112,7 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('a.nav-link.disabled');
+    ).assertSingle('button.nav-link.disabled');
   });
 
   it('Should not render a Tab without a title', () => {
@@ -126,7 +125,7 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     )
-      .find('a.nav-link')
+      .find('button.nav-link')
       .should.have.length(1);
   });
 });

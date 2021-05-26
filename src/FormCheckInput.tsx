@@ -1,38 +1,27 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
-export interface FormCheckInputProps extends BsPrefixProps {
+export interface FormCheckInputProps
+  extends BsPrefixProps,
+    React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
-  bsCustomPrefix?: string;
   type?: FormCheckInputType;
-  isStatic?: boolean;
   isValid?: boolean;
   isInvalid?: boolean;
 }
-
-type FormCheckInput = BsPrefixRefForwardingComponent<
-  'input',
-  FormCheckInputProps
->;
 
 const propTypes = {
   /**
    * @default 'form-check-input'
    */
   bsPrefix: PropTypes.string,
-
-  /**
-   * A seperate bsPrefix used for custom controls
-   *
-   * @default 'custom-control'
-   */
-  bsCustomPrefix: PropTypes.string,
 
   /**
    * The underlying HTML element to use when rendering the FormCheckInput.
@@ -47,12 +36,6 @@ const propTypes = {
   /** The type of checkable. */
   type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
 
-  /**
-   * A convenience prop shortcut for adding `position-static` to the input, for
-   * correct styling when used without an FormCheckLabel
-   */
-  isStatic: PropTypes.bool,
-
   /** Manually style the input as valid */
   isValid: PropTypes.bool,
 
@@ -60,29 +43,26 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormCheckInput: FormCheckInput = React.forwardRef(
+const FormCheckInput: BsPrefixRefForwardingComponent<
+  'input',
+  FormCheckInputProps
+> = React.forwardRef<HTMLInputElement, FormCheckInputProps>(
   (
     {
       id,
       bsPrefix,
-      bsCustomPrefix,
       className,
       type = 'checkbox',
       isValid = false,
       isInvalid = false,
-      isStatic,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
-    }: FormCheckInputProps,
+    },
     ref,
   ) => {
-    const { controlId, custom } = useContext(FormContext);
-    const [prefix, defaultPrefix] = custom
-      ? [bsCustomPrefix, 'custom-control-input']
-      : [bsPrefix, 'form-check-input'];
-
-    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    const { controlId } = useContext(FormContext);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
     return (
       <Component
@@ -95,7 +75,6 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
           bsPrefix,
           isValid && 'is-valid',
           isInvalid && 'is-invalid',
-          isStatic && 'position-static',
         )}
       />
     );

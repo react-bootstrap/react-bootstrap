@@ -1,12 +1,22 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import Modal from '../src/Modal';
-import { shouldWarn } from './helpers';
 
 describe('<Modal>', () => {
   afterEach(() => {
     // make sure the dangling portal elements get cleaned up
     document.body.innerHTML = '';
+  });
+
+  it('Should forward ref to BaseModal', () => {
+    const noOp = () => {};
+    const ref = React.createRef();
+    mount(
+      <Modal show onHide={noOp} animation={false} ref={ref}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+    ref.current.dialog.should.exist;
   });
 
   it('Should render the modal content', () => {
@@ -129,7 +139,7 @@ describe('<Modal>', () => {
         <strong>Message</strong>
       </Modal>,
     )
-      .find('.close')
+      .find('.btn-close')
       .simulate('click');
   });
 
@@ -161,6 +171,22 @@ describe('<Modal>', () => {
     ).find('.modal-dialog.modal-sm');
   });
 
+  it('Should pass fullscreen as bool to the dialog', () => {
+    mount(
+      <Modal show fullscreen>
+        <strong>Message</strong>
+      </Modal>,
+    ).assertSingle('.modal-dialog.modal-fullscreen');
+  });
+
+  it('Should pass fullscreen as string to the dialog', () => {
+    mount(
+      <Modal show fullscreen="sm-down">
+        <strong>Message</strong>
+      </Modal>,
+    ).assertSingle('.modal-dialog.modal-fullscreen-sm-down');
+  });
+
   it('Should pass centered to the dialog', () => {
     const noOp = () => {};
     mount(
@@ -190,21 +216,6 @@ describe('<Modal>', () => {
       .getDOMNode();
 
     assert.ok(dialog.style.color === 'red');
-  });
-
-  it('Should warn about ref access', () => {
-    const noOp = () => {};
-    const ref = React.createRef();
-
-    mount(
-      <Modal show ref={ref} onHide={noOp}>
-        <strong>Message</strong>
-      </Modal>,
-    );
-
-    shouldWarn('Accessing `_modal` is not supported');
-
-    ref.current._modal;
   });
 
   it('Should pass dialogClassName to the dialog', () => {

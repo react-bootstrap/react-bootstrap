@@ -9,7 +9,7 @@ import CardBodyOnly from '../../examples/Card/BodyOnly';
 import CardBodyShorthand from '../../examples/Card/BodyShorthand';
 import CardBorder from '../../examples/Card/Border';
 import CardColumns from '../../examples/Card/Columns';
-import CardDeck from '../../examples/Card/Deck';
+import CardGrid from '../../examples/Card/Grid';
 import CardGroup from '../../examples/Card/Group';
 import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
 import CardImageAndText from '../../examples/Card/ImageAndText';
@@ -130,9 +130,11 @@ You can change a card's appearance by changing their `<bg>`, and `<text>` props.
 
 <ReactPlayground codeText={CardGroup} />
 
-### Card Deck
+### Grid cards
 
-<ReactPlayground codeText={CardDeck} />
+Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control how many cards to show per row.
+
+<ReactPlayground codeText={CardGrid} />
 
 ### Card Columns
 
@@ -142,10 +144,15 @@ You can change a card's appearance by changing their `<bg>`, and `<text>` props.
 
 <ComponentApi metadata={props.data.Card} />
 <ComponentApi metadata={props.data.CardBody} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardFooter} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardHeader} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImg} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImgOverlay} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardLink} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardSubtitle} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardText} exportedBy={props.data.Card} />
+<ComponentApi metadata={props.data.CardTitle} exportedBy={props.data.Card} />
 
-<ComponentApi metadata={props.data.CardDeck} />
 <ComponentApi metadata={props.data.CardGroup} />
 <ComponentApi metadata={props.data.CardColumns} />
 
@@ -158,13 +165,28 @@ export const query = graphql`
     CardBody: componentMetadata(displayName: { eq: "CardBody" }) {
       ...ComponentApi_metadata
     }
+    CardFooter: componentMetadata(displayName: { eq: "CardFooter" }) {
+      ...ComponentApi_metadata
+    }
+    CardHeader: componentMetadata(displayName: { eq: "CardHeader" }) {
+      ...ComponentApi_metadata
+    }
     CardImg: componentMetadata(displayName: { eq: "CardImg" }) {
       ...ComponentApi_metadata
     }
     CardImgOverlay: componentMetadata(displayName: { eq: "CardImgOverlay" }) {
       ...ComponentApi_metadata
     }
-    CardDeck: componentMetadata(displayName: { eq: "CardDeck" }) {
+    CardLink: componentMetadata(displayName: { eq: "CardLink" }) {
+      ...ComponentApi_metadata
+    }
+    CardSubtitle: componentMetadata(displayName: { eq: "CardSubtitle" }) {
+      ...ComponentApi_metadata
+    }
+    CardText: componentMetadata(displayName: { eq: "CardText" }) {
+      ...ComponentApi_metadata
+    }
+    CardTitle: componentMetadata(displayName: { eq: "CardTitle" }) {
       ...ComponentApi_metadata
     }
     CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {

@@ -1,20 +1,18 @@
-import React, { useContext } from 'react';
+import classNames from 'classnames';
+import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import { Transition } from 'react-transition-group';
+import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
-import SelectableContext from './SelectableContext';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixOnlyProps } from './helpers';
 
 export interface AccordionCollapseProps
-  extends React.PropsWithChildren<CollapseProps> {
+  extends BsPrefixOnlyProps,
+    CollapseProps {
   eventKey: string;
 }
-
-type AccordionCollapse = BsPrefixRefForwardingComponent<
-  'div',
-  AccordionCollapseProps
->;
 
 const propTypes = {
   /**
@@ -26,18 +24,23 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse: AccordionCollapse = React.forwardRef<typeof Collapse>(
-  ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
-    const contextEventKey = useContext(AccordionContext);
+const AccordionCollapse: BsPrefixRefForwardingComponent<
+  'div',
+  AccordionCollapseProps
+> = React.forwardRef<Transition<any>, AccordionCollapseProps>(
+  ({ bsPrefix, className, children, eventKey, ...props }, ref) => {
+    const { activeEventKey } = useContext(AccordionContext);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
 
-    // Empty SelectableContext is to prevent elements in the collapse
-    // from collapsing the accordion when clicked.
     return (
-      <SelectableContext.Provider value={null}>
-        <Collapse ref={ref} in={contextEventKey === eventKey} {...props}>
-          <div>{React.Children.only(children)}</div>
-        </Collapse>
-      </SelectableContext.Provider>
+      <Collapse
+        ref={ref}
+        in={activeEventKey === eventKey}
+        {...props}
+        className={classNames(className, bsPrefix)}
+      >
+        <div>{React.Children.only(children)}</div>
+      </Collapse>
     );
   },
 ) as any;

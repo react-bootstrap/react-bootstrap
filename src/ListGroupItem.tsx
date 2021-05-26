@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import React, { useCallback } from 'react';
+import * as React from 'react';
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import AbstractNavItem from './AbstractNavItem';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { EventKey, Variant } from './types';
+import { Variant, EventKey } from './types';
 
 export interface ListGroupItemProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
@@ -18,8 +19,6 @@ export interface ListGroupItemProps
   onClick?: React.MouseEventHandler;
   variant?: Variant;
 }
-
-type ListGroupItem = BsPrefixRefForwardingComponent<'a', ListGroupItemProps>;
 
 const propTypes = {
   /**
@@ -68,60 +67,61 @@ const defaultProps = {
   disabled: false,
 };
 
-const ListGroupItem: ListGroupItem = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      active,
-      disabled,
-      className,
-      variant,
-      action,
-      as,
-      onClick,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
-
-    const handleClick = useCallback(
-      (event) => {
-        if (disabled) {
-          event.preventDefault();
-          event.stopPropagation();
-          return;
-        }
-
-        if (onClick) onClick(event);
+const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
+  React.forwardRef<HTMLElement, ListGroupItemProps>(
+    (
+      {
+        bsPrefix,
+        active,
+        disabled,
+        className,
+        variant,
+        action,
+        as,
+        onClick,
+        ...props
       },
-      [disabled, onClick],
-    );
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
 
-    if (disabled && props.tabIndex === undefined) {
-      props.tabIndex = -1;
-      props['aria-disabled'] = true;
-    }
+      const handleClick = useCallback(
+        (event) => {
+          if (disabled) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+          }
 
-    return (
-      <AbstractNavItem
-        ref={ref}
-        {...props}
-        // eslint-disable-next-line no-nested-ternary
-        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
-        onClick={handleClick}
-        className={classNames(
-          className,
-          bsPrefix,
-          active && 'active',
-          disabled && 'disabled',
-          variant && `${bsPrefix}-${variant}`,
-          action && `${bsPrefix}-action`,
-        )}
-      />
-    );
-  },
-);
+          onClick?.(event);
+        },
+        [disabled, onClick],
+      );
+
+      if (disabled && props.tabIndex === undefined) {
+        props.tabIndex = -1;
+        props['aria-disabled'] = true;
+      }
+
+      return (
+        <AbstractNavItem
+          ref={ref}
+          {...props}
+          // eslint-disable-next-line no-nested-ternary
+          as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+          onClick={handleClick}
+          className={classNames(
+            className,
+            bsPrefix,
+            active && 'active',
+            disabled && 'disabled',
+            variant && `${bsPrefix}-${variant}`,
+            action && `${bsPrefix}-action`,
+          )}
+        />
+      );
+    },
+  );
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.defaultProps = defaultProps;

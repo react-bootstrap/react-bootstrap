@@ -1,22 +1,23 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 import Callout from '../../components/Callout';
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import FormBasic from '../../examples/Form/Basic';
+import FormFloatingBasic from '../../examples/Form/FormFloatingBasic';
+import FormFloatingCustom from '../../examples/Form/FormFloatingCustom';
+import FormFloatingLayout from '../../examples/Form/FormFloatingLayout';
+import FormFloatingSelect from '../../examples/Form/FormFloatingSelect';
+import FormFloatingTextarea from '../../examples/Form/FormFloatingTextarea';
 import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
-import CheckCustom from '../../examples/Form/CheckCustom';
-import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 import CheckInline from '../../examples/Form/CheckInline';
+import ColorPicker from '../../examples/Form/ColorPicker';
 import FormFile from '../../examples/Form/FormFile';
 import FormDisabled from '../../examples/Form/FormDisabled';
 import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
-import FormRow from '../../examples/Form/FormRow';
 import FormText from '../../examples/Form/FormText';
-import FormTextInline from '../../examples/Form/FormTextInline';
 import FormLabelSizing from '../../examples/Form/FormLabelSizing';
 import GridAutoSizing from '../../examples/Form/GridAutoSizing';
 import GridAutoSizingCustom from '../../examples/Form/GridAutoSizingCustom';
@@ -25,23 +26,14 @@ import GridBasic from '../../examples/Form/GridBasic';
 import GridColSizes from '../../examples/Form/GridColSizes';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
-import Inline from '../../examples/Form/Inline';
-import InlineCustom from '../../examples/Form/InlineCustom';
 import InputReadOnly from '../../examples/Form/InputReadOnly';
 import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
 import Range from '../../examples/Form/Range';
-import RangeCustom from '../../examples/Form/RangeCustom';
-import SelectCustom from '../../examples/Form/SelectCustom';
-import SelectCustomSize from '../../examples/Form/SelectCustomSize';
-import SelectCustomHtmlSize from '../../examples/Form/SelectCustomHtmlSize';
+import SelectBasic from '../../examples/Form/SelectBasic';
 import SelectSizes from '../../examples/Form/SelectSizes';
-import File from '../../examples/Form/File';
-import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
-import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
-import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationInputGroup from '../../examples/Form/ValidationInputGroup';
@@ -85,16 +77,12 @@ export default withLayout(function FormControlsSection({ data }) {
         Form controls
       </LinkedHeading>
       <p>
-        For textual form controls—like <code>input</code>s, <code>select</code>
-        s, and <code>textarea</code>s—use the <code>FormControl</code>{' '}
-        component. FormControl adds some additional styles for general
-        appearance, focus state, sizing, and more.
+        For textual form controls—like <code>input</code>s and{' '}
+        <code>textarea</code>s—use the <code>FormControl</code> component.
+        FormControl adds some additional styles for general appearance, focus
+        state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
-      <p>
-        For file inputs, use <code>Form.File</code>.
-      </p>
-      <ReactPlayground codeText={FormFile} />
       <LinkedHeading h="3" id="forms-input-sizes">
         Sizing
       </LinkedHeading>
@@ -104,7 +92,6 @@ export default withLayout(function FormControlsSection({ data }) {
         respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
-      <ReactPlayground codeText={SelectSizes} />
       <LinkedHeading h="3" id="forms-input-readonly">
         Readonly
       </LinkedHeading>
@@ -123,10 +110,14 @@ export default withLayout(function FormControlsSection({ data }) {
         default form field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
-      <LinkedHeading h="2" id="forms-range">
-        Range Inputs
+      <LinkedHeading h="3" id="forms-file">
+        File input
       </LinkedHeading>
-      <ReactPlayground codeText={Range} />
+      <ReactPlayground codeText={FormFile} />
+      <LinkedHeading h="3" id="forms-color">
+        Color
+      </LinkedHeading>
+      <ReactPlayground codeText={ColorPicker} />
       <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
       </LinkedHeading>
@@ -163,11 +154,9 @@ export default withLayout(function FormControlsSection({ data }) {
         </strong>
       </p>
       <ReactPlayground codeText={NoLabels} />
-
       <LinkedHeading h="3" id="forms-check-api">
         Customizing FormCheck rendering
       </LinkedHeading>
-
       <p>
         When you need tighter control, or want to customize how the{' '}
         <code>FormCheck</code> component renders, it may better to use it's
@@ -180,7 +169,77 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
-
+      <LinkedHeading h="2" id="forms-range">
+        Range
+      </LinkedHeading>
+      Create custom <code>{'<input type="range">'}</code> controls with
+      <code>{'<FormRange>'}</code>. The track (the background) and thumb (the
+      value) are both styled to appear the same across browsers. As only Firefox
+      supports “filling” their track from the left or right of the thumb as a
+      means to visually indicate progress, we do not currently support it.
+      <ReactPlayground codeText={Range} />
+      <LinkedHeading h="2" id="forms-select">
+        Select
+      </LinkedHeading>
+      <ReactPlayground codeText={SelectBasic} />
+      <LinkedHeading h="3" id="forms-select-sizes">
+        Sizing
+      </LinkedHeading>
+      <p>
+        You may also choose from small and large custom selects to match our
+        similarly sized text inputs.
+      </p>
+      <ReactPlayground codeText={SelectSizes} />
+      <LinkedHeading h="2" id="forms-floating-labels">
+        Floating labels
+      </LinkedHeading>
+      <p>
+        Wrap a <code>{'<Form.Control>'}</code> element in{' '}
+        <code>{'<FloatingLabel>'}</code> to enable floating labels with
+        Bootstrap’s textual form fields. A <code>placeholder</code> is required
+        on each <code>{'<Form.Control>'}</code> as our method of CSS-only
+        floating labels uses the <code>:placeholder-shown</code> pseudo-element.
+      </p>
+      <ReactPlayground codeText={FormFloatingBasic} />
+      <LinkedHeading h="3" id="forms-floating-labels-textarea">
+        Textareas
+      </LinkedHeading>
+      <p>
+        By default, <code>{'<textarea>'}</code>s will be the same height as{' '}
+        <code>{'<input>'}</code>s. To set a custom height on your{' '}
+        <code>{'<textarea>'}</code>, do not use the <code>rows</code> attribute.
+        Instead, set an explicit <code>height</code> (either inline or via
+        custom CSS).
+      </p>
+      <ReactPlayground codeText={FormFloatingTextarea} />
+      <LinkedHeading h="3" id="forms-floating-labels-select">
+        Selects
+      </LinkedHeading>
+      <p>
+        Other than <code>{'<Form.Control>'}</code>, floating labels are only
+        available on <code>{'<Form.Select>'}</code>s. They work in the same way,
+        but unlike <code>{'<input>'}</code>s, they’ll always show the{' '}
+        <code>{'<label>'}</code> in its floated state.
+      </p>
+      <ReactPlayground codeText={FormFloatingSelect} />
+      <LinkedHeading h="3" id="forms-floating-labels-layout">
+        Layout
+      </LinkedHeading>
+      <p>
+        When working with the Bootstrap grid system, be sure to place form
+        elements within column classes.
+      </p>
+      <ReactPlayground codeText={FormFloatingLayout} />
+      <LinkedHeading h="3" id="forms-floating-labels-customize">
+        Customizing rendering
+      </LinkedHeading>
+      <p>
+        If you need greater control over the rendering, use the{' '}
+        <code>{'<FormFloating>'}</code> component to wrap your input and label.
+        Also note that the <code>{'<Form.Control>'}</code> must come first so we
+        can utilize a sibling selector (e.g., ~).
+      </p>
+      <ReactPlayground codeText={FormFloatingCustom} />
       <LinkedHeading h="2" id="forms-layout">
         Layout
       </LinkedHeading>
@@ -197,9 +256,8 @@ export default withLayout(function FormControlsSection({ data }) {
         The <code>FormGroup</code> component is the easiest way to add some
         structure to forms. It provides a flexible container for grouping of
         labels, controls, optional help text, and form validation messaging. By
-        default it only applies margin-bottom, but it picks up additional styles
-        in <code>{'<Form inline >'}</code> as needed. Use it with{' '}
-        <code>fieldset</code>s, <code>div</code>s, or nearly any other element.
+        default it only applies margin-bottom. Use it with <code>fieldset</code>
+        s, <code>div</code>s, or nearly any other element.
       </p>
       <p>
         You also add the <code>controlId</code> prop to accessibly wire the
@@ -215,25 +273,11 @@ export default withLayout(function FormControlsSection({ data }) {
         additional alignment options.
       </p>
       <ReactPlayground codeText={GridBasic} />
-      <LinkedHeading h="4" id="forms-layout-form-row">
-        Form row
-      </LinkedHeading>
-      <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
-        , a variation of the standard grid row that overrides the default column
-        gutters for tighter and more compact layouts.
-      </p>
-      <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
       <LinkedHeading h="4" id="horizontal-forms">
         Horizontal form
       </LinkedHeading>
-      <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
-        , a variation of the standard grid row that overrides the default column
-        gutters for tighter and more compact layouts.
-      </p>
       <ReactPlayground codeText={Horizontal} />
       <LinkedHeading h="4" id="horizontal-forms-label-sizing">
         Horizontal form label sizing
@@ -248,12 +292,11 @@ export default withLayout(function FormControlsSection({ data }) {
       </LinkedHeading>
       <p>
         As shown in the previous examples, our grid system allows you to place
-        any number of <code>{'<Col>'}</code>s within a <code>{'<Row>'}</code> or{' '}
-        <code>{'<Form.Row>'}</code>. They'll split the available width equally
-        between them. You may also pick a subset of your columns to take up more
-        or less space, while the remaining <code>{'<Col>'}</code>s equally split
-        the rest, with specific column classes like{' '}
-        <code>{'<Col xs={7}>'}</code>.
+        any number of <code>{'<Col>'}</code>s within a <code>{'<Row>'}</code>.
+        They'll split the available width equally between them. You may also
+        pick a subset of your columns to take up more or less space, while the
+        remaining <code>{'<Col>'}</code>s equally split the rest, with specific
+        column classes like <code>{'<Col xs={7}>'}</code>.
       </p>
       <ReactPlayground codeText={GridColSizes} />
       <LinkedHeading h="4" id="forms-auto-sizing">
@@ -276,53 +319,6 @@ export default withLayout(function FormControlsSection({ data }) {
         supported.
       </p>
       <ReactPlayground codeText={GridAutoSizingCustom} />
-      <LinkedHeading h="3" id="forms-inline">
-        Inline forms
-      </LinkedHeading>
-      <p>
-        Use the <code>inline</code> prop to display a series of labels, form
-        controls, and buttons on a single horizontal row. Form controls within
-        forms vary slightly from their default states.
-      </p>
-      <ul>
-        <li>
-          Controls are <code>display: flex</code>, collapsing any HTML white
-          space and allowing you to provide alignment control with spacing and
-          utilities.
-        </li>
-        <li>
-          Controls and input groups receive <code>width: auto</code> to override
-          the Bootstrap default <code>width: 100%</code>.
-        </li>
-        <li>
-          Controls{' '}
-          <b>only appear inline in viewports that are at least 576px wide</b> to
-          account for narrow viewports on mobile devices.
-        </li>
-      </ul>
-      <p>
-        You may need to manually address the width and alignment of individual
-        form controls with spacing utilities (as shown below). Lastly, be sure
-        to always include a <code>{'<Form.Label>'}</code> with each form
-        control, even if you need to hide it from non-screenreader visitors with
-        the <code>srOnly</code> prop.
-      </p>
-      <ReactPlayground codeText={Inline} />
-      <p>Custom form controls and selects are also supported.</p>
-      <ReactPlayground codeText={InlineCustom} />
-      <Callout>
-        <h5>Alternatives to hidden labels</h5>
-        Assistive technologies such as screen readers will have trouble with
-        your forms if you don’t include a label for every input. For these
-        inline forms, you can hide the labels using the <code>srOnly</code>{' '}
-        prop. There are further alternative methods of providing a label for
-        assistive technologies, such as the <code>aria-label</code>,{' '}
-        <code>aria-labelledby</code> or <code>title</code> attribute. If none of
-        these are present, assistive technologies may resort to using the{' '}
-        <code>placeholder</code> attribute, if present, but note that use of{' '}
-        <code>placeholder</code> as a replacement for other labelling methods is
-        not advised.
-      </Callout>
       <LinkedHeading h="2" id="forms-help-text">
         Help text
       </LinkedHeading>
@@ -345,12 +341,6 @@ export default withLayout(function FormControlsSection({ data }) {
         margin for easy spacing from the inputs above.
       </p>
       <ReactPlayground codeText={FormText} />
-      <p>
-        Inline text can use any typical inline HTML element (be it a{' '}
-        <code>{'<small>'}</code>, <code>{'<span>'}</code>, or something else)
-        with nothing more than a utility class.
-      </p>
-      <ReactPlayground codeText={FormTextInline} />
       <LinkedHeading h="2" id="forms-disabled">
         Disabled forms
       </LinkedHeading>
@@ -423,7 +413,6 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>{'<form>'}</code> element.
       </Callout>
       <ReactPlayground codeText={ValidationNative} />
-
       <LinkedHeading h="3" id="forms-validation-libraries">
         Form libraries and server-rendered styles
       </LinkedHeading>
@@ -436,7 +425,6 @@ export default withLayout(function FormControlsSection({ data }) {
         <a href="https://github.com/jaredpalmer/formik">Formik</a>.
       </p>
       <ReactPlayground codeText={ValidationFormik} />
-
       <LinkedHeading h="3" id="forms-validation-tooltips">
         Tooltips
       </LinkedHeading>
@@ -448,7 +436,6 @@ export default withLayout(function FormControlsSection({ data }) {
         but your project may require an alternative setup.
       </p>
       <ReactPlayground codeText={ValidationTooltips} />
-
       <LinkedHeading h="3" id="forms-validation-input-group">
         Input group validation
       </LinkedHeading>
@@ -458,11 +445,9 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>hasValidation</code> prop.
       </p>
       <ReactPlayground codeText={ValidationInputGroup} />
-
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples
       </LinkedHeading>
-
       <LinkedHeading h="2" id="forms-custom">
         Custom forms
       </LinkedHeading>
@@ -472,24 +457,6 @@ export default withLayout(function FormControlsSection({ data }) {
         built on top of semantic and accessible markup, so they’re solid
         replacements for any default form control.
       </p>
-      <LinkedHeading h="3" id="forms-custom-checkboxes-and-radios">
-        Checkboxes and radios
-      </LinkedHeading>
-      <p>
-        Custom checkbox and radio styles are achieved with a resourceful use of
-        the <code>:checked</code> selector and <code>:after</code> pseudo
-        elements, but are Structurally similar to the default{' '}
-        <code>FormCheck</code>. By default the checked and indeterminate icons
-        use embedded svg icons from{' '}
-        <a href="https://useiconic.com/open">Open Iconic</a>.
-      </p>
-
-      <p>
-        Apply Bootstrap's custom elements by adding the <code>custom</code>{' '}
-        prop.
-      </p>
-      <ReactPlayground codeText={CheckCustom} />
-
       <LinkedHeading h="3" id="forms-custom-switch">
         Switches
       </LinkedHeading>
@@ -498,132 +465,16 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>type="switch"</code> to render a toggle switch. Switches also
         support the same customizable children as <code>{'<FormCheck>'}</code>.
       </p>
-
       <ReactPlayground codeText={Switch} />
       <Callout>
         You can also use the <code>{'<Form.Switch>'}</code> alias which
         encapsulates the above, in a very small component wrapper.
       </Callout>
-      <Callout theme="danger">
-        <h5>Watch out!</h5>
-        You must specify an <code>id</code> when using custom check controls or
-        switches. Event handlers are triggered by linking the label with the
-        input via <code>id</code>.
-      </Callout>
-
-      <h3>Inline</h3>
-      <ReactPlayground codeText={CheckCustomInline} />
-
-      <LinkedHeading h="3" id="forms-custom-select">
-        Select
-      </LinkedHeading>
-      <p>
-        For the <code>select</code> form control you can pass the{' '}
-        <code>custom</code> prop to get custom styling of the select element.
-        Custom styles are limited to the <code>select</code> initial appearance
-        and cannot modify the <code>option</code> styling due to browser
-        limitations.
-      </p>
-      <ReactPlayground codeText={SelectCustom} />
-      <h4>Sizing</h4>
-      <p>
-        The custom <code>select</code> element supports sizing.
-      </p>
-      <ReactPlayground codeText={SelectCustomSize} />
-      <h4>HTML size</h4>
-      <p>
-        You can also specify the visible options of your <code>select</code>{' '}
-        element.
-      </p>
-      <ReactPlayground codeText={SelectCustomHtmlSize} />
-
-      <LinkedHeading h="3" id="forms-custom-range">
-        Range
-      </LinkedHeading>
-      <p>
-        For the <code>range</code> form control you can pass the{' '}
-        <code>custom</code> prop to get custom styling of the select element.
-        The track (the background) and thumb (the value) are both styled to
-        appear the same across browsers. As only IE and Firefox support
-        “filling” their track from the left or right of the thumb as a means to
-        visually indicate progress, we do not currently support it.
-      </p>
-      <ReactPlayground codeText={RangeCustom} />
-
-      <LinkedHeading h="3" id="forms-custom-file">
-        File
-      </LinkedHeading>
-      <p>A custom styled File uploader.</p>
-      <Callout>
-        The custom <code>FormFile</code> will by default not visibly display
-        your selected file. This requires additional JS. The recommended plugin
-        to animate custom file input is{' '}
-        <a href="https://www.npmjs.com/package/bs-custom-file-input">
-          bs-custom-file-input
-        </a>
-        .
-      </Callout>
-      <ReactPlayground codeText={File} />
-
-      <h4>Translating or customizing the strings with HTML</h4>
-      <p>
-        Bootstrap also provides a way to translate the “Browse” text in HTML
-        with the <code>data-browse</code> attribute which can be added to the
-        custom input label (example in Dutch):
-      </p>
-      <Callout>
-        Note that the <code>data-browse</code> attribute does not to anything
-        unless the <code>custom</code> prop is set.
-      </Callout>
-      <ReactPlayground codeText={FileButtonTextHTML} />
-
-      <h4>Translating or customizing the strings with SCSS</h4>
-      <p>
-        Please refer to the official{' '}
-        <a href="https://getbootstrap.com/docs/4.4/components/forms/#translating-or-customizing-the-strings-with-scss">
-          Bootstrap documentation for translating via SCSS
-        </a>
-        . The <code>lang</code> prop can be used to pass the language.
-      </p>
-      <ReactPlayground codeText={FileButtonTextScss} />
-
-      <h4>Customizing FormFile rendering</h4>
-      <p>
-        When you need tighter control, or want to customize how the{' '}
-        <code>FormFile</code> component renders, it may be better to use it's
-        constituent parts directly.
-      </p>
-      <p>
-        By providing <code>children</code> to the <code>FormFile</code> you can
-        forgo the default rendering and handle it yourself. (You can still
-        provide an <code>id</code> to the <code>FormFile</code> and have it
-        propagate to the label and input).
-      </p>
-      <Callout>
-        <p>
-          When customizing the <code>FormFile</code> rendering it is important
-          to note the order of the <code>label</code> and <code>input</code>{' '}
-          elements.
-        </p>
-        <ul>
-          <li>
-            If you are not setting the <code>custom</code> prop the
-            <code>label</code> should be before the <code>input</code>.
-          </li>
-          <li>
-            If you are setting the custom prop the <code>input</code> element
-            has to be placed before the <code>label</code> or the{' '}
-            <code>buttonText</code> prop will not work.
-          </li>
-        </ul>
-      </Callout>
-      <ReactPlayground codeText={FileApi} />
-
       <LinkedHeading h="2" id="forms-api">
         API
       </LinkedHeading>
       <ComponentApi metadata={data.Form} />
-      <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormFloating} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormText} exportedBy={data.Form} />
@@ -638,9 +489,9 @@ export default withLayout(function FormControlsSection({ data }) {
         metadata={data.FormCheckLabel}
         exportedBy={data.FormCheck}
       />
-      <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
-      <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
-      <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
+      <ComponentApi metadata={data.FormRange} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormSelect} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FloatingLabel} />
     </>
   );
 });
@@ -650,7 +501,7 @@ export const query = graphql`
     Form: componentMetadata(displayName: { eq: "Form" }) {
       ...ComponentApi_metadata
     }
-    FormRow: componentMetadata(displayName: { eq: "FormRow" }) {
+    FormFloating: componentMetadata(displayName: { eq: "FormFloating" }) {
       ...ComponentApi_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {
@@ -668,9 +519,6 @@ export const query = graphql`
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
       ...ComponentApi_metadata
     }
-    FormFile: componentMetadata(displayName: { eq: "FormFile" }) {
-      ...ComponentApi_metadata
-    }
     FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
       ...ComponentApi_metadata
     }
@@ -680,10 +528,13 @@ export const query = graphql`
     Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
       ...ComponentApi_metadata
     }
-    FormFileInput: componentMetadata(displayName: { eq: "FormFileInput" }) {
+    FormRange: componentMetadata(displayName: { eq: "FormRange" }) {
       ...ComponentApi_metadata
     }
-    FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
+    FormSelect: componentMetadata(displayName: { eq: "FormSelect" }) {
+      ...ComponentApi_metadata
+    }
+    FloatingLabel: componentMetadata(displayName: { eq: "FloatingLabel" }) {
       ...ComponentApi_metadata
     }
   }

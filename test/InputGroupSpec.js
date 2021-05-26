@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import InputGroup from '../src/InputGroup';
@@ -21,7 +20,7 @@ describe('<InputGroup>', () => {
     it('Should forward props to underlying input element', () => {
       const name = 'foobar';
       const wrapper = mount(<InputGroup.Checkbox name={name} />);
-      const input = wrapper.find(`span>input[type="checkbox"]`);
+      const input = wrapper.find('FormCheckInput');
       expect(input.length).to.equal(1);
       expect(input.prop('name')).to.equal(name);
     });
@@ -31,7 +30,7 @@ describe('<InputGroup>', () => {
     it('Should forward props to underlying input element', () => {
       const name = 'foobar';
       const wrapper = mount(<InputGroup.Radio name={name} />);
-      const input = wrapper.find(`span>input[type="radio"]`);
+      const input = wrapper.find('FormCheckInput');
       expect(input.length).to.equal(1);
       expect(input.prop('name')).to.equal(name);
     });

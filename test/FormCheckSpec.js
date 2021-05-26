@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import FormCheck from '../src/FormCheck';
 import Switch from '../src/Switch';
 
@@ -81,45 +81,34 @@ describe('<FormCheck>', () => {
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
-  it('should support custom', () => {
-    const wrapper = mount(<FormCheck custom label="My label" id="myid" />);
-
-    wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-checkbox')
-      .assertSingle('input.custom-control-input');
-
-    wrapper.assertSingle('label.custom-control-label');
-  });
-
-  it('should support custom with inline', () => {
+  it('should not render bsPrefix if no label is specified', () => {
     const wrapper = mount(
-      <FormCheck custom inline label="My label" id="myid" />,
+      <FormCheck id="foo" name="foo" value="foo" type="radio" />,
     );
-    wrapper.assertSingle('div.custom-control-inline');
+    expect(wrapper.find('.form-check').length).to.equal(0);
   });
 
-  it('should supports switches', () => {
+  it('should support switches', () => {
     let wrapper = mount(
       <FormCheck type="switch" label="My label" id="switch-id" />,
     );
 
     wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-switch')
-      .assertSingle('input[type="checkbox"].custom-control-input');
+      .assertSingle('div.form-check')
+      .assertSingle('div.form-switch')
+      .assertSingle('input[type="checkbox"].form-check-input');
 
-    wrapper.assertSingle('label.custom-control-label');
+    wrapper.assertSingle('label.form-check-label');
     wrapper.unmount();
 
     wrapper = mount(<Switch label="My label" id="switch-id2" />);
 
     wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-switch')
-      .assertSingle('input[type="checkbox"].custom-control-input');
+      .assertSingle('div.form-check')
+      .assertSingle('div.form-switch')
+      .assertSingle('input[type="checkbox"].form-check-input');
 
-    wrapper.assertSingle('label.custom-control-label');
+    wrapper.assertSingle('label.form-check-label');
   });
 
   it('should support "as"', () => {

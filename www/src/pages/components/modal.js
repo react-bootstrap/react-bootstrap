@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 import { css } from 'astroturf';
 
 import ComponentApi from '../../components/ComponentApi';
@@ -10,6 +9,7 @@ import ModalStatic from '../../examples/Modal/Static';
 import ModalBasic from '../../examples/Modal/Basic';
 import ModalStaticBackdrop from '../../examples/Modal/StaticBackdrop';
 import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
+import ModalFullScreen from '../../examples/Modal/FullScreen';
 import ModalCustomSizing from '../../examples/Modal/CustomSizing';
 import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
 import ModalWithoutAnimation from '../../examples/Modal/WithoutAnimation';
@@ -131,10 +131,20 @@ export default withLayout(function ModalSection({ data }) {
         Optional Sizes
       </LinkedHeading>
       <p>
-        You can specify a bootstrap large or small modal by using the "size"
-        prop.
+        You can specify a bootstrap large or small modal by using the{' '}
+        <code>size</code> prop.
       </p>
       <ReactPlayground codeText={ModalDefaultSizing} />
+
+      <LinkedHeading h="3" id="modal-fullscreen">
+        Fullscreen Modal
+      </LinkedHeading>
+      <p>
+        You can use the <code>fullscreen</code> prop to make the modal
+        fullscreen. Specifying a breakpoint will only set the modal as
+        fullscreen <b>below</b> the breakpoint size.
+      </p>
+      <ReactPlayground codeText={ModalFullScreen} />
 
       <LinkedHeading h="3" id="modal-custom-sizing">
         Sizing modals using custom CSS

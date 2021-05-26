@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 
 import DocLink from '../../components/DocLink';
 import LinkedHeading from '../../components/LinkedHeading';
@@ -11,7 +10,6 @@ import NavbarBasic from '../../examples/Navbar/Basic';
 import NavbarBrand from '../../examples/Navbar/Brand';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
 import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
-import NavbarForm from '../../examples/Navbar/Form';
 import NavScroll from '../../examples/Navbar/NavScroll';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
 import ContainerOutside from '../../examples/Navbar/ContainerOutside';
@@ -68,11 +66,6 @@ export default withLayout(function NaπvbarSection({ data }) {
       <LinkedHeading h="2" id="navbars-form">
         Forms
       </LinkedHeading>
-      <p>
-        Use <code>{'<Form inline>'}</code> and your various form controls within
-        the Navbar. Align the contents as needed with utility classes.
-      </p>
-      <ReactPlayground codeText={NavbarForm} />
 
       <LinkedHeading h="2" id="navbars-text-link">
         Text and Non-nav links
@@ -110,9 +103,9 @@ export default withLayout(function NaπvbarSection({ data }) {
       <p>
         When the container is within your navbar, its horizontal padding is
         removed at breakpoints lower than your specified{' '}
-        <code>{`expand={'sm' | 'md' | 'lg' | 'xl'}`}</code> prop. This ensures
-        we’re not doubling up on padding unnecessarily on lower viewports when
-        your navbar is collapsed.
+        <code>{`expand={'sm' | 'md' | 'lg' | 'xl' | 'xxl'}`}</code> prop. This
+        ensures we’re not doubling up on padding unnecessarily on lower
+        viewports when your navbar is collapsed.
       </p>
       <ReactPlayground codeText={ContainerInside} />
 
@@ -150,9 +143,6 @@ export default withLayout(function NaπvbarSection({ data }) {
 
       <h3 className="h4">Sticky top</h3>
       <CodeBlock codeText={` <Navbar sticky="top" />`} />
-
-      <h3 className="h4">Sticky bottom</h3>
-      <CodeBlock codeText={` <Navbar sticky="bottom" />`} />
 
       <LinkedHeading h="2" id="navbars-nav-scroll">
         Scrolling

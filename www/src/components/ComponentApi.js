@@ -1,6 +1,5 @@
 import { graphql } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
-import React from 'react';
 import Anchor from './Anchor';
 import Heading from './Heading';
 import ImportApi from './ImportApi';
@@ -30,7 +29,7 @@ function ComponentApi({ heading, metadata, exportedBy }) {
             <span className="text-monospace">{name}</span>
           </Anchor>
 
-          <span className="ml-auto" />
+          <span className="ms-auto" />
           <LinkToSource component={importName} />
         </div>
       </Heading>

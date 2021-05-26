@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Callout from '../../components/Callout';
 import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';

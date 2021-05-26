@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import Dropdown, { DropdownProps } from './Dropdown';
+import { DropdownMenuVariant } from './DropdownMenu';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavDropdownProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'> {
+  extends Omit<DropdownProps, 'onSelect' | 'title'> {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;
@@ -17,14 +17,8 @@ export interface NavDropdownProps
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
+  menuVariant?: DropdownMenuVariant;
 }
-
-type NavDropdown = BsPrefixRefForwardingComponent<'div', NavDropdownProps> & {
-  Item: typeof Dropdown.Item;
-  ItemText: typeof Dropdown.ItemText;
-  Divider: typeof Dropdown.Divider;
-  Header: typeof Dropdown.Header;
-};
 
 const propTypes = {
   /**
@@ -59,64 +53,75 @@ const propTypes = {
    */
   rootCloseEvent: PropTypes.string,
 
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+
   /** @ignore */
   bsPrefix: PropTypes.string,
 };
 
-const NavDropdown: NavDropdown = (React.forwardRef(
-  (
-    {
-      id,
-      title,
-      children,
-      bsPrefix,
-      className,
-      rootCloseEvent,
-      menuRole,
-      disabled,
-      active,
-      renderMenuOnMount,
-      ...props
-    }: NavDropdownProps,
-    ref,
-  ) => {
-    /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
-    const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
+const NavDropdown: BsPrefixRefForwardingComponent<'div', NavDropdownProps> =
+  React.forwardRef(
+    (
+      {
+        id,
+        title,
+        children,
+        bsPrefix,
+        className,
+        rootCloseEvent,
+        menuRole,
+        disabled,
+        active,
+        renderMenuOnMount,
+        menuVariant,
+        ...props
+      }: NavDropdownProps,
+      ref,
+    ) => {
+      /* NavItem has no additional logic, it's purely presentational. Can set nav item class here to support "as" */
+      const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
-    return (
-      <Dropdown
-        ref={ref}
-        {...props}
-        className={classNames(className, navItemPrefix)}
-      >
-        <Dropdown.Toggle
-          id={id}
-          eventKey={null}
-          active={active}
-          disabled={disabled}
-          childBsPrefix={bsPrefix}
-          as={NavLink}
+      return (
+        <Dropdown
+          ref={ref}
+          {...props}
+          className={classNames(className, navItemPrefix)}
         >
-          {title}
-        </Dropdown.Toggle>
+          <Dropdown.Toggle
+            id={id}
+            eventKey={null}
+            active={active}
+            disabled={disabled}
+            childBsPrefix={bsPrefix}
+            as={NavLink}
+          >
+            {title}
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu
-          role={menuRole}
-          renderOnMount={renderMenuOnMount}
-          rootCloseEvent={rootCloseEvent}
-        >
-          {children}
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  },
-) as unknown) as NavDropdown;
+          <Dropdown.Menu
+            role={menuRole}
+            renderOnMount={renderMenuOnMount}
+            rootCloseEvent={rootCloseEvent}
+            variant={menuVariant}
+          >
+            {children}
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+    },
+  );
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
-NavDropdown.Item = Dropdown.Item;
-NavDropdown.ItemText = Dropdown.ItemText;
-NavDropdown.Divider = Dropdown.Divider;
-NavDropdown.Header = Dropdown.Header;
 
-export default NavDropdown;
+export default Object.assign(NavDropdown, {
+  Item: Dropdown.Item,
+  ItemText: Dropdown.ItemText,
+  Divider: Dropdown.Divider,
+  Header: Dropdown.Header,
+});

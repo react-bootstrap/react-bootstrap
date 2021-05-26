@@ -1,5 +1,5 @@
 <Form>
-  <Form.Group as={Row} controlId="formHorizontalEmail">
+  <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
     <Form.Label column sm={2}>
       Email
     </Form.Label>
@@ -8,7 +8,7 @@
     </Col>
   </Form.Group>
 
-  <Form.Group as={Row} controlId="formHorizontalPassword">
+  <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
     <Form.Label column sm={2}>
       Password
     </Form.Label>
@@ -17,7 +17,7 @@
     </Col>
   </Form.Group>
   <fieldset>
-    <Form.Group as={Row}>
+    <Form.Group as={Row} className="mb-3">
       <Form.Label as="legend" column sm={2}>
         Radios
       </Form.Label>
@@ -43,13 +43,13 @@
       </Col>
     </Form.Group>
   </fieldset>
-  <Form.Group as={Row} controlId="formHorizontalCheck">
+  <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
     <Col sm={{ span: 10, offset: 2 }}>
       <Form.Check label="Remember me" />
     </Col>
   </Form.Group>
 
-  <Form.Group as={Row}>
+  <Form.Group as={Row} className="mb-3">
     <Col sm={{ span: 10, offset: 2 }}>
       <Button type="submit">Sign in</Button>
     </Col>

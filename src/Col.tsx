@@ -1,12 +1,9 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type NumberAttr =
   | number
@@ -23,27 +20,25 @@ type NumberAttr =
   | '11'
   | '12';
 
-type ColOrder = 'first' | 'last' | NumberAttr;
+type ColOrderNumber = number | '1' | '2' | '3' | '4' | '5';
+type ColOrder = ColOrderNumber | 'first' | 'last';
 type ColSize = boolean | 'auto' | NumberAttr;
 type ColSpec =
   | ColSize
   | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
 
-export interface ColProps extends BsPrefixPropsWithChildren {
+export interface ColProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   xs?: ColSpec;
   sm?: ColSpec;
   md?: ColSpec;
   lg?: ColSpec;
   xl?: ColSpec;
+  xxl?: ColSpec;
 }
 
-const DEVICE_SIZES = [
-  'xl' as const,
-  'lg' as const,
-  'md' as const,
-  'sm' as const,
-  'xs' as const,
-];
+const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const colSize = PropTypes.oneOfType([
   PropTypes.bool,
   PropTypes.number,
@@ -107,11 +102,21 @@ const propTypes = {
    * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   xl: column,
+
+  /**
+   * The number of columns to span on extra extra large devices (≥1400px)
+   *
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   */
+  xxl: column,
 };
 
-const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef(
+const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
+  HTMLElement,
+  ColProps
+>(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'div', ...props }: ColProps, ref) => {
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
     const spans: string[] = [];
     const classes: string[] = [];

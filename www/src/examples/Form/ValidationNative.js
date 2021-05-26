@@ -13,7 +13,7 @@ function FormExample() {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Row>
+      <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="validationCustom01">
           <Form.Label>First name</Form.Label>
           <Form.Control
@@ -37,9 +37,7 @@ function FormExample() {
         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
           <Form.Label>Username</Form.Label>
           <InputGroup hasValidation>
-            <InputGroup.Prepend>
-              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-            </InputGroup.Prepend>
+            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
             <Form.Control
               type="text"
               placeholder="Username"
@@ -51,8 +49,8 @@ function FormExample() {
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
-      </Form.Row>
-      <Form.Row>
+      </Row>
+      <Row className="mb-3">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>City</Form.Label>
           <Form.Control type="text" placeholder="City" required />
@@ -74,8 +72,8 @@ function FormExample() {
             Please provide a valid zip.
           </Form.Control.Feedback>
         </Form.Group>
-      </Form.Row>
-      <Form.Group>
+      </Row>
+      <Form.Group className="mb-3">
         <Form.Check
           required
           label="Agree to terms and conditions"

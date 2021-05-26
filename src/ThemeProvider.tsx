@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useMemo } from 'react';
+import * as React from 'react';
+import { useContext, useMemo } from 'react';
 
 export interface ThemeProviderProps {
   prefixes: Record<string, unknown>;

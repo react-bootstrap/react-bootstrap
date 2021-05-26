@@ -1,4 +1,4 @@
 <Button variant="primary">
-  Profile <Badge variant="light">9</Badge>
-  <span className="sr-only">unread messages</span>
+  Profile <Badge bg="secondary">9</Badge>
+  <span className="visually-hidden">unread messages</span>
 </Button>;

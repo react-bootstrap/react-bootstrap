@@ -1,20 +1,18 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import all from 'prop-types-extra/lib/all';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-type FormControlElement =
-  | HTMLInputElement
-  | HTMLSelectElement
-  | HTMLTextAreaElement;
+type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
-export interface FormControlProps extends BsPrefixProps {
-  bsCustomPrefix?: string;
+export interface FormControlProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<FormControlElement> {
   htmlSize?: number;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
@@ -22,7 +20,6 @@ export interface FormControlProps extends BsPrefixProps {
   disabled?: boolean;
   value?: string | string[] | number;
   onChange?: React.ChangeEventHandler<FormControlElement>;
-  custom?: boolean;
   type?: string;
   id?: string;
   isValid?: boolean;
@@ -34,13 +31,6 @@ const propTypes = {
    * @default {'form-control'}
    */
   bsPrefix: PropTypes.string,
-
-  /**
-   * A seperate bsPrefix used for custom controls
-   *
-   * @default 'custom'
-   */
-  bsCustomPrefix: PropTypes.string,
 
   /**
    * The FormControl `ref` will be forwarded to the underlying input element,
@@ -61,14 +51,13 @@ const propTypes = {
   /**
    * The size attribute of the underlying HTML element.
    * Specifies the visible width in characters if `as` is `'input'`.
-   * Specifies the number of visible options if `as` is `'select'`.
    */
   htmlSize: PropTypes.number,
 
   /**
    * The underlying HTML element to use when rendering the FormControl.
    *
-   * @type {('input'|'textarea'|'select'|elementType)}
+   * @type {('input'|'textarea'|elementType)}
    */
   as: PropTypes.elementType,
 
@@ -98,18 +87,6 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Use Bootstrap's custom form elements to replace the browser defaults
-   * @type boolean
-   */
-  custom: all(PropTypes.bool, ({ as, type, custom }) =>
-    custom === true && type !== 'range' && as !== 'select'
-      ? Error(
-          '`custom` can only be set to `true` when the input type is `range`, or  `select`',
-        )
-      : null,
-  ),
-
-  /**
    * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
    */
   type: PropTypes.string,
@@ -126,79 +103,64 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormControl: BsPrefixRefForwardingComponent<
-  'input',
-  FormControlProps
-> = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      bsCustomPrefix,
-      type,
-      size,
-      htmlSize,
-      id,
-      className,
-      isValid = false,
-      isInvalid = false,
-      plaintext,
-      readOnly,
-      custom,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'input',
-      ...props
-    }: FormControlProps,
-    ref,
-  ) => {
-    const { controlId } = useContext(FormContext);
-    const [prefix, defaultPrefix] = custom
-      ? [bsCustomPrefix, 'custom']
-      : [bsPrefix, 'form-control'];
+const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
+  React.forwardRef<FormControlElement, FormControlProps>(
+    (
+      {
+        bsPrefix,
+        type,
+        size,
+        htmlSize,
+        id,
+        className,
+        isValid = false,
+        isInvalid = false,
+        plaintext,
+        readOnly,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'input',
+        ...props
+      },
+      ref,
+    ) => {
+      const { controlId } = useContext(FormContext);
 
-    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
 
-    let classes;
-    if (plaintext) {
-      classes = { [`${bsPrefix}-plaintext`]: true };
-    } else if (type === 'file') {
-      classes = { [`${bsPrefix}-file`]: true };
-    } else if (type === 'range') {
-      classes = { [`${bsPrefix}-range`]: true };
-    } else if (Component === 'select' && custom) {
-      classes = {
-        [`${bsPrefix}-select`]: true,
-        [`${bsPrefix}-select-${size}`]: size,
-      };
-    } else {
-      classes = {
-        [bsPrefix]: true,
-        [`${bsPrefix}-${size}`]: size,
-      };
-    }
+      let classes;
+      if (plaintext) {
+        classes = { [`${bsPrefix}-plaintext`]: true };
+      } else {
+        classes = {
+          [bsPrefix]: true,
+          [`${bsPrefix}-${size}`]: size,
+        };
+      }
 
-    warning(
-      controlId == null || !id,
-      '`controlId` is ignored on `<FormControl>` when `id` is specified.',
-    );
+      warning(
+        controlId == null || !id,
+        '`controlId` is ignored on `<FormControl>` when `id` is specified.',
+      );
 
-    return (
-      <Component
-        {...props}
-        type={type}
-        size={htmlSize}
-        ref={ref}
-        readOnly={readOnly}
-        id={id || controlId}
-        className={classNames(
-          className,
-          classes,
-          isValid && `is-valid`,
-          isInvalid && `is-invalid`,
-        )}
-      />
-    );
-  },
-);
+      return (
+        <Component
+          {...props}
+          type={type}
+          size={htmlSize}
+          ref={ref}
+          readOnly={readOnly}
+          id={id || controlId}
+          className={classNames(
+            className,
+            classes,
+            isValid && `is-valid`,
+            isInvalid && `is-invalid`,
+            type === 'color' && `${bsPrefix}-color`,
+          )}
+        />
+      );
+    },
+  );
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;

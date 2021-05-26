@@ -1,6 +1,12 @@
-import React from 'react';
+import * as React from 'react';
+import { SelectCallback } from './helpers';
 
-const context = React.createContext<string | null>(null);
+export interface AccordionContextValue {
+  activeEventKey?: string;
+  onSelect?: SelectCallback;
+}
+
+const context = React.createContext<AccordionContextValue>({});
 context.displayName = 'AccordionContext';
 
 export default context;

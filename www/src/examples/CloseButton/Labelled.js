@@ -1,0 +1,1 @@
+<CloseButton aria-label="Hide" />;

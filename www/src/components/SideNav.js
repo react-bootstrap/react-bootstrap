@@ -1,6 +1,6 @@
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import FormControl from 'react-bootstrap/FormControl';
 
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
 const MenuButton = styled(Button).attrs({ variant: 'link' })`
-  composes: p-0 d-md-none ml-3 from global;
+  composes: p-0 d-md-none ms-3 from global;
 
   line-height: 1;
   color: #212529;
@@ -106,7 +106,7 @@ const gettingStarted = [
   'support',
 ];
 
-const layout = ['grid', 'media'];
+const layout = ['grid'];
 
 const components = [
   'alerts',
@@ -117,16 +117,17 @@ const components = [
   'button-group',
   'cards',
   'carousel',
+  'close-button',
   'dropdowns',
   'figures',
   'forms',
   'input-group',
   'images',
-  'jumbotron',
   'list-group',
   'modal',
   'navs',
   'navbar',
+  'offcanvas',
   'overlays',
   'pagination',
   'popovers',
@@ -138,7 +139,7 @@ const components = [
   'toasts',
 ];
 
-const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
+const utilities = ['transitions', 'ratio', 'react-overlays'];
 
 // We need to configure this
 function attachSearch(ref) {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
@@ -15,6 +15,18 @@ describe('<OverlayTrigger>', () => {
       {children}
     </div>
   ));
+
+  it('should not throw an error with StrictMode', () => {
+    const wrapper = mount(
+      <React.StrictMode>
+        <OverlayTrigger overlay={<Div>test</Div>}>
+          <button type="button">button</button>
+        </OverlayTrigger>
+      </React.StrictMode>,
+    );
+
+    wrapper.find('button').simulate('click');
+  });
 
   it('Should render OverlayTrigger element', () => {
     mount(

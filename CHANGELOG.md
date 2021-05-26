@@ -1,15 +1,87 @@
-# [1.6.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.2...v1.6.0) (2021-05-11)
+# [2.0.0-alpha.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.0...v2.0.0-alpha.2) (2021-05-17)
 
 
 ### Bug Fixes
 
-* **Popover:** fix arrow alignment when running Popper >= 2.84 ([#5774](https://github.com/react-bootstrap/react-bootstrap/issues/5774)) ([da85f30](https://github.com/react-bootstrap/react-bootstrap/commit/da85f30f985870183f09835ac49d0fac075587d6))
-* **types:** fix types for event key ([700e944](https://github.com/react-bootstrap/react-bootstrap/commit/700e944de72072106f1ca50a9b797512dfa95009))
+* **Dropdown:** fix html structure when inside InputGroup ([#5713](https://github.com/react-bootstrap/react-bootstrap/issues/5713)) ([d4b086a](https://github.com/react-bootstrap/react-bootstrap/commit/d4b086aeaaa364410f9200d348a665c7090792f0))
+* **Offcanvas:** fix backdrop class ([#5821](https://github.com/react-bootstrap/react-bootstrap/issues/5821)) ([309f881](https://github.com/react-bootstrap/react-bootstrap/commit/309f88137ccbcf758d574368a22f20bc16d4f539))
 
 
 ### Features
 
-* **Nav:** Add navbarScroll prop ([#5620](https://github.com/react-bootstrap/react-bootstrap/issues/5620)) ([d9c1bb7](https://github.com/react-bootstrap/react-bootstrap/commit/d9c1bb78412e42e6f6add1cc19b83cce48f2830e))
+* **DropdownMenu:** add custom variant support ([#5807](https://github.com/react-bootstrap/react-bootstrap/issues/5807)) ([8c7857a](https://github.com/react-bootstrap/react-bootstrap/commit/8c7857a0f35702986ed32f96b46d8547f06a1d7b))
+* **v5:** Add floating labels ([#5567](https://github.com/react-bootstrap/react-bootstrap/issues/5567)) ([6802774](https://github.com/react-bootstrap/react-bootstrap/commit/6802774ed4754f825063119e5279ae690fe29b56))
+* **v5:** update ResponsiveEmbed to Ratio ([#5714](https://github.com/react-bootstrap/react-bootstrap/issues/5714)) ([91470c2](https://github.com/react-bootstrap/react-bootstrap/commit/91470c2d4cffb66618ebbaf7512d310cff6f544d))
+
+
+* refactor(Dropdown)!: simplify menu alignment API (#5759) ([8a7e095](https://github.com/react-bootstrap/react-bootstrap/commit/8a7e095e8032fdeac4fd1fdb41e6dfb452ae4494)), closes [#5759](https://github.com/react-bootstrap/react-bootstrap/issues/5759)
+
+
+### BREAKING CHANGES
+
+* removes alignRight and menuAlign props in favor of align
+
+
+
+
+
+# [2.0.0-alpha.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* **Nav:** add .card-header-* only if nested in card header ([#5720](https://github.com/react-bootstrap/react-bootstrap/issues/5720)) ([793e857](https://github.com/react-bootstrap/react-bootstrap/commit/793e857f852e5c799a12c203192eb3e1eeda7b33))
+* **types:** fix types for event key ([#5727](https://github.com/react-bootstrap/react-bootstrap/issues/5727)) ([6260997](https://github.com/react-bootstrap/react-bootstrap/commit/62609973722e5769b968eb62913b4f5708df00fc))
+
+
+### Features
+
+* **v5:** add Offcanvas component ([#5738](https://github.com/react-bootstrap/react-bootstrap/issues/5738)) ([0a9eb37](https://github.com/react-bootstrap/react-bootstrap/commit/0a9eb37e86c7430f4bcf02775a380672de8ba19f))
+
+
+
+
+
+# [2.0.0-alpha.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.2...v2.0.0-alpha.0) (2021-03-13)
+
+
+### Bug Fixes
+
+* **DropdownMenu:** use Bootstrap default offsets ([#5662](https://github.com/react-bootstrap/react-bootstrap/issues/5662)) ([f29ad48](https://github.com/react-bootstrap/react-bootstrap/commit/f29ad48432fa799ce0d442be0cdc938c14fde892))
+* **Popover:** use Bootstrap default offsets ([#5663](https://github.com/react-bootstrap/react-bootstrap/issues/5663)) ([ef3cce8](https://github.com/react-bootstrap/react-bootstrap/commit/ef3cce8d38d63d7ad3f119c77e95df2bee58945e))
+* **Toast:** remove margins on close button ([#5707](https://github.com/react-bootstrap/react-bootstrap/issues/5707)) ([9199b49](https://github.com/react-bootstrap/react-bootstrap/commit/9199b498d9cf2d8fb00809cdfeac68ea0ec7f74f))
+* **v5:** Fix form types ([#5350](https://github.com/react-bootstrap/react-bootstrap/issues/5350)) ([835d397](https://github.com/react-bootstrap/react-bootstrap/commit/835d397c10ce0e2bd3e44d7b91edd87371047a71))
+
+
+### Features
+
+* **RTL:** Update margin class in ToastHeader ([07be153](https://github.com/react-bootstrap/react-bootstrap/commit/07be153a5135205414be0dce967d45173f4fe902))
+* **RTL:** Update popover classes, fix placement proptypes ([67bf18d](https://github.com/react-bootstrap/react-bootstrap/commit/67bf18d6af32613a3711a7ff3092745c4a989ef6))
+* **RTL:** Update to new carousel classes ([db5993b](https://github.com/react-bootstrap/react-bootstrap/commit/db5993be55a919614c318de56f1f416fb6629ba8))
+* **RTL:** Update to new dropdown classes ([bd6dcf7](https://github.com/react-bootstrap/react-bootstrap/commit/bd6dcf7d34056b9b3fd0d3aa21dad61f68a1b359))
+* **RTL:** Update tooltip classes ([d87e377](https://github.com/react-bootstrap/react-bootstrap/commit/d87e37711f52fa733e8a088e5e8fd531277e7a25))
+* **v5:** Add Carousel dark variant ([#5464](https://github.com/react-bootstrap/react-bootstrap/issues/5464)) ([ce6230c](https://github.com/react-bootstrap/react-bootstrap/commit/ce6230c22b296f7c122813517bf46ed943edb42d))
+* **v5:** Add FormControl color support ([#5349](https://github.com/react-bootstrap/react-bootstrap/issues/5349)) ([5c5e7ec](https://github.com/react-bootstrap/react-bootstrap/commit/5c5e7ece8063fec91331f36225bff3593d541a80))
+* **v5:** Add row-cols-auto support ([#5366](https://github.com/react-bootstrap/react-bootstrap/issues/5366)) ([457f42f](https://github.com/react-bootstrap/react-bootstrap/commit/457f42fe22397b00e2adae530d5bb877fed14627))
+* **v5:** Add ToastContainer ([#5566](https://github.com/react-bootstrap/react-bootstrap/issues/5566)) ([11763b2](https://github.com/react-bootstrap/react-bootstrap/commit/11763b29cc325f1a5dbb1ee97f5cd33d77b3315c))
+* **v5:** Add XXL support ([#5419](https://github.com/react-bootstrap/react-bootstrap/issues/5419)) ([177922b](https://github.com/react-bootstrap/react-bootstrap/commit/177922bdee26acb9cb3d79a21d42a7d511049719))
+* **v5:** Change Toast default delay to 5000 ([#5570](https://github.com/react-bootstrap/react-bootstrap/issues/5570)) ([c3a98f8](https://github.com/react-bootstrap/react-bootstrap/commit/c3a98f8918e9e0c383a3572870edc71e9398590b))
+* **v5:** Drop block prop from Button ([#5557](https://github.com/react-bootstrap/react-bootstrap/issues/5557)) ([50781e1](https://github.com/react-bootstrap/react-bootstrap/commit/50781e151c7108d049fefa02c2f8c4eeb8a95eb4))
+* **v5:** Drop bsPrefix from FormGroup ([#5362](https://github.com/react-bootstrap/react-bootstrap/issues/5362)) ([091b51e](https://github.com/react-bootstrap/react-bootstrap/commit/091b51ed608f73eff76152b35d6dce1696582412))
+* **v5:** drop bsPrefix support for Form ([b2c0497](https://github.com/react-bootstrap/react-bootstrap/commit/b2c04975afc7f7ad608212b84505404d4abfdfcf))
+* **v5:** drop form inline support ([2113215](https://github.com/react-bootstrap/react-bootstrap/commit/2113215d52308db93a0afe0104eefb63c0eeec1c))
+* **v5:** drop form row support ([e156483](https://github.com/react-bootstrap/react-bootstrap/commit/e156483c069b0fe6fab6380a787ea271f3716322))
+* **v5:** Drop FormFile and related components ([#5523](https://github.com/react-bootstrap/react-bootstrap/issues/5523)) ([d4195da](https://github.com/react-bootstrap/react-bootstrap/commit/d4195da1071edc8f14f0e6da492d92d17051ff70))
+* **v5:** Drop InputGroupPrepend and InputGroupAppend ([#5351](https://github.com/react-bootstrap/react-bootstrap/issues/5351)) ([8e73b63](https://github.com/react-bootstrap/react-bootstrap/commit/8e73b63ea44162a8a8abf48df729c0e1701a7224))
+* **v5:** Drop toggle prop from ButtonGroup ([64b78a5](https://github.com/react-bootstrap/react-bootstrap/commit/64b78a5b02a3e9be99711ffc80c1df0271057b19))
+* **v5:** Refactor ToggleButton ([4daed01](https://github.com/react-bootstrap/react-bootstrap/commit/4daed01ce27c7fa176789cd2f6b691ee3ed5412b))
+* **v5:** rename screen reader classes ([#5665](https://github.com/react-bootstrap/react-bootstrap/issues/5665)) ([907c0b1](https://github.com/react-bootstrap/react-bootstrap/commit/907c0b1787a70b819c2496251a4ee4220399772f))
+* **v5:** Set ColOrder types to max 5 ([#5376](https://github.com/react-bootstrap/react-bootstrap/issues/5376)) ([926c7cf](https://github.com/react-bootstrap/react-bootstrap/commit/926c7cfdad760761deeb58f6b1102d6c600dc4fe))
+* **v5:** Set new arrow class for popover and tooltip ([2ce3e08](https://github.com/react-bootstrap/react-bootstrap/commit/2ce3e089b96a94b380ade38394dfdac292c27b26))
+* **v5:** Update Accordion ([#5517](https://github.com/react-bootstrap/react-bootstrap/issues/5517)) ([5acddf3](https://github.com/react-bootstrap/react-bootstrap/commit/5acddf3af053ba3b72f1ae293f3a15987d26d2c1))
+* **v5:** Update Badge classes ([#5389](https://github.com/react-bootstrap/react-bootstrap/issues/5389)) ([651ae24](https://github.com/react-bootstrap/react-bootstrap/commit/651ae24085a0a63876348295b7636056c92fd04e))
+* **v5:** Update CloseButton ([#5460](https://github.com/react-bootstrap/react-bootstrap/issues/5460)) ([52e8541](https://github.com/react-bootstrap/react-bootstrap/commit/52e854188042626ed7156766b8df855081706923)), closes [#5474](https://github.com/react-bootstrap/react-bootstrap/issues/5474)
+* **v5:** Update dropdown ([#5471](https://github.com/react-bootstrap/react-bootstrap/issues/5471)) ([f728394](https://github.com/react-bootstrap/react-bootstrap/commit/f728394450178092e9365773c69214188b09fe6a))
 
 
 

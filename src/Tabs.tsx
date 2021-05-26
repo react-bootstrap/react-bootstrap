@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
@@ -15,7 +15,8 @@ import { forEach, map } from './ElementChildren';
 import { SelectCallback, TransitionType } from './helpers';
 import { EventKey } from './types';
 
-export interface TabsProps extends React.PropsWithChildren<unknown> {
+export interface TabsProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   activeKey?: EventKey;
   defaultActiveKey?: EventKey;
   onSelect?: SelectCallback;
@@ -113,14 +114,17 @@ function renderTab(child) {
   }
 
   return (
-    <NavItem
-      as={NavLink}
-      eventKey={eventKey}
-      disabled={disabled}
-      id={id}
-      className={tabClassName}
-    >
-      {title}
+    <NavItem as="li" role="presentation">
+      <NavLink
+        as="button"
+        type="button"
+        eventKey={eventKey}
+        disabled={disabled}
+        id={id}
+        className={tabClassName}
+      >
+        {title}
+      </NavLink>
     </NavItem>
   );
 }
@@ -148,7 +152,7 @@ const Tabs = (props: TabsProps) => {
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
-      <Nav {...controlledProps} role="tablist" as="nav">
+      <Nav {...controlledProps} role="tablist" as="ul">
         {map(children, renderTab)}
       </Nav>
 
@@ -167,8 +171,8 @@ const Tabs = (props: TabsProps) => {
   );
 };
 
-Tabs.propTypes = propTypes as any;
-Tabs.defaultProps = defaultProps as any;
+Tabs.propTypes = propTypes;
+Tabs.defaultProps = defaultProps;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

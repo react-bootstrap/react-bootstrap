@@ -1,20 +1,18 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown, { DropdownProps } from './Dropdown';
-import { alignPropType, AlignType } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
-import { BsPrefixPropsWithChildren } from './helpers';
+import { BsPrefixProps } from './helpers';
+import { alignPropType } from './types';
 
 export interface SplitButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title' | 'id'>,
+  extends Omit<DropdownProps, 'title' | 'id'>,
     PropsFromToggle,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   id: string | number;
-  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -56,13 +54,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively.
+   * Aligns the dropdown menu.
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  menuAlign: alignPropType,
+  align: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -114,7 +112,6 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       onClick,
       href,
       target,
-      menuAlign,
       menuRole,
       renderMenuOnMount,
       rootCloseEvent,
@@ -143,11 +140,10 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
         disabled={props.disabled}
         childBsPrefix={bsPrefix}
       >
-        <span className="sr-only">{toggleLabel}</span>
+        <span className="visually-hidden">{toggleLabel}</span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}

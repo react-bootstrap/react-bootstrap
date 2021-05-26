@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Button from '../src/Button';
@@ -84,10 +84,6 @@ describe('<Button>', () => {
         Title
       </Button>,
     ).assertSingle(`a.disabled`);
-  });
-
-  it('Should have block class', () => {
-    mount(<Button block>Title</Button>).assertSingle(`.btn-block`);
   });
 
   it('Should apply variant class', () => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import DropdownItem from '../src/DropdownItem';
@@ -68,5 +67,18 @@ describe('<NavDropdown>', () => {
     );
 
     wrapper.assertSingle('li.nav-item');
+  });
+
+  it('passes menuVariant to dropdown menu', () => {
+    const wrapper = mount(
+      <NavDropdown title="blah" menuVariant="dark" id="test">
+        <DropdownItem>Item 1</DropdownItem>
+      </NavDropdown>,
+    );
+
+    expect(wrapper.find('DropdownMenu').props()).to.have.property(
+      'variant',
+      'dark',
+    );
   });
 });

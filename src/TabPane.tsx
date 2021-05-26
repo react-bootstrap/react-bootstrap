@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -14,15 +15,16 @@ import {
 } from './helpers';
 import { EventKey } from './types';
 
-export interface TabPaneProps extends TransitionCallbacks, BsPrefixProps {
+export interface TabPaneProps
+  extends TransitionCallbacks,
+    BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   eventKey?: EventKey;
   active?: boolean;
   transition?: TransitionType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
-
-type TabPane = BsPrefixRefForwardingComponent<'div', TabPaneProps>;
 
 const propTypes = {
   /**
@@ -125,67 +127,68 @@ function useTabContext(props: TabPaneProps) {
   };
 }
 
-const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
-  const {
-    bsPrefix,
-    className,
-    active,
-    onEnter,
-    onEntering,
-    onEntered,
-    onExit,
-    onExiting,
-    onExited,
-    mountOnEnter,
-    unmountOnExit,
-    transition: Transition,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'div',
-    eventKey: _,
-    ...rest
-  } = useTabContext(props);
+const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
+  React.forwardRef<HTMLElement, TabPaneProps>((props, ref) => {
+    const {
+      bsPrefix,
+      className,
+      active,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      mountOnEnter,
+      unmountOnExit,
+      transition: Transition,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      eventKey: _,
+      ...rest
+    } = useTabContext(props);
 
-  const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
+    const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
 
-  if (!active && !Transition && unmountOnExit) return null;
+    if (!active && !Transition && unmountOnExit) return null;
 
-  let pane = (
-    <Component
-      {...rest}
-      ref={ref}
-      role="tabpanel"
-      aria-hidden={!active}
-      className={classNames(className, prefix, { active })}
-    />
-  );
-
-  if (Transition)
-    pane = (
-      <Transition
-        in={active}
-        onEnter={onEnter}
-        onEntering={onEntering}
-        onEntered={onEntered}
-        onExit={onExit}
-        onExiting={onExiting}
-        onExited={onExited}
-        mountOnEnter={mountOnEnter}
-        unmountOnExit={unmountOnExit}
-      >
-        {pane}
-      </Transition>
+    let pane = (
+      <Component
+        {...rest}
+        ref={ref}
+        role="tabpanel"
+        aria-hidden={!active}
+        className={classNames(className, prefix, { active })}
+      />
     );
 
-  // We provide an empty the TabContext so `<Nav>`s in `<TabPane>`s don't
-  // conflict with the top level one.
-  return (
-    <TabContext.Provider value={null}>
-      <SelectableContext.Provider value={null}>
-        {pane}
-      </SelectableContext.Provider>
-    </TabContext.Provider>
-  );
-});
+    if (Transition)
+      pane = (
+        <Transition
+          in={active}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={onExited}
+          mountOnEnter={mountOnEnter}
+          unmountOnExit={unmountOnExit}
+        >
+          {pane}
+        </Transition>
+      );
+
+    // We provide an empty the TabContext so `<Nav>`s in `<TabPane>`s don't
+    // conflict with the top level one.
+    return (
+      <TabContext.Provider value={null}>
+        <SelectableContext.Provider value={null}>
+          {pane}
+        </SelectableContext.Provider>
+      </TabContext.Provider>
+    );
+  });
 
 TabPane.displayName = 'TabPane';
 TabPane.propTypes = propTypes;

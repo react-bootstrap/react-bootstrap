@@ -1,5 +1,5 @@
 function CustomToggle({ children, eventKey }) {
-  const decoratedOnClick = useAccordionToggle(eventKey, () =>
+  const decoratedOnClick = useAccordionButton(eventKey, () =>
     console.log('totally custom!'),
   );
 

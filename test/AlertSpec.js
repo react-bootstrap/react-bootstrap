@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Alert from '../src/Alert';
@@ -83,6 +83,18 @@ describe('<Alert>', () => {
       </Alert>,
     );
     expect(wrapper.isEmptyRender()).to.be.true;
+  });
+
+  it('should render close button variant', () => {
+    const wrapper = mount(
+      <Alert dismissible closeVariant="white">
+        Message
+      </Alert>,
+    );
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
   });
 
   describe('Web Accessibility', () => {

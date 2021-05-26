@@ -1,4 +1,3 @@
-import React from 'react';
 import Anchor from './Anchor';
 import Heading from './Heading';
 

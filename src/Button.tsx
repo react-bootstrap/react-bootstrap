@@ -1,22 +1,18 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { ButtonVariant } from './types';
 
 export type ButtonType = 'button' | 'reset' | 'submit' | string;
 
 export interface ButtonProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   active?: boolean;
-  block?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
   type?: ButtonType;
@@ -25,7 +21,6 @@ export interface ButtonProps
   target?: any;
 }
 
-type Button = BsPrefixRefForwardingComponent<'button', ButtonProps>;
 export type CommonButtonProps = 'href' | 'size' | 'variant' | 'disabled';
 
 const propTypes = {
@@ -53,9 +48,6 @@ const propTypes = {
    * @type ('sm'|'lg')
    */
   size: PropTypes.string,
-
-  /** Spans the full width of the Button parent */
-  block: PropTypes.bool,
 
   /** Manually set the visual state of the button to `:active` */
   active: PropTypes.bool,
@@ -85,57 +77,41 @@ const defaultProps = {
   disabled: false,
 };
 
-const Button: Button = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      variant,
-      size,
-      active,
-      className,
-      block,
-      type,
-      as,
-      ...props
-    }: ButtonProps,
-    ref,
-  ) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'btn');
+const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
+  React.forwardRef<HTMLButtonElement, ButtonProps>(
+    (
+      { bsPrefix, variant, size, active, className, type, as, ...props },
+      ref,
+    ) => {
+      const prefix = useBootstrapPrefix(bsPrefix, 'btn');
 
-    const classes = classNames(
-      className,
-      prefix,
-      active && 'active',
-      variant && `${prefix}-${variant}`,
-      block && `${prefix}-block`,
-      size && `${prefix}-${size}`,
-    );
-
-    if (props.href) {
-      return (
-        <SafeAnchor
-          {...props}
-          as={as}
-          ref={ref}
-          className={classNames(classes, props.disabled && 'disabled')}
-        />
+      const classes = classNames(
+        className,
+        prefix,
+        active && 'active',
+        variant && `${prefix}-${variant}`,
+        size && `${prefix}-${size}`,
       );
-    }
 
-    if (ref) {
-      (props as any).ref = ref;
-    }
+      if (props.href) {
+        return (
+          <SafeAnchor
+            {...props}
+            as={as}
+            ref={ref}
+            className={classNames(classes, props.disabled && 'disabled')}
+          />
+        );
+      }
 
-    if (type) {
-      (props as any).type = type;
-    } else if (!as) {
-      (props as any).type = 'button';
-    }
+      if (!type && !as) {
+        type = 'button';
+      }
 
-    const Component = as || 'button';
-    return <Component {...props} className={classes} />;
-  },
-);
+      const Component = as || 'button';
+      return <Component {...props} ref={ref} type={type} className={classes} />;
+    },
+  );
 
 Button.displayName = 'Button';
 Button.propTypes = propTypes;

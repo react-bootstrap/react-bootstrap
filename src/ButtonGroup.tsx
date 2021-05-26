@@ -1,21 +1,16 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ButtonGroupProps extends BsPrefixPropsWithChildren {
-  role?: string;
+export interface ButtonGroupProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   size?: 'sm' | 'lg';
-  toggle?: boolean;
   vertical?: boolean;
 }
-
-type ButtonGroup = BsPrefixRefForwardingComponent<'div', ButtonGroupProps>;
 
 const propTypes = {
   /**
@@ -34,13 +29,6 @@ const propTypes = {
   vertical: PropTypes.bool,
 
   /**
-   * Display as a button toggle group.
-   *
-   * (Generally it's better to use `ToggleButtonGroup` directly)
-   */
-  toggle: PropTypes.bool,
-
-  /**
    * An ARIA role describing the button group. Usually the default
    * "group" role is fine. An `aria-label` or `aria-labelledby`
    * prop is also recommended.
@@ -52,43 +40,41 @@ const propTypes = {
 
 const defaultProps = {
   vertical: false,
-  toggle: false,
   role: 'group',
 };
 
-const ButtonGroup: ButtonGroup = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      size,
-      toggle,
-      vertical,
-      className,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      ...rest
-    }: ButtonGroupProps,
-    ref,
-  ) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
-    let baseClass = prefix;
+const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
+  React.forwardRef(
+    (
+      {
+        bsPrefix,
+        size,
+        vertical,
+        className,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        ...rest
+      }: ButtonGroupProps,
+      ref,
+    ) => {
+      const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
+      let baseClass = prefix;
 
-    if (vertical) baseClass = `${prefix}-vertical`;
+      if (vertical) baseClass = `${prefix}-vertical`;
 
-    return (
-      <Component
-        {...rest}
-        ref={ref}
-        className={classNames(
-          className,
-          baseClass,
-          size && `${prefix}-${size}`,
-          toggle && `${prefix}-toggle`,
-        )}
-      />
-    );
-  },
-);
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={classNames(
+            className,
+            baseClass,
+            size && `${prefix}-${size}`,
+          )}
+        />
+      );
+    },
+  );
 
 ButtonGroup.displayName = 'ButtonGroup';
 ButtonGroup.propTypes = propTypes;

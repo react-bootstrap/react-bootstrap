@@ -1,25 +1,26 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
-import CloseButton from './CloseButton';
+import CloseButton, { CloseButtonVariant } from './CloseButton';
 import { Variant } from './types';
 import divWithClassName from './divWithClassName';
 import createWithBsPrefix from './createWithBsPrefix';
 import SafeAnchor from './SafeAnchor';
 import { TransitionType } from './helpers';
 
-export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   bsPrefix?: string;
   variant?: Variant;
   dismissible?: boolean;
   show?: boolean;
   onClose?: (a: any, b: any) => void;
   closeLabel?: string;
+  closeVariant?: CloseButtonVariant;
   transition?: TransitionType;
 }
 
@@ -33,11 +34,6 @@ const AlertHeading = createWithBsPrefix('alert-heading', {
 const AlertLink = createWithBsPrefix('alert-link', {
   Component: SafeAnchor,
 });
-
-type Alert = React.ForwardRefExoticComponent<AlertProps> & {
-  Link: typeof AlertLink;
-  Heading: typeof AlertHeading;
-};
 
 const propTypes = {
   /**
@@ -78,6 +74,11 @@ const propTypes = {
   closeLabel: PropTypes.string,
 
   /**
+   * Sets the variant for close button.
+   */
+  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
+
+  /**
    * Animate the alert dismissal. Defaults to using `<Fade>` animation or use
    * `false` to disable. A custom `react-transition-group` Transition can also
    * be provided.
@@ -91,12 +92,13 @@ const defaultProps = {
   closeLabel: 'Close alert',
 };
 
-const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (uncontrolledProps: AlertProps, ref) => {
     const {
       bsPrefix,
       show,
       closeLabel,
+      closeVariant,
       className,
       children,
       variant,
@@ -128,7 +130,11 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
         )}
       >
         {dismissible && (
-          <CloseButton onClick={handleClose} label={closeLabel} />
+          <CloseButton
+            onClick={handleClose}
+            aria-label={closeLabel}
+            variant={closeVariant}
+          />
         )}
         {children}
       </div>
@@ -142,12 +148,13 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
       </Transition>
     );
   },
-) as unknown) as Alert;
+);
 
 Alert.displayName = 'Alert';
-Alert.defaultProps = defaultProps as any;
+Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
-Alert.Link = AlertLink;
-Alert.Heading = AlertHeading;
 
-export default Alert;
+export default Object.assign(Alert, {
+  Link: AlertLink,
+  Heading: AlertHeading,
+});

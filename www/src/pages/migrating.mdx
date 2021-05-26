@@ -1,11 +1,11 @@
-# Migrating to v1
+# Migrating to v2
 
-React Bootstrap v1 adds full compatibility with Bootstrap 4. Because bootstrap 4 is a major rewrite of the project there
-are significant breaking changes from the pre `v1` react-bootstrap.
+React-Bootstrap v2 adds full compatibility with Bootstrap 5. Because Bootstrap 5 is a major rewrite of the project, there
+are significant breaking changes from React-Bootstrap v1.
 
 **PLEASE FIRST READ THE UPSTREAM BOOSTRAP MIGRATION GUIDE**
 
-> https://getbootstrap.com/docs/4.3/migration/
+> https://v5.getbootstrap.com/docs/5.0/migration
 
 React-Bootstrap _only_ contains components that are present in vanilla Bootstrap. If functionality
 was removed from Bootstrap, then it was also removed from React-Bootstrap. This guide does not
@@ -14,132 +14,126 @@ API changes and additions.
 
 ## Versioning
 
-We will continue to provide general maintenance for Bootstrap 3 components, because there are many projects that continue to depend on Bootstrap 3 support in
+We will continue to provide general maintenance for Bootstrap 4 components, because there are many projects that continue to depend on Bootstrap 4 support in
 `react-bootstrap`. `react-bootstrap` package versions will be as follows:
 
 - Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
 - Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
+- Bootstrap 5 support will be in react-bootstrap versions >= `v2.0.0`
 
 We are **not** committing to keeping breaking changes in lockstep with bootstraps major releases,
-there may be a react-bootstrap v2 targeting Bootstrap v4 depending on what's best for the project.
+there may be a React-Bootstrap v3 targeting Bootstrap 6 depending on what's best for the project.
 
-## Summary of breaking changes from v0.32.0
+## Summary of breaking changes from v1.x
 
 Below is a _rough_ account of the breaking API changes as well as the minimal change to migrate
 
-- `bsStyle` -> `variant`
-- `bsClass` -> `bsPrefix`
-- `bsRole` has been removed from all components. Components now communicate
-  via context to allow intermediate nesting of child components
-- `componentClass` -> `as`
-- All utils have been removed from main exports, most were internal already and the rest have been moved to external libraries
+### General
 
-### Grid
+- React >= 16.14.0 is now required to support the new JSX transform
 
-- renamed to Container
-- removed Clearfix
+### Accordion
 
-#### Col
+- accordion is no longer card-based and has been rewritten with different markup.
+- `AccordionContext`'s value interface has changed.
+- `AccordionToggle` has been renamed to `AccordionButton`.
+- `useAccordionToggle` has been renamed to `useAccordionButton`.
 
-- removed visibility props
-- consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.
+### ButtonGroup
 
-### Navbar
+- removed `toggle`.
 
-- removed `Navbar.Header`
-- removed `Navbar.Form`
-- removed `fluid`, use your own `Container` component in.
-- `inverse` removed and replaced with `variant="dark"`
-- positioning props have been consolidated into `fixed={top|bottom}` and `sticky={top|bottom}`, staticTop has been removed
+### CloseButton
 
-#### NavbarHeader
+- Removed `label` prop in favor of `aria-label`.
+- Added `variant` prop.
 
-- removed, not present in v4
+### Col
 
-#### NavbarToggle
+- `ColOrder` is now maximum 5 instead of 12.
 
-- name changed to `Navbar.Toggle`
+### Dropdown
+- dropdown dividers use `hr` by default instead of `div`.
+- Alignment values `left` and `right` changed to `start` and `end` respectively.
+- Removed `alignRight`. Use `align="end"` instead.
 
-#### NavbarBrand
+### DropdownButton
+- Removed `menuAlign` prop in favor of `align`.
 
-- Renders a `<a>` when an `href` is provided
-- The presence of `children` does not skip the wrapping `span`, use `as` along with `children` for custom rendering
+### DropdownMenu
+- Removed `alignRight`. Use `align="end"` instead.
 
-### Nav
+### Form
 
-- `activeHref` is removed (only activeKey now)
-- `bsStyle` renamed to `variant`
-- NavLink hrefs will be used as `eventKey`s when `eventKey` is absent
-- Local `onSelect` handlers are ignored when in the context of a TabContainer or Navbar (MAYBE ADD BACK?)
+- removed `inline`.
+- removed `bsPrefix`.
 
-#### Nav.Item
+### FormCheck
 
-- Renders _only_ the outer "item" element, use inconjunction with the new `NavLink` component
-- default element changed to `<div>` from a `<li>`
-- `active` prop removed and moved to `NavLink`
+- removed `bsCustomPrefix` and `custom` in favor of `bsSwitchPrefix`.
+
+#### FormCheckInput
+
+- removed `bsCustomPrefix`.
+- removed `isStatic`.
+
+#### FormCheckLabel
+
+- removed `bsCustomPrefix`.
+- changed base class from `form-check-input` to `form-check-label`.
+
+### FormControl
+
+- dropped `as` prop supporting `select` tags in favor of FormSelect.
+- removed `custom`.
+- removed `bsCustomPrefix`.
+- dropped support for `type` supporting the `range` value in favor of FormRange.
+- add color picker
+
+### FormFile
+
+- dropped all file-related components. Use `<Form.Control type="file" />` instead.
+
+### FormGroup
+
+- removed `bsPrefix`. The `.form-group` class is no longer supported in Bootstrap, 
+but this component is useful for passing `controlId` to labels and inputs. To handle
+spacing, use margin utilities instead.
+
+### FormRow
+
+- removed. Use `Row` instead.
 
 ### InputGroup
 
-- removed InputGroup.Button, and InputGroup.Addon
-- added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
+- dropped `InputGroupPrepend` and `InputGroupAppend`. Buttons and `InputGroupText` can now be added as direct children.
 
-### Badge & Label
+### Popover
 
-- removed `Label`, the `Badge` component covers both
-- `bsStyle` renamed to `variant`
+- renamed `content` prop to `body` to coincide with PopoverContent component name change.
 
-### Panel
+### PopoverContent
 
-- removed, replaced with Card components
+- renamed to PopoverBody to match class name.
 
-### Dropdown
+### PopoverTitle
 
-- Removed the `disabled` prop on Dropdown, pass it directly to Dropdown.Toggle
-- Removed bsRole, use function children to render custom Toggles or Menus
-- Removed SplitButton.toggle (replaced with a `split` prop on the basic Toggle)
-- `noCaret` is removed because it's not optional with the styles anymore
-- bsPrefixes are not passed from the parent Dropdown anymore
-- onSelect behavior is now passed to Menu and Toggle via the Context api
-- DropdownMenu is not rendered until opened
-- `divider` has been split out into `Dropdown.Divider`
-- `header` has been split out into `Dropdown.Header`
+- renamed to PopoverHeader to match class name.
 
-#### DropdownButton
+### ResponsiveEmbed
 
-- Extra props are passed to the underlying Dropdown component, not the Toggle.
+- renamed to Ratio.
+- aspectRatio options changed to '1x1' | '4x3' | '16x9' | '21x9'.
 
-#### SplitButton
+### SplitButton
 
-- Extra props are passed to the underlying Dropdown component, not the Toggle.
+- Removed `menuAlign` prop in favor of `align`. 
 
-### NavButton
+### Toast
 
-- Extra props are passed to the underlying Dropdown component, not the Toggle.
+- `delay` is now default 5000 ms.
 
-#### MenuItem
+### ToggleButton
 
-- renamed to `DropdownItem` (also exported on `Dropdown` as `Dropdown.Item`)
-
-### Alert
-
-- `onDismiss` renamed to `onClose`
-
-### Well
-
-- removed.
-
-### Pager
-
-- removed.
-
-### ControlLabel
-
-- renamed to `FormLabel` (also exported on `Form` as `Form.Label`)
-
-### Checkbox and Radio
-
-- Consolidated into a single component. Component's name is `FormCheck` (also exported on `Form` as `Form.Check`)
-
-### Glyphicon
-
-- Removed -- icons are not included in Bootstrap 4. Icon support can be provided via react-icons, fontawesome, or a similar external library.
+- add `bsPrefix`.
+- `id` is now required. This is to allow toggling of the input due to markup changes in Bootstrap.

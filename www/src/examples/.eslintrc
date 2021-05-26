@@ -38,10 +38,8 @@
     "Image": false,
     "Figure": false,
     "InputGroup": false,
-    "Jumbotron": false,
     "ListGroup": false,
     "ListGroupItem": false,
-    "Media": false,
     "DropdownItem": false,
     "Modal": false,
     "Nav": false,
@@ -57,7 +55,7 @@
     "Popover": false,
     "ProgressBar": false,
     "Radio": false,
-    "ResponsiveEmbed": false,
+    "Ratio": false,
     "Row": false,
     "SplitButton": false,
     "Tab": false,
@@ -70,7 +68,7 @@
 
     "ThemeProvider": false,
 
-    "useAccordionToggle": false,
+    "useAccordionButton": false,
     "AccordionContext": false,
 
     "mountNode": false,

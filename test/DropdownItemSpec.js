@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import Button from '../src/Button';
@@ -7,7 +6,7 @@ import Dropdown from '../src/Dropdown';
 describe('<Dropdown.Item>', () => {
   it('renders divider', () => {
     mount(<Dropdown.Divider />).assertSingle(
-      'div.dropdown-divider[role="separator"]',
+      'hr.dropdown-divider[role="separator"]',
     );
   });
 

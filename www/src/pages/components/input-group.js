@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';
@@ -10,6 +9,7 @@ import Buttons from '../../examples/InputGroup/Buttons';
 import Checkboxes from '../../examples/InputGroup/Checkboxes';
 import MultipleAddons from '../../examples/InputGroup/MultipleAddons';
 import MultipleInputs from '../../examples/InputGroup/MultipleInputs';
+import SegmentedButtonDropdowns from '../../examples/InputGroup/SegmentedButtonDropdowns';
 import Sizes from '../../examples/InputGroup/Sizes';
 import withLayout from '../../withLayout';
 
@@ -54,7 +54,10 @@ export default withLayout(function InputGroupSection({ data }) {
       <LinkedHeading h="2" id="input-group-multiple-addons">
         Multiple addons
       </LinkedHeading>
-      <p>Multiple add-ons are supported and can be mixed</p>
+      <p>
+        Multiple add-ons are supported and can be mixed with checkbox and radio
+        input versions.
+      </p>
       <ReactPlayground codeText={MultipleAddons} />
 
       <LinkedHeading h="2" id="input-group-buttons">
@@ -65,6 +68,11 @@ export default withLayout(function InputGroupSection({ data }) {
         Buttons with Dropdowns
       </LinkedHeading>
       <ReactPlayground codeText={ButtonDropdowns} />
+
+      <LinkedHeading h="2" id="input-group-segmented-buttons">
+        Segmented buttons
+      </LinkedHeading>
+      <ReactPlayground codeText={SegmentedButtonDropdowns} />
 
       <LinkedHeading h="2" id="input-group-api">
         API

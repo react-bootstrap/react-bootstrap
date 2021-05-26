@@ -1,7 +1,6 @@
 <>
   <InputGroup className="mb-3">
     <DropdownButton
-      as={InputGroup.Prepend}
       variant="outline-secondary"
       title="Dropdown"
       id="input-group-dropdown-1"
@@ -12,21 +11,44 @@
       <Dropdown.Divider />
       <Dropdown.Item href="#">Separated link</Dropdown.Item>
     </DropdownButton>
-    <FormControl aria-describedby="basic-addon1" />
+    <FormControl aria-label="Text input with dropdown button" />
   </InputGroup>
 
-  <InputGroup>
-    <FormControl
-      placeholder="Recipient's username"
-      aria-label="Recipient's username"
-      aria-describedby="basic-addon2"
-    />
+  <InputGroup className="mb-3">
+    <FormControl aria-label="Text input with dropdown button" />
 
     <DropdownButton
-      as={InputGroup.Append}
       variant="outline-secondary"
       title="Dropdown"
       id="input-group-dropdown-2"
+      align="end"
+    >
+      <Dropdown.Item href="#">Action</Dropdown.Item>
+      <Dropdown.Item href="#">Another action</Dropdown.Item>
+      <Dropdown.Item href="#">Something else here</Dropdown.Item>
+      <Dropdown.Divider />
+      <Dropdown.Item href="#">Separated link</Dropdown.Item>
+    </DropdownButton>
+  </InputGroup>
+
+  <InputGroup>
+    <DropdownButton
+      variant="outline-secondary"
+      title="Dropdown"
+      id="input-group-dropdown-3"
+    >
+      <Dropdown.Item href="#">Action</Dropdown.Item>
+      <Dropdown.Item href="#">Another action</Dropdown.Item>
+      <Dropdown.Item href="#">Something else here</Dropdown.Item>
+      <Dropdown.Divider />
+      <Dropdown.Item href="#">Separated link</Dropdown.Item>
+    </DropdownButton>
+    <FormControl aria-label="Text input with 2 dropdown buttons" />
+    <DropdownButton
+      variant="outline-secondary"
+      title="Dropdown"
+      id="input-group-dropdown-4"
+      align="end"
     >
       <Dropdown.Item href="#">Action</Dropdown.Item>
       <Dropdown.Item href="#">Another action</Dropdown.Item>

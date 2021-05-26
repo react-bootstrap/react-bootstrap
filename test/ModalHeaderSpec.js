@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import Modal from '../src/Modal';
@@ -23,5 +22,13 @@ describe('Modal.Header', () => {
       .simulate('click');
 
     expect(onHideSpy).to.have.been.called;
+  });
+
+  it('should render close button variant', () => {
+    const wrapper = mount(<Modal.Header closeButton closeVariant="white" />);
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
   });
 });
