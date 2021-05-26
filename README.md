@@ -15,6 +15,10 @@ See the [documentation][documentation] with live editable examples and API docum
 
 To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap.github.io) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
 
+### Migrating from Bootstrap 4 to Bootstrap 5
+
+If you would like to update React-Bootstrap within an existing project to use Bootstrap 5, please read our docs for **[migrating to React-Bootstrap V2](https://github.com/react-bootstrap/react-bootstrap/blob/master/www/src/pages/migrating.mdx)**.
+
 ### Migrating from Bootstrap 3 to Bootstrap 4
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.github.io/migrating/)**.
@@ -48,7 +52,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap.github.io/
+[documentation]: https://react-bootstrap-v5.netlify.app/
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
