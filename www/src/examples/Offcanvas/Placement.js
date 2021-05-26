@@ -25,7 +25,7 @@ function OffCanvasExample({ name, ...props }) {
 function Example() {
   return (
     <>
-      {['start', 'end', 'bottom'].map((placement, idx) => (
+      {['start', 'end', 'top', 'bottom'].map((placement, idx) => (
         <OffCanvasExample key={idx} placement={placement} name={placement} />
       ))}
     </>

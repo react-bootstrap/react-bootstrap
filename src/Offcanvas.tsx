@@ -19,7 +19,7 @@ import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-export type OffcanvasPlacement = 'start' | 'end' | 'bottom';
+export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
 export interface OffcanvasProps
   extends Omit<
@@ -66,7 +66,12 @@ const propTypes = {
   /**
    * Which side of the viewport the offcanvas will appear from.
    */
-  placement: PropTypes.oneOf<OffcanvasPlacement>(['start', 'end', 'bottom']),
+   placement: PropTypes.oneOf<OffcanvasPlacement>([
+    'start',
+    'end',
+    'top',
+    'bottom',
+  ]),
 
   /**
    * When `true` The offcanvas will automatically shift focus to itself when it
