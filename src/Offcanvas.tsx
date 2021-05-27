@@ -66,7 +66,7 @@ const propTypes = {
   /**
    * Which side of the viewport the offcanvas will appear from.
    */
-   placement: PropTypes.oneOf<OffcanvasPlacement>([
+  placement: PropTypes.oneOf<OffcanvasPlacement>([
     'start',
     'end',
     'top',
