@@ -276,6 +276,28 @@ describe('<Modal>', () => {
     );
   });
 
+  it('should call `transitionend` before `exited`', (done) => {
+    const increment = sinon.spy();
+    let modal;
+
+    const instance = mount(
+      <Modal
+        show
+        style={{ transition: 'opacity 1s linear' }}
+        onExited={() => {
+          expect(increment.callCount).to.equal(1);
+          modal.removeEventListener('transitionend', increment);
+          done();
+        }}
+      >
+        <strong>Message</strong>
+      </Modal>,
+    );
+    modal = instance.find('.modal').getDOMNode();
+    modal.addEventListener('transitionend', increment);
+    instance.setProps({ show: false });
+  });
+
   describe('cleanup', () => {
     let offSpy;
 
