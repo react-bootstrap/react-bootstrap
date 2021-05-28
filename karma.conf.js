@@ -1,10 +1,10 @@
-const { DefinePlugin } = require('webpack');
+const { DefinePlugin, ProvidePlugin } = require('webpack');
 
 module.exports = (config) => {
   const { env } = process;
 
   config.set({
-    frameworks: ['mocha', 'sinon-chai'],
+    frameworks: ['mocha', 'webpack', 'sinon-chai'],
 
     files: ['test/index.js'],
 
@@ -32,21 +32,23 @@ module.exports = (config) => {
       resolve: {
         symlinks: false,
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        // for Enzyme/Cheerio
-        fallback: { stream: require.resolve('stream-browserify') },
+        fallback: {
+          util: require.resolve('util/'),
+          // for Enzyme/Cheerio
+          stream: require.resolve('stream-browserify'),
+        },
       },
       plugins: [
         new DefinePlugin({
           __DEV__: true,
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
+        new ProvidePlugin({
+          process: 'process/browser',
+        }),
       ],
       devtool: 'inline-cheap-module-source-map',
       stats: 'minimal',
-    },
-
-    webpackMiddleware: {
-      noInfo: true,
     },
 
     reporters: ['mocha', 'coverage'],
