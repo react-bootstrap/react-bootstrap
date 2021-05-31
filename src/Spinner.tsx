@@ -10,7 +10,6 @@ export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,
     BsPrefixProps {
   animation: 'border' | 'grow';
-  role?: string;
   size?: 'sm';
   variant?: Variant;
 }
