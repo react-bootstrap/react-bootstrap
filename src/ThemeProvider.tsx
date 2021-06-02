@@ -2,29 +2,49 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
 
-export interface ThemeProviderProps {
-  prefixes: Record<string, unknown>;
+export interface ThemeContextValue {
+  prefixes: Record<string, string>;
+  dir?: string;
 }
 
-const ThemeContext = React.createContext({});
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ThemeProviderProps extends Partial<ThemeContextValue> {}
+
+const ThemeContext = React.createContext<ThemeContextValue>({ prefixes: {} });
 const { Consumer, Provider } = ThemeContext;
 
-function ThemeProvider({ prefixes, children }) {
-  const copiedPrefixes = useMemo(() => ({ ...prefixes }), [prefixes]);
+const ThemeProvider: React.FC<Partial<ThemeContextValue>> = ({
+  prefixes = {},
+  dir,
+  children,
+}) => {
+  const contextValue = useMemo(
+    () => ({
+      prefixes: { ...prefixes },
+      dir,
+    }),
+    [prefixes, dir],
+  );
 
-  return <Provider value={copiedPrefixes}>{children}</Provider>;
-}
+  return <Provider value={contextValue}>{children}</Provider>;
+};
 
 ThemeProvider.propTypes = {
-  prefixes: PropTypes.object.isRequired,
-};
+  prefixes: PropTypes.object,
+  dir: PropTypes.string,
+} as any;
 
 export function useBootstrapPrefix(
   prefix: string | undefined,
   defaultPrefix: string,
 ): string {
-  const prefixes = useContext(ThemeContext);
+  const { prefixes } = useContext(ThemeContext);
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
+}
+
+export function useRTL() {
+  const { dir } = useContext(ThemeContext);
+  return dir === 'rtl';
 }
 
 function createBootstrapComponent(Component, opts) {

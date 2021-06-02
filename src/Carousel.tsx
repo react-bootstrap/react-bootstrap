@@ -19,7 +19,7 @@ import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useRTL } from './ThemeProvider';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
@@ -253,6 +253,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
     });
 
     const prefix = useBootstrapPrefix(bsPrefix, 'carousel');
+    const isRTL = useRTL();
 
     const nextDirectionRef = useRef<string | null>(null);
     const [direction, setDirection] = useState('next');
@@ -299,7 +300,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
     const activeChildIntervalRef = useCommittedRef(activeChildInterval);
 
     const prev = useCallback(
-      (event) => {
+      (event?) => {
         if (isSliding) {
           return;
         }
@@ -350,7 +351,11 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
     // This is used in the setInterval, so it should not invalidate.
     const nextWhenVisible = useEventCallback(() => {
       if (!document.hidden && isVisible(elementRef.current)) {
-        next();
+        if (isRTL) {
+          prev();
+        } else {
+          next();
+        }
       }
     });
 
@@ -390,11 +395,19 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
           switch (event.key) {
             case 'ArrowLeft':
               event.preventDefault();
-              prev(event);
+              if (isRTL) {
+                next(event);
+              } else {
+                prev(event);
+              }
               return;
             case 'ArrowRight':
               event.preventDefault();
-              next(event);
+              if (isRTL) {
+                prev(event);
+              } else {
+                next(event);
+              }
               return;
             default:
           }
@@ -402,7 +415,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
 
         onKeyDown?.(event);
       },
-      [keyboard, onKeyDown, prev, next],
+      [keyboard, onKeyDown, prev, next, isRTL],
     );
 
     const handleMouseOver = useCallback(
@@ -491,8 +504,9 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
         return undefined;
       }
 
+      const nextFunc = isRTL ? prev : next;
       intervalHandleRef.current = window.setInterval(
-        document.visibilityState ? nextWhenVisible : next,
+        document.visibilityState ? nextWhenVisible : nextFunc,
         activeChildIntervalRef.current ?? interval ?? undefined,
       );
 
@@ -501,7 +515,15 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
           clearInterval(intervalHandleRef.current);
         }
       };
-    }, [shouldPlay, next, activeChildIntervalRef, interval, nextWhenVisible]);
+    }, [
+      shouldPlay,
+      prev,
+      next,
+      activeChildIntervalRef,
+      interval,
+      nextWhenVisible,
+      isRTL,
+    ]);
 
     const indicatorOnClicks = useMemo(
       () =>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Carousel from '../src/Carousel';
+import ThemeProvider from '../src/ThemeProvider';
 
 describe('<Carousel>', () => {
   const items = [
@@ -812,6 +813,73 @@ describe('<Carousel>', () => {
 
       clock.tick(1000);
       onSelectSpy.should.have.been.calledOnce;
+    });
+  });
+
+  describe('RTL', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should slide in correct direction on ArrowLeft when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+
+      const wrapper = mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowLeft',
+      });
+      clock.tick(50);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(2);
+    });
+
+    it('should slide in correct direction on ArrowLeft when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+
+      const wrapper = mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowRight',
+      });
+      clock.tick(50);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
+    });
+
+    it('should slide in correct direction automatically when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+      const interval = 300;
+
+      mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy} interval={interval}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      clock.tick(interval * 1.5);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
     });
   });
 });
