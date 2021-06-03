@@ -9,7 +9,6 @@ export interface SafeAnchorProps
     BsPrefixProps {
   href?: string;
   disabled?: boolean;
-  role?: string;
   tabIndex?: number;
 }
 

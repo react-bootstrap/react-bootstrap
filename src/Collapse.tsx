@@ -17,7 +17,9 @@ import TransitionWrapper from './TransitionWrapper';
 
 type Dimension = 'height' | 'width';
 
-export interface CollapseProps extends TransitionCallbacks {
+export interface CollapseProps
+  extends TransitionCallbacks,
+    Pick<React.HTMLAttributes<HTMLElement>, 'role'> {
   className?: string;
   in?: boolean;
   mountOnEnter?: boolean;
@@ -27,7 +29,6 @@ export interface CollapseProps extends TransitionCallbacks {
   dimension?: Dimension | (() => Dimension);
   getDimensionValue?: (dimension: Dimension, element: HTMLElement) => number;
   children: React.ReactElement;
-  role?: string;
 }
 
 const MARGINS: { [d in Dimension]: string[] } = {
