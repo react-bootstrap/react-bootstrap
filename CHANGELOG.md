@@ -1,3 +1,24 @@
+# [2.0.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-alpha.2...v2.0.0-beta.0) (2021-06-03)
+
+
+### Bug Fixes
+
+* **docs:** fix missing img on toast (fix [#5729](https://github.com/react-bootstrap/react-bootstrap/issues/5729)) ([#5814](https://github.com/react-bootstrap/react-bootstrap/issues/5814)) ([488e5c0](https://github.com/react-bootstrap/react-bootstrap/commit/488e5c0b2ac59ed77ed5866551576f4625ee05d9))
+* **FormLabel:** forward ref when rendering as Col ([#5835](https://github.com/react-bootstrap/react-bootstrap/issues/5835)) ([af24cfa](https://github.com/react-bootstrap/react-bootstrap/commit/af24cfa9c6fb69e3ce0c5b043c498e2b56fa335f))
+* **Modal:** remove default timeout in modal and backdrop transition ([#5837](https://github.com/react-bootstrap/react-bootstrap/issues/5837)) ([e87e2ba](https://github.com/react-bootstrap/react-bootstrap/commit/e87e2ba7d0a46ccf84fffc1ebde7a53779c0ff63))
+* **types:** fix role prop ([#5851](https://github.com/react-bootstrap/react-bootstrap/issues/5851)) ([28769b4](https://github.com/react-bootstrap/react-bootstrap/commit/28769b4e8b089ef55ad5f01f081df095c5b84c87))
+
+
+### Features
+
+* **Carousel:** add `indicatorLabels` prop and fix indicator styling ([#5773](https://github.com/react-bootstrap/react-bootstrap/issues/5773)) ([0f7b39d](https://github.com/react-bootstrap/react-bootstrap/commit/0f7b39d34b0f40091a7572d9d30f6b4d30a37956))
+* **Offcanvas:** add top placement ([#5847](https://github.com/react-bootstrap/react-bootstrap/issues/5847)) ([82fe23f](https://github.com/react-bootstrap/react-bootstrap/commit/82fe23fd3652a599f7bf187848cf1bd2da59b62d))
+* **Overlay:** add ref support ([#5710](https://github.com/react-bootstrap/react-bootstrap/issues/5710)) ([d08e434](https://github.com/react-bootstrap/react-bootstrap/commit/d08e4348a354745924aa9c8c89f7be9983434c66))
+
+
+
+
+
 # [2.0.0-alpha.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.0...v2.0.0-alpha.2) (2021-05-17)
 
 
