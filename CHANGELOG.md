@@ -1,3 +1,17 @@
+## [1.6.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.0...v1.6.1) (2021-06-04)
+
+
+### Bug Fixes
+
+* **docs:** fix missing img on toast (fix [#5729](https://github.com/react-bootstrap/react-bootstrap/issues/5729)) ([#5814](https://github.com/react-bootstrap/react-bootstrap/issues/5814)) ([488e5c0](https://github.com/react-bootstrap/react-bootstrap/commit/488e5c0b2ac59ed77ed5866551576f4625ee05d9))
+* **FormLabel:** forward ref when rendering as Col ([#5835](https://github.com/react-bootstrap/react-bootstrap/issues/5835)) ([bb128e1](https://github.com/react-bootstrap/react-bootstrap/commit/bb128e15e8acb7d1ac25cf93b21167f5a0f4e6f6))
+* **Modal:** remove default timeout in modal and backdrop transition ([#5837](https://github.com/react-bootstrap/react-bootstrap/issues/5837)) ([7dd17bd](https://github.com/react-bootstrap/react-bootstrap/commit/7dd17bda5d0e31ba80c2aefd851951394d49d9b0))
+* **types:** fix role prop ([#5851](https://github.com/react-bootstrap/react-bootstrap/issues/5851)) ([0077178](https://github.com/react-bootstrap/react-bootstrap/commit/0077178b2ab080da8c2a0c40d8cefd238cf0a6fa))
+
+
+
+
+
 # [1.6.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.5.2...v1.6.0) (2021-05-11)
 
 
