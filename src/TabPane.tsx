@@ -149,8 +149,7 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
     } = useTabContext(props);
 
     const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
-
-    if (!active && !Transition && unmountOnExit) return null;
+    const hasMountedRef = React.useRef(false);
 
     let pane = (
       <Component
@@ -162,7 +161,9 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
       />
     );
 
-    if (Transition)
+    if (Transition) {
+      // If we're using transitions, the Transition will deal
+      // with mountOnEnter/unmountOnExit behavior.
       pane = (
         <Transition
           in={active}
@@ -178,6 +179,21 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
           {pane}
         </Transition>
       );
+    } else {
+      const shouldMount =
+        active || // active tabs must always be rendered
+        !mountOnEnter || // tabs that must be mounted even when not active
+        (hasMountedRef.current && !unmountOnExit); // tabs that must remain mounted after exiting (and we had mounted prior)
+      // If we ever mount the component, keep track of that fact.
+      // Not latching this to `true` should also work in case an user of
+      // this component ever changes `unmountOnExit` on a mounted TabPane.
+      hasMountedRef.current = shouldMount;
+      if (!shouldMount) {
+        // Nothing to render; no need to render the providers either,
+        // so early return here.
+        return null;
+      }
+    }
 
     // We provide an empty the TabContext so `<Nav>`s in `<TabPane>`s don't
     // conflict with the top level one.
