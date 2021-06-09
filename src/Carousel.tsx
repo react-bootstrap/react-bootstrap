@@ -19,7 +19,7 @@ import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
-import { useBootstrapPrefix, useRTL } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
@@ -253,7 +253,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
     });
 
     const prefix = useBootstrapPrefix(bsPrefix, 'carousel');
-    const isRTL = useRTL();
+    const isRTL = useIsRTL();
 
     const nextDirectionRef = useRef<string | null>(null);
     const [direction, setDirection] = useState('next');

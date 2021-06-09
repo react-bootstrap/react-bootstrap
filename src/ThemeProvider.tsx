@@ -7,17 +7,14 @@ export interface ThemeContextValue {
   dir?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ThemeProviderProps extends Partial<ThemeContextValue> {}
+export interface ThemeProviderProps extends Partial<ThemeContextValue> {
+  children: React.ElementType;
+}
 
 const ThemeContext = React.createContext<ThemeContextValue>({ prefixes: {} });
 const { Consumer, Provider } = ThemeContext;
 
-const ThemeProvider: React.FC<Partial<ThemeContextValue>> = ({
-  prefixes = {},
-  dir,
-  children,
-}) => {
+function ThemeProvider({ prefixes = {}, dir, children }: ThemeProviderProps) {
   const contextValue = useMemo(
     () => ({
       prefixes: { ...prefixes },
@@ -27,7 +24,7 @@ const ThemeProvider: React.FC<Partial<ThemeContextValue>> = ({
   );
 
   return <Provider value={contextValue}>{children}</Provider>;
-};
+}
 
 ThemeProvider.propTypes = {
   prefixes: PropTypes.object,
@@ -42,7 +39,7 @@ export function useBootstrapPrefix(
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
 
-export function useRTL() {
+export function useIsRTL() {
   const { dir } = useContext(ThemeContext);
   return dir === 'rtl';
 }
