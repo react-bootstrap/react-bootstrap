@@ -47,6 +47,7 @@ export interface DropdownProps
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
+  autoClose: 'true' | 'outside' | 'inside' | 'false';
 }
 
 const propTypes = {
@@ -123,11 +124,18 @@ const propTypes = {
 
   /** @private */
   navbar: PropTypes.bool,
+
+  /**
+   * Controls the auto close behaviour of the dropdown when clicking outside of
+   * the button or the list.
+   */
+  autoClose: PropTypes.oneOf(['true', 'outside', 'inside', 'false']),
 };
 
 const defaultProps: Partial<DropdownProps> = {
   navbar: false,
   align: 'start',
+  autoClose: 'true',
 };
 
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
@@ -144,6 +152,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       navbar: _4,
+      autoClose,
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
 
@@ -156,8 +165,20 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
         if (
           event.currentTarget === document &&
           (source !== 'keydown' || event.key === 'Escape')
-        )
+        ) {
           source = 'rootClose';
+
+          const noOuterCloseModes =
+            autoClose === 'inside' || autoClose === 'false';
+          if (noOuterCloseModes) return;
+        }
+
+        const noAutoAndSelect =
+          !nextShow && autoClose === 'false' && source === 'select';
+        const outsideAndSelect = autoClose === 'outside' && source === 'select';
+
+        if (noAutoAndSelect || outsideAndSelect) return;
+
         onToggle?.(nextShow, event, { source });
       },
     );

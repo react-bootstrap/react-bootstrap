@@ -333,4 +333,141 @@ describe('<Dropdown>', () => {
       ).assertSingle('div.dropdown-menu');
     });
   });
+
+  describe('autoClose behaviour', () => {
+    const createDocumentListenersMock = () => {
+      const listeners = {};
+      const handler = (domEl, event) => listeners?.[event]?.({ target: domEl });
+      document.addEventListener = sinon.spy((event, cb) => {
+        listeners[event] = cb;
+      });
+      document.removeEventListener = sinon.spy((event) => {
+        delete listeners[event];
+      });
+      return {
+        mouseDown: (domEl) => handler(domEl, 'mousedown'),
+        click: (domEl) => handler(domEl, 'click'),
+      };
+    };
+
+    describe('autoClose="true"', () => {
+      it('should close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'true',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+        const fireEvent = createDocumentListenersMock();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'true',
+          onToggle,
+        });
+
+        fireEvent.click(document.body);
+
+        onToggle.should.have.been.calledWith(false);
+      });
+    });
+
+    describe('autoClose="inside"', () => {
+      it('should close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+
+      it('should not close on outer click', () => {
+        const fireEvent = createDocumentListenersMock();
+
+        let wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+        });
+
+        fireEvent.click(document.body);
+
+        expect(wrapper.find('Dropdown').prop('show')).to.be.true;
+      });
+    });
+
+    describe('autoClose="outside"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.not.have.been.calledWith(false);
+      });
+
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+        const fireEvent = createDocumentListenersMock();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        fireEvent.click(document.body);
+
+        onToggle.should.have.been.calledWith(false);
+      });
+    });
+
+    describe('autoClose="false"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'false',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.not.have.been.calledWith(false);
+      });
+
+      it('should not close on outer click', () => {
+        const fireEvent = createDocumentListenersMock();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'false',
+        });
+
+        fireEvent.click(document.body);
+
+        expect(wrapper.find('Dropdown').prop('show')).to.be.true;
+      });
+    });
+  });
 });
