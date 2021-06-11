@@ -188,7 +188,9 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
           {...menuProps}
           style={style}
           // Bootstrap css requires this data attrib to style responsive menus.
-          {...(alignClasses.length && { 'data-bs-popper': 'static' })}
+          {...((alignClasses.length || isNavbar) && {
+            'data-bs-popper': 'static',
+          })}
           className={classNames(
             className,
             prefix,
