@@ -2,6 +2,7 @@ import { mount } from 'enzyme';
 
 import DropdownItem from '../src/DropdownItem';
 import Nav from '../src/Nav';
+import Navbar from '../src/Navbar';
 import NavDropdown from '../src/NavDropdown';
 
 describe('<NavDropdown>', () => {
@@ -80,5 +81,19 @@ describe('<NavDropdown>', () => {
       'variant',
       'dark',
     );
+  });
+
+  it('sets data-bs-popper attribute on dropdown menu', () => {
+    const wrapper = mount(
+      <Navbar>
+        <NavDropdown renderMenuOnMount id="test-id" title="title">
+          <DropdownItem>Item 1</DropdownItem>
+        </NavDropdown>
+      </Navbar>,
+    );
+
+    wrapper
+      .assertSingle('.dropdown-menu')
+      .assertSingle('[data-bs-popper="static"]');
   });
 });
