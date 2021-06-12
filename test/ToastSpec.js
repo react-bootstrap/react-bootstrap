@@ -13,6 +13,10 @@ describe('<Toast>', () => {
     clock.restore();
   });
 
+  it('should apply bg prop', () => {
+    mount(<Toast bg="primary">Card</Toast>).assertSingle('.toast.bg-primary');
+  });
+
   it('should render an entire toast', () => {
     mount(
       <Toast>
