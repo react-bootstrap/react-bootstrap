@@ -34,7 +34,7 @@ const propTypes = {
   tabClassName: PropTypes.string,
 
   /**
-   * Object containing attributes for `<Tab />` component
+   * Object containing attributes to pass to underlying nav link.
    */
   tabAttrs: PropTypes.object,
 };
