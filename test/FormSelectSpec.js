@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 
 import FormSelect from '../src/FormSelect';
+import FormGroup from '../src/FormGroup';
 
 describe('<FormSelect>', () => {
   it('should render correctly', () => {
@@ -29,5 +30,25 @@ describe('<FormSelect>', () => {
     mount(<FormSelect isInvalid />).assertSingle(
       'select.form-select.is-invalid',
     );
+  });
+
+  it('should render controlId correctly', () => {
+    mount(
+      <FormGroup controlId="test-id">
+        <FormSelect>
+          <option>1</option>
+        </FormSelect>
+      </FormGroup>,
+    ).assertSingle('.form-select#test-id');
+  });
+
+  it('should override controlId correctly', () => {
+    mount(
+      <FormGroup controlId="test-id">
+        <FormSelect id="overridden-id">
+          <option>1</option>
+        </FormSelect>
+      </FormGroup>,
+    ).assertSingle('.form-select#overridden-id:not(#test-id)');
   });
 });
