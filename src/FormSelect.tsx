@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixOnlyProps, BsPrefixRefForwardingComponent } from './helpers';
+import FormContext from './FormContext';
 
 export interface FormSelectProps
   extends BsPrefixOnlyProps,
@@ -66,10 +68,12 @@ const FormSelect: BsPrefixRefForwardingComponent<'select', FormSelectProps> =
         className,
         isValid = false,
         isInvalid = false,
+        id,
         ...props
       },
       ref,
     ) => {
+      const { controlId } = useContext(FormContext);
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-select');
 
       return (
@@ -84,6 +88,7 @@ const FormSelect: BsPrefixRefForwardingComponent<'select', FormSelectProps> =
             isValid && `is-valid`,
             isInvalid && `is-invalid`,
           )}
+          id={id || controlId}
         />
       );
     },
