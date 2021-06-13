@@ -496,7 +496,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
             onExiting={onExiting}
             onExited={handleExited}
             manager={getModalManager()}
-            containerClassName={`${bsPrefix}-open`}
             transition={animation ? DialogTransition : undefined}
             backdropTransition={animation ? BackdropTransition : undefined}
             renderBackdrop={renderBackdrop}

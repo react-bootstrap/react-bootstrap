@@ -308,7 +308,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             onExiting={onExiting}
             onExited={handleExited}
             manager={getModalManager()}
-            containerClassName={`${bsPrefix}-open`}
             transition={DialogTransition}
             backdropTransition={BackdropTransition}
             renderBackdrop={renderBackdrop}
