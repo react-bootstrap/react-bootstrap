@@ -2,6 +2,7 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import simulant from 'simulant';
+import sinon from 'sinon';
 import Dropdown from '../src/Dropdown';
 import InputGroup from '../src/InputGroup';
 
@@ -335,47 +336,17 @@ describe('<Dropdown>', () => {
   });
 
   describe('autoClose behaviour', () => {
-    const createDocumentListenersMock = () => {
-      const listeners = {};
-      const handler = (domEl, event) => listeners?.[event]?.({ target: domEl });
-      document.addEventListener = sinon.spy((event, cb) => {
-        listeners[event] = cb;
-      });
-      document.removeEventListener = sinon.spy((event) => {
-        delete listeners[event];
-      });
-      return {
-        mouseDown: (domEl) => handler(domEl, 'mousedown'),
-        click: (domEl) => handler(domEl, 'click'),
-      };
-    };
-
     describe('autoClose="true"', () => {
-      it('should close on child selection', () => {
-        const onToggle = sinon.spy();
-
-        const wrapper = mount(simpleDropdown).setProps({
-          show: true,
-          autoClose: 'true',
-          onToggle,
-        });
-
-        wrapper.find('.dropdown-menu a').first().simulate('click');
-
-        onToggle.should.have.been.calledWith(false);
-      });
-
       it('should close on outer click', () => {
         const onToggle = sinon.spy();
-        const fireEvent = createDocumentListenersMock();
 
         mount(simpleDropdown).setProps({
           show: true,
-          autoClose: 'true',
+          autoClose: true,
           onToggle,
         });
 
-        fireEvent.click(document.body);
+        simulant.fire(document.body, 'click');
 
         onToggle.should.have.been.calledWith(false);
       });
@@ -397,14 +368,12 @@ describe('<Dropdown>', () => {
       });
 
       it('should not close on outer click', () => {
-        const fireEvent = createDocumentListenersMock();
-
         let wrapper = mount(simpleDropdown).setProps({
           show: true,
           autoClose: 'inside',
         });
 
-        fireEvent.click(document.body);
+        simulant.fire(document.body, 'click');
 
         expect(wrapper.find('Dropdown').prop('show')).to.be.true;
       });
@@ -422,12 +391,11 @@ describe('<Dropdown>', () => {
 
         wrapper.find('.dropdown-menu a').first().simulate('click');
 
-        onToggle.should.not.have.been.calledWith(false);
+        sinon.assert.notCalled(onToggle);
       });
 
       it('should close on outer click', () => {
         const onToggle = sinon.spy();
-        const fireEvent = createDocumentListenersMock();
 
         mount(simpleDropdown).setProps({
           show: true,
@@ -435,9 +403,9 @@ describe('<Dropdown>', () => {
           onToggle,
         });
 
-        fireEvent.click(document.body);
+        simulant.fire(document.body, 'click');
 
-        onToggle.should.have.been.calledWith(false);
+        onToggle.should.be.calledWith(false);
       });
     });
 
@@ -447,26 +415,27 @@ describe('<Dropdown>', () => {
 
         const wrapper = mount(simpleDropdown).setProps({
           show: true,
-          autoClose: 'false',
+          autoClose: false,
           onToggle,
         });
 
         wrapper.find('.dropdown-menu a').first().simulate('click');
 
-        onToggle.should.not.have.been.calledWith(false);
+        sinon.assert.notCalled(onToggle);
       });
 
       it('should not close on outer click', () => {
-        const fireEvent = createDocumentListenersMock();
+        const onToggle = sinon.spy();
 
-        const wrapper = mount(simpleDropdown).setProps({
+        mount(simpleDropdown).setProps({
           show: true,
-          autoClose: 'false',
+          autoClose: false,
+          onToggle,
         });
 
-        fireEvent.click(document.body);
+        simulant.fire(document.body, 'click');
 
-        expect(wrapper.find('Dropdown').prop('show')).to.be.true;
+        sinon.assert.notCalled(onToggle);
       });
     });
   });

@@ -1,8 +1,8 @@
 <>
-  {['true', 'outside', 'inside', 'false'].map((autoClose) => (
+  {[true, 'outside', 'inside', false].map((autoClose, index) => (
     <Dropdown autoClose={autoClose} className="d-inline mx-2">
-      <Dropdown.Toggle id={`dropdown-autoclose-${autoClose}`}>
-        AutoClose {autoClose}
+      <Dropdown.Toggle id={`dropdown-autoclose-${index}`}>
+        AutoClose {autoClose.toString()}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>

@@ -47,7 +47,7 @@ export interface DropdownProps
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
-  autoClose: 'true' | 'outside' | 'inside' | 'false';
+  autoClose: boolean | 'outside' | 'inside';
 }
 
 const propTypes = {
@@ -129,13 +129,13 @@ const propTypes = {
    * Controls the auto close behaviour of the dropdown when clicking outside of
    * the button or the list.
    */
-  autoClose: PropTypes.oneOf(['true', 'outside', 'inside', 'false']),
+  autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
 };
 
 const defaultProps: Partial<DropdownProps> = {
   navbar: false,
   align: 'start',
-  autoClose: 'true',
+  autoClose: true,
 };
 
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
@@ -160,6 +160,19 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
     const isInputGroup = useContext(InputGroupContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
 
+    const isClosingPermitted = (source: string): boolean => {
+      // autoClose=false only permits close on button click
+      if (!autoClose) return source === 'click';
+
+      // autoClose=inside doesn't permit close on rootClose
+      if (autoClose === 'inside') return source !== 'rootClose';
+
+      // autoClose=outside doesn't permit close on select
+      if (autoClose === 'outside') return source !== 'select';
+
+      return true;
+    };
+
     const handleToggle = useEventCallback(
       (nextShow, event, source = event.type) => {
         if (
@@ -167,17 +180,9 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
           (source !== 'keydown' || event.key === 'Escape')
         ) {
           source = 'rootClose';
-
-          const noOuterCloseModes =
-            autoClose === 'inside' || autoClose === 'false';
-          if (noOuterCloseModes) return;
         }
 
-        const noAutoAndSelect =
-          !nextShow && autoClose === 'false' && source === 'select';
-        const outsideAndSelect = autoClose === 'outside' && source === 'select';
-
-        if (noAutoAndSelect || outsideAndSelect) return;
+        if (!isClosingPermitted(source)) return;
 
         onToggle?.(nextShow, event, { source });
       },
