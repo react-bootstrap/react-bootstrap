@@ -2,6 +2,7 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import simulant from 'simulant';
+import sinon from 'sinon';
 import Dropdown from '../src/Dropdown';
 import InputGroup from '../src/InputGroup';
 
@@ -331,6 +332,111 @@ describe('<Dropdown>', () => {
           <Dropdown renderOnMount={false}>{dropdownChildren}</Dropdown>
         </InputGroup>,
       ).assertSingle('div.dropdown-menu');
+    });
+  });
+
+  describe('autoClose behaviour', () => {
+    describe('autoClose="true"', () => {
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: true,
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+    });
+
+    describe('autoClose="inside"', () => {
+      it('should close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+
+      it('should not close on outer click', () => {
+        let wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+        });
+
+        simulant.fire(document.body, 'click');
+
+        expect(wrapper.find('Dropdown').prop('show')).to.be.true;
+      });
+    });
+
+    describe('autoClose="outside"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        sinon.assert.notCalled(onToggle);
+      });
+
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        onToggle.should.be.calledWith(false);
+      });
+    });
+
+    describe('autoClose="false"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: false,
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        sinon.assert.notCalled(onToggle);
+      });
+
+      it('should not close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: false,
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        sinon.assert.notCalled(onToggle);
+      });
     });
   });
 });

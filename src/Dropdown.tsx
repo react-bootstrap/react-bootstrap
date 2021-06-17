@@ -47,6 +47,7 @@ export interface DropdownProps
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
+  autoClose: boolean | 'outside' | 'inside';
 }
 
 const propTypes = {
@@ -123,11 +124,18 @@ const propTypes = {
 
   /** @private */
   navbar: PropTypes.bool,
+
+  /**
+   * Controls the auto close behaviour of the dropdown when clicking outside of
+   * the button or the list.
+   */
+  autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
 };
 
 const defaultProps: Partial<DropdownProps> = {
   navbar: false,
   align: 'start',
+  autoClose: true,
 };
 
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
@@ -144,6 +152,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       navbar: _4,
+      autoClose,
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
 
@@ -151,13 +160,30 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
     const isInputGroup = useContext(InputGroupContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
 
+    const isClosingPermitted = (source: string): boolean => {
+      // autoClose=false only permits close on button click
+      if (!autoClose) return source === 'click';
+
+      // autoClose=inside doesn't permit close on rootClose
+      if (autoClose === 'inside') return source !== 'rootClose';
+
+      // autoClose=outside doesn't permit close on select
+      if (autoClose === 'outside') return source !== 'select';
+
+      return true;
+    };
+
     const handleToggle = useEventCallback(
       (nextShow, event, source = event.type) => {
         if (
           event.currentTarget === document &&
           (source !== 'keydown' || event.key === 'Escape')
-        )
+        ) {
           source = 'rootClose';
+        }
+
+        if (!isClosingPermitted(source)) return;
+
         onToggle?.(nextShow, event, { source });
       },
     );

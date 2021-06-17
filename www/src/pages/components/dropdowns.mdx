@@ -20,6 +20,7 @@ import SplitVariants from '../../examples/Dropdown/SplitVariants';
 import DropdownVariants from '../../examples/Dropdown/Variants';
 import ButtonDark from '../../examples/Dropdown/ButtonDark';
 import NavbarDark from '../../examples/Dropdown/NavbarDark';
+import AutoClose from '../../examples/Dropdown/AutoClose';
 
 import styles from '../../css/examples.module.scss';
 
@@ -163,6 +164,19 @@ Separate groups of related menu items with a divider.
   codeText={MenuDividers}
   exampleClassName={styles.staticDropdownMenu}
 />
+
+## AutoClose
+
+By default, the dropdown menu is closed when selecting a menu item or clicking outside of the
+dropdown menu. This behaviour can be changed by using the `autoClose` property.
+
+By default, `autoClose` is set to the default value `true` and behaves like expected. By choosing `false`, the dropdown
+menu can only be toggled by clicking on the dropdown button. `inside` makes the dropdown disappear __only__
+by choosing a menu item and `outside` closes the dropdown menu __only__ by clicking outside.
+
+__Notice__ how the dropdown is toggled in each scenario by clicking on the button.
+
+<ReactPlayground codeText={AutoClose} />
 
 ## Customization
 
