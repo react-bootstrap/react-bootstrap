@@ -10,6 +10,7 @@ import ToastStacking from '../../examples/Toast/Stacking';
 import ToastPlacement from '../../examples/Toast/Placement';
 import ToastPlacementMulti from '../../examples/Toast/PlacementMulti';
 import ToastAutohide from '../../examples/Toast/Autohide';
+import ToastContextual from '../../examples/Toast/Contextual';
 
 # Toasts
 
@@ -54,6 +55,12 @@ For systems that generate more notifications, consider using a wrapping element 
 A Toast can also automatically hide after X milliseconds. For that, use the `autohide` prop in combination with `delay` the prop to sepecify the delay. But be aware, that it will only trigger the `onClose` function, you have to set manually the show property.
 
 <ReactPlayground codeText={ToastAutohide} />
+
+### Contextual variations
+
+Add any of the below mentioned modifier classes to change the appearance of a toast.
+
+<ReactPlayground codeText={ToastContextual} />
 
 ## API
 

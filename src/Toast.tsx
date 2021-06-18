@@ -14,6 +14,7 @@ import {
   BsPrefixRefForwardingComponent,
   TransitionComponent,
 } from './helpers';
+import { Variant } from './types';
 
 export interface ToastProps
   extends BsPrefixProps,
@@ -24,6 +25,7 @@ export interface ToastProps
   onClose?: () => void;
   show?: boolean;
   transition?: TransitionComponent;
+  bg?: Variant;
 }
 
 const propTypes = {
@@ -61,6 +63,13 @@ const propTypes = {
    * A `react-transition-group` Transition component used to animate the Toast on dismissal.
    */
   transition: PropTypes.elementType,
+
+  /**
+   * Sets Toast background
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   */
+  bg: PropTypes.string,
 };
 
 const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
@@ -75,6 +84,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
         delay = 5000,
         autohide = false,
         onClose,
+        bg,
         ...props
       },
       ref,
@@ -121,6 +131,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
           className={classNames(
             bsPrefix,
             className,
+            bg && `bg-${bg}`,
             !hasAnimation && (show ? 'show' : 'hide'),
           )}
           role="alert"

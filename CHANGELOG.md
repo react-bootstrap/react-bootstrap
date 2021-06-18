@@ -1,3 +1,22 @@
+# [2.0.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* **Form:** fix controlId override behavior on FormRange and FormSelect ([#5880](https://github.com/react-bootstrap/react-bootstrap/issues/5880)) ([866ec5b](https://github.com/react-bootstrap/react-bootstrap/commit/866ec5b53eae0aeb33f8e1c9642f61faa997d1b2))
+* **NavDropdown:** fix align="end" not working ([#5878](https://github.com/react-bootstrap/react-bootstrap/issues/5878)) ([a307102](https://github.com/react-bootstrap/react-bootstrap/commit/a307102f893acc1cb11cade3ab1cc000211928f2))
+
+
+### Features
+
+* **Carousel:** add RTL keyboard support ([#5855](https://github.com/react-bootstrap/react-bootstrap/issues/5855)) ([4bbf8ac](https://github.com/react-bootstrap/react-bootstrap/commit/4bbf8ac9a42dbf18cf3c2666196644cdf095d40e))
+* **Dropdown:** add autoClose behaviour ([#5873](https://github.com/react-bootstrap/react-bootstrap/issues/5873)) ([f5b511c](https://github.com/react-bootstrap/react-bootstrap/commit/f5b511cc3cc24af91f146b1e8244af8c3941b8d8))
+* **Toast:** add `bg` property ([#5877](https://github.com/react-bootstrap/react-bootstrap/issues/5877)) ([ff8f1d0](https://github.com/react-bootstrap/react-bootstrap/commit/ff8f1d0aea8ed52fb78e3baa33b05bdfe35e831d))
+
+
+
+
+
 # [2.0.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-alpha.2...v2.0.0-beta.0) (2021-06-03)
 
 
