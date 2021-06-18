@@ -1,15 +1,49 @@
 <>
-  {[true, 'outside', 'inside', false].map((autoClose, index) => (
-    <Dropdown autoClose={autoClose} className="d-inline mx-2">
-      <Dropdown.Toggle id={`dropdown-autoclose-${index}`}>
-        AutoClose {autoClose.toString()}
-      </Dropdown.Toggle>
+  <Dropdown className="d-inline mx-2">
+    <Dropdown.Toggle id="dropdown-autoclose-true">
+      Default Dropdown
+    </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  ))}
+    <Dropdown.Menu>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+
+  <Dropdown className="d-inline mx-2" autoClose="inside">
+    <Dropdown.Toggle id="dropdown-autoclose-inside">
+      Clickable Outside
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+
+  <Dropdown className="d-inline mx-2" autoClose="outside">
+    <Dropdown.Toggle id="dropdown-autoclose-outside">
+      Clickable Inside
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+
+  <Dropdown className="d-inline mx-2" autoClose={false}>
+    <Dropdown.Toggle id="dropdown-autoclose-false">
+      Manual Close
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+      <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
 </>;
