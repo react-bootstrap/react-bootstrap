@@ -1,6 +1,11 @@
 # [2.0.0-beta.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-06-19)
 
 
+### Bug Fixes
+
+* **Dropdown:** fix autoClose being mandatory ([#5886](https://github.com/react-bootstrap/react-bootstrap/pull/5886)) ([866ec5b](https://github.com/react-bootstrap/react-bootstrap/commit/159ee208c07027aa18f25e85e93a8608ba9a432b))
+
+
 
 
 
