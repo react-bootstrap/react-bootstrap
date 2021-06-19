@@ -47,7 +47,7 @@ export interface DropdownProps
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
   navbar?: boolean;
-  autoClose: boolean | 'outside' | 'inside';
+  autoClose?: boolean | 'outside' | 'inside';
 }
 
 const propTypes = {
@@ -162,7 +162,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
 
     const isClosingPermitted = (source: string): boolean => {
       // autoClose=false only permits close on button click
-      if (!autoClose) return source === 'click';
+      if (autoClose === false) return source === 'click';
 
       // autoClose=inside doesn't permit close on rootClose
       if (autoClose === 'inside') return source !== 'rootClose';
@@ -178,13 +178,10 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
         if (
           event.currentTarget === document &&
           (source !== 'keydown' || event.key === 'Escape')
-        ) {
+        )
           source = 'rootClose';
-        }
 
-        if (!isClosingPermitted(source)) return;
-
-        onToggle?.(nextShow, event, { source });
+        if (isClosingPermitted(source)) onToggle?.(nextShow, event, { source });
       },
     );
 
