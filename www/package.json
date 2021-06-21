@@ -37,7 +37,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@restart/context": "^2.1.4",
-    "@restart/hooks": "^0.3.26",
+    "@restart/hooks": "^0.4.0",
     "ast-types": "^0.14.2",
     "astroturf": "^0.10.5",
     "bootstrap": "^5.0.1",
@@ -57,7 +57,7 @@
     "gatsby-source-filesystem": "2.11.1",
     "gatsby-transformer-react-docgen": "^5.9.0",
     "gatsby-transformer-remark": "^2.16.1",
-    "gh-pages": "^3.2.0",
+    "gh-pages": "^3.2.2",
     "holderjs": "^2.9.9",
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-4catalyzer": "^4.0.1",
@@ -71,7 +71,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.2.3",
     "remark-slug": "^6.0.0",
-    "sass": "^1.34.1",
+    "sass": "^1.35.1",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.9"
   }
