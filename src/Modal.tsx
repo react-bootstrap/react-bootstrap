@@ -12,7 +12,7 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
+import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
@@ -49,6 +49,7 @@ export interface ModalProps
   contentClassName?: string;
   dialogAs?: React.ElementType;
   scrollable?: boolean;
+  [other: string]: any;
 }
 
 let manager;
