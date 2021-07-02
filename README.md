@@ -9,17 +9,25 @@
 [![Discord][discord-badge]][discord]
 [![Netlify][netlify-badge]][netlify]
 
-## Docs
+## Bootstrap compatibility
 
-See the [documentation][documentation] with live editable examples and API documentation.
+React-Bootstrap is compatible with various versions of Bootstrap.  As such, you need to ensure you are using the correct combination of versions.  
 
-To find the documentation for the latest **Bootstrap 4** compatible release, [go here](https://react-bootstrap.github.io) and for **Bootstrap 3** [go here](https://react-bootstrap-v3.netlify.app).
+See the below table on which version of React-Bootstrap you should be using in your project.
 
-### Migrating from Bootstrap 4 to Bootstrap 5
+| Bootstrap Version | React-Bootstrap Version | Documentation |
+| ------------- |:-------------:| -----:|
+| v5.x | 2.x beta | [Link](https://react-bootstrap.netlify.app) |
+| v4.x | 1.x | [Link](https://react-bootstrap.github.io) |
+| v3.x | 0.33.x | [Link](https://react-bootstrap-v3.netlify.app) |
+
+## Migrating from previous versions
+
+### Bootstrap 4 to Bootstrap 5
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 5, please read our docs for **[migrating to React-Bootstrap V2](https://github.com/react-bootstrap/react-bootstrap/blob/master/www/src/pages/migrating.mdx)**.
 
-### Migrating from Bootstrap 3 to Bootstrap 4
+### Bootstrap 3 to Bootstrap 4
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.github.io/migrating/)**.
 
@@ -52,7 +60,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap-v5.netlify.app/
+[documentation]: https://react-bootstrap.netlify.app
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
