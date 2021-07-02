@@ -11,9 +11,15 @@ function ToggleButtonGroupControlled() {
 
   return (
     <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
-      <ToggleButton value={1}>Option 1</ToggleButton>
-      <ToggleButton value={2}>Option 2</ToggleButton>
-      <ToggleButton value={3}>Option 3</ToggleButton>
+      <ToggleButton id="tbg-btn-1" value={1}>
+        Option 1
+      </ToggleButton>
+      <ToggleButton id="tbg-btn-2" value={2}>
+        Option 2
+      </ToggleButton>
+      <ToggleButton id="tbg-btn-3" value={3}>
+        Option 3
+      </ToggleButton>
     </ToggleButtonGroup>
   );
 }
