@@ -384,7 +384,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           return;
         }
 
-        onHide();
+        onHide?.();
       };
 
       const handleEscapeKeyDown = (e) => {
@@ -398,30 +398,30 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         }
       };
 
-      const handleEnter = (node, ...args) => {
+      const handleEnter = (node) => {
         if (node) {
           node.style.display = 'block';
           updateDialogStyle(node);
         }
 
-        onEnter?.(node, ...args);
+        onEnter?.(node);
       };
 
-      const handleExit = (node, ...args) => {
+      const handleExit = (node) => {
         removeStaticModalAnimationRef.current?.();
-        onExit?.(node, ...args);
+        onExit?.(node);
       };
 
-      const handleEntering = (node, ...args) => {
-        onEntering?.(node, ...args);
+      const handleEntering = (node) => {
+        onEntering?.(node);
 
         // FIXME: This should work even when animation is disabled.
         addEventListener(window as any, 'resize', handleWindowResize);
       };
 
-      const handleExited = (node, ...args) => {
+      const handleExited = (node) => {
         if (node) node.style.display = ''; // RHL removes it sometimes
-        onExited?.(...args);
+        onExited?.(node);
 
         // FIXME: This should work even when animation is disabled.
         removeEventListener(window as any, 'resize', handleWindowResize);
