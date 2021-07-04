@@ -398,13 +398,13 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         }
       };
 
-      const handleEnter = (node) => {
+      const handleEnter = (node, ...args) => {
         if (node) {
           node.style.display = 'block';
           updateDialogStyle(node);
         }
 
-        onEnter?.(node);
+        onEnter?.(node, ...args);
       };
 
       const handleExit = (node) => {
