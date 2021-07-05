@@ -132,13 +132,14 @@ class Dropdown extends React.Component {
     this.focusNextOnOpen();
   }
 
-  UNSAFE_componentWillUpdate(nextProps) { // eslint-disable-line
-    if (!nextProps.open && this.props.open) {
+  getSnapshotBeforeUpdate(prevProps) {
+    if (!this.props.open && prevProps.open) {
       this._focusInDropdown = contains(
         ReactDOM.findDOMNode(this.menu),
         activeElement(document)
       );
     }
+    return null;
   }
 
   componentDidUpdate(prevProps) {
