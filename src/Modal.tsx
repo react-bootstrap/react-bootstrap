@@ -412,8 +412,8 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         onExit?.(node);
       };
 
-      const handleEntering = (node) => {
-        onEntering?.(node);
+      const handleEntering = (node, ...args) => {
+        onEntering?.(node, ...args);
 
         // FIXME: This should work even when animation is disabled.
         addEventListener(window as any, 'resize', handleWindowResize);
