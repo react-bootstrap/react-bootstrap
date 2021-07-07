@@ -19,7 +19,7 @@ See the below table on which version of React-Bootstrap you should be using in y
 | ------------- |:-------------:| -----:|
 | v5.x | 2.x beta | [Link](https://react-bootstrap.netlify.app) |
 | v4.x | 1.x | [Link](https://react-bootstrap.github.io) |
-| v3.x | 0.33.x | [Link](https://react-bootstrap-v3.netlify.app) |
+| v3.x | 0.33.x (not maintained) | [Link](https://react-bootstrap-v3.netlify.app) |
 
 ## Migrating from previous versions
 
