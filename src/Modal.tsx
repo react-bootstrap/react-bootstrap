@@ -398,13 +398,13 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         }
       };
 
-      const handleEnter = (node, ...args) => {
+      const handleEnter = (node, isAppearing) => {
         if (node) {
           node.style.display = 'block';
           updateDialogStyle(node);
         }
 
-        onEnter?.(node, ...args);
+        onEnter?.(node, isAppearing);
       };
 
       const handleExit = (node) => {
@@ -412,8 +412,8 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         onExit?.(node);
       };
 
-      const handleEntering = (node, ...args) => {
-        onEntering?.(node, ...args);
+      const handleEntering = (node, isAppearing) => {
+        onEntering?.(node, isAppearing);
 
         // FIXME: This should work even when animation is disabled.
         addEventListener(window as any, 'resize', handleWindowResize);
