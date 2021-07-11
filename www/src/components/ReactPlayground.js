@@ -19,6 +19,9 @@ import useMutationObserver from '@restart/hooks/useMutationObserver';
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
 
+import styles from '../css/CopyButton.module.css'
+
+
 const scope = {
   useEffect,
   useRef,
@@ -33,6 +36,8 @@ const scope = {
   yup,
   PlaceholderImage,
 };
+
+var codeToBeCopied = ''; // Keeps the modified/edited code to be copied
 
 const StyledContainer = styled('div')`
   @import '../css/theme';
@@ -120,7 +125,8 @@ function Preview({ showCode, className }) {
   }, [hjs, live.element]);
 
   useMutationObserver(exampleRef.current, {
-    childList: true, subtree: true },
+    childList: true, subtree: true
+  },
     (mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.addedNodes.length > 0) {
@@ -219,6 +225,8 @@ function Editor() {
 
   const showMessage = keyboardFocused || (focused && !ignoreTab);
 
+  const handleCodeChange = (e) => {codeToBeCopied = e.target.value} 
+
   return (
     <div className="position-relative">
       <StyledEditor
@@ -230,7 +238,10 @@ function Editor() {
         aria-describedby={showMessage ? id : null}
         aria-label="Example code editor"
         padding={20}
+        onMouseOut={handleCodeChange}
       />
+
+
       {showMessage && (
         <EditorInfoMessage id={id} aria-live="polite">
           {ignoreTab ? (
@@ -256,11 +267,20 @@ const propTypes = {
 
 function Playground({ codeText, exampleClassName, showCode = true }) {
   // Remove Prettier comments and trailing semicolons in JSX in displayed code.
+  const [copyStatus, setCopy] = useState('Copy to clipboard')
   const code = codeText
     .replace(PRETTIER_IGNORE_REGEX, '')
     .trim()
     .replace(/>;$/, '>');
 
+  const handleCopy = (e) => {
+    const codeToCopy = e.target.value;
+    var promise = navigator.clipboard.writeText(codeToBeCopied) //returns promise
+    setCopy('Copied!')
+  }
+
+
+  const resetCopyStatus = () => {setCopy('Copy to clipboard')}
   return (
     <StyledContainer>
       <LiveProvider
@@ -269,8 +289,21 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
+
         <Preview showCode={showCode} className={exampleClassName} />
-        {showCode && <Editor />}
+        {
+          showCode
+          &&
+          <>
+            <div className={styles.tooltip} onMouseOut={resetCopyStatus}>
+              <button onClick={handleCopy} className={styles.styledCopyButton} value={codeText} >
+                <span className={styles.tooltiptext}>{copyStatus}</span>
+                Copy
+              </button>
+            </div>
+            <Editor />
+          </>
+        }
       </LiveProvider>
     </StyledContainer>
   );
