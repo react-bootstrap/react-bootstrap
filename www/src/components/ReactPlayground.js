@@ -265,14 +265,15 @@ const propTypes = {
 function Playground({ codeText, exampleClassName, showCode = true }) {
   // Remove Prettier comments and trailing semicolons in JSX in displayed code.
   const [copyStatus, setCopy] = useState('Copy to clipboard')
-  const [codeToCopy, setcodeToCopy] = useState(codeText)
-
-  const handleCodeChange = (e) => { setcodeToCopy(e.target.innerHTML)}
-
+  
+  
   const code = codeText
-    .replace(PRETTIER_IGNORE_REGEX, '')
+  .replace(PRETTIER_IGNORE_REGEX, '')
     .trim()
     .replace(/>;$/, '>');
+
+    const [codeToCopy, setcodeToCopy] = useState(code)
+    const handleCodeChange = (e) => { setcodeToCopy(e.target.value)}
 
   const handleCopy = () => {
     navigator.clipboard.writeText(codeToCopy) //copies code to clipboard
