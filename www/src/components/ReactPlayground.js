@@ -37,8 +37,6 @@ const scope = {
   PlaceholderImage,
 };
 
-var codeToBeCopied = ''; // Keeps the modified/edited code to be copied
-
 const StyledContainer = styled('div')`
   @import '../css/theme';
 
@@ -182,7 +180,7 @@ const EditorInfoMessage = styled('div')`
 
 let uid = 0;
 
-function Editor() {
+function Editor({handleCodeChange}) {
   const [focused, setFocused] = useState(false);
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
@@ -225,20 +223,19 @@ function Editor() {
 
   const showMessage = keyboardFocused || (focused && !ignoreTab);
 
-  const handleCodeChange = (e) => {codeToBeCopied = e.target.value} 
+   
 
   return (
     <div className="position-relative">
       <StyledEditor
         onFocus={handleFocus}
-        onBlur={handleBlur}
+        onBlur={(e) => {handleBlur(), handleCodeChange(e)}}
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
         ignoreTabKey={ignoreTab}
         aria-describedby={showMessage ? id : null}
         aria-label="Example code editor"
         padding={20}
-        onMouseOut={handleCodeChange}
       />
 
 
@@ -268,15 +265,18 @@ const propTypes = {
 function Playground({ codeText, exampleClassName, showCode = true }) {
   // Remove Prettier comments and trailing semicolons in JSX in displayed code.
   const [copyStatus, setCopy] = useState('Copy to clipboard')
+  const [codeToCopy, setcodeToCopy] = useState(codeText)
+
+  const handleCodeChange = (e) => { setcodeToCopy(e.target.innerHTML)}
+
   const code = codeText
     .replace(PRETTIER_IGNORE_REGEX, '')
     .trim()
     .replace(/>;$/, '>');
 
-  const handleCopy = (e) => {
-    const codeToCopy = e.target.value;
-    var promise = navigator.clipboard.writeText(codeToBeCopied) //returns promise
-    setCopy('Copied!')
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeToCopy) //copies code to clipboard
+    .then(setCopy('Copied!'))
   }
 
 
@@ -301,7 +301,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
                 Copy
               </button>
             </div>
-            <Editor />
+            <Editor handleCodeChange={handleCodeChange}/>
           </>
         }
       </LiveProvider>
