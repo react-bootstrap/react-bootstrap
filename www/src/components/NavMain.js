@@ -136,6 +136,9 @@ function NavMain({ activePage }) {
               {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
             </Dropdown.Toggle>
             <Dropdown.Menu role="menu">
+              <Dropdown.Item href="https://react-bootstrap.github.io">
+                v2.x (Bootstrap 5)
+              </Dropdown.Item>
               <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
                 v0.33.1 (Bootstrap 3)
               </Dropdown.Item>
