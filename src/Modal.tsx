@@ -12,7 +12,7 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
+import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
@@ -49,6 +49,7 @@ export interface ModalProps
   contentClassName?: string;
   dialogAs?: React.ElementType;
   scrollable?: boolean;
+  [other: string]: any;
 }
 
 let manager;
@@ -383,7 +384,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           return;
         }
 
-        onHide();
+        onHide?.();
       };
 
       const handleEscapeKeyDown = (e) => {
@@ -397,30 +398,30 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         }
       };
 
-      const handleEnter = (node, ...args) => {
+      const handleEnter = (node, isAppearing) => {
         if (node) {
           node.style.display = 'block';
           updateDialogStyle(node);
         }
 
-        onEnter?.(node, ...args);
+        onEnter?.(node, isAppearing);
       };
 
-      const handleExit = (node, ...args) => {
+      const handleExit = (node) => {
         removeStaticModalAnimationRef.current?.();
-        onExit?.(node, ...args);
+        onExit?.(node);
       };
 
-      const handleEntering = (node, ...args) => {
-        onEntering?.(node, ...args);
+      const handleEntering = (node, isAppearing) => {
+        onEntering?.(node, isAppearing);
 
         // FIXME: This should work even when animation is disabled.
         addEventListener(window as any, 'resize', handleWindowResize);
       };
 
-      const handleExited = (node, ...args) => {
+      const handleExited = (node) => {
         if (node) node.style.display = ''; // RHL removes it sometimes
-        onExited?.(...args);
+        onExited?.(node);
 
         // FIXME: This should work even when animation is disabled.
         removeEventListener(window as any, 'resize', handleWindowResize);
