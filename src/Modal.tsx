@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
+import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
 import warning from 'warning';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
@@ -47,6 +47,7 @@ export interface ModalProps
   contentClassName?: string;
   dialogAs?: React.ElementType;
   scrollable?: boolean;
+  [other: string]: any;
 }
 
 type Modal = BsPrefixRefForwardingComponent<'div', ModalProps> & {
@@ -240,7 +241,7 @@ function BackdropTransition(props) {
 
 /* eslint-enable no-use-before-define */
 
-const Modal: Modal = (React.forwardRef(
+const Modal: Modal = React.forwardRef(
   (
     {
       bsPrefix,
@@ -320,9 +321,8 @@ const Modal: Modal = (React.forwardRef(
     function updateDialogStyle(node) {
       if (!canUseDOM) return;
 
-      const containerIsOverflowing = getModalManager().isContainerOverflowing(
-        modal,
-      );
+      const containerIsOverflowing =
+        getModalManager().isContainerOverflowing(modal);
 
       const modalIsOverflowing =
         node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -521,7 +521,7 @@ const Modal: Modal = (React.forwardRef(
       </ModalContext.Provider>
     );
   },
-) as unknown) as Modal;
+) as unknown as Modal;
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
