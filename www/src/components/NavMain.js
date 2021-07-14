@@ -139,7 +139,7 @@ function NavMain({ activePage }) {
                 {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
               </Dropdown.Toggle>
               <Dropdown.Menu role="menu">
-                <Dropdown.Item href="https://react-bootstrap.github.io">
+                <Dropdown.Item href="https://react-bootstrap-v4.netlify.app">
                   v1.5.2 (Bootstrap 4)
                 </Dropdown.Item>
                 <Dropdown.Item href="https://react-bootstrap-v3.netlify.app">
