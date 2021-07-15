@@ -1,3 +1,15 @@
+# [2.0.0-beta.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* use shared modal manager to sync container state ([#5917](https://github.com/react-bootstrap/react-bootstrap/issues/5917)) ([46eb1bb](https://github.com/react-bootstrap/react-bootstrap/commit/46eb1bbfebd37ab90d6f3dcc41c254d2c31ce793))
+* **Modal:** fix wrong types on ModalProps ([#5894](https://github.com/react-bootstrap/react-bootstrap/issues/5894)) ([1db1f11](https://github.com/react-bootstrap/react-bootstrap/commit/1db1f110fc19248474c9a2b957fdd1ae30ebb880))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-06-19)
 
 
