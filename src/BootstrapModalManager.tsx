@@ -9,7 +9,7 @@ const Selector = {
   NAVBAR_TOGGLER: '.navbar-toggler',
 };
 
-export default class BootstrapModalManager extends ModalManager {
+class BootstrapModalManager extends ModalManager {
   private adjustAndStore<T extends keyof CSSStyleDeclaration>(
     prop: T,
     element: HTMLElement,
@@ -66,3 +66,11 @@ export default class BootstrapModalManager extends ModalManager {
     );
   }
 }
+
+let sharedManager: BootstrapModalManager | undefined;
+export function getSharedManager() {
+  if (!sharedManager) sharedManager = new BootstrapModalManager();
+  return sharedManager;
+}
+
+export default BootstrapModalManager;

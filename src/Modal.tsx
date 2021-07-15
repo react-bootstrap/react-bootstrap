@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
-import BootstrapModalManager from './BootstrapModalManager';
+import { getSharedManager } from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
 import ModalContext from './ModalContext';
@@ -51,8 +51,6 @@ export interface ModalProps
   scrollable?: boolean;
   [other: string]: any;
 }
-
-let manager;
 
 const propTypes = {
   /**
@@ -301,8 +299,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       function getModalManager() {
         if (propsManager) return propsManager;
-        if (!manager) manager = new BootstrapModalManager();
-        return manager;
+        return getSharedManager();
       }
 
       function updateDialogStyle(node) {
