@@ -13,7 +13,8 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
-import BootstrapModalManager from './BootstrapModalManager';
+import { ModalInstance } from 'react-overlays/ModalManager';
+import { getSharedManager } from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
 import ModalContext from './ModalContext';
@@ -51,8 +52,6 @@ export interface ModalProps
   scrollable?: boolean;
   [other: string]: any;
 }
-
-let manager;
 
 const propTypes = {
   /**
@@ -284,9 +283,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       const waitingForMouseUpRef = useRef(false);
       const ignoreBackdropClickRef = useRef(false);
       const removeStaticModalAnimationRef = useRef<(() => void) | null>(null);
-
-      // TODO: what's this type
-      const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
+      const [modal, setModalRef] = useCallbackRef<ModalInstance>();
       const mergedRef = useMergedRefs(ref, setModalRef);
       const handleHide = useEventCallback(onHide);
 
@@ -301,15 +298,15 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       function getModalManager() {
         if (propsManager) return propsManager;
-        if (!manager) manager = new BootstrapModalManager();
-        return manager;
+        return getSharedManager();
       }
 
       function updateDialogStyle(node) {
         if (!canUseDOM) return;
 
-        const containerIsOverflowing =
-          getModalManager().isContainerOverflowing(modal);
+        const containerIsOverflowing = getModalManager().isContainerOverflowing(
+          modal!,
+        );
 
         const modalIsOverflowing =
           node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -358,7 +355,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       const handleStaticModalAnimation = () => {
         setAnimateStaticModal(true);
         removeStaticModalAnimationRef.current = transitionEnd(
-          modal!.dialog,
+          modal!.dialog as any,
           () => {
             setAnimateStaticModal(false);
           },

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
@@ -8,8 +7,6 @@ import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
 } from 'react-overlays/Modal';
-import ModalManager from 'react-overlays/ModalManager';
-import useRootClose from 'react-overlays/useRootClose';
 import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
@@ -18,6 +15,9 @@ import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
+import BootstrapModalManager, {
+  getSharedManager,
+} from './BootstrapModalManager';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -217,17 +217,11 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       },
       ref,
     ) => {
-      const [dialogElement, setDialogElement] = useCallbackRef<HTMLElement>();
-      const modalManager = useRef<ModalManager>();
+      const modalManager = useRef<BootstrapModalManager>();
       const handleHide = useEventCallback(onHide);
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
       const modalBsPrefix = useBootstrapPrefix(undefined, 'modal');
-
-      // If there's a backdrop, let BaseModal handle closing.
-      useRootClose(dialogElement, handleHide, {
-        disabled: backdrop,
-      });
 
       const modalContext = useMemo(
         () => ({
@@ -238,23 +232,27 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
 
       function getModalManager() {
         if (propsManager) return propsManager;
-        if (!modalManager.current)
-          modalManager.current = new ModalManager({
-            handleContainerOverflow: !scroll,
-          });
-        return modalManager.current;
+        if (scroll) {
+          // Have to use a different modal manager since the shared
+          // one handles overflow.
+          if (!modalManager.current)
+            modalManager.current = new BootstrapModalManager({
+              handleContainerOverflow: false,
+            });
+          return modalManager.current;
+        }
+
+        return getSharedManager();
       }
 
       const handleEnter = (node, ...args) => {
         if (node) node.style.visibility = 'visible';
         onEnter?.(node, ...args);
-        setDialogElement(node);
       };
 
       const handleExited = (node, ...args) => {
         if (node) node.style.visibility = '';
         onExited?.(...args);
-        setDialogElement(null);
       };
 
       const renderBackdrop = useCallback(
@@ -295,7 +293,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             container={container}
             keyboard={keyboard}
             autoFocus={autoFocus}
-            enforceFocus={enforceFocus}
+            enforceFocus={enforceFocus && !scroll}
             restoreFocus={restoreFocus}
             restoreFocusOptions={restoreFocusOptions}
             onEscapeKeyDown={onEscapeKeyDown}
