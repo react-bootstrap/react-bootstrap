@@ -1,3 +1,14 @@
+# [2.0.0-beta.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-07-20)
+
+
+### Bug Fixes
+
+* **Modal:** fix children typing ([#5936](https://github.com/react-bootstrap/react-bootstrap/issues/5936)) ([ff79d51](https://github.com/react-bootstrap/react-bootstrap/commit/ff79d51fe234ec18d496d6b81c3e59e0ee320825))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-15)
 
 
