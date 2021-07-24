@@ -280,7 +280,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
   const handleCopy = () => {
     navigator.clipboard.writeText(codeToCopy) //copies code to clipboard
       .then(setCopy('Copied!'))
-      
+
   }
 
 
@@ -289,7 +289,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
       useEffect(() => {
         popper.scheduleUpdate();
       }, [children, popper]);
-  
+
       return (
         <Popover ref={ref} body {...props}>
           {children}
@@ -315,19 +315,19 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
           &&
 
           <>
-          <div className={styles.tooltip} onMouseOut={resetCopyStatus}>
-          <OverlayTrigger
-          trigger={['hover', 'focus']}
-          overlay={
-            <UpdatingPopover id="popover-contained">{copyStatus}</UpdatingPopover>
-          }
-    >
-      <Button onClick={handleCopy}  className={styles.styledCopyButton}  variant='dark' value={codeText} >
-        Copy
-      </Button>
-    </OverlayTrigger>
-    </div> 
-    <Editor handleCodeChange={handleCodeChange}/>
+            <div onMouseOut={resetCopyStatus}>
+              <OverlayTrigger
+                trigger={['hover', 'focus']}
+                overlay={
+                  <UpdatingPopover id="popover-contained">{copyStatus}</UpdatingPopover>
+                }
+              >
+                <Button onClick={handleCopy} className={styles.styledCopyButton} variant='dark' value={codeText} >
+                  Copy
+                </Button>
+              </OverlayTrigger>
+            </div>
+            <Editor handleCodeChange={handleCodeChange} />
           </>
         }
       </LiveProvider>
