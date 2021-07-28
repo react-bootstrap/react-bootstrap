@@ -323,7 +323,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
                 }
               >
                 <Button
-                  onMouseOut={resetCopyStatus}
+                  onMouseLeave={resetCopyStatus}
                   onClick={handleCopy}
                   className={styles.styledCopyButton}
                   variant="dark"
