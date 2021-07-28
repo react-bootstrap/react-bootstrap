@@ -315,7 +315,6 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
           <>
             <div>
               <OverlayTrigger
-                onHide={resetCopyStatus}
                 trigger={['hover', 'focus']}
                 overlay={
                   <UpdatingPopover id="popover-contained">
@@ -324,6 +323,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
                 }
               >
                 <Button
+                  onMouseLeave={resetCopyStatus}
                   onClick={handleCopy}
                   className={styles.styledCopyButton}
                   variant="dark"
