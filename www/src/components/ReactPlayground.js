@@ -313,7 +313,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
         <Preview showCode={showCode} className={exampleClassName} />
         {showCode && (
           <>
-            <div onMouseOut={resetCopyStatus}>
+            <div>
               <OverlayTrigger
                 trigger={['hover', 'focus']}
                 overlay={
@@ -323,6 +323,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
                 }
               >
                 <Button
+                  onMouseOut={resetCopyStatus}
                   onClick={handleCopy}
                   className={styles.styledCopyButton}
                   variant="dark"
