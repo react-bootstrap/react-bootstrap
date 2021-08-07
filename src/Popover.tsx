@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
@@ -11,7 +10,6 @@ import { BsPrefixProps } from './helpers';
 export interface PopoverProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {
-  id: string;
   placement?: Placement;
   title?: string;
   arrowProps?: ArrowProps;
@@ -28,12 +26,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
+  id: PropTypes.string,
 
   /**
    * Sets the direction the Popover is positioned towards.

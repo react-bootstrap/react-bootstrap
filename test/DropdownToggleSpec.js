@@ -15,10 +15,6 @@ describe('<DropdownToggle>', () => {
       .should.equal('herpa derpa');
   });
 
-  it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', () => {
-    mount(simpleToggle).assertSingle('button[aria-haspopup=true]');
-  });
-
   it('renders children', () => {
     mount(
       <DropdownToggle id="test-id">
@@ -58,6 +54,6 @@ describe('<DropdownToggle>', () => {
         title="bsClass"
         id="test-id"
       />,
-    ).assertSingle('.my-custom-bsPrefix.btn');
+    ).assertSingle('button.my-custom-bsPrefix.btn');
   });
 });

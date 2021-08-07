@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
-import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
+import safeFindDOMNode from './safeFindDOMNode';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
 

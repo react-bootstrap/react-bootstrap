@@ -7,8 +7,8 @@ import Transition, {
   ENTERED,
   ENTERING,
 } from 'react-transition-group/Transition';
+import { TransitionCallbacks } from '@restart/ui/types';
 import transitionEndListener from './transitionEndListener';
-import { TransitionCallbacks } from './helpers';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';
 
@@ -93,9 +93,9 @@ const fadeStyles = {
 const Fade = React.forwardRef<Transition<any>, FadeProps>(
   ({ className, children, ...props }, ref) => {
     const handleEnter = useCallback(
-      (node) => {
+      (node, isAppearing) => {
         triggerBrowserReflow(node);
-        props.onEnter?.(node);
+        props.onEnter?.(node, isAppearing);
       },
       [props],
     );

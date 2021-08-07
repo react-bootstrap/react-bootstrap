@@ -9,8 +9,8 @@ import Transition, {
   EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
+import { TransitionCallbacks } from '@restart/ui/types';
 import transitionEndListener from './transitionEndListener';
-import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';

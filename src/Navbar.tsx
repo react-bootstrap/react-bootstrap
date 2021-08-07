@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-
+import SelectableContext from '@restart/ui/SelectableContext';
+import { SelectCallback } from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
 
 import createWithBsPrefix from './createWithBsPrefix';
@@ -11,12 +12,7 @@ import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
-import SelectableContext from './SelectableContext';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const NavbarText = createWithBsPrefix('navbar-text', {
   Component: 'span',

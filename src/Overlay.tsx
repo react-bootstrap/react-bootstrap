@@ -4,29 +4,30 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BaseOverlay, {
   OverlayProps as BaseOverlayProps,
-} from 'react-overlays/Overlay';
-import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
+  OverlayArrowProps,
+} from '@restart/ui/Overlay';
 import { componentOrElement, elementType } from 'prop-types-extra';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
 import { TransitionType } from './helpers';
-import { ArrowProps, Placement, RootCloseEvent } from './types';
+import { Placement, RootCloseEvent } from './types';
+import safeFindDOMNode from './safeFindDOMNode';
 
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;
   style: React.CSSProperties;
   'aria-labelledby'?: string;
 
-  arrowProps: ArrowProps;
+  arrowProps: Partial<OverlayArrowProps>;
 
   show: boolean;
-  placement: Placement;
+  placement: Placement | undefined;
   popper: {
     state: any;
     outOfBoundaries: boolean;
-    placement: Placement;
-    scheduleUpdate: () => void;
+    placement: Placement | undefined;
+    scheduleUpdate?: () => void;
   };
   [prop: string]: any;
 }
@@ -178,28 +179,18 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
         }}
         transition={actualTransition}
       >
-        {({
-          props: overlayProps,
-          arrowProps,
-          show,
-          update,
-          forceUpdate: _,
-          placement,
-          state,
-          ...props
-        }) => {
+        {(overlayProps, { arrowProps, placement, popper: popperObj, show }) => {
           wrapRefs(overlayProps, arrowProps);
           const popper = Object.assign(popperRef.current, {
-            state,
-            scheduleUpdate: update,
+            state: popperObj?.state,
+            scheduleUpdate: popperObj?.update,
             placement,
             outOfBoundaries:
-              state?.modifiersData.hide?.isReferenceHidden || false,
+              popperObj?.state?.modifiersData.hide?.isReferenceHidden || false,
           });
 
           if (typeof overlay === 'function')
             return overlay({
-              ...props,
               ...overlayProps,
               placement,
               show,
@@ -209,7 +200,6 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
             });
 
           return React.cloneElement(overlay as React.ReactElement, {
-            ...props,
             ...overlayProps,
             placement,
             arrowProps,

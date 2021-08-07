@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TransitionComponent } from '@restart/ui/types';
 
 export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
@@ -44,27 +45,5 @@ export type BsPrefixComponentClass<
   As extends React.ElementType,
   P = unknown,
 > = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
-
-export type SelectCallback = (
-  eventKey: string | null,
-  e: React.SyntheticEvent<unknown>,
-) => void;
-
-export interface TransitionCallbacks {
-  onEnter?(node: HTMLElement): any;
-  onEntered?(node: HTMLElement): any;
-  onEntering?(node: HTMLElement): any;
-  onExit?(node: HTMLElement): any;
-  onExited?(node: HTMLElement): any;
-  onExiting?(node: HTMLElement): any;
-}
-
-export type TransitionComponent = React.ComponentType<
-  {
-    in?: boolean;
-    appear?: boolean;
-    children: React.ReactElement;
-  } & TransitionCallbacks
->;
 
 export type TransitionType = boolean | TransitionComponent;

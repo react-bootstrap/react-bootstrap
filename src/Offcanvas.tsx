@@ -6,7 +6,7 @@ import { useCallback, useMemo, useRef } from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
-} from 'react-overlays/Modal';
+} from '@restart/ui/Modal';
 import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
@@ -306,7 +306,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             onExiting={onExiting}
             onExited={handleExited}
             manager={getModalManager()}
-            containerClassName={`${bsPrefix}-open`}
             transition={DialogTransition}
             backdropTransition={BackdropTransition}
             renderBackdrop={renderBackdrop}

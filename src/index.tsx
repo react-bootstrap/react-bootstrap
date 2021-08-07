@@ -14,6 +14,9 @@ export type { AccordionButtonProps } from './AccordionButton';
 export { default as Alert } from './Alert';
 export type { AlertProps } from './Alert';
 
+export { default as Anchor } from './Anchor';
+export type { AnchorProps } from './Anchor';
+
 export { default as Badge } from './Badge';
 export type { BadgeProps } from './Badge';
 
@@ -165,9 +168,6 @@ export type { RatioProps } from './Ratio';
 
 export { default as Row } from './Row';
 export type { RowProps } from './Row';
-
-export { default as SafeAnchor } from './SafeAnchor';
-export type { SafeAnchorProps } from './SafeAnchor';
 
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';

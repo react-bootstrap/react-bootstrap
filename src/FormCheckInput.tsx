@@ -11,7 +11,6 @@ type FormCheckInputType = 'checkbox' | 'radio';
 export interface FormCheckInputProps
   extends BsPrefixProps,
     React.InputHTMLAttributes<HTMLInputElement> {
-  id?: string;
   type?: FormCheckInputType;
   isValid?: boolean;
   isInvalid?: boolean;

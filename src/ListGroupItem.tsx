@@ -2,20 +2,17 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
-
-import AbstractNavItem from './AbstractNavItem';
+import BaseNavItem, {
+  NavItemProps as BaseNavItemProps,
+} from '@restart/ui/NavItem';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant, EventKey } from './types';
+import { Variant } from './types';
 
 export interface ListGroupItemProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+  extends Omit<BaseNavItemProps, 'onSelect'>,
     BsPrefixProps {
   action?: boolean;
-  active?: boolean;
-  disabled?: boolean;
-  eventKey?: EventKey;
-  href?: string;
   onClick?: React.MouseEventHandler;
   variant?: Variant;
 }
@@ -104,7 +101,7 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
       }
 
       return (
-        <AbstractNavItem
+        <BaseNavItem
           ref={ref}
           {...props}
           // eslint-disable-next-line no-nested-ternary

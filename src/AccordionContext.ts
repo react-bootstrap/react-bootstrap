@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectCallback } from './helpers';
+import { SelectCallback } from '@restart/ui/types';
 
 export interface AccordionContextValue {
   activeEventKey?: string;
