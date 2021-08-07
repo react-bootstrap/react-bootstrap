@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
-
-import TabContainer from './TabContainer';
+import Tabs from '@restart/ui/Tabs';
 import TabContent from './TabContent';
 import TabPane, { TabPaneProps } from './TabPane';
-import { EventKey } from './types';
 
 export interface TabProps extends Omit<TabPaneProps, 'title'> {
-  eventKey?: EventKey;
   title: React.ReactNode;
   disabled?: boolean;
   tabClassName?: string;
@@ -46,7 +43,7 @@ const Tab: React.FC<TabProps> = () => {
 Tab.propTypes = propTypes;
 
 export default Object.assign(Tab, {
-  Container: TabContainer,
+  Container: Tabs,
   Content: TabContent,
   Pane: TabPane,
 });
