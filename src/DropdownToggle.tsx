@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import * as React from 'react';
 import { useContext } from 'react';
-import { useDropdownToggle } from 'react-overlays/DropdownToggle';
-import DropdownContext from 'react-overlays/DropdownContext';
+import { useDropdownToggle } from '@restart/ui/DropdownToggle';
+import DropdownContext from '@restart/ui/DropdownContext';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
 import InputGroupContext from './InputGroupContext';
@@ -12,7 +11,8 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface DropdownToggleProps extends ButtonProps {
+export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
+  as?: React.ElementType;
   split?: boolean;
   childBsPrefix?: string;
 }
@@ -35,9 +35,8 @@ const propTypes = {
   /**
    * An html id attribute, necessary for assistive technologies, such as screen readers.
    * @type {string|number}
-   * @required
    */
-  id: isRequiredForA11y(PropTypes.any),
+  id: PropTypes.string,
 
   split: PropTypes.bool,
 

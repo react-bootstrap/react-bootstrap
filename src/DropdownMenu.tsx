@@ -5,20 +5,17 @@ import { useContext } from 'react';
 import {
   useDropdownMenu,
   UseDropdownMenuOptions,
-} from 'react-overlays/DropdownMenu';
+} from '@restart/ui/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import { SelectCallback } from '@restart/ui/types';
 import warning from 'warning';
 import DropdownContext from './DropdownContext';
 import InputGroupContext from './InputGroupContext';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
-import { AlignType, AlignDirection, alignPropType } from './types';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { AlignType, AlignDirection, alignPropType, Placement } from './types';
 
 export type DropdownMenuVariant = 'dark' | string;
 
@@ -117,10 +114,10 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
       },
       ref,
     ) => {
-      let alignRight = false;
+      let alignEnd = false;
       const isNavbar = useContext(NavbarContext);
       const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-      const { align: contextAlign } = useContext(DropdownContext);
+      const { align: contextAlign, drop } = useContext(DropdownContext);
       align = align || contextAlign;
       const isInputGroup = useContext(InputGroupContext);
 
@@ -140,25 +137,30 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
 
             // .dropdown-menu-end is required for responsively aligning
             // left in addition to align left classes.
-            // Reuse alignRight to toggle the class below.
-            alignRight = direction === 'start';
+            alignEnd = direction === 'start';
             alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
           }
         } else if (align === 'end') {
-          alignRight = true;
+          alignEnd = true;
         }
       }
 
-      const [menuProps, { hasShown, popper, show, alignEnd, toggle }] =
-        useDropdownMenu({
-          flip,
-          rootCloseEvent,
-          show: showProps,
-          alignEnd: alignRight,
-          usePopper: !isNavbar && alignClasses.length === 0,
-          offset: [0, 2],
-          popperConfig,
-        });
+      let placement: Placement = alignEnd ? 'bottom-end' : 'bottom-start';
+      if (drop === 'up') placement = alignEnd ? 'top-end' : 'top-start';
+      else if (drop === 'end')
+        placement = alignEnd ? 'right-end' : 'right-start';
+      else if (drop === 'start')
+        placement = alignEnd ? 'left-end' : 'left-start';
+
+      const [menuProps, { hasShown, popper, show, toggle }] = useDropdownMenu({
+        flip,
+        rootCloseEvent,
+        show: showProps,
+        usePopper: !isNavbar && alignClasses.length === 0,
+        offset: [0, 2],
+        popperConfig,
+        placement,
+      });
 
       menuProps.ref = useMergedRefs(
         useWrappedRefWithWarning(ref, 'DropdownMenu'),
