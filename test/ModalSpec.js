@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import ModalManager from 'react-overlays/ModalManager';
+import ModalManager from '@restart/ui/ModalManager';
 import Modal from '../src/Modal';
 
 describe('<Modal>', () => {

@@ -12,8 +12,8 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
-import { ModalInstance } from 'react-overlays/ModalManager';
+import BaseModal, { ModalProps as BaseModalProps } from '@restart/ui/Modal';
+import { ModalInstance } from '@restart/ui/ModalManager';
 import { getSharedManager } from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
@@ -305,9 +305,8 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       function updateDialogStyle(node) {
         if (!canUseDOM) return;
 
-        const containerIsOverflowing = getModalManager().isContainerOverflowing(
-          modal!,
-        );
+        const containerIsOverflowing =
+          getModalManager().getScrollbarWidth() > 0;
 
         const modalIsOverflowing =
           node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -387,7 +386,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const handleEscapeKeyDown = (e) => {
         if (!keyboard && backdrop === 'static') {
-          // Call preventDefault to stop modal from closing in react-overlays,
+          // Call preventDefault to stop modal from closing in restart ui,
           // then play our animation.
           e.preventDefault();
           handleStaticModalAnimation();
@@ -495,7 +494,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
             onExiting={onExiting}
             onExited={handleExited}
             manager={getModalManager()}
-            containerClassName={`${bsPrefix}-open`}
             transition={animation ? DialogTransition : undefined}
             backdropTransition={animation ? BackdropTransition : undefined}
             renderBackdrop={renderBackdrop}
