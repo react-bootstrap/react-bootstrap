@@ -21,10 +21,9 @@ export interface DropdownButtonProps
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
-   * @required
+   * @type {string}
    */
-  id: PropTypes.any,
+  id: PropTypes.string,
 
   /** An `href` passed to the Toggle component */
   href: PropTypes.string,

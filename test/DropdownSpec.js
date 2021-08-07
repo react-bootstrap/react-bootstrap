@@ -62,8 +62,6 @@ describe('<Dropdown>', () => {
       .getDOMNode();
 
     buttonNode.textContent.should.match(/Child Title/);
-
-    buttonNode.getAttribute('aria-haspopup').should.equal('true');
     buttonNode.getAttribute('aria-expanded').should.equal('false');
     buttonNode.getAttribute('id').should.be.ok;
   });
@@ -196,10 +194,9 @@ describe('<Dropdown>', () => {
       wrapper.find('button').simulate('click');
 
       expect(spy).to.have.been.calledOnce;
-      expect(spy.getCall(0).args.length).to.equal(3);
+      expect(spy.getCall(0).args.length).to.equal(2);
       expect(spy.getCall(0).args[0]).to.equal(true);
-      expect(spy.getCall(0).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(0).args[2], { source: 'click' });
+      expect(spy.getCall(0).args[1].source).to.equal('click');
     });
 
     it('passes open, event, and source correctly when closed with click', () => {
@@ -215,10 +212,9 @@ describe('<Dropdown>', () => {
 
       wrapper.find('button').simulate('click');
       expect(spy).to.have.been.calledTwice;
-      expect(spy.getCall(1).args.length).to.equal(3);
+      expect(spy.getCall(1).args.length).to.equal(2);
       expect(spy.getCall(1).args[0]).to.equal(false);
-      expect(spy.getCall(1).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(1).args[2], { source: 'click' });
+      expect(spy.getCall(1).args[1].source).to.equal('click');
     });
 
     it('passes open, event, and source correctly when child selected', () => {
@@ -240,10 +236,9 @@ describe('<Dropdown>', () => {
       wrapper.find('a').first().simulate('click');
 
       expect(spy).to.have.been.calledTwice;
-      expect(spy.getCall(1).args.length).to.equal(3);
+      expect(spy.getCall(1).args.length).to.equal(2);
       expect(spy.getCall(1).args[0]).to.equal(false);
-      expect(spy.getCall(1).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(1).args[2], { source: 'select' });
+      expect(spy.getCall(1).args[1].source).to.equal('select');
     });
 
     it('passes open, event, and source correctly when opened with keydown', () => {
@@ -258,10 +253,9 @@ describe('<Dropdown>', () => {
       });
 
       expect(spy).to.have.been.calledOnce;
-      expect(spy.getCall(0).args.length).to.equal(3);
+      expect(spy.getCall(0).args.length).to.equal(2);
       expect(spy.getCall(0).args[0]).to.equal(true);
-      expect(spy.getCall(0).args[1]).to.be.an('event');
-      assert.deepEqual(spy.getCall(0).args[2], { source: 'keydown' });
+      expect(spy.getCall(0).args[1].source).to.equal('keydown');
     });
   });
 
@@ -368,14 +362,17 @@ describe('<Dropdown>', () => {
       });
 
       it('should not close on outer click', () => {
-        let wrapper = mount(simpleDropdown).setProps({
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
           show: true,
           autoClose: 'inside',
+          onToggle,
         });
 
         simulant.fire(document.body, 'click');
 
-        expect(wrapper.find('Dropdown').prop('show')).to.be.true;
+        onToggle.should.not.be.called;
       });
     });
 
