@@ -33,14 +33,12 @@ export type Color =
   | 'white'
   | 'muted';
 
-export type Placement = import('react-overlays/usePopper').Placement;
+export type Placement = import('@restart/ui/usePopper').Placement;
 
 export type ArrowProps = {
   ref: React.RefCallback<HTMLElement>;
   style: React.CSSProperties;
 };
-
-export type EventKey = string | number;
 
 export type AlignDirection = 'start' | 'end';
 

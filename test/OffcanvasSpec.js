@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 // import simulant from 'simulant';
-import ModalManager from 'react-overlays/ModalManager';
+import ModalManager from '@restart/ui/ModalManager';
 import Offcanvas from '../src/Offcanvas';
 
 describe('<Offcanvas>', () => {

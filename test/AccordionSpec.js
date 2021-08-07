@@ -114,7 +114,7 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    wrapper.find('DropdownItem').simulate('click');
+    wrapper.find('a.dropdown-item').simulate('click');
 
     wrapper
       .find('AccordionCollapse')

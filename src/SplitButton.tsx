@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
-import Button, { ButtonType } from './Button';
+import { ButtonType } from '@restart/ui/Button';
+import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown, { DropdownProps } from './Dropdown';
 import { PropsFromToggle } from './DropdownToggle';
@@ -9,10 +9,9 @@ import { BsPrefixProps } from './helpers';
 import { alignPropType } from './types';
 
 export interface SplitButtonProps
-  extends Omit<DropdownProps, 'title' | 'id'>,
+  extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
     BsPrefixProps {
-  id: string | number;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -25,10 +24,10 @@ export interface SplitButtonProps
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: PropTypes.any,
+  id: PropTypes.string,
 
   /**
    * Accessible label for the toggle; the value of `title` if not specified.
@@ -83,7 +82,7 @@ const propTypes = {
   size: PropTypes.string,
 };
 
-const defaultProps = {
+const defaultProps: Partial<SplitButtonProps> = {
   toggleLabel: 'Toggle dropdown',
   type: 'button',
 };
@@ -134,7 +133,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       </Button>
       <Dropdown.Toggle
         split
-        id={id ? id.toString() : undefined}
+        id={id}
         size={size}
         variant={variant}
         disabled={props.disabled}

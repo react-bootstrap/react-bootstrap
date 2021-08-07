@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import useTimeout from '@restart/hooks/useTimeout';
+import { TransitionComponent } from '@restart/ui/types';
 import Fade from './Fade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  TransitionComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
 export interface ToastProps

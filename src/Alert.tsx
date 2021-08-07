@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import CloseButton, { CloseButtonVariant } from './CloseButton';
 import { Variant } from './types';
 import divWithClassName from './divWithClassName';
 import createWithBsPrefix from './createWithBsPrefix';
-import SafeAnchor from './SafeAnchor';
 import { TransitionType } from './helpers';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -32,7 +32,7 @@ const AlertHeading = createWithBsPrefix('alert-heading', {
 });
 
 const AlertLink = createWithBsPrefix('alert-link', {
-  Component: SafeAnchor,
+  Component: Anchor,
 });
 
 const propTypes = {

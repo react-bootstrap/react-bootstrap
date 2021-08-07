@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react';
 import hasClass from 'dom-helpers/hasClass';
-import { Options } from 'react-overlays/usePopper';
+import { Options } from '@restart/ui/usePopper';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Popover from './Popover';
 

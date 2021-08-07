@@ -21,7 +21,6 @@ export interface FormControlProps
   value?: string | string[] | number;
   onChange?: React.ChangeEventHandler<FormControlElement>;
   type?: string;
-  id?: string;
   isValid?: boolean;
   isInvalid?: boolean;
 }

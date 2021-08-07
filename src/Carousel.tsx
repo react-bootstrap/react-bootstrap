@@ -2,6 +2,7 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
+import Anchor from '@restart/ui/Anchor';
 import classNames from 'classnames';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
@@ -18,7 +19,6 @@ import { useUncontrolled } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import { map, forEach } from './ElementChildren';
-import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
@@ -616,20 +616,20 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
         {controls && (
           <>
             {(wrap || activeIndex !== 0) && (
-              <SafeAnchor className={`${prefix}-control-prev`} onClick={prev}>
+              <Anchor className={`${prefix}-control-prev`} onClick={prev}>
                 {prevIcon}
                 {prevLabel && (
                   <span className="visually-hidden">{prevLabel}</span>
                 )}
-              </SafeAnchor>
+              </Anchor>
             )}
             {(wrap || activeIndex !== numChildren - 1) && (
-              <SafeAnchor className={`${prefix}-control-next`} onClick={next}>
+              <Anchor className={`${prefix}-control-next`} onClick={next}>
                 {nextIcon}
                 {nextLabel && (
                   <span className="visually-hidden">{nextLabel}</span>
                 )}
-              </SafeAnchor>
+              </Anchor>
             )}
           </>
         )}

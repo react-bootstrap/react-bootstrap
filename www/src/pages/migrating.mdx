@@ -63,6 +63,10 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 ### DropdownButton
 - Removed `menuAlign` prop in favor of `align`.
 
+### DropdownItem
+
+- removed `onSelect`. Use `onSelect` in the parent `Dropdown` instead.
+
 ### DropdownMenu
 - Removed `alignRight`. Use `align="end"` instead.
 
@@ -111,6 +115,14 @@ spacing, use margin utilities instead.
 
 - dropped `InputGroupPrepend` and `InputGroupAppend`. Buttons and `InputGroupText` can now be added as direct children.
 
+### Nav
+
+- keyboard navigation has been removed. If you need this, use `Tabs` instead.
+
+### NavLink
+
+- removed `onSelect`. Use `onSelect` in the parent `Nav` instead.
+
 ### Popover
 
 - renamed `content` prop to `body` to coincide with PopoverContent component name change.
@@ -127,6 +139,10 @@ spacing, use margin utilities instead.
 
 - renamed to Ratio.
 - aspectRatio options changed to '1x1' | '4x3' | '16x9' | '21x9'.
+
+### SafeAnchor
+
+- renamed to Anchor.
 
 ### SplitButton
 

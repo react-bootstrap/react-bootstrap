@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { ArrowProps, Placement } from './types';
 import { BsPrefixProps } from './helpers';
@@ -9,7 +8,6 @@ import { BsPrefixProps } from './helpers';
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {
-  id: string;
   placement?: Placement;
   arrowProps?: ArrowProps;
   show?: boolean;
@@ -24,12 +22,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
+  id: PropTypes.string,
 
   /**
    * Sets the direction the Tooltip is positioned towards.
