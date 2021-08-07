@@ -2,15 +2,18 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
-
-import SafeAnchor from './SafeAnchor';
-import AbstractNavItem, { AbstractNavItemProps } from './AbstractNavItem';
+import Anchor from '@restart/ui/Anchor';
+import {
+  useNavItem,
+  NavItemProps as BaseNavItemProps,
+} from '@restart/ui/NavItem';
+import { makeEventKey } from '@restart/ui/SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavLinkProps
   extends BsPrefixProps,
-    Omit<AbstractNavItemProps, 'as'> {}
+    Omit<BaseNavItemProps, 'as'> {}
 
 const propTypes = {
   /**
@@ -37,14 +40,6 @@ const propTypes = {
   /** The HTML href attribute for the `NavLink` */
   href: PropTypes.string,
 
-  /** A callback fired when the `NavLink` is selected.
-   *
-   * ```js
-   * function (eventKey: any, event: SyntheticEvent) {}
-   * ```
-   */
-  onSelect: PropTypes.func,
-
   /**
    * Uniquely identifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
@@ -57,20 +52,39 @@ const propTypes = {
 
 const defaultProps = {
   disabled: false,
-  as: SafeAnchor,
 };
 
 const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
   React.forwardRef<HTMLElement, NavLinkProps>(
-    ({ bsPrefix, disabled, className, as, ...props }, ref) => {
+    (
+      {
+        bsPrefix,
+        className,
+        as: Component = Anchor,
+        active,
+        eventKey,
+        ...props
+      },
+      ref,
+    ) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
+      const [navItemProps, meta] = useNavItem({
+        key: makeEventKey(eventKey, props.href),
+        active,
+        ...props,
+      });
+
       return (
-        <AbstractNavItem
+        <Component
           {...props}
+          {...navItemProps}
           ref={ref}
-          as={as as any}
-          disabled={disabled}
-          className={classNames(className, bsPrefix, disabled && 'disabled')}
+          className={classNames(
+            className,
+            bsPrefix,
+            props.disabled && 'disabled',
+            meta.isActive && 'active',
+          )}
         />
       );
     },
