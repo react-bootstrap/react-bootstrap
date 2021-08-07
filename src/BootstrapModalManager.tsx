@@ -1,7 +1,8 @@
+import addClass from 'dom-helpers/addClass';
 import css from 'dom-helpers/css';
 import qsa from 'dom-helpers/querySelectorAll';
-import getScrollbarSize from 'dom-helpers/scrollbarSize';
-import ModalManager from 'react-overlays/ModalManager';
+import removeClass from 'dom-helpers/removeClass';
+import ModalManager, { ContainerState } from '@restart/ui/ModalManager';
 
 const Selector = {
   FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
@@ -35,25 +36,30 @@ class BootstrapModalManager extends ModalManager {
     }
   }
 
-  setContainerStyle(containerState, container) {
-    super.setContainerStyle(containerState, container);
+  setContainerStyle(containerState: ContainerState) {
+    super.setContainerStyle(containerState);
 
-    if (!containerState.overflowing) return;
-    const size = getScrollbarSize();
+    const container = this.getElement();
+    addClass(container, 'modal-open');
+
+    if (!containerState.scrollBarWidth) return;
 
     qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
-      this.adjustAndStore('paddingRight', el, size),
+      this.adjustAndStore('paddingRight', el, containerState.scrollBarWidth),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
-      this.adjustAndStore('marginRight', el, -size),
+      this.adjustAndStore('marginRight', el, -containerState.scrollBarWidth),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
-      this.adjustAndStore('marginRight', el, size),
+      this.adjustAndStore('marginRight', el, containerState.scrollBarWidth),
     );
   }
 
-  removeContainerStyle(containerState, container) {
-    super.removeContainerStyle(containerState, container);
+  removeContainerStyle(containerState: ContainerState) {
+    super.removeContainerStyle(containerState);
+
+    const container = this.getElement();
+    removeClass(container, 'modal-open');
 
     qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
       this.restore('paddingRight', el),
