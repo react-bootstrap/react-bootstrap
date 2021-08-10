@@ -9,7 +9,7 @@ import {
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import { SelectCallback } from '@restart/ui/types';
 import warning from 'warning';
-import DropdownContext from './DropdownContext';
+import DropdownContext, { DropDirection } from './DropdownContext';
 import InputGroupContext from './InputGroupContext';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -95,6 +95,29 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
+export function getDropdownMenuPlacement(
+  alignEnd: boolean,
+  dropDirection?: DropDirection,
+  isRTL?: boolean,
+) {
+  const topStart = isRTL ? 'top-end' : 'top-start';
+  const topEnd = isRTL ? 'top-start' : 'top-end';
+  const bottomStart = isRTL ? 'bottom-end' : 'bottom-start';
+  const bottomEnd = isRTL ? 'bottom-start' : 'bottom-end';
+  const leftStart = isRTL ? 'right-start' : 'left-start';
+  const leftEnd = isRTL ? 'right-end' : 'left-end';
+  const rightStart = isRTL ? 'left-start' : 'right-start';
+  const rightEnd = isRTL ? 'left-end' : 'right-end';
+
+  let placement: Placement = alignEnd ? bottomEnd : bottomStart;
+  if (dropDirection === 'up') placement = alignEnd ? topEnd : topStart;
+  else if (dropDirection === 'end')
+    placement = alignEnd ? rightEnd : rightStart;
+  else if (dropDirection === 'start')
+    placement = alignEnd ? leftEnd : leftStart;
+  return placement;
+}
+
 const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
   React.forwardRef<HTMLElement, DropdownMenuProps>(
     (
@@ -117,7 +140,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
       let alignEnd = false;
       const isNavbar = useContext(NavbarContext);
       const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-      const { align: contextAlign, drop } = useContext(DropdownContext);
+      const { align: contextAlign, drop, isRTL } = useContext(DropdownContext);
       align = align || contextAlign;
       const isInputGroup = useContext(InputGroupContext);
 
@@ -145,12 +168,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         }
       }
 
-      let placement: Placement = alignEnd ? 'bottom-end' : 'bottom-start';
-      if (drop === 'up') placement = alignEnd ? 'top-end' : 'top-start';
-      else if (drop === 'end')
-        placement = alignEnd ? 'right-end' : 'right-start';
-      else if (drop === 'start')
-        placement = alignEnd ? 'left-end' : 'left-start';
+      const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
 
       const [menuProps, { hasShown, popper, show, toggle }] = useDropdownMenu({
         flip,
