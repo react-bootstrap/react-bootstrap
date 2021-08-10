@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import { ArrowProps, Placement } from './types';
-import { BsPrefixProps } from './helpers';
+import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -89,14 +89,10 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
+    const isRTL = useIsRTL();
 
     const [primaryPlacement] = placement?.split('-') || [];
-    let bsDirection = primaryPlacement;
-    if (primaryPlacement === 'left') {
-      bsDirection = 'start';
-    } else if (primaryPlacement === 'right') {
-      bsDirection = 'end';
-    }
+    const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     return (
       <div
