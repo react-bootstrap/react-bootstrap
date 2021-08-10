@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
 import { ArrowProps, Placement } from './types';
-import { BsPrefixProps } from './helpers';
+import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface PopoverProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -98,13 +98,9 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
+    const isRTL = useIsRTL();
     const [primaryPlacement] = placement?.split('-') || [];
-    let bsDirection = primaryPlacement;
-    if (primaryPlacement === 'left') {
-      bsDirection = 'start';
-    } else if (primaryPlacement === 'right') {
-      bsDirection = 'end';
-    }
+    const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     return (
       <div
