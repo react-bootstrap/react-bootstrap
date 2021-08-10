@@ -23,7 +23,7 @@ import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 
 export interface ModalProps
   extends Omit<
@@ -287,6 +287,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       const [modal, setModalRef] = useCallbackRef<ModalInstance>();
       const mergedRef = useMergedRefs(ref, setModalRef);
       const handleHide = useEventCallback(onHide);
+      const isRTL = useIsRTL();
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
 
@@ -299,7 +300,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       function getModalManager() {
         if (propsManager) return propsManager;
-        return getSharedManager();
+        return getSharedManager({ isRTL });
       }
 
       function updateDialogStyle(node) {
