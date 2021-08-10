@@ -9,6 +9,7 @@ import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
 import DocsAlert from '../components/DocsAlert';
 import SEO from '../seo';
+import ThemeProvider from '../../../src/ThemeProvider';
 
 const styles = css`
   .gray > :not(:first-child) {
@@ -46,12 +47,15 @@ const propTypes = {
 
 function DefaultLayout({ children, location, grayscale = true }) {
   return (
-    <div className={grayscale ? styles.gray : undefined}>
-      <SEO pathname={location.pathname} />
-      <NavMain activePage={location.pathname} />
-      <DocsAlert />
-      <MDXProvider components={components}>{children}</MDXProvider>
-    </div>
+    /* Change dir to "rtl" for RTL dev */
+    <ThemeProvider dir="ltr">
+      <div className={grayscale ? styles.gray : undefined}>
+        <SEO pathname={location.pathname} />
+        <NavMain activePage={location.pathname} />
+        <DocsAlert />
+        <MDXProvider components={components}>{children}</MDXProvider>
+      </div>
+    </ThemeProvider>
   );
 }
 

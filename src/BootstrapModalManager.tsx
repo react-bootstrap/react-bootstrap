@@ -2,7 +2,10 @@ import addClass from 'dom-helpers/addClass';
 import css from 'dom-helpers/css';
 import qsa from 'dom-helpers/querySelectorAll';
 import removeClass from 'dom-helpers/removeClass';
-import ModalManager, { ContainerState } from '@restart/ui/ModalManager';
+import ModalManager, {
+  ContainerState,
+  ModalManagerOptions,
+} from '@restart/ui/ModalManager';
 
 const Selector = {
   FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
@@ -44,14 +47,17 @@ class BootstrapModalManager extends ModalManager {
 
     if (!containerState.scrollBarWidth) return;
 
+    const paddingProp = this.isRTL ? 'paddingLeft' : 'paddingRight';
+    const marginProp = this.isRTL ? 'marginLeft' : 'marginRight';
+
     qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
-      this.adjustAndStore('paddingRight', el, containerState.scrollBarWidth),
+      this.adjustAndStore(paddingProp, el, containerState.scrollBarWidth),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
-      this.adjustAndStore('marginRight', el, -containerState.scrollBarWidth),
+      this.adjustAndStore(marginProp, el, -containerState.scrollBarWidth),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
-      this.adjustAndStore('marginRight', el, containerState.scrollBarWidth),
+      this.adjustAndStore(marginProp, el, containerState.scrollBarWidth),
     );
   }
 
@@ -61,21 +67,24 @@ class BootstrapModalManager extends ModalManager {
     const container = this.getElement();
     removeClass(container, 'modal-open');
 
+    const paddingProp = this.isRTL ? 'paddingLeft' : 'paddingRight';
+    const marginProp = this.isRTL ? 'marginLeft' : 'marginRight';
+
     qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
-      this.restore('paddingRight', el),
+      this.restore(paddingProp, el),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
-      this.restore('marginRight', el),
+      this.restore(marginProp, el),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
-      this.restore('marginRight', el),
+      this.restore(marginProp, el),
     );
   }
 }
 
 let sharedManager: BootstrapModalManager | undefined;
-export function getSharedManager() {
-  if (!sharedManager) sharedManager = new BootstrapModalManager();
+export function getSharedManager(options?: ModalManagerOptions) {
+  if (!sharedManager) sharedManager = new BootstrapModalManager(options);
   return sharedManager;
 }
 
