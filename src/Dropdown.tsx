@@ -10,13 +10,13 @@ import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import DropdownContext, { DropDirection } from './DropdownContext';
 import DropdownItem from './DropdownItem';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { AlignType, alignPropType, Placement } from './types';
+import { AlignType, alignPropType } from './types';
 
 const DropdownHeader = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
@@ -149,6 +149,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
 
     const isInputGroup = useContext(InputGroupContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+    const isRTL = useIsRTL();
 
     const isClosingPermitted = (source: string): boolean => {
       // autoClose=false only permits close on button click
@@ -176,19 +177,16 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       },
     );
 
-    // TODO RTL: Flip directions based on RTL setting.
     const alignEnd = align === 'end';
-    let placement: Placement = alignEnd ? 'bottom-end' : 'bottom-start';
-    if (drop === 'up') placement = alignEnd ? 'top-end' : 'top-start';
-    else if (drop === 'end') placement = alignEnd ? 'right-end' : 'right-start';
-    else if (drop === 'start') placement = alignEnd ? 'left-end' : 'left-start';
+    const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
 
     const contextValue = useMemo(
       () => ({
         align,
         drop,
+        isRTL,
       }),
-      [align, drop],
+      [align, drop, isRTL],
     );
 
     return (
