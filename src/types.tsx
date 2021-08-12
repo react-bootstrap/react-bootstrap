@@ -35,11 +35,6 @@ export type Color =
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 
-export type ArrowProps = {
-  ref: React.RefCallback<HTMLElement>;
-  style: React.CSSProperties;
-};
-
 export type AlignDirection = 'start' | 'end';
 
 export type ResponsiveAlignProp =
