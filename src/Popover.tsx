@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
-import { ArrowProps, Placement } from './types';
+import { Placement } from './types';
 import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface PopoverProps
@@ -12,7 +13,7 @@ export interface PopoverProps
     BsPrefixProps {
   placement?: Placement;
   title?: string;
-  arrowProps?: ArrowProps;
+  arrowProps?: Partial<OverlayArrowProps>;
   body?: boolean;
   popper?: any;
   show?: boolean;

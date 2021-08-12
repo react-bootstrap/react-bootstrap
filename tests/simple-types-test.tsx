@@ -924,7 +924,9 @@ const MegaComponent = () => (
       onToggle={noop}
       focusFirstItemOnShow="keyboard"
       navbar
-    />
+    >
+      <Dropdown.Item />
+    </SplitButton>
     <Table
       id="id"
       bordered
