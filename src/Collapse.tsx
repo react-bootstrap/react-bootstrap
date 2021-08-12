@@ -141,6 +141,11 @@ const propTypes = {
    * ARIA role of collapsible element
    */
   role: PropTypes.string,
+
+  /**
+   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
+   */
+  children: PropTypes.element.isRequired,
 };
 
 const defaultProps = {
