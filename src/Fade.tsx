@@ -75,6 +75,11 @@ const propTypes = {
    * Callback fired after the component has faded out
    */
   onExited: PropTypes.func,
+
+  /**
+   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
+   */
+  children: PropTypes.element.isRequired,
 };
 
 const defaultProps = {
