@@ -119,18 +119,23 @@ function Preview({ showCode, className }) {
     });
   }, [hjs, live.element]);
 
-  useMutationObserver(exampleRef.current, {
-    childList: true, subtree: true },
+  useMutationObserver(
+    exampleRef.current,
+    {
+      childList: true,
+      subtree: true,
+    },
     (mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.addedNodes.length > 0) {
+        if (hjs && mutation.addedNodes.length > 0) {
           hjs.run({
             theme: 'gray',
             images: qsa(exampleRef.current, 'img'),
           });
         }
       });
-    });
+    },
+  );
 
   const handleClick = useCallback((e) => {
     if (e.target.tagName === 'A') {
@@ -248,7 +253,8 @@ function Editor() {
   );
 }
 
-const PRETTIER_IGNORE_REGEX = /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+prettier-ignore)/gim;
+const PRETTIER_IGNORE_REGEX =
+  /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+prettier-ignore)/gim;
 
 const propTypes = {
   codeText: PropTypes.string.isRequired,

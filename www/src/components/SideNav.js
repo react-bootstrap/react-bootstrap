@@ -131,6 +131,7 @@ const components = [
   'offcanvas',
   'overlays',
   'pagination',
+  'placeholder',
   'popovers',
   'progress',
   'spinners',
