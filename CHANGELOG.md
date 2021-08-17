@@ -26,9 +26,9 @@
 
 ### BREAKING CHANGES
 
-* renamed to Anchor
+* SafeAnchor renamed to Anchor
 * remove `onSelect` in NavItem
-* removed keyboard navigation
+* removed keyboard navigation in Nav
 * remove `onSelect` from DropdownItem
 
 
