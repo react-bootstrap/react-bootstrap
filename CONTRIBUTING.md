@@ -26,7 +26,7 @@ All commits that fix bugs or add features need a test. You can run `npm run tdd 
 
 ## API Design
 
-Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
+Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `.nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
 
 Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOCs are bad, but we want to try and keep these low level UI blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
 
