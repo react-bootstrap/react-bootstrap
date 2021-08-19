@@ -221,7 +221,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       const handleHide = useEventCallback(onHide);
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
-      const modalBsPrefix = useBootstrapPrefix(undefined, 'modal');
+      const modalBsPrefix = useBootstrapPrefix(undefined, 'offcanvas');
 
       const modalContext = useMemo(
         () => ({
