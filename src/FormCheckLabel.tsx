@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixProps } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormCheckLabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement>,
@@ -21,7 +21,10 @@ const propTypes = {
   htmlFor: PropTypes.string,
 };
 
-const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
+const FormCheckLabel: BsPrefixRefForwardingComponent<
+  'label',
+  FormCheckLabelProps
+> = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
   ({ bsPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId } = useContext(FormContext);
 
@@ -39,6 +42,7 @@ const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
 );
 
 FormCheckLabel.displayName = 'FormCheckLabel';
+FormCheckLabel.typeName = 'FormCheckLabel';
 FormCheckLabel.propTypes = propTypes;
 
 export default FormCheckLabel;

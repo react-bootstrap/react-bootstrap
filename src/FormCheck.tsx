@@ -8,6 +8,7 @@ import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { includesType } from './ElementChildren';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
@@ -152,7 +153,9 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         [controlId, id],
       );
 
-      const hasLabel = label != null && label !== false && !children;
+      const hasLabel =
+        (label != null && label !== false) ||
+        (children && includesType(children, FormCheckLabel));
 
       const input = (
         <FormCheckInput
@@ -172,7 +175,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
             style={style}
             className={classNames(
               className,
-              label && bsPrefix,
+              hasLabel && bsPrefix,
               inline && `${bsPrefix}-inline`,
               type === 'switch' && bsSwitchPrefix,
             )}

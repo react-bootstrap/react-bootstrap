@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BsComponent } from './helpers';
 
 /**
  * Iterates through children that are typically specified as `props.children`,
@@ -35,4 +36,22 @@ function forEach<P = any>(
   });
 }
 
-export { map, forEach };
+/**
+ * Checks that at least one child is of the specified type (either a string for
+ * an HTML element or a component for a React element).
+ */
+function includesType<As extends React.ElementType, P = any>(
+  children: React.ReactNode,
+  type: string | BsComponent<As, P>,
+) {
+  const childrenList = React.Children.toArray(children);
+  return childrenList.some(
+    (child) =>
+      React.isValidElement<P>(child) &&
+      (child.type === type ||
+        (child.type as BsComponent<As, P>)?.typeName ===
+          (type as BsComponent<As, P>).typeName),
+  );
+}
+
+export { map, forEach, includesType };
