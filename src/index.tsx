@@ -155,6 +155,11 @@ export type { PageItemProps } from './PageItem';
 export { default as Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
 
+export { default as Placeholder } from './Placeholder';
+export type { PlaceholderProps } from './Placeholder';
+export { default as PlaceholderButton } from './PlaceholderButton';
+export type { PlaceholderButtonProps } from './PlaceholderButton';
+
 export { default as Popover } from './Popover';
 export type { PopoverProps } from './Popover';
 

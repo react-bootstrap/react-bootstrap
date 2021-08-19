@@ -111,50 +111,74 @@ const propTypes = {
   xxl: column,
 };
 
+export interface UseColMetadata {
+  as?: React.ElementType;
+  bsPrefix: string;
+  spans: string[];
+}
+
+export function useCol({
+  as,
+  bsPrefix,
+  className,
+  ...props
+}: ColProps): [any, UseColMetadata] {
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'col');
+
+  const spans: string[] = [];
+  const classes: string[] = [];
+
+  DEVICE_SIZES.forEach((brkPoint) => {
+    const propValue = props[brkPoint];
+    delete props[brkPoint];
+
+    let span: ColSize | undefined;
+    let offset: NumberAttr | undefined;
+    let order: ColOrder | undefined;
+
+    if (typeof propValue === 'object' && propValue != null) {
+      ({ span = true, offset, order } = propValue);
+    } else {
+      span = propValue;
+    }
+
+    const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+
+    if (span)
+      spans.push(
+        span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`,
+      );
+
+    if (order != null) classes.push(`order${infix}-${order}`);
+    if (offset != null) classes.push(`offset${infix}-${offset}`);
+  });
+
+  return [
+    { ...props, className: classNames(className, ...classes, ...spans) },
+    {
+      as,
+      bsPrefix,
+      spans,
+    },
+  ];
+}
+
 const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
   HTMLElement,
   ColProps
 >(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'col');
-    const spans: string[] = [];
-    const classes: string[] = [];
-
-    DEVICE_SIZES.forEach((brkPoint) => {
-      const propValue = props[brkPoint];
-      delete props[brkPoint];
-
-      let span: ColSize | undefined;
-      let offset: NumberAttr | undefined;
-      let order: ColOrder | undefined;
-
-      if (typeof propValue === 'object' && propValue != null) {
-        ({ span = true, offset, order } = propValue);
-      } else {
-        span = propValue;
-      }
-
-      const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
-
-      if (span)
-        spans.push(
-          span === true ? `${prefix}${infix}` : `${prefix}${infix}-${span}`,
-        );
-
-      if (order != null) classes.push(`order${infix}-${order}`);
-      if (offset != null) classes.push(`offset${infix}-${offset}`);
-    });
-
-    if (!spans.length) {
-      spans.push(prefix); // plain 'col'
-    }
+  (props, ref) => {
+    const [
+      { className, ...colProps },
+      { as: Component = 'div', bsPrefix, spans },
+    ] = useCol(props);
 
     return (
       <Component
-        {...props}
+        {...colProps}
         ref={ref}
-        className={classNames(className, ...spans, ...classes)}
+        className={classNames(className, !spans.length && bsPrefix)}
       />
     );
   },
