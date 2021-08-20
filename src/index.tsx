@@ -181,6 +181,9 @@ export type { SplitButtonProps } from './SplitButton';
 export { default as SSRProvider } from './SSRProvider';
 export type { SSRProviderProps } from './SSRProvider';
 
+export { default as Stack } from './Stack';
+export type { StackProps } from './Stack';
+
 export { default as Tab } from './Tab';
 export type { TabProps } from './Tab';
 

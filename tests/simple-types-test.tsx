@@ -39,6 +39,7 @@ import {
   ProgressBar,
   Spinner,
   SplitButton,
+  Stack,
   Table,
   Tabs,
   Tab,
@@ -1011,6 +1012,11 @@ const MegaComponent = () => (
       <ToggleButton value={2}>Radio 2</ToggleButton>
       <ToggleButton value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
+    <Stack direction="horizontal" gap={1} />
+    <Stack
+      direction="vertical"
+      gap={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
+    />
     {/* // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError? */}
     {/*
     <Tabs invalidProp="2" />; // $ExpectError
