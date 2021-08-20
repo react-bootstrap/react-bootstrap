@@ -81,6 +81,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
 );
 
 FormCheckInput.displayName = 'FormCheckInput';
+FormCheckInput.typeName = 'FormCheckInput';
 FormCheckInput.propTypes = propTypes;
 
 export default FormCheckInput;

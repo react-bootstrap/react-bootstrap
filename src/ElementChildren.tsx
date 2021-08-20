@@ -37,27 +37,43 @@ function forEach<P = any>(
 }
 
 /**
- * Checks that at least one child is of the specified type (either a string for
- * an HTML element or a component for a React element).
+ * Finds a child component by type (either a string for an HTML element or a
+ * component for a React element) and separates it from the parent component's
+ * other children.
  */
-function includesType<As extends React.ElementType, P = any>(
-  children: React.ReactNode,
+function getChildOfType<As extends React.ElementType, P = any>(
+  children: React.ReactNode | React.ReactNode[],
   type: string | BsComponent<As, P>,
-) {
+): {
+  matchingChild: React.ReactElement<P, string | BsComponent<As, P>> | null;
+  otherChildren: React.ReactNode[];
+} {
   if (typeof type !== 'string' && !(type as BsComponent<As, P>).typeName) {
     throw new Error(
       "If 'type' is a component, it must have a defined, non-empty 'typeName' property.",
     );
   }
 
-  const childrenList = React.Children.toArray(children);
-  return childrenList.some(
+  const childrenList = Array.isArray(children)
+    ? children
+    : React.Children.toArray(children);
+  const childIndex = childrenList.findIndex(
     (child) =>
       React.isValidElement<P>(child) &&
       (child.type === type ||
         (child.type as BsComponent<As, P>)?.typeName ===
           (type as BsComponent<As, P>).typeName),
   );
+
+  return childIndex === -1
+    ? { matchingChild: null, otherChildren: childrenList }
+    : {
+        matchingChild: childrenList[childIndex] as React.ReactElement<P>,
+        otherChildren: [
+          ...childrenList.slice(0, childIndex),
+          ...childrenList.slice(childIndex + 1),
+        ],
+      };
 }
 
-export { map, forEach, includesType };
+export { map, forEach, getChildOfType };
