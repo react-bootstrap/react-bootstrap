@@ -44,6 +44,12 @@ function includesType<As extends React.ElementType, P = any>(
   children: React.ReactNode,
   type: string | BsComponent<As, P>,
 ) {
+  if (typeof type !== 'string' && !(type as BsComponent<As, P>).typeName) {
+    throw new Error(
+      "If 'type' is a component, it must have a defined, non-empty 'typeName' property.",
+    );
+  }
+
   const childrenList = React.Children.toArray(children);
   return childrenList.some(
     (child) =>
