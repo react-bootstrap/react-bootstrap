@@ -221,7 +221,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       const handleHide = useEventCallback(onHide);
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
-      const modalBsPrefix = useBootstrapPrefix(undefined, 'modal');
 
       const modalContext = useMemo(
         () => ({
@@ -260,12 +259,12 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
           <div
             {...backdropProps}
             className={classNames(
-              `${modalBsPrefix}-backdrop`,
+              `${bsPrefix}-backdrop`,
               backdropClassName,
             )}
           />
         ),
-        [backdropClassName, modalBsPrefix],
+        [backdropClassName, bsPrefix],
       );
 
       const renderDialog = (dialogProps) => (

@@ -65,7 +65,7 @@ describe('<Offcanvas>', () => {
       <Offcanvas show backdropClassName="custom-backdrop" onHide={noOp}>
         <strong>Message</strong>
       </Offcanvas>,
-    ).find('.modal-backdrop.custom-backdrop');
+    ).find('.offcanvas-backdrop.custom-backdrop');
   });
 
   it('Should pass style to the offcanvas', () => {
@@ -114,7 +114,7 @@ describe('<Offcanvas>', () => {
         <strong>Message</strong>
       </Offcanvas>,
     )
-      .find('div.modal-backdrop')
+      .find('div.offcanvas-backdrop')
       .simulate('click');
 
     expect(onHideSpy).to.have.been.called;
