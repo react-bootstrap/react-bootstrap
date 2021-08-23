@@ -245,7 +245,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
               className,
               children.props.className,
               collapseStyles[state],
-              computedDimension === 'width' && 'width',
+              computedDimension === 'width' && 'collapse-horizontal',
             ),
           })
         }
