@@ -6,15 +6,16 @@ import { Transition } from 'react-transition-group';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { CollapseProps } from './Collapse';
 import AccordionContext from './AccordionContext';
-import { BsPrefixRefForwardingComponent, BsPrefixOnlyProps } from './helpers';
+import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
-export interface AccordionCollapseProps
-  extends BsPrefixOnlyProps,
-    CollapseProps {
+export interface AccordionCollapseProps extends BsPrefixProps, CollapseProps {
   eventKey: string;
 }
 
 const propTypes = {
+  /** Set a custom element for this component */
+  as: PropTypes.elementType,
+
   /**
    * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
    */
@@ -28,7 +29,17 @@ const AccordionCollapse: BsPrefixRefForwardingComponent<
   'div',
   AccordionCollapseProps
 > = React.forwardRef<Transition<any>, AccordionCollapseProps>(
-  ({ bsPrefix, className, children, eventKey, ...props }, ref) => {
+  (
+    {
+      as: Component = 'div',
+      bsPrefix,
+      className,
+      children,
+      eventKey,
+      ...props
+    },
+    ref,
+  ) => {
     const { activeEventKey } = useContext(AccordionContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
 
@@ -39,7 +50,7 @@ const AccordionCollapse: BsPrefixRefForwardingComponent<
         {...props}
         className={classNames(className, bsPrefix)}
       >
-        <div>{React.Children.only(children)}</div>
+        <Component>{React.Children.only(children)}</Component>
       </Collapse>
     );
   },
