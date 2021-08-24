@@ -6,6 +6,7 @@ import {
   useDropdownMenu,
   UseDropdownMenuOptions,
 } from '@restart/ui/DropdownMenu';
+import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import { SelectCallback } from '@restart/ui/types';
 import warning from 'warning';
@@ -184,6 +185,12 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         useWrappedRefWithWarning(ref, 'DropdownMenu'),
         menuProps.ref,
       );
+
+      useIsomorphicEffect(() => {
+        // Popper's initial position for the menu is incorrect when
+        // renderOnMount=true. Need to call update() to correct it.
+        if (show) popper?.update();
+      }, [show]);
 
       if (!hasShown && !renderOnMount && !isInputGroup) return null;
 
