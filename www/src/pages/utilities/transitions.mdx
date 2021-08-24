@@ -5,6 +5,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import Collapse from '../../examples/Collapse';
+import CollapseHorizontal from '../../examples/CollapseHorizontal'
 import Fade from '../../examples/Fade';
 
 # Transitions
@@ -19,6 +20,8 @@ as well as portable for using in other libraries.  All React-bootstrap component
 
 ## Collapse
 
+### Basic Example
+
 Add a collapse toggle animation to an element or component.
 
 <Callout title="Smooth animations">
@@ -31,6 +34,21 @@ Add a collapse toggle animation to an element or component.
 </Callout>
 
 <ReactPlayground codeText={Collapse} />
+
+### Horizontal
+
+Add a collapse toggle animation to an element or component to transition the width instead of height.
+
+<Callout title="Smooth animations">
+  If you're noticing choppy animations, and the component that's being
+  collapsed has non-zero margin or padding, try wrapping the contents of
+  your <code>{'<Collapse>'}</code> inside a node with no margin or
+  padding, like the <code>{'<div>'}</code> in the example below. This will
+  allow the height to be computed properly, so the animation can proceed
+  smoothly.
+</Callout>
+
+<ReactPlayground codeText={CollapseHorizontal} />
 
 ## Fade
 
