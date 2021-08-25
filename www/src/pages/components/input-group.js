@@ -64,7 +64,7 @@ export default withLayout(function InputGroupSection({ data }) {
         Button addons
       </LinkedHeading>
       <ReactPlayground codeText={Buttons} />
-      <LinkedHeading h="2" id="input-group-buttons">
+      <LinkedHeading h="2" id="input-group-dropdowns">
         Buttons with Dropdowns
       </LinkedHeading>
       <ReactPlayground codeText={ButtonDropdowns} />
