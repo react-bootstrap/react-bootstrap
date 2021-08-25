@@ -1,3 +1,21 @@
+# [2.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-08-24)
+
+
+### Bug Fixes
+
+* **Dropdown:** fix menu positioning when renderOnMount=true ([#5989](https://github.com/react-bootstrap/react-bootstrap/issues/5989)) ([a2a4125](https://github.com/react-bootstrap/react-bootstrap/commit/a2a4125a21f25e4bdf52815cebb6c46f9a670ba2))
+* **Offcanvas:** change .modal-backdrop to .offcanvas-backdrop ([#5984](https://github.com/react-bootstrap/react-bootstrap/issues/5984)) ([e3f6046](https://github.com/react-bootstrap/react-bootstrap/commit/e3f6046b1a540bbc9d81dae42f61cf399cf437ea))
+
+
+### Features
+
+* **AccordionCollapse:** add as prop support ([#5991](https://github.com/react-bootstrap/react-bootstrap/issues/5991)) ([f40439e](https://github.com/react-bootstrap/react-bootstrap/commit/f40439e1b29957e331c55ced2637e034e8381fc8))
+* add Placeholder component ([#5974](https://github.com/react-bootstrap/react-bootstrap/issues/5974)) ([182b123](https://github.com/react-bootstrap/react-bootstrap/commit/182b123249d0540fede8118dcd2d2fa3cf69dcc5))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-17)
 
 
