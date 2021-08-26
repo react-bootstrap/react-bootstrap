@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useContext, useMemo, useRef } from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
@@ -11,6 +11,7 @@ import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
+import NavbarContext from './NavbarContext';
 import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -218,9 +219,13 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       ref,
     ) => {
       const modalManager = useRef<BootstrapModalManager>();
-      const handleHide = useEventCallback(onHide);
-
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
+      const { onToggle } = useContext(NavbarContext) || {};
+
+      const handleHide = useEventCallback(() => {
+        onToggle?.();
+        onHide?.();
+      });
 
       const modalContext = useMemo(
         () => ({
@@ -258,10 +263,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         (backdropProps) => (
           <div
             {...backdropProps}
-            className={classNames(
-              `${bsPrefix}-backdrop`,
-              backdropClassName,
-            )}
+            className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
           />
         ),
         [backdropClassName, bsPrefix],
@@ -297,7 +299,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             restoreFocusOptions={restoreFocusOptions}
             onEscapeKeyDown={onEscapeKeyDown}
             onShow={onShow}
-            onHide={onHide}
+            onHide={handleHide}
             onEnter={handleEnter}
             onEntering={onEntering}
             onEntered={onEntered}

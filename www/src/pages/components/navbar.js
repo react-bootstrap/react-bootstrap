@@ -11,6 +11,7 @@ import NavbarBrand from '../../examples/Navbar/Brand';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
 import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
 import NavScroll from '../../examples/Navbar/NavScroll';
+import NavbarOffcanvas from '../../examples/Navbar/Offcanvas';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
 import ContainerOutside from '../../examples/Navbar/ContainerOutside';
 import ContainerInside from '../../examples/Navbar/ContainerInside';
@@ -177,6 +178,25 @@ export default withLayout(function NaπvbarSection({ data }) {
         <code>expand</code> in order for the Navbar to collapse at all.
       </Callout>
       <ReactPlayground codeText={NavbarCollapsible} />
+
+      <LinkedHeading h="3" id="navbar-offcanvas">
+        Offcanvas
+      </LinkedHeading>
+
+      <p>
+        Transform your expanding and collapsing navbar into an offcanvas drawer
+        with the offcanvas component. We extend both the offcanvas default
+        styles and use the <code>expand</code> prop to create a dynamic and
+        flexible navigation sidebar.
+      </p>
+
+      <p>
+        In the example below, to create an offcanvas navbar that is always
+        collapsed across all breakpoints, set the <code>expand</code> prop to{' '}
+        <code>false</code>.
+      </p>
+
+      <ReactPlayground codeText={NavbarOffcanvas} />
 
       <LinkedHeading h="2" id="navbar-api">
         API
