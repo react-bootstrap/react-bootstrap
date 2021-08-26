@@ -49,7 +49,7 @@ const propTypes = {
   backdrop: PropTypes.bool,
 
   /**
-   * Add an optional extra class name to .modal-backdrop.
+   * Add an optional extra class name to .offcanvas-backdrop.
    */
   backdropClassName: PropTypes.string,
 
