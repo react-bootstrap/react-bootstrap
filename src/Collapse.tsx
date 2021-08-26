@@ -117,9 +117,6 @@ const propTypes = {
   /**
    * The dimension used when collapsing, or a function that returns the
    * dimension
-   *
-   * _Note: Bootstrap only partially supports 'width'!
-   * You will need to supply your own CSS animation for the `.width` CSS class._
    */
   dimension: PropTypes.oneOfType([
     PropTypes.oneOf(['height', 'width']),
@@ -245,7 +242,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
               className,
               children.props.className,
               collapseStyles[state],
-              computedDimension === 'width' && 'width',
+              computedDimension === 'width' && 'collapse-horizontal',
             ),
           })
         }
