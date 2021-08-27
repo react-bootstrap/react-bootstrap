@@ -1,4 +1,5 @@
 import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import ListGroup from '../src/ListGroup';
 
@@ -50,5 +51,17 @@ describe('<ListGroup>', () => {
 
   it('accepts as prop', () => {
     mount(<ListGroup as="ul" />).assertSingle('ul.list-group');
+  });
+
+  it('should set active class on list item if activeKey set on parent', () => {
+    const { getByTestId } = render(
+      <ListGroup activeKey="1">
+        <ListGroup.Item eventKey="1" data-testid="list-item">
+          test
+        </ListGroup.Item>
+      </ListGroup>,
+    );
+
+    getByTestId('list-item').classList.contains('active').should.be.true;
   });
 });

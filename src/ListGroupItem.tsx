@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import BaseNavItem, {
+import useEventCallback from '@restart/hooks/useEventCallback';
+import {
+  useNavItem,
   NavItemProps as BaseNavItemProps,
 } from '@restart/ui/NavItem';
+import { makeEventKey } from '@restart/ui/SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
@@ -58,12 +60,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  active: false,
-  disabled: false,
-};
-
 const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
   React.forwardRef<HTMLElement, ListGroupItemProps>(
     (
@@ -71,46 +67,50 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
         bsPrefix,
         active,
         disabled,
+        eventKey,
         className,
         variant,
         action,
         as,
-        onClick,
         ...props
       },
       ref,
     ) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
+      const [navItemProps, meta] = useNavItem({
+        key: makeEventKey(eventKey, props.href),
+        active,
+        ...props,
+      });
 
-      const handleClick = useCallback(
-        (event) => {
-          if (disabled) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-          }
+      const handleClick = useEventCallback((event) => {
+        if (disabled) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
 
-          onClick?.(event);
-        },
-        [disabled, onClick],
-      );
+        navItemProps.onClick(event);
+      });
 
       if (disabled && props.tabIndex === undefined) {
         props.tabIndex = -1;
         props['aria-disabled'] = true;
       }
 
+      // eslint-disable-next-line no-nested-ternary
+      const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
+
       return (
-        <BaseNavItem
+        <Component
           ref={ref}
           {...props}
-          // eslint-disable-next-line no-nested-ternary
-          as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+          {...navItemProps}
           onClick={handleClick}
           className={classNames(
             className,
             bsPrefix,
-            active && 'active',
+            meta.isActive && 'active',
             disabled && 'disabled',
             variant && `${bsPrefix}-${variant}`,
             action && `${bsPrefix}-action`,
@@ -121,7 +121,6 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
   );
 
 ListGroupItem.propTypes = propTypes;
-ListGroupItem.defaultProps = defaultProps;
 ListGroupItem.displayName = 'ListGroupItem';
 
 export default ListGroupItem;
