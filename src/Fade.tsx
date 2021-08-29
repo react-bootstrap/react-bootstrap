@@ -20,6 +20,7 @@ export interface FadeProps extends TransitionCallbacks {
   appear?: boolean;
   timeout?: number;
   children: React.ReactElement;
+  transitionClasses?: Record<string, string>;
 }
 
 const propTypes = {
@@ -80,6 +81,12 @@ const propTypes = {
    * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
    */
   children: PropTypes.element.isRequired,
+
+  /**
+   * Applies additional specified classes during the transition. Takes an object
+   * where the keys correspond to the Transition status
+   */
+  transitionClasses: PropTypes.object,
 };
 
 const defaultProps = {
@@ -96,7 +103,7 @@ const fadeStyles = {
 };
 
 const Fade = React.forwardRef<Transition<any>, FadeProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, transitionClasses = {}, ...props }, ref) => {
     const handleEnter = useCallback(
       (node, isAppearing) => {
         triggerBrowserReflow(node);
@@ -121,6 +128,7 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
               className,
               children.props.className,
               fadeStyles[status],
+              transitionClasses[status],
             ),
           })
         }
