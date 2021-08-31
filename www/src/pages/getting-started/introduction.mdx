@@ -3,6 +3,8 @@ import CodeBlock from '../../components/CodeBlock';
 import BrowserGlobalsCodeBlock from '../../components/BrowserGlobalsCodeBlock';
 import CssCodeBlock from '../../components/CssCodeBlock';
 import DocLink from '../../components/DocLink';
+import ReactPlayground from '../../components/ReactPlayground';
+import AsPropButtonExample from '../../examples/AsProp';
 
 # Introduction
 
@@ -117,6 +119,16 @@ $theme-colors: (
 
 See [the Bootstrap docs](https://getbootstrap.com/docs/4.4/getting-started/theming/)
 for more advanced use cases and details about customizing stylesheets.
+
+## 'as' Prop API
+
+With certain React-Bootstrap components you can specify a custom elementType 
+to be passed with the 'as' Prop.
+
+This can be especially useful if you want to combine the functionality 
+and styling of two seperate components into one combined component.
+
+<ReactPlayground codeText={AsPropButtonExample} />
 
 ## Themes
 
