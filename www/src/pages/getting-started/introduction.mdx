@@ -120,13 +120,18 @@ $theme-colors: (
 See [the Bootstrap docs](https://getbootstrap.com/docs/4.4/getting-started/theming/)
 for more advanced use cases and details about customizing stylesheets.
 
-## 'as' Prop API
+## "as" Prop API
 
-With certain React-Bootstrap components you can specify a custom elementType 
-to be passed with the 'as' Prop.
+With certain React-Bootstrap components, you may want to modify the component or HTML tag 
+that is rendered.
 
-This can be especially useful if you want to combine the functionality 
-and styling of two seperate components into one combined component.
+If you want to keep all the styling of a particular React-Bootstrap component but switch the 
+component that is finally rendered (whether it's a different React-Bootstrap component, a 
+different custom component, or a different HTML tag) you can use the "as" Prop to do so.
+
+The example below passes a Column component to the "as" Prop in a Button component. This 
+ultimately causes a Column component to be rendered but with the same styles as a Button 
+component.
 
 <ReactPlayground codeText={AsPropButtonExample} />
 
