@@ -11,15 +11,15 @@
 
 ## Bootstrap compatibility
 
-React-Bootstrap is compatible with various versions of Bootstrap.  As such, you need to ensure you are using the correct combination of versions.  
+React-Bootstrap is compatible with various versions of Bootstrap. As such, you need to ensure you are using the correct combination of versions.
 
 See the below table on which version of React-Bootstrap you should be using in your project.
 
-| Bootstrap Version | React-Bootstrap Version | Documentation |
-| ------------- |:-------------:| -----:|
-| v5.x | 2.x beta | [Link][v5-documentation] |
-| v4.x | 1.x | [Link][v4-documentation] |
-| v3.x | 0.33.x (not maintained) | [Link][v3-documentation] |
+| Bootstrap Version | React-Bootstrap Version |            Documentation |
+| ----------------- | :---------------------: | -----------------------: |
+| v5.x              |        2.x beta         | [Link][v5-documentation] |
+| v4.x              |           1.x           | [Link][v4-documentation] |
+| v3.x              | 0.33.x (not maintained) | [Link][v3-documentation] |
 
 ## Migrating from previous versions
 
@@ -39,7 +39,7 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 ## Local setup
 
 Yarn is our package manager of choice here. Check out setup
-instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
+instructions [here](https://yarnpkg.com/getting-started/install) if you don't have it installed already.
 After that you can run `yarn run bootstrap` to install all the needed dependencies.
 
 From there you can:
