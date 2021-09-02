@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import useTimeout from '@restart/hooks/useTimeout';
 import { TransitionComponent } from '@restart/ui/types';
-import Fade from './Fade';
+import ToastFade from './ToastFade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -75,7 +75,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
       {
         bsPrefix,
         className,
-        transition: Transition = Fade,
+        transition: Transition = ToastFade,
         show = true,
         animation = true,
         delay = 5000,
