@@ -132,6 +132,7 @@ function FormExample() {
               onChange={handleChange}
               isInvalid={!!errors.terms}
               feedback={errors.terms}
+              feedbackType="invalid"
               id="validationFormik0"
             />
           </Form.Group>
