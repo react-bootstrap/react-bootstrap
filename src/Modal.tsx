@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
+import BaseModal, { BaseModalProps } from 'react-overlays/Modal';
 import warning from 'warning';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
@@ -47,6 +47,7 @@ export interface ModalProps
   contentClassName?: string;
   dialogAs?: React.ElementType;
   scrollable?: boolean;
+  [other: string]: any;
 }
 
 type Modal = BsPrefixRefForwardingComponent<'div', ModalProps> & {
@@ -240,7 +241,7 @@ function BackdropTransition(props) {
 
 /* eslint-enable no-use-before-define */
 
-const Modal: Modal = (React.forwardRef(
+const Modal: Modal = React.forwardRef(
   (
     {
       bsPrefix,
@@ -320,9 +321,8 @@ const Modal: Modal = (React.forwardRef(
     function updateDialogStyle(node) {
       if (!canUseDOM) return;
 
-      const containerIsOverflowing = getModalManager().isContainerOverflowing(
-        modal,
-      );
+      const containerIsOverflowing =
+        getModalManager().isContainerOverflowing(modal);
 
       const modalIsOverflowing =
         node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -396,7 +396,7 @@ const Modal: Modal = (React.forwardRef(
         return;
       }
 
-      onHide();
+      onHide?.();
     };
 
     const handleEscapeKeyDown = (e) => {
@@ -410,33 +410,30 @@ const Modal: Modal = (React.forwardRef(
       }
     };
 
-    const handleEnter = (node, ...args) => {
+    const handleEnter = (node, isAppearing) => {
       if (node) {
         node.style.display = 'block';
         updateDialogStyle(node);
       }
 
-      if (onEnter) onEnter(node, ...args);
+      onEnter?.(node, isAppearing);
     };
 
-    const handleExit = (node, ...args) => {
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
-
-      if (onExit) onExit(node, ...args);
+    const handleExit = (node) => {
+      removeStaticModalAnimationRef.current?.();
+      onExit?.(node);
     };
 
-    const handleEntering = (node, ...args) => {
-      if (onEntering) onEntering(node, ...args);
+    const handleEntering = (node, isAppearing) => {
+      onEntering?.(node, isAppearing);
 
       // FIXME: This should work even when animation is disabled.
       addEventListener(window as any, 'resize', handleWindowResize);
     };
 
-    const handleExited = (node, ...args) => {
+    const handleExited = (node) => {
       if (node) node.style.display = ''; // RHL removes it sometimes
-      if (onExited) onExited(...args);
+      onExited?.(node);
 
       // FIXME: This should work even when animation is disabled.
       removeEventListener(window as any, 'resize', handleWindowResize);
@@ -521,7 +518,7 @@ const Modal: Modal = (React.forwardRef(
       </ModalContext.Provider>
     );
   },
-) as unknown) as Modal;
+) as unknown as Modal;
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
