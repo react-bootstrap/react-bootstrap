@@ -396,7 +396,7 @@ const Modal: Modal = React.forwardRef(
         return;
       }
 
-      onHide();
+      onHide?.();
     };
 
     const handleEscapeKeyDown = (e) => {
@@ -410,33 +410,30 @@ const Modal: Modal = React.forwardRef(
       }
     };
 
-    const handleEnter = (node, ...args) => {
+    const handleEnter = (node, isAppearing) => {
       if (node) {
         node.style.display = 'block';
         updateDialogStyle(node);
       }
 
-      if (onEnter) onEnter(node, ...args);
+      onEnter?.(node, isAppearing);
     };
 
-    const handleExit = (node, ...args) => {
-      if (removeStaticModalAnimationRef.current) {
-        removeStaticModalAnimationRef.current();
-      }
-
-      if (onExit) onExit(node, ...args);
+    const handleExit = (node) => {
+      removeStaticModalAnimationRef.current?.();
+      onExit?.(node);
     };
 
-    const handleEntering = (node, ...args) => {
-      if (onEntering) onEntering(node, ...args);
+    const handleEntering = (node, isAppearing) => {
+      onEntering?.(node, isAppearing);
 
       // FIXME: This should work even when animation is disabled.
       addEventListener(window as any, 'resize', handleWindowResize);
     };
 
-    const handleExited = (node, ...args) => {
+    const handleExited = (node) => {
       if (node) node.style.display = ''; // RHL removes it sometimes
-      if (onExited) onExited(...args);
+      onExited?.(node);
 
       // FIXME: This should work even when animation is disabled.
       removeEventListener(window as any, 'resize', handleWindowResize);
