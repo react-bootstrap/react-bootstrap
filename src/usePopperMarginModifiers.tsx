@@ -103,6 +103,7 @@ export default function usePopperMarginModifiers(): [
       name: 'popoverArrowMargins',
       enabled: true,
       phase: 'main',
+      fn: () => undefined,
       requiresIfExists: ['arrow'],
       effect({ state }) {
         if (
