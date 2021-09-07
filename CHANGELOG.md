@@ -1,3 +1,15 @@
+## [1.6.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.1...v1.6.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* **Modal:** Fix wrong types on ModalProps ([#6022](https://github.com/react-bootstrap/react-bootstrap/issues/6022)) ([18ef232](https://github.com/react-bootstrap/react-bootstrap/commit/18ef232fc26f12d3fb8762eb0f0ec7db3d031071)), closes [#5894](https://github.com/react-bootstrap/react-bootstrap/issues/5894)
+* avoid @popperjs/core console warning ([#6021](https://github.com/react-bootstrap/react-bootstrap/issues/6021)) ([335f782](https://github.com/react-bootstrap/react-bootstrap/commit/335f782c0d4af289bc3ab89dae4e09a10a8e5c47)), closes [#6017](https://github.com/react-bootstrap/react-bootstrap/issues/6017)
+
+
+
+
+
 ## [1.6.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.0...v1.6.1) (2021-06-04)
 
 
