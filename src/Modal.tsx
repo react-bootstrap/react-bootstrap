@@ -37,6 +37,7 @@ export interface ModalProps
     | 'renderDialog'
     | 'transition'
     | 'backdropTransition'
+    | 'children'
   > {
   size?: 'sm' | 'lg' | 'xl';
   bsPrefix?: string;
@@ -240,7 +241,7 @@ function BackdropTransition(props) {
 
 /* eslint-enable no-use-before-define */
 
-const Modal: Modal = (React.forwardRef(
+const Modal: Modal = React.forwardRef(
   (
     {
       bsPrefix,
@@ -320,9 +321,8 @@ const Modal: Modal = (React.forwardRef(
     function updateDialogStyle(node) {
       if (!canUseDOM) return;
 
-      const containerIsOverflowing = getModalManager().isContainerOverflowing(
-        modal,
-      );
+      const containerIsOverflowing =
+        getModalManager().isContainerOverflowing(modal);
 
       const modalIsOverflowing =
         node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -521,7 +521,7 @@ const Modal: Modal = (React.forwardRef(
       </ModalContext.Provider>
     );
   },
-) as unknown) as Modal;
+) as unknown as Modal;
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
