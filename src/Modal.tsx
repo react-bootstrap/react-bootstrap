@@ -37,6 +37,7 @@ export interface ModalProps
     | 'renderDialog'
     | 'transition'
     | 'backdropTransition'
+    | 'children'
   > {
   size?: 'sm' | 'lg' | 'xl';
   bsPrefix?: string;
