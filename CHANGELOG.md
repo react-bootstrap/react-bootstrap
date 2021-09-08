@@ -1,3 +1,14 @@
+## [1.6.3](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.2...v1.6.3) (2021-09-08)
+
+
+### Bug Fixes
+
+* **Modal:** fix children typing ([#6023](https://github.com/react-bootstrap/react-bootstrap/issues/6023)) ([30ceea8](https://github.com/react-bootstrap/react-bootstrap/commit/30ceea8fc84d301456a894c607ab4fd8d1af5447))
+
+
+
+
+
 ## [1.6.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.1...v1.6.2) (2021-09-07)
 
 
