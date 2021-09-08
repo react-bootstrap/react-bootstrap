@@ -10,7 +10,6 @@ import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavDropdownProps
   extends Omit<DropdownProps, 'onSelect' | 'title'> {
-  id: string;
   title: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
@@ -23,10 +22,9 @@ export interface NavDropdownProps
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
-   * @required
+   * @type {string}
    */
-  id: PropTypes.any,
+  id: PropTypes.string,
 
   /** An `onClick` handler passed to the Toggle component */
   onClick: PropTypes.func,

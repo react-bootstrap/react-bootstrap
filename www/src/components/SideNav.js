@@ -104,6 +104,7 @@ const gettingStarted = [
   'why-react-bootstrap',
   'theming',
   'support',
+  'rtl',
 ];
 
 const layout = ['grid'];
@@ -130,6 +131,7 @@ const components = [
   'offcanvas',
   'overlays',
   'pagination',
+  'placeholder',
   'popovers',
   'progress',
   'spinners',
@@ -139,7 +141,7 @@ const components = [
   'toasts',
 ];
 
-const utilities = ['transitions', 'ratio', 'react-overlays'];
+const utilities = ['transitions', 'ratio', 'restart-ui'];
 
 // We need to configure this
 function attachSearch(ref) {
@@ -153,6 +155,12 @@ function attachSearch(ref) {
       });
     });
 }
+
+const nameOverrides = {
+  'why-react-bootstrap': 'Why React-Bootstrap',
+  rtl: 'RTL',
+  'restart-ui': '@restart/ui',
+};
 
 function NavSection({ heading, location: { pathname }, items, path }) {
   let active = pathname.startsWith(path);
@@ -174,10 +182,7 @@ function NavSection({ heading, location: { pathname }, items, path }) {
           {items.map((name) => (
             <Nav.Item key={`${path}/${name}/`}>
               <TocSubLink href={`${path}/${name}/`}>
-                {startCase(name.toLowerCase()).replace(
-                  'React Bootstrap',
-                  'React-Bootstrap',
-                )}
+                {nameOverrides[name] || startCase(name.toLowerCase())}
               </TocSubLink>
             </Nav.Item>
           ))}

@@ -2,23 +2,20 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
-import BaseDropdown from 'react-overlays/Dropdown';
-import { DropDirection } from 'react-overlays/DropdownContext';
+import BaseDropdown, {
+  DropdownProps as BaseDropdownProps,
+  ToggleMetadata,
+} from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import DropdownContext from './DropdownContext';
+import DropdownContext, { DropDirection } from './DropdownContext';
 import DropdownItem from './DropdownItem';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
-import SelectableContext from './SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { AlignType, alignPropType } from './types';
 
 const DropdownHeader = createWithBsPrefix('dropdown-header', {
@@ -33,19 +30,13 @@ const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
 });
 
 export interface DropdownProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  drop?: 'up' | 'start' | 'end' | 'down';
+  extends BaseDropdownProps,
+    BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'children'> {
+  drop?: DropDirection;
   align?: AlignType;
-  show?: boolean;
   flip?: boolean;
-  onToggle?: (
-    isOpen: boolean,
-    event: React.SyntheticEvent,
-    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
-  ) => void;
   focusFirstItemOnShow?: boolean | 'keyboard';
-  onSelect?: SelectCallback;
   navbar?: boolean;
   autoClose?: boolean | 'outside' | 'inside';
 }
@@ -156,9 +147,9 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
 
-    const onSelectCtx = useContext(SelectableContext);
     const isInputGroup = useContext(InputGroupContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+    const isRTL = useIsRTL();
 
     const isClosingPermitted = (source: string): boolean => {
       // autoClose=false only permits close on button click
@@ -174,67 +165,57 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
     };
 
     const handleToggle = useEventCallback(
-      (nextShow, event, source = event.type) => {
+      (nextShow: boolean, meta: ToggleMetadata) => {
         if (
-          event.currentTarget === document &&
-          (source !== 'keydown' || event.key === 'Escape')
+          meta.originalEvent!.currentTarget === document &&
+          (meta.source !== 'keydown' ||
+            (meta.originalEvent as any).key === 'Escape')
         )
-          source = 'rootClose';
+          meta.source = 'rootClose';
 
-        if (isClosingPermitted(source)) onToggle?.(nextShow, event, { source });
+        if (isClosingPermitted(meta.source!)) onToggle?.(nextShow, meta);
       },
     );
 
-    const handleSelect = useEventCallback((key, event) => {
-      onSelectCtx?.(key, event);
-      onSelect?.(key, event);
-      handleToggle(false, event, 'select');
-    });
-
-    // TODO RTL: Flip directions based on RTL setting.
-    let direction: DropDirection = drop as DropDirection;
-    if (drop === 'start') {
-      direction = 'left';
-    } else if (drop === 'end') {
-      direction = 'right';
-    }
+    const alignEnd = align === 'end';
+    const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
 
     const contextValue = useMemo(
       () => ({
         align,
+        drop,
+        isRTL,
       }),
-      [align],
+      [align, drop, isRTL],
     );
 
     return (
       <DropdownContext.Provider value={contextValue}>
-        <SelectableContext.Provider value={handleSelect}>
-          <BaseDropdown
-            drop={direction}
-            show={show}
-            alignEnd={align === 'end'}
-            onToggle={handleToggle}
-            focusFirstItemOnShow={focusFirstItemOnShow}
-            itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
-          >
-            {isInputGroup ? (
-              props.children
-            ) : (
-              <Component
-                {...props}
-                ref={ref}
-                className={classNames(
-                  className,
-                  show && 'show',
-                  (!drop || drop === 'down') && prefix,
-                  drop === 'up' && 'dropup',
-                  drop === 'end' && 'dropend',
-                  drop === 'start' && 'dropstart',
-                )}
-              />
-            )}
-          </BaseDropdown>
-        </SelectableContext.Provider>
+        <BaseDropdown
+          placement={placement}
+          show={show}
+          onSelect={onSelect}
+          onToggle={handleToggle}
+          focusFirstItemOnShow={focusFirstItemOnShow}
+          itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
+        >
+          {isInputGroup ? (
+            props.children
+          ) : (
+            <Component
+              {...props}
+              ref={ref}
+              className={classNames(
+                className,
+                show && 'show',
+                (!drop || drop === 'down') && prefix,
+                drop === 'up' && 'dropup',
+                drop === 'end' && 'dropend',
+                drop === 'start' && 'dropstart',
+              )}
+            />
+          )}
+        </BaseDropdown>
       </DropdownContext.Provider>
     );
   });

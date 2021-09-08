@@ -7,7 +7,10 @@ function Example() {
 
   return (
     <Row>
-      <Col xs={6}>
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowA} className="mb-2">
+          Toggle Toast <strong>with</strong> Animation
+        </Button>
         <Toast show={showA} onClose={toggleShowA}>
           <Toast.Header>
             <img
@@ -21,12 +24,10 @@ function Example() {
           <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
         </Toast>
       </Col>
-      <Col xs={6}>
-        <Button onClick={toggleShowA}>
-          Toggle Toast <strong>with</strong> Animation
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowB} className="mb-2">
+          Toggle Toast <strong>without</strong> Animation
         </Button>
-      </Col>
-      <Col xs={6} className="my-1">
         <Toast onClose={toggleShowB} show={showB} animation={false}>
           <Toast.Header>
             <img
@@ -39,11 +40,6 @@ function Example() {
           </Toast.Header>
           <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
         </Toast>
-      </Col>
-      <Col xs={6}>
-        <Button onClick={toggleShowB}>
-          Toggle Toast <strong>without</strong> Animation
-        </Button>
       </Col>
     </Row>
   );

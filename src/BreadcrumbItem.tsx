@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
-import SafeAnchor from './SafeAnchor';
+import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
@@ -68,7 +67,7 @@ const BreadcrumbItem: BsPrefixRefForwardingComponent<
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'li',
-      linkAs: LinkComponent = SafeAnchor,
+      linkAs: LinkComponent = Anchor,
       linkProps,
       href,
       title,

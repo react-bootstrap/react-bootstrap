@@ -128,7 +128,7 @@ describe('<Nav>', () => {
         </NavDropdown>
       </Nav>,
     )
-      .find('DropdownItem')
+      .find('a.dropdown-item')
       .simulate('click');
 
     onSelectSpy.should.have.been.calledOnce;
@@ -149,140 +149,6 @@ describe('<Nav>', () => {
     shouldWarn('justify navbar `Nav`s are not supported');
 
     mount(<Nav navbar justify />);
-  });
-
-  describe('keyboard navigation', () => {
-    let wrapper;
-    let selectSpy;
-    let keyDownSpy;
-
-    beforeEach(() => {
-      selectSpy = sinon.spy((activeKey) => {
-        wrapper.setProps({ activeKey });
-      });
-      keyDownSpy = sinon.spy();
-
-      wrapper = mount(
-        <Nav
-          activeKey={1}
-          onSelect={selectSpy}
-          onKeyDown={keyDownSpy}
-          role="tablist"
-        >
-          <Nav.Link eventKey={1}>Nav.Link 1 content</Nav.Link>
-          <Nav.Link eventKey={2} disabled>
-            Nav.Link 2 content
-          </Nav.Link>
-          <Nav.Link eventKey={3}>Nav.Link 3 content</Nav.Link>
-          <Nav.Link eventKey={4} disabled>
-            Nav.Link 4 content
-          </Nav.Link>
-          <Nav.Link eventKey={5}>Nav.Link 5 content</Nav.Link>
-        </Nav>,
-        { attachTo: mountPoint },
-      );
-    });
-
-    afterEach(() => wrapper.unmount());
-
-    it('should not allow focusing on disabled tabs', () => {
-      const links = wrapper.find('a').map((n) => n.getDOMNode());
-
-      expect(links[0].getAttribute('tabindex')).to.not.equal('-1');
-      expect(links[1].getAttribute('tabindex')).to.equal('-1');
-      expect(links[2].getAttribute('tabindex')).to.not.equal('-1');
-      expect(links[3].getAttribute('tabindex')).to.equal('-1');
-      expect(links[4].getAttribute('tabindex')).to.not.equal('-1');
-    });
-
-    it('should focus the next tab on arrow key', () => {
-      const anchors = wrapper.find('a');
-
-      anchors
-        .at(0)
-        .tap((a) => a.getDOMNode().focus())
-        .simulate('keydown', {
-          key: 'ArrowRight',
-        });
-
-      expect(wrapper.prop('activeKey')).to.equal('3');
-
-      expect(document.activeElement).to.equal(anchors.at(2).getDOMNode());
-    });
-
-    it('should focus the previous tab on arrow key', () => {
-      wrapper.setProps({ activeKey: 5 });
-
-      const anchors = wrapper.find('a');
-
-      anchors
-        .at(4)
-        .tap((a) => a.getDOMNode().focus())
-        .simulate('keydown', {
-          key: 'ArrowLeft',
-        });
-
-      expect(wrapper.prop('activeKey')).to.equal('3');
-      expect(document.activeElement).to.equal(anchors.at(2).getDOMNode());
-    });
-
-    it('should wrap to the next tab on arrow key', () => {
-      wrapper.setProps({ activeKey: 5 });
-      const anchors = wrapper.find('a');
-
-      anchors
-        .at(4)
-        .tap((a) => a.getDOMNode().focus())
-        .simulate('keydown', {
-          key: 'ArrowDown',
-        });
-
-      expect(wrapper.prop('activeKey')).to.equal('1');
-      expect(document.activeElement).to.equal(anchors.at(0).getDOMNode());
-    });
-
-    it('should wrap to the previous tab on arrow key', () => {
-      const anchors = wrapper.find('a');
-
-      anchors
-        .at(0)
-        .tap((a) => a.getDOMNode().focus())
-        .simulate('keydown', {
-          key: 'ArrowUp',
-        });
-
-      expect(wrapper.prop('activeKey')).to.equal('5');
-      expect(document.activeElement).to.equal(anchors.at(4).getDOMNode());
-    });
-
-    it('should forward to a onKeyDown listener', () => {
-      const anchors = wrapper.find('a');
-
-      anchors
-        .at(0)
-        .tap((a) => a.getDOMNode().focus())
-        .simulate('keydown', {
-          key: 'ArrowUp',
-        });
-
-      sinon.assert.calledOnce(keyDownSpy);
-    });
-
-    ['a', 'b', 'left', 'up'].forEach(({ key }) => {
-      it(`should ignore non-arrow keys: case ${key}`, () => {
-        const anchors = wrapper.find('a');
-
-        anchors
-          .at(0)
-          .tap((a) => a.getDOMNode().focus())
-          .simulate('keydown', {
-            key,
-          });
-
-        expect(document.activeElement).to.equal(anchors.at(0).getDOMNode());
-        sinon.assert.calledOnce(keyDownSpy);
-      });
-    });
   });
 
   describe('Web Accessibility', () => {

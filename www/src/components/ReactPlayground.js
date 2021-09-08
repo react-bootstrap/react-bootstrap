@@ -130,14 +130,14 @@ function Preview({ showCode, className }) {
     },
     (mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.addedNodes.length > 0) {
+        if (hjs && mutation.addedNodes.length > 0) {
           hjs.run({
             theme: 'gray',
             images: qsa(exampleRef.current, 'img'),
           });
         }
       });
-    }
+    },
   );
 
   const handleClick = useCallback((e) => {

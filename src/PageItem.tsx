@@ -3,9 +3,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { ReactNode } from 'react';
+import Anchor from '@restart/ui/Anchor';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-
-import SafeAnchor from './SafeAnchor';
 
 export interface PageItemProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -50,7 +49,7 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
       }: PageItemProps,
       ref,
     ) => {
-      const Component = active || disabled ? 'span' : SafeAnchor;
+      const Component = active || disabled ? 'span' : Anchor;
       return (
         <li
           ref={ref}

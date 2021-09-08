@@ -47,6 +47,7 @@ import {
   ToggleButton,
   Toast,
 } from '../src';
+import BootstrapModalManager from '../src/BootstrapModalManager';
 
 import { CarouselRef } from '../src/Carousel';
 
@@ -288,7 +289,6 @@ const MegaComponent = () => (
         lg={1}
         xl={1}
         xxl={1}
-        noGutters
         bsPrefix="row"
         className="justify-content-md-center"
       >
@@ -300,7 +300,7 @@ const MegaComponent = () => (
           3 of 3
         </Col>
       </Row>
-      <Row noGutters>
+      <Row>
         <Col>1 of 3</Col>
         <Col md="auto">Variable width content</Col>
         <Col xs md={{ span: 4, offset: 4 }}>
@@ -611,12 +611,12 @@ const MegaComponent = () => (
       backdrop="static"
       backdropClassName="class"
       centered
-      container="test"
+      container={React.createRef()}
       dialogAs="div"
       dialogClassName="class"
       enforceFocus
       keyboard
-      manager={{}}
+      manager={new BootstrapModalManager()}
       onEnter={noop}
       onEntered={noop}
       onEntering={noop}
@@ -627,7 +627,9 @@ const MegaComponent = () => (
       onHide={noop}
       onShow={noop}
       restoreFocus
-      restoreFocusOptions={{}}
+      restoreFocusOptions={{
+        preventScroll: false,
+      }}
       scrollabel
       show={false}
       size="xl"
@@ -922,7 +924,9 @@ const MegaComponent = () => (
       onToggle={noop}
       focusFirstItemOnShow="keyboard"
       navbar
-    />
+    >
+      <Dropdown.Item />
+    </SplitButton>
     <Table
       id="id"
       bordered

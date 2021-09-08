@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
-import Feedback from './Feedback';
+import Feedback, { FeedbackType } from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
@@ -22,6 +22,7 @@ export interface FormCheckProps
   isInvalid?: boolean;
   feedbackTooltip?: boolean;
   feedback?: React.ReactNode;
+  feedbackType?: FeedbackType;
   bsSwitchPrefix?: string;
 }
 
@@ -127,6 +128,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         isInvalid = false,
         feedbackTooltip = false,
         feedback,
+        feedbackType,
         className,
         style,
         title = '',
@@ -181,11 +183,8 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
                 {hasLabel && (
                   <FormCheckLabel title={title}>{label}</FormCheckLabel>
                 )}
-                {(isValid || isInvalid) && (
-                  <Feedback
-                    type={isValid ? 'valid' : 'invalid'}
-                    tooltip={feedbackTooltip}
-                  >
+                {feedback && (
+                  <Feedback type={feedbackType} tooltip={feedbackTooltip}>
                     {feedback}
                   </Feedback>
                 )}

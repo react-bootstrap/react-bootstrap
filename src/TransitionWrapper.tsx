@@ -3,8 +3,8 @@ import Transition, {
   TransitionProps,
   TransitionStatus,
 } from 'react-transition-group/Transition';
-import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import safeFindDOMNode from './safeFindDOMNode';
 
 export type TransitionWrapperProps = TransitionProps & {
   childRef?: React.Ref<unknown>;

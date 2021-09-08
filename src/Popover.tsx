@@ -1,20 +1,19 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { OverlayArrowProps } from '@restart/ui/Overlay';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
-import { ArrowProps, Placement } from './types';
-import { BsPrefixProps } from './helpers';
+import { Placement } from './types';
+import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface PopoverProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {
-  id: string;
   placement?: Placement;
   title?: string;
-  arrowProps?: ArrowProps;
+  arrowProps?: Partial<OverlayArrowProps>;
   body?: boolean;
   popper?: any;
   show?: boolean;
@@ -28,12 +27,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
+  id: PropTypes.string,
 
   /**
    * Sets the direction the Popover is positioned towards.
@@ -102,13 +99,9 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
+    const isRTL = useIsRTL();
     const [primaryPlacement] = placement?.split('-') || [];
-    let bsDirection = primaryPlacement;
-    if (primaryPlacement === 'left') {
-      bsDirection = 'start';
-    } else if (primaryPlacement === 'right') {
-      bsDirection = 'end';
-    }
+    const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     return (
       <div

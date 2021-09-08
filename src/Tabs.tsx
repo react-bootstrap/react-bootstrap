@@ -1,30 +1,22 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseTabs, { TabsProps as BaseTabsProps } from '@restart/ui/Tabs';
 import Nav from './Nav';
 import NavLink from './NavLink';
 import NavItem from './NavItem';
-import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
-
 import { forEach, map } from './ElementChildren';
-import { SelectCallback, TransitionType } from './helpers';
-import { EventKey } from './types';
+import getTabTransitionComponent from './getTabTransitionComponent';
+import { TransitionType } from './helpers';
 
 export interface TabsProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  activeKey?: EventKey;
-  defaultActiveKey?: EventKey;
-  onSelect?: SelectCallback;
+  extends Omit<BaseTabsProps, 'transition'>,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'tabs' | 'pills';
   transition?: TransitionType;
-  id?: string;
-  mountOnEnter?: boolean;
-  unmountOnExit?: boolean;
 }
 
 const propTypes = {
@@ -34,6 +26,7 @@ const propTypes = {
    * @controllable onSelect
    */
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
   /** The default active key that is selected on start */
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -45,7 +38,8 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
-   * Sets a default animation strategy for all children `<TabPane>`s.
+   * Sets a default animation strategy for all children `<TabPane>`s.<tbcont
+   *
    * Defaults to `<Fade>` animation, else use `false` to disable or a
    * react-transition-group `<Transition/>` component.
    *
@@ -63,7 +57,7 @@ const propTypes = {
    *
    * @type {string}
    */
-  id: requiredForA11y(PropTypes.string),
+  id: PropTypes.string,
 
   /**
    * Callback fired when a Tab is selected.
@@ -144,11 +138,11 @@ const Tabs = (props: TabsProps) => {
   });
 
   return (
-    <TabContainer
+    <BaseTabs
       id={id}
       activeKey={activeKey}
       onSelect={onSelect}
-      transition={transition}
+      transition={getTabTransitionComponent(transition)}
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
@@ -167,7 +161,7 @@ const Tabs = (props: TabsProps) => {
           return <TabPane {...childProps} />;
         })}
       </TabContent>
-    </TabContainer>
+    </BaseTabs>
   );
 };
 

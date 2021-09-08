@@ -10,6 +10,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
     'import/no-webpack-loader-syntax': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'prefer-arrow-callback': 'off',
     'jsx-a11y/label-has-associated-control': 'off', // this rule doesn't work..
   },

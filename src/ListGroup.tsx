@@ -2,27 +2,17 @@ import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
-
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
+import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
-import { EventKey } from './types';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ListGroupProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  activeKey?: EventKey;
   defaultActiveKey?: EventKey;
-  onSelect?: SelectCallback;
 }
 
 const propTypes = {
@@ -81,7 +71,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
     );
 
     return (
-      <AbstractNav
+      <BaseNav
         ref={ref}
         {...controlledProps}
         as={as}

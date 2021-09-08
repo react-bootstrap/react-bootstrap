@@ -203,14 +203,14 @@ describe('<Collapse>', () => {
       assert.ok(node.className.indexOf('width') === -1);
     });
 
-    it('Should have width in class', () => {
+    it('Should have collapse-horizontal in class', () => {
       function dimension() {
         return 'width';
       }
 
       wrapper.setProps({ dimension });
       let node = wrapper.getDOMNode();
-      assert.ok(node.className.indexOf('width') !== -1);
+      assert.ok(node.className.indexOf('collapse-horizontal') !== -1);
     });
   });
 

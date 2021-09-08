@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { useBootstrapPrefix } from './ThemeProvider';
-import { ArrowProps, Placement } from './types';
-import { BsPrefixProps } from './helpers';
+import { OverlayArrowProps } from '@restart/ui/Overlay';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
+import { Placement } from './types';
+import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {
-  id: string;
   placement?: Placement;
-  arrowProps?: ArrowProps;
+  arrowProps?: Partial<OverlayArrowProps>;
   show?: boolean;
   popper?: any;
 }
@@ -24,12 +23,10 @@ const propTypes = {
 
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string|number}
+   * @type {string}
    * @required
    */
-  id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
+  id: PropTypes.string,
 
   /**
    * Sets the direction the Tooltip is positioned towards.
@@ -93,14 +90,10 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
+    const isRTL = useIsRTL();
 
     const [primaryPlacement] = placement?.split('-') || [];
-    let bsDirection = primaryPlacement;
-    if (primaryPlacement === 'left') {
-      bsDirection = 'start';
-    } else if (primaryPlacement === 'right') {
-      bsDirection = 'end';
-    }
+    const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     return (
       <div

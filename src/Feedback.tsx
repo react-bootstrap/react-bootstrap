@@ -3,13 +3,15 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
+export type FeedbackType = 'valid' | 'invalid';
+
 export interface FeedbackProps
   extends AsProp,
     React.HTMLAttributes<HTMLElement> {
   // I think this is because we use BsPrefixRefForwardingComponent below
   // which includes bsPrefix.
   bsPrefix?: never;
-  type?: 'valid' | 'invalid';
+  type?: FeedbackType;
   tooltip?: boolean;
 }
 
