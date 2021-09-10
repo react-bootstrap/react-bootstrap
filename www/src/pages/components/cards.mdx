@@ -8,7 +8,6 @@ import CardBgColor from '../../examples/Card/BgColor';
 import CardBodyOnly from '../../examples/Card/BodyOnly';
 import CardBodyShorthand from '../../examples/Card/BodyShorthand';
 import CardBorder from '../../examples/Card/Border';
-import CardColumns from '../../examples/Card/Columns';
 import CardGrid from '../../examples/Card/Grid';
 import CardGroup from '../../examples/Card/Group';
 import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
@@ -136,10 +135,6 @@ Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control 
 
 <ReactPlayground codeText={CardGrid} />
 
-### Card Columns
-
-<ReactPlayground codeText={CardColumns} />
-
 ## API
 
 <ComponentApi metadata={props.data.Card} />
@@ -154,7 +149,6 @@ Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control 
 <ComponentApi metadata={props.data.CardTitle} exportedBy={props.data.Card} />
 
 <ComponentApi metadata={props.data.CardGroup} />
-<ComponentApi metadata={props.data.CardColumns} />
 
 
 export const query = graphql`
@@ -190,9 +184,6 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {
-      ...ComponentApi_metadata
-    }
-    CardColumns: componentMetadata(displayName: { eq: "CardColumns" }) {
       ...ComponentApi_metadata
     }
   }
