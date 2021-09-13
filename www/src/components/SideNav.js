@@ -105,6 +105,7 @@ const gettingStarted = [
   'theming',
   'support',
   'rtl',
+  'server-side-rendering',
 ];
 
 const layout = ['grid'];
@@ -160,6 +161,7 @@ const nameOverrides = {
   'why-react-bootstrap': 'Why React-Bootstrap',
   rtl: 'RTL',
   'restart-ui': '@restart/ui',
+  'server-side-rendering': 'Server-side Rendering',
 };
 
 function NavSection({ heading, location: { pathname }, items, path }) {
