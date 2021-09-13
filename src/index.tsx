@@ -38,8 +38,6 @@ export type { ButtonToolbarProps } from './ButtonToolbar';
 export { default as Card } from './Card';
 export type { CardProps } from './Card';
 
-export { default as CardColumns } from './CardColumns';
-
 export { default as CardImg } from './CardImg';
 export type { CardImgProps } from './CardImg';
 

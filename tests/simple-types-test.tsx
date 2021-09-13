@@ -12,7 +12,6 @@ import {
   ButtonGroup,
   ButtonToolbar,
   Card,
-  CardColumns,
   CardGroup,
   Carousel,
   Container,
@@ -184,40 +183,38 @@ const MegaComponent = () => (
         <Button href="wooot" />
       </ButtonGroup>
     </ButtonToolbar>
-    <CardColumns style={style} bsPrefix="card-col">
-      <Card
-        as="div"
-        bg="primary"
-        body
-        border="primary"
-        text="primary"
-        bsPrefix="card"
-        style={{ width: '18rem' }}
-      >
-        <Card.Img
-          as="img"
-          variant="top"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.ImgOverlay
-          as="img"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.Body as="div" bsPrefix="cardbody" style={style}>
-          <Card.Title style={style}>Card Title</Card.Title>
-          <Card.Text style={style}>
-            Some quick example text to build on the card title and make up the
-            bulk of the card content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-      <CardGroup as="div" bsPrefix="cardgroup" style={style} />
-    </CardColumns>
+    <Card
+      as="div"
+      bg="primary"
+      body
+      border="primary"
+      text="primary"
+      bsPrefix="card"
+      style={{ width: '18rem' }}
+    >
+      <Card.Img
+        as="img"
+        variant="top"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.ImgOverlay
+        as="img"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.Body as="div" bsPrefix="cardbody" style={style}>
+        <Card.Title style={style}>Card Title</Card.Title>
+        <Card.Text style={style}>
+          Some quick example text to build on the card title and make up the
+          bulk of the card content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+    <CardGroup as="div" bsPrefix="cardgroup" style={style} />
     <Carousel
       activeIndex={1}
       as="div"
