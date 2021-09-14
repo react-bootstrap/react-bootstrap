@@ -1,0 +1,7 @@
+.styledCopyButton{
+  border-radius: 5px 5px 0px 0px;
+}
+.styledCopyButton:focus{
+  outline: none;
+  box-shadow: none;
+}

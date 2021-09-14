@@ -18,6 +18,9 @@ import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMutationObserver from '@restart/hooks/useMutationObserver';
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
+import styles from '../css/CopyButton.module.css';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import React from 'react';
 
 const scope = {
   useEffect,
@@ -181,7 +184,7 @@ const EditorInfoMessage = styled('div')`
 
 let uid = 0;
 
-function Editor() {
+function Editor({ handleCodeChange }) {
   const [focused, setFocused] = useState(false);
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
@@ -202,7 +205,7 @@ function Editor() {
         setIgnoreTab(true);
       }
     },
-    [ignoreTab],
+    [ignoreTab]
   );
 
   const handleFocus = useCallback(() => {
@@ -211,7 +214,8 @@ function Editor() {
     setKeyboardFocused(!mouseDownRef.current);
   }, []);
 
-  const handleBlur = useCallback(() => {
+  const handleBlur = useCallback((e) => {
+    handleCodeChange(e);
     setFocused(false);
   }, []);
 
@@ -236,6 +240,7 @@ function Editor() {
         aria-label="Example code editor"
         padding={20}
       />
+
       {showMessage && (
         <EditorInfoMessage id={id} aria-live="polite">
           {ignoreTab ? (
@@ -260,13 +265,43 @@ const propTypes = {
   codeText: PropTypes.string.isRequired,
 };
 
+const UpdatingPopover = React.forwardRef(
+  ({ popper, children, show: _, ...props }, ref) => {
+    useEffect(() => {
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
+    return (
+      <Popover ref={ref} body {...props}>
+        {children}
+      </Popover>
+    );
+  }
+);
+
 function Playground({ codeText, exampleClassName, showCode = true }) {
   // Remove Prettier comments and trailing semicolons in JSX in displayed code.
+  const [copyStatus, setCopy] = useState('Copy to clipboard');
+
   const code = codeText
     .replace(PRETTIER_IGNORE_REGEX, '')
     .trim()
     .replace(/>;$/, '>');
 
+  const [codeToCopy, setcodeToCopy] = useState(code);
+  const handleCodeChange = (e) => {
+    setcodeToCopy(e.target.value);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(codeToCopy) //copies code to clipboard
+      .then(setCopy('Copied!'));
+  };
+
+  const resetCopyStatus = () => {
+    setCopy('Copy to clipboard');
+  };
   return (
     <StyledContainer>
       <LiveProvider
@@ -276,7 +311,30 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
         noInline={codeText.includes('render(')}
       >
         <Preview showCode={showCode} className={exampleClassName} />
-        {showCode && <Editor />}
+        {showCode && (
+          <>
+            <div>
+              <OverlayTrigger
+                onExited={resetCopyStatus}
+                trigger={['hover', 'focus']}
+                overlay={
+                  <UpdatingPopover id="popover-contained">
+                    {copyStatus}
+                  </UpdatingPopover>
+                }
+              >
+                <Button
+                  onClick={handleCopy}
+                  className={styles.styledCopyButton}
+                  variant="dark"
+                >
+                  Copy
+                </Button>
+              </OverlayTrigger>
+            </div>
+            <Editor handleCodeChange={handleCodeChange} />
+          </>
+        )}
       </LiveProvider>
     </StyledContainer>
   );
