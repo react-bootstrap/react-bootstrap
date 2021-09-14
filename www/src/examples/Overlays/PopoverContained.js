@@ -16,7 +16,7 @@ function Example() {
         show={show}
         target={target}
         placement="bottom"
-        container={ref.current}
+        container={ref}
         containerPadding={20}
       >
         <Popover id="popover-contained">

@@ -154,7 +154,7 @@ export function useCol({
   });
 
   return [
-    { ...props, className: classNames(className, ...classes, ...spans) },
+    { ...props, className: classNames(className, ...spans, ...classes) },
     {
       as,
       bsPrefix,
