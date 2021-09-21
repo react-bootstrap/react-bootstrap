@@ -137,7 +137,7 @@ export function useCol({
     let order: ColOrder | undefined;
 
     if (typeof propValue === 'object' && propValue != null) {
-      ({ span = true, offset, order } = propValue);
+      ({ span, offset, order } = propValue);
     } else {
       span = propValue;
     }
