@@ -58,3 +58,5 @@ export const alignPropType = PropTypes.oneOfType([
 ]);
 
 export type RootCloseEvent = 'click' | 'mousedown';
+
+export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;

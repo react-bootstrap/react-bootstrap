@@ -108,7 +108,7 @@ const gettingStarted = [
   'server-side-rendering',
 ];
 
-const layout = ['grid'];
+const layout = ['grid', 'stack'];
 
 const components = [
   'alerts',
