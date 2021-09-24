@@ -1,3 +1,14 @@
+## [1.6.4](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.3...v1.6.4) (2021-09-24)
+
+
+### Bug Fixes
+
+* **InputGroup:** fix export ([#6060](https://github.com/react-bootstrap/react-bootstrap/issues/6060)) ([4bfc054](https://github.com/react-bootstrap/react-bootstrap/commit/4bfc0546f59092b04d5e13e4def76d65d2b51487))
+
+
+
+
+
 ## [1.6.3](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.2...v1.6.3) (2021-09-08)
 
 
