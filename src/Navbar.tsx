@@ -10,6 +10,7 @@ import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
+import NavbarOffcanvas from './NavbarOffcanvas';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
@@ -49,7 +50,8 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
+  expand: PropTypes.oneOf([false, true, 'sm', 'md', 'lg', 'xl', 'xxl'])
+    .isRequired,
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
@@ -220,7 +222,8 @@ Navbar.displayName = 'Navbar';
 
 export default Object.assign(Navbar, {
   Brand: NavbarBrand,
-  Toggle: NavbarToggle,
   Collapse: NavbarCollapse,
+  Offcanvas: NavbarOffcanvas,
   Text: NavbarText,
+  Toggle: NavbarToggle,
 });
