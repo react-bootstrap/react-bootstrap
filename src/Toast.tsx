@@ -19,7 +19,7 @@ export interface ToastProps
   animation?: boolean;
   autohide?: boolean;
   delay?: number;
-  onClose?: () => void;
+  onClose?: (e?: React.MouseEvent | React.KeyboardEvent) => void;
   show?: boolean;
   transition?: TransitionComponent;
   bg?: Variant;
