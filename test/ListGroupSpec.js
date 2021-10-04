@@ -64,4 +64,15 @@ describe('<ListGroup>', () => {
 
     getByTestId('list-item').classList.contains('active').should.be.true;
   });
+
+  it('should add numbered class', () => {
+    const { getByTestId } = render(
+      <ListGroup activeKey="1" numbered data-testid="list-group">
+        <ListGroup.Item eventKey="1">test</ListGroup.Item>
+      </ListGroup>,
+    );
+
+    getByTestId('list-group').classList.contains('list-group-numbered').should
+      .be.true;
+  });
 });
