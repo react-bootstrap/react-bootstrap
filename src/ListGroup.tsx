@@ -13,6 +13,7 @@ export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   defaultActiveKey?: EventKey;
+  numbered?: boolean;
 }
 
 const propTypes = {
@@ -38,6 +39,11 @@ const propTypes = {
   horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']),
 
   /**
+   * Generate numbered list items.
+   */
+  numbered: PropTypes.bool,
+
+  /**
    * You can use a custom element type for this component.
    */
   as: PropTypes.elementType,
@@ -50,6 +56,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
       bsPrefix: initialBsPrefix,
       variant,
       horizontal,
+      numbered,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'div',
       ...controlledProps
@@ -80,6 +87,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
           bsPrefix,
           variant && `${bsPrefix}-${variant}`,
           horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
+          numbered && `${bsPrefix}-numbered`,
         )}
       />
     );
