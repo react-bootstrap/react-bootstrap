@@ -5,31 +5,22 @@ import all from 'prop-types-extra/lib/all';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
+import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import CardHeaderContext from './CardHeaderContext';
-import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
-import { EventKey } from './types';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
-  activeKey?: EventKey;
   defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
-  onSelect?: SelectCallback;
   navbar?: boolean;
   navbarScroll?: boolean;
 }
@@ -149,7 +140,7 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
   }
 
   return (
-    <AbstractNav
+    <BaseNav
       as={as}
       ref={ref}
       activeKey={activeKey}

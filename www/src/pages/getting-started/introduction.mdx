@@ -3,6 +3,8 @@ import CodeBlock from '../../components/CodeBlock';
 import BrowserGlobalsCodeBlock from '../../components/BrowserGlobalsCodeBlock';
 import CssCodeBlock from '../../components/CssCodeBlock';
 import DocLink from '../../components/DocLink';
+import ReactPlayground from '../../components/ReactPlayground';
+import AsPropButtonExample from '../../examples/AsProp';
 
 # Introduction
 
@@ -17,7 +19,7 @@ If you plan on customizing the Bootstrap Sass files, or don't want
 to use a CDN for the stylesheet, it may be helpful to
 install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLink> as well.
 
-<CodeBlock codeText={`npm install react-bootstrap bootstrap@${config.bootstrapVersion}`} />
+<CodeBlock codeText={`npm install react-bootstrap@next bootstrap@${config.bootstrapVersion}`} />
 
 ## Importing Components
 
@@ -117,6 +119,21 @@ $theme-colors: (
 
 See [the Bootstrap docs](https://getbootstrap.com/docs/4.4/getting-started/theming/)
 for more advanced use cases and details about customizing stylesheets.
+
+## "as" Prop API
+
+With certain React-Bootstrap components, you may want to modify the component or HTML tag 
+that is rendered.
+
+If you want to keep all the styling of a particular React-Bootstrap component but switch the 
+component that is finally rendered (whether it's a different React-Bootstrap component, a 
+different custom component, or a different HTML tag) you can use the "as" Prop to do so.
+
+The example below passes a Column component to the "as" Prop in a Button component. This 
+ultimately causes a Column component to be rendered but with the same styles as a Button 
+component.
+
+<ReactPlayground codeText={AsPropButtonExample} />
 
 ## Themes
 

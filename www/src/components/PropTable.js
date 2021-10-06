@@ -4,7 +4,6 @@ import capitalize from 'lodash/capitalize';
 import sortBy from 'lodash/sortBy';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import Badge from 'react-bootstrap/Badge';
 import Table from 'react-bootstrap/Table';
 
 function getDoclet(doclets = [], tag) {
@@ -185,7 +184,7 @@ class PropTable extends React.Component {
       return null;
     }
 
-    return <Badge text="danger">required</Badge>;
+    return <sup className="text-danger">required</sup>;
   }
 
   render() {

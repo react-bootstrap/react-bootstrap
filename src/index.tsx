@@ -14,6 +14,9 @@ export type { AccordionButtonProps } from './AccordionButton';
 export { default as Alert } from './Alert';
 export type { AlertProps } from './Alert';
 
+export { default as Anchor } from './Anchor';
+export type { AnchorProps } from './Anchor';
+
 export { default as Badge } from './Badge';
 export type { BadgeProps } from './Badge';
 
@@ -34,8 +37,6 @@ export type { ButtonToolbarProps } from './ButtonToolbar';
 
 export { default as Card } from './Card';
 export type { CardProps } from './Card';
-
-export { default as CardColumns } from './CardColumns';
 
 export { default as CardImg } from './CardImg';
 export type { CardImgProps } from './CardImg';
@@ -152,6 +153,11 @@ export type { PageItemProps } from './PageItem';
 export { default as Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
 
+export { default as Placeholder } from './Placeholder';
+export type { PlaceholderProps } from './Placeholder';
+export { default as PlaceholderButton } from './PlaceholderButton';
+export type { PlaceholderButtonProps } from './PlaceholderButton';
+
 export { default as Popover } from './Popover';
 export type { PopoverProps } from './Popover';
 
@@ -166,14 +172,17 @@ export type { RatioProps } from './Ratio';
 export { default as Row } from './Row';
 export type { RowProps } from './Row';
 
-export { default as SafeAnchor } from './SafeAnchor';
-export type { SafeAnchorProps } from './SafeAnchor';
-
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 
 export { default as SplitButton } from './SplitButton';
 export type { SplitButtonProps } from './SplitButton';
+
+export { default as SSRProvider } from './SSRProvider';
+export type { SSRProviderProps } from './SSRProvider';
+
+export { default as Stack } from './Stack';
+export type { StackProps } from './Stack';
 
 export { default as Tab } from './Tab';
 export type { TabProps } from './Tab';

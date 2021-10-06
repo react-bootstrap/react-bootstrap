@@ -33,14 +33,7 @@ export type Color =
   | 'white'
   | 'muted';
 
-export type Placement = import('react-overlays/usePopper').Placement;
-
-export type ArrowProps = {
-  ref: React.RefCallback<HTMLElement>;
-  style: React.CSSProperties;
-};
-
-export type EventKey = string | number;
+export type Placement = import('@restart/ui/usePopper').Placement;
 
 export type AlignDirection = 'start' | 'end';
 
@@ -65,3 +58,5 @@ export const alignPropType = PropTypes.oneOfType([
 ]);
 
 export type RootCloseEvent = 'click' | 'mousedown';
+
+export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;

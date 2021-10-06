@@ -9,8 +9,8 @@ import Transition, {
   EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
+import { TransitionCallbacks } from '@restart/ui/types';
 import transitionEndListener from './transitionEndListener';
-import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';
@@ -117,9 +117,6 @@ const propTypes = {
   /**
    * The dimension used when collapsing, or a function that returns the
    * dimension
-   *
-   * _Note: Bootstrap only partially supports 'width'!
-   * You will need to supply your own CSS animation for the `.width` CSS class._
    */
   dimension: PropTypes.oneOfType([
     PropTypes.oneOf(['height', 'width']),
@@ -141,6 +138,11 @@ const propTypes = {
    * ARIA role of collapsible element
    */
   role: PropTypes.string,
+
+  /**
+   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
+   */
+  children: PropTypes.element.isRequired,
 };
 
 const defaultProps = {
@@ -240,7 +242,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
               className,
               children.props.className,
               collapseStyles[state],
-              computedDimension === 'width' && 'width',
+              computedDimension === 'width' && 'collapse-horizontal',
             ),
           })
         }

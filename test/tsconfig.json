@@ -1,0 +1,9 @@
+{
+  "extends": "..",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["mocha", "chai", "sinon", "sinon-chai"],
+    "rootDir": "..",
+  },
+  "include": ["../src", "."]
+}

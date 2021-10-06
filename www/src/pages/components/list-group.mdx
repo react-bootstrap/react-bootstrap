@@ -12,19 +12,19 @@ import ListGroupDisabled from '../../examples/ListGroup/Disabled';
 import ListGroupStyle from '../../examples/ListGroup/Style';
 import ListGroupStyleActions from '../../examples/ListGroup/StyleActions';
 import ListGroupFlush from '../../examples/ListGroup/Flush';
+import ListGroupNumbered from '../../examples/ListGroup/Numbered';
+import ListGroupNumberedCustom from '../../examples/ListGroup/NumberedCustom';
 import ListGroupHorizontal from '../../examples/ListGroup/Horizontal';
 import ListGroupHorizontalResponsive from '../../examples/ListGroup/HorizontalResponsive';
 import ListGroupTabs from '../../examples/ListGroup/Tabs';
 
 import styles from '../../css/examples.module.scss';
 
-
 # List groups
 
 <p className="lead">
-  List groups are a flexible and powerful component for displaying a
-  series of content. Modify and extend them to support just about any
-  content within.
+  List groups are a flexible and powerful component for displaying a series of
+  content. Modify and extend them to support just about any content within.
 </p>
 
 ## Basic Example
@@ -54,7 +54,6 @@ that call `preventDefault` to mimick disabled behavior.
   exampleClassName={styles.listGroup}
 />
 
-
 ### Actionable items
 
 Toggle the `action` prop to create <em>actionable</em> list group
@@ -77,6 +76,24 @@ edge-to-edge in a parent container [such as a `Card`](/components/cards/#list-gr
 
 <ReactPlayground
   codeText={ListGroupFlush}
+  exampleClassName={styles.listGroup}
+/>
+
+### Numbered
+
+Add the `numbered` prop to opt into numbered list group items. Numbers are generated via CSS
+(as opposed to a `<ol>`s default browser styling) for better placement inside list group items
+and to allow for better customization.
+
+<ReactPlayground
+  codeText={ListGroupNumbered}
+  exampleClassName={styles.listGroup}
+/>
+
+These work great with custom content as well.
+
+<ReactPlayground
+  codeText={ListGroupNumberedCustom}
   exampleClassName={styles.listGroup}
 />
 
@@ -113,11 +130,12 @@ When paired with `action`s, additional hover and active styles apply.
 />
 
 <Callout title="Conveying meaning to assistive technologies">
-  Using color to add meaning only provides a visual indication,
-  which will not be conveyed to users of assistive technologies – such as screen readers.
-  Ensure that information denoted by the color is either obvious from the content itself
-  (e.g. the visible text), or is included through alternative means,
-  such as additional text hidden with the <code>.visually-hidden</code> class.
+  Using color to add meaning only provides a visual indication, which will not
+  be conveyed to users of assistive technologies – such as screen readers.
+  Ensure that information denoted by the color is either obvious from the
+  content itself (e.g. the visible text), or is included through alternative
+  means, such as additional text hidden with the <code>.visually-hidden</code>{' '}
+  class.
 </Callout>
 
 ## Tabbed Interfaces
@@ -126,17 +144,15 @@ You can also use the [Tab][tabs] components to create ARIA compliant tabbable
 interfaces with the `<ListGroup>` component. Swap out the `<Nav>` component
 for the list group and you are good to go.
 
-<ReactPlayground
-  codeText={ListGroupTabs}
-  exampleClassName={styles.listGroup}
-/>
+<ReactPlayground codeText={ListGroupTabs} exampleClassName={styles.listGroup} />
 
 ## API
 
 <ComponentApi metadata={props.data.ListGroup} />
-<ComponentApi metadata={props.data.ListGroupItem} exportedBy={props.data.ListGroup} />
-
-
+<ComponentApi
+  metadata={props.data.ListGroupItem}
+  exportedBy={props.data.ListGroup}
+/>
 
 export const query = graphql`
   query ListGroupQuery {

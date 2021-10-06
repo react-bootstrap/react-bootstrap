@@ -78,6 +78,7 @@ function FormExample() {
           required
           label="Agree to terms and conditions"
           feedback="You must agree before submitting."
+          feedbackType="invalid"
         />
       </Form.Group>
       <Button type="submit">Submit form</Button>

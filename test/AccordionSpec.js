@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 
 import Accordion from '../src/Accordion';
+import AccordionCollapse from '../src/AccordionCollapse';
 import Dropdown from '../src/Dropdown';
 import ListGroup from '../src/ListGroup';
 import Nav from '../src/Nav';
@@ -12,6 +13,19 @@ describe('<Accordion>', () => {
 
   it('should render flush prop', () => {
     mount(<Accordion flush />).assertSingle('.accordion.accordion-flush');
+  });
+
+  it('should output a h1', () => {
+    const wrapper = mount(
+      <Accordion>
+        <Accordion.Button>Hi</Accordion.Button>
+        <AccordionCollapse as="h1" eventKey="0">
+          <span>hidden Data</span>
+        </AccordionCollapse>
+      </Accordion>,
+    );
+
+    wrapper.find('AccordionCollapse').assertSingle('h1');
   });
 
   it('should only have second item collapsed', () => {
@@ -114,7 +128,7 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    wrapper.find('DropdownItem').simulate('click');
+    wrapper.find('a.dropdown-item').simulate('click');
 
     wrapper
       .find('AccordionCollapse')

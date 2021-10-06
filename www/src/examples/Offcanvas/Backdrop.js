@@ -1,13 +1,18 @@
 const options = [
   {
-    name: 'Enable body scrolling',
-    scroll: true,
-    backdrop: false,
-  },
-  {
     name: 'Enable backdrop (default)',
     scroll: false,
     backdrop: true,
+  },
+  {
+    name: 'Disable backdrop',
+    scroll: false,
+    backdrop: false,
+  },
+  {
+    name: 'Enable body scrolling',
+    scroll: true,
+    backdrop: false,
   },
   {
     name: 'Enable both scrolling & backdrop',
@@ -20,11 +25,11 @@ function OffCanvasExample({ name, ...props }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const toggleShow = () => setShow((s) => !s);
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="me-2">
+      <Button variant="primary" onClick={toggleShow} className="me-2">
         {name}
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>

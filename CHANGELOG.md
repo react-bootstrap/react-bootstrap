@@ -1,3 +1,112 @@
+# [2.0.0-rc.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.6...v2.0.0-rc.0) (2021-09-21)
+
+
+### Bug Fixes
+
+* **ListGroupItem:** fix .active not being set with activeKey in ListGroup ([#6002](https://github.com/react-bootstrap/react-bootstrap/issues/6002)) ([cdaa039](https://github.com/react-bootstrap/react-bootstrap/commit/cdaa0399b0f31740a39efebc0ad08d2f53788c3e))
+* **Toast:** fix fade animation ([#6004](https://github.com/react-bootstrap/react-bootstrap/issues/6004)) ([0237a14](https://github.com/react-bootstrap/react-bootstrap/commit/0237a14d1af749b8eda407d331f6ab3815812850))
+
+
+* refactor(Col)!: remove default span value in breakpoint object (#6014) ([ec285fb](https://github.com/react-bootstrap/react-bootstrap/commit/ec285fb96bb2c0c312c1241b0a040a78e92aa86b)), closes [#6014](https://github.com/react-bootstrap/react-bootstrap/issues/6014)
+* refactor(CardColumns)!: remove component (#6030) ([d36718f](https://github.com/react-bootstrap/react-bootstrap/commit/d36718f2a755e585bdab9f09cb467095cf83f8b0)), closes [#6030](https://github.com/react-bootstrap/react-bootstrap/issues/6030)
+* fix(FormCheck)!: use feedbackType to control feedback type (#6015) ([ab9e080](https://github.com/react-bootstrap/react-bootstrap/commit/ab9e08094ef5cd4b7245323da09932b1c9df2d7f)), closes [#6015](https://github.com/react-bootstrap/react-bootstrap/issues/6015)
+
+
+### Features
+
+* add SSRProvider ([#6031](https://github.com/react-bootstrap/react-bootstrap/issues/6031)) ([ca97dc8](https://github.com/react-bootstrap/react-bootstrap/commit/ca97dc811b3c9845ed17ae42886e6c401613f034))
+* add Stack component ([#5987](https://github.com/react-bootstrap/react-bootstrap/issues/5987)) ([57be243](https://github.com/react-bootstrap/react-bootstrap/commit/57be24396cc59882525486530ee4424ce94e3067))
+* **Collapse:** add horizontal animation ([#5993](https://github.com/react-bootstrap/react-bootstrap/issues/5993)) ([c8f0d1d](https://github.com/react-bootstrap/react-bootstrap/commit/c8f0d1d358f9eca60c12a259e502b50da42c624a))
+
+
+### BREAKING CHANGES
+
+* When using objects in `Col` breakpoint props, `span` is no longer `true` by default
+* Removed CardColumns because it was dropped in Bootstrap 5
+* FormCheck feedback type is now controlled by `feedbackType` instead of `isValid` and `isInvalid`.
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-08-24)
+
+
+### Bug Fixes
+
+* **Dropdown:** fix menu positioning when renderOnMount=true ([#5989](https://github.com/react-bootstrap/react-bootstrap/issues/5989)) ([a2a4125](https://github.com/react-bootstrap/react-bootstrap/commit/a2a4125a21f25e4bdf52815cebb6c46f9a670ba2))
+* **Offcanvas:** change .modal-backdrop to .offcanvas-backdrop ([#5984](https://github.com/react-bootstrap/react-bootstrap/issues/5984)) ([e3f6046](https://github.com/react-bootstrap/react-bootstrap/commit/e3f6046b1a540bbc9d81dae42f61cf399cf437ea))
+
+
+### Features
+
+* **AccordionCollapse:** add as prop support ([#5991](https://github.com/react-bootstrap/react-bootstrap/issues/5991)) ([f40439e](https://github.com/react-bootstrap/react-bootstrap/commit/f40439e1b29957e331c55ced2637e034e8381fc8))
+* add Placeholder component ([#5974](https://github.com/react-bootstrap/react-bootstrap/issues/5974)) ([182b123](https://github.com/react-bootstrap/react-bootstrap/commit/182b123249d0540fede8118dcd2d2fa3cf69dcc5))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* fix exports and types ([#5969](https://github.com/react-bootstrap/react-bootstrap/issues/5969)) ([3531dc8](https://github.com/react-bootstrap/react-bootstrap/commit/3531dc860d43aa81a6548b61d276b4452340bc8c))
+
+
+### Features
+
+* **Dropdown:** add RTL support ([22d8d84](https://github.com/react-bootstrap/react-bootstrap/commit/22d8d84184933c0714fb1832ab5a3f1f101d912f))
+* **Modal:** add RTL support ([0cd40eb](https://github.com/react-bootstrap/react-bootstrap/commit/0cd40eb3c1b6de1991f15eacea598ad3f1c430f3))
+* **Modal:** migrate to restart/ui ([1ff7af7](https://github.com/react-bootstrap/react-bootstrap/commit/1ff7af78517af2f3b70ac857b1ec9f54bd909c56))
+* **Popover:** add RTL support ([9032b16](https://github.com/react-bootstrap/react-bootstrap/commit/9032b1604b94024b7437119dbf3b92bac36c1d1f))
+* **Tabs:** migrate to restart/ui ([8e3f3c2](https://github.com/react-bootstrap/react-bootstrap/commit/8e3f3c2b5f232e17829df3474b7b6e398f22ff3d))
+* **Tooltip:** add RTL support ([c82e133](https://github.com/react-bootstrap/react-bootstrap/commit/c82e1332a85e0e94aec58af0b8012048ffed9d65))
+* add default variant to Alert/Badge ([#5456](https://github.com/react-bootstrap/react-bootstrap/issues/5456)) ([8f76539](https://github.com/react-bootstrap/react-bootstrap/commit/8f76539cc14a4bc5c1f415aaa46ab7a9f83a5a88))
+* migrate components to restart/ui ([73a559e](https://github.com/react-bootstrap/react-bootstrap/commit/73a559ee345bc4033c66fc97858163a6a200126d))
+
+
+* feat(SafeAnchor)!: migrate to restart/ui ([6c56aba](https://github.com/react-bootstrap/react-bootstrap/commit/6c56abae4132a1ae68adcc6b4a3bd559396aa2fa))
+* feat(NavLink)!: migrate to restart/ui ([87bf01a](https://github.com/react-bootstrap/react-bootstrap/commit/87bf01ac55d272ed5151e2f01c2fa85e986f0b59))
+* feat(Nav)!: migrate to restart/ui ([2a7a0e2](https://github.com/react-bootstrap/react-bootstrap/commit/2a7a0e223402f3634008052f4b32e10c52c4997d))
+* feat(Dropdown)!: migrate to restart/ui ([7030465](https://github.com/react-bootstrap/react-bootstrap/commit/70304650baf39a77149fa4bc811849423f449ec6))
+
+
+### BREAKING CHANGES
+
+* SafeAnchor renamed to Anchor
+* remove `onSelect` in NavItem
+* removed keyboard navigation in Nav
+* remove `onSelect` from DropdownItem
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-07-20)
+
+
+### Bug Fixes
+
+* **Modal:** fix children typing ([#5936](https://github.com/react-bootstrap/react-bootstrap/issues/5936)) ([ff79d51](https://github.com/react-bootstrap/react-bootstrap/commit/ff79d51fe234ec18d496d6b81c3e59e0ee320825))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* use shared modal manager to sync container state ([#5917](https://github.com/react-bootstrap/react-bootstrap/issues/5917)) ([46eb1bb](https://github.com/react-bootstrap/react-bootstrap/commit/46eb1bbfebd37ab90d6f3dcc41c254d2c31ce793))
+* **Modal:** fix wrong types on ModalProps ([#5894](https://github.com/react-bootstrap/react-bootstrap/issues/5894)) ([1db1f11](https://github.com/react-bootstrap/react-bootstrap/commit/1db1f110fc19248474c9a2b957fdd1ae30ebb880))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-06-19)
 
 

@@ -2,27 +2,18 @@ import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
-
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
+import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
-import { EventKey } from './types';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ListGroupProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  activeKey?: EventKey;
   defaultActiveKey?: EventKey;
-  onSelect?: SelectCallback;
+  numbered?: boolean;
 }
 
 const propTypes = {
@@ -48,6 +39,11 @@ const propTypes = {
   horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']),
 
   /**
+   * Generate numbered list items.
+   */
+  numbered: PropTypes.bool,
+
+  /**
    * You can use a custom element type for this component.
    */
   as: PropTypes.elementType,
@@ -60,6 +56,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
       bsPrefix: initialBsPrefix,
       variant,
       horizontal,
+      numbered,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'div',
       ...controlledProps
@@ -81,7 +78,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
     );
 
     return (
-      <AbstractNav
+      <BaseNav
         ref={ref}
         {...controlledProps}
         as={as}
@@ -90,6 +87,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
           bsPrefix,
           variant && `${bsPrefix}-${variant}`,
           horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
+          numbered && `${bsPrefix}-numbered`,
         )}
       />
     );

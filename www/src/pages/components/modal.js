@@ -48,8 +48,8 @@ export default withLayout(function ModalSection({ data }) {
         </li>
         <li>
           Bootstrap only supports <strong>one</strong> modal window at a time.
-          Nested modals aren’t supported, but if you really need them the
-          underlying <code>react-overlays</code> can support them if you're
+          Nested modals aren't supported, but if you really need them, the
+          underlying <code>@restart/ui</code> library can support them if you're
           willing.
         </li>
         <li>

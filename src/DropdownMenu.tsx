@@ -5,20 +5,18 @@ import { useContext } from 'react';
 import {
   useDropdownMenu,
   UseDropdownMenuOptions,
-} from 'react-overlays/DropdownMenu';
+} from '@restart/ui/DropdownMenu';
+import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import { SelectCallback } from '@restart/ui/types';
 import warning from 'warning';
-import DropdownContext from './DropdownContext';
+import DropdownContext, { DropDirection } from './DropdownContext';
 import InputGroupContext from './InputGroupContext';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
-import { AlignType, AlignDirection, alignPropType } from './types';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { AlignType, AlignDirection, alignPropType, Placement } from './types';
 
 export type DropdownMenuVariant = 'dark' | string;
 
@@ -98,6 +96,29 @@ const defaultProps: Partial<DropdownMenuProps> = {
   flip: true,
 };
 
+export function getDropdownMenuPlacement(
+  alignEnd: boolean,
+  dropDirection?: DropDirection,
+  isRTL?: boolean,
+) {
+  const topStart = isRTL ? 'top-end' : 'top-start';
+  const topEnd = isRTL ? 'top-start' : 'top-end';
+  const bottomStart = isRTL ? 'bottom-end' : 'bottom-start';
+  const bottomEnd = isRTL ? 'bottom-start' : 'bottom-end';
+  const leftStart = isRTL ? 'right-start' : 'left-start';
+  const leftEnd = isRTL ? 'right-end' : 'left-end';
+  const rightStart = isRTL ? 'left-start' : 'right-start';
+  const rightEnd = isRTL ? 'left-end' : 'right-end';
+
+  let placement: Placement = alignEnd ? bottomEnd : bottomStart;
+  if (dropDirection === 'up') placement = alignEnd ? topEnd : topStart;
+  else if (dropDirection === 'end')
+    placement = alignEnd ? rightEnd : rightStart;
+  else if (dropDirection === 'start')
+    placement = alignEnd ? leftEnd : leftStart;
+  return placement;
+}
+
 const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
   React.forwardRef<HTMLElement, DropdownMenuProps>(
     (
@@ -117,10 +138,10 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
       },
       ref,
     ) => {
-      let alignRight = false;
+      let alignEnd = false;
       const isNavbar = useContext(NavbarContext);
       const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
-      const { align: contextAlign } = useContext(DropdownContext);
+      const { align: contextAlign, drop, isRTL } = useContext(DropdownContext);
       align = align || contextAlign;
       const isInputGroup = useContext(InputGroupContext);
 
@@ -140,30 +161,36 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
 
             // .dropdown-menu-end is required for responsively aligning
             // left in addition to align left classes.
-            // Reuse alignRight to toggle the class below.
-            alignRight = direction === 'start';
+            alignEnd = direction === 'start';
             alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
           }
         } else if (align === 'end') {
-          alignRight = true;
+          alignEnd = true;
         }
       }
 
-      const [menuProps, { hasShown, popper, show, alignEnd, toggle }] =
-        useDropdownMenu({
-          flip,
-          rootCloseEvent,
-          show: showProps,
-          alignEnd: alignRight,
-          usePopper: !isNavbar && alignClasses.length === 0,
-          offset: [0, 2],
-          popperConfig,
-        });
+      const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
+
+      const [menuProps, { hasShown, popper, show, toggle }] = useDropdownMenu({
+        flip,
+        rootCloseEvent,
+        show: showProps,
+        usePopper: !isNavbar && alignClasses.length === 0,
+        offset: [0, 2],
+        popperConfig,
+        placement,
+      });
 
       menuProps.ref = useMergedRefs(
         useWrappedRefWithWarning(ref, 'DropdownMenu'),
         menuProps.ref,
       );
+
+      useIsomorphicEffect(() => {
+        // Popper's initial position for the menu is incorrect when
+        // renderOnMount=true. Need to call update() to correct it.
+        if (show) popper?.update();
+      }, [show]);
 
       if (!hasShown && !renderOnMount && !isInputGroup) return null;
 

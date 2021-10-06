@@ -1,23 +1,24 @@
 import classNames from 'classnames';
-import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useContext, useMemo, useRef } from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
-} from 'react-overlays/Modal';
-import ModalManager from 'react-overlays/ModalManager';
-import useRootClose from 'react-overlays/useRootClose';
+} from '@restart/ui/Modal';
 import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
+import NavbarContext from './NavbarContext';
 import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
+import BootstrapModalManager, {
+  getSharedManager,
+} from './BootstrapModalManager';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -49,7 +50,7 @@ const propTypes = {
   backdrop: PropTypes.bool,
 
   /**
-   * Add an optional extra class name to .modal-backdrop.
+   * Add an optional extra class name to .offcanvas-backdrop.
    */
   backdropClassName: PropTypes.string,
 
@@ -217,16 +218,13 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       },
       ref,
     ) => {
-      const [dialogElement, setDialogElement] = useCallbackRef<HTMLElement>();
-      const modalManager = useRef<ModalManager>();
-      const handleHide = useEventCallback(onHide);
-
+      const modalManager = useRef<BootstrapModalManager>();
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
-      const modalBsPrefix = useBootstrapPrefix(undefined, 'modal');
+      const { onToggle } = useContext(NavbarContext) || {};
 
-      // If there's a backdrop, let BaseModal handle closing.
-      useRootClose(dialogElement, handleHide, {
-        disabled: backdrop,
+      const handleHide = useEventCallback(() => {
+        onToggle?.();
+        onHide?.();
       });
 
       const modalContext = useMemo(
@@ -238,36 +236,37 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
 
       function getModalManager() {
         if (propsManager) return propsManager;
-        if (!modalManager.current)
-          modalManager.current = new ModalManager({
-            handleContainerOverflow: !scroll,
-          });
-        return modalManager.current;
+        if (scroll) {
+          // Have to use a different modal manager since the shared
+          // one handles overflow.
+          if (!modalManager.current)
+            modalManager.current = new BootstrapModalManager({
+              handleContainerOverflow: false,
+            });
+          return modalManager.current;
+        }
+
+        return getSharedManager();
       }
 
       const handleEnter = (node, ...args) => {
         if (node) node.style.visibility = 'visible';
         onEnter?.(node, ...args);
-        setDialogElement(node);
       };
 
       const handleExited = (node, ...args) => {
         if (node) node.style.visibility = '';
         onExited?.(...args);
-        setDialogElement(null);
       };
 
       const renderBackdrop = useCallback(
         (backdropProps) => (
           <div
             {...backdropProps}
-            className={classNames(
-              `${modalBsPrefix}-backdrop`,
-              backdropClassName,
-            )}
+            className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
           />
         ),
-        [backdropClassName, modalBsPrefix],
+        [backdropClassName, bsPrefix],
       );
 
       const renderDialog = (dialogProps) => (
@@ -295,12 +294,12 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             container={container}
             keyboard={keyboard}
             autoFocus={autoFocus}
-            enforceFocus={enforceFocus}
+            enforceFocus={enforceFocus && !scroll}
             restoreFocus={restoreFocus}
             restoreFocusOptions={restoreFocusOptions}
             onEscapeKeyDown={onEscapeKeyDown}
             onShow={onShow}
-            onHide={onHide}
+            onHide={handleHide}
             onEnter={handleEnter}
             onEntering={onEntering}
             onEntered={onEntered}
@@ -308,7 +307,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             onExiting={onExiting}
             onExited={handleExited}
             manager={getModalManager()}
-            containerClassName={`${bsPrefix}-open`}
             transition={DialogTransition}
             backdropTransition={BackdropTransition}
             renderBackdrop={renderBackdrop}

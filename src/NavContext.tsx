@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EventKey } from './types';
+import { EventKey } from '@restart/ui/types';
 
 interface NavContextType {
   role?: string; // used by NavLink to determine it's role

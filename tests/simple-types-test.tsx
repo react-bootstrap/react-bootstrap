@@ -12,7 +12,6 @@ import {
   ButtonGroup,
   ButtonToolbar,
   Card,
-  CardColumns,
   CardGroup,
   Carousel,
   Container,
@@ -40,6 +39,7 @@ import {
   ProgressBar,
   Spinner,
   SplitButton,
+  Stack,
   Table,
   Tabs,
   Tab,
@@ -47,6 +47,7 @@ import {
   ToggleButton,
   Toast,
 } from '../src';
+import BootstrapModalManager from '../src/BootstrapModalManager';
 
 import { CarouselRef } from '../src/Carousel';
 
@@ -183,40 +184,38 @@ const MegaComponent = () => (
         <Button href="wooot" />
       </ButtonGroup>
     </ButtonToolbar>
-    <CardColumns style={style} bsPrefix="card-col">
-      <Card
-        as="div"
-        bg="primary"
-        body
-        border="primary"
-        text="primary"
-        bsPrefix="card"
-        style={{ width: '18rem' }}
-      >
-        <Card.Img
-          as="img"
-          variant="top"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.ImgOverlay
-          as="img"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.Body as="div" bsPrefix="cardbody" style={style}>
-          <Card.Title style={style}>Card Title</Card.Title>
-          <Card.Text style={style}>
-            Some quick example text to build on the card title and make up the
-            bulk of the card content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-      <CardGroup as="div" bsPrefix="cardgroup" style={style} />
-    </CardColumns>
+    <Card
+      as="div"
+      bg="primary"
+      body
+      border="primary"
+      text="primary"
+      bsPrefix="card"
+      style={{ width: '18rem' }}
+    >
+      <Card.Img
+        as="img"
+        variant="top"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.ImgOverlay
+        as="img"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.Body as="div" bsPrefix="cardbody" style={style}>
+        <Card.Title style={style}>Card Title</Card.Title>
+        <Card.Text style={style}>
+          Some quick example text to build on the card title and make up the
+          bulk of the card content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+    <CardGroup as="div" bsPrefix="cardgroup" style={style} />
     <Carousel
       activeIndex={1}
       as="div"
@@ -288,7 +287,6 @@ const MegaComponent = () => (
         lg={1}
         xl={1}
         xxl={1}
-        noGutters
         bsPrefix="row"
         className="justify-content-md-center"
       >
@@ -300,7 +298,7 @@ const MegaComponent = () => (
           3 of 3
         </Col>
       </Row>
-      <Row noGutters>
+      <Row>
         <Col>1 of 3</Col>
         <Col md="auto">Variable width content</Col>
         <Col xs md={{ span: 4, offset: 4 }}>
@@ -611,12 +609,12 @@ const MegaComponent = () => (
       backdrop="static"
       backdropClassName="class"
       centered
-      container="test"
+      container={React.createRef()}
       dialogAs="div"
       dialogClassName="class"
       enforceFocus
       keyboard
-      manager={{}}
+      manager={new BootstrapModalManager()}
       onEnter={noop}
       onEntered={noop}
       onEntering={noop}
@@ -627,7 +625,9 @@ const MegaComponent = () => (
       onHide={noop}
       onShow={noop}
       restoreFocus
-      restoreFocusOptions={{}}
+      restoreFocusOptions={{
+        preventScroll: false,
+      }}
       scrollabel
       show={false}
       size="xl"
@@ -922,7 +922,9 @@ const MegaComponent = () => (
       onToggle={noop}
       focusFirstItemOnShow="keyboard"
       navbar
-    />
+    >
+      <Dropdown.Item />
+    </SplitButton>
     <Table
       id="id"
       bordered
@@ -1010,6 +1012,11 @@ const MegaComponent = () => (
       <ToggleButton value={2}>Radio 2</ToggleButton>
       <ToggleButton value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
+    <Stack direction="horizontal" gap={1} />
+    <Stack
+      direction="vertical"
+      gap={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
+    />
     {/* // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError? */}
     {/*
     <Tabs invalidProp="2" />; // $ExpectError

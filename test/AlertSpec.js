@@ -31,10 +31,19 @@ describe('<Alert>', () => {
       .simulate('click');
   });
 
-  it('Should have use variant class', () => {
+  it('Should default to variant="primary"', () => {
+    mount(<Alert>Message</Alert>).assertSingle(`.alert-primary`);
+  });
+
+  it('Should use variant class', () => {
     mount(<Alert variant="danger">Message</Alert>).assertSingle(
       '.alert-danger',
     );
+  });
+
+  it('Should not have variant class when variant=null', () => {
+    const wrapper = mount(<Alert variant={null}>Message</Alert>);
+    expect(wrapper.find('.alert-primary').length).to.equal(0);
   });
 
   it('should forward refs to the alert', () => {

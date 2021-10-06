@@ -3,8 +3,16 @@ import classNames from 'classnames';
 import qsa from 'dom-helpers/querySelectorAll';
 import * as formik from 'formik';
 import PropTypes from 'prop-types';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import {
   LiveContext,
@@ -14,6 +22,7 @@ import {
   LiveProvider,
 } from 'react-live';
 import * as yup from 'yup';
+import useEventCallback from '@restart/hooks/useEventCallback';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMutationObserver from '@restart/hooks/useMutationObserver';
 import PlaceholderImage from './PlaceholderImage';
@@ -130,14 +139,14 @@ function Preview({ showCode, className }) {
     },
     (mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.addedNodes.length > 0) {
+        if (hjs && mutation.addedNodes.length > 0) {
           hjs.run({
             theme: 'gray',
             images: qsa(exampleRef.current, 'img'),
           });
         }
       });
-    }
+    },
   );
 
   const handleClick = useCallback((e) => {
@@ -169,68 +178,101 @@ const StyledEditor = styled(LiveEditor)`
   border-radius: 0 0 8px 8px !important;
 `;
 
-const EditorInfoMessage = styled('div')`
+const EditorInfoMessage = styled.div`
   composes: p-2 alert alert-info from global;
 
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   font-size: 70%;
   pointer-events: none;
+  margin-bottom: 0;
+  margin-right: 0.5rem;
+`;
+
+const EditorToolbar = styled.div`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: start;
 `;
 
 let uid = 0;
 
-function Editor({ handleCodeChange }) {
+const CopyTooltip = forwardRef(
+  ({ popper, children, show: _, ...props }, ref) => {
+    useEffect(() => {
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
+    return (
+      <Tooltip ref={ref} body {...props}>
+        {children}
+      </Tooltip>
+    );
+  },
+);
+
+function Editor() {
+  const live = useContext(LiveContext);
+
   const [focused, setFocused] = useState(false);
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('Copy to clipboard');
+  const [code, setCode] = useState('');
+
   const mouseDownRef = useRef(false);
 
   const idRef = useRef(null);
   if (idRef.current === null) idRef.current = `described-by-${++uid}`;
   const id = idRef.current;
 
-  const handleKeyDown = useCallback(
-    (e) => {
-      if (ignoreTab) {
-        if (e.key !== 'Tab' && e.key !== 'Shift') {
-          if (e.key === 'Enter') e.preventDefault();
-          setIgnoreTab(false);
-        }
-      } else if (e.key === 'Escape') {
-        setIgnoreTab(true);
+  const handleKeyDown = useEventCallback((e) => {
+    if (ignoreTab) {
+      if (e.key !== 'Tab' && e.key !== 'Shift') {
+        if (e.key === 'Enter') e.preventDefault();
+        setIgnoreTab(false);
       }
-    },
-    [ignoreTab]
-  );
+    } else if (e.key === 'Escape') {
+      setIgnoreTab(true);
+    }
+  });
 
-  const handleFocus = useCallback(() => {
+  const handleFocus = useEventCallback(() => {
     setFocused(true);
     setIgnoreTab(!mouseDownRef.current);
     setKeyboardFocused(!mouseDownRef.current);
-  }, []);
+  });
 
-  const handleBlur = useCallback((e) => {
-    handleCodeChange(e);
+  const handleBlur = useEventCallback(() => {
     setFocused(false);
-  }, []);
+  });
 
-  const handleMouseDown = useCallback(() => {
+  const handleMouseDown = useEventCallback(() => {
     mouseDownRef.current = true;
     window.setTimeout(() => {
       mouseDownRef.current = false;
     });
-  }, []);
+  });
+
+  const handleTooltipExited = useEventCallback(() => {
+    setCopyStatus('Copy to clipboard');
+  });
+
+  const handleCopy = useEventCallback(() => {
+    navigator.clipboard.writeText(code).then(setCopyStatus('Copied!'));
+  });
+
+  const handleCodeChange = useEventCallback((codeText) => {
+    live.onChange(codeText);
+    setCode(codeText);
+  });
 
   const showMessage = keyboardFocused || (focused && !ignoreTab);
 
   return (
     <div className="position-relative">
       <StyledEditor
+        onChange={handleCodeChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
@@ -241,19 +283,31 @@ function Editor({ handleCodeChange }) {
         padding={20}
       />
 
-      {showMessage && (
-        <EditorInfoMessage id={id} aria-live="polite">
-          {ignoreTab ? (
-            <>
-              Press <kbd>enter</kbd> or type a key to enable tab-to-indent
-            </>
-          ) : (
-            <>
-              Press <kbd>esc</kbd> to disable tab trapping
-            </>
-          )}
-        </EditorInfoMessage>
-      )}
+      <EditorToolbar>
+        {showMessage && (
+          <EditorInfoMessage id={id} aria-live="polite">
+            {ignoreTab ? (
+              <>
+                Press <kbd>enter</kbd> or type a key to enable tab-to-indent
+              </>
+            ) : (
+              <>
+                Press <kbd>esc</kbd> to disable tab trapping
+              </>
+            )}
+          </EditorInfoMessage>
+        )}
+
+        <OverlayTrigger
+          onExited={handleTooltipExited}
+          trigger={['hover', 'focus']}
+          overlay={<CopyTooltip id="copy-tooltip">{copyStatus}</CopyTooltip>}
+        >
+          <Button onClick={handleCopy} variant="outline-light" size="sm">
+            Copy
+          </Button>
+        </OverlayTrigger>
+      </EditorToolbar>
     </div>
   );
 }

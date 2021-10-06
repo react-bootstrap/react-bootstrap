@@ -7,8 +7,9 @@ import Transition, {
   ENTERING,
   EXITING,
 } from 'react-transition-group/Transition';
+import { TransitionCallbacks } from '@restart/ui/types';
 import transitionEndListener from './transitionEndListener';
-import { TransitionCallbacks, BsPrefixOnlyProps } from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 import { useBootstrapPrefix } from './ThemeProvider';
 
