@@ -17,8 +17,6 @@ export interface ToggleButtonProps
   inputRef?: React.Ref<HTMLInputElement>;
 }
 
-const noop = () => undefined;
-
 const propTypes = {
   /**
    * @default 'btn-check'
@@ -104,7 +102,7 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
-          onChange={onChange || noop}
+          onChange={onChange}
           id={id}
         />
         <Button
