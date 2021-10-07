@@ -2,9 +2,10 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'astroturf';
 import copy from 'copy-text-to-clipboard';
-import { useCallback, useMemo, useState } from 'react';
+import { useState, forwardRef, useEffect } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
 const Link = styled('span')`
   font-size: 1rem;
@@ -27,26 +28,43 @@ const Code = styled('code')`
 const COPY_IMPORT_TEXT = 'Copy import code';
 const COPIED_IMPORT_TEXT = 'Copied!';
 
+const CopyTooltip = forwardRef(
+  ({ popper, children, show: _, ...props }, ref) => {
+    useEffect(() => {
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
+    return (
+      <Tooltip ref={ref} body {...props}>
+        {children}
+      </Tooltip>
+    );
+  }
+);
+
 const CopyImport = ({ name }) => {
   const [text, setText] = useState(COPY_IMPORT_TEXT);
-  const textToCopy = useMemo(
-    () => `import ${name} from 'react-bootstrap/${name}'`,
-    [name],
-  );
 
-  const handleCopy = useCallback(() => {
-    copy(textToCopy);
+  const handleCopy = useEventCallback(() => {
+    const toBeCopied = `import ${name} from 'react-bootstrap/${name}'`;
+    copy(toBeCopied);
     setText(COPIED_IMPORT_TEXT);
-    setTimeout(() => setText(COPY_IMPORT_TEXT), 2000);
-  }, [textToCopy]);
+  });
+
+  const handleTooltipExited = useEventCallback(() => {
+    setText(COPY_IMPORT_TEXT);
+  });
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip id={`copy-${name}-import-tooltip`}>{text}</Tooltip>}
+      onExited={handleTooltipExited}
+      trigger={['hover', 'focus']}
+      overlay={
+        <CopyTooltip id={`copy-${name}-import-tooltip`}>{text}</CopyTooltip>
+      }
     >
       <Link onClick={handleCopy} className="js-search-exclude">
         <FontAwesomeIcon icon={faCopy} />
-        <span className="visually-hidden">{`Copy import code for the ${name} component`}</span>
       </Link>
     </OverlayTrigger>
   );
