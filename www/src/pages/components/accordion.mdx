@@ -7,6 +7,7 @@ import ReactPlayground from '../../components/ReactPlayground';
 import Basic from '../../examples/Accordion/Basic';
 import AllCollapse from '../../examples/Accordion/AllCollapse';
 import Flush from '../../examples/Accordion/Flush';
+import AlwaysOpen from '../../examples/Accordion/AlwaysOpen';
 import CustomToggle from '../../examples/Accordion/CustomToggle.js';
 import ContextAwareToggle from '../../examples/Accordion/ContextAwareToggle.js';
 
@@ -36,6 +37,13 @@ If you want your `Accordion` to start in a fully-collapsed state, then simply do
 Add `flush` to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.
 
 <ReactPlayground codeText={Flush} />
+
+### Always open
+
+You can make accordion items stay open when another item is opened by using the `alwaysOpen` prop. If you're looking to
+control the component, you must use an array of strings for `activeKey` or `defaultActiveKey`.
+
+<ReactPlayground codeText={AlwaysOpen} />
 
 ## Custom Accordions
 

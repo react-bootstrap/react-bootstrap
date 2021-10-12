@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-
+import { fireEvent, render } from '@testing-library/react';
 import AccordionButton from '../src/AccordionButton';
 
 describe('<AccordionButton>', () => {
@@ -11,9 +11,13 @@ describe('<AccordionButton>', () => {
     mount(<AccordionButton as="div" />).assertSingle('div.accordion-button');
   });
 
-  // Just to get full coverage on the useAccordionButton click handler.
-  it('Should just work if there is no onSelect or onClick handler', () => {
-    const wrapper = mount(<AccordionButton />);
-    wrapper.simulate('click');
+  it('Should call onClick', () => {
+    const onClickSpy = sinon.spy();
+    const { getByTestId } = render(
+      <AccordionButton data-testid="btn" onClick={onClickSpy} />,
+    );
+    fireEvent.click(getByTestId('btn'));
+
+    onClickSpy.should.be.calledOnce;
   });
 });
