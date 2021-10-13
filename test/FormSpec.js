@@ -17,4 +17,8 @@ describe('<Form>', () => {
   it('Should have form as default component', () => {
     mount(<Form />).assertSingle('form');
   });
+
+  it('should have form class `was-validated` if validated', () => {
+    mount(<Form validated />).assertSingle('form.was-validated');
+  });
 });
