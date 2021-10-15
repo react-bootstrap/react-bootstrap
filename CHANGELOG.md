@@ -1,3 +1,21 @@
+# [2.0.0-rc.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-rc.0...v2.0.0-rc.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **Toast:** add optional event arg to Toast onClose ([#6068](https://github.com/react-bootstrap/react-bootstrap/issues/6068)) ([3fc5b57](https://github.com/react-bootstrap/react-bootstrap/commit/3fc5b57236986fe9515d1d696fd1542a3de52d37)), closes [#5726](https://github.com/react-bootstrap/react-bootstrap/issues/5726)
+* **ToastContext:** fix toast context type ([#6073](https://github.com/react-bootstrap/react-bootstrap/issues/6073)) ([3fa3b28](https://github.com/react-bootstrap/react-bootstrap/commit/3fa3b281b9e0400f2d4960c79e757d478d637b5d))
+
+
+### Features
+
+* **ListGroup:** add `numbered` prop ([#6072](https://github.com/react-bootstrap/react-bootstrap/issues/6072)) ([415b636](https://github.com/react-bootstrap/react-bootstrap/commit/415b6369dfefc17e24cc41ea4513cab7a4dd6a4e))
+* add NavbarOffcanvas component ([#5999](https://github.com/react-bootstrap/react-bootstrap/issues/5999)) ([0bb7b42](https://github.com/react-bootstrap/react-bootstrap/commit/0bb7b428250e4a587f753e8a81e8d7721d789811))
+
+
+
+
+
 # [2.0.0-rc.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-beta.6...v2.0.0-rc.0) (2021-09-21)
 
 
