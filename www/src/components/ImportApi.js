@@ -35,11 +35,11 @@ const CopyTooltip = forwardRef(
     }, [children, popper]);
 
     return (
-      <Tooltip ref={ref} body {...props}>
+      <Tooltip ref={ref} {...props}>
         {children}
       </Tooltip>
     );
-  }
+  },
 );
 
 const CopyImport = ({ name }) => {
