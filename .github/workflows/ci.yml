@@ -35,16 +35,6 @@ jobs:
       - name: Install Firefox (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
         run: brew install --cask firefox
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            .cache/yarn
-            node_modules
-            www/node_modules
-          key: react-bootstrap-${{ hashFiles('yarn.lock') }}
-          restore-keys: react-bootstrap
       - name: Install Dependencies
         run: yarn bootstrap
         env:
