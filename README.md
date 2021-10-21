@@ -17,7 +17,7 @@ See the below table on which version of React-Bootstrap you should be using in y
 
 | Bootstrap Version | React-Bootstrap Version | Documentation |
 | ------------- |:-------------:| -----:|
-| v5.x | 2.x beta | [Link][v5-documentation] |
+| v5.x | 2.x | [Link][v5-documentation] |
 | v4.x | 1.x | [Link][v4-documentation] |
 | v3.x | 0.33.x (not maintained) | [Link][v3-documentation] |
 
