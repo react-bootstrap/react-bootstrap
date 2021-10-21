@@ -1,3 +1,9 @@
+# [2.0.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-rc.1...v2.0.0) (2021-10-21)
+
+
+
+
+
 # [2.0.0-rc.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-rc.0...v2.0.0-rc.1) (2021-10-15)
 
 

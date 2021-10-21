@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0",
   "description": "Bootstrap 5 components built with React",
   "keywords": [
     "react",
