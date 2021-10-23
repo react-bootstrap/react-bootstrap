@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
@@ -15,6 +15,18 @@ describe('<OverlayTrigger>', () => {
       {children}
     </div>
   ));
+
+  it('should not throw an error with StrictMode', () => {
+    const wrapper = mount(
+      <React.StrictMode>
+        <OverlayTrigger overlay={<Div>test</Div>}>
+          <button type="button">button</button>
+        </OverlayTrigger>
+      </React.StrictMode>,
+    );
+
+    wrapper.find('button').simulate('click');
+  });
 
   it('Should render OverlayTrigger element', () => {
     mount(
@@ -37,6 +49,27 @@ describe('<OverlayTrigger>', () => {
     wrapper.find('button').simulate('click');
 
     wrapper.assertSingle('div.test');
+  });
+
+  it('Should show the tooltip when transitions are disabled', () => {
+    const overlay = ({ className, ...props }) => (
+      <Div {...props} className={`${className} test`} />
+    );
+    const wrapper = mount(
+      <OverlayTrigger
+        transition={false}
+        trigger={['hover', 'focus']}
+        overlay={overlay}
+      >
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+
+    wrapper.assertNone('.test');
+
+    wrapper.find('button').simulate('focus');
+
+    wrapper.assertSingle('div.test.show');
   });
 
   it('Should call OverlayTrigger onClick prop to child', () => {
@@ -88,6 +121,33 @@ describe('<OverlayTrigger>', () => {
     wrapper.find('button').simulate('click');
 
     wrapper.assertSingle('div.test');
+  });
+
+  it('Should show after mouseover trigger', (done) => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const wrapper = mount(
+        <OverlayTrigger overlay={<Div className="test" />}>
+          <span>hover me</span>
+        </OverlayTrigger>,
+      );
+
+      wrapper.assertNone('.test');
+
+      wrapper.find('span').simulate('mouseover');
+
+      wrapper.assertSingle('div.test');
+
+      wrapper.find('span').simulate('mouseout');
+
+      clock.tick(50);
+
+      wrapper.assertNone('.test');
+    } finally {
+      clock.restore();
+      done();
+    }
   });
 
   it('Should not set aria-describedby if the state is not show', () => {

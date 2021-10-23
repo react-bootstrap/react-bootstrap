@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import Button from '../src/Button';
@@ -7,7 +6,7 @@ import Dropdown from '../src/Dropdown';
 describe('<Dropdown.Item>', () => {
   it('renders divider', () => {
     mount(<Dropdown.Divider />).assertSingle(
-      'div.dropdown-divider[role="separator"]',
+      'hr.dropdown-divider[role="separator"]',
     );
   });
 
@@ -71,80 +70,6 @@ describe('<Dropdown.Item>', () => {
     mount(<Dropdown.Item as={Button} variant="success" />).assertSingle(
       'button.dropdown-item.btn-success',
     );
-  });
-
-  it('click handling with onSelect prop', (done) => {
-    const handleSelect = (eventKey) => {
-      eventKey.should.equal('1');
-      done();
-    };
-    mount(
-      <Dropdown.Item onSelect={handleSelect} eventKey="1">
-        Item
-      </Dropdown.Item>,
-    ).simulate('click');
-  });
-
-  it('click handling with onSelect prop (no eventKey)', (done) => {
-    const handleSelect = (eventKey) => {
-      expect(eventKey).to.not.exist;
-      done();
-    };
-    mount(<Dropdown.Item onSelect={handleSelect}>Item</Dropdown.Item>).simulate(
-      'click',
-    );
-  });
-
-  it('should call custom onClick', () => {
-    const handleClick = sinon.spy();
-    const handleSelect = sinon.spy();
-
-    mount(
-      <Dropdown.Item onClick={handleClick} onSelect={handleSelect}>
-        Item
-      </Dropdown.Item>,
-    ).simulate('click');
-
-    expect(handleClick).to.have.been.called;
-    expect(handleSelect).to.have.been.called;
-  });
-
-  it('does not pass onSelect to DOM node', () => {
-    mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
-      .find('a')
-      .props()
-      .should.not.have.property('onSelect');
-  });
-
-  it('does not pass onSelect to children', () => {
-    mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
-      .find('SafeAnchor')
-      .props()
-      .should.not.have.property('onSelect');
-  });
-
-  it('disabled link', () => {
-    const handleSelect = () => {
-      throw new Error('Should not invoke onSelect event');
-    };
-    mount(
-      <Dropdown.Item onSelect={handleSelect} disabled>
-        Text
-      </Dropdown.Item>,
-    )
-      .assertSingle('a.disabled')
-      .simulate('click');
-  });
-
-  it('should not call onSelect for disabled item that is not a SafeAnchor', () => {
-    const onSelectSpy = sinon.spy();
-    mount(
-      <Dropdown.Item as="div" onSelect={onSelectSpy} disabled>
-        Text
-      </Dropdown.Item>,
-    ).simulate('click');
-
-    onSelectSpy.should.not.have.been.called;
   });
 
   it('should pass through props', () => {

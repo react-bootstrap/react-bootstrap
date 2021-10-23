@@ -7,43 +7,39 @@ function Example() {
 
   return (
     <Row>
-      <Col xs={6}>
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowA} className="mb-2">
+          Toggle Toast <strong>with</strong> Animation
+        </Button>
         <Toast show={showA} onClose={toggleShowA}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
+              className="rounded me-2"
               alt=""
             />
-            <strong className="mr-auto">Bootstrap</strong>
+            <strong className="me-auto">Bootstrap</strong>
             <small>11 mins ago</small>
           </Toast.Header>
           <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
         </Toast>
       </Col>
-      <Col xs={6}>
-        <Button onClick={toggleShowA}>
-          Toggle Toast <strong>with</strong> Animation
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowB} className="mb-2">
+          Toggle Toast <strong>without</strong> Animation
         </Button>
-      </Col>
-      <Col xs={6} className="my-1">
         <Toast onClose={toggleShowB} show={showB} animation={false}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
+              className="rounded me-2"
               alt=""
             />
-            <strong className="mr-auto">Bootstrap</strong>
+            <strong className="me-auto">Bootstrap</strong>
             <small>11 mins ago</small>
           </Toast.Header>
           <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
         </Toast>
-      </Col>
-      <Col xs={6}>
-        <Button onClick={toggleShowB}>
-          Toggle Toast <strong>without</strong> Animation
-        </Button>
       </Col>
     </Row>
   );

@@ -1,4 +1,6 @@
 require('bootstrap/dist/css/bootstrap.min.css');
+// require('bootstrap/dist/css/bootstrap.rtl.min.css');
+
 const React = require('react');
 const { MDXProvider } = require('@mdx-js/react');
 

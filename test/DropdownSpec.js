@@ -1,7 +1,10 @@
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import simulant from 'simulant';
+import sinon from 'sinon';
 import Dropdown from '../src/Dropdown';
+import InputGroup from '../src/InputGroup';
 
 describe('<Dropdown>', () => {
   const dropdownChildren = [
@@ -36,20 +39,20 @@ describe('<Dropdown>', () => {
     node.className.should.match(/\bdropup\b/);
   });
 
-  it('renders div with dropright class', () => {
+  it('renders div with dropend class', () => {
     mount(
-      <Dropdown title="Dropup" drop="right">
+      <Dropdown title="Dropend" drop="end">
         {dropdownChildren}
       </Dropdown>,
-    ).assertSingle('.dropright');
+    ).assertSingle('.dropend');
   });
 
-  it('renders div with dropleft class', () => {
+  it('renders div with dropstart class', () => {
     mount(
-      <Dropdown title="Dropup" drop="left">
+      <Dropdown title="Dropstart" drop="start">
         {dropdownChildren}
       </Dropdown>,
-    ).assertSingle('.dropleft');
+    ).assertSingle('.dropstart');
   });
 
   it('renders toggle with Dropdown.Toggle', () => {
@@ -59,21 +62,19 @@ describe('<Dropdown>', () => {
       .getDOMNode();
 
     buttonNode.textContent.should.match(/Child Title/);
-
-    buttonNode.getAttribute('aria-haspopup').should.equal('true');
     buttonNode.getAttribute('aria-expanded').should.equal('false');
     buttonNode.getAttribute('id').should.be.ok;
   });
 
-  it('forwards alignRight to menu', () => {
+  it('forwards align="end" to menu', () => {
     const Menu = React.forwardRef(
-      ({ show: _, close: _1, alignRight, ...props }, ref) => (
-        <div {...props} data-align-right={alignRight} ref={ref} />
+      ({ show: _, close: _1, align, ...props }, ref) => (
+        <div {...props} data-align={align} ref={ref} />
       ),
     );
 
     mount(
-      <Dropdown alignRight show>
+      <Dropdown align="end" show>
         <Dropdown.Toggle id="test-id" key="toggle">
           Child Title
         </Dropdown.Toggle>
@@ -82,7 +83,7 @@ describe('<Dropdown>', () => {
           <Dropdown.Item>Item 1</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>,
-    ).assertSingle('div[data-align-right=true]');
+    ).assertSingle('div[data-align="end"]');
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space
@@ -193,10 +194,9 @@ describe('<Dropdown>', () => {
       wrapper.find('button').simulate('click');
 
       expect(spy).to.have.been.calledOnce;
-      expect(spy.getCall(0).args.length).to.equal(3);
+      expect(spy.getCall(0).args.length).to.equal(2);
       expect(spy.getCall(0).args[0]).to.equal(true);
-      expect(spy.getCall(0).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(0).args[2], { source: 'click' });
+      expect(spy.getCall(0).args[1].source).to.equal('click');
     });
 
     it('passes open, event, and source correctly when closed with click', () => {
@@ -212,10 +212,9 @@ describe('<Dropdown>', () => {
 
       wrapper.find('button').simulate('click');
       expect(spy).to.have.been.calledTwice;
-      expect(spy.getCall(1).args.length).to.equal(3);
+      expect(spy.getCall(1).args.length).to.equal(2);
       expect(spy.getCall(1).args[0]).to.equal(false);
-      expect(spy.getCall(1).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(1).args[2], { source: 'click' });
+      expect(spy.getCall(1).args[1].source).to.equal('click');
     });
 
     it('passes open, event, and source correctly when child selected', () => {
@@ -237,25 +236,26 @@ describe('<Dropdown>', () => {
       wrapper.find('a').first().simulate('click');
 
       expect(spy).to.have.been.calledTwice;
-      expect(spy.getCall(1).args.length).to.equal(3);
+      expect(spy.getCall(1).args.length).to.equal(2);
       expect(spy.getCall(1).args[0]).to.equal(false);
-      expect(spy.getCall(1).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(1).args[2], { source: 'select' });
+      expect(spy.getCall(1).args[1].source).to.equal('select');
     });
 
     it('passes open, event, and source correctly when opened with keydown', () => {
       const spy = sinon.spy();
       const wrapper = mount(
         <Dropdown onToggle={spy}>{dropdownChildren}</Dropdown>,
+        { attachTo: focusableContainer },
       );
 
-      wrapper.find('button').simulate('keyDown', { key: 'ArrowDown' });
+      simulant.fire(wrapper.find('button').getDOMNode(), 'keydown', {
+        key: 'ArrowDown',
+      });
 
       expect(spy).to.have.been.calledOnce;
-      expect(spy.getCall(0).args.length).to.equal(3);
+      expect(spy.getCall(0).args.length).to.equal(2);
       expect(spy.getCall(0).args[0]).to.equal(true);
-      expect(spy.getCall(0).args[1]).to.be.an('object');
-      assert.deepEqual(spy.getCall(0).args[2], { source: 'keydown' });
+      expect(spy.getCall(0).args[1].source).to.equal('keydown');
     });
   });
 
@@ -289,8 +289,6 @@ describe('<Dropdown>', () => {
           show,
           // eslint-disable-next-line no-unused-vars
           close,
-          // eslint-disable-next-line no-unused-vars
-          alignRight,
           ...props
         },
         ref,
@@ -301,5 +299,141 @@ describe('<Dropdown>', () => {
         <Dropdown.Item>Example Item</Dropdown.Item>
       </Dropdown.Menu>,
     ).assertSingle('#custom-component');
+  });
+
+  describe('InputGroup Dropdowns', () => {
+    it('should not render a .dropdown element when inside input group', () => {
+      const wrapper = mount(
+        <InputGroup>
+          <Dropdown>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      );
+
+      expect(wrapper.find('.dropdown').length).to.equal(0);
+    });
+
+    it('should render .show on the dropdown toggle', () => {
+      mount(
+        <InputGroup>
+          <Dropdown show>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      ).assertSingle('button.dropdown-toggle.show');
+    });
+
+    it('should always render dropdown menu even if renderOnMount=false', () => {
+      mount(
+        <InputGroup>
+          <Dropdown renderOnMount={false}>{dropdownChildren}</Dropdown>
+        </InputGroup>,
+      ).assertSingle('div.dropdown-menu');
+    });
+  });
+
+  describe('autoClose behaviour', () => {
+    describe('autoClose="true"', () => {
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: true,
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+    });
+
+    describe('autoClose="inside"', () => {
+      it('should close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        onToggle.should.have.been.calledWith(false);
+      });
+
+      it('should not close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'inside',
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        onToggle.should.not.be.called;
+      });
+    });
+
+    describe('autoClose="outside"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        sinon.assert.notCalled(onToggle);
+      });
+
+      it('should close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: 'outside',
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        onToggle.should.be.calledWith(false);
+      });
+    });
+
+    describe('autoClose="false"', () => {
+      it('should not close on child selection', () => {
+        const onToggle = sinon.spy();
+
+        const wrapper = mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: false,
+          onToggle,
+        });
+
+        wrapper.find('.dropdown-menu a').first().simulate('click');
+
+        sinon.assert.notCalled(onToggle);
+      });
+
+      it('should not close on outer click', () => {
+        const onToggle = sinon.spy();
+
+        mount(simpleDropdown).setProps({
+          show: true,
+          autoClose: false,
+          onToggle,
+        });
+
+        simulant.fire(document.body, 'click');
+
+        sinon.assert.notCalled(onToggle);
+      });
+    });
   });
 });

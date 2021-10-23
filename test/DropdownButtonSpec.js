@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import DropdownButton from '../src/DropdownButton';
 import DropdownItem from '../src/DropdownItem';
@@ -28,16 +27,16 @@ describe('<DropdownButton>', () => {
     ).assertSingle('.dropdown-menu a.dropdown-item');
   });
 
-  it('forwards alignRight to the Dropdown', () => {
+  it('forwards align="end" to the Dropdown', () => {
     mount(
-      <DropdownButton alignRight title="blah" id="test-id">
+      <DropdownButton align="end" title="blah" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
     )
       .find('Dropdown')
       .first()
       .props()
-      .alignRight.should.equal(true);
+      .align.should.equal('end');
   });
 
   it('passes variant and size to the toggle', () => {
@@ -46,6 +45,19 @@ describe('<DropdownButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
     ).find('button.dropdown-toggle.btn-success.btn-sm');
+  });
+
+  it('passes menuVariant to dropdown menu', () => {
+    const wrapper = mount(
+      <DropdownButton title="blah" menuVariant="dark" id="test">
+        <DropdownItem>Item 1</DropdownItem>
+      </DropdownButton>,
+    );
+
+    expect(wrapper.find('DropdownMenu').props()).to.have.property(
+      'variant',
+      'dark',
+    );
   });
 
   it('forwards onSelect handler to DropdownItems', (done) => {

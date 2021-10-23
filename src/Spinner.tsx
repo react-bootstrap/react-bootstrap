@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixPropsWithChildren } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixPropsWithChildren {
+    BsPrefixProps {
   animation: 'border' | 'grow';
-  role?: string;
   size?: 'sm';
   variant?: Variant;
 }
@@ -59,40 +58,38 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const Spinner = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      variant,
-      animation,
-      size,
-      children,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'div',
-      className,
-      ...props
-    }: SpinnerProps,
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
-    const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
+const Spinner: BsPrefixRefForwardingComponent<'div', SpinnerProps> =
+  React.forwardRef<HTMLElement, SpinnerProps>(
+    (
+      {
+        bsPrefix,
+        variant,
+        animation,
+        size,
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'div',
+        className,
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
+      const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
 
-    return (
-      <Component
-        ref={ref}
-        {...props}
-        className={classNames(
-          className,
-          bsSpinnerPrefix,
-          size && `${bsSpinnerPrefix}-${size}`,
-          variant && `text-${variant}`,
-        )}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+      return (
+        <Component
+          ref={ref}
+          {...props}
+          className={classNames(
+            className,
+            bsSpinnerPrefix,
+            size && `${bsSpinnerPrefix}-${size}`,
+            variant && `text-${variant}`,
+          )}
+        />
+      );
+    },
+  );
 
 Spinner.propTypes = propTypes as any;
 Spinner.displayName = 'Spinner';

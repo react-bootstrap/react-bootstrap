@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import FormLabel from '../src/FormLabel';
@@ -35,9 +35,9 @@ describe('<FormLabel>', () => {
     ).assertSingle('label[htmlFor="foo"].col-sm-4.col-form-label');
   });
 
-  it('should respect srOnly', () => {
-    mount(<FormLabel srOnly>Label</FormLabel>).assertSingle(
-      'label.form-label.sr-only',
+  it('should respect visuallyHidden', () => {
+    mount(<FormLabel visuallyHidden>Label</FormLabel>).assertSingle(
+      'label.form-label.visually-hidden',
     );
   });
 
@@ -58,6 +58,27 @@ describe('<FormLabel>', () => {
           <FormGroup controlId="foo">
             <FormLabel
               type="text"
+              ref={(ref) => {
+                this.input = ref;
+              }}
+            />
+          </FormGroup>
+        );
+      }
+    }
+
+    const instance = mount(<Container />).instance();
+    expect(instance.input.tagName).to.equal('LABEL');
+  });
+
+  it('should support ref forwarding when rendered as a Col', () => {
+    class Container extends React.Component {
+      render() {
+        return (
+          <FormGroup controlId="foo">
+            <FormLabel
+              type="text"
+              column
               ref={(ref) => {
                 this.input = ref;
               }}

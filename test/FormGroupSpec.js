@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import FormControl from '../src/FormControl';
@@ -13,14 +12,6 @@ describe('<FormGroup>', () => {
         <span className="child2" />
       </FormGroup>,
     ).assertSingle('.child1');
-  });
-
-  it('renders with form-group class', () => {
-    mount(
-      <FormGroup>
-        <span />
-      </FormGroup>,
-    );
   });
 
   it('provided controlId to label and control', () => {

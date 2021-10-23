@@ -1,29 +1,47 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useMemo } from 'react';
+import * as React from 'react';
+import { useContext, useMemo } from 'react';
 
-export interface ThemeProviderProps {
-  prefixes: Record<string, unknown>;
+export interface ThemeContextValue {
+  prefixes: Record<string, string>;
+  dir?: string;
 }
 
-const ThemeContext = React.createContext({});
+export interface ThemeProviderProps extends Partial<ThemeContextValue> {
+  children: React.ElementType;
+}
+
+const ThemeContext = React.createContext<ThemeContextValue>({ prefixes: {} });
 const { Consumer, Provider } = ThemeContext;
 
-function ThemeProvider({ prefixes, children }) {
-  const copiedPrefixes = useMemo(() => ({ ...prefixes }), [prefixes]);
+function ThemeProvider({ prefixes = {}, dir, children }: ThemeProviderProps) {
+  const contextValue = useMemo(
+    () => ({
+      prefixes: { ...prefixes },
+      dir,
+    }),
+    [prefixes, dir],
+  );
 
-  return <Provider value={copiedPrefixes}>{children}</Provider>;
+  return <Provider value={contextValue}>{children}</Provider>;
 }
 
 ThemeProvider.propTypes = {
-  prefixes: PropTypes.object.isRequired,
-};
+  prefixes: PropTypes.object,
+  dir: PropTypes.string,
+} as any;
 
 export function useBootstrapPrefix(
   prefix: string | undefined,
   defaultPrefix: string,
 ): string {
-  const prefixes = useContext(ThemeContext);
+  const { prefixes } = useContext(ThemeContext);
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
+}
+
+export function useIsRTL() {
+  const { dir } = useContext(ThemeContext);
+  return dir === 'rtl';
 }
 
 function createBootstrapComponent(Component, opts) {

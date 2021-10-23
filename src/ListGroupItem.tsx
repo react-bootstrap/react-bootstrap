@@ -1,24 +1,23 @@
 import classNames from 'classnames';
-import React, { useCallback } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-
-import AbstractNavItem from './AbstractNavItem';
-import { makeEventKey } from './SelectableContext';
+import useEventCallback from '@restart/hooks/useEventCallback';
+import {
+  useNavItem,
+  NavItemProps as BaseNavItemProps,
+} from '@restart/ui/NavItem';
+import { makeEventKey } from '@restart/ui/SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
-export interface ListGroupItemProps extends BsPrefixProps {
+export interface ListGroupItemProps
+  extends Omit<BaseNavItemProps, 'onSelect'>,
+    BsPrefixProps {
   action?: boolean;
-  active?: boolean;
-  disabled?: boolean;
-  eventKey?: string;
-  href?: string;
   onClick?: React.MouseEventHandler;
   variant?: Variant;
 }
-
-type ListGroupItem = BsPrefixRefForwardingComponent<'a', ListGroupItemProps>;
 
 const propTypes = {
   /**
@@ -46,7 +45,7 @@ const propTypes = {
    */
   disabled: PropTypes.bool,
 
-  eventKey: PropTypes.string,
+  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   onClick: PropTypes.func,
 
@@ -61,67 +60,67 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  active: false,
-  disabled: false,
-};
+const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
+  React.forwardRef<HTMLElement, ListGroupItemProps>(
+    (
+      {
+        bsPrefix,
+        active,
+        disabled,
+        eventKey,
+        className,
+        variant,
+        action,
+        as,
+        ...props
+      },
+      ref,
+    ) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
+      const [navItemProps, meta] = useNavItem({
+        key: makeEventKey(eventKey, props.href),
+        active,
+        ...props,
+      });
 
-const ListGroupItem: ListGroupItem = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      active,
-      disabled,
-      className,
-      variant,
-      action,
-      as,
-      eventKey,
-      onClick,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
-
-    const handleClick = useCallback(
-      (event) => {
+      const handleClick = useEventCallback((event) => {
         if (disabled) {
           event.preventDefault();
           event.stopPropagation();
           return;
         }
 
-        if (onClick) onClick(event);
-      },
-      [disabled, onClick],
-    );
+        navItemProps.onClick(event);
+      });
 
-    return (
-      <AbstractNavItem
-        ref={ref}
-        {...props}
-        // TODO: Restrict eventKey to string in v5?
-        eventKey={makeEventKey(eventKey as any, props.href)}
-        // eslint-disable-next-line no-nested-ternary
-        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
-        onClick={handleClick}
-        className={classNames(
-          className,
-          bsPrefix,
-          active && 'active',
-          disabled && 'disabled',
-          variant && `${bsPrefix}-${variant}`,
-          action && `${bsPrefix}-action`,
-        )}
-      />
-    );
-  },
-);
+      if (disabled && props.tabIndex === undefined) {
+        props.tabIndex = -1;
+        props['aria-disabled'] = true;
+      }
+
+      // eslint-disable-next-line no-nested-ternary
+      const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
+
+      return (
+        <Component
+          ref={ref}
+          {...props}
+          {...navItemProps}
+          onClick={handleClick}
+          className={classNames(
+            className,
+            bsPrefix,
+            meta.isActive && 'active',
+            disabled && 'disabled',
+            variant && `${bsPrefix}-${variant}`,
+            action && `${bsPrefix}-action`,
+          )}
+        />
+      );
+    },
+  );
 
 ListGroupItem.propTypes = propTypes;
-ListGroupItem.defaultProps = defaultProps;
 ListGroupItem.displayName = 'ListGroupItem';
 
 export default ListGroupItem;

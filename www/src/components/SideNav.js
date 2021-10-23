@@ -1,6 +1,6 @@
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import FormControl from 'react-bootstrap/FormControl';
 
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
 const MenuButton = styled(Button).attrs({ variant: 'link' })`
-  composes: p-0 d-md-none ml-3 from global;
+  composes: p-0 d-md-none ms-3 from global;
 
   line-height: 1;
   color: #212529;
@@ -104,9 +104,11 @@ const gettingStarted = [
   'why-react-bootstrap',
   'theming',
   'support',
+  'rtl',
+  'server-side-rendering',
 ];
 
-const layout = ['grid', 'media'];
+const layout = ['grid', 'stack'];
 
 const components = [
   'alerts',
@@ -117,18 +119,20 @@ const components = [
   'button-group',
   'cards',
   'carousel',
+  'close-button',
   'dropdowns',
   'figures',
   'forms',
   'input-group',
   'images',
-  'jumbotron',
   'list-group',
   'modal',
   'navs',
   'navbar',
+  'offcanvas',
   'overlays',
   'pagination',
+  'placeholder',
   'popovers',
   'progress',
   'spinners',
@@ -138,7 +142,7 @@ const components = [
   'toasts',
 ];
 
-const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
+const utilities = ['transitions', 'ratio', 'restart-ui'];
 
 // We need to configure this
 function attachSearch(ref) {
@@ -152,6 +156,13 @@ function attachSearch(ref) {
       });
     });
 }
+
+const nameOverrides = {
+  'why-react-bootstrap': 'Why React-Bootstrap',
+  rtl: 'RTL',
+  'restart-ui': '@restart/ui',
+  'server-side-rendering': 'Server-side Rendering',
+};
 
 function NavSection({ heading, location: { pathname }, items, path }) {
   let active = pathname.startsWith(path);
@@ -173,10 +184,7 @@ function NavSection({ heading, location: { pathname }, items, path }) {
           {items.map((name) => (
             <Nav.Item key={`${path}/${name}/`}>
               <TocSubLink href={`${path}/${name}/`}>
-                {startCase(name.toLowerCase()).replace(
-                  'React Bootstrap',
-                  'React-Bootstrap',
-                )}
+                {nameOverrides[name] || startCase(name.toLowerCase())}
               </TocSubLink>
             </Nav.Item>
           ))}

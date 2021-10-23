@@ -1,16 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import styled from 'astroturf';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
 
-const MastHead = styled(Jumbotron)`
+const MastHead = styled('div')`
   @import '../css/theme';
+
+  composes: mb-4 from global;
 
   background-color: $dark;
   padding: 0;
@@ -84,7 +85,7 @@ const ButtonToolbar = styled('div')`
     margin: -1rem;
 
     & > * {
-      width: 100%;
+      width: calc(100% - 2rem);
       max-width: 300px;
       margin: 1rem;
     }
@@ -96,7 +97,7 @@ export default withLayout(
     render() {
       return (
         <main id="rb-docs-content">
-          <MastHead fluid>
+          <MastHead>
             <Content>
               <Heading>React Bootstrap</Heading>
               <SubHeading>
@@ -108,7 +109,7 @@ export default withLayout(
                 <BrandButton
                   size="lg"
                   variant="brand"
-                  className="mr-3 px-5"
+                  className="me-3 px-5"
                   href="/getting-started/introduction"
                 >
                   Get started

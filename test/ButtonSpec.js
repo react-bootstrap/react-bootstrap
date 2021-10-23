@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Button from '../src/Button';
@@ -86,16 +86,14 @@ describe('<Button>', () => {
     ).assertSingle(`a.disabled`);
   });
 
-  it('Should have block class', () => {
-    mount(<Button block>Title</Button>).assertSingle(`.btn-block`);
-  });
-
   it('Should apply variant class', () => {
-    mount(<Button variant="danger">Title</Button>).assertSingle(`.btn-danger`);
+    mount(<Button variant="danger">Title</Button>).assertSingle(
+      `button.btn-danger`,
+    );
   });
 
   it('Should have size class', () => {
-    mount(<Button size="lg">Title</Button>).assertSingle(`.btn-lg`);
+    mount(<Button size="lg">Title</Button>).assertSingle(`button.btn-lg`);
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {
@@ -103,11 +101,11 @@ describe('<Button>', () => {
       <Button className="bob" variant="danger">
         Title
       </Button>,
-    ).assertSingle(`.bob.btn-danger`);
+    ).assertSingle(`button.bob.btn-danger`);
   });
 
   it('Should default to variant="primary"', () => {
-    mount(<Button>Title</Button>).assertSingle(`.btn-primary`);
+    mount(<Button>Title</Button>).assertSingle(`button.btn-primary`);
   });
 
   it('Should remove default variant', () => {
@@ -129,7 +127,7 @@ describe('<Button>', () => {
   });
 
   it('Should be active', () => {
-    mount(<Button active>Title</Button>).assertSingle(`.active`);
+    mount(<Button active>Title</Button>).assertSingle(`button.active`);
   });
 
   it('Should allow a custom prefix', () => {
@@ -137,6 +135,6 @@ describe('<Button>', () => {
       <Button bsPrefix="my-btn" variant="danger">
         Title
       </Button>,
-    ).assertSingle(`.my-btn.my-btn-danger`);
+    ).assertSingle(`button.my-btn.my-btn-danger`);
   });
 });

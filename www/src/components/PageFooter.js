@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import packageJSON from '../../../package.json';
 
 let { version } = packageJSON;

@@ -26,9 +26,9 @@ All commits that fix bugs or add features need a test. You can run `npm run tdd 
 
 ## API Design
 
-Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
+Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `.nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
 
-Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOCs are bad, but we want to try and keep these low level UI blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
+Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract away something that would otherwise complicate many components (like `uncontrollable`). It's not that HOCs are bad, but we want to try and keep these low level UI blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
 
 Components should not be function components by default. Folks often add `refs` to them so class components are a better default for `react-bootstrap` components. Components should also **not** use `PureComponent` by default. For a variety of reasons the sort of components these are don't generally benefit from that optimization, and may cause bugs.
 
@@ -46,15 +46,16 @@ desired change easier.
 
 ## Documentation
 
-Please update the docs with any API changes, the code and docs should always be
-in sync.
+Please update the docs with any API changes, the code and docs should always be in sync.
 
-Component prop documentation is generated automatically from the React components
-and their leading comments. Please make sure to provide comments for any `propTypes` you add
-or change in a Component.
+The main documentation lives in the `www` folder which is a Gatsby project that uses [MDX](https://www.gatsbyjs.com/docs/how-to/routing/mdx/). The long-form documentation for components, including interactive examples and guides, is found within the `pages/components` directory.
+
+Separately, component prop API documentation is generated automatically from the React components in the `src` directory and their leading comments. This is the documentation that shows up in the tables at the bottom of component doc pages, e.g. [here](https://react-bootstrap.github.io/components/accordion/#api). Please make sure to provide [TSDOC-style](https://tsdoc.org/) comments\* for any `propTypes` you add or change in a component.
+
+Here's an example of well-documented `propTypes`:
 
 ```js
-propTypes: {
+const propTypes = {
   /**
    * Sets the visibility of the Component
    */
@@ -65,15 +66,15 @@ propTypes: {
    * @type {func}
    * @required
    */
-  onHide: myCustomPropType
-}
+  onHide: myCustomPropType,
+};
 ```
 
-There are a few caveats to this format that differ from conventional JSDoc comments.
+\*Note: there are a few caveats to this format that differ from conventional TSDoc comments:
 
-- Only specific doclets (the @ things) should be used, and only when the data cannot be parsed from the component itself
-  - `@type`: Override the "type", use the same names as the default React PropTypes: string, func, bool, number, object. You can express enum and oneOfType types, Like `{("optionA"|"optionB")}`.
-  - `@required`: to mark a prop as required (use the normal React isRequired if possible)
+- Only specific doclets (the @ things, a.k.a Block Tags) should be used, and only when the data cannot be parsed from the component itself.
+  - `@type`: An optional type override. Use the same names as the default React PropTypes: string, func, bool, number, object. This can be helpful to express enums and `oneOfType` types, e.g. `{("optionA"|"optionB")}`.
+  - `@required`: Mark a prop as required (use the normal React `isRequired` if possible)
   - `@private`: Will hide the prop in the documentation
 - All description text should be above the doclets.
 

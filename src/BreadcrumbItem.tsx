@@ -1,15 +1,13 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-
-import SafeAnchor from './SafeAnchor';
+import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface BreadcrumbItemProps extends BsPrefixPropsWithChildren {
+export interface BreadcrumbItemProps
+  extends BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   active?: boolean;
   href?: string;
   linkAs?: React.ElementType;
@@ -17,8 +15,6 @@ export interface BreadcrumbItemProps extends BsPrefixPropsWithChildren {
   title?: React.ReactNode;
   linkProps?: Record<string, any>; // the generic is to much work here
 }
-
-type BreadcrumbItem = BsPrefixRefForwardingComponent<'li', BreadcrumbItemProps>;
 
 const propTypes = {
   /**
@@ -59,7 +55,10 @@ const defaultProps = {
   linkProps: {},
 };
 
-const BreadcrumbItem: BreadcrumbItem = React.forwardRef(
+const BreadcrumbItem: BsPrefixRefForwardingComponent<
+  'li',
+  BreadcrumbItemProps
+> = React.forwardRef<HTMLElement, BreadcrumbItemProps>(
   (
     {
       bsPrefix,
@@ -68,13 +67,13 @@ const BreadcrumbItem: BreadcrumbItem = React.forwardRef(
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'li',
-      linkAs: LinkComponent = SafeAnchor,
+      linkAs: LinkComponent = Anchor,
       linkProps,
       href,
       title,
       target,
       ...props
-    }: BreadcrumbItemProps,
+    },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');

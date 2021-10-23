@@ -2,39 +2,28 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import all from 'prop-types-extra/lib/all';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
+import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import CardContext from './CardContext';
-import AbstractNav from './AbstractNav';
+import CardHeaderContext from './CardHeaderContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavProps extends BsPrefixPropsWithChildren {
+export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
+  defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
-  onSelect?: SelectCallback;
-  role?: string;
   navbar?: boolean;
-  onKeyDown?: React.KeyboardEventHandler<this>;
+  navbarScroll?: boolean;
 }
-
-type Nav = BsPrefixRefForwardingComponent<'div', NavProps> & {
-  Item: typeof NavItem;
-  Link: typeof NavLink;
-};
 
 const propTypes = {
   /**
@@ -56,10 +45,8 @@ const propTypes = {
 
   /**
    * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
-   *
-   * @type {string}
    */
-  activeKey: PropTypes.any,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * Have all `NavItem`s proportionately fill all available width.
@@ -103,6 +90,11 @@ const propTypes = {
    */
   navbar: PropTypes.bool,
 
+  /**
+   * Enable vertical scrolling within the toggleable contents of a collapsed Navbar.
+   */
+  navbarScroll: PropTypes.bool,
+
   as: PropTypes.elementType,
 
   /** @private */
@@ -114,7 +106,10 @@ const defaultProps = {
   fill: false,
 };
 
-const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
+const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
+  HTMLElement,
+  NavProps
+>((uncontrolledProps, ref) => {
   const {
     as = 'div',
     bsPrefix: initialBsPrefix,
@@ -122,8 +117,8 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
     fill,
     justify,
     navbar,
+    navbarScroll,
     className,
-    children,
     activeKey,
     ...props
   } = useUncontrolled(uncontrolledProps, { activeKey: 'onSelect' });
@@ -135,40 +130,39 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
   let isNavbar = false;
 
   const navbarContext = useContext(NavbarContext);
-  const cardContext = useContext(CardContext);
+  const cardHeaderContext = useContext(CardHeaderContext);
 
   if (navbarContext) {
     navbarBsPrefix = navbarContext.bsPrefix;
     isNavbar = navbar == null ? true : navbar;
-  } else if (cardContext) {
-    ({ cardHeaderBsPrefix } = cardContext);
+  } else if (cardHeaderContext) {
+    ({ cardHeaderBsPrefix } = cardHeaderContext);
   }
 
   return (
-    <AbstractNav
+    <BaseNav
       as={as}
       ref={ref}
       activeKey={activeKey}
       className={classNames(className, {
         [bsPrefix]: !isNavbar,
         [`${navbarBsPrefix}-nav`]: isNavbar,
+        [`${navbarBsPrefix}-nav-scroll`]: isNavbar && navbarScroll,
         [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
         [`${bsPrefix}-${variant}`]: !!variant,
         [`${bsPrefix}-fill`]: fill,
         [`${bsPrefix}-justified`]: justify,
       })}
       {...props}
-    >
-      {children}
-    </AbstractNav>
+    />
   );
-}) as unknown) as Nav;
+});
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
 Nav.defaultProps = defaultProps;
 
-Nav.Item = NavItem;
-Nav.Link = NavLink;
-
-export default Nav;
+export default Object.assign(Nav, {
+  Item: NavItem,
+  Link: NavLink,
+});

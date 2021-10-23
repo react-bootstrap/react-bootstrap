@@ -1,15 +1,13 @@
 <>
   <ButtonToolbar className="mb-3" aria-label="Toolbar with Button groups">
-    <ButtonGroup className="mr-2" aria-label="First group">
+    <ButtonGroup className="me-2" aria-label="First group">
       <Button variant="secondary">1</Button>{' '}
       <Button variant="secondary">2</Button>{' '}
       <Button variant="secondary">3</Button>{' '}
       <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
-      <InputGroup.Prepend>
-        <InputGroup.Text id="btnGroupAddon">@</InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text id="btnGroupAddon">@</InputGroup.Text>
       <FormControl
         type="text"
         placeholder="Input group example"
@@ -30,9 +28,7 @@
       <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
-      <InputGroup.Prepend>
-        <InputGroup.Text id="btnGroupAddon2">@</InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text id="btnGroupAddon2">@</InputGroup.Text>
       <FormControl
         type="text"
         placeholder="Input group example"

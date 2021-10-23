@@ -6,13 +6,16 @@ export { default as AccordionCollapse } from './AccordionCollapse';
 export type { AccordionCollapseProps } from './AccordionCollapse';
 
 export {
-  default as AccordionToggle,
-  useAccordionToggle,
-} from './AccordionToggle';
-export type { AccordionToggleProps } from './AccordionToggle';
+  default as AccordionButton,
+  useAccordionButton,
+} from './AccordionButton';
+export type { AccordionButtonProps } from './AccordionButton';
 
 export { default as Alert } from './Alert';
 export type { AlertProps } from './Alert';
+
+export { default as Anchor } from './Anchor';
+export type { AnchorProps } from './Anchor';
 
 export { default as Badge } from './Badge';
 export type { BadgeProps } from './Badge';
@@ -34,9 +37,6 @@ export type { ButtonToolbarProps } from './ButtonToolbar';
 
 export { default as Card } from './Card';
 export type { CardProps } from './Card';
-
-export { default as CardColumns } from './CardColumns';
-export { default as CardDeck } from './CardDeck';
 
 export { default as CardImg } from './CardImg';
 export type { CardImgProps } from './CardImg';
@@ -75,8 +75,10 @@ export type { FormControlProps } from './FormControl';
 export { default as FormCheck } from './FormCheck';
 export type { FormCheckProps } from './FormCheck';
 
-export { default as FormFile } from './FormFile';
-export type { FormFileProps } from './FormFile';
+export { default as FormFloating } from './FormFloating';
+
+export { default as FloatingLabel } from './FloatingLabel';
+export type { FloatingLabelProps } from './FloatingLabel';
 
 export { default as FormGroup } from './FormGroup';
 export type { FormGroupProps } from './FormGroup';
@@ -86,6 +88,9 @@ export type { FormLabelProps } from './FormLabel';
 
 export { default as FormText } from './FormText';
 export type { FormTextProps } from './FormText';
+
+export { default as FormSelect } from './FormSelect';
+export type { FormSelectProps } from './FormSelect';
 
 export { default as Container } from './Container';
 export type { ContainerProps } from './Container';
@@ -97,16 +102,12 @@ export { default as Figure } from './Figure';
 export { default as InputGroup } from './InputGroup';
 export type { InputGroupProps } from './InputGroup';
 
-export { default as Jumbotron } from './Jumbotron';
-export type { JumbotronProps } from './Jumbotron';
-
 export { default as ListGroup } from './ListGroup';
 export type { ListGroupProps } from './ListGroup';
 
 export { default as ListGroupItem } from './ListGroupItem';
 export type { ListGroupItemProps } from './ListGroupItem';
 
-export { default as Media } from './Media';
 export { default as Modal } from './Modal';
 export type { ModalProps } from './Modal';
 
@@ -129,10 +130,16 @@ export { default as NavDropdown } from './NavDropdown';
 export type { NavDropdownProps } from './NavDropdown';
 
 export { default as NavItem } from './NavItem';
-export type { NavItemProps } from './NavItem';
 
 export { default as NavLink } from './NavLink';
 export type { NavLinkProps } from './NavLink';
+
+export { default as Offcanvas } from './Offcanvas';
+export type { OffcanvasProps } from './Offcanvas';
+export { default as OffcanvasHeader } from './OffcanvasHeader';
+export type { OffcanvasHeaderProps } from './OffcanvasHeader';
+export { default as OffcanvasTitle } from './OffcanvasTitle';
+export { default as OffcanvasBody } from './OffcanvasBody';
 
 export { default as Overlay } from './Overlay';
 export type { OverlayProps } from './Overlay';
@@ -146,28 +153,36 @@ export type { PageItemProps } from './PageItem';
 export { default as Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
 
+export { default as Placeholder } from './Placeholder';
+export type { PlaceholderProps } from './Placeholder';
+export { default as PlaceholderButton } from './PlaceholderButton';
+export type { PlaceholderButtonProps } from './PlaceholderButton';
+
 export { default as Popover } from './Popover';
 export type { PopoverProps } from './Popover';
 
-export { default as PopoverTitle } from './PopoverTitle';
-export { default as PopoverContent } from './PopoverContent';
+export { default as PopoverHeader } from './PopoverHeader';
+export { default as PopoverBody } from './PopoverBody';
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
 
-export { default as ResponsiveEmbed } from './ResponsiveEmbed';
-export type { ResponsiveEmbedProps } from './ResponsiveEmbed';
+export { default as Ratio } from './Ratio';
+export type { RatioProps } from './Ratio';
 
 export { default as Row } from './Row';
 export type { RowProps } from './Row';
-
-export { default as SafeAnchor } from './SafeAnchor';
-export type { SafeAnchorProps } from './SafeAnchor';
 
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 
 export { default as SplitButton } from './SplitButton';
 export type { SplitButtonProps } from './SplitButton';
+
+export { default as SSRProvider } from './SSRProvider';
+export type { SSRProviderProps } from './SSRProvider';
+
+export { default as Stack } from './Stack';
+export type { StackProps } from './Stack';
 
 export { default as Tab } from './Tab';
 export type { TabProps } from './Tab';
@@ -194,6 +209,9 @@ export type { ToastProps } from './Toast';
 export { default as ToastBody } from './ToastBody';
 export { default as ToastHeader } from './ToastHeader';
 export type { ToastHeaderProps } from './ToastHeader';
+
+export { default as ToastContainer } from './ToastContainer';
+export type { ToastContainerProps } from './ToastContainer';
 
 export { default as ToggleButton } from './ToggleButton';
 export type { ToggleButtonProps } from './ToggleButton';

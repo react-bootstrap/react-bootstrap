@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
-import React from 'react';
+import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
@@ -14,7 +14,7 @@ interface BsPrefixOptions<As extends React.ElementType = 'div'> {
 
 // TODO: emstricten & fix the typing here! `createWithBsPrefix<TElementType>...`
 export default function createWithBsPrefix<
-  As extends React.ElementType = 'div'
+  As extends React.ElementType = 'div',
 >(
   prefix: string,
   {

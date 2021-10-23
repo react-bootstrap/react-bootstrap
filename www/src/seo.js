@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
@@ -37,7 +36,11 @@ const SEO = ({ title, description, pathname, article }) => (
 
       return (
         <>
-          <Helmet title={seo.title} titleTemplate={titleTemplate}>
+          <Helmet
+            title={seo.title}
+            titleTemplate={titleTemplate}
+            // htmlAttributes={{ dir: 'rtl' }}
+          >
             <meta name="description" content={seo.description} />
             {seo.url && <meta property="og:url" content={seo.url} />}
             {(article ? true : null) && (

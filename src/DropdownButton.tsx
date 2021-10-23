@@ -1,29 +1,29 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, { alignPropType, AlignType } from './DropdownMenu';
+import DropdownMenu, { DropdownMenuVariant } from './DropdownMenu';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { alignPropType } from './types';
 
 export interface DropdownButtonProps
-  extends DropdownProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
-    React.PropsWithChildren<PropsFromToggle> {
+  extends Omit<DropdownProps, 'title'>,
+    PropsFromToggle,
+    BsPrefixProps {
   title: React.ReactNode;
-  menuAlign?: AlignType;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  bsPrefix?: string;
+  menuVariant?: DropdownMenuVariant;
 }
 
 const propTypes = {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
-   * @required
+   * @type {string}
    */
-  id: PropTypes.any,
+  id: PropTypes.string,
 
   /** An `href` passed to the Toggle component */
   href: PropTypes.string,
@@ -38,13 +38,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively.
+   * Aligns the dropdown menu.
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    *
-   * @type {"left"|"right"|{ sm: "left"|"right" }|{ md: "left"|"right" }|{ lg: "left"|"right" }|{ xl: "left"|"right"} }
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  menuAlign: alignPropType,
+  align: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -59,6 +59,13 @@ const propTypes = {
    */
   rootCloseEvent: PropTypes.string,
 
+  /**
+   * Menu color variant.
+   *
+   * Omitting this will use the default light color.
+   */
+  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+
   /** @ignore */
   bsPrefix: PropTypes.string,
   /** @ignore */
@@ -69,13 +76,17 @@ const propTypes = {
 
 /**
  * A convenience component for simple or general use dropdowns. Renders a `Button` toggle and all `children`
- * are passed directly to the default `Dropdown.Menu`.
+ * are passed directly to the default `Dropdown.Menu`. This component accepts all of
+ * [`Dropdown`'s props](#dropdown-props).
  *
  * _All unknown props are passed through to the `Dropdown` component._ Only
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
- * along with menu related props are passed to the `Dropdown.Menu`
+ * along with menu-related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
+const DropdownButton: BsPrefixRefForwardingComponent<
+  'div',
+  DropdownButtonProps
+> = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
   (
     {
       title,
@@ -84,14 +95,14 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
       rootCloseEvent,
       variant,
       size,
-      menuAlign,
       menuRole,
       renderMenuOnMount,
       disabled,
       href,
       id,
+      menuVariant,
       ...props
-    }: DropdownButtonProps,
+    },
     ref,
   ) => (
     <Dropdown ref={ref} {...props}>
@@ -106,10 +117,10 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
         {title}
       </DropdownToggle>
       <DropdownMenu
-        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
+        variant={menuVariant}
       >
         {children}
       </DropdownMenu>
@@ -118,6 +129,6 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
 );
 
 DropdownButton.displayName = 'DropdownButton';
-DropdownButton.propTypes = propTypes as any;
+DropdownButton.propTypes = propTypes;
 
 export default DropdownButton;

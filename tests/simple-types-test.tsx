@@ -12,8 +12,6 @@ import {
   ButtonGroup,
   ButtonToolbar,
   Card,
-  CardColumns,
-  CardDeck,
   CardGroup,
   Carousel,
   Container,
@@ -25,10 +23,8 @@ import {
   Fade,
   Figure,
   Form,
-  FormFile,
   FormControl,
   Image,
-  Jumbotron,
   InputGroup,
   ListGroup,
   Modal,
@@ -43,6 +39,7 @@ import {
   ProgressBar,
   Spinner,
   SplitButton,
+  Stack,
   Table,
   Tabs,
   Tab,
@@ -50,10 +47,36 @@ import {
   ToggleButton,
   Toast,
 } from '../src';
+import BootstrapModalManager from '../src/BootstrapModalManager';
+
+import { CarouselRef } from '../src/Carousel';
 
 const style: React.CSSProperties = {
   color: 'red',
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const RefTest = () => {
+  const carouselRef = React.useRef<CarouselRef>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  carouselRef?.current?.element;
+  carouselRef?.current?.prev();
+  carouselRef?.current?.next();
+
+  return (
+    <>
+      <Carousel ref={carouselRef} />
+    </>
+  );
+};
+
+class ClassComponent extends React.Component {
+  render() {
+    return <div>abc</div>;
+  }
+}
+
+const FunctionComponent: React.FC = () => <div>abc</div>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
@@ -61,6 +84,24 @@ const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
+    <Fade>
+      <div>abc</div>
+    </Fade>
+    <Fade>
+      <ClassComponent />
+    </Fade>
+    <Fade>
+      <FunctionComponent />
+    </Fade>
+    <Collapse>
+      <div>abc</div>
+    </Collapse>
+    <Collapse>
+      <ClassComponent />
+    </Collapse>
+    <Collapse>
+      <FunctionComponent />
+    </Collapse>
     <Alert transition={Fade} />
     <Alert transition={Collapse} />
     <Alert
@@ -84,21 +125,17 @@ const MegaComponent = () => (
       bsPrefix="accordion"
       style={style}
     >
-      <Card>
-        <Card.Header>
-          <Accordion.Toggle as="div" eventKey="0" onClick={noop} style={style}>
-            Click me!
-          </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey="0" style={style}>
-          <Card.Body>Hello! I am the body</Card.Body>
-        </Accordion.Collapse>
-      </Card>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header as="div" onClick={noop} style={style}>
+          Click me!
+        </Accordion.Header>
+        <Accordion.Body>Body</Accordion.Body>
+      </Accordion.Item>
     </Accordion>
     <Badge as="div" pill={false} style={style}>
       42
     </Badge>
-    <Badge as="a" href="#" variant="primary" pill>
+    <Badge as="a" href="#" bg="primary" pill>
       42
     </Badge>
     <Breadcrumb
@@ -124,7 +161,6 @@ const MegaComponent = () => (
     <Button
       active={false}
       as="a"
-      block={false}
       disabled={false}
       href="#"
       size="lg"
@@ -141,7 +177,6 @@ const MegaComponent = () => (
         as="div"
         role="group"
         size="lg"
-        toggle
         vertical
         bsPrefix="btn-group"
         style={style}
@@ -149,41 +184,38 @@ const MegaComponent = () => (
         <Button href="wooot" />
       </ButtonGroup>
     </ButtonToolbar>
-    <CardColumns style={style} bsPrefix="card-col">
-      <Card
-        as="div"
-        bg="primary"
-        body
-        border="primary"
-        text="primary"
-        bsPrefix="card"
-        style={{ width: '18rem' }}
-      >
-        <Card.Img
-          as="img"
-          variant="top"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.ImgOverlay
-          as="img"
-          src="holder.js/100px180"
-          bsPrefix="cardimg"
-          style={style}
-        />
-        <Card.Body as="div" bsPrefix="cardbody" style={style}>
-          <Card.Title style={style}>Card Title</Card.Title>
-          <Card.Text style={style}>
-            Some quick example text to build on the card title and make up the
-            bulk of the card content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-      <CardDeck as="div" bsPrefix="carddeck" style={style} />
-      <CardGroup as="div" bsPrefix="cardgroup" style={style} />
-    </CardColumns>
+    <Card
+      as="div"
+      bg="primary"
+      body
+      border="primary"
+      text="primary"
+      bsPrefix="card"
+      style={{ width: '18rem' }}
+    >
+      <Card.Img
+        as="img"
+        variant="top"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.ImgOverlay
+        as="img"
+        src="holder.js/100px180"
+        bsPrefix="cardimg"
+        style={style}
+      />
+      <Card.Body as="div" bsPrefix="cardbody" style={style}>
+        <Card.Title style={style}>Card Title</Card.Title>
+        <Card.Text style={style}>
+          Some quick example text to build on the card title and make up the
+          bulk of the card content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+    <CardGroup as="div" bsPrefix="cardgroup" style={style} />
     <Carousel
       activeIndex={1}
       as="div"
@@ -221,7 +253,7 @@ const MegaComponent = () => (
         <img
           className="d-block w-100"
           src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Third slide"
+          alt="Second slide"
         />
 
         <Carousel.Caption>
@@ -245,6 +277,8 @@ const MegaComponent = () => (
       </Carousel.Item>
     </Carousel>
     <Container as="div" fluid bsPrefix="container" style={style}>
+      <Row xs="auto" />
+      <Row xs={{ cols: 'auto' }} />
       <Row
         as="div"
         xs={1}
@@ -252,11 +286,11 @@ const MegaComponent = () => (
         md={1}
         lg={1}
         xl={1}
-        noGutters
+        xxl={1}
         bsPrefix="row"
         className="justify-content-md-center"
       >
-        <Col xs lg="2" bsPrefix="col">
+        <Col xs sm md lg="2" xl xxl bsPrefix="col">
           1 of 3
         </Col>
         <Col md="auto">Variable width content</Col>
@@ -264,7 +298,7 @@ const MegaComponent = () => (
           3 of 3
         </Col>
       </Row>
-      <Row noGutters>
+      <Row>
         <Col>1 of 3</Col>
         <Col md="auto">Variable width content</Col>
         <Col xs md={{ span: 4, offset: 4 }}>
@@ -281,7 +315,7 @@ const MegaComponent = () => (
     </Container>
     <Container fluid="sm" />
     <Dropdown
-      alignRight
+      align="end"
       as="div"
       drop="up"
       flip
@@ -305,7 +339,6 @@ const MegaComponent = () => (
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        alignRight
         as="div"
         flip
         onSelect={noop}
@@ -315,7 +348,7 @@ const MegaComponent = () => (
         show
         bsPrefix="dropdownmenu"
         style={style}
-        align={{ sm: 'left' }}
+        align={{ sm: 'start' }}
       >
         <Dropdown.Item
           active
@@ -336,8 +369,8 @@ const MegaComponent = () => (
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
         <Dropdown.Divider as="div" bsPrefix="prefix" style={style} />
       </Dropdown.Menu>
-      <Dropdown.Menu align="left" />
-      <Dropdown.Menu align="right" />
+      <Dropdown.Menu align="start" />
+      <Dropdown.Menu align="end" />
     </Dropdown>
     <DropdownButton
       disabled
@@ -352,7 +385,7 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="dropdownbtn"
       style={style}
-      menuAlign={{ sm: 'left' }}
+      align={{ sm: 'start' }}
     >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -368,19 +401,11 @@ const MegaComponent = () => (
       style={style}
     />
     <Figure.Caption as="figcaption" bsPrefix="figurecaption" />
-    <Form
-      ref={React.createRef<HTMLFormElement>()}
-      as="form"
-      inline
-      validated
-      bsPrefix="form"
-    >
-      <Form.Row as="div" bsPrefix="formrow" style={style} />
+    <Form ref={React.createRef<HTMLFormElement>()} as="form" validated>
       <Form.Group
         ref={React.createRef<HTMLDivElement>()}
         as="div"
         controlId="exampleForm.ControlInput1"
-        bsPrefix="formgroup"
         style={style}
       >
         <Form.Label
@@ -388,7 +413,7 @@ const MegaComponent = () => (
           as="div"
           column="sm"
           htmlFor="id"
-          srOnly
+          visuallyHidden
           bsPrefix="formlabel"
           style={style}
         >
@@ -403,7 +428,6 @@ const MegaComponent = () => (
         />
         <Form.Control
           as="input"
-          custom
           disabled
           htmlSize={1}
           id="id"
@@ -417,17 +441,16 @@ const MegaComponent = () => (
           bsPrefix="formcontrol"
           placeholder="name@example.com"
           ref={React.createRef<HTMLInputElement>()}
-          onChange={(e) => {
+          onChange={(e) =>
             // $ExpectType ChangeEvent<FormControlElement>
-            return e;
-          }}
+            e
+          }
           style={style}
         />
         <FormControl.Feedback as="div" tooltip type="valid" style={style} />
         <Form.Check
           ref={React.createRef<HTMLInputElement>()}
           as="input"
-          custom
           disabled
           feedback="test"
           feedbackTooltip
@@ -439,53 +462,45 @@ const MegaComponent = () => (
           title="title"
           type="checkbox"
           bsPrefix="formcheck"
-          bsCustomPrefix="customcheck"
+          bsSwitchPrefix="formswitch"
           style={style}
         >
           <Form.Check.Input
             as="input"
             id="id"
             isInvalid
-            isStatic
             isValid
             type="radio"
             bsPrefix="formcheckinput"
-            bsCustomPrefix="customcheckinput"
             style={style}
           />
-          <Form.Check.Label
-            htmlFor="for"
-            bsPrefix="formlabel"
-            bsCustomPrefix="formlabelcustom"
-            style={style}
-          />
+          <Form.Check.Label htmlFor="for" bsPrefix="formlabel" style={style} />
         </Form.Check>
+        <Form.Range
+          bsPrefix="prefix"
+          ref={React.createRef<HTMLInputElement>()}
+          min={0}
+          max={100}
+          value={50}
+          className="class"
+          style={style}
+        />
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect1">
         <Form.Label>Example select</Form.Label>
-        <Form.Control
-          as="select"
+        <Form.Select
           ref={React.createRef<HTMLSelectElement>()}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => e}
         >
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
-        </Form.Control>
+        </Form.Select>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect2">
         <Form.Label column={false}>Example multiple select</Form.Label>
-        <Form.Control as="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Control>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlTextarea1">
         <Form.Label>Example textarea</Form.Label>
@@ -493,9 +508,7 @@ const MegaComponent = () => (
           as="textarea"
           rows={3}
           ref={React.createRef<HTMLTextAreaElement>()}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            return e;
-          }}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => e}
         />
       </Form.Group>
       <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
@@ -514,52 +527,10 @@ const MegaComponent = () => (
           <Form.Control type="text" placeholder="Hoizontal" />
         </Col>
       </Form.Group>
-      <Form.File
-        as="div"
-        id="custom-file"
-        label="Custom file input"
-        custom
-        data-browse="browse"
-        disabled
-        feedback="feedback"
-        feedbackTooltip
-        inputAs="input"
-        isInvalid
-        isValid
-        lang="lang"
-        bsPrefix="formfile"
-        bsCustomPrefix="formfilecustom"
-        style={style}
-      >
-        <Form.File.Label
-          data-browse="browse"
-          htmlFor="id"
-          bsPrefix="formfilelabel"
-          bsCustomPrefix="formfilelabelcustom"
-          style={style}
-        />
-        <Form.File.Input
-          as="input"
-          id="id"
-          isInvalid
-          isValid
-          lang="en"
-          bsPrefix="formfileinput"
-          bsCustomPrefix="formfileinputcustom"
-          style={style}
-        />
-      </Form.File>
-      <Form.File
-        ref={React.createRef<HTMLInputElement & FormFile>()}
-        id="custom-file-ref"
-        label="Custom file input"
-        custom
-      />
-
       <Form.Switch label="Switch" disabled />
+      <Form.Control type="color" />
     </Form>
     <Image fluid rounded roundedCircle thumbnail bsPrefix="img" style={style} />
-    <Jumbotron as="div" fluid bsPrefix="jumbotron" style={style} />
     <div>
       <InputGroup
         as="div"
@@ -568,9 +539,7 @@ const MegaComponent = () => (
         className="mb-3"
         style={style}
       >
-        <InputGroup.Prepend bsPrefix="inputgroupprepend" style={style}>
-          <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         <FormControl
           placeholder="Username"
           aria-label="Username"
@@ -584,35 +553,25 @@ const MegaComponent = () => (
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
         />
-        <InputGroup.Append bsPrefix="inputgroupappend" style={style}>
-          <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-        </InputGroup.Append>
+        <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
       </InputGroup>
 
       <label htmlFor="basic-url">Your vanity URL</label>
       <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon3">
-            https://example.com/users/
-          </InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text id="basic-addon3">
+          https://example.com/users/
+        </InputGroup.Text>
         <FormControl id="basic-url" aria-describedby="basic-addon3" />
       </InputGroup>
 
       <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-          <InputGroup.Text>$</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>$</InputGroup.Text>
         <FormControl aria-label="Amount (to the nearest dollar)" />
-        <InputGroup.Append>
-          <InputGroup.Text>.00</InputGroup.Text>
-        </InputGroup.Append>
+        <InputGroup.Text>.00</InputGroup.Text>
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Prepend>
-          <InputGroup.Text>With textarea</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>With textarea</InputGroup.Text>
         <FormControl as="textarea" aria-label="With textarea" />
       </InputGroup>
     </div>
@@ -650,12 +609,12 @@ const MegaComponent = () => (
       backdrop="static"
       backdropClassName="class"
       centered
-      container="test"
+      container={React.createRef()}
       dialogAs="div"
       dialogClassName="class"
       enforceFocus
       keyboard
-      manager={{}}
+      manager={new BootstrapModalManager()}
       onEnter={noop}
       onEntered={noop}
       onEntering={noop}
@@ -666,7 +625,9 @@ const MegaComponent = () => (
       onHide={noop}
       onShow={noop}
       restoreFocus
-      restoreFocusOptions={{}}
+      restoreFocusOptions={{
+        preventScroll: false,
+      }}
       scrollabel
       show={false}
       size="xl"
@@ -692,6 +653,18 @@ const MegaComponent = () => (
         <Button variant="primary">Save Changes</Button>
       </Modal.Footer>
     </Modal>
+    <Modal fullscreen />
+    <Modal fullscreen="sm-down" />
+    <Modal fullscreen="md-down" />
+    <Modal fullscreen="lg-down" />
+    <Modal fullscreen="xl-down" />
+    <Modal fullscreen="xxl-down" />
+    <Modal.Dialog fullscreen />
+    <Modal.Dialog fullscreen="sm-down" />
+    <Modal.Dialog fullscreen="md-down" />
+    <Modal.Dialog fullscreen="lg-down" />
+    <Modal.Dialog fullscreen="xl-down" />
+    <Modal.Dialog fullscreen="xxl-down" />
     <Modal.Dialog
       centered
       scrollable
@@ -754,7 +727,7 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
         drop="up"
-        alignRight
+        align="end"
         show
         flip={false}
         onToggle={noop}
@@ -860,8 +833,8 @@ const MegaComponent = () => (
         bsPrefix="prefix"
         style={style}
       >
-        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-        <strong className="mr-auto">Bootstrap</strong>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
         <small>11 mins ago</small>
       </Toast.Header>
       <Toast.Body as="div" bsPrefix="prefix" id="id" style={style}>
@@ -897,26 +870,32 @@ const MegaComponent = () => (
     </Pagination>
     <Popover
       id="test-popover"
-      content
+      body
       placement="auto"
       popper={{}}
       show
       bsPrefix="popover"
       style={style}
     >
-      <Popover.Title as="div" bsPrefix="prefix" style={style}>
+      <Popover.Header as="div" bsPrefix="prefix" style={style}>
         Popover title
-      </Popover.Title>
-      <Popover.Content as="div" bsPrefix="prefix" style={style}>
+      </Popover.Header>
+      <Popover.Body as="div" bsPrefix="prefix" style={style}>
         <strong>Popover Content</strong>
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
     <div>
       <ProgressBar striped variant="success" min={-10} now={40} max={200} />
       <ProgressBar striped animated variant="info" now={20} />
       <ProgressBar striped variant="warning" now={60} />
       <ProgressBar striped variant="danger" now={80} />
-      <ProgressBar id="id" label="label" srOnly bsPrefix="prefix" style={style}>
+      <ProgressBar
+        id="id"
+        label="label"
+        visuallyHidden
+        bsPrefix="prefix"
+        style={style}
+      >
         <ProgressBar isChild />
       </ProgressBar>
     </div>
@@ -936,8 +915,16 @@ const MegaComponent = () => (
       variant="primary"
       bsPrefix="splitbutton"
       style={style}
-      menuAlign={{ sm: 'left' }}
-    />
+      align={{ sm: 'start' }}
+      drop="up"
+      onSelect={noop}
+      flip
+      onToggle={noop}
+      focusFirstItemOnShow="keyboard"
+      navbar
+    >
+      <Dropdown.Item />
+    </SplitButton>
     <Table
       id="id"
       bordered
@@ -1025,6 +1012,11 @@ const MegaComponent = () => (
       <ToggleButton value={2}>Radio 2</ToggleButton>
       <ToggleButton value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
+    <Stack direction="horizontal" gap={1} />
+    <Stack
+      direction="vertical"
+      gap={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
+    />
     {/* // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError? */}
     {/*
     <Tabs invalidProp="2" />; // $ExpectError

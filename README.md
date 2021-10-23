@@ -1,6 +1,6 @@
 # React-Bootstrap
 
-> [Bootstrap 4][bootstrap] components built with [React][react].
+> **[Bootstrap 5][bootstrap]** components built with [React][react].
 
 [![GitHub Actions CI status][gh-actions-badge]][gh-actions]
 [![Travis CI Build status][travis-badge]][travis]
@@ -9,15 +9,27 @@
 [![Discord][discord-badge]][discord]
 [![Netlify][netlify-badge]][netlify]
 
-## Docs
+## Bootstrap compatibility
 
-See the [documentation][documentation] with live editable examples and API documentation.
+React-Bootstrap is compatible with various versions of Bootstrap.  As such, you need to ensure you are using the correct combination of versions.  
 
-To find the documentation for the latest Bootstrap 3 compatible release, [go here](https://react-bootstrap-v3.netlify.com).
+See the below table on which version of React-Bootstrap you should be using in your project.
 
-### Migrating from Bootstrap 3 to Bootstrap 4
+| Bootstrap Version | React-Bootstrap Version | Documentation |
+| ------------- |:-------------:| -----:|
+| v5.x | 2.x | [Link][v5-documentation] |
+| v4.x | 1.x | [Link][v4-documentation] |
+| v3.x | 0.33.x (not maintained) | [Link][v3-documentation] |
 
-If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.github.io/migrating/)**.
+## Migrating from previous versions
+
+### Bootstrap 4 to Bootstrap 5
+
+If you would like to update React-Bootstrap within an existing project to use Bootstrap 5, please read our docs for **[migrating to React-Bootstrap V2][v5-migration]**.
+
+### Bootstrap 3 to Bootstrap 4
+
+If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1][v4-migration]**.
 
 ## Related modules
 
@@ -48,7 +60,11 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap.github.io/
+[v5-documentation]: https://react-bootstrap.github.io
+[v5-migration]: https://react-bootstrap.github.io/migrating
+[v4-documentation]: https://react-bootstrap-v4.netlify.app
+[v4-migration]: https://react-bootstrap-v4.netlify.app/migrating
+[v3-documentation]: https://react-bootstrap-v3.netlify.app
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
@@ -62,7 +78,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
 [discord]: https://discord.gg/AKfs9vpvRW
-[netlify-badge]: https://api.netlify.com/api/v1/badges/91501718-8820-4d69-b7fe-1616eff5914e/deploy-status
+[netlify-badge]: https://api.netlify.com/api/v1/badges/f09d443f-11b2-4454-812b-0645aeaca824/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
 [gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
 [gh-actions]: https://github.com/react-bootstrap/react-bootstrap/actions

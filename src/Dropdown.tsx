@@ -1,54 +1,45 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-import BaseDropdown from 'react-overlays/Dropdown';
+import * as React from 'react';
+import { useContext, useMemo } from 'react';
+import BaseDropdown, {
+  DropdownProps as BaseDropdownProps,
+  ToggleMetadata,
+} from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import DropdownContext, { DropDirection } from './DropdownContext';
 import DropdownItem from './DropdownItem';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
-import SelectableContext from './SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import InputGroupContext from './InputGroupContext';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { AlignType, alignPropType } from './types';
 
 const DropdownHeader = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
 });
 const DropdownDivider = createWithBsPrefix('dropdown-divider', {
+  Component: 'hr',
   defaultProps: { role: 'separator' },
 });
 const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
   Component: 'span',
 });
 
-export interface DropdownProps extends BsPrefixPropsWithChildren {
-  drop?: 'up' | 'left' | 'right' | 'down';
-  alignRight?: boolean;
-  show?: boolean;
+export interface DropdownProps
+  extends BaseDropdownProps,
+    BsPrefixProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'children'> {
+  drop?: DropDirection;
+  align?: AlignType;
   flip?: boolean;
-  onToggle?: (
-    isOpen: boolean,
-    event: React.SyntheticEvent<Dropdown>,
-    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
-  ) => void;
   focusFirstItemOnShow?: boolean | 'keyboard';
-  onSelect?: SelectCallback;
   navbar?: boolean;
+  autoClose?: boolean | 'outside' | 'inside';
 }
-
-type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
-  Toggle: typeof DropdownToggle;
-  Menu: typeof DropdownMenu;
-  Item: typeof DropdownItem;
-  ItemText: typeof DropdownItemText;
-  Divider: typeof DropdownDivider;
-  Header: typeof DropdownHeader;
-};
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -56,14 +47,20 @@ const propTypes = {
   /**
    * Determines the direction and location of the Menu in relation to it's Toggle.
    */
-  drop: PropTypes.oneOf(['up', 'left', 'right', 'down']),
+  drop: PropTypes.oneOf(['up', 'start', 'end', 'down']),
 
   as: PropTypes.elementType,
 
   /**
-   * Align the menu to the right side of the Dropdown toggle
+   * Aligns the dropdown menu to the specified side of the Dropdown toggle. You can
+   * also align the menu responsively for breakpoints starting at `sm` and up.
+   * The alignment direction will affect the specified breakpoint or larger.
+   *
+   * *Note: Using responsive alignment will disable Popper usage for positioning.*
+   *
+   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  alignRight: PropTypes.bool,
+  align: alignPropType,
 
   /**
    * Whether or not the Dropdown is visible.
@@ -118,85 +115,120 @@ const propTypes = {
 
   /** @private */
   navbar: PropTypes.bool,
+
+  /**
+   * Controls the auto close behaviour of the dropdown when clicking outside of
+   * the button or the list.
+   */
+  autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
 };
 
-const defaultProps = {
+const defaultProps: Partial<DropdownProps> = {
   navbar: false,
+  align: 'start',
+  autoClose: true,
 };
 
-const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
-  const {
-    bsPrefix,
-    drop,
-    show,
-    className,
-    alignRight,
-    onSelect,
-    onToggle,
-    focusFirstItemOnShow,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'div',
-    navbar: _4,
-    ...props
-  } = useUncontrolled(pProps, { show: 'onToggle' });
+const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
+  React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
+    const {
+      bsPrefix,
+      drop,
+      show,
+      className,
+      align,
+      onSelect,
+      onToggle,
+      focusFirstItemOnShow,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      navbar: _4,
+      autoClose,
+      ...props
+    } = useUncontrolled(pProps, { show: 'onToggle' });
 
-  const onSelectCtx = useContext(SelectableContext);
-  const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+    const isInputGroup = useContext(InputGroupContext);
+    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+    const isRTL = useIsRTL();
 
-  const handleToggle = useEventCallback(
-    (nextShow, event, source = event.type) => {
-      if (event.currentTarget === document) source = 'rootClose';
-      if (onToggle) {
-        onToggle(nextShow, event, { source });
-      }
-    },
-  );
+    const isClosingPermitted = (source: string): boolean => {
+      // autoClose=false only permits close on button click
+      if (autoClose === false) return source === 'click';
 
-  const handleSelect = useEventCallback((key, event) => {
-    if (onSelectCtx) onSelectCtx(key, event);
-    if (onSelect) onSelect(key, event);
-    handleToggle(false, event, 'select');
+      // autoClose=inside doesn't permit close on rootClose
+      if (autoClose === 'inside') return source !== 'rootClose';
+
+      // autoClose=outside doesn't permit close on select
+      if (autoClose === 'outside') return source !== 'select';
+
+      return true;
+    };
+
+    const handleToggle = useEventCallback(
+      (nextShow: boolean, meta: ToggleMetadata) => {
+        if (
+          meta.originalEvent!.currentTarget === document &&
+          (meta.source !== 'keydown' ||
+            (meta.originalEvent as any).key === 'Escape')
+        )
+          meta.source = 'rootClose';
+
+        if (isClosingPermitted(meta.source!)) onToggle?.(nextShow, meta);
+      },
+    );
+
+    const alignEnd = align === 'end';
+    const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
+
+    const contextValue = useMemo(
+      () => ({
+        align,
+        drop,
+        isRTL,
+      }),
+      [align, drop, isRTL],
+    );
+
+    return (
+      <DropdownContext.Provider value={contextValue}>
+        <BaseDropdown
+          placement={placement}
+          show={show}
+          onSelect={onSelect}
+          onToggle={handleToggle}
+          focusFirstItemOnShow={focusFirstItemOnShow}
+          itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
+        >
+          {isInputGroup ? (
+            props.children
+          ) : (
+            <Component
+              {...props}
+              ref={ref}
+              className={classNames(
+                className,
+                show && 'show',
+                (!drop || drop === 'down') && prefix,
+                drop === 'up' && 'dropup',
+                drop === 'end' && 'dropend',
+                drop === 'start' && 'dropstart',
+              )}
+            />
+          )}
+        </BaseDropdown>
+      </DropdownContext.Provider>
+    );
   });
-
-  return (
-    <SelectableContext.Provider value={handleSelect}>
-      <BaseDropdown
-        drop={drop}
-        show={show}
-        alignEnd={alignRight}
-        onToggle={handleToggle}
-        focusFirstItemOnShow={focusFirstItemOnShow}
-        itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
-      >
-        {({ props: dropdownProps }) => (
-          <Component
-            {...props}
-            {...dropdownProps}
-            ref={ref}
-            className={classNames(
-              className,
-              show && 'show',
-              (!drop || drop === 'down') && prefix,
-              drop === 'up' && 'dropup',
-              drop === 'right' && 'dropright',
-              drop === 'left' && 'dropleft',
-            )}
-          />
-        )}
-      </BaseDropdown>
-    </SelectableContext.Provider>
-  );
-}) as unknown) as Dropdown;
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-Dropdown.Divider = DropdownDivider;
-Dropdown.Header = DropdownHeader;
-Dropdown.Item = DropdownItem;
-Dropdown.ItemText = DropdownItemText;
-Dropdown.Menu = DropdownMenu;
-Dropdown.Toggle = DropdownToggle;
-
-export default Dropdown;
+export default Object.assign(Dropdown, {
+  Toggle: DropdownToggle,
+  Menu: DropdownMenu,
+  Item: DropdownItem,
+  ItemText: DropdownItemText,
+  Divider: DropdownDivider,
+  Header: DropdownHeader,
+});

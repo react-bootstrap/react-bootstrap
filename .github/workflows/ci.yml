@@ -4,10 +4,12 @@ on:
     branches:
       - master
       - bs3-dev
+      - bs4-dev
   pull_request:
     branches:
       - master
       - bs3-dev
+      - bs4-dev
 jobs:
   ci:
     name: CI
@@ -20,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js environment
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - name: Update Brew (macOS)
@@ -28,12 +30,24 @@ jobs:
         run: brew update
       - name: Install Chrome (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
-        run: brew cask install google-chrome
+        run: brew install --cask google-chrome
       - name: Install Firefox (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
-        run: brew cask install firefox
+        run: brew install --cask firefox
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            .cache/yarn
+            node_modules
+            www/node_modules
+          key: react-bootstrap-${{ hashFiles('yarn.lock') }}
+          restore-keys: react-bootstrap
       - name: Install Dependencies
         run: yarn bootstrap
+        env:
+          YARN_CACHE_FOLDER: .cache/yarn
       - name: Run Tests
         run: yarn test
         env:

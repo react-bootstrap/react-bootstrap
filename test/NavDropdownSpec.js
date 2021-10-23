@@ -1,8 +1,8 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import DropdownItem from '../src/DropdownItem';
 import Nav from '../src/Nav';
+import Navbar from '../src/Navbar';
 import NavDropdown from '../src/NavDropdown';
 
 describe('<NavDropdown>', () => {
@@ -58,5 +58,42 @@ describe('<NavDropdown>', () => {
     );
 
     wrapper.assertSingle('a#test-id');
+  });
+
+  it('should support as as prop', () => {
+    const wrapper = mount(
+      <NavDropdown as="li" id="test-id" title="title">
+        <DropdownItem eventKey="1">Item 1</DropdownItem>
+      </NavDropdown>,
+    );
+
+    wrapper.assertSingle('li.nav-item');
+  });
+
+  it('passes menuVariant to dropdown menu', () => {
+    const wrapper = mount(
+      <NavDropdown title="blah" menuVariant="dark" id="test">
+        <DropdownItem>Item 1</DropdownItem>
+      </NavDropdown>,
+    );
+
+    expect(wrapper.find('DropdownMenu').props()).to.have.property(
+      'variant',
+      'dark',
+    );
+  });
+
+  it('sets data-bs-popper attribute on dropdown menu', () => {
+    const wrapper = mount(
+      <Navbar>
+        <NavDropdown renderMenuOnMount id="test-id" title="title">
+          <DropdownItem>Item 1</DropdownItem>
+        </NavDropdown>
+      </Navbar>,
+    );
+
+    wrapper
+      .assertSingle('.dropdown-menu')
+      .assertSingle('[data-bs-popper="static"]');
   });
 });

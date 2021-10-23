@@ -1,16 +1,18 @@
 {
-  "extends": [
-    "@react-bootstrap",
-    "4catalyzer-typescript",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["@react-bootstrap", "4catalyzer-typescript", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "import/extensions": "off",
-    "prettier/prettier": "warn"
-  }
+    "prettier/prettier": "warn",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*"],
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off"
+      }
+    }
+  ]
 }

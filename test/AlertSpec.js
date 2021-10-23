@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Alert from '../src/Alert';
@@ -31,10 +31,19 @@ describe('<Alert>', () => {
       .simulate('click');
   });
 
-  it('Should have use variant class', () => {
+  it('Should default to variant="primary"', () => {
+    mount(<Alert>Message</Alert>).assertSingle(`.alert-primary`);
+  });
+
+  it('Should use variant class', () => {
     mount(<Alert variant="danger">Message</Alert>).assertSingle(
       '.alert-danger',
     );
+  });
+
+  it('Should not have variant class when variant=null', () => {
+    const wrapper = mount(<Alert variant={null}>Message</Alert>);
+    expect(wrapper.find('.alert-primary').length).to.equal(0);
   });
 
   it('should forward refs to the alert', () => {
@@ -83,6 +92,18 @@ describe('<Alert>', () => {
       </Alert>,
     );
     expect(wrapper.isEmptyRender()).to.be.true;
+  });
+
+  it('should render close button variant', () => {
+    const wrapper = mount(
+      <Alert dismissible closeVariant="white">
+        Message
+      </Alert>,
+    );
+    expect(wrapper.find('CloseButton').props()).to.have.property(
+      'variant',
+      'white',
+    );
   });
 
   describe('Web Accessibility', () => {

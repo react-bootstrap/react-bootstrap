@@ -1,13 +1,13 @@
-<Form.Group>
-  <Form.Control as="select" size="lg">
+<>
+  <Form.Select size="lg">
     <option>Large select</option>
-  </Form.Control>
+  </Form.Select>
   <br />
-  <Form.Control as="select">
+  <Form.Select>
     <option>Default select</option>
-  </Form.Control>
+  </Form.Select>
   <br />
-  <Form.Control size="sm" as="select">
+  <Form.Select size="sm">
     <option>Small select</option>
-  </Form.Control>
-</Form.Group>;
+  </Form.Select>
+</>;

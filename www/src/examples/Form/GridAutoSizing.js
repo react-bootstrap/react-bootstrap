@@ -1,7 +1,7 @@
 <Form>
-  <Form.Row className="align-items-center">
+  <Row className="align-items-center">
     <Col xs="auto">
-      <Form.Label htmlFor="inlineFormInput" srOnly>
+      <Form.Label htmlFor="inlineFormInput" visuallyHidden>
         Name
       </Form.Label>
       <Form.Control
@@ -11,13 +11,11 @@
       />
     </Col>
     <Col xs="auto">
-      <Form.Label htmlFor="inlineFormInputGroup" srOnly>
+      <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
         Username
       </Form.Label>
       <InputGroup className="mb-2">
-        <InputGroup.Prepend>
-          <InputGroup.Text>@</InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>@</InputGroup.Text>
         <FormControl id="inlineFormInputGroup" placeholder="Username" />
       </InputGroup>
     </Col>
@@ -34,5 +32,5 @@
         Submit
       </Button>
     </Col>
-  </Form.Row>
+  </Row>
 </Form>;

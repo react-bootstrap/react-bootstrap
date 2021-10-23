@@ -1,30 +1,20 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
-
 import { useUncontrolled } from 'uncontrollable';
-
+import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
+import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  SelectCallback,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ListGroupProps extends BsPrefixProps {
+export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush';
-  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl';
-  activeKey?: unknown;
-  defaultActiveKey?: unknown;
-  onSelect?: SelectCallback;
+  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  defaultActiveKey?: EventKey;
+  numbered?: boolean;
 }
-
-type ListGroup = BsPrefixRefForwardingComponent<'div', ListGroupProps> & {
-  Item: typeof ListGroupItem;
-};
 
 const propTypes = {
   /**
@@ -37,16 +27,21 @@ const propTypes = {
    *
    * @type {('flush')}
    */
-  variant: PropTypes.oneOf(['flush', undefined]),
+  variant: PropTypes.oneOf(['flush']),
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
    * A value of `null` (the default) sets it to vertical for all breakpoints;
-   * Just including the prop sets it for all breakpoints, while `{sm|md|lg|xl}`
+   * Just including the prop sets it for all breakpoints, while `{sm|md|lg|xl|xxl}`
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
-   * @type {(true|'sm'|'md'|'lg'|'xl')}
+   * @type {(true|'sm'|'md'|'lg'|'xl'|'xxl')}
    */
-  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', undefined]),
+  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']),
+
+  /**
+   * Generate numbered list items.
+   */
+  numbered: PropTypes.bool,
 
   /**
    * You can use a custom element type for this component.
@@ -54,58 +49,53 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  horizontal: undefined,
-};
+const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
+  React.forwardRef<HTMLElement, ListGroupProps>((props, ref) => {
+    const {
+      className,
+      bsPrefix: initialBsPrefix,
+      variant,
+      horizontal,
+      numbered,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as = 'div',
+      ...controlledProps
+    } = useUncontrolled(props, {
+      activeKey: 'onSelect',
+    });
 
-const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
-  const {
-    className,
-    bsPrefix: initialBsPrefix,
-    variant,
-    horizontal,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as = 'div',
-    ...controlledProps
-  } = useUncontrolled(props, {
-    activeKey: 'onSelect',
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
+
+    let horizontalVariant: string | undefined;
+    if (horizontal) {
+      horizontalVariant =
+        horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
+    }
+
+    warning(
+      !(horizontal && variant === 'flush'),
+      '`variant="flush"` and `horizontal` should not be used together.',
+    );
+
+    return (
+      <BaseNav
+        ref={ref}
+        {...controlledProps}
+        as={as}
+        className={classNames(
+          className,
+          bsPrefix,
+          variant && `${bsPrefix}-${variant}`,
+          horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
+          numbered && `${bsPrefix}-numbered`,
+        )}
+      />
+    );
   });
 
-  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
-
-  let horizontalVariant;
-  if (horizontal) {
-    horizontalVariant =
-      horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
-  } else {
-    horizontalVariant = null;
-  }
-
-  warning(
-    !(horizontal && variant === 'flush'),
-    '`variant="flush"` and `horizontal` should not be used together.',
-  );
-
-  return (
-    <AbstractNav
-      ref={ref}
-      {...controlledProps}
-      as={as}
-      className={classNames(
-        className,
-        bsPrefix,
-        variant && `${bsPrefix}-${variant}`,
-        horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
-      )}
-    />
-  );
-}) as unknown) as ListGroup;
-
 ListGroup.propTypes = propTypes;
-ListGroup.defaultProps = defaultProps;
 ListGroup.displayName = 'ListGroup';
 
-ListGroup.Item = ListGroupItem;
-
-export default ListGroup;
+export default Object.assign(ListGroup, {
+  Item: ListGroupItem,
+});

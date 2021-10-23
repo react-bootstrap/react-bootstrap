@@ -1,5 +1,4 @@
 import { mount } from 'enzyme';
-import React from 'react';
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
@@ -28,14 +27,6 @@ describe('ButtonGroup', () => {
     )
       .tap((b) => b.assertSingle('.btn-group-vertical'))
       .assertNone('.btn-group');
-  });
-
-  it('Should add toggle variation', () => {
-    mount(
-      <ButtonGroup toggle>
-        <Button>Title</Button>
-      </ButtonGroup>,
-    ).assertSingle('.btn-group.btn-group-toggle');
   });
 
   it('Should have div as default component', () => {

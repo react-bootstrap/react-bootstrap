@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 import { css } from 'astroturf';
 
 import LinkedHeading from '../../components/LinkedHeading';
@@ -125,7 +124,7 @@ export default withLayout(function TooltipSection({ data }) {
       <p>
         For more advanced behaviors <code>{'<OverlayTrigger>'}</code> accepts a
         function child that passes in the injected <code>ref</code> and event
-        handlers that coorespond to the configured <code>trigger</code> prop.
+        handlers that correspond to the configured <code>trigger</code> prop.
       </p>
       <p>
         You can manually apply the props to any element you want or split them
@@ -229,8 +228,8 @@ export default withLayout(function TooltipSection({ data }) {
       <ComponentApi metadata={data.OverlayTrigger} />
       <ComponentApi metadata={data.Tooltip} />
       <ComponentApi metadata={data.Popover} />
-      <ComponentApi metadata={data.PopoverContent} />
-      <ComponentApi metadata={data.PopoverTitle} />
+      <ComponentApi metadata={data.PopoverBody} />
+      <ComponentApi metadata={data.PopoverHeader} />
     </>
   );
 });
@@ -243,10 +242,10 @@ export const query = graphql`
     Popover: componentMetadata(displayName: { eq: "Popover" }) {
       ...ComponentApi_metadata
     }
-    PopoverContent: componentMetadata(displayName: { eq: "PopoverContent" }) {
+    PopoverBody: componentMetadata(displayName: { eq: "PopoverBody" }) {
       ...ComponentApi_metadata
     }
-    PopoverTitle: componentMetadata(displayName: { eq: "PopoverTitle" }) {
+    PopoverHeader: componentMetadata(displayName: { eq: "PopoverHeader" }) {
       ...ComponentApi_metadata
     }
     Overlay: componentMetadata(displayName: { eq: "Overlay" }) {

@@ -1,22 +1,21 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-import useEventCallback from '@restart/hooks/useEventCallback';
-
+import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import CloseButton from './CloseButton';
-import ModalContext from './ModalContext';
-import { BsPrefixAndClassNameOnlyProps } from './helpers';
+import { CloseButtonVariant } from './CloseButton';
+import AbstractModalHeader, {
+  AbstractModalHeaderProps,
+} from './AbstractModalHeader';
+import { BsPrefixOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
-    React.ComponentProps<'div'> {
-  closeLabel?: string;
-  closeButton?: boolean;
-  onHide?: () => void;
-}
+  extends AbstractModalHeaderProps,
+    BsPrefixOnlyProps {}
 
 const propTypes = {
+  /**
+   * @default 'modal-header'
+   */
   bsPrefix: PropTypes.string,
 
   /**
@@ -25,6 +24,11 @@ const propTypes = {
    * readable.
    */
   closeLabel: PropTypes.string,
+
+  /**
+   * Sets the variant for close button.
+   */
+  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
 
   /**
    * Specify whether the Component should contain a close button
@@ -45,35 +49,14 @@ const defaultProps = {
 };
 
 const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
-  (
-    {
-      bsPrefix,
-      closeLabel,
-      closeButton,
-      onHide,
-      className,
-      children,
-      ...props
-    }: ModalHeaderProps,
-    ref,
-  ) => {
+  ({ bsPrefix, className, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');
-
-    const context = useContext(ModalContext);
-
-    const handleClick = useEventCallback(() => {
-      if (context) context.onHide();
-      if (onHide) onHide();
-    });
-
     return (
-      <div ref={ref} {...props} className={classNames(className, bsPrefix)}>
-        {children}
-
-        {closeButton && (
-          <CloseButton label={closeLabel} onClick={handleClick} />
-        )}
-      </div>
+      <AbstractModalHeader
+        ref={ref}
+        {...props}
+        className={classNames(className, bsPrefix)}
+      />
     );
   },
 );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import Toast from '../src/Toast';
@@ -12,6 +11,10 @@ describe('<Toast>', () => {
 
   afterEach(() => {
     clock.restore();
+  });
+
+  it('should apply bg prop', () => {
+    mount(<Toast bg="primary">Card</Toast>).assertSingle('.toast.bg-primary');
   });
 
   it('should render an entire toast', () => {

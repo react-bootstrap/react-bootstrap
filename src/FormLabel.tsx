@@ -1,19 +1,19 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import warning from 'warning';
 
 import Col, { ColProps } from './Col';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-interface FormLabelBaseProps extends BsPrefixPropsWithChildren {
+interface FormLabelBaseProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   htmlFor?: string;
-  srOnly?: boolean;
+  visuallyHidden?: boolean;
 }
 
 export interface FormLabelOwnProps extends FormLabelBaseProps {
@@ -25,8 +25,6 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
 }
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
-
-type FormLabel = BsPrefixRefForwardingComponent<'label', FormLabelProps>;
 
 const propTypes = {
   /**
@@ -59,7 +57,7 @@ const propTypes = {
    * Hides the label visually while still allowing it to be
    * read by assistive technologies.
    */
-  srOnly: PropTypes.bool,
+  visuallyHidden: PropTypes.bool,
 
   /** Set a custom element for this component */
   as: PropTypes.elementType,
@@ -67,55 +65,62 @@ const propTypes = {
 
 const defaultProps = {
   column: false,
-  srOnly: false,
+  visuallyHidden: false,
 };
 
-const FormLabel: FormLabel = React.forwardRef(
-  (
-    {
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'label',
-      bsPrefix,
-      column,
-      srOnly,
-      className,
-      htmlFor,
-      ...props
-    },
-    ref,
-  ) => {
-    const { controlId } = useContext(FormContext);
+const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
+  React.forwardRef<HTMLElement, FormLabelProps>(
+    (
+      {
+        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+        as: Component = 'label',
+        bsPrefix,
+        column,
+        visuallyHidden,
+        className,
+        htmlFor,
+        ...props
+      },
+      ref,
+    ) => {
+      const { controlId } = useContext(FormContext);
 
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
 
-    let columnClass = 'col-form-label';
-    if (typeof column === 'string')
-      columnClass = `${columnClass} ${columnClass}-${column}`;
+      let columnClass = 'col-form-label';
+      if (typeof column === 'string')
+        columnClass = `${columnClass} ${columnClass}-${column}`;
 
-    const classes = classNames(
-      className,
-      bsPrefix,
-      srOnly && 'sr-only',
-      column && columnClass,
-    );
-
-    warning(
-      controlId == null || !htmlFor,
-      '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
-    );
-    htmlFor = htmlFor || controlId;
-
-    if (column)
-      return (
-        <Col as="label" className={classes} htmlFor={htmlFor} {...props} />
+      const classes = classNames(
+        className,
+        bsPrefix,
+        visuallyHidden && 'visually-hidden',
+        column && columnClass,
       );
 
-    return (
-      // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-      <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
-    );
-  },
-);
+      warning(
+        controlId == null || !htmlFor,
+        '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
+      );
+      htmlFor = htmlFor || controlId;
+
+      if (column)
+        return (
+          <Col
+            ref={ref as React.ForwardedRef<HTMLLabelElement>}
+            as="label"
+            className={classes}
+            htmlFor={htmlFor}
+            {...props}
+          />
+        );
+
+      return (
+        // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
+        <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
+      );
+    },
+  );
 
 FormLabel.displayName = 'FormLabel';
 FormLabel.propTypes = propTypes;

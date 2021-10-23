@@ -1,34 +1,34 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
-
+import * as React from 'react';
+import { useBootstrapPrefix } from './ThemeProvider';
 import Button, { ButtonProps } from './Button';
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixComponentClass,
-} from './helpers';
+
+export type ToggleButtonType = 'checkbox' | 'radio';
 
 export interface ToggleButtonProps
-  extends ButtonProps,
-    React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
-  type?: 'checkbox' | 'radio';
+  extends Omit<ButtonProps, 'onChange' | 'type'> {
+  type?: ToggleButtonType;
   name?: string;
   checked?: boolean;
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  value: unknown;
-  inputRef?: React.LegacyRef<'input'>;
+  value: string | ReadonlyArray<string> | number;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
-
-type ToggleButton = BsPrefixComponentClass<'button', ToggleButtonProps>;
 
 const noop = () => undefined;
 
 const propTypes = {
   /**
+   * @default 'btn-check'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
    * The `<input>` element `type`
    */
-  type: PropTypes.oneOf(['checkbox', 'radio']),
+  type: PropTypes.oneOf<ToggleButtonType>(['checkbox', 'radio']),
 
   /**
    * The HTML input name, used to group like checkboxes or radio buttons together
@@ -47,6 +47,11 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * `id` is required for button clicks to toggle input.
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
    * A callback fired when the underlying input element changes. This is passed
    * directly to the `<input>` so shares the same signature as a native `onChange` event.
    */
@@ -56,19 +61,23 @@ const propTypes = {
    * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.any.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string.isRequired),
+    PropTypes.number,
+  ]).isRequired,
 
   /**
    * A ref attached to the `<input>` element
    * @type {ReactRef}
    */
-  inputRef: PropTypes.any,
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.any]),
 };
 
-const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
+const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
   (
     {
-      children,
+      bsPrefix,
       name,
       className,
       checked,
@@ -76,54 +85,42 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
       onChange,
       value,
       disabled,
+      id,
       inputRef,
       ...props
-    }: ToggleButtonProps,
+    },
     ref,
   ) => {
-    const [focused, setFocused] = useState(false);
-
-    const handleFocus = useCallback((e) => {
-      if (e.target.tagName === 'INPUT') setFocused(true);
-    }, []);
-
-    const handleBlur = useCallback((e) => {
-      if (e.target.tagName === 'INPUT') setFocused(false);
-    }, []);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'btn-check');
 
     return (
-      <Button
-        {...props}
-        ref={ref}
-        className={classNames(
-          className,
-          focused && 'focus',
-          disabled && 'disabled',
-        )}
-        type={undefined}
-        active={!!checked}
-        as="label"
-      >
+      <>
         <input
+          className={bsPrefix}
           name={name}
           type={type}
-          value={value as any}
-          ref={inputRef as any}
+          value={value}
+          ref={inputRef}
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           onChange={onChange || noop}
+          id={id}
         />
-
-        {children}
-      </Button>
+        <Button
+          {...props}
+          ref={ref}
+          className={classNames(className, disabled && 'disabled')}
+          type={undefined}
+          as="label"
+          htmlFor={id}
+        />
+      </>
     );
   },
 );
 
-ToggleButton.propTypes = propTypes as any;
+ToggleButton.propTypes = propTypes;
 ToggleButton.displayName = 'ToggleButton';
 
 export default ToggleButton;

@@ -1,5 +1,4 @@
 import { mount } from 'enzyme';
-import React from 'react';
 import DropdownToggle from '../src/DropdownToggle';
 
 describe('<DropdownToggle>', () => {
@@ -14,10 +13,6 @@ describe('<DropdownToggle>', () => {
       )
       .text()
       .should.equal('herpa derpa');
-  });
-
-  it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', () => {
-    mount(simpleToggle).assertSingle('button[aria-haspopup=true]');
   });
 
   it('renders children', () => {
@@ -59,6 +54,6 @@ describe('<DropdownToggle>', () => {
         title="bsClass"
         id="test-id"
       />,
-    ).assertSingle('.my-custom-bsPrefix.btn');
+    ).assertSingle('button.my-custom-bsPrefix.btn');
   });
 });

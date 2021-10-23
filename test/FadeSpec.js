@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Fade from '../src/Fade';
@@ -18,6 +18,37 @@ describe('Fade', () => {
         );
       }
     };
+  });
+
+  it('should not throw an error with StrictMode', () => {
+    wrapper = mount(
+      <React.StrictMode>
+        <Component>Panel content</Component>
+      </React.StrictMode>,
+    );
+
+    wrapper.setState({ in: true });
+  });
+
+  it('should work with a class component as children', (done) => {
+    const InnerComponent = class extends React.Component {
+      render() {
+        return <div {...this.props}>test</div>;
+      }
+    };
+
+    function onEntering() {
+      assert.equal(wrapper.getDOMNode().className, 'fade show');
+      done();
+    }
+
+    wrapper = mount(
+      <Fade onEntering={onEntering}>
+        <InnerComponent />
+      </Fade>,
+    );
+
+    wrapper.setProps({ in: true });
   });
 
   it('Should default to hidden', () => {

@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import React from 'react';
 
 import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
@@ -62,7 +61,7 @@ export default withLayout(function GridSection({ data }) {
       />
       <p>
         You can set breakpoints for the <code>fluid</code> prop. Setting it to a
-        breakpoint (<code>sm, md, lg, xl</code>) will set the{' '}
+        breakpoint (<code>sm, md, lg, xl, xxl</code>) will set the{' '}
         <code>Container</code> as fluid until the specified breakpoint.
       </p>
       <ReactPlayground
@@ -110,9 +109,9 @@ export default withLayout(function GridSection({ data }) {
         Responsive grids
       </LinkedHeading>
       <p>
-        The <code>Col</code> lets you specify column widths across 5 breakpoint
-        sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
-        the amount of columns to span, or set the prop to{' '}
+        The <code>Col</code> lets you specify column widths across 6 breakpoint
+        sizes (xs, sm, md, lg, xl and xxl). For every breakpoint, you can
+        specify the amount of columns to span, or set the prop to{' '}
         <code>{'<Col lg={true} />'}</code> for auto layout widths.
       </p>
       <ReactPlayground
@@ -158,8 +157,10 @@ export default withLayout(function GridSection({ data }) {
 
       <p>
         The <code>Row</code> lets you specify column widths across 5 breakpoint
-        sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
-        the amount of columns that will fit next to each other.
+        sizes (xs, sm, md, lg, xl and xxl). For every breakpoint, you can
+        specify the amount of columns that will fit next to each other. You can
+        also specify <code>auto</code> to set the columns to their natural
+        widths.
       </p>
       <ReactPlayground
         codeText={GridRowColLayout}

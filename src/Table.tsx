@@ -1,14 +1,13 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import {
-  BsPrefixAndClassNameOnlyProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixOnlyProps } from './helpers';
 
-export interface TableProps extends BsPrefixAndClassNameOnlyProps {
+export interface TableProps
+  extends BsPrefixOnlyProps,
+    React.TableHTMLAttributes<HTMLTableElement> {
   striped?: boolean;
   bordered?: boolean;
   borderless?: boolean;
@@ -17,8 +16,6 @@ export interface TableProps extends BsPrefixAndClassNameOnlyProps {
   variant?: string;
   responsive?: boolean | string;
 }
-
-type Table = BsPrefixRefForwardingComponent<'table', TableProps>;
 
 const propTypes = {
   /**
@@ -70,7 +67,7 @@ const propTypes = {
   responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
-const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
+const Table = React.forwardRef<HTMLTableElement, TableProps>(
   (
     {
       bsPrefix,
@@ -83,7 +80,7 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
       variant,
       responsive,
       ...props
-    }: TableProps,
+    },
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');

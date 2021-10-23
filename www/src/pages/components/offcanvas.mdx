@@ -1,0 +1,71 @@
+import { graphql } from 'gatsby';
+
+import Callout from '../../components/Callout';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import Basic from '../../examples/Offcanvas/Basic';
+import Backdrop from '../../examples/Offcanvas/Backdrop';
+import Placement from '../../examples/Offcanvas/Placement';
+
+# Offcanvas
+
+<p className="lead">
+  Build hidden sidebars into your project for navigation, shopping carts, and
+  more.
+</p>
+
+## Examples
+
+Offcanvas includes support for a header with a close button and an optional body class 
+for some initial padding. We suggest that you include offcanvas headers with dismiss 
+actions whenever possible, or provide an explicit dismiss action.
+
+### Basic Example
+
+<ReactPlayground codeText={Basic} />
+
+### Placement
+
+Offcanvas supports a few different placements:
+- `start` places offcanvas on the left of the viewport
+- `end` places offcanvas on the right of the viewport
+- `top` places offcanvas on the top of the viewport
+- `bottom` places offcanvas on the bottom of the viewport
+
+<ReactPlayground codeText={Placement} />
+
+### Backdrop
+
+Scrolling the `<body>` element is disabled when an offcanvas and its backdrop are 
+visible. Use the `scroll` prop to toggle `<body>` scrolling and the `backdrop` prop 
+to toggle the backdrop.
+
+<ReactPlayground codeText={Backdrop} />
+
+## API
+
+<ComponentApi metadata={props.data.Offcanvas} />
+<ComponentApi metadata={props.data.OffcanvasHeader} />
+<ComponentApi metadata={props.data.OffcanvasTitle} />
+<ComponentApi metadata={props.data.OffcanvasBody} />
+
+export const query = graphql`
+  query OffcanvasQuery {
+    Offcanvas: componentMetadata(displayName: { eq: "Offcanvas" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    OffcanvasHeader: componentMetadata(displayName: { eq: "OffcanvasHeader" }) {
+      ...ComponentApi_metadata
+    }
+    OffcanvasTitle: componentMetadata(displayName: { eq: "OffcanvasTitle" }) {
+      ...ComponentApi_metadata
+    }
+    OffcanvasBody: componentMetadata(displayName: { eq: "OffcanvasBody" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
+
+;

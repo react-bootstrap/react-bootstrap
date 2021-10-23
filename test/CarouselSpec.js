@@ -1,7 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
 import Carousel from '../src/Carousel';
+import ThemeProvider from '../src/ThemeProvider';
 
 describe('<Carousel>', () => {
   const items = [
@@ -10,6 +11,20 @@ describe('<Carousel>', () => {
     <Carousel.Item key={3}>Item 3 content</Carousel.Item>,
   ];
 
+  it('should not throw an error with StrictMode', () => {
+    const ref = React.createRef();
+
+    mount(
+      <React.StrictMode>
+        <Carousel ref={ref} interval={null}>
+          {items}
+        </Carousel>
+      </React.StrictMode>,
+    );
+
+    ref.current.next();
+  });
+
   it('should show the first item by default and render all', () => {
     const wrapper = mount(<Carousel>{items}</Carousel>);
 
@@ -17,7 +32,7 @@ describe('<Carousel>', () => {
 
     expect(carouselItems.at(0).is('.active')).to.be.true;
     expect(carouselItems.at(1).is('.active')).to.be.false;
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       items.length,
     );
   });
@@ -46,7 +61,7 @@ describe('<Carousel>', () => {
 
     expect(carouselItems.at(0).is('.active')).to.be.true;
     expect(carouselItems.at(0).text()).to.equal('Item 1 content');
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(2);
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(2);
   });
 
   it('should call onSelect when indicator selected', (done) => {
@@ -62,7 +77,31 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper.find('.carousel-indicators li').first().simulate('click');
+    wrapper.find('.carousel-indicators button').first().simulate('click');
+  });
+
+  it('should render custom indicator labels', () => {
+    const labels = ['custom1', 'custom2', 'custom3'];
+
+    const wrapper = mount(
+      <Carousel activeIndex={1} interval={null} indicatorLabels={labels}>
+        {items}
+      </Carousel>,
+    );
+
+    const indicators = wrapper.find('.carousel-indicators button');
+    for (let i = 0; i < labels.length; i++) {
+      const node = indicators.at(i).getDOMNode();
+      expect(node.getAttribute('aria-label')).to.equal(labels[i]);
+    }
+  });
+
+  it('should render variant', () => {
+    mount(
+      <Carousel activeIndex={1} interval={null} variant="dark">
+        {items}
+      </Carousel>,
+    ).assertSingle('.carousel.carousel-dark');
   });
 
   describe('ref testing', () => {
@@ -100,7 +139,7 @@ describe('<Carousel>', () => {
     it(`should call ${eventName} with previous index and direction`, (done) => {
       function onEvent(index, direction) {
         expect(index).to.equal(0);
-        expect(direction).to.equal('right');
+        expect(direction).to.equal('end');
 
         done();
       }
@@ -115,14 +154,14 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper.find('.carousel-indicators li').first().simulate('click');
+      wrapper.find('.carousel-indicators button').first().simulate('click');
     });
 
     it(`should call ${eventName} with next index and direction`, (done) => {
       function onEvent(index, direction) {
         const lastPossibleIndex = items.length - 1;
         expect(index).to.equal(lastPossibleIndex);
-        expect(direction).to.equal('left');
+        expect(direction).to.equal('start');
 
         done();
       }
@@ -137,7 +176,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper.find('.carousel-indicators li').last().simulate('click');
+      wrapper.find('.carousel-indicators button').last().simulate('click');
     });
   });
 
@@ -211,7 +250,7 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    const labels = wrapper.find('.sr-only');
+    const labels = wrapper.find('.visually-hidden');
 
     expect(labels).to.have.lengthOf(2);
     expect(labels.at(0).text()).to.equal('Previous awesomeness');
@@ -232,7 +271,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      expect(wrapper.find('.sr-only')).to.have.lengthOf(
+      expect(wrapper.find('.visually-hidden')).to.have.lengthOf(
         0,
         `should not render labels for value ${falsyValue}`,
       );
@@ -267,7 +306,7 @@ describe('<Carousel>', () => {
       <Carousel defaultActiveIndex={items.length - 1}>{items}</Carousel>,
     );
 
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       items.length,
     );
 
@@ -275,7 +314,7 @@ describe('<Carousel>', () => {
 
     wrapper.setProps({ children: fewerItems });
 
-    expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(
+    expect(wrapper.find('.carousel-indicators > button')).to.have.lengthOf(
       fewerItems.length,
     );
     expect(wrapper.find('div.carousel-item')).to.have.lengthOf(
@@ -774,6 +813,73 @@ describe('<Carousel>', () => {
 
       clock.tick(1000);
       onSelectSpy.should.have.been.calledOnce;
+    });
+  });
+
+  describe('RTL', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should slide in correct direction on ArrowLeft when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+
+      const wrapper = mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowLeft',
+      });
+      clock.tick(50);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(2);
+    });
+
+    it('should slide in correct direction on ArrowLeft when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+
+      const wrapper = mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowRight',
+      });
+      clock.tick(50);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
+    });
+
+    it('should slide in correct direction automatically when dir=rtl', () => {
+      const onSelectSpy = sinon.spy();
+      const interval = 300;
+
+      mount(
+        <ThemeProvider dir="rtl">
+          <Carousel activeIndex={1} onSelect={onSelectSpy} interval={interval}>
+            {items}
+          </Carousel>
+        </ThemeProvider>,
+      );
+
+      clock.tick(interval * 1.5);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
     });
   });
 });

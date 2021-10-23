@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavbarBrandProps extends BsPrefixProps {
+export interface NavbarBrandProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   href?: string;
 }
-
-type NavbarBrand = BsPrefixRefForwardingComponent<'a', NavbarBrandProps>;
 
 const propTypes = {
   /** @default 'navbar' */
@@ -26,21 +26,22 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const NavbarBrand: NavbarBrand = React.forwardRef(
-  ({ bsPrefix, className, as, ...props }: NavbarBrandProps, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-brand');
+const NavbarBrand: BsPrefixRefForwardingComponent<'a', NavbarBrandProps> =
+  React.forwardRef<HTMLElement, NavbarBrandProps>(
+    ({ bsPrefix, className, as, ...props }, ref) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-brand');
 
-    const Component = as || (props.href ? 'a' : 'span');
+      const Component = as || (props.href ? 'a' : 'span');
 
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        className={classNames(className, bsPrefix)}
-      />
-    );
-  },
-);
+      return (
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(className, bsPrefix)}
+        />
+      );
+    },
+  );
 
 NavbarBrand.displayName = 'NavbarBrand';
 NavbarBrand.propTypes = propTypes;

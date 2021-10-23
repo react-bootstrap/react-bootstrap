@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 
 import SplitButton from '../src/SplitButton';
@@ -83,7 +82,7 @@ describe('<SplitButton>', () => {
 
   it('should set accessible label on toggle', () => {
     mount(simple)
-      .assertSingle('.sr-only')
+      .assertSingle('.visually-hidden')
       .text()
       .should.equal('Toggle dropdown');
   });
@@ -94,7 +93,7 @@ describe('<SplitButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     )
-      .assertSingle('.sr-only')
+      .assertSingle('.visually-hidden')
       .text()
       .should.equal('Label');
   });

@@ -16,14 +16,14 @@ function Example() {
         show={show}
         target={target}
         placement="bottom"
-        container={ref.current}
+        container={ref}
         containerPadding={20}
       >
         <Popover id="popover-contained">
-          <Popover.Title as="h3">Popover bottom</Popover.Title>
-          <Popover.Content>
+          <Popover.Header as="h3">Popover bottom</Popover.Header>
+          <Popover.Body>
             <strong>Holy guacamole!</strong> Check this info.
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
       </Overlay>
     </div>

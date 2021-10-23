@@ -1,7 +1,6 @@
 import { mount } from 'enzyme';
-import React from 'react';
 import DropdownItem from '../src/DropdownItem';
-import DropdownMenu from '../src/DropdownMenu';
+import DropdownMenu, { getDropdownMenuPlacement } from '../src/DropdownMenu';
 
 describe('<Dropdown.Menu>', () => {
   const simpleMenu = (
@@ -25,12 +24,12 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('div.new-fancy-class');
   });
 
-  it('applies alignRight', () => {
+  it('applies align="end"', () => {
     mount(
-      <DropdownMenu show alignRight>
+      <DropdownMenu show align="end">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-right');
+    ).assertSingle('.dropdown-menu-end');
   });
 
   it('renders on mount with prop', () => {
@@ -41,9 +40,9 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('div.dropdown-menu');
   });
 
-  it('does not add any extra classes when align="left"', () => {
+  it('does not add any extra classes when align="start"', () => {
     const wrapper = mount(
-      <DropdownMenu show align="left">
+      <DropdownMenu show align="start">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     ).find('DropdownMenu');
@@ -51,30 +50,94 @@ describe('<Dropdown.Menu>', () => {
     expect(wrapper.getDOMNode().className).to.equal('dropdown-menu show');
   });
 
-  it('adds right align class when align="right"', () => {
+  it('adds right align class when align="end"', () => {
     mount(
-      <DropdownMenu show align="right">
+      <DropdownMenu show align="end">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-right');
+    ).assertSingle('.dropdown-menu-end');
   });
 
-  it('adds responsive left alignment classes', () => {
+  it('adds responsive start alignment classes', () => {
     mount(
-      <DropdownMenu show align={{ lg: 'left' }}>
+      <DropdownMenu show align={{ lg: 'start' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     )
-      .assertSingle('.dropdown-menu-right')
-      .assertSingle('.dropdown-menu-lg-left');
+      .assertSingle('.dropdown-menu-end')
+      .assertSingle('.dropdown-menu-lg-start');
   });
 
-  it('adds responsive right alignment classes', () => {
+  it('adds responsive end alignment classes', () => {
     mount(
-      <DropdownMenu show align={{ lg: 'right' }}>
+      <DropdownMenu show align={{ lg: 'end' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-lg-right');
+    )
+      .assertSingle('.dropdown-menu-lg-end')
+      .assertSingle('[data-bs-popper="static"]');
+  });
+
+  it('should render variant', () => {
+    mount(
+      <DropdownMenu show variant="dark">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('.dropdown-menu.dropdown-menu-dark');
+  });
+
+  describe('getDropdownMenuPlacement', () => {
+    it('should return top placement', () => {
+      getDropdownMenuPlacement(false, 'up', false).should.equal('top-start');
+      getDropdownMenuPlacement(true, 'up', false).should.equal('top-end');
+    });
+
+    it('should return top placement for RTL', () => {
+      getDropdownMenuPlacement(false, 'up', true).should.equal('top-end');
+      getDropdownMenuPlacement(true, 'up', true).should.equal('top-start');
+    });
+
+    it('should return end placement', () => {
+      getDropdownMenuPlacement(false, 'end', false).should.equal('right-start');
+      getDropdownMenuPlacement(true, 'end', false).should.equal('right-end');
+    });
+
+    it('should return end placement for RTL', () => {
+      getDropdownMenuPlacement(false, 'end', true).should.equal('left-start');
+      getDropdownMenuPlacement(true, 'end', true).should.equal('left-end');
+    });
+
+    it('should return bottom placement', () => {
+      getDropdownMenuPlacement(false, 'bottom', false).should.equal(
+        'bottom-start',
+      );
+      getDropdownMenuPlacement(true, 'bottom', false).should.equal(
+        'bottom-end',
+      );
+    });
+
+    it('should return bottom placement for RTL', () => {
+      getDropdownMenuPlacement(false, 'bottom', true).should.equal(
+        'bottom-end',
+      );
+      getDropdownMenuPlacement(true, 'bottom', true).should.equal(
+        'bottom-start',
+      );
+    });
+
+    it('should return start placement', () => {
+      getDropdownMenuPlacement(false, 'start', false).should.equal(
+        'left-start',
+      );
+      getDropdownMenuPlacement(true, 'start', false).should.equal('left-end');
+    });
+
+    it('should return start placement for RTL', () => {
+      getDropdownMenuPlacement(false, 'start', true).should.equal(
+        'right-start',
+      );
+      getDropdownMenuPlacement(true, 'start', true).should.equal('right-end');
+    });
   });
 
   // it.only('warns about bad refs', () => {

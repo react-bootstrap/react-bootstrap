@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
+import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -55,7 +55,7 @@ const StyledNavbar = styled(Navbar).attrs({
 `;
 
 const SkipToContentLink = styled('a')`
-  composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
+  composes: visually-hidden visually-hidden-focusable bg-primary text-white px-4 py-2 me-2 from global;
 `;
 
 const StyledNavLink = styled(Nav.Link)`
@@ -110,66 +110,73 @@ function NavMain({ activePage }) {
         </a>
       </Banner>
       <StyledNavbar expand collapseOnSelect>
-        <SkipToContentLink href="#rb-docs-content" tabIndex="0">
-          Skip to content
-        </SkipToContentLink>
-        <Navbar.Brand href="/">
-          <img src={logo} alt="react-bootstrap" height={30} />
-        </Navbar.Brand>
+        <Container fluid>
+          <SkipToContentLink href="#rb-docs-content" tabIndex="0">
+            Skip to content
+          </SkipToContentLink>
+          <Navbar.Brand href="/">
+            <img src={logo} alt="react-bootstrap" height={30} />
+          </Navbar.Brand>
 
-        <Nav role="navigation" id="top" className="d-none d-md-flex">
-          {NAV_LINKS.map(({ link, title, exact }) => (
-            <StyledNavLink
-              key={link}
-              href={link}
-              active={exact ? activePage === link : activePage.startsWith(link)}
+          <Nav role="navigation" id="top" className="d-none d-md-flex">
+            {NAV_LINKS.map(({ link, title, exact }) => (
+              <StyledNavLink
+                key={link}
+                href={link}
+                active={
+                  exact ? activePage === link : activePage.startsWith(link)
+                }
+              >
+                {title}
+              </StyledNavLink>
+            ))}
+          </Nav>
+          <Nav className="ms-auto pe-md-5">
+            <StyledDropdown id="t-version">
+              <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
+                v{config.version} (
+                <span className="d-none d-lg-inline">Bootstrap </span>
+                {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
+              </Dropdown.Toggle>
+              <Dropdown.Menu role="menu">
+                <Dropdown.Item href="https://react-bootstrap-v4.netlify.app">
+                  v1.6.1 (Bootstrap 4)
+                </Dropdown.Item>
+                <Dropdown.Item href="https://react-bootstrap-v3.netlify.app">
+                  v0.33.1 (Bootstrap 3)
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </StyledDropdown>
+            <OverlayTrigger
+              placement="bottom"
+              delay={{ show: 200 }}
+              overlay={<Tooltip id="t-github">Github</Tooltip>}
             >
-              {title}
-            </StyledNavLink>
-          ))}
-        </Nav>
-        <Nav className="ml-auto pr-md-5">
-          <StyledDropdown id="t-version">
-            <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
-              v{config.version} (
-              <span className="d-none d-lg-inline">Bootstrap </span>
-              {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
-            </Dropdown.Toggle>
-            <Dropdown.Menu role="menu">
-              <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
-                v0.33.1 (Bootstrap 3)
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </StyledDropdown>
-          <OverlayTrigger
-            placement="bottom"
-            delay={{ show: 200 }}
-            overlay={<Tooltip id="t-github">Github</Tooltip>}
-          >
-            <StyledNavLink
-              href="https://github.com/react-bootstrap/react-bootstrap"
-              target="_blank"
-              rel="noopener noreferrer"
+              <StyledNavLink
+                href="https://github.com/react-bootstrap/react-bootstrap"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faGithub} size="lg" />
+                <span className="visually-hidden">Github</span>
+              </StyledNavLink>
+            </OverlayTrigger>
+            <OverlayTrigger
+              placement="bottom"
+              delay={{ show: 200 }}
+              overlay={<Tooltip id="t-discord">Discord</Tooltip>}
             >
-              <FontAwesomeIcon icon={faGithub} size="lg" />
-              <span className="sr-only">Github</span>
-            </StyledNavLink>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="bottom"
-            delay={{ show: 200 }}
-            overlay={<Tooltip id="t-discord">Discord</Tooltip>}
-          >
-            <StyledNavLink
-              href="https://discord.gg/AKfs9vpvRW"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faDiscord} size="lg" />
-              <span className="sr-only">Discord</span>
-            </StyledNavLink>
-          </OverlayTrigger>
-        </Nav>
+              <StyledNavLink
+                href="https://discord.gg/AKfs9vpvRW"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faDiscord} size="lg" />
+                <span className="visually-hidden">Discord</span>
+              </StyledNavLink>
+            </OverlayTrigger>
+          </Nav>
+        </Container>
       </StyledNavbar>
     </>
   );

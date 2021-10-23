@@ -1,13 +1,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import React from 'react';
+import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixPropsWithChildren,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type RowColWidth =
   | number
@@ -22,21 +19,22 @@ type RowColWidth =
   | '9'
   | '10'
   | '11'
-  | '12';
+  | '12'
+  | 'auto';
 type RowColumns = RowColWidth | { cols?: RowColWidth };
 
-export interface RowProps extends BsPrefixPropsWithChildren {
-  noGutters?: boolean;
+export interface RowProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {
   xs?: RowColumns;
   sm?: RowColumns;
   md?: RowColumns;
   lg?: RowColumns;
   xl?: RowColumns;
+  xxl?: RowColumns;
 }
 
-type Row = BsPrefixRefForwardingComponent<'div', RowProps>;
-
-const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
+const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
 const rowColumns = PropTypes.oneOfType([
@@ -52,56 +50,65 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
-  noGutters: PropTypes.bool.isRequired,
   as: PropTypes.elementType,
 
   /**
-   * The number of columns that will fit next to each other on extra small devices (<576px)
+   * The number of columns that will fit next to each other on extra small devices (<576px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   xs: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on small devices (≥576px)
+   * The number of columns that will fit next to each other on small devices (≥576px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   sm: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on medium devices (≥768px)
+   * The number of columns that will fit next to each other on medium devices (≥768px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   md: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on large devices (≥992px)
+   * The number of columns that will fit next to each other on large devices (≥992px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   lg: rowColumns,
 
   /**
-   * The number of columns that will fit next to each other on extra large devices (≥1200px)
+   * The number of columns that will fit next to each other on extra large devices (≥1200px).
+   * Use `auto` to give columns their natural widths.
    *
-   * @type {(number|{ cols: number })}
+   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
   xl: rowColumns,
+
+  /**
+   * The number of columns that will fit next to each other on extra extra large devices (≥1400px).
+   * Use `auto` to give columns their natural widths.
+   *
+   * @type {(number|'auto'|{ cols: number|'auto' })}
+   */
+  xxl: rowColumns,
 };
 
-const defaultProps = {
-  noGutters: false,
-};
-
-const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
+const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
+  HTMLDivElement,
+  RowProps
+>(
   (
     {
       bsPrefix,
       className,
-      noGutters,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
@@ -132,12 +139,7 @@ const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
       <Component
         ref={ref}
         {...props}
-        className={classNames(
-          className,
-          decoratedBsPrefix,
-          noGutters && 'no-gutters',
-          ...classes,
-        )}
+        className={classNames(className, decoratedBsPrefix, ...classes)}
       />
     );
   },
@@ -145,6 +147,5 @@ const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
 
 Row.displayName = 'Row';
 Row.propTypes = propTypes;
-Row.defaultProps = defaultProps;
 
 export default Row;

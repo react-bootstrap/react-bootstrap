@@ -1,4 +1,3 @@
-import React from 'react';
 import CodeBlock from './CodeBlock';
 
 const propTypes = {};
@@ -11,7 +10,7 @@ function CssCodeBlock() {
       codeText={`
 <link
   rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/${bootstrapVersion}/css/bootstrap.min.css"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@${bootstrapVersion}/dist/css/bootstrap.min.css"
   integrity="${cssHash}"
   crossorigin="anonymous"
 />
