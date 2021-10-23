@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { BsComponent } from './helpers';
 
 /**
  * Iterates through children that are typically specified as `props.children`,
@@ -41,28 +40,21 @@ function forEach<P = any>(
  * component for a React element) and separates it from the parent component's
  * other children.
  */
-function getChildOfType<As extends React.ElementType, P = any>(
+function getChildOfType<P = any>(
   children: React.ReactNode | React.ReactNode[],
-  type: string | BsComponent<As, P>,
+  type: string | React.JSXElementConstructor<P>,
 ): {
-  matchingChild: React.ReactElement<P, string | BsComponent<As, P>> | null;
+  matchingChild: React.ReactElement<
+    P,
+    string | React.JSXElementConstructor<P>
+  > | null;
   otherChildren: React.ReactNode[];
 } {
-  if (typeof type !== 'string' && !(type as BsComponent<As, P>).typeName) {
-    throw new Error(
-      "If 'type' is a component, it must have a defined, non-empty 'typeName' property.",
-    );
-  }
-
   const childrenList = Array.isArray(children)
     ? children
     : React.Children.toArray(children);
   const childIndex = childrenList.findIndex(
-    (child) =>
-      React.isValidElement<P>(child) &&
-      (child.type === type ||
-        (child.type as BsComponent<As, P>)?.typeName ===
-          (type as BsComponent<As, P>).typeName),
+    (child) => React.isValidElement<P>(child) && child.type === type,
   );
 
   return childIndex === -1

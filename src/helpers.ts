@@ -33,28 +33,18 @@ export interface BsPrefixRefForwardingComponent<
   contextTypes?: any;
   defaultProps?: Partial<P>;
   displayName?: string;
-  typeName?: string;
 }
 
 export class BsPrefixComponent<
   As extends React.ElementType,
   P = unknown,
-> extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {
-  typeName?: string;
-}
+> extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
 // Need to use this instead of typeof Component to get proper type checking.
 export type BsPrefixComponentClass<
   As extends React.ElementType,
   P = unknown,
-> = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>> & {
-  typeName?: string;
-};
-
-export type BsComponent<As extends React.ElementType, P = unknown> =
-  | BsPrefixRefForwardingComponent<As, P>
-  | BsPrefixComponentClass<As, P>
-  | BsPrefixComponentClass<As, P>;
+> = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
 
 export type TransitionType = boolean | TransitionComponent;
 
