@@ -8,7 +8,7 @@ import FormContext from './FormContext';
 
 export interface FormSelectProps
   extends BsPrefixOnlyProps,
-    React.HTMLAttributes<HTMLSelectElement> {
+    React.SelectHTMLAttributes<HTMLSelectElement> {
   htmlSize?: number;
   size?: 'sm' | 'lg';
   isValid?: boolean;
