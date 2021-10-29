@@ -1,3 +1,14 @@
+## [2.0.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0...v2.0.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* **FormSelect:** fix props not being defined ([#6106](https://github.com/react-bootstrap/react-bootstrap/issues/6106)) ([4dd40db](https://github.com/react-bootstrap/react-bootstrap/commit/4dd40db26df32fc5f98afdfd6c2f23ada920497a))
+
+
+
+
+
 # [2.0.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.0-rc.1...v2.0.0) (2021-10-21)
 
 
