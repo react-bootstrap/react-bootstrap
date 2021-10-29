@@ -33,7 +33,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.15",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@restart/context": "^2.1.4",
@@ -71,7 +71,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.3.0",
     "remark-slug": "^6.1.0",
-    "sass": "^1.43.2",
+    "sass": "^1.43.4",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.11"
   }
