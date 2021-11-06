@@ -8,7 +8,7 @@ import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { getChildOfType } from './ElementChildren';
+import { hasChildOfType } from './ElementChildren';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
@@ -153,9 +153,11 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         [controlId, id],
       );
 
-      const { matchingChild: inputChild, otherChildren: childrenAfterInput } =
-        getChildOfType(children, FormCheckInput);
-      const inputElement = inputChild ?? (
+      const hasLabel =
+        (!children && label != null && label !== false) ||
+        hasChildOfType(children, FormCheckInput);
+
+      const input = (
         <FormCheckInput
           {...props}
           type={type === 'switch' ? 'checkbox' : type}
@@ -166,25 +168,6 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
           as={as}
         />
       );
-
-      const { matchingChild: labelChild, otherChildren: childrenAfterLabel } =
-        getChildOfType(childrenAfterInput, FormCheckLabel);
-      const labelElement = labelChild ?? (
-        <FormCheckLabel title={title}>{label}</FormCheckLabel>
-      );
-      const hasLabel = (label != null && label !== false) || labelChild != null;
-
-      const { matchingChild: feedbackChild, otherChildren } = getChildOfType(
-        childrenAfterLabel,
-        Feedback,
-      );
-      const feedbackElement =
-        feedbackChild ??
-        (feedback && (
-          <Feedback type={feedbackType} tooltip={feedbackTooltip}>
-            {feedback}
-          </Feedback>
-        ));
 
       return (
         <FormContext.Provider value={innerFormContext}>
@@ -197,10 +180,19 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
               type === 'switch' && bsSwitchPrefix,
             )}
           >
-            {inputElement}
-            {labelElement}
-            {feedbackElement}
-            {otherChildren}
+            {children || (
+              <>
+                {input}
+                {hasLabel && (
+                  <FormCheckLabel title={title}>{label}</FormCheckLabel>
+                )}
+                {feedback && (
+                  <Feedback type={feedbackType} tooltip={feedbackTooltip}>
+                    {feedback}
+                  </Feedback>
+                )}
+              </>
+            )}
           </div>
         </FormContext.Provider>
       );

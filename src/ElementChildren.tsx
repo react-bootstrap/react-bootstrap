@@ -36,36 +36,16 @@ function forEach<P = any>(
 }
 
 /**
- * Finds a child component by type (either a string for an HTML element or a
- * component for a React element) and separates it from the parent component's
- * other children.
+ * Finds whether a component's `children` prop includes a React element of the
+ * specified type.
  */
-function getChildOfType<P = any>(
-  children: React.ReactNode | React.ReactNode[],
+function hasChildOfType<P = any>(
+  children: React.ReactNode,
   type: string | React.JSXElementConstructor<P>,
-): {
-  matchingChild: React.ReactElement<
-    P,
-    string | React.JSXElementConstructor<P>
-  > | null;
-  otherChildren: React.ReactNode[];
-} {
-  const childrenList = Array.isArray(children)
-    ? children
-    : React.Children.toArray(children);
-  const childIndex = childrenList.findIndex(
-    (child) => React.isValidElement<P>(child) && child.type === type,
+): boolean {
+  return React.Children.toArray(children).some(
+    (child) => React.isValidElement(child) && child.type === type,
   );
-
-  return childIndex === -1
-    ? { matchingChild: null, otherChildren: childrenList }
-    : {
-        matchingChild: childrenList[childIndex] as React.ReactElement<P>,
-        otherChildren: [
-          ...childrenList.slice(0, childIndex),
-          ...childrenList.slice(childIndex + 1),
-        ],
-      };
 }
 
-export { map, forEach, getChildOfType };
+export { map, forEach, hasChildOfType };
