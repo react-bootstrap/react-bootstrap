@@ -155,7 +155,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
 
       const hasLabel =
         (!children && label != null && label !== false) ||
-        hasChildOfType(children, FormCheckInput);
+        hasChildOfType(children, FormCheckLabel);
 
       const input = (
         <FormCheckInput
