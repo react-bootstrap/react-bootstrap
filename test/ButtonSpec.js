@@ -9,6 +9,14 @@ describe('<Button>', () => {
       .find('button')
       .should.have.length(1);
   });
+  
+  it('Should find disabled prop', () => {
+    mount(<Button disabled="true">Title</Button>)
+      .find('button')
+      .getDOMNode()
+      .getAttribute('disabled')
+      .should.equal(true)
+  });
 
   it('Should have type=button by default', () => {
     mount(<Button>Title</Button>)
