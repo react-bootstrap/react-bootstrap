@@ -3372,10 +3372,10 @@ commander@^2.18.0, commander@^2.19.0, commander@^2.20.0, commander@^2.20.3:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-common-tags@^1.8.0, common-tags@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.1.tgz#ebf4973edf7d476a9c19646f5f04a45f95796029"
-  integrity sha512-uOZd85rJqrdEIE/JjhW5YAeatX8iqjjvVzIyfx7JL7G5r9Tep6YpYT9gEJWhWpVyDQEyzukWd6p2qULpJ8tmBw==
+common-tags@^1.8.0, common-tags@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.2.tgz#94ebb3c076d26032745fd54face7f688ef5ac9c6"
+  integrity sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==
 
 commondir@^1.0.1:
   version "1.0.1"
