@@ -19,7 +19,6 @@
     "start": "yarn develop",
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve",
     "deploy": "gatsby build --prefix-paths && yarn push-docs",
     "push-docs": "gh-pages -d public --branch master --repo \"https://github.com/react-bootstrap/react-bootstrap.github.io.git\"",
     "sort": "import-sort 'src/pages/**/*.js'"

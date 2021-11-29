@@ -43,7 +43,6 @@
     "prepublishOnly": "npm run build",
     "release": "rollout",
     "start": "yarn --cwd www develop",
-    "start-prod": "yarn build-docs && yarn --cwd www serve",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
