@@ -1,3 +1,14 @@
+## [2.0.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.2...v2.0.3) (2021-12-01)
+
+
+### Bug Fixes
+
+* **FormCheck:** fix `Form.Check.Label` spacing ([#5983](https://github.com/react-bootstrap/react-bootstrap/issues/5983)) ([250655c](https://github.com/react-bootstrap/react-bootstrap/commit/250655cd996c9077be6c8aedbd08399d8cd55cfb)), closes [/github.com/react-bootstrap/react-bootstrap/issues/5938#issuecomment-883704209](https://github.com//github.com/react-bootstrap/react-bootstrap/issues/5938/issues/issuecomment-883704209)
+
+
+
+
+
 ## [2.0.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.1...v2.0.2) (2021-11-04)
 
 
