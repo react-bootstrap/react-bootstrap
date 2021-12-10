@@ -1,0 +1,186 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import Callout from '../../components/Callout';
+
+import Disabled from '../../examples/Overlays/Disabled';
+import Overlay from '../../examples/Overlays/Overlay';
+import OverlayTrigger from '../../examples/Overlays/Trigger';
+import TriggerRenderProp from '../../examples/Overlays/TriggerRenderProp';
+import PopoverBasic from '../../examples/Overlays/PopoverBasic';
+import PopoverContained from '../../examples/Overlays/PopoverContained';
+import PopoverPositioned from '../../examples/Overlays/PopoverPositioned';
+import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
+import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
+import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
+
+import styles from '../../css/examples.module.scss';
+
+# Overlays
+
+<p className="lead">
+  A set of components for positioning beautiful overlays, tooltips, popovers,
+  and anything else you need.
+</p>
+
+## Overview
+
+Things to know about the React-Boostrap Overlay components.
+
+- Overlays rely on the third-party library [Popper.js](https://popper.js.org).
+  It's included automatically with React-Bootstrap, but you should reference the API
+  for more advanced use cases.
+- The `<Tooltip>` and `<Popover>`
+  components do not position themselves. Instead the `<Overlay>` (or `<OverlayTrigger>`)
+  components, inject `ref` and `style` props.
+- Tooltip expects specific props injected by the `<Overlay>` component
+- Tooltips for `disabled` elements must be triggered on a wrapper element.
+
+## Overlay
+
+`Overlay` is the fundamental component for positioning and
+controlling tooltip visibility. It's a wrapper around Popper.js, that
+adds support for transitions, and visibility toggling.
+
+### Creating an Overlay
+
+Overlays consist of at least two elements, the "overlay", the element to
+be positioned, as well as a "target", the element the overlay is
+positioned in relation to. You can also also have an "arrow" element,
+like the tooltips and popovers, but that is optional. Be sure to
+check out the [Popper](https://popper.js.org/docs/v2)
+documentation for more details about the injected props.
+
+<ReactPlayground codeText={Overlay} />
+
+## OverlayTrigger
+
+Since the above pattern is pretty common, but verbose, we've included
+`<OverlayTrigger>` component to help with common
+use-cases. It even has functionality to delayed show or hides, and a few
+different "trigger" events you can mix and match.
+
+Note that triggering components must be able to accept [a ref](https://reactjs.org/docs/refs-and-the-dom.html)
+since `<OverlayTrigger>` will attempt to add one. You can use
+[forwardRef()](https://reactjs.org/docs/react-api.html#reactforwardref) for function components.
+
+<ReactPlayground codeText={OverlayTrigger} />
+
+### Customizing trigger behavior
+
+For more advanced behaviors `<OverlayTrigger>` accepts a
+function child that passes in the injected `ref` and event
+handlers that correspond to the configured `trigger` prop.
+
+You can manually apply the props to any element you want or split them
+up. The example below shows how to position the overlay to a different
+element than the one that triggers its visibility.
+
+<Callout>
+  <strong>Pro Tip:</strong> Using the function form of OverlayTrigger avoids a
+  <code>React.findDOMNode</code> call, for those trying to be strict mode
+  compliant.
+</Callout>
+
+<ReactPlayground codeText={TriggerRenderProp} />
+
+## Tooltips
+
+<p className="lead">
+  A tooltip component for a more stylish alternative to that anchor tag{' '}
+  <code>title</code> attribute.
+</p>
+
+### Examples
+
+Hover over the links below to see tooltips.
+
+<ReactPlayground codeText={TooltipInCopy} showCode={false} />
+
+You can pass the `Overlay` injected props directly to the
+Tooltip component.
+
+<ReactPlayground codeText={TooltipOverlay} />
+
+Or pass a Tooltip element to `OverlayTrigger` instead.
+
+<ReactPlayground codeText={TooltipPositioned} />
+
+## Popovers
+
+<p className="lead">A popover component, like those found in iOS.</p>
+
+### Examples
+
+<ReactPlayground codeText={PopoverBasic} />
+
+As with `<Tooltip>`s, you can control the placement of the Popover.
+
+<ReactPlayground codeText={PopoverPositioned} />
+
+## Disabled elements
+
+Elements with the `disabled` attribute aren’t interactive,
+meaning users cannot hover or click them to trigger a popover (or
+tooltip). As a workaround, you’ll want to trigger the overlay from a
+wrapper `<div>` or `<span>` and override the `pointer-events` on the
+disabled element.
+
+<ReactPlayground codeText={Disabled} />
+
+## Changing containers
+
+You can specify a `container` to control the DOM element the
+overlay is appended to. This is especially useful when styles conflict
+with your Overlays.
+
+<ReactPlayground
+  codeText={PopoverContained}
+  exampleClassName={styles.overlayContained}
+/>
+
+## Updating position dynamically
+
+Since we can't know every time your overlay changes size, to reposition
+it, you need to take manual action if you want to update the position of
+an Overlay in response to a change.
+
+For this, the Overlay component also injects a a `popper`
+prop with a `scheduleUpdate()` method that an overlay
+component can use to reposition itself.
+
+<ReactPlayground codeText={ScheduleUpdate} />
+
+## API
+
+<ComponentApi metadata={props.data.Overlay} />
+<ComponentApi metadata={props.data.OverlayTrigger} />
+<ComponentApi metadata={props.data.Tooltip} />
+<ComponentApi metadata={props.data.Popover} />
+<ComponentApi metadata={props.data.PopoverBody} />
+<ComponentApi metadata={props.data.PopoverHeader} />
+
+export const query = graphql`
+  query OverlayQuery {
+    Tooltip: componentMetadata(displayName: { eq: "Tooltip" }) {
+      ...ComponentApi_metadata
+    }
+    Popover: componentMetadata(displayName: { eq: "Popover" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverBody: componentMetadata(displayName: { eq: "PopoverBody" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverHeader: componentMetadata(displayName: { eq: "PopoverHeader" }) {
+      ...ComponentApi_metadata
+    }
+    Overlay: componentMetadata(displayName: { eq: "Overlay" }) {
+      ...ComponentApi_metadata
+    }
+    OverlayTrigger: componentMetadata(displayName: { eq: "OverlayTrigger" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;

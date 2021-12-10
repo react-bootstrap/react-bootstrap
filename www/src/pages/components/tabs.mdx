@@ -1,0 +1,99 @@
+import { graphql } from 'gatsby';
+
+import ARIA from '../../components/AriaAbbr';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import TabsControlled from '../../examples/Tabs/Controlled';
+import LeftTabs from '../../examples/Tabs/LeftTabs';
+import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
+import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
+
+# Tabbed components
+
+<p className="lead">Dynamic tabbed interfaces</p>
+
+## Examples
+
+Create dynamic tabbed interfaces, as described in the
+[<abbr title="Web Accessibility Initiative">WAI</abbr> <ARIA /> Authoring Practices](https://www.w3.org/TR/wai-aria-practices/#tabpanel).
+`Tabs` is a higher-level component for quickly creating a
+`Nav` matched with a set of `TabPane`s.
+
+<ReactPlayground
+  codeText={TabsUncontrolled}
+  exampleClassName="bs-example-tabs"
+/>
+
+## Controlled
+
+`Tabs` can be controlled directly when you want to handle the
+selection logic personally.
+
+<ReactPlayground codeText={TabsControlled} exampleClassName="bs-example-tabs" />
+
+## No animation
+
+Set the `transition` prop to `false`.
+
+<ReactPlayground
+  codeText={TabsNoAnimation}
+  exampleClassName="bs-example-tabs"
+/>
+
+## Dropdowns?
+
+Dynamic tabbed interfaces should not contain dropdown menus, as this
+causes both usability and accessibility issues. From a usability
+perspective, the fact that the currently displayed tab’s trigger element
+is not immediately visible (as it’s inside the closed dropdown menu) can
+cause confusion. From an accessibility point of view, there is currently
+no sensible way to map this sort of construct to a standard WAI ARIA
+pattern, meaning that it cannot be easily made understandable to users
+of assistive technologies.
+
+That said, it Dropdowns do work technically (sans focus management), but
+we don't make any claims about support.
+
+## Custom Tab Layout
+
+For more complex layouts the flexible `TabContainer`,
+
+`TabContent`, and `TabPane` components along with any
+style of `Nav` allow you to quickly piece together your own Tabs
+component with additional markup needed.
+
+Create a set of NavItems each with an `eventKey`
+corresponding to the eventKey of a `TabPane`. Wrap the whole
+thing in a `TabContainer` and you have fully functioning
+custom tabs component. Check out the below example making use of the
+grid system and pills.
+
+<ReactPlayground codeText={LeftTabs} exampleClassName="bs-example-tabs" />
+
+## API
+
+<ComponentApi metadata={props.data.Tabs} />
+<ComponentApi metadata={props.data.Tab} />
+<ComponentApi metadata={props.data.TabContainer} />
+<ComponentApi metadata={props.data.TabContent} />
+<ComponentApi metadata={props.data.TabPane} />
+
+export const query = graphql`
+  query TabsQuery {
+    Tabs: componentMetadata(displayName: { eq: "Tabs" }) {
+      ...ComponentApi_metadata
+    }
+    Tab: componentMetadata(displayName: { eq: "Tab" }) {
+      ...ComponentApi_metadata
+    }
+    TabContainer: componentMetadata(displayName: { eq: "TabContainer" }) {
+      ...ComponentApi_metadata
+    }
+    TabContent: componentMetadata(displayName: { eq: "TabContent" }) {
+      ...ComponentApi_metadata
+    }
+    TabPane: componentMetadata(displayName: { eq: "TabPane" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;

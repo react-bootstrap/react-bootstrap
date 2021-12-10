@@ -1,0 +1,75 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import ProgressBarAnimated from '../../examples/ProgressBar/Animated';
+import ProgressBarBasic from '../../examples/ProgressBar/Basic';
+import ProgressBarContextual from '../../examples/ProgressBar/Contextual';
+import ProgressBarScreenreaderLabel from '../../examples/ProgressBar/ScreenreaderLabel';
+import ProgressBarStacked from '../../examples/ProgressBar/Stacked';
+import ProgressBarStriped from '../../examples/ProgressBar/Striped';
+import ProgressBarWithLabel from '../../examples/ProgressBar/WithLabel';
+
+# Progress bars
+
+<p className="lead">
+  Provide up-to-date feedback on the progress of a workflow or action with
+  simple yet flexible progress bars.
+</p>
+
+## Example
+
+Default progress bar.
+
+<ReactPlayground codeText={ProgressBarBasic} />
+
+## With label
+
+Add a `label` prop to show a visible percentage. For low
+percentages, consider adding a min-width to ensure the label's text is
+fully visible.
+
+<ReactPlayground codeText={ProgressBarWithLabel} />
+
+## Screenreader only label
+
+Add a `visuallyHidden` prop to hide the label visually.
+
+<ReactPlayground codeText={ProgressBarScreenreaderLabel} />
+
+## Contextual alternatives
+
+Progress bars use some of the same button and alert classes for
+consistent styles.
+
+<ReactPlayground codeText={ProgressBarContextual} />
+
+## Striped
+
+Uses a gradient to create a striped effect.
+
+<ReactPlayground codeText={ProgressBarStriped} />
+
+## Animated
+
+Add `animated` prop to animate the stripes right to left.
+
+<ReactPlayground codeText={ProgressBarAnimated} />
+
+## Stacked
+
+Nest `<ProgressBar />`s to stack them.
+
+<ReactPlayground codeText={ProgressBarStacked} />
+
+## API
+
+<ComponentApi metadata={props.data.ProgressBar} />
+
+export const query = graphql`
+  query ProgressBarQuery {
+    ProgressBar: componentMetadata(displayName: { eq: "ProgressBar" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
