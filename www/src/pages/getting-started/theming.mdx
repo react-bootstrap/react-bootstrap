@@ -1,0 +1,34 @@
+import Callout from '../../components/Callout';
+import ReactPlayground from '../../components/ReactPlayground';
+import Prefixes from '../../examples/Theming/Prefixes';
+import Variants from '../../examples/Theming/Variants';
+
+# Theming and customizing styles
+
+Generally, if you stick to the Bootstrap defined classes and variants,
+there isn't anything you need to do to use a custom theme with
+React-Bootstrap. It just works. But we also make coloring outside the
+lines easy to do.
+
+## New variants and sizes
+
+Custom variants and sizes should follow the pattern of the default
+Bootstrap variants, and define css classes matching:
+`component-*`. React-Bootstrap builds the component
+`classNames` in a consistent way that you can rely on. For
+instance this custom `Button`.
+
+<ReactPlayground codeText={Variants} />
+
+## Prefixing components
+
+In some cases you may need to change the base class "prefix" of one or
+more components. You can control how a component prefixes its classes
+locally by changing the `bsPrefix` prop or globally via the
+`ThemeProvider` component.
+
+<Callout theme="warning">
+  Changing prefixes is an escape hatch and generally shouldn't be used.
+</Callout>
+
+<ReactPlayground codeText={Prefixes} />

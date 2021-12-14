@@ -12,7 +12,7 @@
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     margin-right: 5px;
-  
+
     & > div {
       display: flex;
       align-items: center;
@@ -58,5 +58,18 @@
 
   :global(.row) + :global(.row) {
     margin-top: 1rem;
+  }
+}
+
+// has to be fully global because of modal portals
+:global(.modal-90w) {
+  width: 90%;
+  max-width: none !important;
+}
+
+.overlay-contained {
+  height: 200px;
+  & > div {
+    position: relative;
   }
 }

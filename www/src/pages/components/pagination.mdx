@@ -1,0 +1,37 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import PaginationAdvanced from '../../examples/Pagination/Advanced';
+import PaginationBasic from '../../examples/Pagination/Basic';
+
+# Pagination
+
+A set of _presentational_ components for building pagination UI.
+
+<ReactPlayground codeText={PaginationBasic} />
+
+## More options
+
+For building more complex pagination UI, there are few convenient
+sub-components for adding "First", "Previous", "Next", and "Last"
+buttons, as well as an "Ellipsis" item for indicating
+previous or continuing results.
+
+<ReactPlayground codeText={PaginationAdvanced} />
+
+## API
+
+<ComponentApi metadata={props.data.Pagination} />
+<ComponentApi metadata={props.data.PageItem} />
+
+export const query = graphql`
+  query PaginationQuery {
+    Pagination: componentMetadata(displayName: { eq: "Pagination" }) {
+      ...ComponentApi_metadata
+    }
+    PageItem: componentMetadata(displayName: { eq: "PageItem" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
