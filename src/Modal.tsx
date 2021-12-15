@@ -232,11 +232,11 @@ const defaultProps = {
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
 function DialogTransition(props) {
-  return <Fade {...props} timeout={null} />;
+  return <Fade {...props} timeout={Modal.TRANSITION_DURATION_FALLBACK_TIMEOUT} />;
 }
 
 function BackdropTransition(props) {
-  return <Fade {...props} timeout={null} />;
+  return <Fade {...props} timeout={Modal.BACKDROP_TRANSITION_DURATION_FALLBACK_TIMEOUT} />;
 }
 
 /* eslint-enable no-use-before-define */
@@ -515,6 +515,9 @@ export default Object.assign(Modal, {
   Title: ModalTitle,
   Footer: ModalFooter,
   Dialog: ModalDialog,
-  TRANSITION_DURATION: 300,
-  BACKDROP_TRANSITION_DURATION: 150,
+  // These can be set to acceptable timeouts to make sure that a modal is removed
+  // from the DOM within a certain time period. Default is to not use a timeout and rely on only
+  // the transitionend event.
+  TRANSITION_DURATION_FALLBACK_TIMEOUT: null,
+  BACKDROP_TRANSITION_DURATION_FALLBACK_TIMEOUT: null,
 });
