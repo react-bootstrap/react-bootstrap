@@ -8,8 +8,7 @@ import { DropdownMenuVariant } from './DropdownMenu';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavDropdownProps
-  extends Omit<DropdownProps, 'onSelect' | 'title'> {
+export interface NavDropdownProps extends Omit<DropdownProps, 'title'> {
   title: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
