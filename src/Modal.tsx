@@ -12,7 +12,7 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import BaseModal, { ModalProps as BaseModalProps } from '@restart/ui/Modal';
+import BaseModal, { BaseModalProps } from '@restart/ui/Modal';
 import { ModalInstance } from '@restart/ui/ModalManager';
 import { getSharedManager } from './BootstrapModalManager';
 import Fade from './Fade';
