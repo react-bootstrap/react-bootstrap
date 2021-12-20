@@ -1,3 +1,15 @@
+## [2.0.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.3...v2.0.4) (2021-12-20)
+
+
+### Bug Fixes
+
+* **Modal:** fix typescript intellisense with base props ([#6150](https://github.com/react-bootstrap/react-bootstrap/issues/6150)) ([a7db500](https://github.com/react-bootstrap/react-bootstrap/commit/a7db5008ae667c9cca8a90d3e8e6722e925febb7))
+* **NavDropdown:** fix `onSelect` type ([#6151](https://github.com/react-bootstrap/react-bootstrap/issues/6151)) ([253c998](https://github.com/react-bootstrap/react-bootstrap/commit/253c998883d7151a6ca6e208fc089dd65afd4167))
+
+
+
+
+
 ## [2.0.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.2...v2.0.3) (2021-12-01)
 
 
