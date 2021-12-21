@@ -110,6 +110,19 @@ const gettingStarted = [
 
 const layout = ['grid', 'stack'];
 
+const forms = [
+  'overview',
+  'form-control',
+  'form-text',
+  'select',
+  'checks-radios',
+  'range',
+  'input-group',
+  'floating-labels',
+  'layout',
+  'validation',
+];
+
 const components = [
   'alerts',
   'accordion',
@@ -122,8 +135,6 @@ const components = [
   'close-button',
   'dropdowns',
   'figures',
-  'forms',
-  'input-group',
   'images',
   'list-group',
   'modal',
@@ -245,6 +256,12 @@ class SideNav extends React.Component {
                 location={location}
                 items={layout}
                 path="/layout"
+              />
+              <NavSection
+                heading="Forms"
+                location={location}
+                items={forms}
+                path="/forms"
               />
               <NavSection
                 heading="Components"

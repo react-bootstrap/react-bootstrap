@@ -1,0 +1,40 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import SelectBasic from '../../examples/Form/SelectBasic';
+import SelectSizes from '../../examples/Form/SelectSizes';
+
+# Select
+
+<p className="lead">
+  Customize the native <code>{'<select>'}</code>s with custom CSS that changes
+  the element’s initial appearance.
+</p>
+
+## Default
+
+<ReactPlayground codeText={SelectBasic} />
+
+## Sizing
+
+You may also choose from small and large custom selects to match our
+similarly sized text inputs.
+
+<ReactPlayground codeText={SelectSizes} />
+
+## API
+
+<ComponentApi metadata={props.data.FormSelect} exportedBy={props.data.Form} />
+
+export const query = graphql`
+  query FormSelectQuery {
+    Form: componentMetadata(displayName: { eq: "Form" }) {
+      ...ComponentApi_metadata
+    }
+    FormSelect: componentMetadata(displayName: { eq: "FormSelect" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
