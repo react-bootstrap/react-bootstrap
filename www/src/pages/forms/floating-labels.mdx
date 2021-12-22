@@ -1,0 +1,75 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import FormFloatingBasic from '../../examples/Form/FormFloatingBasic';
+import FormFloatingCustom from '../../examples/Form/FormFloatingCustom';
+import FormFloatingLayout from '../../examples/Form/FormFloatingLayout';
+import FormFloatingSelect from '../../examples/Form/FormFloatingSelect';
+import FormFloatingTextarea from '../../examples/Form/FormFloatingTextarea';
+
+# Floating labels
+
+<p className="lead">
+  Create beautifully simple form labels that float over your input fields.
+</p>
+
+## Example
+
+Wrap a `<Form.Control>` element in `<FloatingLabel>` to enable floating labels with
+Bootstrap’s textual form fields. A `placeholder` is required
+on each `<Form.Control>` as our method of CSS-only
+floating labels uses the `:placeholder-shown` pseudo-element.
+
+<ReactPlayground codeText={FormFloatingBasic} />
+
+## Textareas
+
+By default, `<textarea>`s will be the same height as `<input>`s. To set a custom
+height on your `<textarea>`, do not use the `rows` attribute. Instead, set an
+explicit `height` (either inline or via custom CSS).
+
+<ReactPlayground codeText={FormFloatingTextarea} />
+
+## Selects
+
+Other than `<Form.Control>`, floating labels are only available on `<Form.Select>`s.
+They work in the same way, but unlike `<input>`s, they’ll always show the `<label>`
+in its floated state.
+
+<ReactPlayground codeText={FormFloatingSelect} />
+
+## Layout
+
+When working with the Bootstrap grid system, be sure to place form
+elements within column classes.
+
+<ReactPlayground codeText={FormFloatingLayout} />
+
+## Customizing rendering
+
+If you need greater control over the rendering, use the `<FormFloating>` component
+to wrap your input and label. Also note that the `<Form.Control>` must come first
+so we can utilize a sibling selector (e.g., ~).
+
+<ReactPlayground codeText={FormFloatingCustom} />
+
+## API
+
+<ComponentApi metadata={props.data.FormFloating} exportedBy={props.data.Form} />
+<ComponentApi metadata={props.data.FloatingLabel} />
+
+export const query = graphql`
+  query FormFloatingLabelQuery {
+    Form: componentMetadata(displayName: { eq: "Form" }) {
+      ...ComponentApi_metadata
+    }
+    FormFloating: componentMetadata(displayName: { eq: "FormFloating" }) {
+      ...ComponentApi_metadata
+    }
+    FloatingLabel: componentMetadata(displayName: { eq: "FloatingLabel" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;

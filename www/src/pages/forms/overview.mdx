@@ -1,0 +1,75 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import FormBasic from '../../examples/Form/Basic';
+import FormDisabled from '../../examples/Form/FormDisabled';
+import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
+
+# Forms
+
+<p className="lead">
+  Examples and usage guidelines for form control styles, layout options, and
+  custom components for creating a wide variety of forms.
+</p>
+
+## Overview
+
+The `<FormControl>` component renders a form control with Bootstrap styling.
+The `<FormGroup>` component wraps a form control with proper spacing, along
+with support for a label, help text, and validation state. To ensure
+accessibility, set `controlId` on `<FormGroup>`, and use `<FormLabel>` for
+the label.
+
+<ReactPlayground codeText={FormBasic} />
+
+The `<FormControl>` component directly renders the `<input>` or other specified
+component. If you need to access the value of an uncontrolled `<FormControl>`,
+attach a `ref` to it as you would with an uncontrolled input, then call
+`ReactDOM.findDOMNode(ref)` to get the DOM node. You can then interact with that
+node as you would with any other uncontrolled input.
+
+If your application contains a large number of form groups, we recommend
+building a higher-level component encapsulating a complete field group
+that renders the label, the control, and any other necessary components.
+We don't provide this out-of-the-box, because the composition of those
+field groups is too specific to an individual application to admit a
+good one-size-fits-all solution.
+
+## Disabled forms
+
+Add the `disabled` boolean attribute on an input to prevent user interactions and
+make it appear lighter.
+
+<ReactPlayground codeText={FormDisabledInputs} />
+
+Add the `disabled` attribute to a `<fieldset>` to disable all the controls within.
+
+<ReactPlayground codeText={FormDisabled} />
+
+Browsers treat all native form controls (`<input>`, `<select>` and `<button>` elements)
+inside `<fieldset disabled>` as disabled, preventing both keyboard and mouse interactions
+on them.
+
+However, if your form also includes custom button-like elements such as
+`<a ... class="btn btn-*">`, these will only be given a style of `pointer-events: none`,
+meaning they are still focusable and operable using the keyboard. In this case, you must
+manually modify these controls by adding `tabindex="-1"` to prevent them from receiving
+focus and `aria-disabled="disabled"` to signal their state to assistive technologies.
+
+## API
+
+<ComponentApi metadata={props.data.Form} />
+<ComponentApi metadata={props.data.FormLabel} exportedBy={props.data.Form} />
+
+export const query = graphql`
+  query FormQuery {
+    Form: componentMetadata(displayName: { eq: "Form" }) {
+      ...ComponentApi_metadata
+    }
+    FormLabel: componentMetadata(displayName: { eq: "FormLabel" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
