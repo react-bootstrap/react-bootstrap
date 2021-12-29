@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 16.x
           cache: yarn
       - name: Update Brew (macOS)
         if: matrix.os == 'macOS-latest'
