@@ -2,13 +2,15 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { SelectCallback } from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionBody from './AccordionBody';
 import AccordionButton from './AccordionButton';
 import AccordionCollapse from './AccordionCollapse';
-import AccordionContext from './AccordionContext';
+import AccordionContext, {
+  AccordionSelectCallback,
+  AccordionEventKey,
+} from './AccordionContext';
 import AccordionHeader from './AccordionHeader';
 import AccordionItem from './AccordionItem';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
@@ -16,10 +18,11 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface AccordionProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
     BsPrefixProps {
-  activeKey?: string;
-  defaultActiveKey?: string;
-  onSelect?: SelectCallback;
+  activeKey?: AccordionEventKey;
+  defaultActiveKey?: AccordionEventKey;
+  onSelect?: AccordionSelectCallback;
   flush?: boolean;
+  alwaysOpen?: boolean;
 }
 
 const propTypes = {
@@ -30,13 +33,16 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /** The current active key that corresponds to the currently expanded card */
-  activeKey: PropTypes.string,
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /** The default active key that is expanded on start */
-  defaultActiveKey: PropTypes.string,
+  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /** Renders accordion edge-to-edge with its parent container */
   flush: PropTypes.bool,
+
+  /** Allow accordion items to stay open when another item is opened */
+  alwaysOpen: PropTypes.bool,
 };
 
 const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
@@ -49,6 +55,7 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
       className,
       onSelect,
       flush,
+      alwaysOpen,
       ...controlledProps
     } = useUncontrolled(props, {
       activeKey: 'onSelect',
@@ -59,8 +66,9 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
       () => ({
         activeEventKey: activeKey,
         onSelect,
+        alwaysOpen,
       }),
-      [activeKey, onSelect],
+      [activeKey, onSelect, alwaysOpen],
     );
 
     return (

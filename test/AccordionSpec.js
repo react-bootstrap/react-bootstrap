@@ -1,4 +1,5 @@
 import { mount } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
 
 import Accordion from '../src/Accordion';
 import AccordionCollapse from '../src/AccordionCollapse';
@@ -185,5 +186,52 @@ describe('<Accordion>', () => {
       .at(0)
       .getDOMNode()
       .className.should.include('show');
+  });
+
+  it('should allow multiple items to stay open', () => {
+    const onSelectSpy = sinon.spy();
+
+    const { getByText } = render(
+      <Accordion onSelect={onSelectSpy} alwaysOpen>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>header0</Accordion.Header>
+          <Accordion.Body>body</Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>header1</Accordion.Header>
+          <Accordion.Body>body</Accordion.Body>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    fireEvent.click(getByText('header0'));
+    fireEvent.click(getByText('header1'));
+
+    onSelectSpy.should.be.calledWith(['0', '1']);
+  });
+
+  it('should remove only one of the active indices', () => {
+    const onSelectSpy = sinon.spy();
+
+    const { getByText } = render(
+      <Accordion
+        onSelect={onSelectSpy}
+        defaultActiveKey={['0', '1']}
+        alwaysOpen
+      >
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>header0</Accordion.Header>
+          <Accordion.Body>body</Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>header1</Accordion.Header>
+          <Accordion.Body>body</Accordion.Body>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    fireEvent.click(getByText('header1'));
+
+    onSelectSpy.should.be.calledWith(['0']);
   });
 });
