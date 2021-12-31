@@ -1,3 +1,14 @@
+# [2.1.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.4...v2.1.0) (2021-12-31)
+
+
+### Features
+
+* **Accordion:** add `alwaysOpen` prop ([#6091](https://github.com/react-bootstrap/react-bootstrap/issues/6091)) ([f62da57](https://github.com/react-bootstrap/react-bootstrap/commit/f62da57493a63e40bd67b74f1414ac025c54d553))
+
+
+
+
+
 ## [2.0.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.3...v2.0.4) (2021-12-20)
 
 
