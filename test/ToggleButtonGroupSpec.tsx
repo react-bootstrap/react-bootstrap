@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
+import sinon from 'sinon';
 
 import ToggleButtonGroup from '../src/ToggleButtonGroup';
 
 describe('ToggleButton', () => {
   it('should forward refs to the label', () => {
-    const ref = React.createRef();
-    mount(
+    const ref = React.createRef<HTMLLabelElement>();
+    render(
       <div>
         <ToggleButtonGroup.Button id="id" ref={ref} value={3}>
           Option 3
@@ -14,24 +15,24 @@ describe('ToggleButton', () => {
       </div>,
     );
 
-    ref.current.tagName.should.equal('LABEL');
+    ref.current!.tagName.should.equal('LABEL');
   });
 
   it('should add an inputRef', () => {
-    const ref = React.createRef();
-    mount(
+    const ref = React.createRef<HTMLInputElement>();
+    render(
       <ToggleButtonGroup.Button id="id" inputRef={ref} value={3}>
         Option 3
       </ToggleButtonGroup.Button>,
     );
 
-    ref.current.tagName.should.equal('INPUT');
+    ref.current!.tagName.should.equal('INPUT');
   });
 });
 
 describe('ToggleButtonGroup', () => {
   it('should render checkboxes', () => {
-    const wrapper = mount(
+    const { container, getByLabelText } = render(
       <ToggleButtonGroup type="checkbox">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -45,12 +46,16 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper.assertSingle('.btn-group').assertNone('.btn-group-vertical');
-    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(1);
+    container.firstElementChild!.classList.contains('btn-group').should.be.true;
+
+    getByLabelText('Option 1')!.getAttribute('type')!.should.equal('checkbox');
+    getByLabelText('Option 2')!.getAttribute('type')!.should.equal('checkbox');
+    getByLabelText('Option 3')!.getAttribute('type')!.should.equal('checkbox');
   });
 
   it('should render checkboxes vertically', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="checkbox" vertical>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -64,12 +69,13 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper.assertSingle('.btn-group-vertical').assertNone('.btn-group');
-    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(1);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
   });
 
   it('should render checkboxes vertically and small', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="checkbox" vertical size="sm">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -83,14 +89,15 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper
-      .assertSingle('.btn-group-vertical.btn-group-sm')
-      .assertNone('.btn-group');
-    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(2);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
+    container.firstElementChild!.classList.contains('btn-group-sm').should.be
+      .true;
   });
 
   it('should render checkboxes vertically and large', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="checkbox" vertical size="lg">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -104,14 +111,15 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper
-      .assertSingle('.btn-group-vertical.btn-group-lg')
-      .assertNone('.btn-group');
-    wrapper.find('input[type="checkbox"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(2);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
+    container.firstElementChild!.classList.contains('btn-group-lg').should.be
+      .true;
   });
 
   it('should render radios', () => {
-    const wrapper = mount(
+    const { container, getByLabelText } = render(
       <ToggleButtonGroup type="radio" name="items">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -125,12 +133,16 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper.assertSingle('.btn-group').assertNone('btn-group-vertical');
-    wrapper.find('input[type="radio"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(1);
+    container.firstElementChild!.classList.contains('btn-group').should.be.true;
+
+    getByLabelText('Option 1')!.getAttribute('type')!.should.equal('radio');
+    getByLabelText('Option 2')!.getAttribute('type')!.should.equal('radio');
+    getByLabelText('Option 3')!.getAttribute('type')!.should.equal('radio');
   });
 
   it('should render radios vertically', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="radio" name="items" vertical>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -144,12 +156,13 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper.assertSingle('.btn-group-vertical').assertNone('.btn-group');
-    wrapper.find('input[type="radio"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(1);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
   });
 
   it('should render radios vertically and small', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="radio" name="items" vertical size="sm">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -163,14 +176,15 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper
-      .assertSingle('.btn-group-vertical.btn-group-sm')
-      .assertNone('.btn-group');
-    wrapper.find('input[type="radio"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(2);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
+    container.firstElementChild!.classList.contains('btn-group-sm').should.be
+      .true;
   });
 
   it('should render radios vertically and large', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ToggleButtonGroup type="radio" name="items" vertical size="lg">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -184,32 +198,35 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper
-      .assertSingle('.btn-group-vertical.btn-group-lg')
-      .assertNone('.btn-group');
-    wrapper.find('input[type="radio"]').length.should.equal(3);
+    container.firstElementChild!.classList.length.should.equal(2);
+    container.firstElementChild!.classList.contains('btn-group-vertical').should
+      .be.true;
+    container.firstElementChild!.classList.contains('btn-group-lg').should.be
+      .true;
   });
 
   it('should select initial values', () => {
-    mount(
+    const { getByLabelText } = render(
       <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]}>
-        <ToggleButtonGroup.Button id="id1" value={1}>
+        <ToggleButtonGroup.Button id="id1" data-testid="id1" value={1}>
           Option 1
         </ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button id="id2" value={2}>
+        <ToggleButtonGroup.Button id="id2" data-testid="id2" value={2}>
           Option 2
         </ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button id="id3" value={3}>
+        <ToggleButtonGroup.Button id="id3" data-testid="id3" value={3}>
           Option 3
         </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[checked=true]')
-      .length.should.equal(2);
+    );
+
+    (getByLabelText('Option 1') as HTMLInputElement)!.checked.should.be.true;
+    (getByLabelText('Option 2') as HTMLInputElement)!.checked.should.be.false;
+    (getByLabelText('Option 3') as HTMLInputElement)!.checked.should.be.true;
   });
 
   it('should disable radios', () => {
-    const wrapper = mount(
+    const { getByText, getByLabelText } = render(
       <ToggleButtonGroup type="radio" name="items">
         <ToggleButtonGroup.Button id="id1" value={1} disabled>
           Option 1
@@ -223,14 +240,18 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    wrapper.find('input[disabled=true]').length.should.equal(2);
-    wrapper.find('label.disabled').length.should.equal(2);
-    wrapper.assertNone('label[disabled=true]');
+    (getByLabelText('Option 1') as HTMLInputElement)!.disabled.should.be.true;
+    (getByLabelText('Option 2') as HTMLInputElement)!.disabled.should.be.true;
+    (getByLabelText('Option 3') as HTMLInputElement)!.disabled.should.be.false;
+
+    getByText('Option 1').classList.contains('disabled').should.be.true;
+    getByText('Option 2').classList.contains('disabled').should.be.true;
+    getByText('Option 3').classList.contains('disabled').should.be.false;
   });
 
   it('should return an array of values', () => {
     const spy = sinon.spy();
-    mount(
+    const { getByLabelText } = render(
       <ToggleButtonGroup type="checkbox" onChange={spy}>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -242,17 +263,15 @@ describe('ToggleButtonGroup', () => {
           Option 3
         </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[type="checkbox"]')
-      .at(1)
-      .simulate('change');
+    );
 
+    fireEvent.click(getByLabelText('Option 2'));
     spy.should.have.been.calledWith([2]);
   });
 
   it('should return a single value', () => {
     const spy = sinon.spy();
-    mount(
+    const { getByLabelText } = render(
       <ToggleButtonGroup type="radio" name="items" onChange={spy}>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -264,35 +283,31 @@ describe('ToggleButtonGroup', () => {
           Option 3
         </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[type="radio"]')
-      .at(1)
-      .simulate('change');
+    );
 
+    fireEvent.click(getByLabelText('Option 2'));
     spy.should.have.been.calledWith(2);
   });
 
   it('should filter out value when deselected', () => {
     const spy = sinon.spy();
-    mount(
+    const { getByLabelText } = render(
       <ToggleButtonGroup
         type="checkbox"
         name="items"
         defaultValue={[1, 2]}
         onChange={spy}
       >
-        <ToggleButtonGroup.Button id="id2" value={1}>
+        <ToggleButtonGroup.Button id="id1" data-testid="id1" value={1}>
           Option 1
         </ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button id="id3" value={2}>
+        <ToggleButtonGroup.Button id="id2" data-testid="id2" value={2}>
           Option 2
         </ToggleButtonGroup.Button>
       </ToggleButtonGroup>,
-    )
-      .find('input[type="checkbox"]')
-      .at(0)
-      .simulate('change');
+    );
 
+    fireEvent.click(getByLabelText('Option 1'));
     spy.should.have.been.calledWith([2]);
   });
 });

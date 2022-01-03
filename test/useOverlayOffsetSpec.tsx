@@ -1,28 +1,32 @@
 import * as React from 'react';
 import { useImperativeHandle } from 'react';
 import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import { expect } from 'chai';
 
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
 import useOverlayOffset from '../src/useOverlayOffset';
 
 describe('useOverlayOffset', () => {
-  const Wrapper = React.forwardRef((props, outerRef) => {
-    const [ref, modifiers] = useOverlayOffset();
+  const Wrapper = React.forwardRef<any, React.PropsWithChildren<unknown>>(
+    (props, outerRef) => {
+      const [ref, modifiers] = useOverlayOffset();
 
-    useImperativeHandle(outerRef, () => ({
-      modifiers,
-    }));
+      useImperativeHandle(outerRef, () => ({
+        modifiers,
+      }));
 
-    return React.cloneElement(props.children, {
-      ref,
-    });
-  });
+      return React.cloneElement(props.children as React.ReactElement, {
+        ref,
+      });
+    },
+  );
 
-  it('should have offset of [0, 8] for Popovers', () => {
-    const ref = React.createRef();
+  it('should have offset of [0s, 8] for Popovers', () => {
+    const ref = React.createRef<any>();
 
-    mount(
+    render(
       <Wrapper ref={ref}>
         <Popover id="test-popover" />
       </Wrapper>,
@@ -33,7 +37,7 @@ describe('useOverlayOffset', () => {
   });
 
   it('should have offset of [0, 0] for Tooltips', () => {
-    const ref = React.createRef();
+    const ref = React.createRef<any>();
 
     mount(
       <Wrapper ref={ref}>
@@ -46,7 +50,7 @@ describe('useOverlayOffset', () => {
   });
 
   it('should have offset of [0, 0] for any overlay', () => {
-    const ref = React.createRef();
+    const ref = React.createRef<any>();
 
     mount(
       <Wrapper ref={ref}>
