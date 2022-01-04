@@ -382,7 +382,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           return;
         }
 
-        onHide?.();
+        onHide?.(e);
       };
 
       const handleEscapeKeyDown = (e) => {
