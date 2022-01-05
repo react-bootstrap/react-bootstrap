@@ -1,6 +1,19 @@
-import { mount } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
+import sinon from 'sinon';
 
 import Toast from '../src/Toast';
+
+const getToast = ({
+  delay = 500,
+  onCloseSpy,
+  autohide = true,
+  show = true,
+}) => (
+  <Toast delay={delay} onClose={onCloseSpy} show={show} autohide={autohide}>
+    <Toast.Header>header-content</Toast.Header>
+    <Toast.Body>body-content</Toast.Body>
+  </Toast>
+);
 
 describe('<Toast>', () => {
   let clock;
@@ -14,51 +27,66 @@ describe('<Toast>', () => {
   });
 
   it('should apply bg prop', () => {
-    mount(<Toast bg="primary">Card</Toast>).assertSingle('.toast.bg-primary');
+    const { container } = render(<Toast bg="primary">Card</Toast>);
+    container.firstElementChild!.classList.contains('bg-primary').should.be
+      .true;
+    container.firstElementChild!.classList.contains('toast').should.be.true;
   });
 
   it('should render an entire toast', () => {
-    mount(
+    const { container } = render(
       <Toast>
         <Toast.Header />
         <Toast.Body />
       </Toast>,
-    ).assertSingle(
-      'div.toast[className="fade toast show"][role="alert"][aria-live="assertive"][aria-atomic="true"]',
+    );
+    ['fade', 'toast', 'show'].map((className) =>
+      container.firstElementChild!.classList.contains(className),
+    );
+    (
+      [
+        ['role', 'alert'],
+        ['aria-live', 'assertive'],
+        ['aria-atomic', true],
+      ] as const
+    ).map(
+      ([attrName, attrVal]) =>
+        container.firstElementChild!.attributes.getNamedItem(attrName)!
+          .textContent === attrVal,
     );
   });
 
   it('should render without transition if animation is false', () => {
-    mount(
+    const { container } = render(
       <Toast animation={false}>
         <Toast.Header />
         <Toast.Body />
       </Toast>,
-    ).assertSingle(
-      'div.toast[className="toast show"][role="alert"][aria-live="assertive"][aria-atomic="true"]',
+    );
+
+    ['toast', 'show'].map((className) =>
+      container.firstElementChild!.classList.contains(className),
     );
   });
 
   it('should trigger the onClose event after clicking on the close button', () => {
     const onCloseSpy = sinon.spy();
 
-    mount(
+    const { container } = render(
       <Toast onClose={onCloseSpy}>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
       </Toast>,
-    )
-      .find('.toast-header')
-      .at(0)
-      .find('button')
-      .simulate('click');
-
+    );
+    fireEvent.click(
+      container.firstElementChild!.getElementsByTagName('button')[0],
+    );
     expect(onCloseSpy).to.have.been.calledOnce;
   });
 
   it('should trigger the onClose event after the autohide delay', () => {
     const onCloseSpy = sinon.spy();
-    mount(
+    render(
       <Toast onClose={onCloseSpy} delay={500} show autohide>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
@@ -70,7 +98,7 @@ describe('<Toast>', () => {
 
   it('should not trigger the onClose event if autohide is not set', () => {
     const onCloseSpy = sinon.spy();
-    mount(
+    render(
       <Toast onClose={onCloseSpy}>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
@@ -82,30 +110,26 @@ describe('<Toast>', () => {
 
   it('should clearTimeout after unmount', () => {
     const onCloseSpy = sinon.spy();
-    const wrapper = mount(
+    const { unmount } = render(
       <Toast delay={500} onClose={onCloseSpy} show autohide>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
       </Toast>,
     );
-    wrapper.unmount();
+    unmount();
     clock.tick(1000);
     expect(onCloseSpy).not.to.have.been.called;
   });
 
   it('should not reset autohide timer when element re-renders with same props', () => {
     const onCloseSpy = sinon.spy();
-    const wrapper = mount(
-      <Toast delay={500} onClose={onCloseSpy} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
+    const toast = getToast({ onCloseSpy });
+    const { rerender } = render(toast);
 
     clock.tick(250);
 
     // Trigger render with no props changes.
-    wrapper.setProps({});
+    rerender(toast);
 
     clock.tick(300);
     expect(onCloseSpy).to.have.been.calledOnce;
@@ -113,16 +137,11 @@ describe('<Toast>', () => {
 
   it('should not reset autohide timer when delay is changed', () => {
     const onCloseSpy = sinon.spy();
-    const wrapper = mount(
-      <Toast delay={500} onClose={onCloseSpy} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
+    const { rerender } = render(getToast({ delay: 500, onCloseSpy }));
 
     clock.tick(250);
 
-    wrapper.setProps({ delay: 10000 });
+    rerender(getToast({ delay: 10000, onCloseSpy }));
 
     clock.tick(300);
     expect(onCloseSpy).to.have.been.calledOnce;
@@ -131,16 +150,12 @@ describe('<Toast>', () => {
   it('should not reset autohide timer when onClosed is changed', () => {
     const onCloseSpy = sinon.spy();
     const onCloseSpy2 = sinon.spy();
-    const wrapper = mount(
-      <Toast delay={500} onClose={onCloseSpy} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
+
+    const { rerender } = render(getToast({ onCloseSpy }));
 
     clock.tick(250);
 
-    wrapper.setProps({ onClose: onCloseSpy2 });
+    rerender(getToast({ onCloseSpy: onCloseSpy2 }));
 
     clock.tick(300);
     expect(onCloseSpy).not.to.have.been.called;
@@ -149,16 +164,11 @@ describe('<Toast>', () => {
 
   it('should not call onClose if autohide is changed from true to false', () => {
     const onCloseSpy = sinon.spy();
-    const wrapper = mount(
-      <Toast delay={500} onClose={onCloseSpy} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
+    const { rerender } = render(getToast({ onCloseSpy, autohide: true }));
 
     clock.tick(250);
 
-    wrapper.setProps({ autohide: false });
+    rerender(getToast({ onCloseSpy, autohide: false }));
 
     clock.tick(300);
     expect(onCloseSpy).not.to.have.been.called;
@@ -166,27 +176,23 @@ describe('<Toast>', () => {
 
   it('should not call onClose if show is changed from true to false', () => {
     const onCloseSpy = sinon.spy();
-    const wrapper = mount(
-      <Toast delay={500} onClose={onCloseSpy} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
+    const { rerender } = render(getToast({ show: true, onCloseSpy }));
+    clock.tick(100);
 
-    clock.tick(250);
-
-    wrapper.setProps({ show: false });
+    rerender(getToast({ show: false, onCloseSpy }));
 
     clock.tick(300);
     expect(onCloseSpy).not.to.have.been.called;
   });
 
   it('should render with bsPrefix', () => {
-    mount(
+    const { container } = render(
       <Toast bsPrefix="my-toast">
         <Toast.Header />
         <Toast.Body />
       </Toast>,
-    ).assertSingle('div.my-toast');
+    );
+    container.firstElementChild!.tagName === 'div';
+    container.firstElementChild!.classList.contains('my-toast');
   });
 });
