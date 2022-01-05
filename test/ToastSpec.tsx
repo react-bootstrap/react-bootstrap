@@ -1,5 +1,4 @@
 import { fireEvent, render } from '@testing-library/react';
-import { mount } from 'enzyme';
 import sinon from 'sinon';
 
 import Toast from '../src/Toast';
@@ -10,7 +9,7 @@ const getToast = ({
   autohide = true,
   show = true,
 }) => (
-  <Toast delay={delay} onClose={onCloseSpy} show autohide={autohide}>
+  <Toast delay={delay} onClose={onCloseSpy} show={show} autohide={autohide}>
     <Toast.Header>header-content</Toast.Header>
     <Toast.Body>body-content</Toast.Body>
   </Toast>
