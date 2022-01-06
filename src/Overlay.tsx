@@ -179,10 +179,10 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
         }}
         transition={actualTransition}
       >
-        {(overlayProps, { arrowProps, placement, popper: popperObj, show }) => {
+        {(overlayProps, { arrowProps, popper: popperObj, show }) => {
           wrapRefs(overlayProps, arrowProps);
           // Need to get placement from popper object first, handling case when overlay is flipped using 'flip' prop
-          const updatedPlacement = popperObj?.placement || placement;
+          const updatedPlacement = popperObj?.placement;
           const popper = Object.assign(popperRef.current, {
             state: popperObj?.state,
             scheduleUpdate: popperObj?.update,
