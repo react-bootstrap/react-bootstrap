@@ -181,10 +181,12 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
       >
         {(overlayProps, { arrowProps, placement, popper: popperObj, show }) => {
           wrapRefs(overlayProps, arrowProps);
+          // Need to get placement from popper object first, handling case when overlay is flipped using 'flip' prop
+          const updatedPlacement = popperObj?.placement || placement;
           const popper = Object.assign(popperRef.current, {
             state: popperObj?.state,
             scheduleUpdate: popperObj?.update,
-            placement,
+            placement: updatedPlacement,
             outOfBoundaries:
               popperObj?.state?.modifiersData.hide?.isReferenceHidden || false,
           });
@@ -192,7 +194,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
           if (typeof overlay === 'function')
             return overlay({
               ...overlayProps,
-              placement,
+              placement: updatedPlacement,
               show,
               ...(!transition && show && { className: 'show' }),
               popper,
@@ -201,7 +203,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
 
           return React.cloneElement(overlay as React.ReactElement, {
             ...overlayProps,
-            placement,
+            placement: updatedPlacement,
             arrowProps,
             popper,
             className: classNames(
