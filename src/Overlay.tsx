@@ -181,6 +181,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
       >
         {(overlayProps, { arrowProps, popper: popperObj, show }) => {
           wrapRefs(overlayProps, arrowProps);
+          // Need to get placement from popper object, handling case when overlay is flipped using 'flip' prop
           const updatedPlacement = popperObj?.placement;
           const popper = Object.assign(popperRef.current, {
             state: popperObj?.state,
