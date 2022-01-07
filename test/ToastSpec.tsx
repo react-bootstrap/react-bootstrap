@@ -40,8 +40,10 @@ describe('<Toast>', () => {
         <Toast.Body />
       </Toast>,
     );
-    ['fade', 'toast', 'show'].map((className) =>
-      container.firstElementChild!.classList.contains(className),
+    ['fade', 'toast', 'show'].map(
+      (className) =>
+        container.firstElementChild!.classList.contains(className).should.be
+          .true,
     );
     (
       [
@@ -51,8 +53,10 @@ describe('<Toast>', () => {
       ] as const
     ).map(
       ([attrName, attrVal]) =>
-        container.firstElementChild!.attributes.getNamedItem(attrName)!
-          .textContent === attrVal,
+        (
+          container.firstElementChild!.attributes.getNamedItem(attrName)!
+            .textContent === `${attrVal}`
+        ).should.be.true,
     );
   });
 
@@ -64,8 +68,10 @@ describe('<Toast>', () => {
       </Toast>,
     );
 
-    ['toast', 'show'].map((className) =>
-      container.firstElementChild!.classList.contains(className),
+    ['toast', 'show'].map(
+      (className) =>
+        container.firstElementChild!.classList.contains(className).should.be
+          .true,
     );
   });
 
@@ -192,7 +198,7 @@ describe('<Toast>', () => {
         <Toast.Body />
       </Toast>,
     );
-    container.firstElementChild!.tagName === 'div';
+    container.firstElementChild!.tagName.toLowerCase().should.equal('div');
     container.firstElementChild!.classList.contains('my-toast');
   });
 });

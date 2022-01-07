@@ -9,8 +9,12 @@ describe('Toast.Header', () => {
         <strong>content</strong>
       </Toast.Header>,
     );
-    container.firstElementChild!.tagName === 'div';
-    container.firstElementChild!.firstElementChild!.tagName === 'strong';
+    container.firstElementChild!.tagName.toLowerCase().should.equal('div');
+
+    container
+      .firstElementChild!.firstElementChild!.tagName.toLowerCase()
+      .should.equal('strong');
+
     container.firstElementChild!.classList.contains('toast-header').should.be
       .true;
   });
