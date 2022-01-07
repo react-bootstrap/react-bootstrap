@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
+import sinon from 'sinon';
 
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
@@ -63,10 +63,10 @@ describe('<Tabs>', () => {
     secondTabButton.tagName.toLowerCase().should.equal('button');
   });
 
-  it('Should allow tab to have React components', () => {
-    const tabTitle = <strong className="special-tab">Tab 2</strong>;
+  it('Should allow tab title to have React components', () => {
+    const tabTitle = <strong className="special-tab">React Tab 2</strong>;
 
-    mount(
+    const { getByText } = render(
       <Tabs id="test" defaultActiveKey={2}>
         <Tab title="Tab 1" eventKey={1}>
           Tab 1 content
@@ -75,17 +75,18 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('NavLink button .special-tab');
+    );
+    getByText('React Tab 2').classList.contains('special-tab').should.be.true;
   });
 
-  it('Should call onSelect when tab is selected', (done) => {
-    function onSelect(key) {
-      assert.equal(key, '2');
-      done();
-    }
+  it('Should call onSelect when tab is selected', () => {
+    const onSelect = (key) => {
+      expect(key).to.equal('2');
+    };
+    const onSelectSpy = sinon.spy(onSelect);
 
-    mount(
-      <Tabs id="test" onSelect={onSelect} activeKey={1}>
+    const { getByText } = render(
+      <Tabs id="test" onSelect={onSelectSpy} activeKey={1}>
         <Tab title="Tab 1" eventKey="1">
           Tab 1 content
         </Tab>
@@ -93,9 +94,11 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    )
-      .find('NavLink[eventKey="2"] button')
-      .simulate('click');
+    );
+
+    getByText('Tab 2').click();
+    console.log(onSelectSpy);
+    expect(onSelectSpy).to.have.been.called;
   });
 
   it('Should have children with the correct DOM properties', () => {
