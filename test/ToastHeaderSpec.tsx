@@ -9,8 +9,7 @@ describe('Toast.Header', () => {
         <strong>content</strong>
       </Toast.Header>,
     );
-    (container.firstElementChild!.tagName.toLowerCase() === 'div').should.be
-      .true;
+    container.firstElementChild!.tagName.toLowerCase().should.equal('div');
 
     container
       .firstElementChild!.firstElementChild!.tagName.toLowerCase()
