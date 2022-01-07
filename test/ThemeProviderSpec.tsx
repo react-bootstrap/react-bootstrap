@@ -10,7 +10,9 @@ describe('<ThemeProvider>', () => {
     class Foo extends React.Component<{ bsPrefix: string }, any> {
       render() {
         return (
-          <p className={`${this.props.bsPrefix} ${this.props.bsPrefix}-bar`} />
+          <p className={`${this.props.bsPrefix} ${this.props.bsPrefix}-bar`}>
+            foo val
+          </p>
         );
       }
     },
@@ -18,18 +20,19 @@ describe('<ThemeProvider>', () => {
   );
 
   it('should use HOC value', () => {
-    const { container } = render(
+    const { getByText } = render(
       <div>
         <Foo />
       </div>,
     );
 
-    container.firstElementChild!.classList.contains(hocValue);
-    container.firstElementChild!.tagName === 'p';
+    const fooElem = getByText('foo val');
+    fooElem.classList.contains(hocValue).should.be.true;
+    fooElem.tagName.toLowerCase().should.equal('p');
   });
 
   it('should provide bsPrefix overrides', () => {
-    const { container } = render(
+    const { getByText } = render(
       <ThemeProvider prefixes={{ btn: 'my-btn', foo: 'global-foo' }}>
         <div>
           <Button variant="primary">My label</Button>
@@ -37,34 +40,37 @@ describe('<ThemeProvider>', () => {
         </div>
       </ThemeProvider>,
     );
-    container.firstElementChild!.tagName === 'button';
-    container.firstElementChild!.classList.contains('my-btn');
-    container.firstElementChild!.classList.contains('my-btn-primary');
+    const buttonElem = getByText('My label');
+    buttonElem.tagName.toLowerCase().should.equal('button');
+    buttonElem.classList.contains('my-btn').should.be.true;
+    buttonElem.classList.contains('my-btn-primary').should.be.true;
 
-    container.lastElementChild!.tagName === 'p';
-    container.lastElementChild!.classList.contains('global-foo');
+    const fooElem = getByText('foo val');
+    fooElem.tagName.toLowerCase().should.equal('p');
+    fooElem.classList.contains('global-foo').should.be.true;
   });
 
   it('should use prop bsPrefix first', () => {
-    const { container } = render(
+    const { getByText } = render(
       <ThemeProvider prefixes={{ foo: 'global-foo' }}>
         <div>
           <Foo bsPrefix="my-foo" />
         </div>
       </ThemeProvider>,
     );
-    container.firstElementChild!.tagName === 'p';
-    container.firstElementChild!.classList.contains('my-foo');
+    const fooElem = getByText('foo val');
+    fooElem.tagName.toLowerCase().should.equal('p');
+    fooElem.classList.contains('my-foo').should.be.true;
   });
 
   it('should forward ref', () => {
     let ref;
-    const { container } = render(
+    const { getByText } = render(
       <div>
         <Foo bsPrefix="my-foo" ref={(r) => (ref = r)} />
       </div>,
     );
     // If the ref of rendered element has the correct bsPrefix, it means that it has been forwarded correctly
-    container.firstElementChild!.className.includes(ref.props.bsPrefix);
+    getByText('foo val').className.includes(ref.props.bsPrefix).should.be.true;
   });
 });
