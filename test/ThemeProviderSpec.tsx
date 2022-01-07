@@ -1,33 +1,35 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 
+import { render } from '@testing-library/react';
 import ThemeProvider, { createBootstrapComponent } from '../src/ThemeProvider';
 import Button from '../src/Button';
 
 describe('<ThemeProvider>', () => {
+  const hocValue = 'foo';
   const Foo = createBootstrapComponent(
-    class Foo extends React.Component {
+    class Foo extends React.Component<{ bsPrefix: string }, any> {
       render() {
         return (
           <p className={`${this.props.bsPrefix} ${this.props.bsPrefix}-bar`} />
         );
       }
     },
-    'foo',
+    hocValue,
   );
 
   it('should use HOC value', () => {
-    const wrapper = mount(
+    const { container } = render(
       <div>
         <Foo />
       </div>,
     );
 
-    wrapper.assertSingle('p.foo');
+    container.firstElementChild!.classList.contains(hocValue);
+    container.firstElementChild!.tagName === 'p';
   });
 
   it('should provide bsPrefix overrides', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ThemeProvider prefixes={{ btn: 'my-btn', foo: 'global-foo' }}>
         <div>
           <Button variant="primary">My label</Button>
@@ -35,31 +37,34 @@ describe('<ThemeProvider>', () => {
         </div>
       </ThemeProvider>,
     );
+    container.firstElementChild!.tagName === 'button';
+    container.firstElementChild!.classList.contains('my-btn');
+    container.firstElementChild!.classList.contains('my-btn-primary');
 
-    wrapper.assertSingle('button.my-btn.my-btn-primary');
-    wrapper.assertSingle('p.global-foo');
+    container.lastElementChild!.tagName === 'p';
+    container.lastElementChild!.classList.contains('global-foo');
   });
 
   it('should use prop bsPrefix first', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ThemeProvider prefixes={{ foo: 'global-foo' }}>
         <div>
           <Foo bsPrefix="my-foo" />
         </div>
       </ThemeProvider>,
     );
-
-    wrapper.assertSingle('p.my-foo');
+    container.firstElementChild!.tagName === 'p';
+    container.firstElementChild!.classList.contains('my-foo');
   });
 
   it('should forward ref', () => {
     let ref;
-    const wrapper = mount(
+    const { container } = render(
       <div>
         <Foo bsPrefix="my-foo" ref={(r) => (ref = r)} />
       </div>,
     );
-
-    expect(ref).to.equal(wrapper.find('Foo').instance());
+    // If the ref of rendered element has the correct bsPrefix, it means that it has been forwarded correctly
+    container.firstElementChild!.className.includes(ref.props.bsPrefix);
   });
 });
