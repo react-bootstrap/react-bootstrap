@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { mount } from 'enzyme';
 
 import Table from '../src/Table';
 
