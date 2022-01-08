@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { act, cleanup, render } from '@testing-library/react';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
+import React from 'react';
 
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
@@ -81,7 +82,7 @@ describe('<Tabs>', () => {
 
   it('Should call onSelect when tab is selected', () => {
     const onSelect = (key) => {
-      expect(key).to.equal('2');
+      key.should.equal('2');
     };
     const onSelectSpy = sinon.spy(onSelect);
 
@@ -97,12 +98,11 @@ describe('<Tabs>', () => {
     );
 
     getByText('Tab 2').click();
-    console.log(onSelectSpy);
-    expect(onSelectSpy).to.have.been.called;
+    onSelectSpy.should.have.been.called;
   });
 
   it('Should have children with the correct DOM properties', () => {
-    const wrapper = mount(
+    const { getByText } = render(
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1" className="custom" eventKey={1}>
           Tab 1 content
@@ -112,15 +112,27 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     );
+    const firstTabContent = getByText('Tab 1 content');
+    const secondTabContent = getByText('Tab 2 content');
 
-    wrapper.assertSingle('button.nav-link.tcustom');
-    wrapper.assertNone('button.nav-link.custom');
-    wrapper.assertSingle('div.tab-pane.custom#test-tabpane-1');
+    const firstTabTitle = getByText('Tab 1');
+    const secondTabTitle = getByText('Tab 2');
+
+    firstTabContent.classList.contains('custom').should.be.true;
+    secondTabContent.classList.contains('tcustom').should.be.false;
+
+    firstTabTitle.classList.contains('custom').should.be.false;
+    secondTabTitle.classList.contains('tcustom').should.be.true;
   });
 
   it('Should pass variant to Nav', () => {
-    mount(
-      <Tabs id="test" variant="pills" defaultActiveKey={1} transition={false}>
+    const { getByTestId } = render(
+      <Tabs
+        data-testid="test"
+        variant="pills"
+        defaultActiveKey={1}
+        transition={false}
+      >
         <Tab title="Tab 1" eventKey={1}>
           Tab 1 content
         </Tab>
@@ -128,12 +140,17 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('ul.nav-pills');
+    );
+
+    getByTestId('test').classList.contains('nav-pills').should.be.true;
   });
 
   it('Should pass disabled to Nav', () => {
-    mount(
-      <Tabs id="test" defaultActiveKey={1}>
+    const onSelect = (e) => e;
+    const onSelectSpy = sinon.spy(onSelect);
+
+    const { getByText } = render(
+      <Tabs id="test" defaultActiveKey={1} onSelect={onSelectSpy}>
         <Tab title="Tab 1" eventKey={1}>
           Tab 1 content
         </Tab>
@@ -141,32 +158,24 @@ describe('<Tabs>', () => {
           Tab 2 content
         </Tab>
       </Tabs>,
-    ).assertSingle('button.nav-link.disabled');
+    );
+    const secondTabTitle = getByText('Tab 2');
+    secondTabTitle.classList.contains('disabled').should.be.true;
+
+    onSelectSpy.should.not.have.been.called;
   });
 
   it('Should not render a Tab without a title', () => {
     shouldWarn('Failed prop');
-    mount(
-      <Tabs id="test" defaultActiveKey={1}>
+    const { getByTestId } = render(
+      <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
         <Tab eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2} disabled>
           Tab 2 content
         </Tab>
       </Tabs>,
-    )
-      .find('button.nav-link')
-      .should.have.length(1);
-  });
-});
-
-describe('<Tab>', () => {
-  it('should throw error message on attempt to render', () => {
-    expect(() =>
-      shallow(
-        <Tab title="Tab 1" eventKey={1}>
-          Tab 1 content
-        </Tab>,
-      ),
-    ).to.throw();
+    );
+    const tabs = getByTestId('testid');
+    tabs.children.should.have.length(1);
   });
 });
