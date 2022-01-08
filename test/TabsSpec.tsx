@@ -1,5 +1,5 @@
-import { act, cleanup, render } from '@testing-library/react';
-import { mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
@@ -179,3 +179,15 @@ describe('<Tabs>', () => {
     tabs.children.should.have.length(1);
   });
 });
+
+// describe('<Tab>', () => {
+//   it('should throw error message on attempt to render', () => {
+//     expect(() =>
+//       render(
+//         <Tab title="Tab 1" eventKey={1}>
+//           Tab 1 content
+//         </Tab>,
+//       ),
+//     ).to.throw();
+//   });
+// });
