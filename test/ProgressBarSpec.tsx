@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { mount } from 'enzyme';
 
 import ProgressBar from '../src/ProgressBar';
 import { shouldWarn } from './helpers';
@@ -169,7 +168,7 @@ describe('<ProgressBar>', () => {
   });
 
   it('Should show stacked bars', () => {
-    const { container, getByTestId } = render(
+    const { getByTestId } = render(
       <ProgressBar data-testid="test">
         <ProgressBar key={1} now={50} />
         <ProgressBar key={2} now={30} />
