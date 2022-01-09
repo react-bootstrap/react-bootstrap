@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 
 import ProgressBar from '../src/ProgressBar';
@@ -5,39 +6,54 @@ import { shouldWarn } from './helpers';
 
 describe('<ProgressBar>', () => {
   it('Should output a progress bar with wrapper', () => {
-    mount(<ProgressBar min={0} max={10} now={0} />).assertSingle(
-      'div.progress .progress-bar[role="progressbar"]',
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={0} max={10} now={0} />,
     );
+    const progressElem = getByTestId('test');
+    const innerProgressElem = progressElem.firstElementChild!;
+
+    progressElem.classList.contains('progress').should.be.true;
+    innerProgressElem.classList.contains('progress-bar').should.be.true;
+    innerProgressElem.getAttribute('role')!.should.equal('progressbar');
   });
 
   ['success', 'warning', 'info', 'danger'].forEach((variant) => {
     it(`Should have the variant="${variant}" class`, () => {
-      mount(
-        <ProgressBar min={0} max={10} now={0} variant={variant} />,
-      ).assertSingle(`.progress-bar.bg-${variant}`);
+      const { getByTestId } = render(
+        <ProgressBar
+          data-testid="test"
+          min={0}
+          max={10}
+          now={0}
+          variant={variant}
+        />,
+      );
+      const innerProgressElem = getByTestId('test').firstElementChild!;
+      innerProgressElem.classList.contains(`bg-${variant}`);
     });
   });
 
   it('Should default to min:0, max:100', () => {
-    mount(<ProgressBar now={5} />).assertSingle(
-      '.progress-bar[aria-valuemin=0][aria-valuemax=100]',
-    );
+    const { getByTestId } = render(<ProgressBar data-testid="test" now={5} />);
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.getAttribute('aria-valuemin')!.should.equal('0');
+    innerProgressElem.getAttribute('aria-valuemax')!.should.equal('100');
   });
 
   it('Should have 0% computed width', () => {
-    const node = mount(<ProgressBar min={0} max={10} now={0} />)
-      .find('.progress-bar')
-      .getDOMNode();
-
-    assert.equal(node.style.width, '0%');
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={0} max={10} now={0} />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    (innerProgressElem as HTMLElement).style.width.should.equal('0%');
   });
 
   it('Should have 10% computed width', () => {
-    const node = mount(<ProgressBar min={0} max={10} now={1} />)
-      .find('.progress-bar')
-      .getDOMNode();
-
-    assert.equal(node.style.width, '10%');
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={0} max={10} now={1} />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    (innerProgressElem as HTMLElement).style.width.should.equal('10%');
   });
 
   it('Should have 100% computed width', () => {
