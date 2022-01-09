@@ -8,7 +8,7 @@ export interface ThemeContextValue {
 }
 
 export interface ThemeProviderProps extends Partial<ThemeContextValue> {
-  children: React.ElementType;
+  children: React.ReactNode;
 }
 
 const ThemeContext = React.createContext<ThemeContextValue>({ prefixes: {} });
@@ -50,11 +50,13 @@ function createBootstrapComponent(Component, opts) {
   // If it's a functional component make sure we don't break it with a ref
   const { prefix, forwardRefAs = isClassy ? 'ref' : 'innerRef' } = opts;
 
-  const Wrapped = React.forwardRef(({ ...props }, ref) => {
-    props[forwardRefAs] = ref;
-    const bsPrefix = useBootstrapPrefix((props as any).bsPrefix, prefix);
-    return <Component {...props} bsPrefix={bsPrefix} />;
-  });
+  const Wrapped = React.forwardRef<any, { bsPrefix?: string }>(
+    ({ ...props }, ref) => {
+      props[forwardRefAs] = ref;
+      const bsPrefix = useBootstrapPrefix((props as any).bsPrefix, prefix);
+      return <Component {...props} bsPrefix={bsPrefix} />;
+    },
+  );
 
   Wrapped.displayName = `Bootstrap(${Component.displayName || Component.name})`;
   return Wrapped;
