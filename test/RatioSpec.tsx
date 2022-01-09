@@ -23,7 +23,8 @@ describe('Ratio', () => {
       </Ratio>,
     );
     const ratioElem = getByTestId('test');
-    ratioElem.getAttribute('style')!.should.equal('--bs-aspect-ratio:50%;');
+    const styleAttr = ratioElem.getAttribute('style')!;
+    styleAttr.should.match(/--bs-aspect-ratio:[ ]*50%;/);
   });
 
   it('should support custom ratios using fraction for aspectRatio', () => {
@@ -33,7 +34,8 @@ describe('Ratio', () => {
       </Ratio>,
     );
     const ratioElem = getByTestId('test');
-    ratioElem.getAttribute('style')!.should.equal('--bs-aspect-ratio:50%;');
+    const styleAttr = ratioElem.getAttribute('style')!;
+    styleAttr.should.match(/--bs-aspect-ratio:[ ]*50%;/);
   });
 
   it('should support use 100% as custom ratio if aspectRatio is less than 0', () => {
@@ -43,7 +45,8 @@ describe('Ratio', () => {
       </Ratio>,
     );
     const ratioElem = getByTestId('test');
-    ratioElem.getAttribute('style')!.should.equal('--bs-aspect-ratio:100%;');
+    const styleAttr = ratioElem.getAttribute('style')!;
+    styleAttr.should.match(/--bs-aspect-ratio:[ ]*100%;/);
   });
 
   it('should support use 100% as custom ratio if aspectRatio is greater than 100', () => {
@@ -53,6 +56,7 @@ describe('Ratio', () => {
       </Ratio>,
     );
     const ratioElem = getByTestId('test');
-    ratioElem.getAttribute('style')!.should.equal('--bs-aspect-ratio:100%;');
+    const styleAttr = ratioElem.getAttribute('style')!;
+    styleAttr.should.match(/--bs-aspect-ratio:[ ]*100%;/);
   });
 });
