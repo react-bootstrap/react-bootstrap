@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { mount } from 'enzyme';
 
 import PageItem, { First } from '../src/PageItem';
 
