@@ -57,44 +57,48 @@ describe('<ProgressBar>', () => {
   });
 
   it('Should have 100% computed width', () => {
-    const node = mount(<ProgressBar min={0} max={10} now={10} />)
-      .find('.progress-bar')
-      .getDOMNode();
-
-    assert.equal(node.style.width, '100%');
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={0} max={10} now={10} />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    (innerProgressElem as HTMLElement).style.width.should.equal('100%');
   });
 
   it('Should have 50% computed width with non-zero min', () => {
-    const node = mount(<ProgressBar min={1} max={11} now={6} />)
-      .find('.progress-bar')
-      .getDOMNode();
-
-    assert.equal(node.style.width, '50%');
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={1} max={11} now={6} />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    (innerProgressElem as HTMLElement).style.width.should.equal('50%');
   });
 
   it('Should not have label', () => {
-    const node = mount(<ProgressBar min={0} max={10} now={5} />).getDOMNode();
-
-    assert.equal(node.textContent, '');
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={0} max={10} now={5} />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.textContent!.should.equal('');
   });
 
   it('Should have label', () => {
-    const node = mount(
+    const { getByTestId } = render(
       <ProgressBar
+        data-testid="test"
         min={0}
         max={10}
         now={5}
         variant="success"
         label="progress bar label"
       />,
-    ).getDOMNode();
-
-    assert.equal(node.textContent, 'progress bar label');
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.textContent!.should.equal('progress bar label');
   });
 
   it('Should have screen reader only label', () => {
-    const node = mount(
+    const { getByTestId } = render(
       <ProgressBar
+        data-testid="test"
         min={0}
         max={10}
         now={5}
@@ -102,98 +106,122 @@ describe('<ProgressBar>', () => {
         variant="success"
         label="progress bar label"
       />,
-    )
-      .find('.visually-hidden')
-      .getDOMNode();
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
 
-    assert.equal(node.textContent, 'progress bar label');
+    innerProgressElem.classList.contains('visually-hidden');
+    innerProgressElem.textContent!.should.equal('progress bar label');
   });
 
   it('Should have a label that is a React component', () => {
     const customLabel = <strong className="special-label">My label</strong>;
 
-    mount(
-      <ProgressBar min={0} max={10} now={5} label={customLabel} />,
-    ).assertSingle('.special-label');
+    const { getByTestId } = render(
+      <ProgressBar
+        data-testid="test"
+        min={0}
+        max={10}
+        now={5}
+        label={customLabel}
+      />,
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.firstElementChild!.classList.contains('special-label')
+      .should.be.true;
   });
 
   it('Should have screen reader only label that wraps a React component', () => {
     const customLabel = <strong className="special-label">My label</strong>;
 
-    mount(
+    const { getByTestId } = render(
       <ProgressBar
+        data-testid="test"
         min={0}
         max={10}
         now={5}
         label={customLabel}
         visuallyHidden
       />,
-    ).find('.visually-hidden .special-label');
+    );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.firstElementChild!.classList.contains('visually-hidden')
+      .should.be.true;
+    innerProgressElem.firstElementChild!.firstElementChild!.classList.contains(
+      'special-label',
+    ).should.be.true;
   });
 
   it('Should show striped bar', () => {
-    mount(<ProgressBar min={1} max={11} now={6} striped />).assertSingle(
-      '.progress-bar-striped',
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={1} max={11} now={6} striped />,
     );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.classList.contains('progress-bar-striped');
   });
 
   it('Should show animated striped bar', () => {
-    mount(<ProgressBar min={1} max={11} now={6} animated />).assertSingle(
-      '.progress-bar-striped.progress-bar-animated',
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test" min={1} max={11} now={6} animated />,
     );
+    const innerProgressElem = getByTestId('test').firstElementChild!;
+    innerProgressElem.classList.contains('progress-bar-striped');
+    innerProgressElem.classList.contains('progress-bar-animated');
   });
 
   it('Should show stacked bars', () => {
-    const node = mount(
-      <ProgressBar>
+    const { container, getByTestId } = render(
+      <ProgressBar data-testid="test">
         <ProgressBar key={1} now={50} />
         <ProgressBar key={2} now={30} />
       </ProgressBar>,
-    ).getDOMNode();
+    );
+    const innerProgressElem = getByTestId('test');
 
-    const bar1 = node.firstChild;
-    const bar2 = node.lastChild;
+    const bar1 = innerProgressElem.firstElementChild!;
+    const bar2 = innerProgressElem.lastElementChild!;
 
-    assert.ok(bar1.className.match(/\bprogress-bar\b/));
-    assert.equal(bar1.style.width, '50%');
+    bar1.classList.contains('progress-bar').should.be.true;
+    (bar1 as HTMLElement).style.width.should.equal('50%');
 
-    assert.ok(bar2.className.match(/\bprogress-bar\b/));
-    assert.equal(bar2.style.width, '30%');
+    bar2.classList.contains('progress-bar').should.be.true;
+    (bar2 as HTMLElement).style.width.should.equal('30%');
   });
 
   it('Should render animated and striped children in stacked bar too', () => {
-    const node = mount(
-      <ProgressBar>
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test">
         <ProgressBar animated key={1} now={50} />
         <ProgressBar striped key={2} now={30} />
       </ProgressBar>,
-    ).getDOMNode();
-    // const node = ReactDOM.findDOMNode(node);
-    const bar1 = node.firstChild;
-    const bar2 = node.lastChild;
+    );
+    const innerProgressElem = getByTestId('test');
 
-    assert.ok(bar1.className.match(/\bprogress-bar\b/));
-    assert.ok(bar1.className.match(/\bprogress-bar-animated\b/));
-    assert.ok(bar1.className.match(/\bprogress-bar-striped\b/));
+    const bar1 = innerProgressElem.firstElementChild!;
+    const bar2 = innerProgressElem.lastElementChild!;
 
-    assert.ok(bar2.className.match(/\bprogress-bar\b/));
-    assert.ok(bar2.className.match(/\bprogress-bar-striped\b/));
-    assert.notOk(bar2.className.match(/\bprogress-bar-animated\b/));
+    bar1.classList.contains('progress-bar').should.be.true;
+    bar1.classList.contains('progress-bar-striped').should.be.true;
+    bar1.classList.contains('progress-bar-animated').should.be.true;
+
+    bar2.classList.contains('progress-bar').should.be.true;
+    bar2.classList.contains('progress-bar-striped').should.be.true;
+    bar2.classList.contains('progress-bar-animated').should.be.false;
   });
 
   it('Should forward className and style to nested bars', () => {
-    const node = mount(
-      <ProgressBar>
+    const { getByTestId } = render(
+      <ProgressBar data-testid="test">
         <ProgressBar now={1} className="bar1" />
         <ProgressBar now={2} style={{ minWidth: 10 }} />
       </ProgressBar>,
-    ).getDOMNode();
+    );
+    const innerProgressElem = getByTestId('test');
 
-    const bar1 = node.firstChild;
-    const bar2 = node.lastChild;
+    const bar1 = innerProgressElem.firstElementChild!;
+    const bar2 = innerProgressElem.lastElementChild!;
 
-    assert.ok(bar1.className.match(/\bbar1\b/));
-    assert.equal(bar2.style.minWidth, '10px');
+    bar1.classList.contains('progress-bar').should.be.true;
+    (bar2 as HTMLElement).style.minWidth.should.equal('10px');
   });
 
   it('allows only ProgressBar in children', () => {
@@ -203,7 +231,7 @@ describe('<ProgressBar>', () => {
       return null;
     }
 
-    mount(
+    render(
       <ProgressBar>
         <ProgressBar key={1} />
         <NotProgressBar />
