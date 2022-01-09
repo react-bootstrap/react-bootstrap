@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-import { shallow } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
 import React from 'react';
 
@@ -97,7 +96,7 @@ describe('<Tabs>', () => {
       </Tabs>,
     );
 
-    getByText('Tab 2').click();
+    fireEvent.click(getByText('Tab 2'));
     onSelectSpy.should.have.been.called;
   });
 
