@@ -11,7 +11,9 @@ describe('<PageItem>', () => {
       firstElem.classList.contains('page-link').should.be.true;
 
       firstElem.firstElementChild!.tagName.toLowerCase().should.equal('span');
-      firstElem.firstElementChild!.ariaHidden.should.equal('true');
+      firstElem
+        .firstElementChild!.getAttribute('aria-hidden')!
+        .should.equal('true');
       firstElem.firstElementChild!.textContent!.should.equal('«');
     });
     it('should have expected custom innerText', () => {
