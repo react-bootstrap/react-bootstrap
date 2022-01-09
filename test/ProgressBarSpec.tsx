@@ -229,12 +229,16 @@ describe('<ProgressBar>', () => {
     function NotProgressBar() {
       return null;
     }
+    function NotProgressBar2() {
+      return <div>asdf</div>;
+    }
 
     render(
       <ProgressBar>
         <ProgressBar key={1} />
         <NotProgressBar />
         foo
+        <NotProgressBar2 />
         <ProgressBar key={2} />
       </ProgressBar>,
     );
