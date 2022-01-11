@@ -1,9 +1,8 @@
-import { mount } from 'enzyme';
 import * as React from 'react';
 import ModalManager from '@restart/ui/ModalManager';
 import { fireEvent, render } from '@testing-library/react';
-import Offcanvas from '../src/Offcanvas';
 import sinon from 'sinon';
+import Offcanvas from '../src/Offcanvas';
 
 describe('<Offcanvas>', () => {
   afterEach(() => {

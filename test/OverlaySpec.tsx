@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 
 import { render } from '@testing-library/react';
 import Overlay from '../src/Overlay';
