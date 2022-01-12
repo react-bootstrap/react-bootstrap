@@ -5,11 +5,6 @@ import sinon from 'sinon';
 import Offcanvas from '../src/Offcanvas';
 
 describe('<Offcanvas>', () => {
-  afterEach(() => {
-    // make sure the dangling portal elements get cleaned up
-    // document.body.innerHTML = '';
-  });
-
   it('Should render the modal content', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const noop = () => {};
