@@ -220,18 +220,6 @@ describe('<OverlayTrigger>', () => {
   });
 
   describe('trigger handlers', () => {
-    let mountPoint;
-
-    beforeEach(() => {
-      mountPoint = document.createElement('div');
-      document.body.appendChild(mountPoint);
-    });
-
-    afterEach(() => {
-      ReactDOM.unmountComponentAtNode(mountPoint);
-      document.body.removeChild(mountPoint);
-    });
-
     it('Should keep trigger handlers', (done) => {
       const { getByTestId } = render(
         <div>
