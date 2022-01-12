@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import DropdownItem from '../src/DropdownItem';
 import Nav from '../src/Nav';
@@ -7,34 +7,46 @@ import NavDropdown from '../src/NavDropdown';
 
 describe('<NavDropdown>', () => {
   it('Should render li when in nav', () => {
-    const wrapper = mount(
+    const { getByTestId } = render(
       <NavDropdown
         defaultShow
         title="Title"
         className="test-class"
         id="nav-test"
+        data-testid="test"
       >
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
     );
+    const navDropdownElem = getByTestId('test');
+    navDropdownElem.classList.contains('dropdown').should.be.true;
+    navDropdownElem.classList.contains('test-class').should.be.true;
 
-    wrapper.assertSingle('div.dropdown.test-class');
-
-    wrapper.assertSingle('a.nav-link').text().should.equal('Title');
+    navDropdownElem.firstElementChild!.classList.contains('nav-link');
+    navDropdownElem.firstElementChild!.textContent!.should.equal('Title');
   });
 
   it('renders active toggle', () => {
-    mount(
-      <NavDropdown defaultShow active title="Title" id="nav-test">
+    const { getByTestId } = render(
+      <NavDropdown
+        defaultShow
+        active
+        title="Title"
+        id="nav-test"
+        data-testid="test"
+      >
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
-    ).assertSingle('a.dropdown-toggle.active');
+    );
+    const navDropdownElem = getByTestId('test');
+    navDropdownElem.firstElementChild!.classList.contains('active').should.be
+      .true;
   });
 
   it('should handle child active state', () => {
-    const wrapper = mount(
+    render(
       <Nav defaultActiveKey="2">
         <NavDropdown defaultShow id="test-id" title="title">
           <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
@@ -44,56 +56,48 @@ describe('<NavDropdown>', () => {
       </Nav>,
     );
 
-    wrapper
-      .assertSingle('a.active')
-      .text()
-      .should.equal('DropdownItem 2 content');
+    document
+      .querySelector('a.active')!
+      .textContent!.should.equal('DropdownItem 2 content');
   });
 
   it('should pass the id to the NavLink element', () => {
-    const wrapper = mount(
-      <NavDropdown id="test-id" title="title">
+    const { getByTestId } = render(
+      <NavDropdown id="test-id" title="title" data-testid="test">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </NavDropdown>,
     );
-
-    wrapper.assertSingle('a#test-id');
+    getByTestId('test').firstElementChild!.id.should.equal('test-id');
   });
 
   it('should support as as prop', () => {
-    const wrapper = mount(
-      <NavDropdown as="li" id="test-id" title="title">
+    const { getByTestId } = render(
+      <NavDropdown as="li" id="test-id" title="title" data-testid="test">
         <DropdownItem eventKey="1">Item 1</DropdownItem>
       </NavDropdown>,
     );
-
-    wrapper.assertSingle('li.nav-item');
+    getByTestId('test').tagName.toLowerCase().should.equal('li');
   });
 
   it('passes menuVariant to dropdown menu', () => {
-    const wrapper = mount(
-      <NavDropdown title="blah" menuVariant="dark" id="test">
+    render(
+      <NavDropdown renderMenuOnMount title="blah" menuVariant="dark" id="test">
         <DropdownItem>Item 1</DropdownItem>
       </NavDropdown>,
     );
-
-    expect(wrapper.find('DropdownMenu').props()).to.have.property(
-      'variant',
-      'dark',
-    );
+    document.querySelector('.dropdown-menu-dark')!.should.exist;
   });
 
   it('sets data-bs-popper attribute on dropdown menu', () => {
-    const wrapper = mount(
+    render(
       <Navbar>
         <NavDropdown renderMenuOnMount id="test-id" title="title">
           <DropdownItem>Item 1</DropdownItem>
         </NavDropdown>
       </Navbar>,
     );
-
-    wrapper
-      .assertSingle('.dropdown-menu')
-      .assertSingle('[data-bs-popper="static"]');
+    document
+      .querySelectorAll('.dropdown-menu[data-bs-popper="static"]')
+      .length.should.equal(1);
   });
 });
