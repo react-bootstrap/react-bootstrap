@@ -1,89 +1,98 @@
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import DropdownItem from '../src/DropdownItem';
 import DropdownMenu, { getDropdownMenuPlacement } from '../src/DropdownMenu';
 
 describe('<Dropdown.Menu>', () => {
-  const simpleMenu = (
-    <DropdownMenu show>
-      <DropdownItem eventKey="1">Item 1</DropdownItem>
-      <DropdownItem eventKey="2">Item 2</DropdownItem>
-      <DropdownItem eventKey="3">Item 3</DropdownItem>
-      <DropdownItem eventKey="4">Item 4</DropdownItem>
-    </DropdownMenu>
-  );
-
   it('renders div with dropdown-menu class', () => {
-    mount(simpleMenu).assertSingle('div.dropdown-menu');
+    const { container } = render(
+      <DropdownMenu show>
+        <DropdownItem eventKey="1">Item 1</DropdownItem>
+        <DropdownItem eventKey="2">Item 2</DropdownItem>
+        <DropdownItem eventKey="3">Item 3</DropdownItem>
+        <DropdownItem eventKey="4">Item 4</DropdownItem>
+      </DropdownMenu>,
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu').should.be
+      .true;
   });
 
   it('Should pass props to dropdown', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu show className="new-fancy-class">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('div.new-fancy-class');
+    );
+
+    container.firstElementChild!.classList.contains('new-fancy-class').should.be
+      .true;
   });
 
   it('applies align="end"', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu show align="end">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-end');
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu-end').should
+      .be.true;
   });
 
   it('renders on mount with prop', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu renderOnMount>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('div.dropdown-menu');
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu').should.be
+      .true;
   });
 
   it('does not add any extra classes when align="start"', () => {
-    const wrapper = mount(
+    const { container } = render(
       <DropdownMenu show align="start">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).find('DropdownMenu');
+    );
 
-    expect(wrapper.getDOMNode().className).to.equal('dropdown-menu show');
-  });
-
-  it('adds right align class when align="end"', () => {
-    mount(
-      <DropdownMenu show align="end">
-        <DropdownItem>Item</DropdownItem>
-      </DropdownMenu>,
-    ).assertSingle('.dropdown-menu-end');
+    container.firstElementChild!.className.should.equal('dropdown-menu show');
   });
 
   it('adds responsive start alignment classes', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu show align={{ lg: 'start' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    )
-      .assertSingle('.dropdown-menu-end')
-      .assertSingle('.dropdown-menu-lg-start');
+    );
+    container.firstElementChild!.classList.contains('dropdown-menu-end').should
+      .be.true;
+    container.firstElementChild!.classList.contains('dropdown-menu-lg-start')
+      .should.be.true;
   });
 
   it('adds responsive end alignment classes', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu show align={{ lg: 'end' }}>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    )
-      .assertSingle('.dropdown-menu-lg-end')
-      .assertSingle('[data-bs-popper="static"]');
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu-lg-end')
+      .should.be.true;
+    container.querySelector('[data-bs-popper="static"]')!.should.exist;
   });
 
   it('should render variant', () => {
-    mount(
+    const { container } = render(
       <DropdownMenu show variant="dark">
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
-    ).assertSingle('.dropdown-menu.dropdown-menu-dark');
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu-dark').should
+      .be.true;
   });
 
   describe('getDropdownMenuPlacement', () => {
@@ -108,21 +117,15 @@ describe('<Dropdown.Menu>', () => {
     });
 
     it('should return bottom placement', () => {
-      getDropdownMenuPlacement(false, 'bottom', false).should.equal(
+      getDropdownMenuPlacement(false, 'down', false).should.equal(
         'bottom-start',
       );
-      getDropdownMenuPlacement(true, 'bottom', false).should.equal(
-        'bottom-end',
-      );
+      getDropdownMenuPlacement(true, 'down', false).should.equal('bottom-end');
     });
 
     it('should return bottom placement for RTL', () => {
-      getDropdownMenuPlacement(false, 'bottom', true).should.equal(
-        'bottom-end',
-      );
-      getDropdownMenuPlacement(true, 'bottom', true).should.equal(
-        'bottom-start',
-      );
+      getDropdownMenuPlacement(false, 'down', true).should.equal('bottom-end');
+      getDropdownMenuPlacement(true, 'down', true).should.equal('bottom-start');
     });
 
     it('should return start placement', () => {
@@ -139,32 +142,4 @@ describe('<Dropdown.Menu>', () => {
       getDropdownMenuPlacement(true, 'start', true).should.equal('right-end');
     });
   });
-
-  // it.only('warns about bad refs', () => {
-  //   class Parent extends React.Component {
-  //     componentDidCatch() {}
-
-  //     render() {
-  //       return this.props.children;
-  //     }
-  //   }
-
-  //   class Menu extends React.Component {
-  //     render() {
-  //       const { show: _, alignRight: _1, close: _2, ...props } = this.props;
-
-  //       return <div {...props} />;
-  //     }
-  //   }
-
-  //   expect(() =>
-  //     mount(
-  //       <Parent>
-  //         <DropdownMenu show as={Menu}>
-  //           <DropdownItem>Item</DropdownItem>
-  //         </DropdownMenu>
-  //       </Parent>,
-  //     ),
-  //   ).to.throw();
-  // });
 });

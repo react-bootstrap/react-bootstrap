@@ -1,4 +1,6 @@
-/* eslint no-new-func: 0 */
+/* eslint-disable no-new-func */
+import { expect } from 'chai';
+import sinon from 'sinon';
 import createChainedFunction from '../src/createChainedFunction';
 
 describe('createChainedFunction', () => {
@@ -28,7 +30,7 @@ describe('createChainedFunction', () => {
   });
 
   it('wraps multiple functions and invokes them in the order provided', () => {
-    const results = [];
+    const results: number[] = [];
     const func1 = () => results.push(1);
     const func2 = () => results.push(2);
     const func3 = () => results.push(3);
@@ -43,7 +45,7 @@ describe('createChainedFunction', () => {
       herpa: 'derpa',
     };
 
-    const func = (arg1, arg2) => {
+    const func = (arg1: any, arg2: any) => {
       arg1.should.equal(in1);
       arg2.should.equal(in2);
     };
