@@ -122,14 +122,16 @@ describe('<Nav>', () => {
   it('should call onSelect when a NavDropdown.Item is selected', () => {
     const onSelectSpy = sinon.spy();
 
-    render(
+    const { getByTestId } = render(
       <Nav onSelect={onSelectSpy}>
         <NavDropdown title="Dropdown" id="nav-dropdown-test" renderMenuOnMount>
-          <NavDropdown.Item eventKey={1}>Dropdown item</NavDropdown.Item>
+          <NavDropdown.Item eventKey={1} data-testid="test">
+            Dropdown item
+          </NavDropdown.Item>
         </NavDropdown>
       </Nav>,
     );
-    const dropdownItem = document.querySelector('a.dropdown-item');
+    const dropdownItem = getByTestId('test');
     fireEvent.click(dropdownItem!);
 
     onSelectSpy.should.have.been.calledOnce;

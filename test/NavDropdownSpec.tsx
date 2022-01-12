@@ -23,7 +23,8 @@ describe('<NavDropdown>', () => {
     navDropdownElem.classList.contains('dropdown').should.be.true;
     navDropdownElem.classList.contains('test-class').should.be.true;
 
-    navDropdownElem.firstElementChild!.classList.contains('nav-link');
+    navDropdownElem.firstElementChild!.classList.contains('nav-link').should.be
+      .true;
     navDropdownElem.firstElementChild!.textContent!.should.equal('Title');
   });
 
@@ -46,19 +47,19 @@ describe('<NavDropdown>', () => {
   });
 
   it('should handle child active state', () => {
-    render(
+    const { getByTestId } = render(
       <Nav defaultActiveKey="2">
         <NavDropdown defaultShow id="test-id" title="title">
           <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-          <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
+          <DropdownItem eventKey="2" data-testid="test">
+            DropdownItem 2 content
+          </DropdownItem>
           <DropdownItem eventKey="3">DropdownItem 3 content</DropdownItem>
         </NavDropdown>
       </Nav>,
     );
 
-    document
-      .querySelector('a.active')!
-      .textContent!.should.equal('DropdownItem 2 content');
+    getByTestId('test').textContent!.should.equal('DropdownItem 2 content');
   });
 
   it('should pass the id to the NavLink element', () => {
