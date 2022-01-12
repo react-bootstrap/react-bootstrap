@@ -1,5 +1,4 @@
 import { fireEvent, render } from '@testing-library/react';
-import { mount } from 'enzyme';
 import sinon from 'sinon';
 import CardHeader from '../src/CardHeader';
 import Nav from '../src/Nav';
