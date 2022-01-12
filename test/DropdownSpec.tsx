@@ -70,9 +70,6 @@ describe('<Dropdown>', () => {
     container.querySelector('[data-align="end"]')!.should.exist;
   });
 
-  // NOTE: The onClick event handler is invoked for both the Enter and Space
-  // keys as well since the component is a button. I cannot figure out how to
-  // get ReactTestUtils to simulate such though.
   it('toggles open/closed when clicked', () => {
     const { container, getByText, getByTestId } = render(simpleDropdown);
     const dropdown = container.firstElementChild!;
