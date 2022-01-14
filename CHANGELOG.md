@@ -1,3 +1,14 @@
+## [2.1.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.0...v2.1.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* prioritize poppers position prop in overlaytrigger ([#6175](https://github.com/react-bootstrap/react-bootstrap/issues/6175)) ([dc9a0d7](https://github.com/react-bootstrap/react-bootstrap/commit/dc9a0d7154193a333b58a3451349ce745ccd3246))
+
+
+
+
+
 # [2.1.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.0.4...v2.1.0) (2021-12-31)
 
 
