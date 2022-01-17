@@ -13,28 +13,28 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 
 import logo from '../assets/logo.svg';
 
-const Banner = styled(Navbar).attrs({
-  as: 'header',
-  variant: 'dark',
-  role: 'banner',
-})`
-  @import '../css/theme.scss';
+// const Banner = styled(Navbar).attrs({
+//   as: 'header',
+//   variant: 'dark',
+//   role: 'banner',
+// })`
+//   @import '../css/theme.scss';
 
-  composes: text-light justify-content-center from global;
-  min-height: 4rem;
-  background-color: $darker;
-  filter: none;
-  -webkit-filter: none;
+//   composes: text-light justify-content-center from global;
+//   min-height: 4rem;
+//   background-color: $darker;
+//   filter: none;
+//   -webkit-filter: none;
 
-  a {
-    margin-left: 1em;
-    color: $brand;
-  }
+//   a {
+//     margin-left: 1em;
+//     color: $brand;
+//   }
 
-  @include media-breakpoint-up(md) {
-    z-index: 1040;
-  }
-`;
+//   @include media-breakpoint-up(md) {
+//     z-index: 1040;
+//   }
+// `;
 
 const StyledNavbar = styled(Navbar).attrs({
   as: 'header',
@@ -99,16 +99,6 @@ const propTypes = {
 function NavMain({ activePage }) {
   return (
     <>
-      <Banner>
-        <span className="text-light">Black Lives Matter.</span>
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://support.eji.org/give/153413/#!/donation/checkout"
-        >
-          Support the Equal Justice Initiative.
-        </a>
-      </Banner>
       <StyledNavbar expand collapseOnSelect>
         <Container fluid>
           <SkipToContentLink href="#rb-docs-content" tabIndex="0">
