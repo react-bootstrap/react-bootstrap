@@ -251,7 +251,9 @@ describe('<Navbar>', () => {
         <Navbar.Collapse>
           <Nav as="div">
             <Nav.Link href="#home" onClick={navItemSpy}>
-              <span className="link-text">Option 1</span>
+              <span className="link-text" data-testid="test">
+                Option 1
+              </span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
