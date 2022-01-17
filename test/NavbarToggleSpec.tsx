@@ -4,7 +4,7 @@ import NavbarToggle from '../src/NavbarToggle';
 
 describe('<NavbarToggle>', () => {
   it('Should have button as default component', () => {
-    const { container } = render(<NavbarToggle />);
-    container.firstElementChild!.tagName.toLowerCase().should.equal('button');
+    const { getByTestId } = render(<NavbarToggle data-testid="test" />);
+    getByTestId('test').tagName.toLowerCase().should.equal('button');
   });
 });
