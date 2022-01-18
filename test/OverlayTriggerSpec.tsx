@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
