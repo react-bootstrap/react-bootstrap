@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const CarbonAds = () => {
   const ref = useRef();
@@ -14,6 +14,12 @@ const CarbonAds = () => {
 
       ref.current.appendChild(script);
     }
+
+    return () => {
+      while (ref.current?.firstChild) {
+        ref.current.removeChild(ref.current.firstChild);
+      }
+    };
   }, []);
 
   return <div ref={ref} />;
