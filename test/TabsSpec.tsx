@@ -177,6 +177,18 @@ describe('<Tabs>', () => {
     const tabs = getByTestId('testid');
     tabs.children.should.have.length(1);
   });
+
+  it('Should render TabPane with role="tabpanel"', () => {
+    const { getAllByRole } = render(
+      <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+      </Tabs>,
+    );
+
+    getAllByRole('tabpanel').should.have.length(1);
+  });
 });
 
 // describe('<Tab>', () => {
