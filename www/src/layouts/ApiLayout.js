@@ -10,7 +10,7 @@ const propTypes = {
 
 function ComponentsLayout({ children, ...props }) {
   return (
-    <Default {...props} grayscale={false}>
+    <Default {...props}>
       <Main location={props.location}>{children}</Main>
     </Default>
   );
