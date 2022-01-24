@@ -86,8 +86,8 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
 
       return (
         <Component
-          {...props}
           {...buttonProps}
+          {...props}
           ref={ref}
           className={classNames(
             className,
