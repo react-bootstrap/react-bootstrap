@@ -4,9 +4,9 @@ import AccordionButton from '../src/AccordionButton';
 
 describe('<AccordionButton>', () => {
   it('Should have button as default component', () => {
-    const { getByText } = render(<AccordionButton />);
-    getByText('AccordionButton').tagName.toLowerCase().should.equal('button');
-    getByText('AccordionButton').type.should.equal('button');
+    const { getByTestId } = render(<AccordionButton data-testid="test-accordion-button" />);
+    getByTestId('test-accordion-button').tagName.toLowerCase().should.equal('button');
+    getByTestId('test-accordion-button').type.should.equal('button');
   });
 
   it('Should allow rendering as different component', () => {
