@@ -1,34 +1,7 @@
-import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import sinon from 'sinon';
 
 import ToggleButtonGroup from '../src/ToggleButtonGroup';
-
-describe('ToggleButton', () => {
-  it('should forward refs to the label', () => {
-    const ref = React.createRef<HTMLLabelElement>();
-    render(
-      <div>
-        <ToggleButtonGroup.Button id="id" ref={ref} value={3}>
-          Option 3
-        </ToggleButtonGroup.Button>
-      </div>,
-    );
-
-    ref.current!.tagName.should.equal('LABEL');
-  });
-
-  it('should add an inputRef', () => {
-    const ref = React.createRef<HTMLInputElement>();
-    render(
-      <ToggleButtonGroup.Button id="id" inputRef={ref} value={3}>
-        Option 3
-      </ToggleButtonGroup.Button>,
-    );
-
-    ref.current!.tagName.should.equal('INPUT');
-  });
-});
 
 describe('ToggleButtonGroup', () => {
   it('should render checkboxes', () => {

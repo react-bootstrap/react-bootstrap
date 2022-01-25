@@ -112,6 +112,7 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
           ref={ref}
           className={classNames(className, disabled && 'disabled')}
           type={undefined}
+          role={undefined}
           as="label"
           htmlFor={id}
         />
