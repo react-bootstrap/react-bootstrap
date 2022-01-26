@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Simulate } from 'react-dom/test-utils';
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import sinon from 'sinon';
 
@@ -759,13 +760,29 @@ describe('<Carousel>', () => {
     }): void {
       const { target, startX, endX } = params;
 
-      fireEvent.touchStart(target, {
-        touches: [new Touch({ identifier: 1, target, clientX: startX })],
+      /**
+       * Below code is not working on Firefox due to Touch is not defined error.
+       * Maybe related to {@link https://bugzilla.mozilla.org/show_bug.cgi?id=1693172}?
+       *
+       * To avoid issue we are going to use {@link import('react-dom').Simulate} (used by enzyme internally)
+       */
+
+      // fireEvent.touchStart(target, {
+      //   touches: [new Touch({ identifier: 1, target, clientX: startX })],
+      // });
+      // fireEvent.touchMove(target, {
+      //   touches: [new Touch({ identifier: 1, target, clientX: endX })],
+      // });
+      // fireEvent.touchEnd(target);
+
+      Simulate.touchStart(target, {
+        touches: [{ identifier: 1, target, clientX: startX }] as never,
       });
-      fireEvent.touchMove(target, {
-        touches: [new Touch({ identifier: 1, target, clientX: endX })],
+      Simulate.touchMove(target, {
+        touches: [{ identifier: 1, target, clientX: endX }] as never,
       });
-      fireEvent.touchEnd(target);
+
+      Simulate.touchEnd(target);
     }
 
     it('should swipe right', () => {
@@ -799,12 +816,22 @@ describe('<Carousel>', () => {
     });
 
     it('should handle a custom multi-touch move event', () => {
-      fireEvent.touchMove(carousel, {
+      /** @see generateTouchEvents */
+
+      // fireEvent.touchMove(carousel, {
+      //   touches: [
+      //     new Touch({ identifier: 1, target: carousel, clientX: 0 }),
+      //     new Touch({ identifier: 1, target: carousel, clientX: 50 }),
+      //   ],
+      // });
+
+      Simulate.touchMove(carousel, {
         touches: [
-          new Touch({ identifier: 1, target: carousel, clientX: 0 }),
-          new Touch({ identifier: 1, target: carousel, clientX: 50 }),
-        ],
+          { identifier: 1, target: carousel, clientX: 0 },
+          { identifier: 1, target: carousel, clientX: 50 },
+        ] as never,
       });
+
       clock.tick(50);
       onTouchMoveSpy.should.have.been.calledOnce;
     });

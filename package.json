@@ -88,6 +88,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.0.0",
+    "@types/react-dom": "^16.9.14",
     "@types/sinon": "^10.0.6",
     "@types/sinon-chai": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
