@@ -10,13 +10,13 @@ function OffCanvasExample({ name, ...props }) {
         {name}
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
+        <OffcanvasHeader closeButton>
+          <OffcanvasTitle>Offcanvas</OffcanvasTitle>
+        </OffcanvasHeader>
+        <OffcanvasBody>
           Some text as placeholder. In real life you can have the elements you
           have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
+        </OffcanvasBody>
       </Offcanvas>
     </>
   );
