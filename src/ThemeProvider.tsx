@@ -36,7 +36,7 @@ export function useBootstrapPrefix(
   defaultPrefix: string,
 ): string {
   const { prefixes } = useContext(ThemeContext);
-  return prefix || prefixes[defaultPrefix] || defaultPrefix;
+  return prefix ?? prefixes[defaultPrefix] ?? defaultPrefix;
 }
 
 export function useIsRTL() {
