@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "types": ["mocha", "chai", "sinon", "sinon-chai"],
-    "rootDir": "..",
+    "rootDir": ".."
   },
   "include": ["../src", "."]
 }

@@ -7,6 +7,7 @@ import styled from 'astroturf';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
+import CarbonAds from '../components/CarbonAds';
 
 const MastHead = styled('div')`
   @import '../css/theme';
@@ -125,6 +126,9 @@ export default withLayout(
               </ButtonToolbar>
               <div className="text-muted mt-3">
                 Current version: {pkg.version}
+              </div>
+              <div className="py-3">
+                <CarbonAds />
               </div>
             </Content>
           </MastHead>
