@@ -1,3 +1,15 @@
+## [2.1.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.1...v2.1.2) (2022-01-31)
+
+
+### Bug Fixes
+
+* update @restart/ui to v1.0.1 ([#6220](https://github.com/react-bootstrap/react-bootstrap/issues/6220)) ([f46dee3](https://github.com/react-bootstrap/react-bootstrap/commit/f46dee30a37a56c039b4a96404e6adcb705fe514))
+* **ToggleButton:** remove `role="button"` from label ([#6204](https://github.com/react-bootstrap/react-bootstrap/issues/6204)) ([54bcbfa](https://github.com/react-bootstrap/react-bootstrap/commit/54bcbfa04dc5922e9ad449d54dc17812323ae334))
+
+
+
+
+
 ## [2.1.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.0...v2.1.1) (2022-01-14)
 
 
