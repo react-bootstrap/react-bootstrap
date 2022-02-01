@@ -1,5 +1,6 @@
-import { mount } from 'enzyme';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
 import Accordion from '../src/Accordion';
 import AccordionCollapse from '../src/AccordionCollapse';
@@ -9,119 +10,126 @@ import Nav from '../src/Nav';
 
 describe('<Accordion>', () => {
   it('should output a div', () => {
-    mount(<Accordion />).assertSingle('div');
+    const { getByTestId } = render(<Accordion data-testid="test" />);
+
+    getByTestId('test').tagName.toLowerCase().should.equal('div');
   });
 
   it('should render flush prop', () => {
-    mount(<Accordion flush />).assertSingle('.accordion.accordion-flush');
+    const { getByTestId } = render(<Accordion flush data-testid="test" />);
+
+    const node = getByTestId('test');
+    node.classList.contains('accordion').should.be.true;
+    node.classList.contains('accordion-flush').should.be.true;
   });
 
   it('should output a h1', () => {
-    const wrapper = mount(
+    const { getByTestId } = render(
       <Accordion>
         <Accordion.Button>Hi</Accordion.Button>
-        <AccordionCollapse as="h1" eventKey="0">
+        <AccordionCollapse as="h1" eventKey="0" data-testid="test-collapse">
           <span>hidden Data</span>
         </AccordionCollapse>
       </Accordion>,
     );
 
-    wrapper.find('AccordionCollapse').assertSingle('h1');
+    getByTestId('test-collapse').tagName.toLowerCase().should.equal('h1');
   });
 
   it('should only have second item collapsed', () => {
-    const wrapper = mount(
+    const { getByTestId } = render(
       <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
+        <Accordion.Item eventKey="1" data-testid="item-1">
           <Accordion.Header />
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
       </Accordion>,
     );
-    const collapses = wrapper.find('AccordionCollapse');
 
-    collapses.at(0).getDOMNode().className.should.include('show');
-    collapses.at(1).getDOMNode().className.should.include('collapse');
+    expect(getByTestId('item-0').querySelector('.show')).to.exist;
+    expect(getByTestId('item-1').querySelector('.collapse')).to.exist;
   });
 
-  it('should expand next item and collapse current item on click', () => {
+  it('should expand next item and collapse current item on click', async () => {
     const onClickSpy = sinon.spy();
-    const wrapper = mount(
+
+    const { getByTestId, getByText } = render(
       <Accordion>
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header onClick={onClickSpy} />
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header onClick={onClickSpy} />
+        <Accordion.Item eventKey="1" data-testid="item-1">
+          <Accordion.Header onClick={onClickSpy} data-testid="item-1-button">
+            Button item 1
+          </Accordion.Header>
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
       </Accordion>,
     );
-    wrapper.find('AccordionHeader').at(1).find('button').simulate('click');
+
+    fireEvent.click(getByText('Button item 1'));
 
     onClickSpy.should.be.calledOnce;
 
-    const collapses = wrapper.find('AccordionCollapse');
+    expect(getByTestId('item-0').querySelector('.collapse')).to.exist;
 
-    collapses.at(0).getDOMNode().className.should.include('collapse');
+    const item1 = getByTestId('item-1');
+    expect(item1.querySelector('.collapsing')).to.exist;
 
-    // Enzyme doesn't really provide support for async utilities
-    // on components, but in an ideal setup we should be testing for
-    // this className to be `show` after the collapsing animation is done
-    // (which is possible in `@testing-library` via `waitForElement`).
-    // https://testing-library.com/docs/dom-testing-library/api-async#waitforelement
-    collapses.at(1).getDOMNode().className.should.include('collapsing');
+    await waitFor(() => expect(item1.querySelector('.show')).to.exist, {
+      container: item1,
+    });
   });
 
-  it('should collapse current item on click', () => {
+  it('should collapse current item on click', async () => {
     const onClickSpy = sinon.spy();
-    const wrapper = mount(
+
+    const { getByTestId, getByText } = render(
       <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header onClick={onClickSpy} />
+        <Accordion.Item eventKey="0" data-testid="item-0">
+          <Accordion.Header onClick={onClickSpy}>
+            Button item 0
+          </Accordion.Header>
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
+        <Accordion.Item eventKey="1" data-testid="item-1">
           <Accordion.Header onClick={onClickSpy} />
           <Accordion.Body>body text</Accordion.Body>
         </Accordion.Item>
       </Accordion>,
     );
-    wrapper.find('AccordionHeader').at(0).find('button').simulate('click');
+
+    fireEvent.click(getByText('Button item 0'));
 
     onClickSpy.should.be.calledOnce;
 
-    const collapses = wrapper.find('AccordionCollapse');
+    expect(getByTestId('item-1').querySelector('.collapse')).to.exist;
 
-    collapses.at(0).getDOMNode().className.should.include('collapse');
-    collapses.at(1).getDOMNode().className.should.include('collapse');
-
-    // Enzyme doesn't really provide support for async utilities
-    // on components, but in an ideal setup we should be testing for
-    // this className to be `show` after the collapsing animation is done
-    // (which is possible in `@testing-library` via `waitForElement`).
-    // https://testing-library.com/docs/dom-testing-library/api-async#waitforelement
-    collapses.at(0).getDOMNode().className.should.include('collapsing');
+    const item0 = getByTestId('item-0');
+    expect(item0.querySelector('.collapsing')).to.exist;
+    await waitFor(() => expect(item0.querySelector('.show')).to.not.exist, {
+      container: item0,
+    });
   });
 
   // https://github.com/react-bootstrap/react-bootstrap/issues/4176
   it('Should not close accordion when child dropdown clicked', () => {
-    const wrapper = mount(
+    const { getByTestId, getByText } = render(
       <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
           <Accordion.Body>
             <Dropdown show>
               <Dropdown.Toggle id="dropdown-test">
-                Dropdown Button
+                Dropdown Toggle
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="#">Action</Dropdown.Item>
+                <Dropdown.Item href="#">Dropdown Action</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Accordion.Body>
@@ -129,24 +137,21 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    wrapper.find('a.dropdown-item').simulate('click');
+    fireEvent.click(getByText('Dropdown Action'));
 
-    wrapper
-      .find('AccordionCollapse')
-      .at(0)
-      .getDOMNode()
-      .className.should.include('show');
+    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
+      .exist;
   });
 
   it('Should not close accordion when child ListGroup clicked', () => {
-    const wrapper = mount(
+    const { getByTestId, getByText } = render(
       <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
           <Accordion.Body>
             <ListGroup defaultActiveKey="#link1">
               <ListGroup.Item action href="#link1">
-                Link 1
+                List Group Item 1
               </ListGroup.Item>
             </ListGroup>
           </Accordion.Body>
@@ -154,24 +159,21 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    wrapper.find('ListGroupItem').simulate('click');
+    fireEvent.click(getByText('List Group Item 1'));
 
-    wrapper
-      .find('AccordionCollapse')
-      .at(0)
-      .getDOMNode()
-      .className.should.include('show');
+    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
+      .exist;
   });
 
   it('Should not close accordion when child Nav clicked', () => {
-    const wrapper = mount(
+    const { getByTestId, getByText } = render(
       <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
           <Accordion.Body>
             <Nav activeKey="/home">
               <Nav.Item>
-                <Nav.Link href="#">Active</Nav.Link>
+                <Nav.Link href="#">Nav Link Item 0</Nav.Link>
               </Nav.Item>
             </Nav>
           </Accordion.Body>
@@ -179,13 +181,10 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    wrapper.find('NavLink').simulate('click');
+    fireEvent.click(getByText('Nav Link Item 0'));
 
-    wrapper
-      .find('AccordionCollapse')
-      .at(0)
-      .getDOMNode()
-      .className.should.include('show');
+    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
+      .exist;
   });
 
   it('should allow multiple items to stay open', () => {
