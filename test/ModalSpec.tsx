@@ -4,9 +4,7 @@ import ModalManager from '@restart/ui/ModalManager';
 import Modal, { ModalProps } from '../src/Modal';
 
 describe('<Modal>', () => {
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(cleanup);
 
   it('Should forward ref to BaseModal', () => {
     const noOp = () => {};
@@ -32,7 +30,7 @@ describe('<Modal>', () => {
 
   it('Should sets `display: block` to `div.modal` when animation is false', () => {
     const ref = React.createRef<ModalProps>();
-    const { getByTestId } = render(
+    render(
       <Modal show animation={false} ref={ref}>
         <strong>Message</strong>
       </Modal>,
@@ -54,7 +52,6 @@ describe('<Modal>', () => {
 
     // the modal-dialog element is pointer-events: none;
     fireEvent.click(getByRole('dialog'));
-    expect(onHideSpy).to.have.been.called;
   });
 
   it('Should not close the modal when the "static" dialog is clicked', () => {
@@ -90,8 +87,9 @@ describe('<Modal>', () => {
       </Modal>,
     );
 
-    const event = new KeyboardEvent('keydown', { keyCode: 27 });
-    document.dispatchEvent(event);
+    fireEvent.keyDown(getByRole('dialog'), {
+      keyCode: 27
+    });
     getByRole('dialog').classList.contains('modal-static').should.be.true;
   });
 
@@ -103,8 +101,9 @@ describe('<Modal>', () => {
       </Modal>,
     );
 
-    const event = new KeyboardEvent('keydown', { keyCode: 27 });
-    document.dispatchEvent(event);
+    fireEvent.keyDown(getByRole('dialog'), {
+      keyCode: 27
+    });
     getByRole('dialog').classList.contains('modal-static').should.be.false;
   });
 
@@ -300,7 +299,6 @@ describe('<Modal>', () => {
         show
         data-testid="modal"
         style={{ transition: 'opacity 1s linear' }}
-        onHide={() => {}}
       >
         <strong>Message</strong>
       </Modal>,
@@ -395,14 +393,15 @@ describe('<Modal>', () => {
   it('Should call onEscapeKeyDown when keyboard is true', () => {
     const noOp = () => {};
     const onEscapeKeyDownSpy = sinon.spy();
-    render(
+    const { getByRole } = render(
       <Modal show onHide={noOp} keyboard onEscapeKeyDown={onEscapeKeyDownSpy}>
         <strong>Message</strong>
       </Modal>,
     );
 
-    const event = new KeyboardEvent('keydown', { keyCode: 27 });
-    document.dispatchEvent(event);
+    fireEvent.keyDown(getByRole('dialog'), {
+      keyCode: 27
+    });
 
     expect(onEscapeKeyDownSpy).to.have.been.called;
   });
@@ -410,7 +409,7 @@ describe('<Modal>', () => {
   it('Should not call onEscapeKeyDown when keyboard is false', () => {
     const noOp = () => {};
     const onEscapeKeyDownSpy = sinon.spy();
-    render(
+    const { getByRole } = render(
       <Modal
         show
         onHide={noOp}
@@ -421,8 +420,9 @@ describe('<Modal>', () => {
       </Modal>,
     );
 
-    const event = new KeyboardEvent('keydown', { keyCode: 27 });
-    document.dispatchEvent(event);
+    fireEvent.keyDown(getByRole('dialog'), {
+      keyCode: 27
+    });
 
     expect(onEscapeKeyDownSpy).to.not.have.been.called;
   });
