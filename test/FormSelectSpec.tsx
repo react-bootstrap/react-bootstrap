@@ -14,8 +14,7 @@ describe('<FormSelect>', () => {
     element.classList.length.should.equal(2);
     element.classList.contains('my-control').should.be.true;
     element.classList.contains('form-select').should.be.true;
-    element.hasAttribute('name').should.be.true;
-    element.getAttribute('name')?.should.equal('bar');
+    element.getAttribute('name')!.should.equal('bar');
   });
 
   it('should render size correctly', () => {
@@ -34,8 +33,7 @@ describe('<FormSelect>', () => {
     );
 
     const element = getByTestId('test-id');
-    element.hasAttribute('size');
-    element.getAttribute('size')?.should.equal('3');
+    element.getAttribute('size')!.should.equal('3');
   });
 
   it('should render isValid correctly', () => {

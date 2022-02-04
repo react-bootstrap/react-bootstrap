@@ -24,10 +24,8 @@ describe('<FormControl>', () => {
     element.classList.length.should.equal(2);
     element.classList.contains('form-control').should.be.true;
     element.classList.contains('my-control').should.be.true;
-    element.hasAttribute('name').should.be.true;
-    element.getAttribute('name').should.equal('bar');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('text');
+    element.getAttribute('name')!.should.equal('bar');
+    element.getAttribute('type')!.should.equal('text');
   });
 
   it('should support textarea', () => {
@@ -53,9 +51,7 @@ describe('<FormControl>', () => {
       <FormControl type="color" data-testid="test-id" />,
     );
 
-    const element = getByTestId('test-id');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('color');
+    getByTestId('test-id').getAttribute('type')!.should.equal('color');
   });
 
   it('should use controlId for id', () => {
@@ -98,7 +94,7 @@ describe('<FormControl>', () => {
     }
 
     render(<Container />);
-    input.tagName.toUpperCase().should.to.equal('INPUT');
+    input.tagName.toLowerCase().should.to.equal('input');
   });
 
   it('should properly display size of FormControl', () => {
@@ -116,9 +112,7 @@ describe('<FormControl>', () => {
       <FormControl type="text" htmlSize={42} data-testid="test-id" />,
     );
 
-    const element = getByTestId('test-id');
-    element.hasAttribute('size').should.be.true;
-    element.getAttribute('size').should.equal('42');
+    getByTestId('test-id').getAttribute('size')!.should.equal('42');
   });
 
   it('Should have input as default component', () => {
@@ -136,9 +130,7 @@ describe('<FormControl>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
-    element.hasAttribute('value').should.be.true;
-    element.getAttribute('value').should.equal('10');
+    getByTestId('test-id').getAttribute('value')!.should.equal('10');
   });
 
   it('should support an array of strings as values', () => {
@@ -150,8 +142,6 @@ describe('<FormControl>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
-    element.hasAttribute('value').should.be.true;
-    element.getAttribute('value').should.equal('hello,world');
+    getByTestId('test-id').getAttribute('value')!.should.equal('hello,world');
   });
 });

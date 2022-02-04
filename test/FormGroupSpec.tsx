@@ -40,8 +40,7 @@ describe('<FormGroup>', () => {
     const element = getByTestId('test-id');
     const label = element.getElementsByTagName('label');
     label.length.should.equal(1);
-    label[0].hasAttribute('for').should.be.true;
-    label[0].getAttribute('for')?.should.equal('my-control');
+    label[0].getAttribute('for')!.should.equal('my-control');
 
     const input = element.getElementsByTagName('input');
     input.length.should.equal(1);

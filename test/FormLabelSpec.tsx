@@ -22,8 +22,7 @@ describe('<FormLabel>', () => {
     element.classList.contains('form-label').should.be.true;
     element.classList.contains('my-control').should.be.true;
     element.id.should.equal('foo');
-    element.hasAttribute('for');
-    element.getAttribute('for').should.equal('bar');
+    element.getAttribute('for')!.should.not.null;
   });
 
   it('should use controlId for htmlFor', () => {
@@ -34,8 +33,7 @@ describe('<FormLabel>', () => {
     );
 
     const element = getByTestId('test-id');
-    element.hasAttribute('for');
-    element.getAttribute('for').should.equal('foo');
+    element.getAttribute('for')!.should.equal('foo');
   });
 
   it('should render as a Col', () => {
@@ -64,8 +62,7 @@ describe('<FormLabel>', () => {
     element.classList.contains('form-label').should.be.true;
     element.classList.contains('col-form-label').should.be.true;
     element.classList.contains('col-sm-4').should.be.true;
-    element.hasAttribute('for');
-    element.getAttribute('for').should.equal('foo');
+    element.getAttribute('for')!.should.equal('foo');
   });
 
   it('should respect visuallyHidden', () => {
@@ -90,8 +87,7 @@ describe('<FormLabel>', () => {
     );
 
     const element = getByTestId('test-id');
-    element.hasAttribute('for');
-    element.getAttribute('for').should.equal('bar');
+    element.getAttribute('for')!.should.equal('bar');
   });
 
   it('should support ref forwarding', () => {
@@ -111,7 +107,7 @@ describe('<FormLabel>', () => {
     }
 
     render(<Container />);
-    input.tagName.toUpperCase().should.to.equal('LABEL');
+    input.tagName.toLowerCase().should.to.equal('label');
   });
 
   it('should support ref forwarding when rendered as a Col', () => {
@@ -132,7 +128,7 @@ describe('<FormLabel>', () => {
     }
 
     render(<Container />);
-    input.tagName.toUpperCase().should.to.equal('LABEL');
+    input.tagName.toLowerCase().should.to.equal('label');
   });
 
   it('accepts as prop', () => {

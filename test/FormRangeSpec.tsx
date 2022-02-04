@@ -19,10 +19,8 @@ describe('<FormRange>', () => {
     element.classList.length.should.equal(2);
     element.classList.contains('form-range').should.be.true;
     element.classList.contains('my-control').should.be.true;
-    element.hasAttribute('name').should.be.true;
-    element.getAttribute('name').should.equal('bar');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('range');
+    element.getAttribute('name')!.should.equal('bar');
+    element.getAttribute('type')!.should.equal('range');
   });
 
   it('should render controlId as id correctly', () => {

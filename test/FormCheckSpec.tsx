@@ -19,28 +19,24 @@ describe('<FormCheck>', () => {
 
     const element = getByTestId('test-id');
 
-    element.parentElement.classList.length.should.equal(2);
-    element.parentElement.classList.contains('form-check').should.be.true;
-    element.parentElement.classList.contains('my-checkbox').should.be.true;
+    element.parentElement!.classList.length.should.equal(2);
+    element.parentElement!.classList.contains('form-check').should.be.true;
+    element.parentElement!.classList.contains('my-checkbox').should.be.true;
 
     element.id.should.equal('foo');
     element.classList.length.should.equal(1);
     element.classList.contains('form-check-input').should.be.true;
-    element.hasAttribute('name').should.be.true;
-    element.getAttribute('name').should.equal('foo');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('checkbox');
-    element.hasAttribute('value').should.be.true;
-    element.getAttribute('value').should.equal('foo');
-    element.hasAttribute('checked');
+    element.getAttribute('name')!.should.equal('foo');
+    element.getAttribute('type')!.should.equal('checkbox');
+    element.getAttribute('value')!.should.equal('foo');
+    element.getAttribute('checked')!.should.equal('');
 
     const labels = container.getElementsByTagName('label');
     labels.length.should.equal(1);
     const label = labels[0];
     label.classList.length.should.equal(1);
     label.classList.contains('form-check-label').should.be.true;
-    label.hasAttribute('for').should.be.true;
-    label.getAttribute('for').should.equal('foo');
+    label.getAttribute('for')!.should.equal('foo');
     label.innerText.should.equal('My label');
   });
 
@@ -60,28 +56,24 @@ describe('<FormCheck>', () => {
 
     const element = getByTestId('test-id');
 
-    element.parentElement.classList.length.should.equal(2);
-    element.parentElement.classList.contains('form-check').should.be.true;
-    element.parentElement.classList.contains('my-radio').should.be.true;
+    element.parentElement!.classList.length.should.equal(2);
+    element.parentElement!.classList.contains('form-check').should.be.true;
+    element.parentElement!.classList.contains('my-radio').should.be.true;
 
     element.id.should.equal('foo');
     element.classList.length.should.equal(1);
     element.classList.contains('form-check-input').should.be.true;
-    element.hasAttribute('name').should.be.true;
-    element.getAttribute('name').should.equal('foo');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('radio');
-    element.hasAttribute('value').should.be.true;
-    element.getAttribute('value').should.equal('foo');
-    element.hasAttribute('checked');
+    element.getAttribute('name')!.should.equal('foo');
+    element.getAttribute('type')!.should.equal('radio');
+    element.getAttribute('value')!.should.equal('foo');
+    element.getAttribute('checked')!.should.equal('');
 
     const labels = container.getElementsByTagName('label');
     labels.length.should.equal(1);
     const label = labels[0];
     label.classList.length.should.equal(1);
     label.classList.contains('form-check-label').should.be.true;
-    label.hasAttribute('for').should.be.true;
-    label.getAttribute('for').should.equal('foo');
+    label.getAttribute('for')!.should.equal('foo');
     label.innerText.should.equal('My label');
   });
 
@@ -90,8 +82,8 @@ describe('<FormCheck>', () => {
       container: { firstElementChild: element },
     } = render(<FormCheck inline label="My label" />);
 
-    element.classList.length.should.equal(2);
-    element.classList.contains('form-check-inline').should.be.true;
+    element!.classList.length.should.equal(2);
+    element!.classList.contains('form-check-inline').should.be.true;
   });
 
   it('should support isValid', () => {
@@ -150,24 +142,22 @@ describe('<FormCheck>', () => {
 
     const element = getByTestId('test-id');
 
-    element.parentElement.classList.length.should.equal(2);
-    element.parentElement.classList.contains('form-check').should.be.true;
-    element.parentElement.classList.contains('form-switch').should.be.true;
+    element.parentElement!.classList.length.should.equal(2);
+    element.parentElement!.classList.contains('form-check').should.be.true;
+    element.parentElement!.classList.contains('form-switch').should.be.true;
 
     element.id.should.equal('switch-id');
     element.classList.length.should.equal(1);
     element.classList.contains('form-check-input').should.be.true;
     element.id.should.equal('switch-id');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('checkbox');
+    element.getAttribute('type')!.should.equal('checkbox');
 
     const labels = container.getElementsByTagName('label');
     labels.length.should.equal(1);
     const label = labels[0];
     label.classList.length.should.equal(1);
     label.classList.contains('form-check-label').should.be.true;
-    label.hasAttribute('for').should.be.true;
-    label.getAttribute('for').should.equal('switch-id');
+    label.getAttribute('for')!.should.equal('switch-id');
     label.innerText.should.equal('My label');
   });
 
@@ -178,24 +168,22 @@ describe('<FormCheck>', () => {
 
     const element = getByTestId('test-id');
 
-    element.parentElement.classList.length.should.equal(2);
-    element.parentElement.classList.contains('form-check').should.be.true;
-    element.parentElement.classList.contains('form-switch').should.be.true;
+    element.parentElement!.classList.length.should.equal(2);
+    element.parentElement!.classList.contains('form-check').should.be.true;
+    element.parentElement!.classList.contains('form-switch').should.be.true;
 
     element.id.should.equal('switch-id');
     element.classList.length.should.equal(1);
     element.classList.contains('form-check-input').should.be.true;
     element.id.should.equal('switch-id');
-    element.hasAttribute('type').should.be.true;
-    element.getAttribute('type').should.equal('checkbox');
+    element.getAttribute('type')!.should.equal('checkbox');
 
     const labels = container.getElementsByTagName('label');
     labels.length.should.equal(1);
     const label = labels[0];
     label.classList.length.should.equal(1);
     label.classList.contains('form-check-label').should.be.true;
-    label.hasAttribute('for').should.be.true;
-    label.getAttribute('for').should.equal('switch-id');
+    label.getAttribute('for')!.should.equal('switch-id');
     label.innerText.should.equal('My label');
   });
 
@@ -219,7 +207,7 @@ describe('<FormCheck>', () => {
 
     const feedbacks = container.getElementsByClassName('valid-feedback');
     feedbacks.length.should.equal(1);
-    feedbacks[0].textContent.should.equal('test');
+    feedbacks[0].textContent!.should.equal('test');
   });
 
   it('Should render invalid feedback properly', () => {
@@ -229,7 +217,7 @@ describe('<FormCheck>', () => {
 
     const feedbacks = container.getElementsByClassName('invalid-feedback');
     feedbacks.length.should.equal(1);
-    feedbacks[0].textContent.should.equal('test');
+    feedbacks[0].textContent!.should.equal('test');
   });
 
   it('Should render valid feedback tooltip properly', () => {
