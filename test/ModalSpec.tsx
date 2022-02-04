@@ -4,7 +4,6 @@ import ModalManager from '@restart/ui/ModalManager';
 import Modal, { ModalProps } from '../src/Modal';
 
 describe('<Modal>', () => {
-  afterEach(cleanup);
 
   it('Should forward ref to BaseModal', () => {
     const noOp = () => {};
