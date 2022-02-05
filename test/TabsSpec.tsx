@@ -13,7 +13,7 @@ const checkEventKey = (elem: Element, eventKey: string | number) =>
   elem.getAttribute('aria-controls') === `test-tabpane-${eventKey}`;
 
 describe('<Tabs>', () => {
-  it('Should show the correct tab and assign correct eventKeys', () => {
+  it('Should show the correct tab and assign correct eventKeys and fade transition', () => {
     const { getByText } = render(
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1 title" eventKey={1}>
@@ -31,6 +31,8 @@ describe('<Tabs>', () => {
     firstTabButton.tagName.toLowerCase().should.equal('button');
     firstTabButton.classList.contains('active').should.be.true;
     firstTabContent.classList.contains('active').should.be.true;
+    firstTabContent.classList.contains('fade').should.be.true;
+    firstTabContent.classList.contains('show').should.be.true;
 
     secondTabButton.classList.contains('active').should.be.false;
     secondTabButton.tagName.toLowerCase().should.equal('button');

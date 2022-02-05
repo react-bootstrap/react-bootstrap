@@ -47,7 +47,7 @@ const propTypes = {
    * @default {Fade}
    */
   transition: PropTypes.oneOfType([
-    PropTypes.oneOf([false]),
+    PropTypes.oneOf([true, false]),
     PropTypes.elementType,
   ]),
 
@@ -87,6 +87,7 @@ const propTypes = {
 const defaultProps = {
   variant: 'tabs',
   mountOnEnter: false,
+  transition: true,
   unmountOnExit: false,
 };
 
