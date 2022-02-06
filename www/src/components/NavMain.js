@@ -50,7 +50,7 @@ const StyledNavbar = styled(Navbar).attrs({
   @include media-breakpoint-up(md) {
     position: sticky;
     top: 0rem;
-    z-index: 1040;
+    z-index: 1081;
   }
 `;
 
