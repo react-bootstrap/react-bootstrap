@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import NoopTransition from '@restart/ui/NoopTransition';
 import SelectableContext from '@restart/ui/SelectableContext';
 import TabContext from '@restart/ui/TabContext';
 import { useTabPanel } from '@restart/ui/TabPanel';
 import { EventKey, TransitionCallbacks } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
+import Fade from './Fade';
 import getTabTransitionComponent from './getTabTransitionComponent';
 import {
   BsPrefixProps,
@@ -118,7 +118,7 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
           onExited,
           mountOnEnter,
           unmountOnExit,
-          transition: Transition = NoopTransition,
+          transition: Transition = Fade,
         },
       ] = useTabPanel({
         ...props,
