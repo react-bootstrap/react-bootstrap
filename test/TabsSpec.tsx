@@ -1,6 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
-import React from 'react';
 
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
@@ -188,6 +187,17 @@ describe('<Tabs>', () => {
     );
 
     getAllByRole('tabpanel').should.have.length(1);
+  });
+
+  it('should have fade animation by default', () => {
+    const { getByRole } = render(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+      </Tabs>,
+    );
+    getByRole('tabpanel').classList.contains('fade').should.be.true;
   });
 });
 
