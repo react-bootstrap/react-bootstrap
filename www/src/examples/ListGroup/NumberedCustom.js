@@ -7,7 +7,7 @@
       <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-    <Badge variant="primary" pill>
+    <Badge bg="primary" pill>
       14
     </Badge>
   </ListGroup.Item>
@@ -19,7 +19,7 @@
       <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-    <Badge variant="primary" pill>
+    <Badge bg="primary" pill>
       14
     </Badge>
   </ListGroup.Item>
@@ -31,7 +31,7 @@
       <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-    <Badge variant="primary" pill>
+    <Badge bg="primary" pill>
       14
     </Badge>
   </ListGroup.Item>
