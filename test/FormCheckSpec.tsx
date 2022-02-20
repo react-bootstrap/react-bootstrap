@@ -232,7 +232,7 @@ describe('<FormCheck>', () => {
 
     const feedbacks = container.getElementsByClassName('valid-tooltip');
     feedbacks.length.should.equal(1);
-    feedbacks[0].textContent.should.equal('test');
+    feedbacks[0].textContent!.should.equal('test');
   });
 
   it('Should render invalid feedback tooltip properly', () => {
@@ -247,6 +247,6 @@ describe('<FormCheck>', () => {
 
     const feedbacks = container.getElementsByClassName('invalid-tooltip');
     feedbacks.length.should.equal(1);
-    feedbacks[0].textContent.should.equal('test');
+    feedbacks[0].textContent!.should.equal('test');
   });
 });

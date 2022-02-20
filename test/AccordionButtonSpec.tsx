@@ -11,7 +11,8 @@ describe('<AccordionButton>', () => {
       .tagName.toLowerCase()
       .should.equal('button');
     getByTestId('test-accordion-button')
-      .type.should.equal('button');
+      .getAttribute('type')!
+      .should.equal('button');
   });
 
   it('Should allow rendering as different component', () => {

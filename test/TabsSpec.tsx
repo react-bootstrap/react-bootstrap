@@ -167,6 +167,7 @@ describe('<Tabs>', () => {
     shouldWarn('Failed prop');
     const { getByTestId } = render(
       <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
+        {/* @ts-ignore */}
         <Tab eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2} disabled>
           Tab 2 content

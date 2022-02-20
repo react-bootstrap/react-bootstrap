@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+import sinon from 'sinon';
 
 import Modal from '../src/Modal';
 
@@ -14,8 +15,8 @@ describe('Modal.Header', () => {
     getByTestId('test-modal').classList.contains('modal-header').should.be.true;
     getByTestId('test-modal').classList.contains('custom-class').should.be.true;
     getByTestId('test-modal')
-      .querySelector('strong')
-      .textContent.should.equal('Content');
+      .querySelector('strong')!
+      .textContent!.should.equal('Content');
   });
 
   it('has closeButton without a containing Modal and renders', () => {
@@ -24,7 +25,7 @@ describe('Modal.Header', () => {
     );
 
     getByTestId('test-modal').tagName.toLowerCase().should.equal('div');
-    getByTestId('test-modal').querySelector('button').should.exist;
+    getByTestId('test-modal').querySelector('button')!.should.exist;
   });
 
   it('Should trigger onHide when modal is closed', () => {
@@ -33,7 +34,7 @@ describe('Modal.Header', () => {
       <Modal.Header data-testid="test-modal" closeButton onHide={onHideSpy} />,
     );
 
-    fireEvent.click(getByTestId('test-modal').querySelector('button'));
+    fireEvent.click(getByTestId('test-modal').querySelector('button')!);
     onHideSpy.should.be.calledOnce;
   });
 
@@ -46,9 +47,9 @@ describe('Modal.Header', () => {
       />,
     );
 
-    getByTestId('test-modal').querySelector('button').should.exist;
-    getByTestId('test-modal')
-      .querySelector('button')
-      .classList.contains('btn-close-white').should.be.true;
+    const button = getByTestId('test-modal').querySelector('button')!;
+
+    button.should.exist;
+    button.classList.contains('btn-close-white').should.be.true;
   });
 });

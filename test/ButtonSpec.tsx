@@ -130,7 +130,7 @@ describe('<Button>', () => {
   });
 
   it('Should remove default variant', () => {
-    const { getByRole } = render(<Button variant={null}>Title</Button>);
+    const { getByRole } = render(<Button variant={null as any}>Title</Button>);
 
     getByRole('button').classList.contains('btn-primary').should.be.false;
   });

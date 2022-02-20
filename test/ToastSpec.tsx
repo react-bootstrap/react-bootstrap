@@ -87,7 +87,7 @@ describe('<Toast>', () => {
     fireEvent.click(
       container.firstElementChild!.getElementsByTagName('button')[0],
     );
-    expect(onCloseSpy).to.have.been.calledOnce;
+    onCloseSpy.should.have.been.calledOnce;
   });
 
   it('should trigger the onClose event after the autohide delay', () => {
@@ -99,7 +99,7 @@ describe('<Toast>', () => {
       </Toast>,
     );
     clock.tick(1000);
-    expect(onCloseSpy).to.have.been.calledOnce;
+    onCloseSpy.should.have.been.calledOnce;
   });
 
   it('should not trigger the onClose event if autohide is not set', () => {
@@ -111,7 +111,7 @@ describe('<Toast>', () => {
       </Toast>,
     );
     clock.tick(3000);
-    expect(onCloseSpy).not.to.have.been.called;
+    onCloseSpy.should.not.to.have.been.called;
   });
 
   it('should clearTimeout after unmount', () => {
@@ -124,7 +124,7 @@ describe('<Toast>', () => {
     );
     unmount();
     clock.tick(1000);
-    expect(onCloseSpy).not.to.have.been.called;
+    onCloseSpy.should.not.to.have.been.called;
   });
 
   it('should not reset autohide timer when element re-renders with same props', () => {
@@ -138,7 +138,7 @@ describe('<Toast>', () => {
     rerender(toast);
 
     clock.tick(300);
-    expect(onCloseSpy).to.have.been.calledOnce;
+    onCloseSpy.should.have.been.calledOnce;
   });
 
   it('should not reset autohide timer when delay is changed', () => {
@@ -150,7 +150,7 @@ describe('<Toast>', () => {
     rerender(getToast({ delay: 10000, onCloseSpy }));
 
     clock.tick(300);
-    expect(onCloseSpy).to.have.been.calledOnce;
+    onCloseSpy.should.have.been.calledOnce;
   });
 
   it('should not reset autohide timer when onClosed is changed', () => {
@@ -164,8 +164,8 @@ describe('<Toast>', () => {
     rerender(getToast({ onCloseSpy: onCloseSpy2 }));
 
     clock.tick(300);
-    expect(onCloseSpy).not.to.have.been.called;
-    expect(onCloseSpy2).to.have.been.calledOnce;
+    onCloseSpy.should.not.to.have.been.called;
+    onCloseSpy2.should.have.been.calledOnce;
   });
 
   it('should not call onClose if autohide is changed from true to false', () => {
@@ -177,7 +177,7 @@ describe('<Toast>', () => {
     rerender(getToast({ onCloseSpy, autohide: false }));
 
     clock.tick(300);
-    expect(onCloseSpy).not.to.have.been.called;
+    onCloseSpy.should.not.to.have.been.called;
   });
 
   it('should not call onClose if show is changed from true to false', () => {
@@ -188,7 +188,7 @@ describe('<Toast>', () => {
     rerender(getToast({ show: false, onCloseSpy }));
 
     clock.tick(300);
-    expect(onCloseSpy).not.to.have.been.called;
+    onCloseSpy.should.not.to.have.been.called;
   });
 
   it('should render with bsPrefix', () => {
