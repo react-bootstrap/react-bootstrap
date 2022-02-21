@@ -26,7 +26,7 @@ describe('Badge', () => {
 
     const badge = getByTestId('test');
     badge.tagName.toLowerCase().should.equal('a');
-    badge.getAttribute('href').should.equal('#');
+    badge.getAttribute('href')!.should.equal('#');
   });
 
   it('Should default to bg="primary"', () => {
@@ -49,7 +49,7 @@ describe('Badge', () => {
 
   it('Should not have bg class when bg=null', () => {
     const { getByTestId } = render(
-      <Badge bg={null} data-testid="test">
+      <Badge bg={null as any} data-testid="test">
         Message
       </Badge>,
     );

@@ -10,13 +10,12 @@ describe('Modal.Title', () => {
       </Modal.Title>,
     );
 
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('div');
-    getByTestId('test-modal').classList.contains('h4').should.be.true;
-    getByTestId('test-modal').classList.contains('modal-title').should.be.true;
-    getByTestId('test-modal').classList.contains('custom-class').should.be.true;
-    getByTestId('test-modal')
-      .querySelector('strong')
-      .textContent.should.equal('Content');
+    const elem = getByTestId('test-modal');
+    elem.tagName.toLowerCase().should.equal('div');
+    elem.classList.contains('h4').should.be.true;
+    elem.classList.contains('modal-title').should.be.true;
+    elem.classList.contains('custom-class').should.be.true;
+    elem.querySelector('strong')!.textContent!.should.equal('Content');
   });
 
   it('should allow custom elements instead of "div"', () => {

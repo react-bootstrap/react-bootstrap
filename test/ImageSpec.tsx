@@ -4,10 +4,7 @@ import Image from '../src/Image';
 
 describe('Image', () => {
   it('should be an image', () => {
-    
-    const { getByTestId } = render(
-      <Image data-testid="test-image" />,
-    );
+    const { getByTestId } = render(<Image data-testid="test-image" />);
     getByTestId('test-image').tagName.toLowerCase().should.equal('img');
   });
 
@@ -17,12 +14,11 @@ describe('Image', () => {
     );
     getByTestId('test-image').getAttribute('src')!.should.equal('image.jpg');
     getByTestId('test-image').getAttribute('alt')!.should.equal('this is alt');
-
   });
 
   it('should have correct class when fluid prop is set', () => {
     const { getByTestId } = render(<Image data-testid="test-image" fluid />);
-    getByTestId('test-image').classList.contains('img-fluid').should.be.true; 
+    getByTestId('test-image').classList.contains('img-fluid').should.be.true;
   });
 
   it('should not override class when rounded prop is set', () => {
@@ -31,7 +27,6 @@ describe('Image', () => {
     );
     getByTestId('test-image').classList.contains('img-fluid').should.be.true;
     getByTestId('test-image').classList.contains('rounded').should.be.true;
-
   });
 
   it('should have correct class when rounded prop is set', () => {
@@ -43,13 +38,15 @@ describe('Image', () => {
     const { getByTestId } = render(
       <Image data-testid="test-image" roundedCircle />,
     );
-    getByTestId('test-image').classList.contains('rounded-circle').should.be.true;
-
+    getByTestId('test-image').classList.contains('rounded-circle').should.be
+      .true;
   });
 
   it('should have correct class when thumbnail prop is set', () => {
-    const { getByTestId } = render(<Image data-testid="test-image" thumbnail />);
-    getByTestId('test-image').classList.contains('img-thumbnail').should.be.true;
-    
+    const { getByTestId } = render(
+      <Image data-testid="test-image" thumbnail />,
+    );
+    getByTestId('test-image').classList.contains('img-thumbnail').should.be
+      .true;
   });
 });

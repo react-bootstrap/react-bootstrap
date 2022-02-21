@@ -156,9 +156,9 @@ describe('<Breadcrumb.Item>', () => {
 
   it('Should be able to pass attributes to the li element', () => {
     const { getByRole } = render(
-      <Breadcrumb.Item foo="bar">Crumb</Breadcrumb.Item>,
+      <Breadcrumb.Item data-foo="bar">Crumb</Breadcrumb.Item>,
     );
 
-    expect(getByRole('listitem').getAttribute('foo')).to.be.equal('bar');
+    expect(getByRole('listitem').getAttribute('data-foo')).to.be.equal('bar');
   });
 });
