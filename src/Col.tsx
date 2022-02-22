@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useBootstrapBreakpoints } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type NumberAttr =
@@ -36,9 +36,9 @@ export interface ColProps
   lg?: ColSpec;
   xl?: ColSpec;
   xxl?: ColSpec;
+  [key: string]: any;
 }
 
-const DEVICE_SIZES = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 const colSize = PropTypes.oneOfType([
   PropTypes.bool,
   PropTypes.number,
@@ -124,11 +124,12 @@ export function useCol({
   ...props
 }: ColProps): [any, UseColMetadata] {
   bsPrefix = useBootstrapPrefix(bsPrefix, 'col');
+  const breakpoints = useBootstrapBreakpoints();
 
   const spans: string[] = [];
   const classes: string[] = [];
 
-  DEVICE_SIZES.forEach((brkPoint) => {
+  breakpoints.forEach((brkPoint) => {
     const propValue = props[brkPoint];
     delete props[brkPoint];
 

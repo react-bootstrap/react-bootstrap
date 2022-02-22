@@ -42,7 +42,8 @@ export type ResponsiveAlignProp =
   | { md: AlignDirection }
   | { lg: AlignDirection }
   | { xl: AlignDirection }
-  | { xxl: AlignDirection };
+  | { xxl: AlignDirection }
+  | Record<string, AlignDirection>;
 
 export type AlignType = AlignDirection | ResponsiveAlignProp;
 
@@ -55,6 +56,7 @@ export const alignPropType = PropTypes.oneOfType([
   PropTypes.shape({ lg: alignDirection }),
   PropTypes.shape({ xl: alignDirection }),
   PropTypes.shape({ xxl: alignDirection }),
+  PropTypes.object,
 ]);
 
 export type RootCloseEvent = 'click' | 'mousedown';

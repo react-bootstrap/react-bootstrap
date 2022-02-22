@@ -30,4 +30,9 @@ describe('<Container>', () => {
     const { getByText } = render(<Container>Container</Container>);
     getByText('Container').tagName.toLowerCase().should.equal('div');
   });
+
+  it('should allow custom breakpoints', () => {
+    const { getByText } = render(<Container fluid="custom">test</Container>);
+    getByText('test').classList.contains('container-custom').should.be.true;
+  });
 });

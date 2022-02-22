@@ -23,7 +23,7 @@ export interface NavbarProps
   extends BsPrefixProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   variant?: 'light' | 'dark';
-  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
   fixed?: 'top' | 'bottom';
   sticky?: 'top';
@@ -50,8 +50,7 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOf([false, true, 'sm', 'md', 'lg', 'xl', 'xxl'])
-    .isRequired,
+  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
