@@ -111,7 +111,7 @@ const gettingStarted = [
   'server-side-rendering',
 ];
 
-const layout = ['grid', 'stack'];
+const layout = ['breakpoints', 'grid', 'stack'];
 
 const forms = [
   'overview',

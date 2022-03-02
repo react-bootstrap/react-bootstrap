@@ -39,8 +39,28 @@ function ThemeProvider({
 }
 
 ThemeProvider.propTypes = {
+  /**
+   * An object mapping of Bootstrap component classes that
+   * map to a custom class.
+   *
+   * **Note: Changing prefixes is an escape hatch and generally
+   * shouldn't be used.**
+   *
+   * For more information, see [here](/getting-started/theming/#prefixing-components).
+   */
   prefixes: PropTypes.object,
+
+  /**
+   * An array of breakpoints that your application supports.
+   * Defaults to the standard Bootstrap breakpoints.
+   */
   breakpoints: PropTypes.arrayOf(PropTypes.string),
+
+  /**
+   * Indicates the directionality of the application's text.
+   *
+   * Use `rtl` to set text as "right to left".
+   */
   dir: PropTypes.string,
 } as any;
 
