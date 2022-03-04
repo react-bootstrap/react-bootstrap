@@ -8,13 +8,8 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface ContainerProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  fluid?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  fluid?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 }
-
-const containerSizes = PropTypes.oneOfType([
-  PropTypes.bool,
-  PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'xxl']),
-]);
 
 const propTypes = {
   /**
@@ -26,7 +21,7 @@ const propTypes = {
    * Allow the Container to fill all of its available horizontal space.
    * @type {(true|"sm"|"md"|"lg"|"xl"|"xxl")}
    */
-  fluid: containerSizes,
+  fluid: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   /**
    * You can use a custom element for this component
    */

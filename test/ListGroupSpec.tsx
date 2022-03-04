@@ -41,7 +41,7 @@ describe('<ListGroup>', () => {
     listGroup.classList.contains('list-group-horizontal').should.be.true;
   });
 
-  (['sm', 'md', 'lg', 'xl'] as const).forEach((breakpoint) => {
+  (['sm', 'md', 'lg', 'xl', 'xxl', 'custom'] as const).forEach((breakpoint) => {
     it(`accepts responsive horizontal ${breakpoint} breakpoint`, () => {
       const { getByTestId } = render(
         <ListGroup horizontal={breakpoint} data-testid="test" />,

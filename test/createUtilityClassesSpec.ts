@@ -61,4 +61,16 @@ describe('createUtilityClassName', () => {
       'text-xl-start',
     ]);
   });
+
+  it('should handle custom breakpoints', () => {
+    const classList = createUtilityClasses(
+      {
+        gap: { xs: 2, custom: 3 },
+      },
+      ['xs', 'custom'],
+    );
+
+    classList.length.should.equal(2);
+    classList.should.include.all.members(['gap-2', 'gap-custom-3']);
+  });
 });

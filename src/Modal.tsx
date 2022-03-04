@@ -38,6 +38,7 @@ export interface ModalProps
   size?: 'sm' | 'lg' | 'xl';
   fullscreen?:
     | true
+    | string
     | 'sm-down'
     | 'md-down'
     | 'lg-down'

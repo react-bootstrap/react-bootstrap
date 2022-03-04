@@ -183,6 +183,17 @@ describe('<Modal>', () => {
       .be.true;
   });
 
+  it('Should allow custom breakpoints for fullscreen', () => {
+    const { getByTestId } = render(
+      <Modal show fullscreen="custom-down" data-testid="modal">
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    getByTestId('modal').classList.contains('modal-fullscreen-custom-down')
+      .should.be.true;
+  });
+
   it('Should pass centered to the dialog', () => {
     const { getByTestId } = render(
       <Modal show centered data-testid="modal">

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/aria-role */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 
 import {
@@ -20,6 +21,7 @@ import {
   Row,
   Dropdown,
   DropdownButton,
+  DropdownMenu,
   Fade,
   Figure,
   Form,
@@ -43,9 +45,11 @@ import {
   Table,
   Tabs,
   Tab,
+  ThemeProvider,
   ToggleButtonGroup,
   ToggleButton,
   Toast,
+  ModalDialog,
 } from '../src';
 import BootstrapModalManager from '../src/BootstrapModalManager';
 
@@ -55,7 +59,6 @@ const style: React.CSSProperties = {
   color: 'red',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const RefTest = () => {
   const carouselRef = React.useRef<CarouselRef>();
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -81,7 +84,6 @@ const FunctionComponent: React.FC = () => <div>abc</div>;
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
     <Fade>
@@ -1036,4 +1038,32 @@ const MegaComponent = () => (
     <Button as="img" src="bla" />
     */}
   </>
+);
+
+const CustomBreakpoints = () => (
+  <ThemeProvider
+    dir="rtl"
+    breakpoints={['customBreakpoint', 'sm']}
+    prefixes={{ a: 'a' }}
+  >
+    <Container fluid="custom" />
+    <Col customBreakpoint="2" />
+    <Dropdown align={{ custom: 'start' }}>
+      <div />
+    </Dropdown>
+    <DropdownButton align={{ custom: 'start' }} title="title">
+      <div />
+    </DropdownButton>
+    <DropdownMenu align={{ custom: 'start' }}>
+      <div />
+    </DropdownMenu>
+    <ListGroup horizontal="custom" />
+    <Modal fullscreen="custom" />
+    <ModalDialog fullscreen="custom" />
+    <Navbar expand="custom" />
+    <Row customBreakpoint="auto" />
+    <SplitButton align={{ custom: 'start' }} title="title">
+      <div />
+    </SplitButton>
+  </ThemeProvider>
 );

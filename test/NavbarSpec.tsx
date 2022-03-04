@@ -277,6 +277,14 @@ describe('<Navbar>', () => {
     getByTestId('test').classList.contains('navbar-expand-sm').should.be.true;
   });
 
+  it('should allow custom breakpoints for expand', () => {
+    const { getByTestId } = render(
+      <Navbar expand="custom" data-testid="test" />,
+    );
+    getByTestId('test').classList.contains('navbar-expand-custom').should.be
+      .true;
+  });
+
   it('Should render correctly when bg is set', () => {
     const { getByTestId } = render(<Navbar bg="light" data-testid="test" />);
     getByTestId('test').classList.contains('bg-light').should.be.true;
