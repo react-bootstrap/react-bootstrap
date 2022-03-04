@@ -1,3 +1,21 @@
+# [2.2.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.2...v2.2.0) (2022-03-04)
+
+
+### Bug Fixes
+
+* **TabPane:** use Fade for default transition ([#6235](https://github.com/react-bootstrap/react-bootstrap/issues/6235)) ([3e0b4d3](https://github.com/react-bootstrap/react-bootstrap/commit/3e0b4d3719e74d9680d44ec172b40f49947338b4))
+* added missing ModalHeader exports to index ([#6228](https://github.com/react-bootstrap/react-bootstrap/issues/6228)) ([3332da9](https://github.com/react-bootstrap/react-bootstrap/commit/3332da98a33cb0d60327339f7498b38722dae1aa))
+
+
+### Features
+
+* support custom breakpoints ([#6253](https://github.com/react-bootstrap/react-bootstrap/issues/6253)) ([0910a21](https://github.com/react-bootstrap/react-bootstrap/commit/0910a21b7d35eb859ca9e160c4492ef41a33810e))
+* **Tabs:** support passing custom attributes to Tab ([#5879](https://github.com/react-bootstrap/react-bootstrap/issues/5879)) ([6afa734](https://github.com/react-bootstrap/react-bootstrap/commit/6afa734cf29027cda36e188181762dca88fc48da))
+
+
+
+
+
 ## [2.1.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.1...v2.1.2) (2022-01-31)
 
 
