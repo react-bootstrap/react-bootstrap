@@ -20,6 +20,7 @@ export interface ToastProps
   autohide?: boolean;
   delay?: number;
   onClose?: (e?: React.MouseEvent | React.KeyboardEvent) => void;
+  onHidden?: () => void;
   show?: boolean;
   transition?: TransitionComponent;
   bg?: Variant;
@@ -52,6 +53,11 @@ const propTypes = {
   onClose: PropTypes.func,
 
   /**
+   * A Callback fired after the Toast finishes transitioning out
+   */
+  onHidden: PropTypes.func,
+
+  /**
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
@@ -81,6 +87,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
         delay = 5000,
         autohide = false,
         onClose,
+        onHidden,
         bg,
         ...props
       },
@@ -140,7 +147,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
       return (
         <ToastContext.Provider value={toastContext}>
           {hasAnimation && Transition ? (
-            <Transition in={show} unmountOnExit>
+            <Transition in={show} onExited={onHidden} unmountOnExit>
               {toast}
             </Transition>
           ) : (
