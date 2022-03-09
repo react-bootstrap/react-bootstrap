@@ -4,27 +4,26 @@ import { mount } from 'enzyme';
 import { render } from '@testing-library/react';
 import { expect } from 'chai';
 
+import { Offset } from '@restart/ui/usePopper';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
 import useOverlayOffset from '../src/useOverlayOffset';
-import OverlayTrigger from '../src/OverlayTrigger';
-import Button from '../src/Button';
-import Overlay from '../src/Overlay';
 
 describe('useOverlayOffset', () => {
-  const Wrapper = React.forwardRef<any, React.PropsWithChildren<unknown>>(
-    (props, outerRef) => {
-      const [ref, modifiers] = useOverlayOffset();
+  const Wrapper = React.forwardRef<
+    any,
+    React.PropsWithChildren<{ customOffset?: Offset }>
+  >((props, outerRef) => {
+    const [ref, modifiers] = useOverlayOffset(props.customOffset);
 
-      useImperativeHandle(outerRef, () => ({
-        modifiers,
-      }));
+    useImperativeHandle(outerRef, () => ({
+      modifiers,
+    }));
 
-      return React.cloneElement(props.children as React.ReactElement, {
-        ref,
-      });
-    },
-  );
+    return React.cloneElement(props.children as React.ReactElement, {
+      ref,
+    });
+  });
 
   it('should have offset of [0s, 8] for Popovers', () => {
     const ref = React.createRef<any>();
@@ -39,13 +38,13 @@ describe('useOverlayOffset', () => {
     expect(offset).to.eql([0, 8]);
   });
 
-  it('should apply offset when rendering Popover inside Overlay', () => {
+  it('should apply custom offset', () => {
     const ref = React.createRef<any>();
 
     render(
-      <Overlay show transition={false} ref={ref} target={ref.current}>
-        {({ ...props }) => <div {...props}>Simple tooltip</div>}
-      </Overlay>,
+      <Wrapper ref={ref} customOffset={[200, 200]}>
+        <Popover id="test-popover" />
+      </Wrapper>,
     );
 
     const offset = ref.current.modifiers[0].options.offset();
