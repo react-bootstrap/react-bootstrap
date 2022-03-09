@@ -408,17 +408,16 @@ describe('<Carousel>', () => {
     it('should go through the items given the specified intervals', () => {
       const onSelectSpy = sinon.spy();
       render(
-        <Carousel interval={1000} onSelect={onSelectSpy}>
-          <Carousel.Item interval={100}>Item 1 content</Carousel.Item>
+        <Carousel interval={5000} onSelect={onSelectSpy}>
+          <Carousel.Item interval={1000}>Item 1 content</Carousel.Item>
           <Carousel.Item>Item 2 content</Carousel.Item>
         </Carousel>,
       );
 
       // should be long enough to handle false positive issues
       // but short enough to not trigger auto-play to occur twice
-      // (since the interval for the second item should be `1000`)
-      clock.tick(200);
-
+      // (since the interval for the second item should be `5000`)
+      clock.tick(1100);
       onSelectSpy.should.have.been.calledOnceWith(1);
     });
 
