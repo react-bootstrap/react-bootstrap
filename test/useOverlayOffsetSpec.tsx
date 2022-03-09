@@ -7,6 +7,9 @@ import { expect } from 'chai';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
 import useOverlayOffset from '../src/useOverlayOffset';
+import OverlayTrigger from '../src/OverlayTrigger';
+import Button from '../src/Button';
+import Overlay from '../src/Overlay';
 
 describe('useOverlayOffset', () => {
   const Wrapper = React.forwardRef<any, React.PropsWithChildren<unknown>>(
@@ -34,6 +37,19 @@ describe('useOverlayOffset', () => {
 
     const offset = ref.current.modifiers[0].options.offset();
     expect(offset).to.eql([0, 8]);
+  });
+
+  it('should apply offset when rendering Popover inside Overlay', () => {
+    const ref = React.createRef<any>();
+
+    render(
+      <Overlay show transition={false} ref={ref} target={ref.current}>
+        {({ ...props }) => <div {...props}>Simple tooltip</div>}
+      </Overlay>,
+    );
+
+    const offset = ref.current.modifiers[0].options.offset();
+    expect(offset).to.eql([200, 200]);
   });
 
   it('should have offset of [0, 0] for Tooltips', () => {
