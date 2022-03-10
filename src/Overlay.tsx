@@ -163,7 +163,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     outerRef,
   ) => {
     const popperRef = useRef({});
-    const [ref, modifiers] = useOverlayOffset();
+    const [ref, modifiers] = useOverlayOffset(outerProps.offset);
     const mergedRef = useMergedRefs(outerRef, ref);
 
     const actualTransition =
