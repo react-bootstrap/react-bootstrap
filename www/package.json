@@ -63,7 +63,7 @@
     "import-sort-parser-4catalyzer": "^4.0.1",
     "import-sort-style-module": "^6.0.0",
     "lodash": "^4.17.21",
-    "prismjs": "^1.26.0",
+    "prismjs": "^1.27.0",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-docgen": "^5.4.0",
