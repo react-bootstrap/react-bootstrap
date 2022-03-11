@@ -71,7 +71,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.4.1",
     "remark-slug": "^6.1.0",
-    "sass": "^1.49.7",
+    "sass": "^1.49.9",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.11"
   }
