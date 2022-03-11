@@ -1,3 +1,15 @@
+## [2.2.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.0...v2.2.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* **Carousel:** fix issue where changing `activeIndex` won't work ([#6265](https://github.com/react-bootstrap/react-bootstrap/issues/6265)) ([0c7c5f7](https://github.com/react-bootstrap/react-bootstrap/commit/0c7c5f72847f7c8099742614dcedd88c66346082))
+* **useOverlayOffset:** use offset prop in useOverlayOffset ([#6264](https://github.com/react-bootstrap/react-bootstrap/issues/6264)) ([e338818](https://github.com/react-bootstrap/react-bootstrap/commit/e338818d975fcc68e0845f1ccc4ce5da381e098a))
+
+
+
+
+
 # [2.2.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.2...v2.2.0) (2022-03-04)
 
 
