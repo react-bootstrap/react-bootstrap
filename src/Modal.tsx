@@ -290,6 +290,16 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       const handleHide = useEventCallback(onHide);
       const isRTL = useIsRTL();
 
+      const ariaProps = Object.keys(props)
+        .filter((prop) => prop.indexOf('aria') !== -1)
+        .reduce<{ [x: string]: any }>(
+          (ariaPropsObject, ariaProp) => ({
+            ...ariaPropsObject,
+            [ariaProp]: props[ariaProp],
+          }),
+          {},
+        );
+
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
 
       const modalContext = useMemo(
@@ -451,6 +461,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         <div
           role="dialog"
           {...dialogProps}
+          {...ariaProps}
           style={baseModalStyle}
           className={classNames(
             className,
