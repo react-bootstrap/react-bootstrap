@@ -292,13 +292,14 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const ariaProps = Object.keys(props)
         .filter((prop) => prop.indexOf('aria') !== -1)
-        .reduce<{ [x: string]: any }>(
-          (ariaPropsObject, ariaProp) => ({
+        .reduce<{ [x: string]: any }>((ariaPropsObject, ariaProp) => {
+          const val = props[ariaProp];
+          delete props[ariaProp];
+          return {
             ...ariaPropsObject,
-            [ariaProp]: props[ariaProp],
-          }),
-          {},
-        );
+            [ariaProp]: val,
+          };
+        }, {});
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
 
