@@ -1,6 +1,6 @@
 import styled from 'astroturf';
 import { graphql } from 'gatsby';
-import capitalize from 'lodash/capitalize';
+import upperFirst from 'lodash/upperFirst';
 import sortBy from 'lodash/sortBy';
 import PropTypes from 'prop-types';
 import * as React from 'react';
@@ -150,7 +150,7 @@ class PropTable extends React.Component {
     ) : (
       <span>
         controlled by: <Code>{controllable}</Code>, initial prop:{' '}
-        <Code>{`default${capitalize(propName)}`}</Code>
+        <Code>{`default${upperFirst(propName)}`}</Code>
       </span>
     );
 
