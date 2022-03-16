@@ -3,10 +3,12 @@
   "version": "2.2.1",
   "description": "Bootstrap 5 components built with React",
   "keywords": [
+    "bootstrap",
     "react",
+    "component",
+    "components",
     "ecosystem-react",
-    "react-component",
-    "bootstrap"
+    "react-component"
   ],
   "homepage": "https://react-bootstrap.github.io/",
   "bugs": {
