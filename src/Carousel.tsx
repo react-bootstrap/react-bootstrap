@@ -128,7 +128,7 @@ const propTypes = {
   /**
    * The amount of time to delay between automatically cycling an item. If `null`, carousel will not automatically cycle.
    */
-  interval: PropTypes.number,
+  interval: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
 
   /** Whether the carousel should react to keyboard events. */
   keyboard: PropTypes.bool,

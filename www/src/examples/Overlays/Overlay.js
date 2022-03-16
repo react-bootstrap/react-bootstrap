@@ -12,6 +12,7 @@ function Example() {
           <div
             {...props}
             style={{
+              position: 'absolute',
               backgroundColor: 'rgba(255, 100, 100, 0.85)',
               padding: '2px 10px',
               color: 'white',
