@@ -1,4 +1,5 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import React, { useEffect } from 'react';
 import sinon from 'sinon';
 
 import Tab from '../src/Tab';
@@ -188,6 +189,35 @@ describe('<Tabs>', () => {
     );
 
     getAllByRole('tabpanel').should.have.length(1);
+  });
+
+  it('should fire transition events', async () => {
+    const transitionSpy = sinon.spy();
+    const { getByText } = render(
+      <Tabs data-testid="testid" id="test" defaultActiveKey={2}>
+        <Tab
+          title="Tab 1"
+          eventKey={1}
+          onEnter={transitionSpy}
+          onEntering={transitionSpy}
+          onEntered={transitionSpy}
+          onExit={transitionSpy}
+          onExiting={transitionSpy}
+          onExited={transitionSpy}
+        >
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+
+    fireEvent.click(getByText('Tab 1'));
+    await waitFor(() => transitionSpy.should.have.been.calledThrice);
+
+    fireEvent.click(getByText('Tab 2'));
+    await waitFor(() => transitionSpy.callCount.should.equal(6));
   });
 
   it('should have fade animation by default', () => {
