@@ -393,6 +393,19 @@ describe('<Modal>', () => {
     );
   });
 
+  it('Should set aria-label to the role="dialog" element if aria-label set', () => {
+    const labelValue = 'modal-label';
+    const { getByRole } = render(
+      <Modal show aria-label={labelValue}>
+        <Modal.Header closeButton>
+          <Modal.Title id="modal-title">Modal heading</Modal.Title>
+        </Modal.Header>
+      </Modal>,
+    );
+
+    expect(getByRole('dialog').getAttribute('aria-label')).to.equal(labelValue);
+  });
+
   it('Should call onEscapeKeyDown when keyboard is true', () => {
     const onEscapeKeyDownSpy = sinon.spy();
     const { getByRole } = render(
