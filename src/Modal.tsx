@@ -218,6 +218,8 @@ const propTypes = {
   container: PropTypes.any,
 
   'aria-labelledby': PropTypes.any,
+
+  'aria-label': PropTypes.string,
 };
 
 const defaultProps = {
@@ -253,6 +255,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         children,
         dialogAs: Dialog,
         'aria-labelledby': ariaLabelledby,
+        'aria-label': ariaLabel,
 
         /* BaseModal props */
 
@@ -289,17 +292,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       const mergedRef = useMergedRefs(ref, setModalRef);
       const handleHide = useEventCallback(onHide);
       const isRTL = useIsRTL();
-
-      const ariaProps = Object.keys(props)
-        .filter((prop) => prop.indexOf('aria') !== -1)
-        .reduce<{ [x: string]: any }>((ariaPropsObject, ariaProp) => {
-          const val = props[ariaProp];
-          delete props[ariaProp];
-          return {
-            ...ariaPropsObject,
-            [ariaProp]: val,
-          };
-        }, {});
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
 
@@ -462,7 +454,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         <div
           role="dialog"
           {...dialogProps}
-          {...ariaProps}
           style={baseModalStyle}
           className={classNames(
             className,
@@ -471,6 +462,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           )}
           onClick={backdrop ? handleClick : undefined}
           onMouseUp={handleMouseUp}
+          aria-label={ariaLabel}
           aria-labelledby={ariaLabelledby}
         >
           {/*
