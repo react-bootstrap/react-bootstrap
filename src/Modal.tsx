@@ -402,7 +402,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const handleEnter = (node, isAppearing) => {
         if (node) {
-          node.style.display = 'block';
           updateDialogStyle(node);
         }
 
@@ -445,10 +444,9 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const baseModalStyle = { ...style, ...modalStyle };
 
-      // Sets `display` always block when `animation` is false
-      if (!animation) {
-        baseModalStyle.display = 'block';
-      }
+      // If `display` is not set to block, autoFocus inside the modal fails
+      // https://github.com/react-bootstrap/react-bootstrap/issues/5102
+      baseModalStyle.display = 'block';
 
       const renderDialog = (dialogProps) => (
         <div
