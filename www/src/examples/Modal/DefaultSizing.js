@@ -4,7 +4,7 @@ function Example() {
 
   return (
     <>
-      <Button onClick={() => setSmShow(true)}>Small modal</Button>{' '}
+      <Button onClick={() => setSmShow(true)} className="me-2">Small modal</Button>
       <Button onClick={() => setLgShow(true)}>Large modal</Button>
       <Modal
         size="sm"
