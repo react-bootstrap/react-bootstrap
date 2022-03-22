@@ -21,7 +21,7 @@ export type DropdownMenuVariant = 'dark' | string;
 
 export interface DropdownMenuProps
   extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+    React.HTMLAttributes<HTMLElement> {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
