@@ -12,6 +12,7 @@ import ModalCustomSizing from '../../examples/Modal/CustomSizing';
 import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
 import ModalWithoutAnimation from '../../examples/Modal/WithoutAnimation';
 import ModalGrid from '../../examples/Modal/Grid';
+import ModalFocus from '../../examples/Modal/Focus';
 
 import styles from '../../css/examples.module.scss';
 
@@ -90,9 +91,15 @@ inside the modal content.
 
 <ReactPlayground codeText={ModalGrid} />
 
+### Focus on specific element
+
+You can focus on an element inside the modal using `autoFocus` attribute on the element.
+
+<ReactPlayground codeText={ModalFocus} />
+
 ## Optional Sizes
 
-You can specify a bootstrap large or small modal by using the
+You can specify a Bootstrap large or small modal by using the
 `size` prop.
 
 <ReactPlayground codeText={ModalDefaultSizing} />
