@@ -8,7 +8,6 @@ import {
 } from '@restart/ui/DropdownMenu';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import { SelectCallback } from '@restart/ui/types';
 import warning from 'warning';
 import DropdownContext, { DropDirection } from './DropdownContext';
 import InputGroupContext from './InputGroupContext';
@@ -22,12 +21,11 @@ export type DropdownMenuVariant = 'dark' | string;
 
 export interface DropdownMenuProps
   extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+    React.HTMLAttributes<HTMLElement> {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
   align?: AlignType;
-  onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: UseDropdownMenuOptions['popperConfig'];
   variant?: DropdownMenuVariant;
@@ -58,8 +56,6 @@ const propTypes = {
    * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
   align: alignPropType,
-
-  onSelect: PropTypes.func,
 
   /**
    * Which event when fired outside the component will cause it to be closed
