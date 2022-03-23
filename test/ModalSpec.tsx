@@ -393,6 +393,20 @@ describe('<Modal>', () => {
     );
   });
 
+  it('Should set aria-describedby to the role="dialog" element if aria-describedby set', () => {
+    const { getByRole } = render(
+      <Modal show aria-describedby="modal-title">
+        <Modal.Header closeButton>
+          <Modal.Title id="modal-title">Modal heading</Modal.Title>
+        </Modal.Header>
+      </Modal>,
+    );
+
+    expect(getByRole('dialog').getAttribute('aria-describedby')).to.equal(
+      'modal-title',
+    );
+  });
+
   it('Should set aria-label to the role="dialog" element if aria-label set', () => {
     const labelValue = 'modal-label';
     const { getByRole } = render(

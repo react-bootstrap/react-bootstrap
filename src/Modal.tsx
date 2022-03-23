@@ -217,8 +217,8 @@ const propTypes = {
    */
   container: PropTypes.any,
 
-  'aria-labelledby': PropTypes.any,
-
+  'aria-labelledby': PropTypes.string,
+  'aria-describedby': PropTypes.string,
   'aria-label': PropTypes.string,
 };
 
@@ -255,6 +255,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         children,
         dialogAs: Dialog,
         'aria-labelledby': ariaLabelledby,
+        'aria-describedby': ariaDescribedby,
         'aria-label': ariaLabel,
 
         /* BaseModal props */
@@ -462,6 +463,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           onMouseUp={handleMouseUp}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledby}
+          aria-describedby={ariaDescribedby}
         >
           {/*
         // @ts-ignore */}
