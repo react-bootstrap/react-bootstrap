@@ -1,3 +1,17 @@
+## [2.2.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.1...v2.2.2) (2022-03-25)
+
+
+### Bug Fixes
+
+* update @restart/ui to v1.2.0 ([#6285](https://github.com/react-bootstrap/react-bootstrap/issues/6285)) ([4f5e625](https://github.com/react-bootstrap/react-bootstrap/commit/4f5e625f9ba39a158eb8db311f3328b00ee2b618))
+* **Modal:** fix autofocus for inputs when animation is enabled ([#6278](https://github.com/react-bootstrap/react-bootstrap/issues/6278)) ([08e1bbc](https://github.com/react-bootstrap/react-bootstrap/commit/08e1bbc04a0722e7fe79c194f42f9a890f56ee31))
+* **Modal:** render aria-describedby on the top level modal element ([#6282](https://github.com/react-bootstrap/react-bootstrap/issues/6282)) ([93a8a0e](https://github.com/react-bootstrap/react-bootstrap/commit/93a8a0ef29409293dd69fad5873ad791634b3ed1))
+* **Modal:** render aria-label on top level modal element ([#6269](https://github.com/react-bootstrap/react-bootstrap/issues/6269)) ([48f7c07](https://github.com/react-bootstrap/react-bootstrap/commit/48f7c078d07af5f9266923ef04c3e85a836dcfa9))
+
+
+
+
+
 ## [2.2.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.0...v2.2.1) (2022-03-11)
 
 
