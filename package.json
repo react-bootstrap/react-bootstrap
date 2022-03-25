@@ -61,7 +61,7 @@
   "dependencies": {
     "@babel/runtime": "^7.17.2",
     "@restart/hooks": "^0.4.5",
-    "@restart/ui": "^1.0.2",
+    "@restart/ui": "^1.2.0",
     "@types/invariant": "^2.2.35",
     "@types/prop-types": "^15.7.4",
     "@types/react": ">=16.14.8",
