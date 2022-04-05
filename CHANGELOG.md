@@ -1,3 +1,14 @@
+## [2.2.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.2...v2.2.3) (2022-04-05)
+
+
+### Bug Fixes
+
+* bump @restart/hooks to v0.4.6 ([#6294](https://github.com/react-bootstrap/react-bootstrap/issues/6294)) ([dceb74b](https://github.com/react-bootstrap/react-bootstrap/commit/dceb74b2c0d81b71265410a1b3c85802bed14c68))
+
+
+
+
+
 ## [2.2.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.1...v2.2.2) (2022-03-25)
 
 
