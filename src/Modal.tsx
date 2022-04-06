@@ -35,7 +35,7 @@ export interface ModalProps
     | 'backdropTransition'
     | 'children'
   > {
-  size?: 'sm' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   fullscreen?:
     | true
     | string
