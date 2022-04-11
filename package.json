@@ -62,11 +62,7 @@
     "@babel/runtime": "^7.17.2",
     "@restart/hooks": "^0.4.6",
     "@restart/ui": "^1.2.0",
-    "@types/invariant": "^2.2.35",
-    "@types/prop-types": "^15.7.4",
-    "@types/react": ">=16.14.8",
     "@types/react-transition-group": "^4.4.4",
-    "@types/warning": "^3.0.0",
     "classnames": "^2.3.1",
     "dom-helpers": "^5.2.1",
     "invariant": "^2.2.4",
@@ -89,10 +85,13 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "@types/chai": "^4.3.0",
+    "@types/invariant": "^2.2.35",
     "@types/mocha": "^9.1.0",
+    "@types/prop-types": "^15.7.4",
     "@types/react-dom": "^16.9.14",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "^3.2.8",
+    "@types/warning": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
@@ -147,8 +146,14 @@
     "webpack": "^5.70.0"
   },
   "peerDependencies": {
+    "@types/react": ">=16.14.8",
     "react": ">=16.14.0",
     "react-dom": ">=16.14.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "directory": "lib"
