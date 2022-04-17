@@ -23,7 +23,7 @@ describe('<Pagination>', () => {
   });
 
   it('sub-compontents should forward ref correctly', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = React.createRef<HTMLLIElement>();
     render(
       <Pagination data-testid="test" size="sm">
         Item content
