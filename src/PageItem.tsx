@@ -74,14 +74,14 @@ PageItem.displayName = 'PageItem';
 export default PageItem;
 
 function createButton(name: string, defaultValue: ReactNode, label = name) {
-  function Button({ children, ...props }: PageItemProps) {
-    return (
-      <PageItem {...props}>
+  const Button = React.forwardRef(
+    ({ children, ...props }: PageItemProps, ref) => (
+      <PageItem {...props} ref={ref}>
         <span aria-hidden="true">{children || defaultValue}</span>
         <span className="visually-hidden">{label}</span>
       </PageItem>
-    );
-  }
+    ),
+  );
 
   Button.displayName = name;
 

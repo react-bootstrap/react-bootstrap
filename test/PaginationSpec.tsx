@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import React from 'react';
 
 import Pagination from '../src/Pagination';
 
@@ -19,5 +20,16 @@ describe('<Pagination>', () => {
     );
     const paginationElem = getByTestId('test');
     paginationElem.classList.contains('pagination-sm').should.be.true;
+  });
+
+  it('sub-compontents should forward ref correctly', () => {
+    const ref = React.createRef<HTMLLIElement>();
+    render(
+      <Pagination data-testid="test" size="sm">
+        Item content
+        <Pagination.Next ref={ref} data-testid="next" />
+      </Pagination>,
+    );
+    ref.current?.tagName.toLowerCase().should.be.equal('li');
   });
 });
