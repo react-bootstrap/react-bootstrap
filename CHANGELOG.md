@@ -1,3 +1,19 @@
+# [2.3.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.3...v2.3.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* **deps:** clean up [@types](https://github.com/types) deps list ([#6303](https://github.com/react-bootstrap/react-bootstrap/issues/6303)) ([609c678](https://github.com/react-bootstrap/react-bootstrap/commit/609c678244a06ad4f7df0e03518ece19c2e97a73))
+
+
+### Features
+
+* **Pagination:** Wrap Pagination sub-components in forward refs ([#6306](https://github.com/react-bootstrap/react-bootstrap/issues/6306)) ([2686ae3](https://github.com/react-bootstrap/react-bootstrap/commit/2686ae381c61ee298e1bd7e2cbae10abc31df2dc))
+
+
+
+
+
 ## [2.2.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.2...v2.2.3) (2022-04-05)
 
 
