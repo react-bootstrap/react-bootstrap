@@ -101,7 +101,6 @@ const propTypes = {
 const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
   React.forwardRef<HTMLElement, TabPaneProps>(
     ({ bsPrefix, transition, ...props }, ref) => {
-      const shouldOmitTransition = transition === false;
       const [
         {
           className,
@@ -130,33 +129,26 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
 
       // We provide an empty the TabContext so `<Nav>`s in `<TabPanel>`s don't
       // conflict with the top level one.
-      const content = (
-        <Component
-          {...rest}
-          ref={ref}
-          className={classNames(className, prefix, isActive && 'active')}
-        />
-      );
       return (
         <TabContext.Provider value={null}>
           <SelectableContext.Provider value={null}>
-            {shouldOmitTransition ? (
-              content
-            ) : (
-              <Transition
-                in={isActive}
-                onEnter={onEnter}
-                onEntering={onEntering}
-                onEntered={onEntered}
-                onExit={onExit}
-                onExiting={onExiting}
-                onExited={onExited}
-                mountOnEnter={mountOnEnter}
-                unmountOnExit={unmountOnExit as any}
-              >
-                {content}
-              </Transition>
-            )}
+            <Transition
+              in={isActive}
+              onEnter={onEnter}
+              onEntering={onEntering}
+              onEntered={onEntered}
+              onExit={onExit}
+              onExiting={onExiting}
+              onExited={onExited}
+              mountOnEnter={mountOnEnter}
+              unmountOnExit={unmountOnExit as any}
+            >
+              <Component
+                {...rest}
+                ref={ref}
+                className={classNames(className, prefix, isActive && 'active')}
+              />
+            </Transition>
           </SelectableContext.Provider>
         </TabContext.Provider>
       );
