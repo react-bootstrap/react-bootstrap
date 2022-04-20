@@ -4,10 +4,10 @@
   id="noanim-tab-example"
   className="mb-3"
 >
-  <Tab eventKey="home" title="Home" transition={false}>
+  <Tab eventKey="home" title="Home">
     <Sonnet />
   </Tab>
-  <Tab eventKey="profile" title="Profile" transition={false}>
+  <Tab eventKey="profile" title="Profile">
     <Sonnet />
   </Tab>
   <Tab eventKey="contact" title="Contact" disabled>
