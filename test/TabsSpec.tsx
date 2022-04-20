@@ -200,6 +200,24 @@ describe('<Tabs>', () => {
     );
     getByRole('tabpanel').classList.contains('fade').should.be.true;
   });
+
+  it('Should omit Transition in TabPane if prop is false ', () => {
+    const { getByText } = render(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" className="custom" eventKey={1} transition={false}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" tabClassName="tcustom" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+    const firstTabContent = getByText('Tab 1 content');
+    const secondTabContent = getByText('Tab 2 content');
+
+    firstTabContent.classList.contains('fade').should.be.false;
+    secondTabContent.classList.contains('fade').should.be.true;
+  });
 });
 
 // describe('<Tab>', () => {
