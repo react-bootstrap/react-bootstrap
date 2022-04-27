@@ -190,8 +190,9 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
         onToggle: () => onToggle?.(!expanded),
         bsPrefix,
         expanded: !!expanded,
+        expand,
       }),
-      [bsPrefix, expanded, onToggle],
+      [bsPrefix, expanded, expand, onToggle],
     );
 
     return (
