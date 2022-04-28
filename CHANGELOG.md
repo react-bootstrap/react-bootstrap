@@ -1,3 +1,15 @@
+## [2.3.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.0...v2.3.1) (2022-04-28)
+
+
+### Bug Fixes
+
+* **NavbarOffcanvas:** fix rendering of nav items when expand is used ([#6310](https://github.com/react-bootstrap/react-bootstrap/issues/6310)) ([63869f9](https://github.com/react-bootstrap/react-bootstrap/commit/63869f923995d3897c3e4f3d77433cf8a3f6505e))
+* **TabPane:** omit Transition when prop is false ([#6305](https://github.com/react-bootstrap/react-bootstrap/issues/6305)) ([1c71e9e](https://github.com/react-bootstrap/react-bootstrap/commit/1c71e9ecc8a8bf5d9e90ea61dcaa1635d7eb8712))
+
+
+
+
+
 # [2.3.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.3...v2.3.0) (2022-04-19)
 
 
