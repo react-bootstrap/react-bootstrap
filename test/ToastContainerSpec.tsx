@@ -13,20 +13,23 @@ const expectedClassesWithoutPosition: Record<ToastPosition, Array<string>> = {
   'bottom-end': ['bottom-0', 'end-0'],
 };
 
-describe('ToastContainer', () => {
-  describe('without containerPosition', () => {
-    const expectedClasses = Object.fromEntries(
-      Object.entries(expectedClassesWithoutPosition).map(([key, value]) => [
-        key,
-        ['position-absolute', ...value],
-      ]),
-    );
+const createExpectedClasses = (containerPosition = 'absolute') =>
+  Object.fromEntries(
+    Object.entries(expectedClassesWithoutPosition).map(([key, value]) => [
+      key,
+      [`position-${containerPosition}`, ...value],
+    ]),
+  );
 
-    it('should render a basic toast container', () => {
-      const { container } = render(<ToastContainer />);
-      container.firstElementChild!.classList.contains('toast-container').should
-        .be.true;
-    });
+describe('ToastContainer', () => {
+  it('should render a basic toast container', () => {
+    const { container } = render(<ToastContainer />);
+    container.firstElementChild!.classList.contains('toast-container').should.be
+      .true;
+  });
+
+  describe('without containerPosition', () => {
+    const expectedClasses = createExpectedClasses();
 
     Object.keys(expectedClasses).forEach((position: ToastPosition) => {
       it(`should render classes for position=${position} with position-absolute`, () => {
@@ -40,21 +43,10 @@ describe('ToastContainer', () => {
     });
   });
 
-  describe('with containerPosition', () => {
-    ['absolute', 'fixed', 'relative', 'sticky', 'custom'].forEach(
-      (containerPosition) => {
-        const expectedClasses = Object.fromEntries(
-          Object.entries(expectedClassesWithoutPosition).map(([key, value]) => [
-            key,
-            [`position-${containerPosition}`, ...value],
-          ]),
-        );
-
-        it('should render a basic toast container', () => {
-          const { container } = render(<ToastContainer />);
-          container.firstElementChild!.classList.contains('toast-container')
-            .should.be.true;
-        });
+  ['absolute', 'fixed', 'relative', 'sticky', 'custom'].forEach(
+    (containerPosition) => {
+      describe(`with containerPosition=${containerPosition}`, () => {
+        const expectedClasses = createExpectedClasses(containerPosition);
 
         Object.keys(expectedClasses).forEach((position: ToastPosition) => {
           it(`should render classes for position=${position} with position-${containerPosition}`, () => {
@@ -64,7 +56,6 @@ describe('ToastContainer', () => {
                 containerPosition={containerPosition}
               />,
             );
-
             expectedClasses[position].map(
               (className) =>
                 container.firstElementChild!.classList.contains(className)
@@ -72,7 +63,7 @@ describe('ToastContainer', () => {
             );
           });
         });
-      },
-    );
-  });
+      });
+    },
+  );
 });
