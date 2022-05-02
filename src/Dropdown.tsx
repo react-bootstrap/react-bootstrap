@@ -82,11 +82,8 @@ const propTypes = {
    *
    * ```js
    * function(
-   *   isOpen: boolean,
-   *   event: SyntheticEvent,
-   *   metadata: {
-   *     source: 'select' | 'click' | 'rootClose' | 'keydown'
-   *   }
+   *   nextShow: boolean,
+   *   meta: ToggleMetadata,
    * ): void
    * ```
    *
