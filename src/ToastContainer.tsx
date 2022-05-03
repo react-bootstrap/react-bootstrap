@@ -19,6 +19,7 @@ export interface ToastContainerProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
   position?: ToastPosition;
+  containerPosition?: string;
 }
 
 const propTypes = {
@@ -41,6 +42,13 @@ const propTypes = {
     'bottom-center',
     'bottom-end',
   ]),
+
+  /**
+   * By default the container is rendered with `position-absolute` utility class. Provide a string to use other `position-*` utility classes, or an empty string to remove it.
+   *
+   * @default 'absolute'
+   */
+  containerPosition: PropTypes.string,
 };
 
 const positionClasses = {
@@ -63,6 +71,7 @@ const ToastContainer: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       position,
+      containerPosition = 'absolute',
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -78,7 +87,10 @@ const ToastContainer: BsPrefixRefForwardingComponent<
         {...props}
         className={classNames(
           bsPrefix,
-          position && `position-absolute ${positionClasses[position]}`,
+          position && [
+            containerPosition ? `position-${containerPosition}` : null,
+            positionClasses[position],
+          ],
           className,
         )}
       />
