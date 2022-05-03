@@ -44,7 +44,7 @@ const propTypes = {
   ]),
 
   /**
-   * By default the container is rendered with `position-absolute` utility class. Provide a string to use other `position-*` utility classes, or `false` to remove it.
+   * By default the container is rendered with `position-absolute` utility class. Provide a string to use other `position-*` utility classes, or an empty string to remove it.
    *
    * @default 'absolute'
    */
@@ -87,8 +87,10 @@ const ToastContainer: BsPrefixRefForwardingComponent<
         {...props}
         className={classNames(
           bsPrefix,
-          position &&
-            `position-${containerPosition} ${positionClasses[position]}`,
+          position && [
+            containerPosition ? `position-${containerPosition}` : null,
+            positionClasses[position],
+          ],
           className,
         )}
       />
