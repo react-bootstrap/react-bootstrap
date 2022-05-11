@@ -1,3 +1,14 @@
+## [1.6.5](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.4...v1.6.5) (2022-05-11)
+
+
+### Bug Fixes
+
+* update react-overlays and @restart/hooks packages ([#6333](https://github.com/react-bootstrap/react-bootstrap/issues/6333)) ([9654ca2](https://github.com/react-bootstrap/react-bootstrap/commit/9654ca231dc782caad04cbf605b053d5e4b30350))
+
+
+
+
+
 ## [1.6.4](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.3...v1.6.4) (2021-09-24)
 
 
