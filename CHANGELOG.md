@@ -1,3 +1,14 @@
+# [2.4.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.1...v2.4.0) (2022-05-13)
+
+
+### Features
+
+* **ToastContainer:** add `containerPosition` prop ([#6316](https://github.com/react-bootstrap/react-bootstrap/issues/6316)) ([9815957](https://github.com/react-bootstrap/react-bootstrap/commit/9815957898c6f59a6df89f1aec847a67482af4d6))
+
+
+
+
+
 ## [2.3.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.0...v2.3.1) (2022-04-28)
 
 
