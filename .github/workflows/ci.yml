@@ -10,6 +10,9 @@ on:
       - master
       - bs3-dev
       - bs4-dev
+permissions:
+  contents: read
+
 jobs:
   ci:
     name: CI
