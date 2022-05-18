@@ -133,6 +133,21 @@ describe('<Offcanvas>', () => {
     onHideSpy.should.have.been.called;
   });
 
+  it('should not close when static backdrop is clicked', () => {
+    const onHideSpy = sinon.spy();
+    render(
+      <Offcanvas show onHide={onHideSpy} backdrop="static">
+        <strong>Message</strong>
+      </Offcanvas>,
+    );
+    const backdropElem =
+      document.getElementsByClassName('offcanvas-backdrop')[0];
+
+    fireEvent.click(backdropElem);
+
+    onHideSpy.should.not.have.been.called;
+  });
+
   // TODO: unsure if we need this, since it seems like Offcanvas is still undergoing some
   // changes upstream.
   // it('Should close when anything outside offcanvas clicked and backdrop=false', () => {
