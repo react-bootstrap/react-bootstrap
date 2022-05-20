@@ -6,6 +6,7 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import Basic from '../../examples/Offcanvas/Basic';
 import Backdrop from '../../examples/Offcanvas/Backdrop';
+import StaticBackdrop from '../../examples/Offcanvas/StaticBackdrop';
 import Placement from '../../examples/Offcanvas/Placement';
 
 # Offcanvas
@@ -42,6 +43,12 @@ visible. Use the `scroll` prop to toggle `<body>` scrolling and the `backdrop` p
 to toggle the backdrop.
 
 <ReactPlayground codeText={Backdrop} />
+
+### Static backdrop
+
+When `backdrop` is set to `static`, the offcanvas will not close when clicking outside of it.
+
+<ReactPlayground codeText={StaticBackdrop} />
 
 ## API
 

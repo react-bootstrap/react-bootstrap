@@ -45,9 +45,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Include a backdrop component.
+   * Include a backdrop component. Specify 'static' for a backdrop that doesn't
+   * trigger an "onHide" when clicked.
    */
-  backdrop: PropTypes.bool,
+  backdrop: PropTypes.oneOf(['static', true, false]),
 
   /**
    * Add an optional extra class name to .offcanvas-backdrop.
