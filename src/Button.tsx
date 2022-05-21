@@ -10,8 +10,8 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { ButtonVariant } from './types';
 
 export interface ButtonProps
-  extends BaseButtonProps,
-    Omit<BsPrefixProps, 'as'> {
+  extends BsPrefixProps,
+    Omit<BaseButtonProps, 'as'> {
   active?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
@@ -78,11 +78,12 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
     ({ as, bsPrefix, variant, size, active, className, ...props }, ref) => {
       const prefix = useBootstrapPrefix(bsPrefix, 'btn');
       const [buttonProps, { tagName }] = useButtonProps({
-        tagName: as,
+        // Use 'template' when as={Component}, since it gets no special treatment
+        tagName: as && typeof as !== 'string' ? 'template' : as,
         ...props,
       });
 
-      const Component = tagName as React.ElementType;
+      const Component = as || tagName;
 
       return (
         <Component

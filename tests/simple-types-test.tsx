@@ -55,6 +55,21 @@ import BootstrapModalManager from '../src/BootstrapModalManager';
 
 import { CarouselRef } from '../src/Carousel';
 
+// Simplified react-router-dom@6/Link
+// https://github.com/remix-run/react-router/blob/09e90ec885d95b4a35f0eebcf4bac6f796ce9878/packages/react-router-dom/index.tsx#L251-L289
+interface CustomLinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
+  to: string;
+}
+
+const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
+  ({ children, to, ...rest }, ref) => (
+    <a {...rest} href={to} ref={ref}>
+      {children}
+    </a>
+  ),
+);
+
 const style: React.CSSProperties = {
   color: 'red',
 };
@@ -165,6 +180,17 @@ const MegaComponent = () => (
       as="a"
       disabled={false}
       href="#"
+      size="lg"
+      type="button"
+      variant="primary"
+      bsPrefix="btn"
+      style={style}
+    />
+    <Button
+      active={false}
+      as={CustomLink}
+      to="#"
+      disabled={false}
       size="lg"
       type="button"
       variant="primary"
