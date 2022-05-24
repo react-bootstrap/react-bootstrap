@@ -5,6 +5,21 @@ import sinon from 'sinon';
 
 import Button from '../src/Button';
 
+// Simplified react-router@6/Link
+// https://github.com/remix-run/react-router/blob/09e90ec885d95b4a35f0eebcf4bac6f796ce9878/packages/react-router-dom/index.tsx#L251-L289
+interface CustomLinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
+  to: string;
+}
+
+const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
+  ({ children, to, ...rest }, ref) => (
+    <a {...rest} href={to} ref={ref}>
+      {children}
+    </a>
+  ),
+);
+
 describe('<Button>', () => {
   it('Should output a button', () => {
     const { getByRole } = render(<Button>Title</Button>);
@@ -24,7 +39,7 @@ describe('<Button>', () => {
     expect(getByRole('button').getAttribute('type')).to.be.equal('submit');
   });
 
-  it('Should show the type if explicitly passed in when "as" is used', () => {
+  it('Should show the type if explicitly passed in when as="element" is used', () => {
     const { getByTestId } = render(
       <Button as="div" type="submit" data-testid="test">
         Title
@@ -34,9 +49,29 @@ describe('<Button>', () => {
     expect(getByTestId('test').getAttribute('type')).to.be.equal('submit');
   });
 
-  it('Should not have default type=button when "as" is used', () => {
+  it('Should show the type if explicitly passed in when as={Component} is used', () => {
+    const { getByTestId } = render(
+      <Button as={CustomLink} to="/" type="submit" data-testid="test">
+        Title
+      </Button>,
+    );
+
+    expect(getByTestId('test').getAttribute('type')).to.be.equal('submit');
+  });
+
+  it('Should not have default type=button when as="element" is used', () => {
     const { getByTestId } = render(
       <Button as="div" data-testid="test">
+        Title
+      </Button>,
+    );
+
+    expect(getByTestId('test').getAttribute('type')).to.be.null;
+  });
+
+  it('Should not have default type=button when as={Component} is used', () => {
+    const { getByTestId } = render(
+      <Button as={CustomLink} to="/" data-testid="test">
         Title
       </Button>,
     );
@@ -53,10 +88,28 @@ describe('<Button>', () => {
     );
 
     expect(ref.current?.tagName).to.be.equal('BUTTON');
+  });
+
+  it('should forward refs to the link', () => {
+    const ref = React.createRef<HTMLAnchorElement>();
+    render(
+      <div>
+        <Button
+          ref={
+            ref as unknown as React.Ref<HTMLButtonElement> /* TODO: inferred <a> ref type is wrong */
+          }
+          href="a"
+        >
+          Yo
+        </Button>
+      </div>,
+    );
+
+    expect(ref.current?.tagName).to.be.equal('A');
 
     render(
       <div>
-        <Button ref={ref} href="a">
+        <Button ref={ref} as={CustomLink} to="/">
           Yo
         </Button>
       </div>,
@@ -73,10 +126,36 @@ describe('<Button>', () => {
     expect(getByRole('button').getAttribute('href')).to.be.equal(href);
   });
 
+  it('Should pass through href from as={Component}', () => {
+    const href = '/url';
+
+    const { getByRole } = render(
+      <Button as={CustomLink} to={href}>
+        Title
+      </Button>,
+    );
+
+    expect(getByRole('button').getAttribute('href')).to.be.equal(href);
+  });
+
   it('Should call onClick callback', () => {
     const onClick = sinon.spy();
 
     const { getByRole } = render(<Button onClick={onClick}>Title</Button>);
+
+    fireEvent.click(getByRole('button'));
+
+    onClick.should.have.been.calledOnce;
+  });
+
+  it('Should call onClick callback with as={Component}', () => {
+    const onClick = sinon.spy();
+
+    const { getByRole } = render(
+      <Button as={CustomLink} to="/" onClick={onClick}>
+        Title
+      </Button>,
+    );
 
     fireEvent.click(getByRole('button'));
 
@@ -92,6 +171,16 @@ describe('<Button>', () => {
   it('Should be disabled link', () => {
     const { getByRole } = render(
       <Button disabled href="#">
+        Title
+      </Button>,
+    );
+
+    getByRole('button').classList.contains('disabled').should.be.true;
+  });
+
+  it('Should be disabled with as={CustomLink}', () => {
+    const { getByRole } = render(
+      <Button disabled as={CustomLink} to="#">
         Title
       </Button>,
     );
