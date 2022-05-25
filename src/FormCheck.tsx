@@ -16,6 +16,7 @@ export interface FormCheckProps
   extends BsPrefixProps,
     React.InputHTMLAttributes<HTMLInputElement> {
   inline?: boolean;
+  reverse?: boolean;
   disabled?: boolean;
   label?: React.ReactNode;
   type?: FormCheckType;
@@ -83,6 +84,11 @@ const propTypes = {
   inline: PropTypes.bool,
 
   /**
+   * Put your checkboxes, radios, and switches on the opposite side.
+   */
+  reverse: PropTypes.bool,
+
+  /**
    * Disables the control.
    */
   disabled: PropTypes.bool,
@@ -124,6 +130,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         bsPrefix,
         bsSwitchPrefix,
         inline = false,
+        reverse = false,
         disabled = false,
         isValid = false,
         isInvalid = false,
@@ -177,6 +184,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
               className,
               hasLabel && bsPrefix,
               inline && `${bsPrefix}-inline`,
+              reverse && `${bsPrefix}-reverse`,
               type === 'switch' && bsSwitchPrefix,
             )}
           >

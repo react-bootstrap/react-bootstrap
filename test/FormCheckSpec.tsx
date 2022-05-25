@@ -86,6 +86,15 @@ describe('<FormCheck>', () => {
     element!.classList.contains('form-check-inline').should.be.true;
   });
 
+  it('should support in reverse', () => {
+    const {
+      container: { firstElementChild: element },
+    } = render(<FormCheck reverse label="My label" />);
+
+    element!.classList.length.should.equal(2);
+    element!.classList.contains('form-check-reverse').should.be.true;
+  });
+
   it('should support isValid', () => {
     const { getByTestId } = render(<FormCheck isValid data-testid="test-id" />);
 
