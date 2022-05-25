@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { State } from '@restart/ui/usePopper';
 
 export type Variant =
   | 'primary'
@@ -62,3 +63,10 @@ export const alignPropType = PropTypes.oneOfType([
 export type RootCloseEvent = 'click' | 'mousedown';
 
 export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;
+
+export interface PopperRef {
+  state: State | undefined;
+  outOfBoundaries: boolean;
+  placement: Placement | undefined;
+  scheduleUpdate?: () => void;
+}
