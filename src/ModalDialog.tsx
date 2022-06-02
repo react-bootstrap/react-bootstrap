@@ -31,7 +31,7 @@ const propTypes = {
   /**
    * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg','xl')
+   * @type ('sm'|'lg'|'xl')
    */
   size: PropTypes.string,
 
