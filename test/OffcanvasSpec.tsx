@@ -1,13 +1,15 @@
 import * as React from 'react';
+import { expect } from 'chai';
 import ModalManager from '@restart/ui/ModalManager';
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
 import Offcanvas from '../src/Offcanvas';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 describe('<Offcanvas>', () => {
   it('Should render the modal content', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const { getByTestId } = render(
       <Offcanvas show onHide={noop}>
         <strong data-testid="test">Message</strong>
@@ -50,8 +52,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should pass className to the offcanvas', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const { getByTestId } = render(
       <Offcanvas show className="myoffcanvas" onHide={noop} data-testid="test">
         <strong>Message</strong>
@@ -62,9 +62,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should pass backdropClassName to the backdrop', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
-
     render(
       <Offcanvas show backdropClassName="custom-backdrop" onHide={noop}>
         <strong>Message</strong>
@@ -76,8 +73,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should pass style to the offcanvas', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const { getByTestId } = render(
       <Offcanvas show style={{ color: 'red' }} onHide={noop} data-testid="test">
         <strong>Message</strong>
@@ -94,8 +89,7 @@ describe('<Offcanvas>', () => {
       return (
         <Offcanvas
           show={show}
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onHide={() => {}}
+          onHide={noop}
           onExit={increment}
           onExiting={increment}
           onExited={() => {
@@ -185,8 +179,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should set aria-labelledby to the role="dialog" element if aria-labelledby set', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const { getByTestId } = render(
       <Offcanvas
         show
@@ -210,8 +202,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should call onEscapeKeyDown when keyboard is true', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const onEscapeKeyDownSpy = sinon.spy();
     render(
       <Offcanvas
@@ -229,8 +219,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should not call onEscapeKeyDown when keyboard is false', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
     const onEscapeKeyDownSpy = sinon.spy();
     render(
       <Offcanvas
@@ -248,9 +236,6 @@ describe('<Offcanvas>', () => {
   });
 
   it('Should use custom props manager if specified', (done) => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
-
     class MyModalManager extends ModalManager {
       add() {
         done();
@@ -270,8 +255,7 @@ describe('<Offcanvas>', () => {
 
   it('should not change overflow style when scroll=true', () => {
     const containerRef = React.createRef<any>();
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const noop = () => {};
+
     render(
       <div ref={containerRef} style={{ height: '2000px', overflow: 'scroll' }}>
         <Offcanvas show onHide={noop} container={containerRef} scroll>
@@ -281,5 +265,25 @@ describe('<Offcanvas>', () => {
     );
 
     containerRef.current.style.overflow.should.equal('scroll');
+  });
+
+  it('should set responsive class', () => {
+    const { getByTestId } = render(
+      <Offcanvas data-testid="test" responsive="lg" show onHide={noop}>
+        <strong>Message</strong>
+      </Offcanvas>,
+    );
+    const offcanvasElem = getByTestId('test');
+    offcanvasElem.classList.contains('offcanvas-lg').should.be.true;
+  });
+
+  it('should render offcanvas when show=false', () => {
+    const { getByTestId } = render(
+      <Offcanvas data-testid="test" responsive="lg" onHide={noop}>
+        <strong>Message</strong>
+      </Offcanvas>,
+    );
+    const offcanvasElem = getByTestId('test');
+    expect(offcanvasElem.getAttribute('role')).to.not.exist;
   });
 });
