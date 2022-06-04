@@ -1,4 +1,9 @@
-function Example() {
+import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
+
+function PlacementExample() {
   const [position, setPosition] = useState('top-start');
 
   return (
@@ -52,3 +57,5 @@ function Example() {
     </>
   );
 }
+
+export default PlacementExample;

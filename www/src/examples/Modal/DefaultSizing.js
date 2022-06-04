@@ -1,10 +1,16 @@
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 function Example() {
   const [smShow, setSmShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
 
   return (
     <>
-      <Button onClick={() => setSmShow(true)} className="me-2">Small modal</Button>
+      <Button onClick={() => setSmShow(true)} className="me-2">
+        Small modal
+      </Button>
       <Button onClick={() => setLgShow(true)}>Large modal</Button>
       <Modal
         size="sm"

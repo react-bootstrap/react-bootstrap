@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Fade from 'react-bootstrap/Fade';
+
 function Example() {
   const [open, setOpen] = useState(false);
 

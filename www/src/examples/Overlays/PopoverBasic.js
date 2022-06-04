@@ -1,3 +1,7 @@
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
 const popover = (
   <Popover id="popover-basic">
     <Popover.Header as="h3">Popover right</Popover.Header>
