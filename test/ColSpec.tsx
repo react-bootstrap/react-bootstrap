@@ -93,4 +93,17 @@ describe('Col', () => {
     );
     getByText('test').classList.contains('col-custom-3').should.be.true;
   });
+
+  it('should allow custom breakpoints smaller than default "xs"', () => {
+    const { getByText } = render(
+      <ThemeProvider breakpoints={['xxs', 'xs']} minBreakpoint="xxs">
+        <Col xxs="3" xs="2">
+          test
+        </Col>
+      </ThemeProvider>,
+    );
+
+    getByText('test').classList.contains('col-3').should.be.true;
+    getByText('test').classList.contains('col-xs-2').should.be.true;
+  });
 });
