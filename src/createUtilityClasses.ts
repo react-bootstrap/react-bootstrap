@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { DEFAULT_BREAKPOINTS } from './ThemeProvider';
+import { DEFAULT_BREAKPOINTS, DEFAULT_MIN_BREAKPOINT } from './ThemeProvider';
 
 export type ResponsiveUtilityValue<T> =
   | T
@@ -29,6 +29,7 @@ export function responsivePropType(propType: any) {
 export default function createUtilityClassName(
   utilityValues: Record<string, ResponsiveUtilityValue<unknown>>,
   breakpoints = DEFAULT_BREAKPOINTS,
+  minBreakpoint = DEFAULT_MIN_BREAKPOINT,
 ) {
   const classes: string[] = [];
   Object.entries(utilityValues).forEach(([utilName, utilValue]) => {
@@ -37,7 +38,7 @@ export default function createUtilityClassName(
         breakpoints.forEach((brkPoint) => {
           const bpValue = utilValue![brkPoint];
           if (bpValue != null) {
-            const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+            const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : '';
             classes.push(`${utilName}${infix}-${bpValue}`);
           }
         });

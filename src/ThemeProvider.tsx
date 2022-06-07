@@ -3,10 +3,12 @@ import * as React from 'react';
 import { useContext, useMemo } from 'react';
 
 export const DEFAULT_BREAKPOINTS = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+export const DEFAULT_MIN_BREAKPOINT = 'xs';
 
 export interface ThemeContextValue {
   prefixes: Record<string, string>;
   breakpoints: string[];
+  minBreakpoint?: string;
   dir?: string;
 }
 
@@ -17,12 +19,14 @@ export interface ThemeProviderProps extends Partial<ThemeContextValue> {
 const ThemeContext = React.createContext<ThemeContextValue>({
   prefixes: {},
   breakpoints: DEFAULT_BREAKPOINTS,
+  minBreakpoint: DEFAULT_MIN_BREAKPOINT,
 });
 const { Consumer, Provider } = ThemeContext;
 
 function ThemeProvider({
   prefixes = {},
   breakpoints = DEFAULT_BREAKPOINTS,
+  minBreakpoint = DEFAULT_MIN_BREAKPOINT,
   dir,
   children,
 }: ThemeProviderProps) {
@@ -30,9 +34,10 @@ function ThemeProvider({
     () => ({
       prefixes: { ...prefixes },
       breakpoints,
+      minBreakpoint,
       dir,
     }),
-    [prefixes, breakpoints, dir],
+    [prefixes, breakpoints, minBreakpoint, dir],
   );
 
   return <Provider value={contextValue}>{children}</Provider>;
@@ -57,6 +62,12 @@ ThemeProvider.propTypes = {
   breakpoints: PropTypes.arrayOf(PropTypes.string),
 
   /**
+   * The minimum breakpoint used by your application.
+   * Defaults to the smallest of the standard Bootstrap breakpoints.
+   */
+  minBreakpoint: PropTypes.string,
+
+  /**
    * Indicates the directionality of the application's text.
    *
    * Use `rtl` to set text as "right to left".
@@ -75,6 +86,11 @@ export function useBootstrapPrefix(
 export function useBootstrapBreakpoints() {
   const { breakpoints } = useContext(ThemeContext);
   return breakpoints;
+}
+
+export function useBootstrapMinBreakpoint() {
+  const { minBreakpoint } = useContext(ThemeContext);
+  return minBreakpoint;
 }
 
 export function useIsRTL() {
