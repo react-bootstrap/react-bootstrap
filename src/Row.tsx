@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 import * as React from 'react';
 
-import { useBootstrapPrefix, useBootstrapBreakpoints } from './ThemeProvider';
+import {
+  useBootstrapPrefix,
+  useBootstrapBreakpoints,
+  useBootstrapMinBreakpoint,
+} from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type RowColWidth =
@@ -117,6 +121,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
     const breakpoints = useBootstrapBreakpoints();
+    const minBreakpoint = useBootstrapMinBreakpoint();
 
     const sizePrefix = `${decoratedBsPrefix}-cols`;
     const classes: string[] = [];
@@ -132,7 +137,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
         cols = propValue;
       }
 
-      const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+      const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : '';
 
       if (cols != null) classes.push(`${sizePrefix}${infix}-${cols}`);
     });

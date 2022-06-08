@@ -2,7 +2,11 @@ import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix, useBootstrapBreakpoints } from './ThemeProvider';
+import {
+  useBootstrapPrefix,
+  useBootstrapBreakpoints,
+  useBootstrapMinBreakpoint,
+} from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type NumberAttr =
@@ -125,6 +129,7 @@ export function useCol({
 }: ColProps): [any, UseColMetadata] {
   bsPrefix = useBootstrapPrefix(bsPrefix, 'col');
   const breakpoints = useBootstrapBreakpoints();
+  const minBreakpoint = useBootstrapMinBreakpoint();
 
   const spans: string[] = [];
   const classes: string[] = [];
@@ -143,7 +148,7 @@ export function useCol({
       span = propValue;
     }
 
-    const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+    const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : '';
 
     if (span)
       spans.push(
