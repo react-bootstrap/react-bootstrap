@@ -1,6 +1,10 @@
-<>
-  <style type="text/css">
-    {`
+import Button from 'react-bootstrap/Button';
+
+function VariantsExample() {
+  return (
+    <>
+      <style type="text/css">
+        {`
     .btn-flat {
       background-color: purple;
       color: white;
@@ -11,9 +15,13 @@
       font-size: 1.5rem;
     }
     `}
-  </style>
+      </style>
 
-  <Button variant="flat" size="xxl">
-    flat button
-  </Button>
-</>;
+      <Button variant="flat" size="xxl">
+        flat button
+      </Button>
+    </>
+  );
+}
+
+export default VariantsExample;

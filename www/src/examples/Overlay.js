@@ -1,21 +1,25 @@
+import Button from 'react-bootstrap/Button';
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 class Example extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.getTarget = this.getTarget.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.getTarget = this.getTarget.bind(this);
 
     this.state = {
       show: true,
     };
   }
 
-  getTarget() {
-    return ReactDOM.findDOMNode(this.target);
-  }
-
   handleToggle() {
     this.setState((s) => ({ show: !s.show }));
+  }
+
+  getTarget() {
+    return ReactDOM.findDOMNode(this.target);
   }
 
   render() {

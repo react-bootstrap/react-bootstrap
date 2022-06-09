@@ -1,7 +1,15 @@
-<>
-  <p aria-hidden="true">
-    <Placeholder xs={6} />
-  </p>
+import Placeholder from 'react-bootstrap/Placeholder';
 
-  <Placeholder.Button xs={4} aria-hidden="true" />
-</>;
+function BasicExample() {
+  return (
+    <>
+      <p aria-hidden="true">
+        <Placeholder xs={6} />
+      </p>
+
+      <Placeholder.Button xs={4} aria-hidden="true" />
+    </>
+  );
+}
+
+export default BasicExample;
