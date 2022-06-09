@@ -25,8 +25,8 @@ import * as yup from 'yup';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMutationObserver from '@restart/hooks/useMutationObserver';
-import { PlaceholderImage } from './PlaceholderImage';
-import { Sonnet } from './Sonnet';
+import PlaceholderImage from './PlaceholderImage';
+import Sonnet from './Sonnet';
 
 const scope = {
   useEffect,

@@ -3,6 +3,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
+import Sonnet from '../../components/Sonnet';
+
 function TabsExample() {
   return (
     <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">

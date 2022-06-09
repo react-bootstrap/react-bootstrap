@@ -1,7 +1,7 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import { Sonnet } from '../../components/Sonnet';
+import Sonnet from '../../components/Sonnet';
 
 function NoAnimationExample() {
   return (

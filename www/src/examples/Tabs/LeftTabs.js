@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
-import { Sonnet } from '../../components/Sonnet';
+import Sonnet from '../../components/Sonnet';
 
 function LeftTabsExample() {
   return (
