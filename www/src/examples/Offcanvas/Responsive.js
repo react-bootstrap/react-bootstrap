@@ -1,4 +1,9 @@
-function Example() {
+import { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
+function ResponsiveExample() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,4 +33,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default ResponsiveExample;
