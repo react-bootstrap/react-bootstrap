@@ -1,3 +1,25 @@
+# [2.5.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.4.0...v2.5.0-beta.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* **NavbarOffcanvas:** fix render to be SSR safe ([#6360](https://github.com/react-bootstrap/react-bootstrap/issues/6360)) ([94d2fb4](https://github.com/react-bootstrap/react-bootstrap/commit/94d2fb452e2d91ce5905fa1dce0a416af0940483))
+* **Overlay:** fix initial positioning of overlays ([#6348](https://github.com/react-bootstrap/react-bootstrap/issues/6348)) ([bdb89d5](https://github.com/react-bootstrap/react-bootstrap/commit/bdb89d588897f2766beae6083b711c1531f96977))
+* **ToggleButtonGroup:** remove extra `onChange` check ([#6345](https://github.com/react-bootstrap/react-bootstrap/issues/6345)) ([52220e0](https://github.com/react-bootstrap/react-bootstrap/commit/52220e06ef5fdba4460c19fb9b888cf15bd2b211))
+
+
+### Features
+
+* **FormCheck:** add support for reverse checks and radios ([#6353](https://github.com/react-bootstrap/react-bootstrap/issues/6353)) ([dd41911](https://github.com/react-bootstrap/react-bootstrap/commit/dd4191190b118840351f5cd8e20ccc7add3e98a8))
+* **Offcanvas:** add responsive support ([#6363](https://github.com/react-bootstrap/react-bootstrap/issues/6363)) ([3bc4df2](https://github.com/react-bootstrap/react-bootstrap/commit/3bc4df2a30f42e8d8b6a869abeba994da9a1cda2))
+* **Offcanvas:** added support for static backdrops ([#6342](https://github.com/react-bootstrap/react-bootstrap/issues/6342)) ([e5b7c89](https://github.com/react-bootstrap/react-bootstrap/commit/e5b7c89410ae26eb9825ae181a2c11ee6b074bb3))
+* **Table:** add support for striped columns ([#6344](https://github.com/react-bootstrap/react-bootstrap/issues/6344)) ([9dc95c7](https://github.com/react-bootstrap/react-bootstrap/commit/9dc95c76bc35553809fb0f873a6fccc206416ce3))
+* **ThemeProvider:** support breakpoints smaller than xs ([#6371](https://github.com/react-bootstrap/react-bootstrap/issues/6371)) ([09bf4a2](https://github.com/react-bootstrap/react-bootstrap/commit/09bf4a2b19c8411fce54fd6128b213289d792617))
+
+
+
+
+
 # [2.4.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.1...v2.4.0) (2022-05-13)
 
 
