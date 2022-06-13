@@ -19,7 +19,7 @@ export default function transitionEndListener(
   const remove = transitionEnd(
     element,
     (e) => {
-      if (e.target === element) {
+      if (e.currentTarget === element) {
         remove();
         handler(e);
       }
