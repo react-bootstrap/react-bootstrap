@@ -1,36 +1,39 @@
 import DismissibleControlled from '../../examples/Alert/DismissibleControlled';
 import ReactPlayground from '../../components/ReactPlayground';
 
-# Why React-Bootstrap?
+<PageHeader title="Why React-Bootstrap?" />
+
 React-Bootstrap is a complete re-implementation of the
 Bootstrap components using React. It has **no dependency
-on either `bootstrap.js` or jQuery.** If you have React 
-setup and React-Bootstrap installed, you have everything 
-you need. 
+on either `bootstrap.js` or jQuery.** If you have React
+setup and React-Bootstrap installed, you have everything
+you need.
 
 Methods and events using jQuery is done imperatively
 by directly manipulating the DOM. In contrast, React
 uses updates to the state to update the virtual DOM.
 In this way, React-Bootstrap provides a more reliable
-solution by incorporating Bootstrap functionality into 
+solution by incorporating Bootstrap functionality into
 React's virtual DOM. Below are a few examples of how
 React-Bootstrap components differ from Bootstrap.
 
 ## A Simple React Component
+
 The CSS and details of Bootstrap components are rather
 opinionated and lengthy. React-Bootstrap simplifies
 this by condensing the original Bootstrap into React-styled
-components. 
+components.
 
 ### Bootstrap
+
 ```
 import * as React from 'react';
 
 function Example()  {
   return (
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Oh snap! You got an error!</strong> 
-      <p> 
+      <strong>Oh snap! You got an error!</strong>
+      <p>
         Change this and that and try again.
       </p>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -43,6 +46,7 @@ function Example()  {
 ```
 
 ### React-Bootstrap
+
 ```
 import * as React from 'react';
 import Alert from 'react-bootstrap/Alert';
@@ -60,11 +64,12 @@ function Example() {
 ```
 
 ## Bootstrap with state
+
 Since React-Bootstrap is built with React Javascript, state
 can be passed within React-Bootstrap components as a prop.
 It also makes it easier to manage the state as updates are
 made using React’s state instead of directly manipulating
-the state of the DOM. This also gives a lot of flexibility 
+the state of the DOM. This also gives a lot of flexibility
 when creating more complex components.
 
 ### React-bootstrap
@@ -72,11 +77,12 @@ when creating more complex components.
 <ReactPlayground codeText={DismissibleControlled} />
 
 ### Bootstrap
+
 ```
 // HTML
 <div class="alert alert-success alert-dismissible fade show firstCollapsible" role="alert">
-  <strong>How's it going?!</strong> 
-  <p> 
+  <strong>How's it going?!</strong>
+  <p>
     Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
     eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
     amet fermentum.

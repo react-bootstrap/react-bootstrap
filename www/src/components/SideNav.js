@@ -7,7 +7,6 @@ import FormControl from 'react-bootstrap/FormControl';
 import styled from 'astroturf';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import CarbonAds from './CarbonAds';
 
 const MenuButton = styled(Button).attrs({ variant: 'link' })`
   composes: p-0 d-md-none ms-3 from global;
@@ -285,7 +284,6 @@ class SideNav extends React.Component {
               />
               <NavSection heading="About" location={location} path="/about" />
             </TableOfContents>
-            <CarbonAds />
           </OverflowWrapper>
         </Collapse>
       </SidePanel>

@@ -9,25 +9,10 @@ import ButtonToolbar from '../../examples/ButtonGroup/Toolbar';
 import ButtonToolbarBasic from '../../examples/ButtonGroup/ToolbarBasic';
 import ButtonGroupVertical from '../../examples/ButtonGroup/Vertical';
 
-export const query = graphql`
-  query ButtonGroupQuery {
-    ButtonGroup: componentMetadata(displayName: { eq: "ButtonGroup" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-    ButtonToolbar: componentMetadata(displayName: { eq: "ButtonToolbar" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-  }
-`;
-
-# Button groups
-
-<p className="lead">
-  Group a series of buttons together on a single line with the button
-  group.
-</p>
+<PageHeader
+  title="Button group"
+  subTitle="Group a series of buttons together on a single line or stack them in a vertical column."
+/>
 
 ## Basic example
 
@@ -37,7 +22,7 @@ Wrap a series of `<Button>`s in a `<ButtonGroup>`.
 
 ## Button toolbar
 
-Combine sets of  `<ButtonGroup>`s into a `<ButtonToolbar>` for more complex components.
+Combine sets of `<ButtonGroup>`s into a `<ButtonToolbar>` for more complex components.
 
 <ReactPlayground codeText={ButtonToolbarBasic} />
 
@@ -50,7 +35,7 @@ to space things properly.
 ## Sizing
 
 Instead of applying button sizing props to every button in a group, just
-add  `size ` prop to the  `<ButtonGroup>`.
+add `size` prop to the `<ButtonGroup>`.
 
 <ReactPlayground codeText={ButtonGroupSizes} />
 
@@ -65,7 +50,7 @@ You can place other button types within the
 
 Make a set of buttons appear vertically stacked rather than
 horizontally, by adding `vertical` to the `<ButtonGroup>`.
- __Split button dropdowns are not supported here.__
+**Split button dropdowns are not supported here.**
 
 <ReactPlayground codeText={ButtonGroupVertical} />
 
@@ -74,4 +59,17 @@ horizontally, by adding `vertical` to the `<ButtonGroup>`.
 <ComponentApi metadata={props.data.ButtonGroup} />
 <ComponentApi metadata={props.data.ButtonToolbar} />
 
+export const query = graphql`
+  query ButtonGroupQuery {
+    ButtonGroup: componentMetadata(displayName: { eq: "ButtonGroup" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    ButtonToolbar: componentMetadata(displayName: { eq: "ButtonToolbar" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;
 
+;

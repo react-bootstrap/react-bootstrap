@@ -7,6 +7,7 @@ import Heading from '../components/Heading';
 import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
 import DocsAlert from '../components/DocsAlert';
+import PageHeader from '../components/PageHeader';
 import SEO from '../seo';
 import ThemeProvider from '../../../src/ThemeProvider';
 
@@ -31,6 +32,7 @@ const components = {
     ) : (
       <pre {...props} />
     ),
+  PageHeader,
 };
 
 const propTypes = {

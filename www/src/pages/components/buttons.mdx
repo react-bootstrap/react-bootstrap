@@ -15,12 +15,10 @@ import ToggleButtonGroupControlled from '../../examples/Button/ToggleButtonGroup
 import ToggleButtonGroupUncontrolled from '../../examples/Button/ToggleButtonGroupUncontrolled';
 import ButtonTypes from '../../examples/Button/Types';
 
-# Buttons
-
-<p className="lead">
-  Custom button styles for actions in forms, dialogs, and more with
-  support for multiple sizes, states, and more.
-</p>
+<PageHeader
+  title="Buttons"
+  subTitle="Use Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more."
+/>
 
 ## Examples
 
@@ -30,7 +28,6 @@ button. Just modify the `variant` prop.
 <ReactPlayground codeText={ButtonTypes} />
 
 ### Outline buttons
-
 
 For a lighter touch, Buttons also come in `outline-*`
 variants with no background color.
@@ -57,13 +54,12 @@ Fancy larger or smaller buttons? Add `size="lg"`,
 
 ## Block buttons
 
-Create responsive stacks of full-width, “block buttons” like those in Bootstrap 4 
-with a mix of our display and gap utilities. 
+Create responsive stacks of full-width, “block buttons” like those in Bootstrap 4
+with a mix of our display and gap utilities.
 
 <ReactPlayground codeText={ButtonBlock} />
 
 ## Active state
-
 
 To set a button's active state simply set the component's
 `active` prop.
@@ -104,7 +100,6 @@ button that works neatly inside an HTML form.
 The above handles styling, But requires manually controlling the
 `checked` state for each radio or checkbox in the group.
 
-
 For a nicer experience with checked state management use the
 `<ToggleButtonGroup>` instead of a `<ButtonGroup>` component.
 The group behaves as a form component, where the `value` is an array of the selected
@@ -124,7 +119,6 @@ The group behaves as a form component, where the `value` is an array of the sele
 <ComponentApi metadata={props.data.Button} />
 <ComponentApi metadata={props.data.ToggleButtonGroup} />
 <ComponentApi metadata={props.data.ToggleButton} />
-
 
 export const query = graphql`
   query ButtonQuery {

@@ -12,11 +12,10 @@ import ToastPlacementMulti from '../../examples/Toast/PlacementMulti';
 import ToastAutohide from '../../examples/Toast/Autohide';
 import ToastContextual from '../../examples/Toast/Contextual';
 
-# Toasts
-
-<p className="lead">
-  Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
-</p>
+<PageHeader
+  title="Toasts"
+  subTitle="Push notifications to your visitors with a toast, a lightweight and easily customizable alert message."
+/>
 
 Toasts are lightweight notifications designed to mimic the push notifications that have been popularized by mobile and desktop operating systems. They’re built with flexbox, so they’re easy to align and position.
 
@@ -65,8 +64,8 @@ Add any of the below mentioned modifier classes to change the appearance of a to
 ## API
 
 <ComponentApi metadata={props.data.Toast} />
-<ComponentApi metadata={props.data.ToastHeader}/>
-<ComponentApi metadata={props.data.ToastBody}/>
+<ComponentApi metadata={props.data.ToastHeader} />
+<ComponentApi metadata={props.data.ToastBody} />
 <ComponentApi metadata={props.data.ToastContainer} />
 
 export const query = graphql`

@@ -12,12 +12,11 @@ import GridColSizes from '../../examples/Form/GridColSizes';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
 
-# Layout
-
-<p className="lead">
-  Give your forms some structure—from inline to horizontal to custom grid
-  implementations—with our form layout options.
-</p>
+<PageHeader
+  title="Layout"
+  subTitle="Give your forms some structure—from inline to horizontal to custom grid
+  implementations—with our form layout options."
+/>
 
 ## Forms
 
@@ -91,8 +90,8 @@ like `<Col xs={7}>`.
 
 ## Auto-sizing
 
-The example below uses a flexbox utility to vertically center the contents and 
-changes `<Col>` to `<Col xs="auto">` so that your columns only take up as much 
+The example below uses a flexbox utility to vertically center the contents and
+changes `<Col>` to `<Col xs="auto">` so that your columns only take up as much
 space as needed. Put another way, the column sizes itself based on on the contents.
 
 <ReactPlayground codeText={GridAutoSizing} />
