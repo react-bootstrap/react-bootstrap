@@ -1,4 +1,4 @@
-# Migrating to v2
+<PageHeader title="Migrating to v2" />
 
 React-Bootstrap v2 adds full compatibility with Bootstrap 5. Because Bootstrap 5 is a major rewrite of the project, there
 are significant breaking changes from React-Bootstrap v1.
@@ -40,6 +40,7 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - `useAccordionToggle` has been renamed to `useAccordionButton`.
 
 ### Badge
+
 - `variant` has been renamed to `bg`.
 
 ### ButtonGroup
@@ -61,11 +62,13 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - When using objects in breakpoint props, `span` is no longer `true` by default.
 
 ### Dropdown
+
 - dropdown dividers use `hr` by default instead of `div`.
 - Alignment values `left` and `right` changed to `start` and `end` respectively.
 - Removed `alignRight`. Use `align="end"` instead.
 
 ### DropdownButton
+
 - Removed `menuAlign` prop in favor of `align`.
 
 ### DropdownItem
@@ -73,6 +76,7 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - removed `onSelect`. Use `onSelect` in the parent `Dropdown` instead.
 
 ### DropdownMenu
+
 - Removed `alignRight`. Use `align="end"` instead.
 
 ### Form
@@ -109,9 +113,9 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 
 ### FormGroup
 
-- removed `bsPrefix`. The `.form-group` class is no longer supported in Bootstrap, 
-but this component is useful for passing `controlId` to labels and inputs. To handle
-spacing, use margin utilities instead.
+- removed `bsPrefix`. The `.form-group` class is no longer supported in Bootstrap,
+  but this component is useful for passing `controlId` to labels and inputs. To handle
+  spacing, use margin utilities instead.
 
 ### FormRow
 
@@ -152,7 +156,7 @@ spacing, use margin utilities instead.
 
 ### SplitButton
 
-- Removed `menuAlign` prop in favor of `align`. 
+- Removed `menuAlign` prop in favor of `align`.
 
 ### Toast
 

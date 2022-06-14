@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const CarbonAds = () => {
+const CarbonAds = (props) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const CarbonAds = () => {
     };
   }, []);
 
-  return <div ref={ref} />;
+  return <div ref={ref} {...props} />;
 };
 
 export default CarbonAds;

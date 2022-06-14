@@ -9,10 +9,12 @@ import SpinnerVariants from '../../examples/Spinner/Variants';
 import SpinnerSizes from '../../examples/Spinner/Sizes';
 import SpinnerButtons from '../../examples/Spinner/Buttons';
 
+<PageHeader
+  title="Spinners"
+  subTitle="Spinners can be used to show the loading state in your projects."
+/>
 
-# Spinners
-
-Spinners can be used to show the loading state in your projects.
+## Example
 
 <ReactPlayground codeText={SpinnerBasic} />
 
@@ -63,14 +65,13 @@ spinner's meaning inside the component using Bootstrap's `visually-hidden`
 class.
 
 The example below provides an example of accessible usage of this
- component.
+component.
 
 <ReactPlayground codeText={SpinnerBasic} />
 
 ## API
 
 <ComponentApi metadata={props.data.metadata} />
-
 
 export const query = graphql`
   query Spinner {

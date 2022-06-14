@@ -24,13 +24,11 @@ import AutoClose from '../../examples/Dropdown/AutoClose';
 
 import styles from '../../css/examples.module.scss';
 
-
-# Dropdowns
-
-<p className="lead">
-  Toggle contextual overlays for displaying lists of links and more with
-  the Bootstrap dropdown plugin
-</p>
+<PageHeader
+  title="Dropdowns"
+  subTitle="Toggle contextual overlays for displaying lists of links and more with
+  the Bootstrap dropdown plugin"
+/>
 
 ## Overview
 
@@ -38,7 +36,6 @@ Dropdowns are toggleable, contextual overlays for displaying lists of
 links and more. Like overlays, Dropdowns are built using a third-party
 library <a href="https://popper.js.org/">Popper.js</a>, which provides
 dynamic positioning and viewport detection.
-
 
 ## Accessibility
 
@@ -69,7 +66,6 @@ the `<DropdownButton>` component to help reduce typing. Provide
 a `title` prop and some `<DropdownItem>`s and you're
 ready to go.
 
-
 <ReactPlayground codeText={DropdownBasicButton} />
 
 DropdownButton will forward Button props to the underlying Toggle
@@ -84,7 +80,6 @@ components with another Button and a ButtonGroup.
 
 <ReactPlayground codeText={SplitBasic} />
 
-
 As with DropdownButton, `SplitButton` is provided as
 convenience component.
 
@@ -98,7 +93,7 @@ Dropdowns work with buttons of all sizes.
 
 ## Dark dropdowns
 
-Opt into darker dropdowns to match a dark navbar or custom style by adding 
+Opt into darker dropdowns to match a dark navbar or custom style by adding
 `variant="dark"` onto an existing `DropdownMenu`. Alternatively, use
 `menuVariant="dark"` when using the `DropdownButton` component.
 
@@ -135,15 +130,14 @@ it by passing `align="end"` to a `<Dropdown>`, `<DropdownButton>`, or `<SplitBut
 
 ### Responsive alignment
 
-If you want to use responsive menu alignment, pass an object containing a breakpoint to the 
-`align` prop on the `<DropdownMenu>`, `<DropdownButton>`, or `<SplitButton>`. 
+If you want to use responsive menu alignment, pass an object containing a breakpoint to the
+`align` prop on the `<DropdownMenu>`, `<DropdownButton>`, or `<SplitButton>`.
 You can specify `start` or `end` for the various breakpoints.
 
 <Callout theme="danger" title="Warning">
-  Using responsive alignment will disable Popper usage so any dynamic positioning 
-  features such as <code>flip</code> will not work.
+  Using responsive alignment will disable Popper usage so any dynamic
+  positioning features such as <code>flip</code> will not work.
 </Callout>
-
 
 <ReactPlayground codeText={MenuAlignResponsive} />
 
@@ -171,10 +165,10 @@ By default, the dropdown menu is closed when selecting a menu item or clicking o
 dropdown menu. This behaviour can be changed by using the `autoClose` property.
 
 By default, `autoClose` is set to the default value `true` and behaves like expected. By choosing `false`, the dropdown
-menu can only be toggled by clicking on the dropdown button. `inside` makes the dropdown disappear __only__
-by choosing a menu item and `outside` closes the dropdown menu __only__ by clicking outside.
+menu can only be toggled by clicking on the dropdown button. `inside` makes the dropdown disappear **only**
+by choosing a menu item and `outside` closes the dropdown menu **only** by clicking outside.
 
-__Notice__ how the dropdown is toggled in each scenario by clicking on the button.
+**Notice** how the dropdown is toggled in each scenario by clicking on the button.
 
 <ReactPlayground codeText={AutoClose} />
 
@@ -195,7 +189,7 @@ Menu components
 For those that want to customize everything, you can forgo the included
 Toggle and Menu components, and create your own. By providing custom
 components to the `as` prop, you can control how each
-component behaves. Custom toggle and menu components __must__ be able to accept refs.
+component behaves. Custom toggle and menu components **must** be able to accept refs.
 
 <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
@@ -207,17 +201,28 @@ component behaves. Custom toggle and menu components __must__ be able to accept 
 
 <ComponentApi metadata={props.data.Dropdown} />
 
-<ComponentApi metadata={props.data.DropdownToggle} exportedBy={props.data.Dropdown} />
-
-<ComponentApi metadata={props.data.DropdownMenu} exportedBy={props.data.Dropdown} />
-
-<ComponentApi metadata={props.data.DropdownItem} exportedBy={props.data.Dropdown} />
-<ComponentApi metadata={props.data.DropdownHeader} exportedBy={props.data.Dropdown} />
 <ComponentApi
-metadata={props.data.DropdownDivider}
-exportedBy={props.data.Dropdown}
+  metadata={props.data.DropdownToggle}
+  exportedBy={props.data.Dropdown}
 />
 
+<ComponentApi
+  metadata={props.data.DropdownMenu}
+  exportedBy={props.data.Dropdown}
+/>
+
+<ComponentApi
+  metadata={props.data.DropdownItem}
+  exportedBy={props.data.Dropdown}
+/>
+<ComponentApi
+  metadata={props.data.DropdownHeader}
+  exportedBy={props.data.Dropdown}
+/>
+<ComponentApi
+  metadata={props.data.DropdownDivider}
+  exportedBy={props.data.Dropdown}
+/>
 
 export const query = graphql`
   query DropdownMDXQuery {

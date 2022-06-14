@@ -23,12 +23,11 @@ import CardWithHeader from '../../examples/Card/WithHeader';
 import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
 import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
 
-# Cards
-
-<p className="lead">
-  Bootstrap’s cards provide a flexible and extensible content container
-  with multiple variants and options.
-</p>
+<PageHeader
+  title="Cards"
+  subTitle="Bootstrap’s cards provide a flexible and extensible content container
+  with multiple variants and options."
+/>
 
 ## Basic Example
 
@@ -142,14 +141,16 @@ Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control 
 <ComponentApi metadata={props.data.CardFooter} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardHeader} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImg} exportedBy={props.data.Card} />
-<ComponentApi metadata={props.data.CardImgOverlay} exportedBy={props.data.Card} />
+<ComponentApi
+  metadata={props.data.CardImgOverlay}
+  exportedBy={props.data.Card}
+/>
 <ComponentApi metadata={props.data.CardLink} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardSubtitle} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardText} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardTitle} exportedBy={props.data.Card} />
 
 <ComponentApi metadata={props.data.CardGroup} />
-
 
 export const query = graphql`
   query CardQuery {

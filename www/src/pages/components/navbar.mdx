@@ -15,12 +15,11 @@ import NavbarTextLink from '../../examples/Navbar/TextLink';
 import ContainerOutside from '../../examples/Navbar/ContainerOutside';
 import ContainerInside from '../../examples/Navbar/ContainerInside';
 
-# Navbars
-
-<p className="lead">
-  A powerful, responsive navigation header, the navbar. Includes support for
-  branding, navigation, and more
-</p>
+<PageHeader
+  title="Navbars"
+  subTitle="A powerful, responsive navigation header, the navbar. Includes support for
+  branding, navigation, and more."
+/>
 
 ## Overview
 
@@ -125,8 +124,8 @@ the collapsing behavior by using the `expanded` and
 `onToggle` props.
 
 <Callout theme="warning">
-  Watch out! You <strong>need</strong> to provide a breakpoint value to <code>expand</code> in
-  order for the Navbar to collapse at all.
+  Watch out! You <strong>need</strong> to provide a breakpoint value to{' '}
+  <code>expand</code> in order for the Navbar to collapse at all.
 </Callout>
 
 <ReactPlayground codeText={NavbarCollapsible} />

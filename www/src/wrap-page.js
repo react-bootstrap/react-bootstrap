@@ -7,6 +7,7 @@ const { MDXProvider } = require('@mdx-js/react');
 const Heading = require('./components/Heading');
 const CodeBlock = require('./components/CodeBlock');
 const LinkedHeading = require('./components/LinkedHeading');
+const PageHeader = require('./components/PageHeader');
 
 const getMode = (className = '') => {
   const [, mode] = className.match(/language-(\w+)/) || [];
@@ -29,6 +30,7 @@ const components = {
     ) : (
       <pre {...props} />
     ),
+  PageHeader,
 };
 
 module.exports = ({ element }) => (
