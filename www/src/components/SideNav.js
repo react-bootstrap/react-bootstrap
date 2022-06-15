@@ -49,16 +49,17 @@ const OverflowWrapper = styled('div')`
   }
 `;
 
-const TableOfContents = styled('nav')`
+const TableOfContents = styled(Nav)`
   @import '../css/theme';
 
-  composes: pt-2 pb-4 from global;
+  composes: pt-2 pb-4 flex-column from global;
 
   @include media-breakpoint-up(md) {
     height: 100% !important;
     overflow: auto;
     margin-right: -15px;
     padding-right: calc(15px + 1rem);
+    flex-wrap: nowrap;
   }
 `;
 
