@@ -1,8 +1,16 @@
 import classNames from 'classnames';
+import useBreakpoint from '@restart/hooks/useBreakpoint';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useCallback, useContext, useMemo, useRef } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
@@ -230,6 +238,18 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       const modalManager = useRef<BootstrapModalManager>();
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
       const { onToggle } = useContext(NavbarContext) || {};
+      const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+      const hideResponsiveOffcanvas = useBreakpoint(
+        (responsive as any) || 'xs',
+        'up',
+      );
+
+      useEffect(() => {
+        // Handles the case where screen is resized while the responsive
+        // offcanvas is shown. If `responsive` not provided, just use `show`.
+        setShowOffcanvas(responsive ? show && !hideResponsiveOffcanvas : show);
+      }, [show, responsive, hideResponsiveOffcanvas]);
 
       const handleHide = useEventCallback(() => {
         onToggle?.();
@@ -299,11 +319,11 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
             Only render static elements when offcanvas isn't shown so we 
             don't duplicate elements 
           */}
-          {!show && renderDialog({})}
+          {!showOffcanvas && renderDialog({})}
 
           <ModalContext.Provider value={modalContext}>
             <BaseModal
-              show={show}
+              show={showOffcanvas}
               ref={ref}
               backdrop={backdrop}
               container={container}
