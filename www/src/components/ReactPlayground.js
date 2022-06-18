@@ -312,6 +312,8 @@ function Editor() {
 const PRETTIER_IGNORE_REGEX =
   /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+prettier-ignore)/gim;
 
+const IGNORE_IMPORTS_EXPORTS_REGEX = /^.*\b(import|export)\b.*$/gim;
+
 const propTypes = {
   codeText: PropTypes.string.isRequired,
 };
@@ -323,6 +325,9 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
     .trim()
     .replace(/>;$/, '>');
 
+  const transformCode = (rawCode) =>
+    rawCode.replace(IGNORE_IMPORTS_EXPORTS_REGEX, '');
+
   return (
     <StyledContainer>
       <LiveProvider
@@ -330,6 +335,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
         code={code}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
+        transformCode={transformCode}
       >
         <Preview showCode={showCode} className={exampleClassName} />
         {showCode && <Editor />}

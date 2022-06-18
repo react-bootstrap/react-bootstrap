@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import {
+  useBootstrapPrefix,
+  useBootstrapBreakpoints,
+  useBootstrapMinBreakpoint,
+} from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { GapValue } from './types';
 import createUtilityClassName, {
@@ -46,6 +50,8 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
         bsPrefix,
         direction === 'horizontal' ? 'hstack' : 'vstack',
       );
+      const breakpoints = useBootstrapBreakpoints();
+      const minBreakpoint = useBootstrapMinBreakpoint();
 
       return (
         <Component
@@ -56,6 +62,8 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
             bsPrefix,
             ...createUtilityClassName({
               gap,
+              breakpoints,
+              minBreakpoint,
             }),
           )}
         />

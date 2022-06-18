@@ -4,16 +4,14 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import Breadcrumb from '../../examples/Breadcrumb';
 
+<PageHeader
+  title="Breadcrumbs"
+  subTitle="Indicate the current page’s location within a navigational hierarchy that automatically adds separators via CSS."
+/>
 
-## Breadcrumbs
+## Example
 
-Indicate the current page’s location within a navigational
-hierarchy that automatically adds separators via CSS. Add `active `
-prop to active  `Breadcrumb.Item `. Do not
-set both  `active ` and  `href ` attributes. `active ` overrides  `href ` and  `span `
-element is rendered instead of  `a `.
-
-### Example
+Add `active` prop to the active `Breadcrumb.Item`. Do not set both `active` and `href` attributes. `active` overrides `href` and `span` element is rendered instead of `a`.
 
 <ReactPlayground codeText={Breadcrumb} />
 
@@ -25,7 +23,6 @@ element is rendered instead of  `a `.
   metadata={props.data.BreadcrumbItem}
   exportedBy={props.data.Breadcrumb}
 />
-
 
 export const query = graphql`
   query BreadcrumbQuery {

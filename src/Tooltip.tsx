@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import { Placement } from './types';
+import { Placement, PopperRef } from './types';
 import { BsPrefixProps, getOverlayDirection } from './helpers';
 
 export interface TooltipProps
@@ -12,7 +12,7 @@ export interface TooltipProps
   placement?: Placement;
   arrowProps?: Partial<OverlayArrowProps>;
   show?: boolean;
-  popper?: any;
+  popper?: PopperRef;
 }
 
 const propTypes = {

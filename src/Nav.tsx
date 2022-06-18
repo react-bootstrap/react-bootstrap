@@ -49,6 +49,11 @@ const propTypes = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
+   * The default active key that is selected on start.
+   */
+  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
    * Have all `NavItem`s proportionately fill all available width.
    */
   fill: PropTypes.bool,

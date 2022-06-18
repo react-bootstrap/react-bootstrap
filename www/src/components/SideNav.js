@@ -7,7 +7,6 @@ import FormControl from 'react-bootstrap/FormControl';
 import styled from 'astroturf';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import CarbonAds from './CarbonAds';
 
 const MenuButton = styled(Button).attrs({ variant: 'link' })`
   composes: p-0 d-md-none ms-3 from global;
@@ -50,16 +49,17 @@ const OverflowWrapper = styled('div')`
   }
 `;
 
-const TableOfContents = styled('nav')`
+const TableOfContents = styled(Nav)`
   @import '../css/theme';
 
-  composes: pt-2 pb-4 from global;
+  composes: pt-2 pb-4 flex-column from global;
 
   @include media-breakpoint-up(md) {
     height: 100% !important;
     overflow: auto;
     margin-right: -15px;
     padding-right: calc(15px + 1rem);
+    flex-wrap: nowrap;
   }
 `;
 
@@ -111,7 +111,7 @@ const gettingStarted = [
   'server-side-rendering',
 ];
 
-const layout = ['grid', 'stack'];
+const layout = ['breakpoints', 'grid', 'stack'];
 
 const forms = [
   'overview',
@@ -285,7 +285,6 @@ class SideNav extends React.Component {
               />
               <NavSection heading="About" location={location} path="/about" />
             </TableOfContents>
-            <CarbonAds />
           </OverflowWrapper>
         </Collapse>
       </SidePanel>

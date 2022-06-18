@@ -10,6 +10,9 @@ on:
       - master
       - bs3-dev
       - bs4-dev
+permissions:
+  contents: read
+
 jobs:
   ci:
     name: CI
@@ -20,9 +23,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: yarn
@@ -44,6 +47,6 @@ jobs:
         env:
           BROWSER: ${{ matrix.browser }}
       - name: Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
       - name: Build Project
         run: yarn build

@@ -6,9 +6,10 @@ import DocLink from '../../components/DocLink';
 import ReactPlayground from '../../components/ReactPlayground';
 import AsPropButtonExample from '../../examples/AsProp';
 
-# Introduction
-
-<p className="lead">Learn how to include React Bootstrap in your project</p>
+<PageHeader
+  title="Introduction"
+  subTitle="Learn how to include React Bootstrap in your project."
+/>
 
 ## Installation
 
@@ -19,7 +20,7 @@ If you plan on customizing the Bootstrap Sass files, or don't want
 to use a CDN for the stylesheet, it may be helpful to
 install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLink> as well.
 
-<CodeBlock codeText={`npm install react-bootstrap bootstrap@${config.bootstrapVersion}`} />
+<CodeBlock codeText={`npm install react-bootstrap bootstrap`} />
 
 ## Importing Components
 
@@ -65,6 +66,7 @@ stylesheet **is required** to use these components.
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
+
 How and which Bootstrap styles you include is up to you, but the
 simplest way is to include the latest styles from the CDN. A little
 more information about the benefits of using a CDN can be found
@@ -122,15 +124,15 @@ for more advanced use cases and details about customizing stylesheets.
 
 ## "as" Prop API
 
-With certain React-Bootstrap components, you may want to modify the component or HTML tag 
+With certain React-Bootstrap components, you may want to modify the component or HTML tag
 that is rendered.
 
-If you want to keep all the styling of a particular React-Bootstrap component but switch the 
-component that is finally rendered (whether it's a different React-Bootstrap component, a 
+If you want to keep all the styling of a particular React-Bootstrap component but switch the
+component that is finally rendered (whether it's a different React-Bootstrap component, a
 different custom component, or a different HTML tag) you can use the "as" Prop to do so.
 
-The example below passes a Column component to the "as" Prop in a Button component. This 
-ultimately causes a Column component to be rendered but with the same styles as a Button 
+The example below passes a Column component to the "as" Prop in a Button component. This
+ultimately causes a Column component to be rendered but with the same styles as a Button
 component.
 
 <ReactPlayground codeText={AsPropButtonExample} />
@@ -152,6 +154,7 @@ If you would like to add a custom theme on your app using Create React
 App, they have additional documentation for Create React App and
 Bootstrap
 [here](https://facebook.github.io/create-react-app/docs/adding-bootstrap#using-a-custom-theme)
+
 </Callout>
 
 ## Browser support

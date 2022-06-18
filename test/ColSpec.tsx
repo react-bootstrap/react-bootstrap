@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '../src';
 
 import Col from '../src/Col';
 
@@ -82,5 +83,27 @@ describe('Col', () => {
   it('Should have div as default component', () => {
     const { getByText } = render(<Col>Column</Col>);
     getByText('Column').tagName.toLowerCase().should.equal('div');
+  });
+
+  it('should allow custom breakpoints', () => {
+    const { getByText } = render(
+      <ThemeProvider breakpoints={['custom']}>
+        <Col custom="3">test</Col>
+      </ThemeProvider>,
+    );
+    getByText('test').classList.contains('col-custom-3').should.be.true;
+  });
+
+  it('should allow custom breakpoints smaller than default "xs"', () => {
+    const { getByText } = render(
+      <ThemeProvider breakpoints={['xxs', 'xs']} minBreakpoint="xxs">
+        <Col xxs="3" xs="2">
+          test
+        </Col>
+      </ThemeProvider>,
+    );
+
+    getByText('test').classList.contains('col-3').should.be.true;
+    getByText('test').classList.contains('col-xs-2').should.be.true;
   });
 });

@@ -11,7 +11,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush';
-  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  horizontal?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   defaultActiveKey?: EventKey;
   numbered?: boolean;
 }
@@ -36,7 +36,7 @@ const propTypes = {
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
    * @type {(true|'sm'|'md'|'lg'|'xl'|'xxl')}
    */
-  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']),
+  horizontal: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * Generate numbered list items.

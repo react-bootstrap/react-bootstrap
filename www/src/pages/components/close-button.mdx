@@ -7,10 +7,12 @@ import CloseButtonDisabled from '../../examples/CloseButton/Disabled';
 import CloseButtonVariants from '../../examples/CloseButton/Variants';
 import CloseButtonLabelled from '../../examples/CloseButton/Labelled';
 
+<PageHeader
+  title="Close Button"
+  subTitle="A generic close button for dismissing content such as modals and alerts."
+/>
 
-# Close Button
-
-A generic close button for dismissing content such as modals and alerts.
+## Example
 
 <ReactPlayground codeText={CloseButtonBasic} />
 
@@ -30,7 +32,7 @@ Change the default dark color to white using `variant="white"`.
 ## Accessibility
 
 To ensure the maximum accessibility for Close Button components, it is
-recommended that you provide relevant text for screen readers.  The example
+recommended that you provide relevant text for screen readers. The example
 below provides an example of accessible usage of this component by way of the
 `aria-label` property.
 
@@ -39,7 +41,6 @@ below provides an example of accessible usage of this component by way of the
 ## API
 
 <ComponentApi metadata={props.data.metadata} />
-
 
 export const query = graphql`
   query CloseButton {

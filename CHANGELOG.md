@@ -1,3 +1,119 @@
+# [2.5.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.4.0...v2.5.0-beta.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* **NavbarOffcanvas:** fix render to be SSR safe ([#6360](https://github.com/react-bootstrap/react-bootstrap/issues/6360)) ([94d2fb4](https://github.com/react-bootstrap/react-bootstrap/commit/94d2fb452e2d91ce5905fa1dce0a416af0940483))
+* **Overlay:** fix initial positioning of overlays ([#6348](https://github.com/react-bootstrap/react-bootstrap/issues/6348)) ([bdb89d5](https://github.com/react-bootstrap/react-bootstrap/commit/bdb89d588897f2766beae6083b711c1531f96977))
+* **ToggleButtonGroup:** remove extra `onChange` check ([#6345](https://github.com/react-bootstrap/react-bootstrap/issues/6345)) ([52220e0](https://github.com/react-bootstrap/react-bootstrap/commit/52220e06ef5fdba4460c19fb9b888cf15bd2b211))
+
+
+### Features
+
+* **FormCheck:** add support for reverse checks and radios ([#6353](https://github.com/react-bootstrap/react-bootstrap/issues/6353)) ([dd41911](https://github.com/react-bootstrap/react-bootstrap/commit/dd4191190b118840351f5cd8e20ccc7add3e98a8))
+* **Offcanvas:** add responsive support ([#6363](https://github.com/react-bootstrap/react-bootstrap/issues/6363)) ([3bc4df2](https://github.com/react-bootstrap/react-bootstrap/commit/3bc4df2a30f42e8d8b6a869abeba994da9a1cda2))
+* **Offcanvas:** added support for static backdrops ([#6342](https://github.com/react-bootstrap/react-bootstrap/issues/6342)) ([e5b7c89](https://github.com/react-bootstrap/react-bootstrap/commit/e5b7c89410ae26eb9825ae181a2c11ee6b074bb3))
+* **Table:** add support for striped columns ([#6344](https://github.com/react-bootstrap/react-bootstrap/issues/6344)) ([9dc95c7](https://github.com/react-bootstrap/react-bootstrap/commit/9dc95c76bc35553809fb0f873a6fccc206416ce3))
+* **ThemeProvider:** support breakpoints smaller than xs ([#6371](https://github.com/react-bootstrap/react-bootstrap/issues/6371)) ([09bf4a2](https://github.com/react-bootstrap/react-bootstrap/commit/09bf4a2b19c8411fce54fd6128b213289d792617))
+
+
+
+
+
+# [2.4.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.1...v2.4.0) (2022-05-13)
+
+
+### Features
+
+* **ToastContainer:** add `containerPosition` prop ([#6316](https://github.com/react-bootstrap/react-bootstrap/issues/6316)) ([9815957](https://github.com/react-bootstrap/react-bootstrap/commit/9815957898c6f59a6df89f1aec847a67482af4d6))
+
+
+
+
+
+## [2.3.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.3.0...v2.3.1) (2022-04-28)
+
+
+### Bug Fixes
+
+* **NavbarOffcanvas:** fix rendering of nav items when expand is used ([#6310](https://github.com/react-bootstrap/react-bootstrap/issues/6310)) ([63869f9](https://github.com/react-bootstrap/react-bootstrap/commit/63869f923995d3897c3e4f3d77433cf8a3f6505e))
+* **TabPane:** omit Transition when prop is false ([#6305](https://github.com/react-bootstrap/react-bootstrap/issues/6305)) ([1c71e9e](https://github.com/react-bootstrap/react-bootstrap/commit/1c71e9ecc8a8bf5d9e90ea61dcaa1635d7eb8712))
+
+
+
+
+
+# [2.3.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.3...v2.3.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* **deps:** clean up [@types](https://github.com/types) deps list ([#6303](https://github.com/react-bootstrap/react-bootstrap/issues/6303)) ([609c678](https://github.com/react-bootstrap/react-bootstrap/commit/609c678244a06ad4f7df0e03518ece19c2e97a73))
+
+
+### Features
+
+* **Pagination:** Wrap Pagination sub-components in forward refs ([#6306](https://github.com/react-bootstrap/react-bootstrap/issues/6306)) ([2686ae3](https://github.com/react-bootstrap/react-bootstrap/commit/2686ae381c61ee298e1bd7e2cbae10abc31df2dc))
+
+
+
+
+
+## [2.2.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.2...v2.2.3) (2022-04-05)
+
+
+### Bug Fixes
+
+* bump @restart/hooks to v0.4.6 ([#6294](https://github.com/react-bootstrap/react-bootstrap/issues/6294)) ([dceb74b](https://github.com/react-bootstrap/react-bootstrap/commit/dceb74b2c0d81b71265410a1b3c85802bed14c68))
+
+
+
+
+
+## [2.2.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.1...v2.2.2) (2022-03-25)
+
+
+### Bug Fixes
+
+* update @restart/ui to v1.2.0 ([#6285](https://github.com/react-bootstrap/react-bootstrap/issues/6285)) ([4f5e625](https://github.com/react-bootstrap/react-bootstrap/commit/4f5e625f9ba39a158eb8db311f3328b00ee2b618))
+* **Modal:** fix autofocus for inputs when animation is enabled ([#6278](https://github.com/react-bootstrap/react-bootstrap/issues/6278)) ([08e1bbc](https://github.com/react-bootstrap/react-bootstrap/commit/08e1bbc04a0722e7fe79c194f42f9a890f56ee31))
+* **Modal:** render aria-describedby on the top level modal element ([#6282](https://github.com/react-bootstrap/react-bootstrap/issues/6282)) ([93a8a0e](https://github.com/react-bootstrap/react-bootstrap/commit/93a8a0ef29409293dd69fad5873ad791634b3ed1))
+* **Modal:** render aria-label on top level modal element ([#6269](https://github.com/react-bootstrap/react-bootstrap/issues/6269)) ([48f7c07](https://github.com/react-bootstrap/react-bootstrap/commit/48f7c078d07af5f9266923ef04c3e85a836dcfa9))
+
+
+
+
+
+## [2.2.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.2.0...v2.2.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* **Carousel:** fix issue where changing `activeIndex` won't work ([#6265](https://github.com/react-bootstrap/react-bootstrap/issues/6265)) ([0c7c5f7](https://github.com/react-bootstrap/react-bootstrap/commit/0c7c5f72847f7c8099742614dcedd88c66346082))
+* **useOverlayOffset:** use offset prop in useOverlayOffset ([#6264](https://github.com/react-bootstrap/react-bootstrap/issues/6264)) ([e338818](https://github.com/react-bootstrap/react-bootstrap/commit/e338818d975fcc68e0845f1ccc4ce5da381e098a))
+
+
+
+
+
+# [2.2.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.2...v2.2.0) (2022-03-04)
+
+
+### Bug Fixes
+
+* **TabPane:** use Fade for default transition ([#6235](https://github.com/react-bootstrap/react-bootstrap/issues/6235)) ([3e0b4d3](https://github.com/react-bootstrap/react-bootstrap/commit/3e0b4d3719e74d9680d44ec172b40f49947338b4))
+* added missing ModalHeader exports to index ([#6228](https://github.com/react-bootstrap/react-bootstrap/issues/6228)) ([3332da9](https://github.com/react-bootstrap/react-bootstrap/commit/3332da98a33cb0d60327339f7498b38722dae1aa))
+
+
+### Features
+
+* support custom breakpoints ([#6253](https://github.com/react-bootstrap/react-bootstrap/issues/6253)) ([0910a21](https://github.com/react-bootstrap/react-bootstrap/commit/0910a21b7d35eb859ca9e160c4492ef41a33810e))
+* **Tabs:** support passing custom attributes to Tab ([#5879](https://github.com/react-bootstrap/react-bootstrap/issues/5879)) ([6afa734](https://github.com/react-bootstrap/react-bootstrap/commit/6afa734cf29027cda36e188181762dca88fc48da))
+
+
+
+
+
 ## [2.1.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.1.1...v2.1.2) (2022-01-31)
 
 

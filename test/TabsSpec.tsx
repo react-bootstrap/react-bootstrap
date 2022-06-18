@@ -1,6 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
-import React from 'react';
 
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
@@ -168,6 +167,7 @@ describe('<Tabs>', () => {
     shouldWarn('Failed prop');
     const { getByTestId } = render(
       <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
+        {/* @ts-ignore */}
         <Tab eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2} disabled>
           Tab 2 content
@@ -176,6 +176,47 @@ describe('<Tabs>', () => {
     );
     const tabs = getByTestId('testid');
     tabs.children.should.have.length(1);
+  });
+
+  it('Should render TabPane with role="tabpanel"', () => {
+    const { getAllByRole } = render(
+      <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+      </Tabs>,
+    );
+
+    getAllByRole('tabpanel').should.have.length(1);
+  });
+
+  it('should have fade animation by default', () => {
+    const { getByRole } = render(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+      </Tabs>,
+    );
+    getByRole('tabpanel').classList.contains('fade').should.be.true;
+  });
+
+  it('Should omit Transition in TabPane if prop is false ', () => {
+    const { getByText } = render(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab title="Tab 1" className="custom" eventKey={1} transition={false}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" tabClassName="tcustom" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+    const firstTabContent = getByText('Tab 1 content');
+    const secondTabContent = getByText('Tab 2 content');
+
+    firstTabContent.classList.contains('fade').should.be.false;
+    secondTabContent.classList.contains('fade').should.be.true;
   });
 });
 

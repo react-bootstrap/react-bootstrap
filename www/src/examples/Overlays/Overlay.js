@@ -1,3 +1,7 @@
+import React, { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import Overlay from 'react-bootstrap/Overlay';
+
 function Example() {
   const [show, setShow] = useState(false);
   const target = useRef(null);
@@ -12,6 +16,7 @@ function Example() {
           <div
             {...props}
             style={{
+              position: 'absolute',
               backgroundColor: 'rgba(255, 100, 100, 0.85)',
               padding: '2px 10px',
               color: 'white',

@@ -38,6 +38,7 @@ export interface ModalProps
   size?: 'sm' | 'lg' | 'xl';
   fullscreen?:
     | true
+    | string
     | 'sm-down'
     | 'md-down'
     | 'lg-down'
@@ -216,7 +217,9 @@ const propTypes = {
    */
   container: PropTypes.any,
 
-  'aria-labelledby': PropTypes.any,
+  'aria-labelledby': PropTypes.string,
+  'aria-describedby': PropTypes.string,
+  'aria-label': PropTypes.string,
 };
 
 const defaultProps = {
@@ -252,6 +255,8 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         children,
         dialogAs: Dialog,
         'aria-labelledby': ariaLabelledby,
+        'aria-describedby': ariaDescribedby,
+        'aria-label': ariaLabel,
 
         /* BaseModal props */
 
@@ -398,7 +403,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const handleEnter = (node, isAppearing) => {
         if (node) {
-          node.style.display = 'block';
           updateDialogStyle(node);
         }
 
@@ -441,10 +445,9 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
       const baseModalStyle = { ...style, ...modalStyle };
 
-      // Sets `display` always block when `animation` is false
-      if (!animation) {
-        baseModalStyle.display = 'block';
-      }
+      // If `display` is not set to block, autoFocus inside the modal fails
+      // https://github.com/react-bootstrap/react-bootstrap/issues/5102
+      baseModalStyle.display = 'block';
 
       const renderDialog = (dialogProps) => (
         <div
@@ -458,7 +461,9 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           )}
           onClick={backdrop ? handleClick : undefined}
           onMouseUp={handleMouseUp}
+          aria-label={ariaLabel}
           aria-labelledby={ariaLabelledby}
+          aria-describedby={ariaDescribedby}
         >
           {/*
         // @ts-ignore */}

@@ -15,29 +15,12 @@ import NavStacked from '../../examples/Nav/Stacked';
 import Tabs from '../../examples/Nav/Tabs';
 import Pills from '../../examples/Nav/Pills';
 
+<PageHeader
+  title="Navs and tabs"
+  subTitle="Documentation and examples for how to use Bootstrap’s included navigation components."
+/>
 
-export const query = graphql`
-  query NavQuery {
-    Nav: componentMetadata(displayName: { eq: "Nav" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-    NavItem: componentMetadata(displayName: { eq: "NavItem" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-    NavLink: componentMetadata(displayName: { eq: "NavLink" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-    NavDropdown: componentMetadata(displayName: { eq: "NavDropdown" }) {
-      displayName
-      ...ComponentApi_metadata
-    }
-  }
-`;
-
-# Base Nav
+## Base Nav
 
 Navigation bits in Bootstrap all share a general `Nav`
 component and styles. Swap `variant`s to switch between each
@@ -62,7 +45,6 @@ When a `<ul>` is appropriate you can render one via the `as` prop; be sure to
 also set your items to `<li>` as well!
 
 <ReactPlayground codeText={NavList} />
-
 
 ## Alignment and orientation
 
@@ -129,5 +111,25 @@ straight-forward `<NavDropdown>` that works for most cases.
 <ComponentApi metadata={props.data.NavLink} exportedBy={props.data.Nav} />
 <ComponentApi metadata={props.data.NavDropdown} />
 
+export const query = graphql`
+  query NavQuery {
+    Nav: componentMetadata(displayName: { eq: "Nav" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavItem: componentMetadata(displayName: { eq: "NavItem" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavLink: componentMetadata(displayName: { eq: "NavLink" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavDropdown: componentMetadata(displayName: { eq: "NavDropdown" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;
 
 [0]: https://getbootstrap.com/docs/4.0/layout/grid/#horizontal-alignment

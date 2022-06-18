@@ -128,7 +128,7 @@ const propTypes = {
   /**
    * The amount of time to delay between automatically cycling an item. If `null`, carousel will not automatically cycle.
    */
-  interval: PropTypes.number,
+  interval: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
 
   /** Whether the carousel should react to keyboard events. */
   keyboard: PropTypes.bool,
@@ -263,21 +263,23 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
       activeIndex || 0,
     );
 
-    if (!isSliding && activeIndex !== renderedActiveIndex) {
-      if (nextDirectionRef.current) {
-        setDirection(nextDirectionRef.current);
-      } else {
-        setDirection(
-          (activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev',
-        );
-      }
+    useEffect(() => {
+      if (!isSliding && activeIndex !== renderedActiveIndex) {
+        if (nextDirectionRef.current) {
+          setDirection(nextDirectionRef.current);
+        } else {
+          setDirection(
+            (activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev',
+          );
+        }
 
-      if (slide) {
-        setIsSliding(true);
-      }
+        if (slide) {
+          setIsSliding(true);
+        }
 
-      setRenderedActiveIndex(activeIndex || 0);
-    }
+        setRenderedActiveIndex(activeIndex || 0);
+      }
+    }, [activeIndex, isSliding, renderedActiveIndex, slide]);
 
     useEffect(() => {
       if (nextDirectionRef.current) {

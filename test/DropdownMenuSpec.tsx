@@ -84,6 +84,17 @@ describe('<Dropdown.Menu>', () => {
     container.querySelector('[data-bs-popper="static"]')!.should.exist;
   });
 
+  it('allows custom responsive alignment classes', () => {
+    const { container } = render(
+      <DropdownMenu show align={{ custom: 'end' }}>
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    );
+
+    container.firstElementChild!.classList.contains('dropdown-menu-custom-end')
+      .should.be.true;
+  });
+
   it('should render variant', () => {
     const { container } = render(
       <DropdownMenu show variant="dark">

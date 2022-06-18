@@ -6,12 +6,16 @@ import BaseOverlay, {
   OverlayProps as BaseOverlayProps,
   OverlayArrowProps,
 } from '@restart/ui/Overlay';
+import { State } from '@restart/ui/usePopper';
 import { componentOrElement, elementType } from 'prop-types-extra';
+import useCallbackRef from '@restart/hooks/useCallbackRef';
+import useEventCallback from '@restart/hooks/useEventCallback';
+import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
 import { TransitionType } from './helpers';
-import { Placement, RootCloseEvent } from './types';
+import { Placement, PopperRef, RootCloseEvent } from './types';
 import safeFindDOMNode from './safeFindDOMNode';
 
 export interface OverlayInjectedProps {
@@ -23,12 +27,7 @@ export interface OverlayInjectedProps {
 
   show: boolean;
   placement: Placement | undefined;
-  popper: {
-    state: any;
-    outOfBoundaries: boolean;
-    placement: Placement | undefined;
-    scheduleUpdate?: () => void;
-  };
+  popper: PopperRef;
   [prop: string]: any;
 }
 
@@ -162,12 +161,24 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     { children: overlay, transition, popperConfig = {}, ...outerProps },
     outerRef,
   ) => {
-    const popperRef = useRef({});
-    const [ref, modifiers] = useOverlayOffset();
+    const popperRef = useRef<Partial<PopperRef>>({});
+    const [firstRenderedState, setFirstRenderedState] = useCallbackRef<State>();
+    const [ref, modifiers] = useOverlayOffset(outerProps.offset);
     const mergedRef = useMergedRefs(outerRef, ref);
 
     const actualTransition =
       transition === true ? Fade : transition || undefined;
+
+    const handleFirstUpdate = useEventCallback((state) => {
+      setFirstRenderedState(state);
+      popperConfig?.onFirstUpdate?.(state);
+    });
+
+    useIsomorphicEffect(() => {
+      if (firstRenderedState) {
+        popperRef.current.scheduleUpdate?.();
+      }
+    }, [firstRenderedState]);
 
     return (
       <BaseOverlay
@@ -176,6 +187,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
         popperConfig={{
           ...popperConfig,
           modifiers: modifiers.concat(popperConfig.modifiers || []),
+          onFirstUpdate: handleFirstUpdate,
         }}
         transition={actualTransition}
       >

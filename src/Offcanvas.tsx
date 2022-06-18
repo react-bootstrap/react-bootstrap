@@ -1,8 +1,16 @@
 import classNames from 'classnames';
+import useBreakpoint from '@restart/hooks/useBreakpoint';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useCallback, useContext, useMemo, useRef } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
@@ -36,6 +44,7 @@ export interface OffcanvasProps
   backdropClassName?: string;
   scroll?: boolean;
   placement?: OffcanvasPlacement;
+  responsive?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string;
 }
 
 const propTypes = {
@@ -45,9 +54,10 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Include a backdrop component.
+   * Include a backdrop component. Specify 'static' for a backdrop that doesn't
+   * trigger an "onHide" when clicked.
    */
-  backdrop: PropTypes.bool,
+  backdrop: PropTypes.oneOf(['static', true, false]),
 
   /**
    * Add an optional extra class name to .offcanvas-backdrop.
@@ -73,6 +83,12 @@ const propTypes = {
     'top',
     'bottom',
   ]),
+
+  /**
+   * Hide content outside the viewport from a specified breakpoint and down.
+   * @type {("sm"|"md"|"lg"|"xl"|"xxl")}
+   */
+  responsive: PropTypes.string,
 
   /**
    * When `true` The offcanvas will automatically shift focus to itself when it
@@ -191,6 +207,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         children,
         'aria-labelledby': ariaLabelledby,
         placement,
+        responsive,
 
         /* BaseModal props */
 
@@ -221,6 +238,18 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       const modalManager = useRef<BootstrapModalManager>();
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
       const { onToggle } = useContext(NavbarContext) || {};
+      const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+      const hideResponsiveOffcanvas = useBreakpoint(
+        (responsive as any) || 'xs',
+        'up',
+      );
+
+      useEffect(() => {
+        // Handles the case where screen is resized while the responsive
+        // offcanvas is shown. If `responsive` not provided, just use `show`.
+        setShowOffcanvas(responsive ? show && !hideResponsiveOffcanvas : show);
+      }, [show, responsive, hideResponsiveOffcanvas]);
 
       const handleHide = useEventCallback(() => {
         onToggle?.();
@@ -271,12 +300,11 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
 
       const renderDialog = (dialogProps) => (
         <div
-          role="dialog"
           {...dialogProps}
           {...props}
           className={classNames(
             className,
-            bsPrefix,
+            responsive ? `${bsPrefix}-${responsive}` : bsPrefix,
             `${bsPrefix}-${placement}`,
           )}
           aria-labelledby={ariaLabelledby}
@@ -286,33 +314,41 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       );
 
       return (
-        <ModalContext.Provider value={modalContext}>
-          <BaseModal
-            show={show}
-            ref={ref}
-            backdrop={backdrop}
-            container={container}
-            keyboard={keyboard}
-            autoFocus={autoFocus}
-            enforceFocus={enforceFocus && !scroll}
-            restoreFocus={restoreFocus}
-            restoreFocusOptions={restoreFocusOptions}
-            onEscapeKeyDown={onEscapeKeyDown}
-            onShow={onShow}
-            onHide={handleHide}
-            onEnter={handleEnter}
-            onEntering={onEntering}
-            onEntered={onEntered}
-            onExit={onExit}
-            onExiting={onExiting}
-            onExited={handleExited}
-            manager={getModalManager()}
-            transition={DialogTransition}
-            backdropTransition={BackdropTransition}
-            renderBackdrop={renderBackdrop}
-            renderDialog={renderDialog}
-          />
-        </ModalContext.Provider>
+        <>
+          {/* 
+            Only render static elements when offcanvas isn't shown so we 
+            don't duplicate elements 
+          */}
+          {!showOffcanvas && renderDialog({})}
+
+          <ModalContext.Provider value={modalContext}>
+            <BaseModal
+              show={showOffcanvas}
+              ref={ref}
+              backdrop={backdrop}
+              container={container}
+              keyboard={keyboard}
+              autoFocus={autoFocus}
+              enforceFocus={enforceFocus && !scroll}
+              restoreFocus={restoreFocus}
+              restoreFocusOptions={restoreFocusOptions}
+              onEscapeKeyDown={onEscapeKeyDown}
+              onShow={onShow}
+              onHide={handleHide}
+              onEnter={handleEnter}
+              onEntering={onEntering}
+              onEntered={onEntered}
+              onExit={onExit}
+              onExiting={onExiting}
+              onExited={handleExited}
+              manager={getModalManager()}
+              transition={DialogTransition}
+              backdropTransition={BackdropTransition}
+              renderBackdrop={renderBackdrop}
+              renderDialog={renderDialog}
+            />
+          </ModalContext.Provider>
+        </>
       );
     },
   );

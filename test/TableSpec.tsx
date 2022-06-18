@@ -11,11 +11,20 @@ describe('Table', () => {
     tableElem.tagName.toLowerCase().should.equal('table');
   });
 
-  it('Should have correct class when striped', () => {
+  it('Should have correct class when using striped row', () => {
     const { getByTestId } = render(<Table data-testid="test" striped />);
     const tableElem = getByTestId('test');
 
     tableElem.classList.contains('table-striped').should.be.true;
+  });
+
+  it('Should have correct class when using striped column', () => {
+    const { getByTestId } = render(
+      <Table data-testid="test" striped="columns" />,
+    );
+    const tableElem = getByTestId('test');
+
+    tableElem.classList.contains('table-striped-columns').should.be.true;
   });
 
   it('Should have correct class when hover', () => {

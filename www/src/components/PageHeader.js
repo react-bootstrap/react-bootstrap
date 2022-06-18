@@ -1,11 +1,14 @@
+import Heading from './Heading';
+import CarbonAds from './CarbonAds';
+
 function PageHeader({ title, subTitle }) {
   return (
-    <div className="bs-docs-header" id="content">
-      <div className="container">
-        <h1>{title}</h1>
-        <p>{subTitle}</p>
-      </div>
-    </div>
+    <>
+      <Heading h="1">{title}</Heading>
+      {subTitle && <p className="lead">{subTitle}</p>}
+
+      <CarbonAds className="my-4" />
+    </>
   );
 }
 

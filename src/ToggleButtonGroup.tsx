@@ -99,7 +99,7 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
     const isActive = values.indexOf(inputVal) !== -1;
 
     if (type === 'radio') {
-      if (!isActive && onChange) onChange(inputVal, event);
+      if (!isActive) onChange(inputVal, event);
       return;
     }
 

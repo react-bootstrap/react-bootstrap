@@ -102,7 +102,7 @@ function getDefaultActiveKey(children) {
 }
 
 function renderTab(child) {
-  const { title, eventKey, disabled, tabClassName, id } = child.props;
+  const { title, eventKey, disabled, tabClassName, tabAttrs, id } = child.props;
   if (title == null) {
     return null;
   }
@@ -116,6 +116,7 @@ function renderTab(child) {
         disabled={disabled}
         id={id}
         className={tabClassName}
+        {...tabAttrs}
       >
         {title}
       </NavLink>
@@ -157,6 +158,7 @@ const Tabs = (props: TabsProps) => {
           delete childProps.title;
           delete childProps.disabled;
           delete childProps.tabClassName;
+          delete childProps.tabAttrs;
 
           return <TabPane {...childProps} />;
         })}

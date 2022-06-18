@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '../src';
 
 import Row from '../src/Row';
 
@@ -65,5 +66,27 @@ describe('Row', () => {
     const { getByText } = render(<Row as="section">Row</Row>);
     getByText('Row').tagName.toLowerCase().should.equal('section');
     getByText('Row').classList.contains('row').should.be.true;
+  });
+
+  it('should allow custom breakpoints', () => {
+    const { getByText } = render(
+      <ThemeProvider breakpoints={['custom']}>
+        <Row custom="3">test</Row>
+      </ThemeProvider>,
+    );
+    getByText('test').classList.contains('row-cols-custom-3').should.be.true;
+  });
+
+  it('should allow custom breakpoints smaller than default "xs"', () => {
+    const { getByText } = render(
+      <ThemeProvider breakpoints={['xxs', 'xs']} minBreakpoint="xxs">
+        <Row xxs="3" xs="2">
+          test
+        </Row>
+      </ThemeProvider>,
+    );
+
+    getByText('test').classList.contains('row-cols-3').should.be.true;
+    getByText('test').classList.contains('row-cols-xs-2').should.be.true;
   });
 });

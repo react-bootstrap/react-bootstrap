@@ -3,7 +3,9 @@ import { useContext } from 'react';
 import Offcanvas, { OffcanvasProps } from './Offcanvas';
 import NavbarContext from './NavbarContext';
 
-const NavbarOffcanvas = React.forwardRef<HTMLDivElement, OffcanvasProps>(
+export type NavbarOffcanvasProps = Omit<OffcanvasProps, 'show'>;
+
+const NavbarOffcanvas = React.forwardRef<HTMLDivElement, NavbarOffcanvasProps>(
   (props, ref) => {
     const context = useContext(NavbarContext);
 

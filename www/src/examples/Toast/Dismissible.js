@@ -1,4 +1,10 @@
-function Example() {
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+
+function DismissibleExample() {
   const [showA, setShowA] = useState(true);
   const [showB, setShowB] = useState(true);
 
@@ -45,4 +51,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default DismissibleExample;

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { State } from '@restart/ui/usePopper';
 
 export type Variant =
   | 'primary'
@@ -42,7 +43,8 @@ export type ResponsiveAlignProp =
   | { md: AlignDirection }
   | { lg: AlignDirection }
   | { xl: AlignDirection }
-  | { xxl: AlignDirection };
+  | { xxl: AlignDirection }
+  | Record<string, AlignDirection>;
 
 export type AlignType = AlignDirection | ResponsiveAlignProp;
 
@@ -55,8 +57,16 @@ export const alignPropType = PropTypes.oneOfType([
   PropTypes.shape({ lg: alignDirection }),
   PropTypes.shape({ xl: alignDirection }),
   PropTypes.shape({ xxl: alignDirection }),
+  PropTypes.object,
 ]);
 
 export type RootCloseEvent = 'click' | 'mousedown';
 
 export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;
+
+export interface PopperRef {
+  state: State | undefined;
+  outOfBoundaries: boolean;
+  placement: Placement | undefined;
+  scheduleUpdate?: () => void;
+}

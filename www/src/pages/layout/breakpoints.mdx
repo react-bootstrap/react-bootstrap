@@ -1,0 +1,46 @@
+import { graphql } from 'gatsby';
+
+import BreakpointTable from '../../components/BreakpointTable';
+import Callout from '../../components/Callout';
+import CodeBlock from '../../components/CodeBlock';
+import ComponentApi from '../../components/ComponentApi';
+import CustomBreakpoints from '../../examples/CustomBreakpoints';
+import DocLink from '../../components/DocLink';
+
+<PageHeader
+  title="Breakpoints"
+  subTitle="Breakpoints are customizable widths that determine how your responsive layout behaves across device or viewport sizes in Bootstrap."
+/>
+
+## Available breakpoints
+
+Bootstrap includes six default breakpoints, sometimes referred to as _grid tiers_,
+for building responsively. These breakpoints can be customized if you’re using our
+source Sass files.
+
+<BreakpointTable />
+
+## Custom breakpoints
+
+If you are looking to use custom breakpoints, you must wrap your application with
+a theme provider and use the `breakpoints` prop to specify the breakpoints you
+will use. This ensures that components such as `Row` or `Col` can parse the
+correct custom breakpoint props.
+
+<CodeBlock codeText={CustomBreakpoints} />
+
+## More information
+
+For more information about breakpoints, see the <DocLink path="/layout/breakpoints">Bootstrap documentation</DocLink>.
+
+## API
+
+<ComponentApi metadata={props.data.ThemeProvider} />
+
+export const query = graphql`
+  query ThemeProviderBreakpointsQuery {
+    ThemeProvider: componentMetadata(displayName: { eq: "ThemeProvider" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;

@@ -8,7 +8,7 @@ import { BsPrefixOnlyProps } from './helpers';
 export interface TableProps
   extends BsPrefixOnlyProps,
     React.TableHTMLAttributes<HTMLTableElement> {
-  striped?: boolean;
+  striped?: boolean | string;
   bordered?: boolean;
   borderless?: boolean;
   hover?: boolean;
@@ -25,8 +25,9 @@ const propTypes = {
 
   /**
    * Adds zebra-striping to any table row within the `<tbody>`.
+   * Use `columns` to add zebra-striping to any table column.
    */
-  striped: PropTypes.bool,
+  striped: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * Adds borders on all sides of the table and cells.
@@ -84,12 +85,16 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');
+
     const classes = classNames(
       className,
       decoratedBsPrefix,
       variant && `${decoratedBsPrefix}-${variant}`,
       size && `${decoratedBsPrefix}-${size}`,
-      striped && `${decoratedBsPrefix}-striped`,
+      striped &&
+        `${decoratedBsPrefix}-${
+          typeof striped === 'string' ? `striped-${striped}` : 'striped'
+        }`,
       bordered && `${decoratedBsPrefix}-bordered`,
       borderless && `${decoratedBsPrefix}-borderless`,
       hover && `${decoratedBsPrefix}-hover`,

@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 function Example() {
   const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
   const [fullscreen, setFullscreen] = useState(true);
@@ -11,7 +15,7 @@ function Example() {
   return (
     <>
       {values.map((v, idx) => (
-        <Button key={idx} className="me-2" onClick={() => handleShow(v)}>
+        <Button key={idx} className="me-2 mb-2" onClick={() => handleShow(v)}>
           Full screen
           {typeof v === 'string' && `below ${v.split('-')[0]}`}
         </Button>

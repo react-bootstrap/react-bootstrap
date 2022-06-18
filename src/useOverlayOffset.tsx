@@ -1,15 +1,14 @@
 import { useMemo, useRef } from 'react';
 import hasClass from 'dom-helpers/hasClass';
-import { Options } from '@restart/ui/usePopper';
+import { Offset, Options } from '@restart/ui/usePopper';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Popover from './Popover';
 
 // This is meant for internal use.
 // This applies a custom offset to the overlay if it's a popover.
-export default function useOverlayOffset(): [
-  React.RefObject<HTMLElement>,
-  Options['modifiers'],
-] {
+export default function useOverlayOffset(
+  customOffset?: Offset,
+): [React.RefObject<HTMLElement>, Options['modifiers']] {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const popoverClass = useBootstrapPrefix(undefined, 'popover');
 
@@ -22,13 +21,13 @@ export default function useOverlayOffset(): [
             overlayRef.current &&
             hasClass(overlayRef.current, popoverClass)
           ) {
-            return Popover.POPPER_OFFSET;
+            return customOffset || Popover.POPPER_OFFSET;
           }
-          return [0, 0];
+          return customOffset || [0, 0];
         },
       },
     }),
-    [popoverClass],
+    [customOffset, popoverClass],
   );
 
   return [overlayRef, [offset]];

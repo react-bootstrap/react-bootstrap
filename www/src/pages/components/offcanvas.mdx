@@ -6,28 +6,37 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import Basic from '../../examples/Offcanvas/Basic';
 import Backdrop from '../../examples/Offcanvas/Backdrop';
+import StaticBackdrop from '../../examples/Offcanvas/StaticBackdrop';
+import Responsive from '../../examples/Offcanvas/Responsive';
 import Placement from '../../examples/Offcanvas/Placement';
 
-# Offcanvas
-
-<p className="lead">
-  Build hidden sidebars into your project for navigation, shopping carts, and
-  more.
-</p>
+<PageHeader
+  title="Offcanvas"
+  subTitle="Build hidden sidebars into your project for navigation, shopping carts, and
+  more."
+/>
 
 ## Examples
 
-Offcanvas includes support for a header with a close button and an optional body class 
-for some initial padding. We suggest that you include offcanvas headers with dismiss 
+Offcanvas includes support for a header with a close button and an optional body class
+for some initial padding. We suggest that you include offcanvas headers with dismiss
 actions whenever possible, or provide an explicit dismiss action.
 
 ### Basic Example
 
 <ReactPlayground codeText={Basic} />
 
+### Responsive
+
+Responsive offcanvas classes hide content outside the viewport from a specified breakpoint
+and down. Above that breakpoint, the contents within will behave as usual.
+
+<ReactPlayground codeText={Responsive} />
+
 ### Placement
 
 Offcanvas supports a few different placements:
+
 - `start` places offcanvas on the left of the viewport
 - `end` places offcanvas on the right of the viewport
 - `top` places offcanvas on the top of the viewport
@@ -37,11 +46,17 @@ Offcanvas supports a few different placements:
 
 ### Backdrop
 
-Scrolling the `<body>` element is disabled when an offcanvas and its backdrop are 
-visible. Use the `scroll` prop to toggle `<body>` scrolling and the `backdrop` prop 
+Scrolling the `<body>` element is disabled when an offcanvas and its backdrop are
+visible. Use the `scroll` prop to toggle `<body>` scrolling and the `backdrop` prop
 to toggle the backdrop.
 
 <ReactPlayground codeText={Backdrop} />
+
+### Static backdrop
+
+When `backdrop` is set to `static`, the offcanvas will not close when clicking outside of it.
+
+<ReactPlayground codeText={StaticBackdrop} />
 
 ## API
 

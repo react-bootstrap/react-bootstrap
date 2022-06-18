@@ -7,15 +7,15 @@ import ReactPlayground from '../../components/ReactPlayground';
 import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
 import CheckInline from '../../examples/Form/CheckInline';
+import CheckReverse from '../../examples/Form/CheckReverse';
 import NoLabels from '../../examples/Form/NoLabels';
 import Switch from '../../examples/Form/Switch';
 
-# Checks and radios
-
-<p className="lead">
-  Create consistent cross-browser and cross-device checkboxes and radios with
-  our completely rewritten checks component.
-</p>
+<PageHeader
+  title="Checks and radios"
+  subTitle="Create consistent cross-browser and cross-device checkboxes and radios with
+  our completely rewritten checks component."
+/>
 
 For the non-textual checkbox and radio controls, `FormCheck`
 provides a single component for both types that adds some additional
@@ -47,6 +47,12 @@ children as `<FormCheck>`.
 Group checkboxes or radios on the same horizontal row by adding the `inline` prop.
 
 <ReactPlayground codeText={CheckInline} />
+
+## Reverse
+
+Put your checkboxes, radios, and switches on the opposite side with the `reverse` prop.
+
+<ReactPlayground codeText={CheckReverse} />
 
 ## Without labels
 

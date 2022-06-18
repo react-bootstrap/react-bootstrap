@@ -8,6 +8,7 @@ export interface TabProps extends Omit<TabPaneProps, 'title'> {
   title: React.ReactNode;
   disabled?: boolean;
   tabClassName?: string;
+  tabAttrs?: Record<string, any>;
 }
 
 /* eslint-disable react/no-unused-prop-types */
@@ -28,6 +29,11 @@ const propTypes = {
    * Class to pass to the underlying nav link.
    */
   tabClassName: PropTypes.string,
+
+  /**
+   * Object containing attributes to pass to underlying nav link.
+   */
+  tabAttrs: PropTypes.object,
 };
 
 const Tab: React.FC<TabProps> = () => {

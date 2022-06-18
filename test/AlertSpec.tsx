@@ -1,4 +1,6 @@
 import * as React from 'react';
+import sinon from 'sinon';
+import { expect } from 'chai';
 import { fireEvent, render } from '@testing-library/react';
 import Alert from '../src/Alert';
 
@@ -55,7 +57,7 @@ describe('<Alert>', () => {
 
   it('Should not have variant class when variant=null', () => {
     const { getByTestId } = render(
-      <Alert variant={null} data-testid="test-alert">
+      <Alert variant={null as any} data-testid="test-alert">
         Message
       </Alert>,
     );
@@ -64,7 +66,7 @@ describe('<Alert>', () => {
   });
 
   it('should forward refs to the alert', () => {
-    const ref = React.createRef();
+    const ref = React.createRef<HTMLDivElement>();
     const { getByTestId } = render(
       <Alert ref={ref} data-testid="test-alert">
         message

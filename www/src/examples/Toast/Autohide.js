@@ -1,4 +1,10 @@
-function Example() {
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+
+function AutohideExample() {
   const [show, setShow] = useState(false);
 
   return (
@@ -24,4 +30,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default AutohideExample;

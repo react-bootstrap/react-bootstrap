@@ -12,6 +12,7 @@ export interface ModalDialogProps
   size?: 'sm' | 'lg' | 'xl';
   fullscreen?:
     | true
+    | string
     | 'sm-down'
     | 'md-down'
     | 'lg-down'
@@ -30,7 +31,7 @@ const propTypes = {
   /**
    * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg','xl')
+   * @type ('sm'|'lg'|'xl')
    */
   size: PropTypes.string,
 

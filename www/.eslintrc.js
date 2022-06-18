@@ -1,6 +1,11 @@
 const path = require('path');
 
 module.exports = {
+  parserOptions: {
+    babelOptions: {
+      configFile: path.resolve(__dirname, '../.babelrc.js'),
+    },
+  },
   globals: {
     graphql: false,
     config: false,

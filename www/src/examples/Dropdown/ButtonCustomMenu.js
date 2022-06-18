@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
+
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -27,7 +31,7 @@ const CustomMenu = React.forwardRef(
         className={className}
         aria-labelledby={labeledBy}
       >
-        <FormControl
+        <Form.Control
           autoFocus
           className="mx-3 my-2 w-auto"
           placeholder="Type to filter..."
