@@ -16,6 +16,7 @@ export interface DropdownButtonProps
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   menuVariant?: DropdownMenuVariant;
+  flip?: boolean;
 }
 
 const propTypes = {
@@ -66,6 +67,13 @@ const propTypes = {
    */
   menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
 
+  /**
+   * Allow Dropdown to flip in case of an overlapping on the reference element. For more information refer to
+   * Popper.js's flip [docs](https://popper.js.org/docs/v2/modifiers/flip/).
+   *
+   */
+  flip: PropTypes.bool,
+
   /** @ignore */
   bsPrefix: PropTypes.string,
   /** @ignore */
@@ -101,6 +109,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
       href,
       id,
       menuVariant,
+      flip,
       ...props
     },
     ref,
@@ -121,6 +130,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
         variant={menuVariant}
+        flip={flip}
       >
         {children}
       </DropdownMenu>
