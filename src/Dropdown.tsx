@@ -35,7 +35,6 @@ export interface DropdownProps
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'children'> {
   drop?: DropDirection;
   align?: AlignType;
-  flip?: boolean;
   focusFirstItemOnShow?: boolean | 'keyboard';
   navbar?: boolean;
   autoClose?: boolean | 'outside' | 'inside';
@@ -68,13 +67,6 @@ const propTypes = {
    * @controllable onToggle
    */
   show: PropTypes.bool,
-
-  /**
-   * Allow Dropdown to flip in case of an overlapping on the reference element. For more information refer to
-   * Popper.js's flip [docs](https://popper.js.org/docs/v2/modifiers/flip/).
-   *
-   */
-  flip: PropTypes.bool,
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
