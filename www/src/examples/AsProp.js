@@ -1,11 +1,8 @@
-<Row className="mx-0">
-  <Button as={Col} variant="primary">
-    Button #1
+<Stack direction="horizontal" gap={2}>
+  <Button as="a" variant="primary">
+    Button as link
   </Button>
-  <Button as={Col} variant="secondary" className="mx-2">
-    Button #2
+  <Button as="a" variant="success">
+    Button as link
   </Button>
-  <Button as={Col} variant="success">
-    Button #3
-  </Button>
-</Row>;
+</Stack>;
