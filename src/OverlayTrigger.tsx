@@ -74,6 +74,8 @@ const propTypes = {
   /**
    * Specify which action or actions trigger Overlay visibility
    *
+   * The `click` trigger ignores the configured `delay`.
+   *
    * @type {'hover' | 'click' |'focus' | Array<'hover' | 'click' |'focus'>}
    */
   trigger: PropTypes.oneOfType([triggerType, PropTypes.arrayOf(triggerType)]),
