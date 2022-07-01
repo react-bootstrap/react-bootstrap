@@ -252,6 +252,7 @@ function OverlayTrigger({
   const handleClick = useCallback(
     (...args: any[]) => {
       setShow(!show);
+      if (delay.hide) handleHide();
       onClick?.(...args);
     },
     [onClick, setShow, show],
