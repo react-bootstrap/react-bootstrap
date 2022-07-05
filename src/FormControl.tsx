@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
@@ -23,6 +22,7 @@ export interface FormControlProps
   type?: string;
   isValid?: boolean;
   isInvalid?: boolean;
+  autoFocus?: boolean;
 }
 
 const propTypes = {
@@ -122,7 +122,19 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
       },
       ref,
     ) => {
-      const { controlId } = useContext(FormContext);
+      const { controlId } = React.useContext(FormContext);
+
+      // autoFocus prop directly on input triggers scroll page after close modal in safari
+      const innerRef = React.useRef<FormControlElement | null>(null);
+      React.useImperativeHandle(
+        ref,
+        () => innerRef.current as FormControlElement,
+      );
+      React.useEffect(() => {
+        if (props.autoFocus) {
+          innerRef.current?.focus({ preventScroll: true });
+        }
+      }, [props.autoFocus]);
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
 
@@ -144,9 +156,10 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
       return (
         <Component
           {...props}
+          autoFocus={false}
           type={type}
           size={htmlSize}
-          ref={ref}
+          ref={innerRef}
           readOnly={readOnly}
           id={id || controlId}
           className={classNames(

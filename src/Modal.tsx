@@ -443,11 +443,9 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         [animation, backdropClassName, bsPrefix],
       );
 
-      const baseModalStyle = { ...style, ...modalStyle };
-
       // If `display` is not set to block, autoFocus inside the modal fails
       // https://github.com/react-bootstrap/react-bootstrap/issues/5102
-      baseModalStyle.display = 'block';
+      const baseModalStyle = { ...style, ...modalStyle, display: 'block' };
 
       const renderDialog = (dialogProps) => (
         <div
