@@ -124,17 +124,13 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
     ) => {
       const { controlId } = React.useContext(FormContext);
 
-      // autoFocus prop directly on input triggers scroll page after close modal in safari
+      // autoFocus safari bug
       const innerRef = React.useRef<FormControlElement | null>(null);
       React.useImperativeHandle(
         ref,
         () => innerRef.current as FormControlElement,
       );
-      React.useEffect(() => {
-        if (props.autoFocus) {
-          innerRef.current?.focus({ preventScroll: true });
-        }
-      }, [props.autoFocus]);
+      React.useEffect(() => () => innerRef.current?.blur(), [props.autoFocus]);
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
 
@@ -156,7 +152,6 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
       return (
         <Component
           {...props}
-          autoFocus={false}
           type={type}
           size={htmlSize}
           ref={innerRef}
