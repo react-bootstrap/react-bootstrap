@@ -16,7 +16,6 @@ export interface TabsProps
   extends Omit<BaseTabsProps, 'transition'>,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
     NavProps {
-  variant?: 'tabs' | 'pills';
   transition?: TransitionType;
 }
 
