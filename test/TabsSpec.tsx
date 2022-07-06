@@ -218,6 +218,36 @@ describe('<Tabs>', () => {
     firstTabContent.classList.contains('fade').should.be.false;
     secondTabContent.classList.contains('fade').should.be.true;
   });
+
+  it('Should pass fill to Nav', () => {
+    const { getByTestId } = render(
+      <Tabs data-testid="test" defaultActiveKey={1} transition={false} fill>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+
+    getByTestId('test').classList.contains('nav-fill').should.be.true;
+  });
+
+  it('Should pass justified to Nav', () => {
+    const { getByTestId } = render(
+      <Tabs data-testid="test" defaultActiveKey={1} transition={false} justify>
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+
+    getByTestId('test').classList.contains('nav-justified').should.be.true;
+  });
 });
 
 // describe('<Tab>', () => {
