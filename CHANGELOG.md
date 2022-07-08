@@ -1,3 +1,23 @@
+# [2.5.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0-beta.0...v2.5.0-beta.1) (2022-07-08)
+
+
+### Bug Fixes
+
+* **Dropdown:** remove unused flip prop ([7c2002f](https://github.com/react-bootstrap/react-bootstrap/commit/7c2002f51c81eba7b65fceccb55532cd93e7958a))
+* update @restart/ui to v1.3.0 ([#6383](https://github.com/react-bootstrap/react-bootstrap/issues/6383)) ([775e774](https://github.com/react-bootstrap/react-bootstrap/commit/775e774ad15540193173180b9000ca89e58bd786))
+* **Offcanvas:** fix responsive behavior when resizing screen ([#6380](https://github.com/react-bootstrap/react-bootstrap/issues/6380)) ([a3e188a](https://github.com/react-bootstrap/react-bootstrap/commit/a3e188a6ebafc20e6354dd8b4a05820c33bdd282))
+
+
+### Features
+
+* **DropdownButton:** add `flip` prop support ([85ef5bc](https://github.com/react-bootstrap/react-bootstrap/commit/85ef5bc2c95de34a3ee9579ef68ae6690cc36995))
+* **SplitButton:** add `flip` prop support ([909c564](https://github.com/react-bootstrap/react-bootstrap/commit/909c5645a1470eada9fa9f8ebc912d0b473559ec))
+* **Tabs:** allow fill and justify settings for tabs ([#6391](https://github.com/react-bootstrap/react-bootstrap/issues/6391)) ([239c459](https://github.com/react-bootstrap/react-bootstrap/commit/239c459a3513cf1cbc5083b7a0608eba7f724505))
+
+
+
+
+
 # [2.5.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.4.0...v2.5.0-beta.0) (2022-06-10)
 
 
