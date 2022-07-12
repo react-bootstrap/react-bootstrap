@@ -8,7 +8,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface CardImgProps
   extends BsPrefixProps,
     React.ImgHTMLAttributes<HTMLImageElement> {
-  variant?: 'top' | 'bottom';
+  variant?: 'top' | 'bottom' | string;
 }
 
 const propTypes = {

@@ -25,7 +25,7 @@ import triggerBrowserReflow from './triggerBrowserReflow';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 
-export type CarouselVariant = 'dark';
+export type CarouselVariant = 'dark' | string;
 
 export interface CarouselRef {
   element?: HTMLElement;

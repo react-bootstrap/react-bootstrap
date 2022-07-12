@@ -17,7 +17,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
-  variant?: 'tabs' | 'pills';
+  variant?: 'tabs' | 'pills' | string;
   defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
