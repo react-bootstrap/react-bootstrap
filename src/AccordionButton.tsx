@@ -38,22 +38,27 @@ export function useAccordionButton(
       Compare the event key in context with the given event key.
       If they are the same, then collapse the component.
     */
+    const currentKey = eventKey;
+    let isExpanded = false;
     let eventKeyPassed: AccordionEventKey =
       eventKey === activeEventKey ? null : eventKey;
+    if (eventKeyPassed && !alwaysOpen) {
+      isExpanded = true;
+    }
     if (alwaysOpen) {
       if (Array.isArray(activeEventKey)) {
         if (activeEventKey.includes(eventKey)) {
           eventKeyPassed = activeEventKey.filter((k) => k !== eventKey);
         } else {
+          isExpanded = true;
           eventKeyPassed = [...activeEventKey, eventKey];
         }
       } else {
-        // activeEventKey is undefined.
         eventKeyPassed = [eventKey];
       }
     }
 
-    onSelect?.(eventKeyPassed, e);
+    onSelect?.(eventKeyPassed, e, currentKey, isExpanded);
     onClick?.(e);
   };
 }
