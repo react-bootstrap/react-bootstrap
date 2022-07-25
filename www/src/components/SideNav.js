@@ -1,8 +1,8 @@
+import { DocSearch } from '@docsearch/react';
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
 import * as React from 'react';
 import Nav from 'react-bootstrap/Nav';
-import FormControl from 'react-bootstrap/FormControl';
 
 import styled from 'astroturf';
 import Button from 'react-bootstrap/Button';
@@ -158,19 +158,6 @@ const components = [
 
 const utilities = ['transitions', 'ratio', 'restart-ui'];
 
-// We need to configure this
-function attachSearch(ref) {
-  if (ref && window)
-    import('docsearch.js').then(({ default: docsearch }) => {
-      docsearch({
-        apiKey: '00f98b765b687b91399288e7c4c68ce1',
-        indexName: 'react_bootstrap_v4',
-        inputSelector: `#${ref.id}`,
-        debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
-      });
-    });
-}
-
 const nameOverrides = {
   'why-react-bootstrap': 'Why React-Bootstrap',
   rtl: 'RTL',
@@ -219,12 +206,11 @@ class SideNav extends React.Component {
     const { location, ...props } = this.props;
     return (
       <SidePanel {...props}>
-        <form className="py-3 d-flex align-items-center">
-          <FormControl
-            id="docs-search-input"
-            type="text"
-            placeholder="Search…"
-            ref={attachSearch}
+        <form className="py-3 d-flex align-items-center justify-content-between">
+          <DocSearch
+            appId="C38ZI55F9H"
+            apiKey="33985ee571397d832ef243988ff4c891"
+            indexName="react_bootstrap_v4"
           />
           <MenuButton onClick={this.handleCollapse}>
             <svg

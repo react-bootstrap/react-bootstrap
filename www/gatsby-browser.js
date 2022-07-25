@@ -1,4 +1,5 @@
 require('./src/css/global.scss');
+require('@docsearch/css/dist/style.css');
 
 // prevent FontAwesome icons' flash from a very large one down to a properly sized one
 require('@fortawesome/fontawesome-svg-core/styles.css');
