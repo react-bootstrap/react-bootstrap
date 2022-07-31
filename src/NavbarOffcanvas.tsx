@@ -9,7 +9,14 @@ const NavbarOffcanvas = React.forwardRef<HTMLDivElement, NavbarOffcanvasProps>(
   (props, ref) => {
     const context = useContext(NavbarContext);
 
-    return <Offcanvas ref={ref} show={!!context?.expanded} {...props} />;
+    return (
+      <Offcanvas
+        ref={ref}
+        show={!!context?.expanded}
+        {...props}
+        renderStaticNode
+      />
+    );
   },
 );
 
