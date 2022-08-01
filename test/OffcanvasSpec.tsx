@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { expect } from 'chai';
 import ModalManager from '@restart/ui/ModalManager';
 import { fireEvent, render } from '@testing-library/react';
@@ -285,5 +286,33 @@ describe('<Offcanvas>', () => {
     );
     const offcanvasElem = getByTestId('test');
     expect(offcanvasElem.getAttribute('role')).to.not.exist;
+  });
+
+  it('should not mount, unmount and mount content on show', () => {
+    const InnerComponent = ({ onMount, onUnmount }) => {
+      useEffect(() => {
+        onMount();
+        return () => {
+          onUnmount();
+        };
+      }, []);
+
+      return <div>Content</div>;
+    };
+
+    const onMountSpy = sinon.spy();
+    const onUnmountSpy = sinon.spy();
+
+    const { unmount } = render(
+      <Offcanvas data-testid="test" onHide={noop} show>
+        <InnerComponent onMount={onMountSpy} onUnmount={onUnmountSpy} />
+      </Offcanvas>,
+    );
+
+    onMountSpy.callCount.should.equal(1);
+
+    unmount();
+
+    onUnmountSpy.callCount.should.equal(1);
   });
 });

@@ -45,6 +45,7 @@ export interface OffcanvasProps
   scroll?: boolean;
   placement?: OffcanvasPlacement;
   responsive?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string;
+  renderStaticNode?: boolean;
 }
 
 const propTypes = {
@@ -176,6 +177,13 @@ const propTypes = {
    */
   container: PropTypes.any,
 
+  /**
+   * For internal use to render static node from NavbarOffcanvas.
+   *
+   * @private
+   */
+  renderStaticNode: PropTypes.bool,
+
   'aria-labelledby': PropTypes.string,
 };
 
@@ -188,6 +196,7 @@ const defaultProps: Partial<OffcanvasProps> = {
   enforceFocus: true,
   restoreFocus: true,
   placement: 'start',
+  renderStaticNode: false,
 };
 
 function DialogTransition(props) {
@@ -231,6 +240,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         onExited,
         backdropClassName,
         manager: propsManager,
+        renderStaticNode,
         ...props
       },
       ref,
@@ -317,9 +327,14 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         <>
           {/* 
             Only render static elements when offcanvas isn't shown so we 
-            don't duplicate elements 
+            don't duplicate elements.
+
+            TODO: Should follow bootstrap behavior and don't unmount children
+            when show={false} in BaseModal. Will do this next major version.
           */}
-          {!showOffcanvas && renderDialog({})}
+          {!showOffcanvas &&
+            (responsive || renderStaticNode) &&
+            renderDialog({})}
 
           <ModalContext.Provider value={modalContext}>
             <BaseModal
