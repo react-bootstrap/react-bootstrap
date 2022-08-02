@@ -38,6 +38,17 @@ const propTypes = {
   /** The default active key that is expanded on start */
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
+  /**
+   * Callback fired when the active item changes.
+   *
+   * ```js
+   * (eventKey: string | string[] | null, event: Object) => void
+   * ```
+   *
+   * @controllable activeIndex
+   */
+  onSelect: PropTypes.func,
+
   /** Renders accordion edge-to-edge with its parent container */
   flush: PropTypes.bool,
 

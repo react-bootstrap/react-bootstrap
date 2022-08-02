@@ -25,6 +25,9 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
+/**
+ * This component accepts all of [`Collapse`'s props](/utilities/transitions/#collapse-props).
+ */
 const AccordionCollapse: BsPrefixRefForwardingComponent<
   'div',
   AccordionCollapseProps
