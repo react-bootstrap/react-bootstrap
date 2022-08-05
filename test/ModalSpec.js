@@ -362,6 +362,20 @@ describe('<Modal>', () => {
     );
   });
 
+  it('Should set aria-describedby to the role="dialog" element if aria-describedby set', () => {
+    const wrapper = mount(
+      <Modal show aria-describedby="modal-title">
+        <Modal.Header closeButton>
+          <Modal.Title id="modal-title">Modal heading</Modal.Title>
+        </Modal.Header>
+      </Modal>,
+    );
+
+    wrapper.assertSingle(
+      'div.modal.show[role="dialog"][aria-describedby="modal-title"]',
+    );
+  });
+
   it('Should set aria-label to the role="dialog" element if aria-label set', () => {
     const wrapper = mount(
       <Modal show aria-label="modal-label">
