@@ -218,6 +218,8 @@ const propTypes = {
   container: PropTypes.any,
 
   'aria-labelledby': PropTypes.any,
+
+  'aria-label': PropTypes.string,
 };
 
 const defaultProps = {
@@ -253,6 +255,7 @@ const Modal: Modal = React.forwardRef(
       children,
       dialogAs: Dialog,
       'aria-labelledby': ariaLabelledby,
+      'aria-label': ariaLabel,
 
       /* BaseModal props */
 
@@ -473,6 +476,7 @@ const Modal: Modal = React.forwardRef(
         )}
         onClick={backdrop ? handleClick : undefined}
         onMouseUp={handleMouseUp}
+        aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
       >
         {/*

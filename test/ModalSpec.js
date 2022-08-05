@@ -362,6 +362,20 @@ describe('<Modal>', () => {
     );
   });
 
+  it('Should set aria-label to the role="dialog" element if aria-label set', () => {
+    const wrapper = mount(
+      <Modal show aria-label="modal-label">
+        <Modal.Header closeButton>
+          <Modal.Title id="modal-title">Modal heading</Modal.Title>
+        </Modal.Header>
+      </Modal>,
+    );
+
+    wrapper.assertSingle(
+      'div.modal.show[role="dialog"][aria-label="modal-label"]',
+    );
+  });
+
   it('Should call onEscapeKeyDown when keyboard is true', () => {
     const noOp = () => {};
     const onEscapeKeyDownSpy = sinon.spy();
