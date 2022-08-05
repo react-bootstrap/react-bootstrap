@@ -1,3 +1,16 @@
+# [2.5.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0-beta.1...v2.5.0) (2022-08-05)
+
+
+### Bug Fixes
+
+* **Offcanvas:** prevent children mounting twice on show when not responsive ([#6416](https://github.com/react-bootstrap/react-bootstrap/issues/6416)) ([e2c4eeb](https://github.com/react-bootstrap/react-bootstrap/commit/e2c4eeba38b9e44642bd10daaa1d268d5fc98ea6))
+* ensure consistent API for custom variants ([#6398](https://github.com/react-bootstrap/react-bootstrap/issues/6398)) ([8a81903](https://github.com/react-bootstrap/react-bootstrap/commit/8a8190310a5cac9bd9ea7ac1179950b602f7b3c7))
+* update @restart/ui to 1.3.1 ([#6408](https://github.com/react-bootstrap/react-bootstrap/issues/6408)) ([a49d435](https://github.com/react-bootstrap/react-bootstrap/commit/a49d4350899f432e61299ade40900d73174ff0e5))
+
+
+
+
+
 # [2.5.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0-beta.0...v2.5.0-beta.1) (2022-07-08)
 
 
