@@ -5,6 +5,7 @@ import CssCodeBlock from '../../components/CssCodeBlock';
 import DocLink from '../../components/DocLink';
 import ReactPlayground from '../../components/ReactPlayground';
 import AsPropButtonExample from '../../examples/AsProp';
+import AsPropAccordionExample from '../../examples/AsPropAccordion';
 
 <PageHeader
   title="Introduction"
@@ -136,6 +137,13 @@ ultimately causes a `a` tag to be rendered but with the same styles as a `Button
 component.
 
 <ReactPlayground codeText={AsPropButtonExample} />
+
+Below is an illustration of passing a React Bootstrap component. It contains a `Badge` component and a `Button` 
+component that have been supplied to the `as` prop, respectively, as `Button` and `Badge`. This finally results 
+in the rendering of a `Button` component with the same styles as a `Badge` component and a `Badge` component with 
+the same styles as a `Button`.
+
+<ReactPlayground codeText={AsPropAccordionExample} />
 
 ## Themes
 
