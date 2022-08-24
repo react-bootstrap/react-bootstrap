@@ -5,10 +5,4 @@
       New
     </Badge>
   </h1>
-  <h2>
-    Example heading{' '}
-    <Button bg="secondary" as="Badge">
-      New
-    </Button>
-  </h2>
 </div>;
