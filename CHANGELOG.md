@@ -1,3 +1,15 @@
+## [1.6.6](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.5...v1.6.6) (2022-08-25)
+
+
+### Bug Fixes
+
+* **Modal:** render aria-describedby on the top level modal element ([6dd9e3b](https://github.com/react-bootstrap/react-bootstrap/commit/6dd9e3bec2d096e971204b0616a1f6c9e214b963))
+* **Modal:** render aria-label on top level modal element ([273901f](https://github.com/react-bootstrap/react-bootstrap/commit/273901f1b59ee27eb6f99dd5a2752f5b02c5da4d))
+
+
+
+
+
 ## [1.6.5](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.4...v1.6.5) (2022-05-11)
 
 
