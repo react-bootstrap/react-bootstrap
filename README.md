@@ -36,7 +36,7 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 - [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
 - [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
 
-## Local setup
+## Local setup as yarn
 
 Yarn is our package manager of choice here. Check out setup
 instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
@@ -47,6 +47,17 @@ From there you can:
 - Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
 - Start a local copy of the docs site with `yarn start`
 - Or build a local copy of the library with `yarn run build`
+
+## Local setup as npm
+
+Yarn is our package manager of choice here. Check out setup
+instructions [here](https://nodejs.org/en/) if you don't have it installed already.
+After that you can run `npm install bootstrap` to install all the needed dependencies.
+
+From there you can:
+
+- Start a local copy of the docs site with `npm start`
+- Or build a local copy of the library with `npm run build`
 
 ## CodeSandbox Examples
 
