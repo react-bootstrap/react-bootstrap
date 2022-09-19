@@ -458,6 +458,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
             className,
             bsPrefix,
             animateStaticModal && `${bsPrefix}-static`,
+            !animation && 'show',
           )}
           onClick={backdrop ? handleClick : undefined}
           onMouseUp={handleMouseUp}
