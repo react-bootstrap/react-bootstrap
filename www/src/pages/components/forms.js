@@ -481,7 +481,7 @@ export default withLayout(function FormControlsSection({ data }) {
         elements, but are Structurally similar to the default{' '}
         <code>FormCheck</code>. By default the checked and indeterminate icons
         use embedded svg icons from{' '}
-        <a href="https://useiconic.com/open">Open Iconic</a>.
+        <a href="https://github.com/iconic/open-iconic">Open Iconic</a>.
       </p>
 
       <p>
