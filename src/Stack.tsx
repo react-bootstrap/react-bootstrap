@@ -13,12 +13,10 @@ import createUtilityClassName, {
   responsivePropType,
 } from './createUtilityClasses';
 
-export type StackDirection = 'horizontal' | 'vertical';
-
 export interface StackProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  direction?: StackDirection;
+  horizontal?: boolean;
   gap?: ResponsiveUtilityValue<GapValue>;
 }
 
@@ -27,8 +25,7 @@ const propTypes = {
    * Change the underlying component CSS base class name and modifier class names prefix.
    * **This is an escape hatch** for working with heavily customized bootstrap css.
    *
-   * Defaults to `hstack` if direction is `horizontal` or `vstack` if direction
-   * is `vertical`.
+   * Defaults to `hstack` if horizontal is present or true, or `vstack` if horizontal is absent or false.
    *
    * @default 'hstack | vstack'
    */
@@ -43,12 +40,12 @@ const propTypes = {
 const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
   React.forwardRef<HTMLElement, StackProps>(
     (
-      { as: Component = 'div', bsPrefix, className, direction, gap, ...props },
+      { as: Component = 'div', bsPrefix, className, horizontal, gap, ...props },
       ref,
     ) => {
       bsPrefix = useBootstrapPrefix(
         bsPrefix,
-        direction === 'horizontal' ? 'hstack' : 'vstack',
+        horizontal ? 'hstack' : 'vstack',
       );
       const breakpoints = useBootstrapBreakpoints();
       const minBreakpoint = useBootstrapMinBreakpoint();
