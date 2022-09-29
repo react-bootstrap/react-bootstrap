@@ -32,6 +32,11 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
+   * Arranges the elements of the stack horizontally.
+   */
+  horizontal: PropTypes.bool,
+
+  /**
    * Sets the spacing between each item. Valid values are `0-5`.
    */
   gap: responsivePropType(PropTypes.number),
@@ -43,10 +48,7 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
       { as: Component = 'div', bsPrefix, className, horizontal, gap, ...props },
       ref,
     ) => {
-      bsPrefix = useBootstrapPrefix(
-        bsPrefix,
-        horizontal ? 'hstack' : 'vstack',
-      );
+      bsPrefix = useBootstrapPrefix(bsPrefix, horizontal ? 'hstack' : 'vstack');
       const breakpoints = useBootstrapBreakpoints();
       const minBreakpoint = useBootstrapMinBreakpoint();
 

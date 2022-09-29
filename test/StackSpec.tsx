@@ -9,7 +9,7 @@ describe('<Stack>', () => {
   });
 
   it('should render direction', () => {
-    const { container } = render(<Stack direction="horizontal" />);
+    const { container } = render(<Stack horizontal />);
     container.firstElementChild!.className.should.contain('hstack');
   });
 
