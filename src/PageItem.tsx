@@ -56,7 +56,7 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
           style={style}
           className={classNames(className, 'page-item', { active, disabled })}
         >
-          <Component className="page-link" disabled={disabled} {...props}>
+          <Component className="page-link" {...props}>
             {children}
             {active && activeLabel && (
               <span className="visually-hidden">{activeLabel}</span>
