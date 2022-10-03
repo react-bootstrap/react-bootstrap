@@ -21,7 +21,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Set's the size of all PageItems.
+   * Sets the size of all PageItems.
    *
    * @type {('sm'|'lg')}
    */

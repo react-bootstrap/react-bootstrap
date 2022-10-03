@@ -22,10 +22,13 @@ const propTypes = {
   /** Styles PageItem as active, and renders a `<span>` instead of an `<a>`. */
   active: PropTypes.bool,
 
-  /** An accessible label indicating the active state.. */
+  /** An accessible label indicating the active state. */
   activeLabel: PropTypes.string,
 
-  /** A callback function for when this component is clicked */
+  /** The HTML href attribute for the `PageItem`. */
+  href: PropTypes.string,
+
+  /** A callback function for when this component is clicked. */
   onClick: PropTypes.func,
 };
 
