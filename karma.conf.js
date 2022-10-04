@@ -36,6 +36,7 @@ module.exports = (config) => {
           util: require.resolve('util/'),
           // for Enzyme/Cheerio
           stream: require.resolve('stream-browserify'),
+          'process/browser': require.resolve('process/browser'),
         },
       },
       plugins: [
