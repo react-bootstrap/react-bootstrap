@@ -10,7 +10,10 @@ export interface CloseButtonProps
 }
 
 const propTypes = {
+  /** An accessible label indicating the relevant information about the Close Button. */
   'aria-label': PropTypes.string,
+
+  /** A callback fired after the Close Button is clicked. */
   onClick: PropTypes.func,
 
   /**
