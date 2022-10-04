@@ -48,7 +48,6 @@ describe('<PageItem>', () => {
       pageItemElem.classList.contains('disabled').should.be.true;
 
       pageItemInnerElem.classList.contains('page-link').should.be.true;
-      pageItemInnerElem.getAttribute('disabled')!.should.exist;
     });
   });
 });
