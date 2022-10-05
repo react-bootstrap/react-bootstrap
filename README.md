@@ -39,7 +39,7 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 ## Local setup
 
 Yarn is our package manager of choice here. Check out setup
-instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
+instructions [here](https://yarnpkg.com/getting-started/install) if you don't have it installed already.
 After that you can run `yarn run bootstrap` to install all the needed dependencies.
 
 From there you can:
