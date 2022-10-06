@@ -50,7 +50,7 @@ const propTypes = {
   /** A callback function for when this component is clicked.  */
   onClick: PropTypes.func,
 
-  /** Providing a `href` will render the ListGroup.Item as an `<a>` element (unless `as` is provided). */
+  /** Providing a `href` and setting `action` to `true`, it will render the ListGroup.Item as an `<a>` element (unless `as` is provided). */
   href: PropTypes.string,
 
   /**
