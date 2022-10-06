@@ -26,7 +26,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Sets contextual classes for list item
+   * Sets contextual classes for list item.
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
    */
   variant: PropTypes.string,
@@ -36,19 +36,21 @@ const propTypes = {
    */
   action: PropTypes.bool,
   /**
-   * Sets list item as active
+   * Sets list item as active.
    */
   active: PropTypes.bool,
 
   /**
-   * Sets list item state as disabled
+   * Sets list item state as disabled.
    */
   disabled: PropTypes.bool,
 
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
+  /** A callback function for when this component is clicked.  */
   onClick: PropTypes.func,
 
+  /** Providing a `href` will render the ListGroup.Item as an `<a>` element (unless `as` is provided). */
   href: PropTypes.string,
 
   /**
