@@ -100,12 +100,12 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
 
       // eslint-disable-next-line no-nested-ternary
       const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
-      if (Component === 'div') delete props.href;
 
       return (
         <Component
           ref={ref}
           {...props}
+          href={Component === 'div' ? undefined : props.href}
           {...navItemProps}
           onClick={handleClick}
           className={classNames(
