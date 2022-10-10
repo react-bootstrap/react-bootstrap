@@ -122,7 +122,7 @@ const propTypes = {
   collapseOnSelect: PropTypes.bool,
 
   /**
-   * Controls the visiblity of the navbar body
+   * Controls the visibility of the navbar body
    *
    * @controllable onToggle
    */
