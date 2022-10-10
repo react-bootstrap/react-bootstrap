@@ -22,7 +22,7 @@ describe('<Pagination>', () => {
     paginationElem.classList.contains('pagination-sm').should.be.true;
   });
 
-  it('sub-compontents should forward ref correctly', () => {
+  it('sub-components should forward ref correctly', () => {
     const ref = React.createRef<HTMLLIElement>();
     render(
       <Pagination data-testid="test" size="sm">
