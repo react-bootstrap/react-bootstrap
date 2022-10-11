@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import {
   useNavItem,
@@ -101,11 +102,15 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
       // eslint-disable-next-line no-nested-ternary
       const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
 
+      warning(
+        as || !(!action && props.href),
+        '`action=false` and `href` should not be used together.',
+      );
+
       return (
         <Component
           ref={ref}
           {...props}
-          href={Component === 'div' ? undefined : props.href}
           {...navItemProps}
           onClick={handleClick}
           className={classNames(
