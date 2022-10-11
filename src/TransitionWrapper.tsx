@@ -39,9 +39,7 @@ const TransitionWrapper = React.forwardRef<
     const nodeRef = useRef<HTMLElement>(null);
     const mergedRef = useMergedRefs(nodeRef, childRef);
 
-    const attachRef = (
-      r: React.ComponentClass | Element | null | undefined,
-    ) => {
+    const attachRef = (r: React.Component | Element | null | undefined) => {
       mergedRef(safeFindDOMNode(r));
     };
 
