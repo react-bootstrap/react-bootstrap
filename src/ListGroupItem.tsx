@@ -53,7 +53,7 @@ const propTypes = {
 
   /**
    * You can use a custom element type for this component. For none `action` items, items render as `li`.
-   * For actions the default is an achor or button element depending on whether a `href` is provided.
+   * For actions the default is an anchor or button element depending on whether a `href` is provided.
    *
    * @default {'div' | 'a' | 'button'}
    */

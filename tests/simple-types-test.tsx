@@ -518,7 +518,7 @@ const MegaComponent = () => (
           Horizontal
         </Form.Label>
         <Col sm={10}>
-          <Form.Control type="text" placeholder="Hoizontal" />
+          <Form.Control type="text" placeholder="Horizontal" />
         </Col>
       </Form.Group>
       <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
@@ -526,7 +526,7 @@ const MegaComponent = () => (
           Horizontal
         </Form.Label>
         <Col sm={10}>
-          <Form.Control type="text" placeholder="Hoizontal" />
+          <Form.Control type="text" placeholder="Horizontal" />
         </Col>
       </Form.Group>
       <Form.Switch label="Switch" disabled />

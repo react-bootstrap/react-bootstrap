@@ -25,17 +25,17 @@ describe('<FormRange>', () => {
 
   it('should render controlId as id correctly', () => {
     const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+      <FormGroup controlId="control-id">
         <FormRange data-testid="test-id" />
       </FormGroup>,
     );
     const element = getByTestId('test-id');
-    element.id.should.equal('controll-id');
+    element.id.should.equal('control-id');
   });
 
   it('should override controlId correctly', () => {
     const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+      <FormGroup controlId="control-id">
         <FormRange id="overridden-id" data-testid="test-id" />
       </FormGroup>,
     );

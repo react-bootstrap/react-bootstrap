@@ -58,7 +58,7 @@ describe('<FormSelect>', () => {
 
   it('should render controlId correctly', () => {
     const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+      <FormGroup controlId="control-id">
         <FormSelect data-testid="test-id">
           <option>1</option>
         </FormSelect>
@@ -66,12 +66,12 @@ describe('<FormSelect>', () => {
     );
 
     const element = getByTestId('test-id');
-    element.id.should.equal('controll-id');
+    element.id.should.equal('control-id');
   });
 
   it('should override controlId correctly', () => {
     const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+      <FormGroup controlId="control-id">
         <FormSelect id="overridden-id" data-testid="test-id">
           <option>1</option>
         </FormSelect>
