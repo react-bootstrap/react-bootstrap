@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { shouldWarn } from './helpers';
 
 import ListGroupItem from '../src/ListGroupItem';
 
@@ -87,6 +88,31 @@ describe('<ListGroupItem>', () => {
       const item = getByTestId('test');
       item.tagName.toLowerCase().should.equal('a');
       item.classList.contains('list-group-item-action').should.be.true;
+      expect(item.getAttribute('href')).to.be.equal('/foo');
+    });
+    it('renders a div and show warning', () => {
+      shouldWarn('together');
+      const { getByTestId } = render(
+        <ListGroupItem action={false} href="/foo" data-testid="test" />,
+      );
+
+      const item = getByTestId('test');
+      item.tagName.toLowerCase().should.equal('div');
+      item.classList.contains('list-group-item-action').should.be.false;
+      expect(item.getAttribute('href')).to.be.equal('/foo');
+    });
+    it('passes href to custom as components', () => {
+      const { getByTestId } = render(
+        <ListGroupItem
+          as="div"
+          action={false}
+          data-testid="test"
+          href="/foo"
+        />,
+      );
+      const item = getByTestId('test');
+      item.tagName.toLowerCase().should.equal('div');
+      item.classList.contains('list-group-item-action').should.be.false;
       expect(item.getAttribute('href')).to.be.equal('/foo');
     });
   });
