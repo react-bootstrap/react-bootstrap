@@ -201,7 +201,7 @@ function OverlayTrigger({
       ? React.Children.only(children).props
       : ({} as any);
 
-  const attachRef = (r: React.ComponentClass | Element | null | undefined) => {
+  const attachRef = (r: React.Component | Element | null | undefined) => {
     mergedRef(safeFindDOMNode(r));
   };
 

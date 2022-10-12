@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
 export default function safeFindDOMNode(
-  componentOrElement: React.ComponentClass | Element | null | undefined,
+  componentOrElement: React.Component | Element | null | undefined,
 ) {
   if (componentOrElement && 'setState' in componentOrElement) {
     return ReactDOM.findDOMNode(componentOrElement);
