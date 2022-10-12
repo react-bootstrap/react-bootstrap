@@ -90,15 +90,6 @@ describe('<ListGroupItem>', () => {
       item.classList.contains('list-group-item-action').should.be.true;
       expect(item.getAttribute('href')).to.be.equal('/foo');
     });
-    it('renders a div', () => {
-      const { getByTestId } = render(
-        <ListGroupItem action={false} data-testid="test" />,
-      );
-
-      const item = getByTestId('test');
-      item.tagName.toLowerCase().should.equal('div');
-      item.classList.contains('list-group-item-action').should.be.false;
-    });
     it('renders a div and show warning', () => {
       shouldWarn('together');
       const { getByTestId } = render(
@@ -110,16 +101,7 @@ describe('<ListGroupItem>', () => {
       item.classList.contains('list-group-item-action').should.be.false;
       expect(item.getAttribute('href')).to.be.equal('/foo');
     });
-    it('renders as div', () => {
-      const { getByTestId } = render(
-        <ListGroupItem as="div" data-testid="test" />,
-      );
-
-      const item = getByTestId('test');
-      item.tagName.toLowerCase().should.equal('div');
-      item.classList.contains('list-group-item-action').should.be.false;
-    });
-    it('renders as div with href', () => {
+    it('passes href to custom as components', () => {
       const { getByTestId } = render(
         <ListGroupItem
           as="div"
