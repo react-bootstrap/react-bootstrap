@@ -9,7 +9,7 @@ import { Variant } from './types';
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,
     BsPrefixProps {
-  animation: 'border' | 'grow';
+  animation?: 'border' | 'grow';
   size?: 'sm';
   variant?: Variant;
 }
@@ -74,8 +74,8 @@ const Spinner: BsPrefixRefForwardingComponent<'div', SpinnerProps> =
       ref,
     ) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
-      const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
-
+      const animationName = animation || 'border';
+      const bsSpinnerPrefix = `${bsPrefix}-${animationName}`;
       return (
         <Component
           ref={ref}
