@@ -9,7 +9,7 @@ import { Variant } from './types';
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,
     BsPrefixProps {
-  animation: 'border' | 'grow';
+  animation?: 'border' | 'grow';
   size?: 'sm';
   variant?: Variant;
 }
@@ -64,7 +64,7 @@ const Spinner: BsPrefixRefForwardingComponent<'div', SpinnerProps> =
       {
         bsPrefix,
         variant,
-        animation,
+        animation = 'border',
         size,
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
         as: Component = 'div',
@@ -75,7 +75,6 @@ const Spinner: BsPrefixRefForwardingComponent<'div', SpinnerProps> =
     ) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
       const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
-
       return (
         <Component
           ref={ref}
