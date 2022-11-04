@@ -233,4 +233,36 @@ describe('<Accordion>', () => {
 
     onSelectSpy.should.be.calledWith(['0']);
   });
+
+  it('should pass transition callbacks to underlying AccordionCollapse', async () => {
+    const increment = sinon.spy();
+
+    const { getByText } = render(
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>header0</Accordion.Header>
+          <Accordion.Body
+            onEnter={increment}
+            onEntering={increment}
+            onEntered={increment}
+            onExit={increment}
+            onExiting={increment}
+            onExited={increment}
+          >
+            body
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    fireEvent.click(getByText('header0'));
+
+    // Wait for body to open.
+    await waitFor(() => increment.callCount.should.equal(3));
+
+    fireEvent.click(getByText('header0'));
+
+    // Wait for body to close.
+    await waitFor(() => increment.callCount.should.equal(6));
+  });
 });
