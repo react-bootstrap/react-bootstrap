@@ -1,3 +1,24 @@
+# [2.6.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0...v2.6.0) (2022-11-06)
+
+
+### Bug Fixes
+
+* update @restart/ui to 1.4.0 ([#6479](https://github.com/react-bootstrap/react-bootstrap/issues/6479)) ([e38deae](https://github.com/react-bootstrap/react-bootstrap/commit/e38deae002093a4e08a9cd7e7cc76ab8f2508b98))
+* update @restart/ui to 1.4.1 ([#6481](https://github.com/react-bootstrap/react-bootstrap/issues/6481)) ([a42c8de](https://github.com/react-bootstrap/react-bootstrap/commit/a42c8de3c6ff659bb37838b24a89771e67d841b7))
+* **ListGroupItem:** prevent a div with a href ([#6462](https://github.com/react-bootstrap/react-bootstrap/issues/6462)) ([c4b15a3](https://github.com/react-bootstrap/react-bootstrap/commit/c4b15a3bdb2f4f9ade1fcf46008543e87959d75e))
+* **Modal:** apply 'show' class when animation = false ([#6447](https://github.com/react-bootstrap/react-bootstrap/issues/6447)) ([8f5e903](https://github.com/react-bootstrap/react-bootstrap/commit/8f5e903765d32fc43d782616e25ab75b375bee6a))
+* **PageItem:** remove disabled attribute on span ([#6455](https://github.com/react-bootstrap/react-bootstrap/issues/6455)) ([249c178](https://github.com/react-bootstrap/react-bootstrap/commit/249c1785e32e7c9dfe2ff442f88fe2d73046b8ab))
+* **types:** fix type of 'safeFindDOMNode' function ([#6465](https://github.com/react-bootstrap/react-bootstrap/issues/6465)) ([f2f1847](https://github.com/react-bootstrap/react-bootstrap/commit/f2f18473e26cc90919034ed3198de46b2cb15833))
+
+
+### Features
+
+* **Spinner:** make the animation default to border ([#6468](https://github.com/react-bootstrap/react-bootstrap/issues/6468)) ([fb3e4d5](https://github.com/react-bootstrap/react-bootstrap/commit/fb3e4d5338567a7ae5b679d258dca5b7d813c89c))
+
+
+
+
+
 # [2.5.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0-beta.1...v2.5.0) (2022-08-05)
 
 
