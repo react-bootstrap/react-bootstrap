@@ -71,7 +71,7 @@
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-live": "^2.4.1",
-    "remark-slug": "^6.1.0",
+    "remark-slug": "^7.0.1",
     "sass": "^1.56.0",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.11"
