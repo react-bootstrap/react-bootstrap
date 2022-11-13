@@ -110,11 +110,13 @@ describe('<Dropdown.Menu>', () => {
     it('should return top placement', () => {
       getDropdownMenuPlacement(false, 'up', false).should.equal('top-start');
       getDropdownMenuPlacement(true, 'up', false).should.equal('top-end');
+      getDropdownMenuPlacement(true, 'up-centered', false).should.equal('top');
     });
 
     it('should return top placement for RTL', () => {
       getDropdownMenuPlacement(false, 'up', true).should.equal('top-end');
       getDropdownMenuPlacement(true, 'up', true).should.equal('top-start');
+      getDropdownMenuPlacement(true, 'up-centered', true).should.equal('top');
     });
 
     it('should return end placement', () => {
@@ -132,11 +134,17 @@ describe('<Dropdown.Menu>', () => {
         'bottom-start',
       );
       getDropdownMenuPlacement(true, 'down', false).should.equal('bottom-end');
+      getDropdownMenuPlacement(true, 'down-centered', false).should.equal(
+        'bottom',
+      );
     });
 
     it('should return bottom placement for RTL', () => {
       getDropdownMenuPlacement(false, 'down', true).should.equal('bottom-end');
       getDropdownMenuPlacement(true, 'down', true).should.equal('bottom-start');
+      getDropdownMenuPlacement(true, 'down-centered', true).should.equal(
+        'bottom',
+      );
     });
 
     it('should return start placement', () => {

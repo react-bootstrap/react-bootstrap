@@ -112,6 +112,8 @@ export function getDropdownMenuPlacement(
     placement = alignEnd ? rightEnd : rightStart;
   else if (dropDirection === 'start')
     placement = alignEnd ? leftEnd : leftStart;
+  else if (dropDirection === 'down-centered') placement = 'bottom';
+  else if (dropDirection === 'up-centered') placement = 'top';
   return placement;
 }
 
