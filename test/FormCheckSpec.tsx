@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import * as React from 'react';
+import { expect } from 'chai';
 import FormCheck from '../src/FormCheck';
 import Switch from '../src/Switch';
 
@@ -139,6 +140,12 @@ describe('<FormCheck>', () => {
     container.getElementsByClassName('form-check').length.should.equal(0);
   });
 
+  it('should work with indeterminate state', () => {
+    const { getByRole } = render(<FormCheck type="checkbox" indeterminate />);
+
+    expect(getByRole('checkbox').indeterminate).to.be.equal(true);
+  });
+
   it('should support type switch', () => {
     const { getByTestId, container } = render(
       <FormCheck
@@ -199,6 +206,21 @@ describe('<FormCheck>', () => {
   it('should support "as"', () => {
     const Surrogate = ({ className = '', ...rest }) => (
       <input className={`extraClass ${className}'`} {...rest} />
+    );
+    const { getByTestId } = render(
+      <FormCheck as={Surrogate} data-testid="test-id" />,
+    );
+
+    const element = getByTestId('test-id');
+    element.classList.length.should.equal(2);
+    element.classList.contains('extraClass').should.be.true;
+  });
+
+  it('should support "as" that forwardsRef', () => {
+    const Surrogate = React.forwardRef(
+      ({ className = '', ...rest }: any, ref) => (
+        <input ref={ref} className={`extraClass ${className}'`} {...rest} />
+      ),
     );
     const { getByTestId } = render(
       <FormCheck as={Surrogate} data-testid="test-id" />,

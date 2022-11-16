@@ -32,6 +32,16 @@ describe('<InputGroup>', () => {
 
       expect(getByRole('checkbox').getAttribute('name')).to.be.equal(name);
     });
+
+    it('should work with indeterminate state', () => {
+      const name = 'foobar';
+
+      const { getByRole } = render(
+        <InputGroup.Checkbox indeterminate name={name} />,
+      );
+
+      expect(getByRole('checkbox').indeterminate).to.be.equal(true);
+    });
   });
 
   describe('<Radio>', () => {

@@ -57,3 +57,7 @@ export function getOverlayDirection(placement: string, isRTL?: boolean) {
   }
   return bsDirection;
 }
+
+export function isDOMElement(element: JSX.Element) {
+  return typeof element?.type === 'string';
+}

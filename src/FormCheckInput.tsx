@@ -2,9 +2,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
+import { isForwardRef } from 'react-is';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixProps,
+  BsPrefixRefForwardingComponent,
+  isDOMElement,
+} from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
@@ -69,27 +74,24 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
     const inputRef = React.useRef<HTMLInputElement>();
-    React.useImperativeHandle(
-      ref,
-      () =>
-        ({
-          current: {
-            ...inputRef.current,
-            indeterminate: !!indeterminate,
-          },
-        } as any),
-    );
-
+    const existingRef =
+      isForwardRef(<Component />) || isDOMElement(<Component />)
+        ? ref || inputRef
+        : undefined;
     React.useEffect(() => {
-      if (inputRef.current && type === 'checkbox' && indeterminate) {
-        inputRef.current.indeterminate = true;
+      if (
+        (existingRef as any)?.current &&
+        type === 'checkbox' &&
+        indeterminate
+      ) {
+        (existingRef as any).current.indeterminate = true;
       }
-    }, [indeterminate, ref, type]);
+    }, [existingRef, indeterminate, ref, type]);
 
     return (
       <Component
         {...props}
-        ref={inputRef}
+        ref={existingRef}
         type={type}
         id={id || controlId}
         className={classNames(
