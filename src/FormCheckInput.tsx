@@ -14,6 +14,7 @@ export interface FormCheckInputProps
   type?: FormCheckInputType;
   isValid?: boolean;
   isInvalid?: boolean;
+  indeterminate?: boolean;
 }
 
 const propTypes = {
@@ -40,6 +41,9 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool,
+
+  /** Set whether the input is of indeterminate state */
+  indeterminate: PropTypes.bool,
 };
 
 const FormCheckInput: BsPrefixRefForwardingComponent<
@@ -54,6 +58,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
       type = 'checkbox',
       isValid = false,
       isInvalid = false,
+      indeterminate = false,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
@@ -63,10 +68,28 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     const { controlId } = useContext(FormContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
+    const inputRef = React.useRef<HTMLInputElement>();
+    React.useImperativeHandle(
+      ref,
+      () =>
+        ({
+          current: {
+            ...inputRef.current,
+            indeterminate: !!indeterminate,
+          },
+        } as any),
+    );
+
+    React.useEffect(() => {
+      if (inputRef.current && type === 'checkbox' && indeterminate) {
+        inputRef.current.indeterminate = true;
+      }
+    }, [indeterminate, ref, type]);
+
     return (
       <Component
         {...props}
-        ref={ref}
+        ref={inputRef}
         type={type}
         id={id || controlId}
         className={classNames(
