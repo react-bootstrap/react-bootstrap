@@ -82,7 +82,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     React.useEffect(() => {
       if (
         (existingRef as any)?.current &&
-        type === 'checkbox' &&
+        (existingRef as any)?.current.type === 'checkbox' &&
         indeterminate
       ) {
         (existingRef as any).current.indeterminate = true;
