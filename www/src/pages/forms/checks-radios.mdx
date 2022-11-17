@@ -32,7 +32,8 @@ FormCheck.
 
 ## Indeterminate
 
-There's also a possiblity to render an indeterminate state
+There's also a possiblity to render a checkbox in an indeterminate state.
+*Note: Since 'indeterminate' state relies on imperative useEffect logic, it cannot be used in SSR context.*
 
 <ReactPlayground codeText={CheckIndeterminate} />
 

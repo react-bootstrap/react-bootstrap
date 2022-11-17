@@ -75,6 +75,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
 
     const inputRef = React.useRef<HTMLInputElement>();
     const existingRef =
+      /* If 'as' forwards a ref, support it */
       isForwardRef(<Component />) || isDOMElement(<Component />)
         ? ref || inputRef
         : undefined;
