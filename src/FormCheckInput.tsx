@@ -2,14 +2,11 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
-import { isForwardRef } from 'react-is';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
+import useCallbackRef from '@restart/hooks/useCallbackRef';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  isDOMElement,
-} from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
@@ -73,21 +70,14 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     const { controlId } = useContext(FormContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
-    const inputRef = React.useRef<HTMLInputElement>();
-    const existingRef =
-      /* If 'as' forwards a ref, support it */
-      isForwardRef(<Component />) || isDOMElement(<Component />)
-        ? ref || inputRef
-        : undefined;
+    const [element, inputRef] = useCallbackRef<HTMLInputElement>();
+    const existingRef = useMergedRefs(inputRef, ref);
+
     React.useEffect(() => {
-      if (
-        (existingRef as any)?.current &&
-        (existingRef as any)?.current.type === 'checkbox' &&
-        indeterminate
-      ) {
-        (existingRef as any).current.indeterminate = true;
+      if (element && element.type === 'checkbox' && indeterminate) {
+        element.indeterminate = true;
       }
-    }, [existingRef, indeterminate, ref, type]);
+    }, [element, existingRef, indeterminate, ref, type]);
 
     return (
       <Component

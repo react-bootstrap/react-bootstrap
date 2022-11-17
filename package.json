@@ -68,7 +68,6 @@
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "prop-types-extra": "^1.1.0",
-    "react-is": "^18.2.0",
     "react-transition-group": "^4.4.2",
     "uncontrollable": "^7.2.1",
     "warning": "^4.0.3"
@@ -90,7 +89,6 @@
     "@types/mocha": "^9.1.1",
     "@types/prop-types": "^15.7.5",
     "@types/react-dom": "^16.9.17",
-    "@types/react-is": "^17.0.3",
     "@types/sinon": "^10.0.13",
     "@types/sinon-chai": "^3.2.9",
     "@types/warning": "^3.0.0",
