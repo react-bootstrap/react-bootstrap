@@ -46,7 +46,14 @@ const propTypes = {
   /**
    * Determines the direction and location of the Menu in relation to it's Toggle.
    */
-  drop: PropTypes.oneOf(['up', 'start', 'end', 'down']),
+  drop: PropTypes.oneOf<DropDirection>([
+    'up',
+    'up-centered',
+    'start',
+    'end',
+    'down',
+    'down-centered',
+  ]),
 
   as: PropTypes.elementType,
 
@@ -116,6 +123,7 @@ const defaultProps: Partial<DropdownProps> = {
   navbar: false,
   align: 'start',
   autoClose: true,
+  drop: 'down',
 };
 
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
@@ -178,6 +186,15 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       [align, drop, isRTL],
     );
 
+    const directionClasses = {
+      down: prefix,
+      'down-centered': `${prefix}-center`,
+      up: 'dropup',
+      'up-centered': 'dropup-center dropup',
+      end: 'dropend',
+      start: 'dropstart',
+    };
+
     return (
       <DropdownContext.Provider value={contextValue}>
         <BaseDropdown
@@ -197,10 +214,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
               className={classNames(
                 className,
                 show && 'show',
-                (!drop || drop === 'down') && prefix,
-                drop === 'up' && 'dropup',
-                drop === 'end' && 'dropend',
-                drop === 'start' && 'dropstart',
+                directionClasses[drop!],
               )}
             />
           )}
