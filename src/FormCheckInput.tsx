@@ -82,6 +82,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     return (
       <Component
         {...props}
+        // When using indeterminate, 'as' prop has to accept a ref
         ref={indeterminate || ref ? existingRef : undefined}
         type={type}
         id={id || controlId}
