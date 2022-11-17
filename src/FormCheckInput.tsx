@@ -82,7 +82,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     return (
       <Component
         {...props}
-        ref={existingRef}
+        ref={indeterminate || ref ? existingRef : undefined}
         type={type}
         id={id || controlId}
         className={classNames(

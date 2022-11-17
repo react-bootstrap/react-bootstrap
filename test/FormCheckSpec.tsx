@@ -203,6 +203,19 @@ describe('<FormCheck>', () => {
     label.innerText.should.equal('My label');
   });
 
+  it('should support "as"', () => {
+    const Surrogate = ({ className = '', ...rest }) => (
+      <input className={`extraClass ${className}'`} {...rest} />
+    );
+    const { getByTestId } = render(
+      <FormCheck as={Surrogate} data-testid="test-id" />,
+    );
+
+    const element = getByTestId('test-id');
+    element.classList.length.should.equal(2);
+    element.classList.contains('extraClass').should.be.true;
+  });
+
   it('should support "as" that forwardsRef', () => {
     const Surrogate = React.forwardRef(
       ({ className = '', ...rest }: any, ref) => (
