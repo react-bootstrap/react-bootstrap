@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 import { expect } from 'chai';
 import FormCheck from '../src/FormCheck';
@@ -141,9 +141,33 @@ describe('<FormCheck>', () => {
   });
 
   it('should work with indeterminate state', () => {
-    const { getByRole } = render(<FormCheck type="checkbox" indeterminate />);
+    const TestElem = () => {
+      const [isIndeterminate, setIndeterminate] = React.useState(true);
+
+      return (
+        <>
+          <button
+            type="submit"
+            onClick={() => setIndeterminate(!isIndeterminate)}
+          >
+            click
+          </button>
+          <FormCheck
+            type="checkbox"
+            indeterminate={isIndeterminate}
+            onClick={() => setIndeterminate(!isIndeterminate)}
+          />
+        </>
+      );
+    };
+
+    const { getByRole } = render(<TestElem />);
 
     expect(getByRole('checkbox').indeterminate).to.be.equal(true);
+
+    fireEvent.click(getByRole('button'));
+
+    expect(getByRole('checkbox').indeterminate).to.be.equal(false);
   });
 
   it('should support type switch', () => {

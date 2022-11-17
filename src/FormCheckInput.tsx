@@ -60,7 +60,7 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
       type = 'checkbox',
       isValid = false,
       isInvalid = false,
-      indeterminate = false,
+      indeterminate,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
@@ -74,8 +74,12 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     const existingRef = useMergedRefs(inputRef, ref);
 
     React.useEffect(() => {
-      if (element && element.type === 'checkbox' && indeterminate) {
-        element.indeterminate = true;
+      if (element && element.type === 'checkbox') {
+        if (indeterminate) {
+          element.indeterminate = true;
+        } else {
+          element.indeterminate = false;
+        }
       }
     }, [element, existingRef, indeterminate, ref, type]);
 
