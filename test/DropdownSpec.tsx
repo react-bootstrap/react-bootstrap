@@ -40,6 +40,31 @@ describe('<Dropdown>', () => {
     });
   });
 
+  it('renders div with drop=down-centered', () => {
+    const { container } = render(
+      <Dropdown title="Drop" drop="down-centered">
+        {dropdownChildren}
+      </Dropdown>,
+    );
+
+    container.firstElementChild!.classList.should.not.contain(['dropdown']);
+    container.firstElementChild!.classList.should.contain([`dropdown-center`]);
+  });
+
+  it('renders div with drop=up-centered', () => {
+    const { container } = render(
+      <Dropdown title="Drop" drop="up-centered">
+        {dropdownChildren}
+      </Dropdown>,
+    );
+
+    container.firstElementChild!.classList.should.not.contain(['dropdown']);
+    container.firstElementChild!.classList.should.contain([
+      'dropup-center',
+      'dropup',
+    ]);
+  });
+
   it('renders toggle with Dropdown.Toggle', () => {
     const { getByText } = render(simpleDropdown);
 
