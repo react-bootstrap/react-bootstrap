@@ -40,7 +40,7 @@ jobs:
         run: brew install --cask firefox
       - name: Install Firefox (ubuntu)
         if: matrix.os == 'ubuntu-latest' && matrix.browser == 'FirefoxHeadless'
-        run: sudo apt install firefox
+        run: sudo apt install xvfb && sudo apt install firefox
       - name: Install Dependencies
         run: yarn bootstrap
         env:
