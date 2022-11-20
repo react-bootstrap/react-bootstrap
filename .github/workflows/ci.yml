@@ -38,6 +38,9 @@ jobs:
       - name: Install Firefox (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
         run: brew install --cask firefox
+      - name: Install Firefox (ubuntu)
+        if: matrix.os == 'ubuntu-latest' && matrix.browser == 'FirefoxHeadless'
+        run: sudo apt install firefox
       - name: Install Dependencies
         run: yarn bootstrap
         env:
