@@ -38,6 +38,9 @@ jobs:
       - name: Install Firefox (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
         run: brew install --cask firefox
+      - name: Install Firefox (ubuntu)
+        if: matrix.os == 'ubuntu-latest' && matrix.browser == 'FirefoxHeadless'
+        run: sudo snap remove firefox && sudo add-apt-repository ppa:mozillateam/ppa && sudo apt install --target-release 'o=LP-PPA-mozillateam' firefox
       - name: Install Dependencies
         run: yarn bootstrap
         env:
