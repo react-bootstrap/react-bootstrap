@@ -63,8 +63,9 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
       indeterminate,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
-      checked,
+      defaultChecked = false,
       onChange,
+      checked,
       ...props
     },
     ref,
@@ -75,7 +76,11 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     const [element, inputRef] = useCallbackRef<HTMLInputElement>();
     const existingRef = useMergedRefs(inputRef, ref);
 
-    const handleIndeterminate = React.useCallback(() => {
+    const [innerChecked, setInnerChecked] = React.useState(
+      defaultChecked || checked,
+    );
+
+    React.useEffect(() => {
       if (element && element.type === 'checkbox') {
         if (indeterminate) {
           element.indeterminate = true;
@@ -83,20 +88,16 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
           element.indeterminate = false;
         }
       }
-    }, [element, indeterminate]);
-
-    React.useEffect(() => {
-      handleIndeterminate();
-    }, [element, existingRef, handleIndeterminate, indeterminate, ref, type]);
+    }, [element, existingRef, indeterminate, ref, type, innerChecked]);
 
     return (
       <Component
         {...props}
         // When using indeterminate, 'as' prop has to accept a ref
         ref={indeterminate || ref ? existingRef : undefined}
-        checked={checked}
-        onChange={(e) => {
-          handleIndeterminate();
+        checked={innerChecked}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setInnerChecked(e.target.checked);
           onChange?.(e);
         }}
         type={type}
