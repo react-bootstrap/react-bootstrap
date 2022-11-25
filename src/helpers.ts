@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TransitionComponent } from '@restart/ui/types';
+import { UtilityProps } from './utilities';
 
 export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
@@ -19,7 +20,7 @@ export interface AsProp<As extends React.ElementType = React.ElementType> {
 
 export interface BsPrefixProps<As extends React.ElementType = React.ElementType>
   extends BsPrefixOnlyProps,
-    AsProp<As> {}
+    AsProp<As>, UtilityProps {}
 
 export interface BsPrefixRefForwardingComponent<
   TInitial extends React.ElementType,
