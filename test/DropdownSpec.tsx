@@ -230,6 +230,13 @@ describe('<Dropdown>', () => {
       onToggleSpy.getCall(0).args[0].should.equal(true);
       onToggleSpy.getCall(0).args[1].source.should.equal('keydown');
     });
+
+    it('Should render .show on the dropdown toggle when outside an InputGroup', () => {
+      const { getByText } = render(
+        <Dropdown show>{dropdownChildren}</Dropdown>,
+      );
+      getByText('Child Title').classList.contains('show').should.be.true;
+    });
   });
 
   it('should use each components bsPrefix', () => {
