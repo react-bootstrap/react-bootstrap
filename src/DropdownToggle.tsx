@@ -1,15 +1,14 @@
+import useMergedRefs from '@restart/hooks/useMergedRefs';
+import DropdownContext from '@restart/ui/DropdownContext';
+import { useDropdownToggle } from '@restart/ui/DropdownToggle';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
-import { useDropdownToggle } from '@restart/ui/DropdownToggle';
-import DropdownContext from '@restart/ui/DropdownContext';
-import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps, CommonButtonProps } from './Button';
-import InputGroupContext from './InputGroupContext';
+import { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
   as?: React.ElementType;
@@ -64,7 +63,6 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
     const dropdownContext = useContext(DropdownContext);
-    const isInputGroup = useContext(InputGroupContext);
 
     if (childBsPrefix !== undefined) {
       (props as any).bsPrefix = childBsPrefix;
@@ -85,7 +83,7 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
           className,
           prefix,
           split && `${prefix}-split`,
-          !!isInputGroup && dropdownContext?.show && 'show',
+          dropdownContext?.show && 'show',
         )}
         {...toggleProps}
         {...props}
