@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { TransitionCallbacks } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionCollapse from './AccordionCollapse';
 import AccordionItemContext from './AccordionItemContext';
@@ -9,6 +10,7 @@ import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionBodyProps
   extends BsPrefixProps,
+    TransitionCallbacks,
     React.HTMLAttributes<HTMLElement> {}
 
 const propTypes = {
@@ -17,6 +19,31 @@ const propTypes = {
 
   /** @default 'accordion-body' */
   bsPrefix: PropTypes.string,
+
+  /**
+   * Callback fired before the component expands
+   */
+  onEnter: PropTypes.func,
+  /**
+   * Callback fired after the component starts to expand
+   */
+  onEntering: PropTypes.func,
+  /**
+   * Callback fired after the component has expanded
+   */
+  onEntered: PropTypes.func,
+  /**
+   * Callback fired before the component collapses
+   */
+  onExit: PropTypes.func,
+  /**
+   * Callback fired after the component starts to collapse
+   */
+  onExiting: PropTypes.func,
+  /**
+   * Callback fired after the component has collapsed
+   */
+  onExited: PropTypes.func,
 };
 
 const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
@@ -27,6 +54,12 @@ const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
         as: Component = 'div',
         bsPrefix,
         className,
+        onEnter,
+        onEntering,
+        onEntered,
+        onExit,
+        onExiting,
+        onExited,
         ...props
       },
       ref,
@@ -35,7 +68,15 @@ const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
       const { eventKey } = useContext(AccordionItemContext);
 
       return (
-        <AccordionCollapse eventKey={eventKey}>
+        <AccordionCollapse
+          eventKey={eventKey}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={onExited}
+        >
           <Component
             ref={ref}
             {...props}
