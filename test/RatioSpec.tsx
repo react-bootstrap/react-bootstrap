@@ -49,7 +49,7 @@ describe('Ratio', () => {
     styleAttr.should.match(/--bs-aspect-ratio:[ ]*100%;/);
   });
 
-  it('should support use 100% as custom ratio if aspectRatio is greater than 100', () => {
+  it('should support aspectRatio greater than 100', () => {
     const { getByTestId } = render(
       <Ratio data-testid="test" aspectRatio={200}>
         <div />
@@ -57,6 +57,6 @@ describe('Ratio', () => {
     );
     const ratioElem = getByTestId('test');
     const styleAttr = ratioElem.getAttribute('style')!;
-    styleAttr.should.match(/--bs-aspect-ratio:[ ]*100%;/);
+    styleAttr.should.match(/--bs-aspect-ratio:[ ]*200%;/);
   });
 });

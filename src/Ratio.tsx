@@ -37,7 +37,7 @@ const defaultProps = {
 };
 
 function toPercent(num: number): string {
-  if (num <= 0 || num > 100) return '100%';
+  if (num <= 0) return '100%';
   if (num < 1) return `${num * 100}%`;
   return `${num}%`;
 }
