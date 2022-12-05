@@ -42,7 +42,7 @@
     "@restart/hooks": "^0.4.7",
     "ast-types": "^0.14.2",
     "astroturf": "^0.10.5",
-    "bootstrap": "^5.2.2",
+    "bootstrap": "^5.2.3",
     "classnames": "^2.3.2",
     "common-tags": "^1.8.2",
     "copy-text-to-clipboard": "^3.0.1",
@@ -72,7 +72,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.4.1",
     "remark-slug": "^6.1.0",
-    "sass": "^1.56.0",
+    "sass": "^1.56.1",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.11"
   }
