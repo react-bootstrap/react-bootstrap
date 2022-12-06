@@ -391,13 +391,16 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       };
 
       const handleEscapeKeyDown = (e) => {
-        if (!keyboard && backdrop === 'static') {
-          // Call preventDefault to stop modal from closing in restart ui,
-          // then play our animation.
+        if (keyboard) {
+          onEscapeKeyDown?.(e);
+        } else {
+          // Call preventDefault to stop modal from closing in @restart/ui.
           e.preventDefault();
-          handleStaticModalAnimation();
-        } else if (keyboard && onEscapeKeyDown) {
-          onEscapeKeyDown(e);
+
+          if (backdrop === 'static') {
+            // Play static modal animation.
+            handleStaticModalAnimation();
+          }
         }
       };
 
