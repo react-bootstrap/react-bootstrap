@@ -1,7 +1,7 @@
 import * as React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ModalManager from '@restart/ui/ModalManager';
 import Modal, { ModalProps } from '../src/Modal';
 
@@ -448,6 +448,38 @@ describe('<Modal>', () => {
     });
 
     onEscapeKeyDownSpy.should.not.have.been.called;
+  });
+
+  it('Should not hide modal when keyboard is false', async () => {
+    function ModalTest() {
+      const [show, setShow] = React.useState(false);
+
+      return (
+        <>
+          <Modal show={show} onHide={() => setShow(false)} keyboard={false}>
+            <strong>Message</strong>
+          </Modal>
+          <button type="button" onClick={() => setShow((s) => !s)}>
+            Button
+          </button>
+        </>
+      );
+    }
+
+    render(<ModalTest />);
+
+    // Show the modal.
+    fireEvent.click(screen.getByRole('button'));
+
+    // Escape key.
+    fireEvent.keyDown(screen.getByRole('dialog'), {
+      keyCode: 27,
+    });
+
+    // Wait a bit before checking if modal is still there.
+    await new Promise((r) => setTimeout(r, 500));
+
+    expect(screen.queryByRole('dialog')).to.exist;
   });
 
   it('Should use custom props manager if specified', (done) => {
