@@ -1,3 +1,22 @@
+# [2.7.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.6.0...v2.7.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* **Dropdown:** fic missing .show class on dropdown toggle when active ([#6508](https://github.com/react-bootstrap/react-bootstrap/issues/6508)) ([eaa4bb9](https://github.com/react-bootstrap/react-bootstrap/commit/eaa4bb999f03a2bbb6ad0cb51dd4aa040cb96cfd))
+* **Modal:** fix modal not closing when keyboard=false ([#6515](https://github.com/react-bootstrap/react-bootstrap/issues/6515)) ([92703d5](https://github.com/react-bootstrap/react-bootstrap/commit/92703d5e3d8558e0a9599512c832adf9b0d37a25))
+
+
+### Features
+
+* **AccordionBody:** add transition callback props ([#6478](https://github.com/react-bootstrap/react-bootstrap/issues/6478)) ([ba092df](https://github.com/react-bootstrap/react-bootstrap/commit/ba092df063e024615c3f0d43f8b0681543e71b94))
+* **Dropdown:** add support for centered dropdown menus ([#6490](https://github.com/react-bootstrap/react-bootstrap/issues/6490)) ([500ee94](https://github.com/react-bootstrap/react-bootstrap/commit/500ee94086fa7ddbea9a613c49908ad51cc67e96))
+* **Ratio:** add support for portrait size ratios ([#6501](https://github.com/react-bootstrap/react-bootstrap/issues/6501)) ([3cfdab1](https://github.com/react-bootstrap/react-bootstrap/commit/3cfdab16dc4a51ecd648341921d93edd28b3deb2))
+
+
+
+
+
 # [2.6.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.5.0...v2.6.0) (2022-11-06)
 
 
