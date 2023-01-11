@@ -134,8 +134,6 @@
     "mocha": "^9.2.2",
     "prettier": "^2.8.0",
     "process": "^0.11.10",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
     "react-test-renderer": "^16.14.0",
     "simulant": "^0.2.2",
     "sinon": "^14.0.2",
