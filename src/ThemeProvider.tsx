@@ -15,13 +15,15 @@ export interface ThemeContextValue {
 export interface ThemeProviderProps extends Partial<ThemeContextValue> {
   children: React.ReactNode;
 }
+const contextCreator = (typeof React.createContext) === "undefined" ? function (defaultValue: ThemeContextValue) { return React.createServerContext<ThemeContextValue>("react-bootstrap", defaultValue) } : React.createContext<ThemeContextValue>
 
-const ThemeContext = React.createContext<ThemeContextValue>({
+const ThemeContext = contextCreator({
   prefixes: {},
   breakpoints: DEFAULT_BREAKPOINTS,
   minBreakpoint: DEFAULT_MIN_BREAKPOINT,
 });
-const { Consumer, Provider } = ThemeContext;
+
+const { Provider } = ThemeContext;
 
 function ThemeProvider({
   prefixes = {},
@@ -117,4 +119,5 @@ function createBootstrapComponent(Component, opts) {
 }
 
 export { createBootstrapComponent, Consumer as ThemeConsumer };
+export { createBootstrapComponent };
 export default ThemeProvider;
