@@ -118,6 +118,5 @@ function createBootstrapComponent(Component, opts) {
   return Wrapped;
 }
 
-export { createBootstrapComponent, Consumer as ThemeConsumer };
 export { createBootstrapComponent };
 export default ThemeProvider;
