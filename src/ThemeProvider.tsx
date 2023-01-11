@@ -15,7 +15,17 @@ export interface ThemeContextValue {
 export interface ThemeProviderProps extends Partial<ThemeContextValue> {
   children: React.ReactNode;
 }
-const contextCreator = (typeof React.createContext) === "undefined" ? function (defaultValue: ThemeContextValue) { return React.createServerContext<ThemeContextValue>("react-bootstrap", defaultValue) } : React.createContext<ThemeContextValue>
+
+// @ts-ignore
+const contextCreator =
+  typeof React.createContext === 'undefined'
+    ? function (defaultValue: ThemeContextValue) {
+        return React.createServerContext<ThemeContextValue>(
+          'react-bootstrap',
+          defaultValue,
+        );
+      }
+    : React.createContext<ThemeContextValue>;
 
 const ThemeContext = contextCreator({
   prefixes: {},
@@ -81,22 +91,22 @@ export function useBootstrapPrefix(
   prefix: string | undefined,
   defaultPrefix: string,
 ): string {
-  const { prefixes } = useContext(ThemeContext);
+  const { prefixes }: ThemeContextValue = useContext(ThemeContext);
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
 
 export function useBootstrapBreakpoints() {
-  const { breakpoints } = useContext(ThemeContext);
+  const { breakpoints }: ThemeContextValue = useContext(ThemeContext);
   return breakpoints;
 }
 
 export function useBootstrapMinBreakpoint() {
-  const { minBreakpoint } = useContext(ThemeContext);
+  const { minBreakpoint }: ThemeContextValue = useContext(ThemeContext);
   return minBreakpoint;
 }
 
 export function useIsRTL() {
-  const { dir } = useContext(ThemeContext);
+  const { dir }: ThemeContextValue = useContext(ThemeContext);
   return dir === 'rtl';
 }
 
