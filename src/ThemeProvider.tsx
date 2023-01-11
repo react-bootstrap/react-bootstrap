@@ -16,10 +16,10 @@ export interface ThemeProviderProps extends Partial<ThemeContextValue> {
   children: React.ReactNode;
 }
 
-// @ts-ignore
 const contextCreator =
   typeof React.createContext === 'undefined'
     ? function (defaultValue: ThemeContextValue) {
+        // @ts-ignore
         return React.createServerContext<ThemeContextValue>(
           'react-bootstrap',
           defaultValue,
