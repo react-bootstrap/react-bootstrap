@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
 import AccordionButton from '../src/AccordionButton';
+import Accordion from '../src/Accordion';
 
 describe('<AccordionButton>', () => {
   it('Should have button as default component', () => {
@@ -32,5 +33,16 @@ describe('<AccordionButton>', () => {
     fireEvent.click(getByTestId('btn'));
 
     onClickSpy.should.be.calledOnce;
+  });
+
+  it('Should have toggled aria-expanded attribute in alwaysOpen accordion', () => {
+    const onClickSpy = sinon.spy();
+    const { getByTestId } = render(
+      <Accordion alwaysOpen>
+        <AccordionButton data-testid="btn" onClick={onClickSpy} />
+      </Accordion>,
+    );
+    fireEvent.click(getByTestId('btn'));
+    getByTestId('btn').getAttribute('aria-expanded').should.equal('true');
   });
 });
