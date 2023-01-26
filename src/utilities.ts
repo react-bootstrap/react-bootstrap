@@ -4,7 +4,7 @@ interface TextUtilityProps {
   textAlign?: 'start' | 'end' | 'center' | string;
 }
 
-function useTextUtilities(textUtilityProps: TextUtilityProps): string {
+const useTextUtilities = (textUtilityProps: TextUtilityProps): string => {
   return classNames(
     textUtilityProps.textAlign && `text-${textUtilityProps.textAlign}`,
   );
@@ -12,7 +12,7 @@ function useTextUtilities(textUtilityProps: TextUtilityProps): string {
 
 export type UtilityProps = TextUtilityProps;
 
-export function useUtilities(utilityProps: UtilityProps): string {
+export const  useUtilities = (utilityProps: UtilityProps): string => {
   return classNames(
     useTextUtilities({
       textAlign: utilityProps.textAlign,
