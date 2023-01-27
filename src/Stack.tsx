@@ -60,11 +60,13 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
           className={classNames(
             className,
             bsPrefix,
-            ...createUtilityClassName({
-              gap,
+            ...createUtilityClassName(
+              {
+                gap,
+              },
               breakpoints,
               minBreakpoint,
-            }),
+            ),
           )}
         />
       );
