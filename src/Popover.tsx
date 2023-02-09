@@ -7,6 +7,7 @@ import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
 import { Placement, PopperRef } from './types';
 import { BsPrefixProps, getOverlayDirection } from './helpers';
+import getInitialPopperStyles from './getInitialPopperStyles';
 
 export interface PopoverProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -17,6 +18,7 @@ export interface PopoverProps
   body?: boolean;
   popper?: PopperRef;
   show?: boolean;
+  hasDoneInitialMeasure?: boolean;
 }
 
 const propTypes = {
@@ -71,6 +73,11 @@ const propTypes = {
    */
   body: PropTypes.bool,
 
+  /**
+   * Whether or not Popper has done its initial measurement and positioning.
+   */
+  hasDoneInitialMeasure: PropTypes.bool,
+
   /** @private */
   popper: PropTypes.object,
 
@@ -92,8 +99,9 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
       children,
       body,
       arrowProps,
-      popper: _,
-      show: _1,
+      hasDoneInitialMeasure,
+      popper,
+      show: _,
       ...props
     },
     ref,
@@ -103,11 +111,19 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     const [primaryPlacement] = placement?.split('-') || [];
     const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
+    let computedStyle = style;
+    if (!hasDoneInitialMeasure) {
+      computedStyle = {
+        ...style,
+        ...getInitialPopperStyles(popper?.strategy),
+      };
+    }
+
     return (
       <div
         ref={ref}
         role="tooltip"
-        style={style}
+        style={computedStyle}
         x-placement={primaryPlacement}
         className={classNames(
           className,

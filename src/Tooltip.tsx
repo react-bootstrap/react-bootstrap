@@ -5,6 +5,7 @@ import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import { Placement, PopperRef } from './types';
 import { BsPrefixProps, getOverlayDirection } from './helpers';
+import getInitialPopperStyles from './getInitialPopperStyles';
 
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -13,6 +14,7 @@ export interface TooltipProps
   arrowProps?: Partial<OverlayArrowProps>;
   show?: boolean;
   popper?: PopperRef;
+  hasDoneInitialMeasure?: boolean;
 }
 
 const propTypes = {
@@ -63,6 +65,11 @@ const propTypes = {
     style: PropTypes.object,
   }),
 
+  /**
+   * Whether or not Popper has done its initial measurement and positioning.
+   */
+  hasDoneInitialMeasure: PropTypes.bool,
+
   /** @private */
   popper: PropTypes.object,
 
@@ -83,8 +90,9 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       style,
       children,
       arrowProps,
-      popper: _,
-      show: _2,
+      hasDoneInitialMeasure,
+      popper,
+      show: _,
       ...props
     }: TooltipProps,
     ref,
@@ -95,10 +103,18 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     const [primaryPlacement] = placement?.split('-') || [];
     const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
+    let computedStyle = style;
+    if (!hasDoneInitialMeasure) {
+      computedStyle = {
+        ...style,
+        ...getInitialPopperStyles(popper?.strategy),
+      };
+    }
+
     return (
       <div
         ref={ref}
-        style={style}
+        style={computedStyle}
         role="tooltip"
         x-placement={primaryPlacement}
         className={classNames(className, bsPrefix, `bs-tooltip-${bsDirection}`)}
