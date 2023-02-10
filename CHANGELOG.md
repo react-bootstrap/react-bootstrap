@@ -1,3 +1,16 @@
+## [2.7.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.0...v2.7.1) (2023-02-10)
+
+
+### Bug Fixes
+
+* **Accordion:** fix `aria-expanded` value when using `alwaysOpen` ([#6537](https://github.com/react-bootstrap/react-bootstrap/issues/6537)) ([7f633bf](https://github.com/react-bootstrap/react-bootstrap/commit/7f633bf31ed4771c97904df4bb9567900ad4e96c)), closes [#6536](https://github.com/react-bootstrap/react-bootstrap/issues/6536) [#6536](https://github.com/react-bootstrap/react-bootstrap/issues/6536)
+* **Overlay:** fix flickering of tooltips and popovers during initial render ([#6544](https://github.com/react-bootstrap/react-bootstrap/issues/6544)) ([821624d](https://github.com/react-bootstrap/react-bootstrap/commit/821624d432d346d1f2f52d625eb484b70ba786e6))
+* **Stack:** fix incorrect classes being generated ([#6540](https://github.com/react-bootstrap/react-bootstrap/issues/6540)) ([e3a77e1](https://github.com/react-bootstrap/react-bootstrap/commit/e3a77e1938baa3d5b000a5aabfc034992ac615d5))
+
+
+
+
+
 # [2.7.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.6.0...v2.7.0) (2022-12-07)
 
 
