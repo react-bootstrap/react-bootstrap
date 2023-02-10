@@ -73,7 +73,7 @@
     "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@4c/rollout": "^3.0.1",
+    "@4c/rollout": "^4.0.2",
     "@4c/tsconfig": "^0.4.1",
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
