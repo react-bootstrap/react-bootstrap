@@ -30,16 +30,16 @@
     }
   },
   "devDependencies": {
-    "@docsearch/css": "^3.3.0",
-    "@docsearch/react": "^3.3.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-brands-svg-icons": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@docsearch/css": "^3.3.3",
+    "@docsearch/react": "^3.3.3",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@restart/context": "^2.1.4",
-    "@restart/hooks": "^0.4.7",
+    "@restart/hooks": "^0.4.9",
     "ast-types": "^0.14.2",
     "astroturf": "^0.10.5",
     "bootstrap": "^5.2.3",
@@ -72,7 +72,7 @@
     "react-helmet": "^6.1.0",
     "react-live": "^2.4.1",
     "remark-slug": "^6.1.0",
-    "sass": "^1.56.1",
+    "sass": "^1.58.0",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.32.11"
   }
