@@ -12,7 +12,14 @@ function Example() {
         Click me to see
       </Button>
       <Overlay target={target.current} show={show} placement="right">
-        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+        {({
+          placement: _placement,
+          arrowProps: _arrowProps,
+          show: _show,
+          popper: _popper,
+          hasDoneInitialMeasure: _hasDoneInitialMeasure,
+          ...props
+        }) => (
           <div
             {...props}
             style={{

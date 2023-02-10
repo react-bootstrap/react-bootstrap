@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BaseOverlay, {
@@ -8,7 +8,6 @@ import BaseOverlay, {
 } from '@restart/ui/Overlay';
 import { State } from '@restart/ui/usePopper';
 import { componentOrElement, elementType } from 'prop-types-extra';
-import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
@@ -28,6 +27,8 @@ export interface OverlayInjectedProps {
   show: boolean;
   placement: Placement | undefined;
   popper: PopperRef;
+  hasDoneInitialMeasure?: boolean;
+
   [prop: string]: any;
 }
 
@@ -162,7 +163,9 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     outerRef,
   ) => {
     const popperRef = useRef<Partial<PopperRef>>({});
-    const [firstRenderedState, setFirstRenderedState] = useCallbackRef<State>();
+    const [firstRenderedState, setFirstRenderedState] = useState<State | null>(
+      null,
+    );
     const [ref, modifiers] = useOverlayOffset(outerProps.offset);
     const mergedRef = useMergedRefs(outerRef, ref);
 
@@ -179,6 +182,12 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
         popperRef.current.scheduleUpdate?.();
       }
     }, [firstRenderedState]);
+
+    useEffect(() => {
+      if (!outerProps.show) {
+        setFirstRenderedState(null);
+      }
+    }, [outerProps.show]);
 
     return (
       <BaseOverlay
@@ -201,7 +210,10 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
             placement: updatedPlacement,
             outOfBoundaries:
               popperObj?.state?.modifiersData.hide?.isReferenceHidden || false,
+            strategy: popperConfig.strategy,
           });
+
+          const hasDoneInitialMeasure = !!firstRenderedState;
 
           if (typeof overlay === 'function')
             return overlay({
@@ -211,6 +223,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
               ...(!transition && show && { className: 'show' }),
               popper,
               arrowProps,
+              hasDoneInitialMeasure,
             });
 
           return React.cloneElement(overlay as React.ReactElement, {
@@ -218,6 +231,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
             placement: updatedPlacement,
             arrowProps,
             popper,
+            hasDoneInitialMeasure,
             className: classNames(
               (overlay as React.ReactElement).props.className,
               !transition && show && 'show',

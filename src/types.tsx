@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { State } from '@restart/ui/usePopper';
+import { State, UsePopperOptions } from '@restart/ui/usePopper';
 
 export type Variant =
   | 'primary'
@@ -69,4 +69,5 @@ export interface PopperRef {
   outOfBoundaries: boolean;
   placement: Placement | undefined;
   scheduleUpdate?: () => void;
+  strategy: UsePopperOptions['strategy'];
 }
