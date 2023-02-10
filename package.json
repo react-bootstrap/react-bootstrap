@@ -82,7 +82,7 @@
     "@react-bootstrap/babel-preset": "^2.1.0",
     "@react-bootstrap/eslint-config": "^2.0.0",
     "@testing-library/dom": "^8.20.0",
-    "@testing-library/react": "^12.1.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/chai": "^4.3.4",
     "@types/invariant": "^2.2.35",
