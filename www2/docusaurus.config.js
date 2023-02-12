@@ -26,7 +26,7 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
+  // plugins: ['./plugins/webpack-plugin'],
   presets: [
     [
       'classic',
@@ -39,20 +39,16 @@ const config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          // customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve(
+            './node_modules/bootstrap/dist/css/bootstrap.min.css',
+          ),
         },
       }),
     ],
   ],
-
+  themes: ['@docusaurus/theme-live-codeblock'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -65,11 +61,16 @@ const config = {
         items: [
           {
             type: 'doc',
+            docId: 'getting-started',
+            position: 'left',
+            label: 'Getting Started',
+          },
+          {
+            type: 'doc',
             docId: 'intro',
             position: 'left',
             label: 'Tutorial',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -109,10 +110,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',
