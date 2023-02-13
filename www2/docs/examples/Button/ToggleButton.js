@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
@@ -76,4 +76,4 @@ function ToggleButtonExample() {
   );
 }
 
-render(<ToggleButtonExample />);
+export default ToggleButtonExample;

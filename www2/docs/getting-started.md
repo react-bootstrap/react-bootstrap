@@ -2,7 +2,6 @@
 sidebar_position: 1
 ---
 
-import CodeBlock from '@theme/CodeBlock';
 import AsProp from '!!raw-loader!./examples/AsProp';
 import AsPropComponent from '!!raw-loader!./examples/AsPropComponent';
 

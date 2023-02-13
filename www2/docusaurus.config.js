@@ -27,6 +27,7 @@ const config = {
     locales: ['en'],
   },
   // plugins: ['./plugins/webpack-plugin'],
+  plugins: ['docusaurus-plugin-sass'],
   presets: [
     [
       'classic',
@@ -40,10 +41,10 @@ const config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
-          // customCss: require.resolve('./src/css/custom.css'),
-          customCss: require.resolve(
+          customCss: [
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
-          ),
+            './src/css/carbonads.scss',
+          ],
         },
       }),
     ],
@@ -52,6 +53,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      liveCodeBlock: {
+        /**
+         * The position of the live playground, above or under the editor
+         * Possible values: "top" | "bottom"
+         */
+        playgroundPosition: 'top',
+      },
       navbar: {
         title: 'React Bootstrap',
         logo: {
