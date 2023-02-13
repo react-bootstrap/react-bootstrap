@@ -3,20 +3,22 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-
-const { Formik } = formik;
-
-const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  username: yup.string().required(),
-  city: yup.string().required(),
-  state: yup.string().required(),
-  zip: yup.string().required(),
-  terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
-});
+import * as formik from 'formik';
+import * as yup from 'yup';
 
 function FormExample() {
+  const { Formik } = formik;
+
+  const schema = yup.object().shape({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    username: yup.string().required(),
+    city: yup.string().required(),
+    state: yup.string().required(),
+    zip: yup.string().required(),
+    terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
+  });
+
   return (
     <Formik
       validationSchema={schema}
@@ -31,15 +33,7 @@ function FormExample() {
         terms: false,
       }}
     >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        touched,
-        isValid,
-        errors,
-      }) => (
+      {({ handleSubmit, handleChange, values, touched, errors }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationFormik01">
@@ -149,4 +143,4 @@ function FormExample() {
   );
 }
 
-render(<FormExample />);
+export default FormExample;
