@@ -34,7 +34,7 @@
     "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
   },
   "scripts": {
-    "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www --network-timeout 100000",
+    "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www2 --network-timeout 100000",
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www build",
     "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
@@ -135,8 +135,8 @@
     "mocha": "^9.2.2",
     "prettier": "^2.8.4",
     "process": "^0.11.10",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-test-renderer": "^16.14.0",
     "simulant": "^0.2.2",
     "sinon": "^14.0.2",

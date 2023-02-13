@@ -14,6 +14,12 @@
       "rules": {
         "@typescript-eslint/no-unused-expressions": "off"
       }
+    },
+    {
+      "files": ["www2/**/*"],
+      "rules": {
+        "no-console": "off"
+      }
     }
   ]
 }
