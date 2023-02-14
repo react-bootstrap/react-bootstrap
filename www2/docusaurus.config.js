@@ -44,6 +44,8 @@ const config = {
           customCss: [
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
             './src/css/carbonads.scss',
+            './src/css/examples.scss',
+            './src/css/theme.scss',
           ],
         },
       }),

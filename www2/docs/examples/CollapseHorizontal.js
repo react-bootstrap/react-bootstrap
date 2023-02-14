@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
@@ -31,4 +31,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Example;

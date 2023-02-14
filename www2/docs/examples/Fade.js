@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Fade from 'react-bootstrap/Fade';
 
@@ -25,4 +25,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Example;
