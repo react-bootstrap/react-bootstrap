@@ -1,3 +1,14 @@
+## [2.7.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.1...v2.7.2) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Overlay:** fix arrow animation ([#6551](https://github.com/react-bootstrap/react-bootstrap/issues/6551)) ([21b9981](https://github.com/react-bootstrap/react-bootstrap/commit/21b9981359b151269af740d1fa4c8a287ae9c71f))
+
+
+
+
+
 ## [2.7.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.0...v2.7.1) (2023-02-10)
 
 
