@@ -76,12 +76,6 @@ const config = {
             label: 'Getting Started',
           },
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
-          },
-          {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
@@ -96,7 +90,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/docs/getting-started',
               },
             ],
           },
