@@ -92,7 +92,7 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       arrowProps,
       hasDoneInitialMeasure,
       popper,
-      show: _,
+      show,
       ...props
     }: TooltipProps,
     ref,
@@ -104,7 +104,7 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     let computedStyle = style;
-    if (!hasDoneInitialMeasure) {
+    if (show && !hasDoneInitialMeasure) {
       computedStyle = {
         ...style,
         ...getInitialPopperStyles(popper?.strategy),

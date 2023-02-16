@@ -101,7 +101,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
       arrowProps,
       hasDoneInitialMeasure,
       popper,
-      show: _,
+      show,
       ...props
     },
     ref,
@@ -112,7 +112,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
     let computedStyle = style;
-    if (!hasDoneInitialMeasure) {
+    if (show && !hasDoneInitialMeasure) {
       computedStyle = {
         ...style,
         ...getInitialPopperStyles(popper?.strategy),

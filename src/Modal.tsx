@@ -341,7 +341,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
       });
 
       // We prevent the modal from closing during a drag by detecting where the
-      // the click originates from. If it starts in the modal and then ends outside
+      // click originates from. If it starts in the modal and then ends outside
       // don't close.
       const handleDialogMouseDown = () => {
         waitingForMouseUpRef.current = true;
