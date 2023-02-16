@@ -43,6 +43,8 @@ const config = {
         theme: {
           customCss: [
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            './src/css/docusaurus-theme.scss',
+            './src/css/algolia.scss',
             './src/css/carbonads.scss',
             './src/css/examples.scss',
             './src/css/theme.scss',
@@ -76,21 +78,26 @@ const config = {
             label: 'Getting Started',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            type: 'doc',
+            docId: 'components/accordion',
+            position: 'left',
+            label: 'Components',
+          },
+          {
+            href: 'https://github.com/react-bootstrap/react-bootstrap',
             label: 'GitHub',
             position: 'right',
           },
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/getting-started',
+                label: 'Getting Started',
+                to: '/docs/getting-started/introduction',
               },
             ],
           },
@@ -99,15 +106,11 @@ const config = {
             items: [
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                href: 'https://stackoverflow.com/questions/tagged/react-bootstrap',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://discord.gg/AKfs9vpvRW',
               },
             ],
           },
@@ -116,7 +119,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/react-bootstrap/react-bootstrap',
               },
             ],
           },
@@ -126,6 +129,32 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'C38ZI55F9H',
+
+        // Public API key: it is safe to commit it
+        apiKey: '33985ee571397d832ef243988ff4c891',
+
+        indexName: 'react_bootstrap_v4',
+
+        contextualSearch: false,
+
+        // // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+        // replaceSearchResultPathname: {
+        //   from: '/docs/', // or as RegExp: /\/docs\//
+        //   to: '/',
+        // },
+
+        // // Optional: Algolia search parameters
+        // searchParameters: {},
+
+        // // Optional: path for search page that enabled by default (`false` to disable it)
+        // searchPagePath: 'search',
       },
     }),
 };
