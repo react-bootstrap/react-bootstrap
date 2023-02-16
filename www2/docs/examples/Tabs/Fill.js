@@ -1,8 +1,6 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import Sonnet from '../../components/Sonnet';
-
 function FillExample() {
   return (
     <Tabs
@@ -12,16 +10,16 @@ function FillExample() {
       fill
     >
       <Tab eventKey="home" title="Home">
-        <Sonnet />
+        Tab content for Home
       </Tab>
       <Tab eventKey="profile" title="Profile">
-        <Sonnet />
+        Tab content for Profile
       </Tab>
       <Tab eventKey="longer-tab" title="Loooonger Tab">
-        <Sonnet />
+        Tab content for Loooonger Tab
       </Tab>
       <Tab eventKey="contact" title="Contact" disabled>
-        <Sonnet />
+        Tab content for Contact
       </Tab>
     </Tabs>
   );

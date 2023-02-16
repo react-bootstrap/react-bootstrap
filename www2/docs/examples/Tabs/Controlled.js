@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
-import Sonnet from '../../components/Sonnet';
 
 function ControlledTabsExample() {
   const [key, setKey] = useState('home');
@@ -15,13 +13,13 @@ function ControlledTabsExample() {
       className="mb-3"
     >
       <Tab eventKey="home" title="Home">
-        <Sonnet />
+        Tab content for Home
       </Tab>
       <Tab eventKey="profile" title="Profile">
-        <Sonnet />
+        Tab content for Profile
       </Tab>
       <Tab eventKey="contact" title="Contact" disabled>
-        <Sonnet />
+        Tab content for Contact
       </Tab>
     </Tabs>
   );

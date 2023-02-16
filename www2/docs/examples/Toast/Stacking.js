@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
 function StackingExample() {
-  const [position, setPosition] = useState('top-start');
-
   return (
-    <ToastContainer>
+    <ToastContainer className="position-static">
       <Toast>
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
