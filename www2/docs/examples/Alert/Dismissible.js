@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
@@ -20,4 +20,4 @@ function AlertDismissibleExample() {
   return <Button onClick={() => setShow(true)}>Show Alert</Button>;
 }
 
-render(<AlertDismissibleExample />);
+export default AlertDismissibleExample;

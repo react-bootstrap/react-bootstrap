@@ -18,4 +18,4 @@ const Example = () => (
   </OverlayTrigger>
 );
 
-render(<Example />);
+export default Example;

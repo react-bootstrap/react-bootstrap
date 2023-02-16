@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
 
@@ -39,4 +39,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Example;

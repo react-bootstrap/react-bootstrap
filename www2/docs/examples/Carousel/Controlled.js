@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
+  const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
@@ -51,4 +51,4 @@ function ControlledCarousel() {
   );
 }
 
-render(<ControlledCarousel />);
+export default ControlledCarousel;

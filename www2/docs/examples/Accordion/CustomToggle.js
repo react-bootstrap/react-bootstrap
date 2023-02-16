@@ -41,4 +41,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Example;

@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import AccordionContext from 'react-bootstrap/AccordionContext';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
 
@@ -31,7 +33,7 @@ function Example() {
           <ContextAwareToggle eventKey="0">Click me!</ContextAwareToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
-          <Card.Body>Hello! I'm the body</Card.Body>
+          <Card.Body>Hello! I am the body</Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
@@ -39,11 +41,11 @@ function Example() {
           <ContextAwareToggle eventKey="1">Click me!</ContextAwareToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="1">
-          <Card.Body>Hello! I'm another body</Card.Body>
+          <Card.Body>Hello! I am another body</Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>
   );
 }
 
-render(<Example />);
+export default Example;

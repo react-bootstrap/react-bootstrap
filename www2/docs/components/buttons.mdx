@@ -20,14 +20,18 @@ import ButtonTypes from '!!raw-loader!../examples/Button/Types';
 Use any of the available button style types to quickly create a styled
 button. Just modify the `variant` prop.
 
-<CodeBlock language="jsx" live>{ButtonTypes}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonTypes}
+</CodeBlock>
 
 ### Outline buttons
 
 For a lighter touch, Buttons also come in `outline-*`
 variants with no background color.
 
-<CodeBlock language="jsx" live>{ButtonOutlineTypes}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonOutlineTypes}
+</CodeBlock>
 
 ## Button tags
 
@@ -38,34 +42,44 @@ like, adding a `href` prop will automatically render an
 render whatever your heart desires. React Bootstrap will take care of
 the proper ARIA roles for you.
 
-<CodeBlock language="jsx" live>{ButtonTagTypes}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonTagTypes}
+</CodeBlock>
 
 ## Sizes
 
 Fancy larger or smaller buttons? Add `size="lg"`,
 `size="sm"` for additional sizes.
 
-<CodeBlock language="jsx" live>{ButtonSizes}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonSizes}
+</CodeBlock>
 
 ## Block buttons
 
 Create responsive stacks of full-width, “block buttons” like those in Bootstrap 4
 with a mix of our display and gap utilities.
 
-<CodeBlock language="jsx" live>{ButtonBlock}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonBlock}
+</CodeBlock>
 
 ## Active state
 
 To set a button's active state simply set the component's
 `active` prop.
 
-<CodeBlock language="jsx" live>{ButtonActive}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonActive}
+</CodeBlock>
 
 ### Disabled state
 
 Make buttons look inactive by adding the `disabled` prop to.
 
-<CodeBlock language="jsx" live>{ButtonDisabled}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonDisabled}
+</CodeBlock>
 
 Watch out! `<a>` elements don't naturally support a
 `disabled` attribute. In browsers that support it this is handled with a
@@ -82,7 +96,9 @@ pattern to give the user feedback as to the loading state, this can
 easily be done by updating your `<Button />`s
 props from a state change like below.
 
-<CodeBlock language="jsx" live>{ButtonLoading}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ButtonLoading}
+</CodeBlock>
 
 ## Checkbox / Radio
 
@@ -90,7 +106,9 @@ Buttons can also be used to style `checkbox` and
 `radio` form elements. This is helpful when you want a toggle
 button that works neatly inside an HTML form.
 
-<CodeBlock language="jsx" live>{ToggleButton}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ToggleButton}
+</CodeBlock>
 
 The above handles styling, But requires manually controlling the
 `checked` state for each radio or checkbox in the group.
@@ -103,10 +121,14 @@ The group behaves as a form component, where the `value` is an array of the sele
 
 #### Uncontrolled
 
-<CodeBlock language="jsx" live>{ToggleButtonGroupUncontrolled}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ToggleButtonGroupUncontrolled}
+</CodeBlock>
 
 #### Controlled
 
-<CodeBlock language="jsx" live>{ToggleButtonGroupControlled}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {ToggleButtonGroupControlled}
+</CodeBlock>
 
 ## API

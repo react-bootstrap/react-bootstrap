@@ -18,7 +18,10 @@
     {
       "files": ["www2/**/*"],
       "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "react/prop-types": "off",
+        "react/no-unescaped-entities": "off",
+        "no-alert": "off"
       }
     }
   ]

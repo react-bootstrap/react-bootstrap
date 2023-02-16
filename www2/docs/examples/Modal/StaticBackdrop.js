@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
@@ -24,7 +24,7 @@ function Example() {
           <Modal.Title>Modal title</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
+          I will not close if you click outside me. Don not even try to press
           escape key.
         </Modal.Body>
         <Modal.Footer>
@@ -38,4 +38,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Example;

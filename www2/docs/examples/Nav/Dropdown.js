@@ -32,4 +32,4 @@ function NavDropdownExample() {
   );
 }
 
-render(<NavDropdownExample />);
+export default NavDropdownExample;
