@@ -27,7 +27,28 @@ const config = {
     locales: ['en'],
   },
   // plugins: ['./plugins/webpack-plugin'],
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    // [
+    //   'docusaurus-plugin-react-docgen-typescript',
+    //   /** @type {import('docusaurus-plugin-react-docgen-typescript').Options} */
+    //   {
+    //     src: ['../src/**/*.tsx'],
+    //     parserOptions: {
+    //       propFilter: (prop, component) => {
+    //         // if (prop.parent) {
+    //         //   return !prop.parent.fileName.includes('@types/react');
+    //         // }
+
+    //         return true;
+    //       },
+    //       shouldExtractLiteralValuesFromEnum: true,
+    //       shouldExtractValuesFromUnion: true,
+    //       shouldRemoveUndefinedFromOptional: true,
+    //     },
+    //   },
+    // ],
+  ],
   presets: [
     [
       'classic',
@@ -57,6 +78,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'light',
+        // TODO: Add dark mode from BS 5.3
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
+      },
       liveCodeBlock: {
         /**
          * The position of the live playground, above or under the editor
