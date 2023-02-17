@@ -151,33 +151,39 @@ The example below passes an anchor to the `as` prop in a `Button` component. Thi
 ultimately causes a `a` tag to be rendered but with the same styles as a `Button`
 component.
 
-<CodeBlock language="jsx" live>{AsPropButtonExample}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {AsPropButtonExample}
+</CodeBlock>
 
 Below is an illustration of passing a React Bootstrap component. It contains a `Badge` component and a `Button`
 component that have been supplied to the `as` prop. This finally results in the rendering of a `Button` component
 with the same styles as a `Badge` component.
 
-<CodeBlock language="jsx" live>{AsPropComponent}</CodeBlock>
+<CodeBlock language="jsx" live>
+  {AsPropComponent}
+</CodeBlock>
 
 ## Themes
 
 React-Bootstrap is compatible with existing Bootstrap themes. Just
 follow the installation instructions for your theme of choice.
 
-<Callout theme="danger" title="Watch out!">
-  Because React-Bootstrap completely reimplements Bootstrap's JavaScript, it's
-  not automatically compatible with themes that extend the default JavaScript
-  behaviors.
-</Callout>
+:::danger Watch out!
 
-<Callout theme="warning" title="Create React App">
+Because React-Bootstrap completely reimplements Bootstrap's JavaScript, it's
+not automatically compatible with themes that extend the default JavaScript
+behaviors.
+
+:::
+
+:::caution Create React App
 
 If you would like to add a custom theme on your app using Create React
 App, they have additional documentation for Create React App and
 Bootstrap
 [here](https://facebook.github.io/create-react-app/docs/adding-bootstrap#using-a-custom-theme)
 
-</Callout>
+:::
 
 ## Browser support
 
