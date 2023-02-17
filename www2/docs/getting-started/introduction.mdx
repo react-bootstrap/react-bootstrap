@@ -70,9 +70,8 @@ stylesheet **is required** to use these components.
 
 ### CSS
 
-```
+```jsx
 {/* The following line can be included in your src/index.js or App.js file */}
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
@@ -97,13 +96,13 @@ in your main Sass file and then require it on your `src/index.js` or `App.js` fi
 This applies to a typical `create-react-app` application in other use cases you might have to setup
 the bundler of your choice to compile Sass/SCSS stylesheets to CSS.
 
-```
+```css
 /* The following line can be included in a src/App.scss */
-
 @import "~bootstrap/scss/bootstrap";
+```
 
+```jsx
 /* The following line can be included in your src/index.js or App.js file */
-
 import './App.scss';
 ```
 
@@ -112,7 +111,7 @@ import './App.scss';
 If you wish to customize the Bootstrap theme or any Bootstrap variables
 you can create a custom Sass file:
 
-```
+```css
 /* The following block can be included in a custom.scss */
 
 /* make the customizations */
@@ -127,9 +126,8 @@ $theme-colors: (
 
 ... And import it on the main Sass file.
 
-```
+```css
 /* The following line can be included in a src/App.scss */
-
 @import "custom";
 ```
 
