@@ -71,7 +71,9 @@ stylesheet **is required** to use these components.
 ### CSS
 
 ```jsx
-{/* The following line can be included in your src/index.js or App.js file */}
+{
+  /* The following line can be included in your src/index.js or App.js file */
+}
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
@@ -80,14 +82,7 @@ simplest way is to include the latest styles from the CDN. A little
 more information about the benefits of using a CDN can be found
 [here](https://www.w3schools.com/bootstrap/bootstrap_get_started.asp).
 
-```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-  crossorigin="anonymous"
-/>
-```
+<CssCodeBlock />
 
 ### Sass
 
@@ -98,7 +93,7 @@ the bundler of your choice to compile Sass/SCSS stylesheets to CSS.
 
 ```css
 /* The following line can be included in a src/App.scss */
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 ```
 
 ```jsx
@@ -116,24 +111,24 @@ you can create a custom Sass file:
 
 /* make the customizations */
 $theme-colors: (
-    "info": tomato,
-    "danger": teal
+  'info': tomato,
+  'danger': teal
 );
 
 /* import bootstrap to set changes */
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 ```
 
 ... And import it on the main Sass file.
 
 ```css
 /* The following line can be included in a src/App.scss */
-@import "custom";
+@import 'custom';
 ```
 
 ### Advanced usage
 
-See [the Bootstrap docs](https://getbootstrap.com/docs/4.4/getting-started/theming/)
+See <DocLink path="/customize/overview">the Bootstrap docs</DocLink>
 for more advanced use cases and details about customizing stylesheets.
 
 ## `as` Prop API

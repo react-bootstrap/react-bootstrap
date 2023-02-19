@@ -29,6 +29,7 @@ const config = {
   // plugins: ['./plugins/webpack-plugin'],
   plugins: [
     'docusaurus-plugin-sass',
+    './plugins/bootstrap-metadata-plugin',
     // [
     //   'docusaurus-plugin-react-docgen-typescript',
     //   /** @type {import('docusaurus-plugin-react-docgen-typescript').Options} */

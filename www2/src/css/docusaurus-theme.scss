@@ -19,6 +19,12 @@
   --ifm-hero-background-color: #712cf9;
   --ifm-hero-text-color: rgba(255, 255, 255, 0.85);
   --ifm-footer-background-color: #f8f9fa;
+
+  --ifm-navbar-background-color: #712cf9;
+  --ifm-navbar-link-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-link-hover-color: #fff;
+
+  --ifm-menu-color-active: #712cf9;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -34,4 +40,24 @@
 
   --ifm-hero-background-color: #712cf9;
   --ifm-footer-background-color: #2b3035;
+}
+
+// Override Bootstrap styles.
+.navbar {
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
+
+  &.navbar--fixed-top {
+    position: sticky;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.theme-doc-sidebar-container {
+  a {
+    text-decoration: none;
+  }
 }
