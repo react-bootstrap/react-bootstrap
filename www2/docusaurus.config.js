@@ -30,6 +30,7 @@ const config = {
   plugins: [
     'docusaurus-plugin-sass',
     './plugins/bootstrap-metadata-plugin',
+    './plugins/react-docgen-plugin',
     // [
     //   'docusaurus-plugin-react-docgen-typescript',
     //   /** @type {import('docusaurus-plugin-react-docgen-typescript').Options} */

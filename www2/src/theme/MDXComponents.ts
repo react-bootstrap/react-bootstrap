@@ -4,6 +4,7 @@ import AriaAbbr from '@site/src/components/AriaAbbr';
 import CodeBlock from '@theme/CodeBlock';
 import CssCodeBlock from '@site/src/components/CssCodeBlock';
 import DocLink from '@site/src/components/DocLink';
+import PropsTable from '@site/src/components/PropsTable';
 
 export default {
   // Re-use the default mapping
@@ -12,4 +13,5 @@ export default {
   CodeBlock,
   CssCodeBlock,
   DocLink,
+  PropsTable,
 };
