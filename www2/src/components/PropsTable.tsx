@@ -16,6 +16,18 @@ function useComponentData(name: string) {
   return data;
 }
 
+function getPropValue(prop: any) {
+  if (prop.type.name === 'union') {
+    return prop.type.value.map((v) => v.name).join(' | ');
+  }
+
+  if (prop.type.name === 'enum') {
+    return prop.type.value.map((v) => v.value).join(' | ');
+  }
+
+  return prop.type.name;
+}
+
 interface PropsTableProps {
   name: string;
 }
@@ -46,11 +58,7 @@ const PropsTable: React.FC<PropsTableProps> = ({ name }) => {
                 {propName}{' '}
                 {prop.required && <sup className="text-danger">Required</sup>}
               </td>
-              <td>
-                {prop.type.value
-                  ? prop.type.value.map((v) => v.name).join(' | ')
-                  : prop.type.name}
-              </td>
+              <td>{getPropValue(prop)}</td>
               <td>{}</td>
               <td>{prop.description}</td>
             </tr>
