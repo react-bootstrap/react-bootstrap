@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const rbVersion = require('../package.json').version;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -111,6 +112,21 @@ const config = {
             docId: 'components/accordion',
             position: 'left',
             label: 'Components',
+          },
+          {
+            type: 'dropdown',
+            label: `v${rbVersion} (Bootstrap 5)`,
+            items: [
+              {
+                label: 'v1.6.1 (Bootstrap 4)',
+                href: 'https://react-bootstrap-v4.netlify.app/',
+              },
+              {
+                label: 'v0.33.1 (Bootstrap 3)',
+                href: 'https://react-bootstrap-v3.netlify.app/',
+              },
+            ],
+            position: 'right',
           },
           {
             href: 'https://github.com/react-bootstrap/react-bootstrap',

@@ -1,7 +1,7 @@
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const bootstrapPackageJson = require('bootstrap/package.json');
-const rbPackageJson = require('../package.json');
+const rbPackageJson = require('../../package.json');
 
 async function getIntegrity(filePath) {
   const algo = 'sha384';

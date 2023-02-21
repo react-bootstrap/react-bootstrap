@@ -5,11 +5,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import CarbonAds from '@site/src/components/CarbonAds';
+import useBootstrapMetadata from '@site/src/hooks/useBootstrapMetadata';
 
 import styles from './index.module.css';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
+  const { rbVersion } = useBootstrapMetadata();
+
   return (
     <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
@@ -29,6 +32,8 @@ function HomepageHeader() {
             Components
           </Link>
         </div>
+
+        <div className="my-2">Current version: {rbVersion}</div>
 
         <div className={styles.carbonads}>
           <CarbonAds />

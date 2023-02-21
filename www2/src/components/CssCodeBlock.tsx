@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
 import CodeBlock from '@theme/CodeBlock';
+import useBootstrapMetadata from '@site/src/hooks/useBootstrapMetadata';
 
 const CssCodeBlock: React.FC = () => {
-  const { bootstrapCssHash, bootstrapVersion } = usePluginData(
-    'bootstrap-metadata-plugin',
-  ) as any;
+  const { bootstrapCssHash, bootstrapVersion } = useBootstrapMetadata();
 
   return (
     <CodeBlock language="html">
