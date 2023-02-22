@@ -43,32 +43,29 @@ const PropsTable: React.FC<PropsTableProps> = ({ name }) => {
   }
 
   return (
-    <>
-      <h3 className="my-3">{name}</h3>
-      <Table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
+    <Table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries<any>(data.props).map(([propName, prop]) => (
+          <tr key={propName}>
+            <td>
+              {propName}{' '}
+              {prop.required && <sup className="text-danger">Required</sup>}
+            </td>
+            <td>{getPropValue(prop)}</td>
+            <td>{}</td>
+            <td>{prop.description}</td>
           </tr>
-        </thead>
-        <tbody>
-          {Object.entries<any>(data.props).map(([propName, prop]) => (
-            <tr key={propName}>
-              <td>
-                {propName}{' '}
-                {prop.required && <sup className="text-danger">Required</sup>}
-              </td>
-              <td>{getPropValue(prop)}</td>
-              <td>{}</td>
-              <td>{prop.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </>
+        ))}
+      </tbody>
+    </Table>
   );
 };
 
