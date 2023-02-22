@@ -17,15 +17,18 @@ function useComponentData(name: string) {
 }
 
 function getPropValue(prop: any) {
-  if (prop.type.name === 'union') {
-    return prop.type.value.map((v) => v.name).join(' | ');
+  const { type } = prop;
+  const { name, value } = type || {};
+
+  if (name === 'union') {
+    return value.map((v: any) => v.name).join(' | ');
   }
 
-  if (prop.type.name === 'enum') {
-    return prop.type.value.map((v) => v.value).join(' | ');
+  if (name === 'enum') {
+    return value.map((v: any) => v.value).join(' | ');
   }
 
-  return prop.type.name;
+  return name;
 }
 
 interface PropsTableProps {
@@ -41,7 +44,7 @@ const PropsTable: React.FC<PropsTableProps> = ({ name }) => {
 
   return (
     <>
-      <h3>{name}</h3>
+      <h3 className="my-3">{name}</h3>
       <Table>
         <thead>
           <tr>

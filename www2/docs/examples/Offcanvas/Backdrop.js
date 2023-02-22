@@ -59,4 +59,4 @@ function Example() {
   );
 }
 
-export default Example;
+render(<Example />);

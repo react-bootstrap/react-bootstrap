@@ -22,7 +22,8 @@
         "react/prop-types": "off",
         "react/no-unescaped-entities": "off",
         "no-alert": "off",
-        "no-restricted-syntax": "off"
+        "no-restricted-syntax": "off",
+        "no-undef": "off"
       }
     }
   ]

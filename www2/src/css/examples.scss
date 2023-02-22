@@ -1,5 +1,20 @@
 @import './theme';
 
+// Reset the styles for BS due to conflicts from Docusaurus.
+.bs-example {
+  .btn-group {
+    display: inline-flex !important;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .navbar {
+    background-color: initial;
+  }
+}
+
 .list-group :global() {
   max-width: 400px;
 }
@@ -46,17 +61,16 @@
   );
 }
 
-// global b/c we need to use it in a modal
-:global(.show-grid) {
-  :global(.row) > :global(.col),
-  :global(.row) > [class^='col-'] {
+.show-grid {
+  .row > .col,
+  .row > [class^='col-'] {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     background-color: $brand-light;
     border: 1px solid $brand;
   }
 
-  :global(.row) + :global(.row) {
+  .row + .row {
     margin-top: 1rem;
   }
 }

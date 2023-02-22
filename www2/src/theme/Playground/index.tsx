@@ -102,13 +102,17 @@ export default function Playground({
       >
         {playgroundPosition === 'top' ? (
           <>
-            <ResultWithHeader className={previewClassName} />
+            <ResultWithHeader
+              className={clsx('bs-example', previewClassName)}
+            />
             <EditorWithHeader />
           </>
         ) : (
           <>
             <EditorWithHeader />
-            <ResultWithHeader className={previewClassName} />
+            <ResultWithHeader
+              className={clsx('bs-example', previewClassName)}
+            />
           </>
         )}
       </LiveProvider>
