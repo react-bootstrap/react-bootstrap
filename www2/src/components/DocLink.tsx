@@ -1,15 +1,10 @@
 import * as React from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
+import Link from '@docusaurus/Link';
+import useBootstrapMetadata from '@site/src/hooks/useBootstrapMetadata';
 
 function DocLink({ path, children }) {
-  const { bootstrapDocsUrl } = usePluginData(
-    'bootstrap-metadata-plugin',
-  ) as any;
-  return (
-    <a href={`${bootstrapDocsUrl}${path}`} target="_blank" rel="noreferrer">
-      {children}
-    </a>
-  );
+  const { bootstrapDocsUrl } = useBootstrapMetadata();
+  return <Link to={`${bootstrapDocsUrl}${path}`}>{children}</Link>;
 }
 
 export default DocLink;
