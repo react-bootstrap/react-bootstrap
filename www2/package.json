@@ -1,5 +1,5 @@
 {
-  "name": "www-2",
+  "name": "react-bootstrap-website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -31,13 +31,12 @@
     "holderjs": "^2.9.9",
     "prism-react-renderer": "^1.3.5",
     "raw-loader": "^4.0.2",
-    "react": "^17.0.1",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.7.1",
     "react-docgen": "^5.4.3",
-    "react-dom": "^17.0.1",
+    "react-dom": "^18.2.0",
     "react-live": "^2.4.1",
-    "sass": "^1.58.0",
-    "shakespeare-data": "^3.0.0",
+    "sass": "^1.58.3",
     "yup": "^1.0.0"
   },
   "devDependencies": {
