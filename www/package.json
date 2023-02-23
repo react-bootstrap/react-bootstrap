@@ -30,6 +30,8 @@
     }
   },
   "devDependencies": {
+    "@codesandbox/sandpack-react": "1.20.9",
+    "@codesandbox/sandpack-themes": "latest",
     "@docsearch/css": "^3.3.3",
     "@docsearch/react": "^3.3.3",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
