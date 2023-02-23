@@ -2,6 +2,8 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const reactDocgen = require('react-docgen');
 
+const DOCLET_PATTERN = /^@(\w+)(?:$|\s((?:[^](?!^@\w))*))/gim;
+
 module.exports = () => ({
   name: 'react-docgen-plugin',
   configureWebpack(config) {
@@ -47,10 +49,29 @@ module.exports = () => ({
     return data;
   },
   async contentLoaded({ content, actions }) {
-    const { createData, setGlobalData } = actions;
+    const { createData } = actions;
 
     const promises = [];
     for (const componentData of content) {
+      // Attach doclets to each prop.
+      if (componentData.props) {
+        Object.keys(componentData.props).forEach((propName) => {
+          const prop = componentData.props[propName];
+          prop.doclets = {};
+
+          if (prop.description) {
+            prop.doclets = reactDocgen.utils.docblock.getDoclets(
+              prop.description,
+            );
+
+            // Strip out the doclets from the description.
+            prop.description = prop.description
+              .replace(DOCLET_PATTERN, '')
+              .trim();
+          }
+        });
+      }
+
       promises.push(
         createData(
           `${componentData.displayName}.json`,
@@ -62,12 +83,6 @@ module.exports = () => ({
       );
     }
 
-    const jsonPaths = await Promise.all(promises);
-    const map = jsonPaths.reduce((acc, jsonPath, idx) => {
-      acc[content[idx].displayName] = jsonPath;
-      return acc;
-    }, {});
-
-    setGlobalData(map);
+    await Promise.all(promises);
   },
 });

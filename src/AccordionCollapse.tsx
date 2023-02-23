@@ -26,7 +26,7 @@ const propTypes = {
 };
 
 /**
- * This component accepts all of [`Collapse`'s props](/utilities/transitions/#collapse-props).
+ * This component accepts all of [`Collapse`'s props](/docs/utilities/transitions#collapse-1).
  */
 const AccordionCollapse: BsPrefixRefForwardingComponent<
   'div',
