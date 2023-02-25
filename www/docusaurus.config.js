@@ -32,25 +32,6 @@ const config = {
     'docusaurus-plugin-sass',
     './plugins/bootstrap-metadata-plugin',
     './plugins/react-docgen-plugin',
-    // [
-    //   'docusaurus-plugin-react-docgen-typescript',
-    //   /** @type {import('docusaurus-plugin-react-docgen-typescript').Options} */
-    //   {
-    //     src: ['../src/**/*.tsx'],
-    //     parserOptions: {
-    //       propFilter: (prop, component) => {
-    //         // if (prop.parent) {
-    //         //   return !prop.parent.fileName.includes('@types/react');
-    //         // }
-
-    //         return true;
-    //       },
-    //       shouldExtractLiteralValuesFromEnum: true,
-    //       shouldExtractValuesFromUnion: true,
-    //       shouldRemoveUndefinedFromOptional: true,
-    //     },
-    //   },
-    // ],
   ],
   presets: [
     [

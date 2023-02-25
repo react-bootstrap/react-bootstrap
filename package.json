@@ -34,7 +34,7 @@
     "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
   },
   "scripts": {
-    "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www2 --network-timeout 100000",
+    "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www --network-timeout 100000",
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www build",
     "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
@@ -44,8 +44,7 @@
     "lint": "eslint --ext tsx --ext ts src && tsc --noEmit",
     "prepublishOnly": "npm run build",
     "release": "rollout",
-    "start": "yarn --cwd www develop",
-    "start2": "yarn --cwd www2 start",
+    "start": "yarn --cwd www start",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",

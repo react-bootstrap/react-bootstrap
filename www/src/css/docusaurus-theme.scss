@@ -25,6 +25,11 @@
   --ifm-navbar-link-hover-color: #fff;
 
   --ifm-menu-color-active: #712cf9;
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.85)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+
+  @media (min-width: 768px) {
+    --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.5)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+  }
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -53,6 +58,19 @@
 
   a {
     text-decoration: none;
+  }
+
+  .navbar__toggle {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .navbar-sidebar {
+    color: rgba(255, 255, 255, 0.85);
+
+    .menu__link,
+    .menu__link--active {
+      color: rgba(255, 255, 255, 0.85);
+    }
   }
 }
 

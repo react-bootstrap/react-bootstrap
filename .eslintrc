@@ -16,7 +16,7 @@
       }
     },
     {
-      "files": ["www2/**/*"],
+      "files": ["www/**/*"],
       "rules": {
         "no-console": "off",
         "react/prop-types": "off",
