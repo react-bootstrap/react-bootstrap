@@ -4,10 +4,10 @@ function renderValue(valueArray: string[]) {
   const renderedEnumValues = [];
   valueArray.forEach((value: any, i: number) => {
     if (i > 0) {
-      renderedEnumValues.push(<span key={`${value}c`}> | </span>);
+      renderedEnumValues.push(<span key={`${i}c`}> | </span>);
     }
 
-    renderedEnumValues.push(<code key={value}>{value}</code>);
+    renderedEnumValues.push(<code key={i}>{value}</code>);
   });
 
   return <>{renderedEnumValues}</>;

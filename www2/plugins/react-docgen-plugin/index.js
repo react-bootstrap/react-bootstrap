@@ -1,6 +1,7 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const reactDocgen = require('react-docgen');
+const resolveHocComponents = require('./resolveHocComponents');
 
 const DOCLET_PATTERN = /^@(\w+)(?:$|\s((?:[^](?!^@\w))*))/gim;
 
@@ -20,7 +21,7 @@ module.exports = () => ({
     };
   },
   async loadContent() {
-    const srcPath = path.join(__dirname, '../../src');
+    const srcPath = path.join(__dirname, '../../../src');
     const files = await fs.readdir(srcPath);
 
     const promises = files.map(async (file) => {
@@ -28,14 +29,9 @@ module.exports = () => ({
         const filePath = path.join(srcPath, file);
         const buffer = await fs.readFile(filePath);
 
-        const output = reactDocgen.parse(
-          buffer,
-          reactDocgen.resolver.findExportedComponentDefinition,
-          null,
-          {
-            filename: filePath,
-          },
-        );
+        const output = reactDocgen.parse(buffer, resolveHocComponents, null, {
+          filename: filePath,
+        });
 
         return output;
       } catch (err) {
