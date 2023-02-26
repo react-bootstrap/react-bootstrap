@@ -13,10 +13,10 @@
   .navbar {
     background-color: initial;
   }
-}
 
-.list-group :global() {
-  max-width: 400px;
+  .list-group {
+    max-width: 400px;
+  }
 }
 
 .ratio-examples {
@@ -37,9 +37,7 @@
 }
 
 .static-dropdown-menu {
-  composes: clearfix from global;
-
-  :global(.dropdown-menu) {
+  .dropdown-menu {
     position: static !important;
     top: auto !important;
     left: auto !important;
@@ -49,16 +47,18 @@
     opacity: 1 !important;
   }
 }
-.custom-dropdown-menu :global(.super-colors) {
-  background: linear-gradient(
-    to bottom,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  );
+.custom-dropdown-menu {
+  .super-colors {
+    background: linear-gradient(
+      to bottom,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      violet
+    );
+  }
 }
 
 .show-grid {
@@ -75,8 +75,7 @@
   }
 }
 
-// has to be fully global because of modal portals
-:global(.modal-90w) {
+.modal-90w {
   width: 90%;
   max-width: none !important;
 }

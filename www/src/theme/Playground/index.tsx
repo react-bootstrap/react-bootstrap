@@ -1,14 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 import useIsBrowser from '@docusaurus/useIsBrowser';
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import { LiveProvider, LiveEditor, LiveError } from 'react-live';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { usePrismTheme } from '@docusaurus/theme-common';
 import type { Props } from '@theme/Playground';
-
 import type { ThemeConfig } from '@docusaurus/theme-live-codeblock';
+import Preview from './Preview';
+
 import styles from './styles.module.css';
 
 function Header({ children }: { children: React.ReactNode }) {
@@ -36,7 +37,7 @@ function ResultWithHeader({ className }: any) {
         <BrowserOnly fallback={<LivePreviewLoader />}>
           {() => (
             <>
-              <LivePreview className={className} />
+              <Preview className={className} />
               <LiveError />
             </>
           )}

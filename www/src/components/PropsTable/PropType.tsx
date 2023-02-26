@@ -42,7 +42,7 @@ const PropType: React.FC<PropTypeProps> = ({ prop }) => {
     return renderValue(value.map((v) => v.value));
   }
 
-  return name;
+  return name ?? null;
 };
 
 export default PropType;
