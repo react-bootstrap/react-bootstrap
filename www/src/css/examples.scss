@@ -1,5 +1,3 @@
-@import './theme';
-
 // Reset the styles for BS due to conflicts from Docusaurus.
 .bs-example {
   .btn-group {
@@ -66,8 +64,8 @@
   .row > [class^='col-'] {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    background-color: $brand-light;
-    border: 1px solid $brand;
+    background-color: #bbeffd;
+    border: 1px solid #61dafb;
   }
 
   .row + .row {

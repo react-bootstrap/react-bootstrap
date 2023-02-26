@@ -9,7 +9,7 @@ const rbVersion = require('../package.json').version;
 const config = {
   title: 'React Bootstrap',
   tagline: 'The most popular front-end framework, rebuilt for React.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://react-bootstrap.github.io/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -48,7 +48,6 @@ const config = {
             './src/css/algolia.scss',
             './src/css/carbonads.scss',
             './src/css/examples.scss',
-            './src/css/theme.scss',
           ],
         },
       }),
