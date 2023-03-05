@@ -33,12 +33,11 @@
     "prism-react-renderer": "^1.3.5",
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.7.1",
     "react-docgen": "^5.4.3",
     "react-dom": "^17.0.2",
     "react-live": "^2.4.1",
     "sass": "^1.58.3",
-    "yup": "^1.0.0"
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.3.1",

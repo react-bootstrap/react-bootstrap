@@ -27,8 +27,9 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  // plugins: ['./plugins/webpack-plugin'],
   plugins: [
+    './plugins/react-resolver-plugin',
+    './plugins/webpack-plugin',
     'docusaurus-plugin-sass',
     './plugins/bootstrap-metadata-plugin',
     './plugins/react-docgen-plugin',

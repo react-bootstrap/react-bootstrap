@@ -13,7 +13,7 @@ module.exports = () => ({
             use: [
               getJSLoader(
                 isServer,
-                path.resolve(__dirname, '../../.babelrc.js'),
+                path.resolve(__dirname, '../babel.config.js'),
               ),
             ],
           },
