@@ -1,8 +1,4 @@
 {
   "label": "Getting started",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "A guide on how to get started"
-  }
+  "position": 1
 }

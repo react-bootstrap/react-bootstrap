@@ -25,6 +25,12 @@
         "no-restricted-syntax": "off",
         "no-undef": "off"
       }
+    },
+    {
+      "files": ["www/docs/examples/**/*"],
+      "rules": {
+        "import/no-unresolved": "off"
+      }
     }
   ]
 }

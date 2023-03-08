@@ -20,7 +20,7 @@ function BrandExample() {
         <Container>
           <Navbar.Brand href="#home">
             <img
-              src="/logo.svg"
+              src="/img/logo.svg"
               width="30"
               height="30"
               className="d-inline-block align-top"
@@ -35,7 +35,7 @@ function BrandExample() {
           <Navbar.Brand href="#home">
             <img
               alt=""
-              src="/logo.svg"
+              src="/img/logo.svg"
               width="30"
               height="30"
               className="d-inline-block align-top"
