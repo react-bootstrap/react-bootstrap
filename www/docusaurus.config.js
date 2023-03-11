@@ -121,6 +121,22 @@ const config = {
                 label: 'Getting Started',
                 to: '/docs/getting-started/introduction',
               },
+              {
+                label: 'Layout',
+                to: '/docs/layout/breakpoints',
+              },
+              {
+                label: 'Forms',
+                to: '/docs/forms/overview',
+              },
+              {
+                label: 'Components',
+                to: '/docs/components/accordion',
+              },
+              {
+                label: 'Utilities',
+                to: '/docs/utilities/transitions',
+              },
             ],
           },
           {
