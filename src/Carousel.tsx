@@ -188,10 +188,10 @@ const defaultProps = {
   wrap: true,
   touch: true,
 
-  prevIcon: <span aria-hidden="true" className="carousel-control-prev-icon" />,
+  prevIcon: <span aria-label="previous slide" aria-hidden="true" className="carousel-control-prev-icon" />,
   prevLabel: 'Previous',
 
-  nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
+  nextIcon: <span aria-label="next slide" aria-hidden="true" className="carousel-control-next-icon" />,
   nextLabel: 'Next',
 };
 
