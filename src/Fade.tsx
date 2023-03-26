@@ -89,27 +89,28 @@ const propTypes = {
   transitionClasses: PropTypes.object,
 };
 
-const defaultProps = {
-  in: false,
-  timeout: 300,
-  mountOnEnter: false,
-  unmountOnExit: false,
-  appear: false,
-};
-
 const fadeStyles = {
   [ENTERING]: 'show',
   [ENTERED]: 'show',
 };
 
 const Fade = React.forwardRef<Transition<any>, FadeProps>(
-  ({ className, children, transitionClasses = {}, ...props }, ref) => {
+  ({ className, children, transitionClasses = {}, onEnter, ...rest }, ref) => {
+    const props = {
+      in: false,
+      timeout: 300,
+      mountOnEnter: false,
+      unmountOnExit: false,
+      appear: false,
+      ...rest,
+    };
+
     const handleEnter = useCallback(
       (node, isAppearing) => {
         triggerBrowserReflow(node);
-        props.onEnter?.(node, isAppearing);
+        onEnter?.(node, isAppearing);
       },
-      [props],
+      [onEnter],
     );
 
     return (
@@ -138,7 +139,6 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
 );
 
 Fade.propTypes = propTypes as any;
-Fade.defaultProps = defaultProps;
 Fade.displayName = 'Fade';
 
 export default Fade;

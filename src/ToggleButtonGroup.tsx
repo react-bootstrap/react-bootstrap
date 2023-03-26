@@ -75,19 +75,21 @@ const propTypes = {
   vertical: PropTypes.bool,
 };
 
-const defaultProps = {
-  type: 'radio',
-  vertical: false,
-};
-
 const ToggleButtonGroup: BsPrefixRefForwardingComponent<
   'a',
   ToggleButtonGroupProps<any>
 > = React.forwardRef<HTMLElement, ToggleButtonGroupProps<any>>((props, ref) => {
-  const { children, type, name, value, onChange, ...controlledProps } =
-    useUncontrolled(props, {
-      value: 'onChange',
-    });
+  const {
+    children,
+    type = 'radio',
+    name,
+    value,
+    onChange,
+    vertical = false,
+    ...controlledProps
+  } = useUncontrolled(props, {
+    value: 'onChange',
+  });
 
   const getValues: () => any[] = () => (value == null ? [] : [].concat(value));
 
@@ -120,7 +122,7 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
   );
 
   return (
-    <ButtonGroup {...controlledProps} ref={ref as any}>
+    <ButtonGroup {...controlledProps} ref={ref as any} vertical={vertical}>
       {map(children, (child) => {
         const values = getValues();
         const { value: childVal, onChange: childOnChange } = child.props;
@@ -138,7 +140,6 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
 });
 
 ToggleButtonGroup.propTypes = propTypes;
-ToggleButtonGroup.defaultProps = defaultProps as any;
 
 export default Object.assign(ToggleButtonGroup, {
   Button: ToggleButton,

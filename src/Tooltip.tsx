@@ -77,15 +77,11 @@ const propTypes = {
   show: PropTypes.any,
 };
 
-const defaultProps = {
-  placement: 'right',
-};
-
 const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       bsPrefix,
-      placement,
+      placement = 'right',
       className,
       style,
       children,
@@ -128,7 +124,6 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 );
 
 Tooltip.propTypes = propTypes as any;
-Tooltip.defaultProps = defaultProps as any;
 Tooltip.displayName = 'Tooltip';
 
 export default Tooltip;

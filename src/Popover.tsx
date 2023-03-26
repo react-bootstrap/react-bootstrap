@@ -85,15 +85,11 @@ const propTypes = {
   show: PropTypes.bool,
 };
 
-const defaultProps: Partial<PopoverProps> = {
-  placement: 'right',
-};
-
 const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       bsPrefix,
-      placement,
+      placement = 'right',
       className,
       style,
       children,
@@ -140,7 +136,6 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
 );
 
 Popover.propTypes = propTypes as any;
-Popover.defaultProps = defaultProps;
 
 export default Object.assign(Popover, {
   Header: PopoverHeader,

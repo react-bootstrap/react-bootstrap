@@ -40,16 +40,17 @@ export const propTypes = {
   thumbnail: PropTypes.bool,
 };
 
-const defaultProps = {
-  fluid: false,
-  rounded: false,
-  roundedCircle: false,
-  thumbnail: false,
-};
-
 const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   (
-    { bsPrefix, className, fluid, rounded, roundedCircle, thumbnail, ...props },
+    {
+      bsPrefix,
+      className,
+      fluid = false,
+      rounded = false,
+      roundedCircle = false,
+      thumbnail = false,
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
@@ -71,6 +72,5 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
 
 Image.displayName = 'Image';
 Image.propTypes = propTypes;
-Image.defaultProps = defaultProps;
 
 export default Image;

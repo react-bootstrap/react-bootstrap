@@ -80,13 +80,6 @@ const propTypes = {
   onExited: PropTypes.func,
 };
 
-const defaultProps = {
-  in: false,
-  mountOnEnter: false,
-  unmountOnExit: false,
-  appear: false,
-};
-
 const transitionStyles = {
   [ENTERING]: 'show',
   [ENTERED]: 'show',
@@ -95,34 +88,51 @@ const transitionStyles = {
 const OffcanvasToggling = React.forwardRef<
   Transition<any>,
   OffcanvasTogglingProps
->(({ bsPrefix, className, children, ...props }, ref) => {
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
+>(
+  (
+    {
+      bsPrefix,
+      className,
+      children,
+      in: inProp = false,
+      mountOnEnter = false,
+      unmountOnExit = false,
+      appear = false,
+      ...props
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
 
-  return (
-    <TransitionWrapper
-      ref={ref}
-      addEndListener={transitionEndListener}
-      {...props}
-      childRef={(children as any).ref}
-    >
-      {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
-        React.cloneElement(children, {
-          ...innerProps,
-          className: classNames(
-            className,
-            children.props.className,
-            (status === ENTERING || status === EXITING) &&
-              `${bsPrefix}-toggling`,
-            transitionStyles[status],
-          ),
-        })
-      }
-    </TransitionWrapper>
-  );
-});
+    return (
+      <TransitionWrapper
+        ref={ref}
+        addEndListener={transitionEndListener}
+        in={inProp}
+        mountOnEnter={mountOnEnter}
+        unmountOnExit={unmountOnExit}
+        appear={appear}
+        {...props}
+        childRef={(children as any).ref}
+      >
+        {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
+          React.cloneElement(children, {
+            ...innerProps,
+            className: classNames(
+              className,
+              children.props.className,
+              (status === ENTERING || status === EXITING) &&
+                `${bsPrefix}-toggling`,
+              transitionStyles[status],
+            ),
+          })
+        }
+      </TransitionWrapper>
+    );
+  },
+);
 
 OffcanvasToggling.propTypes = propTypes as any;
-OffcanvasToggling.defaultProps = defaultProps;
 OffcanvasToggling.displayName = 'OffcanvasToggling';
 
 export default OffcanvasToggling;
