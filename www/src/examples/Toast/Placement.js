@@ -39,7 +39,11 @@ function PlacementExample() {
         className="bg-dark position-relative"
         style={{ minHeight: '240px' }}
       >
-        <ToastContainer className="p-3" position={position}>
+        <ToastContainer
+          className="p-3"
+          position={position}
+          style={{ zIndex: 1 }}
+        >
           <Toast>
             <Toast.Header closeButton={false}>
               <img
