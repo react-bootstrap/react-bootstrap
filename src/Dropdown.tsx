@@ -119,28 +119,21 @@ const propTypes = {
   autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
 };
 
-const defaultProps: Partial<DropdownProps> = {
-  navbar: false,
-  align: 'start',
-  autoClose: true,
-  drop: 'down',
-};
-
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
   React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
     const {
       bsPrefix,
-      drop,
+      drop = 'down',
       show,
       className,
-      align,
+      align = 'start',
       onSelect,
       onToggle,
       focusFirstItemOnShow,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       navbar: _4,
-      autoClose,
+      autoClose = true,
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
 
@@ -225,7 +218,6 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
-Dropdown.defaultProps = defaultProps;
 
 export default Object.assign(Dropdown, {
   Toggle: DropdownToggle,

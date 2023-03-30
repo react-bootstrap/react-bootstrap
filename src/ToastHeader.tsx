@@ -38,18 +38,13 @@ const propTypes = {
   closeButton: PropTypes.bool,
 };
 
-const defaultProps = {
-  closeLabel: 'Close',
-  closeButton: true,
-};
-
 const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
   (
     {
       bsPrefix,
-      closeLabel,
+      closeLabel = 'Close',
       closeVariant,
-      closeButton,
+      closeButton = true,
       className,
       children,
       ...props
@@ -83,6 +78,5 @@ const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
 
 ToastHeader.displayName = 'ToastHeader';
 ToastHeader.propTypes = propTypes;
-ToastHeader.defaultProps = defaultProps;
 
 export default ToastHeader;

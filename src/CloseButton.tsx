@@ -24,12 +24,11 @@ const propTypes = {
   variant: PropTypes.oneOf<CloseButtonVariant>(['white']),
 };
 
-const defaultProps = {
-  'aria-label': 'Close',
-};
-
 const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ className, variant, ...props }, ref) => (
+  (
+    { className, variant, 'aria-label': ariaLabel = 'Close', ...props },
+    ref,
+  ) => (
     <button
       ref={ref}
       type="button"
@@ -38,6 +37,7 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
         variant && `btn-close-${variant}`,
         className,
       )}
+      aria-label={ariaLabel}
       {...props}
     />
   ),
@@ -45,6 +45,5 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
 
 CloseButton.displayName = 'CloseButton';
 CloseButton.propTypes = propTypes;
-CloseButton.defaultProps = defaultProps;
 
 export default CloseButton;

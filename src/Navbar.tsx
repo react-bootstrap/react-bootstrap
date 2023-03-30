@@ -50,7 +50,7 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
@@ -137,18 +137,12 @@ const propTypes = {
   role: PropTypes.string,
 };
 
-const defaultProps = {
-  expand: true,
-  variant: 'light' as const,
-  collapseOnSelect: false,
-};
-
 const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
   React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
     const {
       bsPrefix: initialBsPrefix,
-      expand,
-      variant,
+      expand = true,
+      variant = 'light',
       bg,
       fixed,
       sticky,
@@ -158,7 +152,7 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
       expanded,
       onToggle,
       onSelect,
-      collapseOnSelect,
+      collapseOnSelect = false,
       ...controlledProps
     } = useUncontrolled(props, {
       expanded: 'onToggle',
@@ -217,7 +211,6 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
   });
 
 Navbar.propTypes = propTypes;
-Navbar.defaultProps = defaultProps;
 Navbar.displayName = 'Navbar';
 
 export default Object.assign(Navbar, {

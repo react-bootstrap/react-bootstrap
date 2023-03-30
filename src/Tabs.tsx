@@ -94,12 +94,6 @@ const propTypes = {
   justify: PropTypes.bool,
 };
 
-const defaultProps = {
-  variant: 'tabs',
-  mountOnEnter: false,
-  unmountOnExit: false,
-};
-
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
   forEach(children, (child) => {
@@ -139,8 +133,9 @@ const Tabs = (props: TabsProps) => {
     id,
     onSelect,
     transition,
-    mountOnEnter,
-    unmountOnExit,
+    mountOnEnter = false,
+    unmountOnExit = false,
+    variant = 'tabs',
     children,
     activeKey = getDefaultActiveKey(children),
     ...controlledProps
@@ -157,7 +152,7 @@ const Tabs = (props: TabsProps) => {
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
-      <Nav {...controlledProps} role="tablist" as="ul">
+      <Nav {...controlledProps} role="tablist" as="ul" variant={variant}>
         {map(children, renderTab)}
       </Nav>
 
@@ -178,7 +173,6 @@ const Tabs = (props: TabsProps) => {
 };
 
 Tabs.propTypes = propTypes;
-Tabs.defaultProps = defaultProps;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

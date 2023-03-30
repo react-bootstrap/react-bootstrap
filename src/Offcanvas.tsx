@@ -187,18 +187,6 @@ const propTypes = {
   'aria-labelledby': PropTypes.string,
 };
 
-const defaultProps: Partial<OffcanvasProps> = {
-  show: false,
-  backdrop: true,
-  keyboard: true,
-  scroll: false,
-  autoFocus: true,
-  enforceFocus: true,
-  restoreFocus: true,
-  placement: 'start',
-  renderStaticNode: false,
-};
-
 function DialogTransition(props) {
   return <OffcanvasToggling {...props} />;
 }
@@ -215,22 +203,22 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         className,
         children,
         'aria-labelledby': ariaLabelledby,
-        placement,
+        placement = 'start',
         responsive,
 
         /* BaseModal props */
 
-        show,
-        backdrop,
-        keyboard,
-        scroll,
+        show = false,
+        backdrop = true,
+        keyboard = true,
+        scroll = false,
         onEscapeKeyDown,
         onShow,
         onHide,
         container,
-        autoFocus,
-        enforceFocus,
-        restoreFocus,
+        autoFocus = true,
+        enforceFocus = true,
+        restoreFocus = true,
         restoreFocusOptions,
         onEntered,
         onExit,
@@ -240,7 +228,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         onExited,
         backdropClassName,
         manager: propsManager,
-        renderStaticNode,
+        renderStaticNode = false,
         ...props
       },
       ref,
@@ -370,7 +358,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
 
 Offcanvas.displayName = 'Offcanvas';
 Offcanvas.propTypes = propTypes;
-Offcanvas.defaultProps = defaultProps;
 
 export default Object.assign(Offcanvas, {
   Body: OffcanvasBody,
