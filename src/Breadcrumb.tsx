@@ -33,20 +33,15 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  label: 'breadcrumb',
-  listProps: {},
-};
-
 const Breadcrumb: BsPrefixRefForwardingComponent<'nav', BreadcrumbProps> =
   React.forwardRef<HTMLElement, BreadcrumbProps>(
     (
       {
         bsPrefix,
         className,
-        listProps,
+        listProps = {},
         children,
-        label,
+        label = 'breadcrumb',
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
         as: Component = 'nav',
         ...props
@@ -75,7 +70,6 @@ const Breadcrumb: BsPrefixRefForwardingComponent<'nav', BreadcrumbProps> =
 
 Breadcrumb.displayName = 'Breadcrumb';
 Breadcrumb.propTypes = propTypes;
-Breadcrumb.defaultProps = defaultProps;
 
 export default Object.assign(Breadcrumb, {
   Item: BreadcrumbItem,

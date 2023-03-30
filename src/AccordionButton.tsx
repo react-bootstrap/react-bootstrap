@@ -87,7 +87,11 @@ const AccordionButton: BsPrefixRefForwardingComponent<
         ref={ref}
         onClick={accordionOnClick}
         {...props}
-        aria-expanded={eventKey === activeEventKey}
+        aria-expanded={
+          Array.isArray(activeEventKey)
+            ? activeEventKey.includes(eventKey)
+            : eventKey === activeEventKey
+        }
         className={classNames(
           className,
           bsPrefix,

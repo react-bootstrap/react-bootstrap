@@ -3,13 +3,12 @@ import * as React from 'react';
 
 import Image, { ImageProps, propTypes as imagePropTypes } from './Image';
 
-const defaultProps = { fluid: true };
-
 const FigureImage = React.forwardRef<HTMLImageElement, ImageProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, fluid = true, ...props }, ref) => (
     <Image
       ref={ref}
       {...props}
+      fluid={fluid}
       className={classNames(className, 'figure-img')}
     />
   ),
@@ -17,6 +16,5 @@ const FigureImage = React.forwardRef<HTMLImageElement, ImageProps>(
 
 FigureImage.displayName = 'FigureImage';
 FigureImage.propTypes = imagePropTypes;
-FigureImage.defaultProps = defaultProps;
 
 export default FigureImage;

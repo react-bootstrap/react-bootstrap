@@ -69,10 +69,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  body: false,
-};
-
 const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
   HTMLElement,
   CardProps
@@ -84,7 +80,7 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
       bg,
       text,
       border,
-      body,
+      body = false,
       children,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -114,7 +110,6 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
 
 Card.displayName = 'Card';
 Card.propTypes = propTypes;
-Card.defaultProps = defaultProps;
 
 export default Object.assign(Card, {
   Img: CardImg,

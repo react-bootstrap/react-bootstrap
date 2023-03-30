@@ -145,15 +145,6 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const defaultProps = {
-  in: false,
-  timeout: 300,
-  mountOnEnter: false,
-  unmountOnExit: false,
-  appear: false,
-  getDimensionValue: getDefaultDimensionValue,
-};
-
 const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
   (
     {
@@ -165,6 +156,11 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
       className,
       children,
       dimension = 'height',
+      in: inProp = false,
+      timeout = 300,
+      mountOnEnter = false,
+      unmountOnExit = false,
+      appear = false,
       getDimensionValue = getDefaultDimensionValue,
       ...props
     },
@@ -227,13 +223,18 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
         ref={ref}
         addEndListener={transitionEndListener}
         {...props}
-        aria-expanded={props.role ? props.in : null}
+        aria-expanded={props.role ? inProp : null}
         onEnter={handleEnter}
         onEntering={handleEntering}
         onEntered={handleEntered}
         onExit={handleExit}
         onExiting={handleExiting}
         childRef={(children as any).ref}
+        in={inProp}
+        timeout={timeout}
+        mountOnEnter={mountOnEnter}
+        unmountOnExit={unmountOnExit}
+        appear={appear}
       >
         {(state: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
@@ -253,7 +254,5 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
 
 // @ts-ignore
 Collapse.propTypes = propTypes;
-// @ts-ignore
-Collapse.defaultProps = defaultProps;
 
 export default Collapse;

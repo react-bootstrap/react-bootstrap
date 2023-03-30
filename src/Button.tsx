@@ -67,18 +67,25 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: 'primary',
-  active: false,
-  disabled: false,
-};
-
 const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
   React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ as, bsPrefix, variant, size, active, className, ...props }, ref) => {
+    (
+      {
+        as,
+        bsPrefix,
+        variant = 'primary',
+        size,
+        active = false,
+        disabled = false,
+        className,
+        ...props
+      },
+      ref,
+    ) => {
       const prefix = useBootstrapPrefix(bsPrefix, 'btn');
       const [buttonProps, { tagName }] = useButtonProps({
         tagName: as,
+        disabled,
         ...props,
       });
 
@@ -89,13 +96,14 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
           {...buttonProps}
           {...props}
           ref={ref}
+          disabled={disabled}
           className={classNames(
             className,
             prefix,
             active && 'active',
             variant && `${prefix}-${variant}`,
             size && `${prefix}-${size}`,
-            props.href && props.disabled && 'disabled',
+            props.href && disabled && 'disabled',
           )}
         />
       );
@@ -104,6 +112,5 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
 
 Button.displayName = 'Button';
 Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
 
 export default Button;

@@ -39,17 +39,19 @@ const propTypes = {
   onHide: PropTypes.func,
 };
 
-const defaultProps = {
-  closeLabel: 'Close',
-  closeButton: false,
-};
-
 const AbstractModalHeader = React.forwardRef<
   HTMLDivElement,
   AbstractModalHeaderProps
 >(
   (
-    { closeLabel, closeVariant, closeButton, onHide, children, ...props },
+    {
+      closeLabel = 'Close',
+      closeVariant,
+      closeButton = false,
+      onHide,
+      children,
+      ...props
+    },
     ref,
   ) => {
     const context = useContext(ModalContext);
@@ -76,6 +78,5 @@ const AbstractModalHeader = React.forwardRef<
 );
 
 AbstractModalHeader.propTypes = propTypes;
-AbstractModalHeader.defaultProps = defaultProps;
 
 export default AbstractModalHeader;

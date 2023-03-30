@@ -34,7 +34,7 @@ Things to know about the React-Bootstrap Overlay components.
 - The `<Tooltip>` and `<Popover>`
   components do not position themselves. Instead the `<Overlay>` (or `<OverlayTrigger>`)
   components, inject `ref` and `style` props.
-- Tooltip expects specific props injected by the `<Overlay>` component
+- Tooltip expects specific props injected by the `<Overlay>` component.
 - Tooltips for `disabled` elements must be triggered on a wrapper element.
 
 ## Overlay
@@ -47,12 +47,22 @@ adds support for transitions, and visibility toggling.
 
 Overlays consist of at least two elements, the "overlay", the element to
 be positioned, as well as a "target", the element the overlay is
-positioned in relation to. You can also also have an "arrow" element,
+positioned in relation to. You can also have an "arrow" element,
 like the tooltips and popovers, but that is optional. Be sure to
 check out the [Popper](https://popper.js.org/docs/v2)
 documentation for more details about the injected props.
 
 <ReactPlayground codeText={Overlay} />
+
+### Customizing Overlay rendering
+
+The `Overlay` injects a number of props that you can use to customize the
+rendering behavior. There is a case where you would need to show the overlay
+before `Popper` can measure and position it properly. In React-Bootstrap,
+tooltips and popovers sets the opacity and position to avoid issues where
+the initial positioning of the overlay is incorrect. See the
+[Tooltip](https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Tooltip.tsx)
+implementation for an example on how this is done.
 
 ## OverlayTrigger
 
@@ -146,7 +156,7 @@ Since we can't know every time your overlay changes size, to reposition
 it, you need to take manual action if you want to update the position of
 an Overlay in response to a change.
 
-For this, the Overlay component also injects a a `popper`
+For this, the Overlay component also injects a `popper`
 prop with a `scheduleUpdate()` method that an overlay
 component can use to reposition itself.
 
