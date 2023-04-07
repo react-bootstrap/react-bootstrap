@@ -106,11 +106,6 @@ const propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-const defaultProps = {
-  justify: false,
-  fill: false,
-};
-
 const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
   HTMLElement,
   NavProps
@@ -119,8 +114,8 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
     as = 'div',
     bsPrefix: initialBsPrefix,
     variant,
-    fill,
-    justify,
+    fill = false,
+    justify = false,
     navbar,
     navbarScroll,
     className,
@@ -165,7 +160,6 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
-Nav.defaultProps = defaultProps;
 
 export default Object.assign(Nav, {
   Item: NavItem,

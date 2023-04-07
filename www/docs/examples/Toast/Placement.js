@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
@@ -39,7 +39,11 @@ function PlacementExample() {
         className="bg-dark position-relative"
         style={{ minHeight: '240px' }}
       >
-        <ToastContainer className="p-3" position={position}>
+        <ToastContainer
+          className="p-3"
+          position={position}
+          style={{ zIndex: 1 }}
+        >
           <Toast>
             <Toast.Header closeButton={false}>
               <img

@@ -23,7 +23,8 @@
         "react/no-unescaped-entities": "off",
         "no-alert": "off",
         "no-restricted-syntax": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "jsx-a11y/label-has-associated-control": "off"
       }
     },
     {

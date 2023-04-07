@@ -32,21 +32,15 @@ const propTypes = {
   onClick: PropTypes.func,
 };
 
-const defaultProps = {
-  active: false,
-  disabled: false,
-  activeLabel: '(current)',
-};
-
 const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
   React.forwardRef<HTMLLIElement, PageItemProps>(
     (
       {
-        active,
-        disabled,
+        active = false,
+        disabled = false,
         className,
         style,
-        activeLabel,
+        activeLabel = '(current)',
         children,
         ...props
       }: PageItemProps,
@@ -71,7 +65,6 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
   );
 
 PageItem.propTypes = propTypes;
-PageItem.defaultProps = defaultProps;
 PageItem.displayName = 'PageItem';
 
 export default PageItem;

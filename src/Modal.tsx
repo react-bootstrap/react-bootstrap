@@ -222,17 +222,6 @@ const propTypes = {
   'aria-label': PropTypes.string,
 };
 
-const defaultProps = {
-  show: false,
-  backdrop: true,
-  keyboard: true,
-  autoFocus: true,
-  enforceFocus: true,
-  restoreFocus: true,
-  animation: true,
-  dialogAs: ModalDialog,
-};
-
 /* eslint-disable no-use-before-define, react/no-multi-comp */
 function DialogTransition(props) {
   return <Fade {...props} timeout={null} />;
@@ -253,24 +242,24 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         dialogClassName,
         contentClassName,
         children,
-        dialogAs: Dialog,
+        dialogAs: Dialog = ModalDialog,
         'aria-labelledby': ariaLabelledby,
         'aria-describedby': ariaDescribedby,
         'aria-label': ariaLabel,
 
         /* BaseModal props */
 
-        show,
-        animation,
-        backdrop,
-        keyboard,
+        show = false,
+        animation = true,
+        backdrop = true,
+        keyboard = true,
         onEscapeKeyDown,
         onShow,
         onHide,
         container,
-        autoFocus,
-        enforceFocus,
-        restoreFocus,
+        autoFocus = true,
+        enforceFocus = true,
+        restoreFocus = true,
         restoreFocusOptions,
         onEntered,
         onExit,
@@ -516,7 +505,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
-Modal.defaultProps = defaultProps;
 
 export default Object.assign(Modal, {
   Body: ModalBody,

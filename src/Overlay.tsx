@@ -141,13 +141,6 @@ const propTypes = {
   ]),
 };
 
-const defaultProps: Partial<OverlayProps> = {
-  transition: Fade,
-  rootClose: false,
-  show: false,
-  placement: 'top',
-};
-
 function wrapRefs(props, arrowProps) {
   const { ref } = props;
   const { ref: aRef } = arrowProps;
@@ -159,7 +152,15 @@ function wrapRefs(props, arrowProps) {
 
 const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
   (
-    { children: overlay, transition, popperConfig = {}, ...outerProps },
+    {
+      children: overlay,
+      transition = Fade,
+      popperConfig = {},
+      rootClose = false,
+      placement = 'top',
+      show: outerShow = false,
+      ...outerProps
+    },
     outerRef,
   ) => {
     const popperRef = useRef<Partial<PopperRef>>({});
@@ -184,10 +185,10 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     }, [firstRenderedState]);
 
     useEffect(() => {
-      if (!outerProps.show) {
+      if (!outerShow) {
         setFirstRenderedState(null);
       }
-    }, [outerProps.show]);
+    }, [outerShow]);
 
     return (
       <BaseOverlay
@@ -199,6 +200,9 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
           onFirstUpdate: handleFirstUpdate,
         }}
         transition={actualTransition}
+        rootClose={rootClose}
+        placement={placement}
+        show={outerShow}
       >
         {(overlayProps, { arrowProps, popper: popperObj, show }) => {
           wrapRefs(overlayProps, arrowProps);
@@ -249,6 +253,5 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
 
 Overlay.displayName = 'Overlay';
 Overlay.propTypes = propTypes;
-Overlay.defaultProps = defaultProps;
 
 export default Overlay;

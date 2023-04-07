@@ -28,17 +28,22 @@ export default function createWithBsPrefix<
       { className, bsPrefix, as: Tag = Component || 'div', ...props }: any,
       ref,
     ) => {
+      const componentProps = {
+        ...defaultProps,
+        ...props,
+      };
+
       const resolvedPrefix = useBootstrapPrefix(bsPrefix, prefix);
       return (
         <Tag
           ref={ref}
           className={classNames(className, resolvedPrefix)}
-          {...props}
+          {...componentProps}
         />
       );
     },
   );
-  BsComponent.defaultProps = defaultProps as any;
+
   BsComponent.displayName = displayName;
   return BsComponent as any;
 }

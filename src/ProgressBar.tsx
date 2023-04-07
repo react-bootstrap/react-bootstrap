@@ -124,15 +124,6 @@ const propTypes = {
   isChild: PropTypes.bool,
 };
 
-const defaultProps = {
-  min: 0,
-  max: 100,
-  animated: false,
-  isChild: false,
-  visuallyHidden: false,
-  striped: false,
-};
-
 function getPercentage(now, min, max) {
   const percentage = ((now - min) / (max - min)) * 100;
   return Math.round(percentage * ROUND_PRECISION) / ROUND_PRECISION;
@@ -182,7 +173,16 @@ function renderProgressBar(
 renderProgressBar.propTypes = propTypes;
 
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ isChild, ...props }: ProgressBarProps, ref) => {
+  ({ isChild = false, ...rest }: ProgressBarProps, ref) => {
+    const props = {
+      min: 0,
+      max: 100,
+      animated: false,
+      visuallyHidden: false,
+      striped: false,
+      ...rest,
+    };
+
     props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
 
     if (isChild) {
@@ -233,6 +233,5 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
 
 ProgressBar.displayName = 'ProgressBar';
 ProgressBar.propTypes = propTypes;
-ProgressBar.defaultProps = defaultProps;
 
 export default ProgressBar;
