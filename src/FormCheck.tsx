@@ -26,6 +26,7 @@ export interface FormCheckProps
   feedback?: React.ReactNode;
   feedbackType?: FeedbackType;
   bsSwitchPrefix?: string;
+  indeterminate?: boolean;
 }
 
 const propTypes = {
@@ -145,6 +146,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         children,
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
         as = 'input',
+        indeterminate,
         ...props
       },
       ref,
@@ -173,6 +175,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
           isInvalid={isInvalid}
           disabled={disabled}
           as={as}
+          indeterminate={indeterminate}
         />
       );
 

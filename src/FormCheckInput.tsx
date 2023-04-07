@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
+import useCallbackRef from '@restart/hooks/useCallbackRef';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
@@ -14,6 +16,7 @@ export interface FormCheckInputProps
   type?: FormCheckInputType;
   isValid?: boolean;
   isInvalid?: boolean;
+  indeterminate?: boolean;
 }
 
 const propTypes = {
@@ -40,6 +43,9 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool,
+
+  /** Set whether the input is of indeterminate state */
+  indeterminate: PropTypes.bool,
 };
 
 const FormCheckInput: BsPrefixRefForwardingComponent<
@@ -54,8 +60,12 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
       type = 'checkbox',
       isValid = false,
       isInvalid = false,
+      indeterminate,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
+      defaultChecked = false,
+      onChange,
+      checked,
       ...props
     },
     ref,
@@ -63,10 +73,33 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
     const { controlId } = useContext(FormContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
+    const [element, inputRef] = useCallbackRef<HTMLInputElement>();
+    const existingRef = useMergedRefs(inputRef, ref);
+
+    const [innerChecked, setInnerChecked] = React.useState(
+      defaultChecked || checked,
+    );
+
+    React.useEffect(() => {
+      if (element && element.type === 'checkbox') {
+        if (indeterminate) {
+          element.indeterminate = true;
+        } else {
+          element.indeterminate = false;
+        }
+      }
+    }, [element, existingRef, indeterminate, ref, type, innerChecked]);
+
     return (
       <Component
         {...props}
-        ref={ref}
+        // When using indeterminate, 'as' prop has to accept a ref
+        ref={indeterminate || ref ? existingRef : undefined}
+        checked={innerChecked}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setInnerChecked(e.target.checked);
+          onChange?.(e);
+        }}
         type={type}
         id={id || controlId}
         className={classNames(
