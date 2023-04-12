@@ -1,3 +1,15 @@
+## [2.7.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.2...v2.7.3) (2023-04-12)
+
+
+### Bug Fixes
+
+* **ToastContainer:** allow setting `containerPosition` without `position` ([#6574](https://github.com/react-bootstrap/react-bootstrap/issues/6574)) ([41ec134](https://github.com/react-bootstrap/react-bootstrap/commit/41ec134dea072d1656e47f31cac217feb433f9fc))
+* switch from defaultProps to JS default params ([#6568](https://github.com/react-bootstrap/react-bootstrap/issues/6568)) ([1d5b726](https://github.com/react-bootstrap/react-bootstrap/commit/1d5b726de93ec52cd71b22048b5f92198e48db68))
+
+
+
+
+
 ## [2.7.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.1...v2.7.2) (2023-02-14)
 
 
