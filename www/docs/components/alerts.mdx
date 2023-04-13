@@ -1,0 +1,77 @@
+---
+title: Alerts
+description: Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+---
+
+import AdditionalContent from '!!raw-loader!../examples/Alert/AdditionalContent';
+import Basic from '!!raw-loader!../examples/Alert/Basic';
+import Dismissible from '!!raw-loader!../examples/Alert/Dismissible';
+import DismissibleControlled from '!!raw-loader!../examples/Alert/DismissibleControlled';
+import Link from '!!raw-loader!../examples/Alert/Link';
+
+## Examples
+
+Alerts are available for any length of text, as well as an optional
+dismiss button. For proper styling, use one of the eight `variant`s.
+
+<CodeBlock language="jsx" live>
+  {Basic}
+</CodeBlock>
+
+:::info Conveying meaning to assistive technologies
+
+Using color to add meaning only provides a visual indication, which will not
+be conveyed to users of assistive technologies – such as screen readers.
+Ensure that information denoted by the color is either obvious from the
+content itself (e.g. the visible text), or is included through alternative
+means, such as additional text hidden with the `.visually-hidden`
+class.
+
+:::
+
+### Links
+
+For links, use the `<Alert.Link>` component to provide matching
+colored links within any alert.
+
+<CodeBlock language="jsx" live>
+  {Link}
+</CodeBlock>
+
+### Additional content
+
+Alerts can contain whatever content you like. Headers, paragraphs, dividers, go crazy.
+
+<CodeBlock language="jsx" live>
+  {AdditionalContent}
+</CodeBlock>
+
+### Dismissing
+
+Add the `dismissible` prop to add a functioning dismiss
+button to the Alert.
+
+<CodeBlock language="jsx" live>
+  {Dismissible}
+</CodeBlock>
+
+You can also control the visual state directly which is great if you
+want to build more complicated alerts.
+
+<CodeBlock language="jsx" live>
+  {DismissibleControlled}
+</CodeBlock>
+
+## API
+
+### Alert
+
+<PropsTable name="Alert" />
+
+### AlertHeading
+
+<PropsTable name="AlertHeading" />
+
+### AlertLink
+
+<PropsTable name="AlertLink" />

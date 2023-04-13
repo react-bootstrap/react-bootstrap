@@ -25,7 +25,7 @@ export interface ProgressBarProps
 const ROUND_PRECISION = 1000;
 
 /**
- * Validate that children, if any, are instances of `<ProgressBar>`.
+ * Validate that children, if any, are instances of `ProgressBar`.
  */
 function onlyProgressBar(props, propName, componentName): Error | null {
   const children = props[propName];

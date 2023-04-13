@@ -1,0 +1,90 @@
+// Reset the styles for BS due to conflicts from Docusaurus.
+.bs-example {
+  .btn-group {
+    display: inline-flex !important;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .navbar {
+    background-color: initial;
+  }
+
+  .list-group {
+    max-width: 400px;
+  }
+
+  .breadcrumb-item {
+    margin-top: 0;
+  }
+}
+
+.ratio-examples {
+  .ratio {
+    display: inline-block;
+    width: 10rem;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-right: 5px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.static-dropdown-menu {
+  .dropdown-menu {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    display: block !important;
+    opacity: 1 !important;
+  }
+}
+.custom-dropdown-menu {
+  .super-colors {
+    background: linear-gradient(
+      to bottom,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      violet
+    );
+  }
+}
+
+.show-grid {
+  .row > .col,
+  .row > [class^='col-'] {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: #bbeffd;
+    border: 1px solid #61dafb;
+  }
+
+  .row + .row {
+    margin-top: 1rem;
+  }
+}
+
+.modal-90w {
+  width: 90%;
+  max-width: none !important;
+}
+
+.overlay-contained {
+  height: 200px;
+  & > div {
+    position: relative;
+  }
+}

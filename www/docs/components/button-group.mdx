@@ -1,0 +1,73 @@
+---
+title: Button group
+description: Group a series of buttons together on a single line or stack them in a vertical column.
+---
+
+import ButtonGroupBasic from '!!raw-loader!../examples/ButtonGroup/Basic';
+import ButtonGroupNested from '!!raw-loader!../examples/ButtonGroup/Nested';
+import ButtonGroupSizes from '!!raw-loader!../examples/ButtonGroup/Sizes';
+import ButtonToolbar from '!!raw-loader!../examples/ButtonGroup/Toolbar';
+import ButtonToolbarBasic from '!!raw-loader!../examples/ButtonGroup/ToolbarBasic';
+import ButtonGroupVertical from '!!raw-loader!../examples/ButtonGroup/Vertical';
+
+## Basic example
+
+Wrap a series of `<Button>`s in a `<ButtonGroup>`.
+
+<CodeBlock language="jsx" live>
+  {ButtonGroupBasic}
+</CodeBlock>
+
+## Button toolbar
+
+Combine sets of `<ButtonGroup>`s into a `<ButtonToolbar>` for more complex components.
+
+<CodeBlock language="jsx" live>
+  {ButtonToolbarBasic}
+</CodeBlock>
+
+Feel free to mix input groups with button groups in your toolbars.
+Similar to the example above, you’ll likely need some utilities though
+to space things properly.
+
+<CodeBlock language="jsx" live>
+  {ButtonToolbar}
+</CodeBlock>
+
+## Sizing
+
+Instead of applying button sizing props to every button in a group, just
+add `size` prop to the `<ButtonGroup>`.
+
+<CodeBlock language="jsx" live>
+  {ButtonGroupSizes}
+</CodeBlock>
+
+## Nesting
+
+You can place other button types within the
+`<ButtonGroup>` like `<DropdownButton>`s.
+
+<CodeBlock language="jsx" live>
+  {ButtonGroupNested}
+</CodeBlock>
+
+## Vertical variation
+
+Make a set of buttons appear vertically stacked rather than
+horizontally, by adding `vertical` to the `<ButtonGroup>`.
+**Split button dropdowns are not supported here.**
+
+<CodeBlock language="jsx" live>
+  {ButtonGroupVertical}
+</CodeBlock>
+
+## API
+
+### ButtonGroup
+
+<PropsTable name="ButtonGroup" />
+
+### ButtonToolbar
+
+<PropsTable name="ButtonToolbar" />

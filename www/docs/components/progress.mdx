@@ -1,0 +1,77 @@
+---
+title: Progress bars
+description: Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
+---
+
+import ProgressBarAnimated from '!!raw-loader!../examples/ProgressBar/Animated';
+import ProgressBarBasic from '!!raw-loader!../examples/ProgressBar/Basic';
+import ProgressBarContextual from '!!raw-loader!../examples/ProgressBar/Contextual';
+import ProgressBarScreenreaderLabel from '!!raw-loader!../examples/ProgressBar/ScreenreaderLabel';
+import ProgressBarStacked from '!!raw-loader!../examples/ProgressBar/Stacked';
+import ProgressBarStriped from '!!raw-loader!../examples/ProgressBar/Striped';
+import ProgressBarWithLabel from '!!raw-loader!../examples/ProgressBar/WithLabel';
+
+## Example
+
+Default progress bar.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarBasic}
+</CodeBlock>
+
+## With label
+
+Add a `label` prop to show a visible percentage. For low
+percentages, consider adding a min-width to ensure the label's text is
+fully visible.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarWithLabel}
+</CodeBlock>
+
+## Screenreader only label
+
+Add a `visuallyHidden` prop to hide the label visually.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarScreenreaderLabel}
+</CodeBlock>
+
+## Contextual alternatives
+
+Progress bars use some of the same button and alert classes for
+consistent styles.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarContextual}
+</CodeBlock>
+
+## Striped
+
+Uses a gradient to create a striped effect.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarStriped}
+</CodeBlock>
+
+## Animated
+
+Add `animated` prop to animate the stripes right to left.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarAnimated}
+</CodeBlock>
+
+## Stacked
+
+Nest `<ProgressBar />`s to stack them.
+
+<CodeBlock language="jsx" live>
+  {ProgressBarStacked}
+</CodeBlock>
+
+## API
+
+### ProgressBar
+
+<PropsTable name="ProgressBar" />
