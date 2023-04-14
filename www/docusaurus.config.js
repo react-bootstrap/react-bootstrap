@@ -9,7 +9,7 @@ const rbVersion = require('../package.json').version;
 const config = {
   title: 'React Bootstrap',
   tagline: 'The most popular front-end framework, rebuilt for React.',
-  url: 'https://react-bootstrap.github.io/',
+  url: 'https://react-bootstrap.netlify.app/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
