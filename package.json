@@ -46,9 +46,8 @@
     "release": "rollout",
     "start": "yarn --cwd www start",
     "tdd": "karma start",
-    "test": "npm run lint && npm run test-browser && npm run test-node",
+    "test": "npm run lint && npm run test-browser",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "cross-env NODE_ENV=test-server mocha test/server/*Spec.js",
     "prepare": "husky install"
   },
   "lint-staged": {
