@@ -59,17 +59,17 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
-    "@restart/hooks": "^0.4.6",
-    "@restart/ui": "^1.4.1",
-    "@types/react-transition-group": "^4.4.4",
-    "classnames": "^2.3.1",
+    "@babel/runtime": "^7.21.0",
+    "@restart/hooks": "^0.4.9",
+    "@restart/ui": "^1.6.2",
+    "@types/react-transition-group": "^4.4.5",
+    "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "prop-types-extra": "^1.1.0",
-    "react-transition-group": "^4.4.2",
-    "uncontrollable": "^7.2.1",
+    "react-transition-group": "^4.4.5",
+    "uncontrollable": "^8.0.0",
     "warning": "^4.0.3"
   },
   "devDependencies": {
