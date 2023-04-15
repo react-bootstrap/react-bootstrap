@@ -1,3 +1,15 @@
+## [2.7.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.3...v2.7.4) (2023-04-15)
+
+
+### Bug Fixes
+
+* downgrade uncontrollable to 7.2.1 ([#6592](https://github.com/react-bootstrap/react-bootstrap/issues/6592)) ([3898c72](https://github.com/react-bootstrap/react-bootstrap/commit/3898c72a6a5e2f6012633e81d9d9f9052fc06dd2))
+* update dependencies ([#6587](https://github.com/react-bootstrap/react-bootstrap/issues/6587)) ([753dc53](https://github.com/react-bootstrap/react-bootstrap/commit/753dc53c822054fff286ed39feb7c9c38e38053b))
+
+
+
+
+
 ## [2.7.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.2...v2.7.3) (2023-04-12)
 
 
