@@ -5,6 +5,11 @@
  */
 
 /* You can override the default Infima variables here. */
+
+::selection{
+  color: #fff;
+  background: #919597;
+}
 :root {
   --ifm-color-primary: #712cf9;
   --ifm-color-primary-dark: #6528e0;
