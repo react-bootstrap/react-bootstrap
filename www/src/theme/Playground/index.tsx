@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import clsx from 'clsx';
 import useIsBrowser from '@docusaurus/useIsBrowser';
-import { LiveProvider, LiveEditor, LiveError } from 'react-live';
+import { LiveContext, LiveProvider, LiveEditor, LiveError } from 'react-live';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { usePrismTheme } from '@docusaurus/theme-common';
 import type { Props } from '@theme/Playground';
 import type { ThemeConfig } from '@docusaurus/theme-live-codeblock';
+import CopyButton from '@theme-original/CodeBlock/CopyButton';
 import Preview from './Preview';
+import EditorInfoMessage from './EditorInfoMessage';
 
 import styles from './styles.module.css';
 
@@ -47,15 +49,91 @@ function ResultWithHeader({ className }: any) {
   );
 }
 
+let uid = 0;
+
 function ThemedLiveEditor() {
+  const { code } = useContext(LiveContext);
   const isBrowser = useIsBrowser();
+  const [focused, setFocused] = useState(false);
+  const [ignoreTab, setIgnoreTab] = useState(false);
+  const [keyboardFocused, setKeyboardFocused] = useState(false);
+  const mouseDownRef = useRef(false);
+  const idRef = useRef(null);
+
+  if (idRef.current === null) idRef.current = `described-by-${++uid}`;
+  const id = idRef.current;
+
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (ignoreTab) {
+        if (e.key !== 'Tab' && e.key !== 'Shift') {
+          if (e.key === 'Enter') e.preventDefault();
+          setIgnoreTab(false);
+        }
+      } else if (e.key === 'Escape') {
+        setIgnoreTab(true);
+      }
+    },
+    [ignoreTab],
+  );
+
+  const handleFocus = useCallback(() => {
+    setFocused(true);
+    setIgnoreTab(!mouseDownRef.current);
+    setKeyboardFocused(!mouseDownRef.current);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setFocused(false);
+  }, []);
+
+  const handleMouseDown = useCallback(() => {
+    mouseDownRef.current = true;
+    window.setTimeout(() => {
+      mouseDownRef.current = false;
+    });
+  }, []);
+
+  // Hack because LiveEditor doesn't define this type
+  const props = {
+    ignoreTabKey: ignoreTab,
+  };
+
+  const showMessage = keyboardFocused || (focused && !ignoreTab);
+
   return (
-    <LiveEditor
-      // We force remount the editor on hydration,
-      // otherwise dark prism theme is not applied
-      key={String(isBrowser)}
-      className={styles.playgroundEditor}
-    />
+    <div className="position-relative">
+      <LiveEditor
+        // We force remount the editor on hydration,
+        // otherwise dark prism theme is not applied
+        key={String(isBrowser)}
+        className={styles.playgroundEditor}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        aria-describedby={showMessage ? id : null}
+        {...props}
+      />
+      <div className={clsx(styles.editorToolbar)}>
+        {showMessage && (
+          <EditorInfoMessage id={id} aria-live="polite">
+            {ignoreTab ? (
+              <>
+                Press <kbd>enter</kbd> or type a key to enable tab-to-indent
+              </>
+            ) : (
+              <>
+                Press <kbd>esc</kbd> to disable tab trapping
+              </>
+            )}
+          </EditorInfoMessage>
+        )}
+        <div className={styles.buttonGroup}>
+          <CopyButton code={code} />
+        </div>
+      </div>
+    </div>
   );
 }
 
