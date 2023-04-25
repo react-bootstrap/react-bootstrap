@@ -42,6 +42,7 @@ body:
     attributes:
       label: Reproducible Example
       description: Provide a link to the minimum reproduction here. You can fork from [CodeSandbox](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic) to get started.
+      placeholder: Paste a link to your reproduction here. Issues without reproductions will be deprioritized.
     validations:
       required: true
   - type: textarea
