@@ -12,7 +12,7 @@ import {
 } from './helpers';
 
 export interface PopoverProps
-  extends React.ComponentPropsWithoutRef<'div'>,
+  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'content'>,
     BsPrefixPropsWithChildren {
   id: string;
   placement?: Placement;
@@ -77,7 +77,7 @@ const defaultProps = {
   placement: 'right',
 };
 
-const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
+const Popover: Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       bsPrefix,
@@ -114,7 +114,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
       </div>
     );
   },
-) as unknown) as Popover;
+) as unknown as Popover;
 
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps as any;
