@@ -1,3 +1,14 @@
+## [1.6.7](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.6...v1.6.7) (2023-05-03)
+
+
+### Bug Fixes
+
+* **Popover:** fix `content` prop error ([#6612](https://github.com/react-bootstrap/react-bootstrap/issues/6612)) ([3d1df53](https://github.com/react-bootstrap/react-bootstrap/commit/3d1df53df9b84f1624cd7b78acfe6b3a21ecf937))
+
+
+
+
+
 ## [1.6.6](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.5...v1.6.6) (2022-08-25)
 
 
