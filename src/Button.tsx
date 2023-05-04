@@ -39,6 +39,14 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
+   * Callback fired when a button is clicked. An event related to the click event will be
+   * passed as argument to the event handler function that is passed to `onClick`
+   *
+   * @type func
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Specifies a large or small button.
    *
    * @type ('sm'|'lg')
