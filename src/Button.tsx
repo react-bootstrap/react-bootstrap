@@ -39,6 +39,11 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
+   * Callback fired when the button is clicked.
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Specifies a large or small button.
    *
    * @type ('sm'|'lg')
