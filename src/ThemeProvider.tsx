@@ -16,16 +16,24 @@ export interface ThemeProviderProps extends Partial<ThemeContextValue> {
   children: React.ReactNode;
 }
 
-const contextCreator =
-  typeof React.createContext === 'undefined'
-    ? function (defaultValue: ThemeContextValue) {
-        // @ts-ignore
-        return React.createServerContext<ThemeContextValue>(
-          'react-bootstrap',
-          defaultValue,
-        );
-      }
-    : React.createContext<ThemeContextValue>;
+console.log(`serverside: ${typeof window === 'undefined'}`);
+
+// @ts-ignore
+const isServerSide = typeof React.createServerContext !== 'undefined';
+console.log(`has create server context : ${isServerSide}`);
+console.log(
+  `has create client context : ${typeof React.createContext !== 'undefined'}`,
+);
+const contextCreator = isServerSide
+  ? function (defaultValue: ThemeContextValue) {
+      console.log('creating server context');
+      // @ts-ignore
+      return React.createServerContext<ThemeContextValue>(
+        'react-bootstrap',
+        defaultValue,
+      );
+    }
+  : React.createContext<ThemeContextValue>;
 
 const ThemeContext = contextCreator({
   prefixes: {},
@@ -33,6 +41,7 @@ const ThemeContext = contextCreator({
   minBreakpoint: DEFAULT_MIN_BREAKPOINT,
 });
 
+console.log('created context with memo');
 const { Provider } = ThemeContext;
 
 function ThemeProvider({
