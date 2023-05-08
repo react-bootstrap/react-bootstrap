@@ -1,0 +1,85 @@
+---
+title: Input Group
+description: Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs, custom selects, and custom file inputs.
+sidebar_position: 7
+---
+
+import Basic from '!!raw-loader!../examples/InputGroup/Basic';
+import ButtonDropdowns from '!!raw-loader!../examples/InputGroup/ButtonDropdowns';
+import Buttons from '!!raw-loader!../examples/InputGroup/Buttons';
+import Checkboxes from '!!raw-loader!../examples/InputGroup/Checkboxes';
+import MultipleAddons from '!!raw-loader!../examples/InputGroup/MultipleAddons';
+import MultipleInputs from '!!raw-loader!../examples/InputGroup/MultipleInputs';
+import SegmentedButtonDropdowns from '!!raw-loader!../examples/InputGroup/SegmentedButtonDropdowns';
+import Sizes from '!!raw-loader!../examples/InputGroup/Sizes';
+
+## Example
+
+Place one add-on or button on either side of an input. You may also
+place one on both sides of an input. Remember to place
+`<label>`s outside the input group.
+
+<CodeBlock language="jsx" live>
+  {Basic}
+</CodeBlock>
+
+## Sizing
+
+Add the relative form sizing classes to the `InputGroup` and
+contents within will automatically resize—no need for repeating the form
+control size classes on each element.
+
+<CodeBlock language="jsx" live>
+  {Sizes}
+</CodeBlock>
+
+## Checkboxes and radios
+
+Use the `InputGroup.Radio` or
+`InputGroup.Checkbox` to add options to an input group.
+
+<CodeBlock language="jsx" live>
+  {Checkboxes}
+</CodeBlock>
+
+## Multiple inputs
+
+While multiple inputs are supported visually, validation styles are only
+available for input groups with a single input.
+
+<CodeBlock language="jsx" live>
+  {MultipleInputs}
+</CodeBlock>
+
+## Multiple addons
+
+Multiple add-ons are supported and can be mixed with checkbox and radio
+input versions.
+
+<CodeBlock language="jsx" live>
+  {MultipleAddons}
+</CodeBlock>
+
+## Button addons
+
+<CodeBlock language="jsx" live>
+  {Buttons}
+</CodeBlock>
+
+## Buttons with Dropdowns
+
+<CodeBlock language="jsx" live>
+  {ButtonDropdowns}
+</CodeBlock>
+
+## Segmented buttons
+
+<CodeBlock language="jsx" live>
+  {SegmentedButtonDropdowns}
+</CodeBlock>
+
+## API
+
+### InputGroup
+
+<PropsTable name="InputGroup" />

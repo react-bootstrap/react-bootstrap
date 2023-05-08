@@ -1,0 +1,77 @@
+---
+title: Form controls
+description: Give textual form controls like <input>s and <textarea>s an upgrade with custom styles, sizing, focus states, and more.
+sidebar_position: 2
+---
+
+import FormTextControls from '!!raw-loader!../examples/Form/TextControls';
+import FormInputSizes from '!!raw-loader!../examples/Form/InputSizes';
+import FormControlDisabled from '!!raw-loader!../examples/Form/FormControlDisabled';
+import InputReadOnly from '!!raw-loader!../examples/Form/InputReadOnly';
+import Plaintext from '!!raw-loader!../examples/Form/Plaintext';
+import FormFile from '!!raw-loader!../examples/Form/FormFile';
+import ColorPicker from '!!raw-loader!../examples/Form/ColorPicker';
+
+## Example
+
+For textual form controls—like `input`s and `textarea`s—use the `FormControl` component.
+FormControl adds some additional styles for general appearance, focus
+state, sizing, and more.
+
+<CodeBlock language="jsx" live>
+  {FormTextControls}
+</CodeBlock>
+
+## Sizing
+
+Use `size` on `<FormControl>` to change the size of the input.
+
+<CodeBlock language="jsx" live>
+  {FormInputSizes}
+</CodeBlock>
+
+## Disabled
+
+Add the `disabled` prop on an input to give it a grayed out appearance and remove pointer events.
+
+<CodeBlock language="jsx" live>
+  {FormControlDisabled}
+</CodeBlock>
+
+## Readonly
+
+Add the `readOnly` prop on an input to prevent modification
+of the input's value. Read-only inputs appear lighter (just like
+disabled inputs), but retain the standard cursor.
+
+<CodeBlock language="jsx" live>
+  {InputReadOnly}
+</CodeBlock>
+
+## Readonly plain text
+
+If you want to have readonly elements in your form styled as plain text,
+use the `plaintext` prop on FormControls to remove the
+default form field styling and preserve the correct margin and padding.
+
+<CodeBlock language="jsx" live>
+  {Plaintext}
+</CodeBlock>
+
+## File input
+
+<CodeBlock language="jsx" live>
+  {FormFile}
+</CodeBlock>
+
+## Color
+
+<CodeBlock language="jsx" live>
+  {ColorPicker}
+</CodeBlock>
+
+## API
+
+### FormControl
+
+<PropsTable name="FormControl" />

@@ -1,0 +1,113 @@
+---
+title: Why React-Bootstrap?
+sidebar_position: 2
+---
+
+import DismissibleControlled from '!!raw-loader!../examples/Alert/DismissibleControlled';
+
+React-Bootstrap is a complete re-implementation of the
+Bootstrap components using React. It has **no dependency
+on either `bootstrap.js` or jQuery.** If you have React
+setup and React-Bootstrap installed, you have everything
+you need.
+
+Methods and events using jQuery is done imperatively
+by directly manipulating the DOM. In contrast, React
+uses updates to the state to update the virtual DOM.
+In this way, React-Bootstrap provides a more reliable
+solution by incorporating Bootstrap functionality into
+React's virtual DOM. Below are a few examples of how
+React-Bootstrap components differ from Bootstrap.
+
+## A Simple React Component
+
+The CSS and details of Bootstrap components are rather
+opinionated and lengthy. React-Bootstrap simplifies
+this by condensing the original Bootstrap into React-styled
+components.
+
+### Bootstrap
+
+```jsx
+import * as React from 'react';
+
+function Example() {
+  return (
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Oh snap! You got an error!</strong>
+      <p>Change this and that and try again.</p>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  );
+}
+```
+
+### React-Bootstrap
+
+```jsx
+import * as React from 'react';
+import Alert from 'react-bootstrap/Alert';
+
+function Example() {
+  return (
+    <Alert dismissible variant="danger">
+      <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+      <p>Change this and that and try again.</p>
+    </Alert>
+  );
+}
+```
+
+## Bootstrap with state
+
+Since React-Bootstrap is built with React Javascript, state
+can be passed within React-Bootstrap components as a prop.
+It also makes it easier to manage the state as updates are
+made using React’s state instead of directly manipulating
+the state of the DOM. This also gives a lot of flexibility
+when creating more complex components.
+
+### React-bootstrap
+
+<CodeBlock language="jsx" live>
+  {DismissibleControlled}
+</CodeBlock>
+
+### Bootstrap
+
+```html
+<div class="alert alert-success alert-dismissible fade show firstCollapsible" role="alert">
+  <strong>How's it going?!</strong>
+  <p>
+    Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+    eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
+    amet fermentum.
+  </p>
+  <hr/>
+  <div class="d-flex justify-content-end">
+	<button type="button" class="btn btn-outline-success">Close me ya'll!</button>
+  </div>
+</div>
+<div class="d-flex justify-content-start alert fade show">
+	<button type="button" class="btn btn-primary d-none secondCollapsible">Show Alert</button>
+</div>
+```
+
+```js
+$('.btn-outline-success').on('click', function(e) {
+    $('.firstCollapsible').addClass('d-none');
+    $('.secondCollapsible').removeClass('d-none');
+})
+
+$('.btn-primary').on('click', function(e) {
+    $('.firstCollapsible').removeClass('d-none');
+    $('.secondCollapsible').addClass('d-none');
+})
+```

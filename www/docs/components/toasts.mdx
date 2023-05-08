@@ -1,0 +1,88 @@
+---
+title: Toasts
+description: Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
+---
+
+import ToastBasic from '!!raw-loader!../examples/Toast/Basic';
+import ToastDismissible from '!!raw-loader!../examples/Toast/Dismissible';
+import ToastStacking from '!!raw-loader!../examples/Toast/Stacking';
+import ToastPlacement from '!!raw-loader!../examples/Toast/Placement';
+import ToastPlacementMulti from '!!raw-loader!../examples/Toast/PlacementMulti';
+import ToastAutohide from '!!raw-loader!../examples/Toast/Autohide';
+import ToastContextual from '!!raw-loader!../examples/Toast/Contextual';
+
+Toasts are lightweight notifications designed to mimic the push notifications that have been popularized by mobile and desktop operating systems. They’re built with flexbox, so they’re easy to align and position.
+
+## Examples
+
+### Basic
+
+To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use display: flex, allowing easy alignment of content thanks to our margin and flexbox utilities.
+
+Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.
+
+<CodeBlock language="jsx" live>
+  {ToastBasic}
+</CodeBlock>
+
+### Dismissible
+
+<CodeBlock language="jsx" live>
+  {ToastDismissible}
+</CodeBlock>
+
+### Stacking
+
+When you have multiple toasts, we default to vertically stacking them in a readable manner.
+
+<CodeBlock language="jsx" live>
+  {ToastStacking}
+</CodeBlock>
+
+### Placement
+
+Place toasts by setting a `position` in a `ToastContainer`. The top right is often used for notifications, as is the top middle.
+
+<CodeBlock language="jsx" live>
+  {ToastPlacement}
+</CodeBlock>
+
+For systems that generate more notifications, consider using a wrapping element so they can easily stack.
+
+<CodeBlock language="jsx" live>
+  {ToastPlacementMulti}
+</CodeBlock>
+
+### Autohide
+
+A Toast can also automatically hide after X milliseconds using the `autohide` prop with the `delay` prop to specify the delay. To open the toast, manually change the show property.
+
+<CodeBlock language="jsx" live>
+  {ToastAutohide}
+</CodeBlock>
+
+### Contextual variations
+
+Add any of the below mentioned modifier classes to change the appearance of a toast.
+
+<CodeBlock language="jsx" live>
+  {ToastContextual}
+</CodeBlock>
+
+## API
+
+### Toast
+
+<PropsTable name="Toast" />
+
+### ToastHeader
+
+<PropsTable name="ToastHeader" />
+
+### ToastBody
+
+<PropsTable name="ToastBody" />
+
+### ToastContainer
+
+<PropsTable name="ToastContainer" />

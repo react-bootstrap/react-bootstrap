@@ -54,12 +54,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-/**
- *
- * @property {InputGroupText} Text
- * @property {InputGroupRadio} Radio
- * @property {InputGroupCheckbox} Checkbox
- */
 const InputGroup: BsPrefixRefForwardingComponent<'div', InputGroupProps> =
   React.forwardRef<HTMLElement, InputGroupProps>(
     (

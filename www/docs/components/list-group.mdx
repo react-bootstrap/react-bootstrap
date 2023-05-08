@@ -1,0 +1,139 @@
+---
+title: List groups
+description: List groups are a flexible and powerful component for displaying a series of content. Modify and extend them to support just about any content within.
+---
+
+import ListGroupDefault from '!!raw-loader!../examples/ListGroup/Default';
+import ListGroupLinked from '!!raw-loader!../examples/ListGroup/Linked';
+import ListGroupActive from '!!raw-loader!../examples/ListGroup/Active';
+import ListGroupDisabled from '!!raw-loader!../examples/ListGroup/Disabled';
+import ListGroupStyle from '!!raw-loader!../examples/ListGroup/Style';
+import ListGroupStyleActions from '!!raw-loader!../examples/ListGroup/StyleActions';
+import ListGroupFlush from '!!raw-loader!../examples/ListGroup/Flush';
+import ListGroupNumbered from '!!raw-loader!../examples/ListGroup/Numbered';
+import ListGroupNumberedCustom from '!!raw-loader!../examples/ListGroup/NumberedCustom';
+import ListGroupHorizontal from '!!raw-loader!../examples/ListGroup/Horizontal';
+import ListGroupHorizontalResponsive from '!!raw-loader!../examples/ListGroup/HorizontalResponsive';
+import ListGroupTabs from '!!raw-loader!../examples/ListGroup/Tabs';
+
+## Basic Example
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupDefault}
+</CodeBlock>
+
+### Active items
+
+Set the `active` prop to indicate the list groups current active selection.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupActive}
+</CodeBlock>
+
+### Disabled items
+
+Set the `disabled` prop to prevent actions on a `<ListGroup.Item>`. For elements
+that aren't naturally disable-able (like anchors) `onClick` handlers are added
+that call `preventDefault` to mimick disabled behavior.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupDisabled}
+</CodeBlock>
+
+### Actionable items
+
+Toggle the `action` prop to create <em>actionable</em> list group
+items, with disabled, hover and active styles. List item actions will render
+a `<button>` or `<a>` (depending on the presence of an `href`) by default but
+can be overridden by setting the `as` prop as usual.
+
+List items `actions` are distinct from plain items to ensure that click or tap
+affordances aren't applied to non-interactive items.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupLinked}
+</CodeBlock>
+
+### Flush
+
+Add the `flush` variant to remove outer borders and rounded corners to render list group items
+edge-to-edge in a parent container [such as a `Card`](cards#list-groups).
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupFlush}
+</CodeBlock>
+
+### Numbered
+
+Add the `numbered` prop to opt into numbered list group items. Numbers are generated via CSS
+(as opposed to a `<ol>`s default browser styling) for better placement inside list group items
+and to allow for better customization.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupNumbered}
+</CodeBlock>
+
+These work great with custom content as well.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupNumberedCustom}
+</CodeBlock>
+
+### Horizontal
+
+Use the `horizontal` prop to make the ListGroup render horizontally. Currently **horizontal list groups cannot be combined with flush list groups.**
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupHorizontal}
+</CodeBlock>
+
+There are responsive variants to `horizontal`: setting it to `{sm|md|lg|xl|xxl}` makes the list group horizontal starting at that breakpoint’s `min-width`.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupHorizontalResponsive}
+</CodeBlock>
+
+### Contextual classes
+
+Use contextual variants on `<ListGroup.Item>`s to style them with a stateful background and color.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupStyle}
+</CodeBlock>
+
+When paired with `action`s, additional hover and active styles apply.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupStyleActions}
+</CodeBlock>
+
+:::info Conveying meaning to assistive technologies
+
+Using color to add meaning only provides a visual indication, which will not
+be conveyed to users of assistive technologies – such as screen readers.
+Ensure that information denoted by the color is either obvious from the
+content itself (e.g. the visible text), or is included through alternative
+means, such as additional text hidden with the `.visually-hidden`
+class.
+
+:::
+
+## Tabbed Interfaces
+
+You can also use the [Tab][tabs] components to create ARIA compliant tabbable
+interfaces with the `<ListGroup>` component. Swap out the `<Nav>` component
+for the list group and you are good to go.
+
+<CodeBlock language="jsx" live previewClassName="list-group">
+  {ListGroupTabs}
+</CodeBlock>
+
+## API
+
+### ListGroup
+
+<PropsTable name="ListGroup" />
+
+### ListGroupItem
+
+<PropsTable name="ListGroupItem" />

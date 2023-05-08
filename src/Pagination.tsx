@@ -28,14 +28,6 @@ const propTypes = {
   size: PropTypes.oneOf<PaginationSize>(['sm', 'lg']),
 };
 
-/**
- * @property {PageItem} Item
- * @property {PageItem} First
- * @property {PageItem} Prev
- * @property {PageItem} Ellipsis
- * @property {PageItem} Next
- * @property {PageItem} Last
- */
 const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
   ({ bsPrefix, className, size, ...props }, ref) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');

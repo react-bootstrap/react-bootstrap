@@ -1,79 +1,62 @@
 {
-  "name": "react-bootstrap-docs",
-  "version": "1.0.0",
-  "description": "React-Bootstrap Documentation",
-  "keywords": [
-    "gatsby"
-  ],
-  "homepage": "https://react-bootstrap.github.io/",
-  "bugs": {
-    "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
-  },
-  "license": "MIT",
-  "author": "Jason Quense",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
-  },
+  "name": "react-bootstrap-website",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "yarn develop",
-    "develop": "gatsby develop",
-    "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && yarn push-docs",
-    "push-docs": "gh-pages -d public --branch master --repo \"https://github.com/react-bootstrap/react-bootstrap.github.io.git\"",
-    "sort": "import-sort 'src/pages/**/*.js'"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
   },
-  "importSort": {
-    ".js": {
-      "style": "module",
-      "parser": "4catalyzer"
-    }
-  },
-  "devDependencies": {
-    "@docsearch/css": "^3.3.3",
-    "@docsearch/react": "^3.3.3",
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-brands-svg-icons": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mdx-js/mdx": "^1.6.22",
+  "dependencies": {
+    "@docusaurus/core": "^2.4.0",
+    "@docusaurus/preset-classic": "^2.4.0",
+    "@docusaurus/theme-common": "^2.4.0",
+    "@docusaurus/theme-live-codeblock": "^2.4.0",
     "@mdx-js/react": "^1.6.22",
-    "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.4.9",
     "ast-types": "^0.14.2",
-    "astroturf": "^0.10.5",
     "bootstrap": "^5.2.3",
-    "classnames": "^2.3.2",
-    "common-tags": "^1.8.2",
-    "copy-text-to-clipboard": "^3.0.1",
+    "clsx": "^1.2.1",
+    "docusaurus-plugin-sass": "^0.2.3",
     "dom-helpers": "^5.2.1",
     "formik": "^2.2.9",
-    "gatsby": "^2.32.13",
-    "gatsby-plugin-astroturf": "^0.2.1",
-    "gatsby-plugin-catch-links": "^2.10.0",
-    "gatsby-plugin-mdx": "^1.10.1",
-    "gatsby-plugin-react-helmet": "^3.10.0",
-    "gatsby-plugin-sass": "^3.2.0",
-    "gatsby-remark-prismjs": "^3.13.0",
-    "gatsby-source-filesystem": "2.11.1",
-    "gatsby-transformer-react-docgen": "^5.9.0",
-    "gatsby-transformer-remark": "^2.16.1",
-    "gh-pages": "^3.2.3",
     "holderjs": "^2.9.9",
-    "import-sort-cli": "^6.0.0",
-    "import-sort-parser-4catalyzer": "^4.0.1",
-    "import-sort-style-module": "^6.0.0",
-    "lodash": "^4.17.21",
-    "prismjs": "^1.29.0",
-    "prop-types": "^15.8.1",
-    "react": "^16.14.0",
+    "lodash.camelcase": "^4.3.0",
+    "markdown-to-jsx": "^7.2.0",
+    "prism-react-renderer": "^1.3.5",
+    "raw-loader": "^4.0.2",
+    "react": "^17.0.2",
     "react-docgen": "^5.4.3",
-    "react-dom": "^16.14.0",
-    "react-helmet": "^6.1.0",
+    "react-dom": "^17.0.2",
     "react-live": "^2.4.1",
-    "remark-slug": "^6.1.0",
-    "sass": "^1.58.0",
-    "shakespeare-data": "^3.0.0",
-    "yup": "^0.32.11"
+    "sass": "^1.62.0",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^2.4.0",
+    "@tsconfig/docusaurus": "^1.0.7",
+    "typescript": "^5.0.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.14"
   }
 }

@@ -1,0 +1,34 @@
+---
+title: Pagination
+description: A set of presentational components for building pagination UI.
+---
+
+import PaginationAdvanced from '!!raw-loader!../examples/Pagination/Advanced';
+import PaginationBasic from '!!raw-loader!../examples/Pagination/Basic';
+
+## Example
+
+<CodeBlock language="jsx" live noInline>
+  {PaginationBasic}
+</CodeBlock>
+
+## More options
+
+For building more complex pagination UI, there are few convenient
+sub-components for adding "First", "Previous", "Next", and "Last"
+buttons, as well as an "Ellipsis" item for indicating
+previous or continuing results.
+
+<CodeBlock language="jsx" live>
+  {PaginationAdvanced}
+</CodeBlock>
+
+## API
+
+### Pagination
+
+<PropsTable name="Pagination" />
+
+### PageItem
+
+<PropsTable name="PageItem" />

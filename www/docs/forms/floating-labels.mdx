@@ -1,0 +1,71 @@
+---
+title: Floating labels
+description: Create beautifully simple form labels that float over your input fields.
+sidebar_position: 8
+---
+
+import FormFloatingBasic from '!!raw-loader!../examples/Form/FormFloatingBasic';
+import FormFloatingCustom from '!!raw-loader!../examples/Form/FormFloatingCustom';
+import FormFloatingLayout from '!!raw-loader!../examples/Form/FormFloatingLayout';
+import FormFloatingSelect from '!!raw-loader!../examples/Form/FormFloatingSelect';
+import FormFloatingTextarea from '!!raw-loader!../examples/Form/FormFloatingTextarea';
+
+## Example
+
+Wrap a `<Form.Control>` element in `<FloatingLabel>` to enable floating labels with
+Bootstrap’s textual form fields. A `placeholder` is required
+on each `<Form.Control>` as our method of CSS-only
+floating labels uses the `:placeholder-shown` pseudo-element.
+
+<CodeBlock language="jsx" live>
+  {FormFloatingBasic}
+</CodeBlock>
+
+## Textareas
+
+By default, `<textarea>`s will be the same height as `<input>`s. To set a custom
+height on your `<textarea>`, do not use the `rows` attribute. Instead, set an
+explicit `height` (either inline or via custom CSS).
+
+<CodeBlock language="jsx" live>
+  {FormFloatingTextarea}
+</CodeBlock>
+
+## Selects
+
+Other than `<Form.Control>`, floating labels are only available on `<Form.Select>`s.
+They work in the same way, but unlike `<input>`s, they’ll always show the `<label>`
+in its floated state.
+
+<CodeBlock language="jsx" live>
+  {FormFloatingSelect}
+</CodeBlock>
+
+## Layout
+
+When working with the Bootstrap grid system, be sure to place form
+elements within column classes.
+
+<CodeBlock language="jsx" live>
+  {FormFloatingLayout}
+</CodeBlock>
+
+## Customizing rendering
+
+If you need greater control over the rendering, use the `<FormFloating>` component
+to wrap your input and label. Also note that the `<Form.Control>` must come first
+so we can utilize a sibling selector (e.g., ~).
+
+<CodeBlock language="jsx" live>
+  {FormFloatingCustom}
+</CodeBlock>
+
+## API
+
+### FormFloating
+
+<PropsTable name="FormFloating" />
+
+### FloatingLabel
+
+<PropsTable name="FloatingLabel" />

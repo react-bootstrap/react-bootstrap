@@ -37,11 +37,12 @@ body:
         2. Click on '....'
         3. Scroll down to '....'
         4. See error
-  - type: textarea
+  - type: input
     id: bug-repro
     attributes:
       label: Reproducible Example
-      description: Provide a minimum reproduction here. You can fork from [CodeSandbox](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic) to get started.
+      description: Provide a link to the minimum reproduction here. You can fork from [CodeSandbox](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic) to get started.
+      placeholder: Paste a link to your reproduction here. Issues without reproductions will be deprioritized.
     validations:
       required: true
   - type: textarea

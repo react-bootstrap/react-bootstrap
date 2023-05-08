@@ -1,3 +1,27 @@
+## [2.7.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.3...v2.7.4) (2023-04-15)
+
+
+### Bug Fixes
+
+* downgrade uncontrollable to 7.2.1 ([#6592](https://github.com/react-bootstrap/react-bootstrap/issues/6592)) ([3898c72](https://github.com/react-bootstrap/react-bootstrap/commit/3898c72a6a5e2f6012633e81d9d9f9052fc06dd2))
+* update dependencies ([#6587](https://github.com/react-bootstrap/react-bootstrap/issues/6587)) ([753dc53](https://github.com/react-bootstrap/react-bootstrap/commit/753dc53c822054fff286ed39feb7c9c38e38053b))
+
+
+
+
+
+## [2.7.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.2...v2.7.3) (2023-04-12)
+
+
+### Bug Fixes
+
+* **ToastContainer:** allow setting `containerPosition` without `position` ([#6574](https://github.com/react-bootstrap/react-bootstrap/issues/6574)) ([41ec134](https://github.com/react-bootstrap/react-bootstrap/commit/41ec134dea072d1656e47f31cac217feb433f9fc))
+* switch from defaultProps to JS default params ([#6568](https://github.com/react-bootstrap/react-bootstrap/issues/6568)) ([1d5b726](https://github.com/react-bootstrap/react-bootstrap/commit/1d5b726de93ec52cd71b22048b5f92198e48db68))
+
+
+
+
+
 ## [2.7.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.1...v2.7.2) (2023-02-14)
 
 

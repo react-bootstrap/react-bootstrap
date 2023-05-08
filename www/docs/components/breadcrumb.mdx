@@ -1,0 +1,24 @@
+---
+title: Breadcrumbs
+description: Indicate the current page’s location within a navigational hierarchy that automatically adds separators via CSS.
+---
+
+import Breadcrumb from '!!raw-loader!../examples/Breadcrumb';
+
+## Example
+
+Add `active` prop to the active `Breadcrumb.Item`. Do not set both `active` and `href` attributes. `active` overrides `href` and `span` element is rendered instead of `a`.
+
+<CodeBlock language="jsx" live>
+  {Breadcrumb}
+</CodeBlock>
+
+## API
+
+### Breadcrumb
+
+<PropsTable name="Breadcrumb" />
+
+### BreadcrumbItem
+
+<PropsTable name="BreadcrumbItem" />
