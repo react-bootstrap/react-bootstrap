@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import * as React from 'react';
-import Anchor from '@restart/ui/Anchor';
+// import Anchor from '@restart/ui/Anchor';
 import {
   useNavItem,
   NavItemProps as BaseNavItemProps,
@@ -56,7 +56,8 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
       {
         bsPrefix,
         className,
-        as: Component = Anchor,
+        as: Component = 'a',
+        // as = 'a',
         active,
         eventKey,
         disabled = false,
