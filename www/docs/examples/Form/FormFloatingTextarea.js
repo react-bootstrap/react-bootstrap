@@ -9,12 +9,12 @@ function FormFloatingTextareaExample() {
         label="Comments"
         className="mb-3"
       >
-        <Form.Control as="textarea" placeholder="Leave a comment here" />
+        <Form.Control as="textarea"  />
       </FloatingLabel>
       <FloatingLabel controlId="floatingTextarea2" label="Comments">
         <Form.Control
           as="textarea"
-          placeholder="Leave a comment here"
+       
           style={{ height: '100px' }}
         />
       </FloatingLabel>
