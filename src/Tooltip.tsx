@@ -126,4 +126,8 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 Tooltip.propTypes = propTypes as any;
 Tooltip.displayName = 'Tooltip';
 
-export default Tooltip;
+export default Object.assign(Tooltip, {
+  // Default tooltip offset.
+  // https://github.com/twbs/bootstrap/blob/beca2a6c7f6bc88b6449339fc76edcda832c59e5/js/src/tooltip.js#L65
+  TOOLTIP_OFFSET: [0, 6],
+});
