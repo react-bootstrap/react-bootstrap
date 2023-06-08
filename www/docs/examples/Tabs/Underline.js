@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
-function LeftTabsExample() {
+function UnderlineExample() {
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row>
@@ -28,4 +28,4 @@ function LeftTabsExample() {
   );
 }
 
-export default LeftTabsExample;
+export default UnderlineExample;
