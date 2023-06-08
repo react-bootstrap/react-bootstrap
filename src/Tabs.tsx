@@ -33,7 +33,7 @@ const propTypes = {
   /**
    * Navigation style
    *
-   * @type {('tabs'| 'pills')}
+   * @type {('tabs'| 'pills' | 'underline')}
    */
   variant: PropTypes.string,
 

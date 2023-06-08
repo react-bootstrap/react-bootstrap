@@ -17,7 +17,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
-  variant?: 'tabs' | 'pills' | string;
+  variant?: 'tabs' | 'pills' | 'underline' | string;
   defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
@@ -39,7 +39,7 @@ const propTypes = {
   /**
    * The visual variant of the nav items.
    *
-   * @type {('tabs'|'pills')}
+   * @type {('tabs'| 'pills' | 'underline')}
    */
   variant: PropTypes.string,
 
