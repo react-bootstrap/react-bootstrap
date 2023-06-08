@@ -13,6 +13,7 @@ import NavJustified from '!!raw-loader!../examples/Nav/Justified';
 import NavStacked from '!!raw-loader!../examples/Nav/Stacked';
 import Tabs from '!!raw-loader!../examples/Nav/Tabs';
 import Pills from '!!raw-loader!../examples/Nav/Pills';
+import Underline from '!!raw-loader!../examples/Nav/Underline';
 
 ## Base Nav
 
@@ -46,11 +47,11 @@ also set your items to `<li>` as well!
   {NavList}
 </CodeBlock>
 
-## Alignment and orientation
+## Available styles
 
 You can control the the direction and orientation of the
-`Nav` by making use of the [flexbox layout][0] utility classes.
-By default, navs are left-aligned, but that is easily changed to center or right-aligned.
+`Nav` by making use of the <DocLink path="/utilities/flex#justify-content">flexbox utility</DocLink>
+classes. By default, navs are left-aligned, but that is easily changed to center or right-aligned.
 
 <CodeBlock language="jsx" live>
   {NavAlignment}
@@ -58,16 +59,15 @@ By default, navs are left-aligned, but that is easily changed to center or right
 
 ### Vertical
 
-Create stacked navs by changing the flex item direction with the
-`.flex-column` class, or your own css. You can even use the
-responsive versions to stack in some viewports but not others (e.g.
-`.flex-sm-column`).
+Create stacked navs by changing the flex item direction with the `.flex-column` class, or
+your own css. You can even use the responsive versions to stack in some viewports but not
+others (e.g. `.flex-sm-column`).
 
 <CodeBlock language="jsx" live>
   {NavStacked}
 </CodeBlock>
 
-## Tabs
+### Tabs
 
 Visually represent nav items as "tabs". This style pairs nicely with
 tabbable regions created by our [Tab components](tabs).
@@ -79,12 +79,16 @@ default stylesheet.
   {Tabs}
 </CodeBlock>
 
-## Pills
-
-An alternative visual variant.
+### Pills
 
 <CodeBlock language="jsx" live>
   {Pills}
+</CodeBlock>
+
+### Underline
+
+<CodeBlock language="jsx" live>
+  {Underline}
 </CodeBlock>
 
 ## Fill and justify
@@ -138,5 +142,3 @@ straight-forward `<NavDropdown>` that works for most cases.
 ### NavDropdown
 
 <PropsTable name="NavDropdown" />
-
-[0]: https://getbootstrap.com/docs/4.0/layout/grid/#horizontal-alignment
