@@ -33,7 +33,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary: var(--bs-emphasis-color);
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
   --ifm-color-primary-darkest: #1a8870;
@@ -42,8 +42,11 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
-  --ifm-hero-background-color: #712cf9;
+  --ifm-hero-background-color: var(--bs-body-bg);
   --ifm-footer-background-color: #2b3035;
+
+  --ifm-menu-color-active: var(--bs-emphasis-color);
+  --ifm-toc-link-color: var(--bs-body-color);
 }
 
 // Override Bootstrap styles.

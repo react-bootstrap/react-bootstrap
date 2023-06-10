@@ -61,8 +61,6 @@ const config = {
     ({
       colorMode: {
         defaultMode: 'light',
-        // TODO: Add dark mode from BS 5.3
-        disableSwitch: true,
         respectPrefersColorScheme: false,
       },
       liveCodeBlock: {
