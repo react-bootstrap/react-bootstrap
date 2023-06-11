@@ -93,7 +93,7 @@
     "@types/warning": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.11.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.7",
