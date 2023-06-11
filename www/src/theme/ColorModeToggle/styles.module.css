@@ -15,7 +15,7 @@
 }
 
 .toggleButton:hover {
-  background: var(--ifm-color-emphasis-200);
+  background: var(--ifm-color-emphasis-500);
 }
 
 [data-theme='light'] .darkToggleIcon,
@@ -25,4 +25,8 @@
 
 .toggleButtonDisabled {
   cursor: not-allowed;
+}
+
+.toggleIcon {
+  color: var(--ifm-navbar-link-color);
 }
