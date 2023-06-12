@@ -16,12 +16,13 @@
     max-width: 400px;
   }
 
-  .breadcrumb-item, .nav-item {
+  .breadcrumb-item,
+  .nav-item {
     margin-top: 0;
   }
 }
 
-.ratio-examples {
+.ratio-example {
   .ratio {
     display: inline-block;
     width: 10rem;
@@ -35,6 +36,16 @@
       align-items: center;
       justify-content: center;
     }
+  }
+}
+
+.stack-example {
+  .vstack,
+  .vstack > div:not(.vr),
+  .hstack,
+  .hstack > div:not(.vr) {
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.15);
+    border: rgba(112.520718, 44.062154, 249.437846, 0.3);
   }
 }
 
