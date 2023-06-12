@@ -13,7 +13,7 @@ function MydModalWithGrid(props) {
           Using Grid in Modal
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="show-grid">
+      <Modal.Body className="grid-example">
         <Container>
           <Row>
             <Col xs={12} md={8}>

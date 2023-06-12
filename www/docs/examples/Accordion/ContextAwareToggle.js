@@ -17,7 +17,7 @@ function ContextAwareToggle({ children, eventKey, callback }) {
   return (
     <button
       type="button"
-      style={{ backgroundColor: isCurrentEventKey ? 'pink' : 'lavender' }}
+      style={{ backgroundColor: isCurrentEventKey ? 'rgba(255,192,203,0.6)' : 'rgb(230,230,250,0.6)' }}
       onClick={decoratedOnClick}
     >
       {children}

@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function TextLinkExample() {
   return (
-    <Navbar>
+    <Navbar className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
         <Navbar.Toggle />
