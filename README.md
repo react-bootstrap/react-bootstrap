@@ -61,7 +61,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
 [v5-documentation]: https://react-bootstrap.github.io
-[v5-migration]: https://react-bootstrap.github.io/migrating
+[v5-migration]: https://react-bootstrap.github.io/docs/migrating
 [v4-documentation]: https://react-bootstrap-v4.netlify.app
 [v4-migration]: https://react-bootstrap-v4.netlify.app/migrating
 [v3-documentation]: https://react-bootstrap-v3.netlify.app
