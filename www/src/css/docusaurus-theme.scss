@@ -33,17 +33,31 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
+  body {
+    background-color: initial;
+  }
+
+  --ifm-color-primary: #712cf9;
+  --ifm-color-primary-dark: #6528e0;
+  --ifm-color-primary-darker: #6528e0;
+  --ifm-color-primary-darkest: #6528e0;
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
-  --ifm-hero-background-color: #712cf9;
+  --ifm-hero-background-color: var(--bs-body-bg);
   --ifm-footer-background-color: #2b3035;
+
+  --ifm-menu-color-active: var(--bs-emphasis-color);
+  --ifm-toc-link-color: var(--bs-body-color);
+
+  --ifm-breadcrumb-color-active: var(--bs-emphasis-color);
+  --ifm-button-color: var(--bs-emphasis-color);
+
+  .table-of-contents__link--active {
+    color: var(--bs-emphasis-color);
+  }
 }
 
 // Override Bootstrap styles.
@@ -85,4 +99,20 @@ a.button {
 
 .pagination-nav__link {
   text-decoration: none;
+}
+
+.alert-info svg {
+  fill: var(--bs-info-text-emphasis);
+}
+
+.alert-warning svg {
+  fill: var(--bs-warning-text-emphasis);
+}
+
+.alert-danger svg {
+  fill: var(--bs-danger-text-emphasis);
+}
+
+.alert-success svg {
+  fill: var(--bs-success-text-emphasis);
 }

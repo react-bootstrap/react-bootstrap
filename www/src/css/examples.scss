@@ -16,12 +16,14 @@
     max-width: 400px;
   }
 
-  .breadcrumb-item, .nav-item {
+  .breadcrumb-item,
+  .nav-item,
+  .page-item {
     margin-top: 0;
   }
 }
 
-.ratio-examples {
+.ratio-example {
   .ratio {
     display: inline-block;
     width: 10rem;
@@ -35,6 +37,16 @@
       align-items: center;
       justify-content: center;
     }
+  }
+}
+
+.stack-example {
+  .vstack,
+  .vstack > div:not(.vr),
+  .hstack,
+  .hstack > div:not(.vr) {
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.15);
+    border: 1px solid rgba(112.520718, 44.062154, 249.437846, 0.3);
   }
 }
 
@@ -63,13 +75,13 @@
   }
 }
 
-.show-grid {
+.grid-example {
   .row > .col,
   .row > [class^='col-'] {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    background-color: #bbeffd;
-    border: 1px solid #61dafb;
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.15);
+    border: 1px solid rgba(112.520718, 44.062154, 249.437846, 0.3);
   }
 
   .row + .row {

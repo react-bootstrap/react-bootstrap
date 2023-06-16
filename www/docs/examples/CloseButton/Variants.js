@@ -2,9 +2,9 @@ import CloseButton from 'react-bootstrap/CloseButton';
 
 function VariantsExample() {
   return (
-    <div className="bg-dark p-3">
-      <CloseButton variant="white" />
-      <CloseButton variant="white" disabled />
+    <div data-bs-theme="dark" className='bg-dark p-2'>
+      <CloseButton />
+      <CloseButton disabled />
     </div>
   );
 }

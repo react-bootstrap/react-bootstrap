@@ -57,6 +57,14 @@ and background-color utilities. Choose from `variant="light"` for use with light
 background colors, or `variant="dark"` for dark background colors. Then, customize
 with the `bg` prop or any custom css!
 
+:::caution Heads up!
+
+Dark variants for components were deprecated in Bootstrap v5.3.0 with the introduction
+of color modes. Instead of adding `variant="dark"`, set `data-bs-theme="dark"` on the
+`Navbar`.
+
+:::
+
 <CodeBlock language="jsx" live>
   {NavbarColorSchemes}
 </CodeBlock>

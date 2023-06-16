@@ -60,9 +60,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'light',
-        // TODO: Add dark mode from BS 5.3
-        disableSwitch: true,
+        defaultMode: 'dark',
         respectPrefersColorScheme: false,
       },
       liveCodeBlock: {
