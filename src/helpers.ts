@@ -1,10 +1,17 @@
 import React from 'react';
 
-export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
+export type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
 
-export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
-  React.ComponentPropsWithRef<Inner>,
+export type ReplaceProps<
+  Inner extends string | React.ComponentType<any>,
   P
+> = Omit<
+  React.ComponentPropsWithRef<
+    Inner extends IntrinsicElementsKeys | React.JSXElementConstructor<any>
+      ? Inner
+      : never
+  >,
+  keyof P
 > &
   P;
 
@@ -17,20 +24,25 @@ export interface BsCustomPrefixProps {
   bsCustomPrefix?: string;
 }
 
-export interface BsPrefixProps<As extends React.ElementType = React.ElementType>
-  extends BsPrefixAndClassNameOnlyProps {
+export interface BsPrefixProps<
+  As extends string | React.ComponentType<any> =
+    | string
+    | React.ComponentType<any>
+> extends BsPrefixAndClassNameOnlyProps {
   as?: As;
 }
 
 export type BsPrefixPropsWithChildren<
-  As extends React.ElementType = React.ElementType
+  As extends string | React.ComponentType<any> =
+    | string
+    | React.ComponentType<any>
 > = React.PropsWithChildren<BsPrefixProps<As>>;
 
 export interface BsPrefixRefForwardingComponent<
-  TInitial extends React.ElementType,
+  TInitial extends string | React.ComponentType<any>,
   P = unknown
 > {
-  <As extends React.ElementType = TInitial>(
+  <As extends string | React.ComponentType<any> = TInitial>(
     props: React.PropsWithChildren<ReplaceProps<As, BsPrefixProps<As> & P>>,
     context?: any,
   ): React.ReactElement | null;
@@ -41,13 +53,13 @@ export interface BsPrefixRefForwardingComponent<
 }
 
 export class BsPrefixComponent<
-  As extends React.ElementType,
+  As extends string | React.ComponentType<any>,
   P = unknown
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
 // Need to use this instead of typeof Component to get proper type checking.
 export type BsPrefixComponentClass<
-  As extends React.ElementType,
+  As extends string | React.ComponentType<any>,
   P = unknown
 > = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
 
