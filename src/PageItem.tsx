@@ -32,6 +32,12 @@ const propTypes = {
 
   /** A callback function for when this component is clicked. */
   onClick: PropTypes.func,
+
+  /** custom style for the inner component of the PageItem */
+  innerStyle: PropTypes.object,
+
+  /** custom className for the inner component of the PageItem */
+  innerClassName: PropTypes.string,
 };
 
 const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
