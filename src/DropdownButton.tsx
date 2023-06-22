@@ -11,6 +11,7 @@ export interface DropdownButtonProps
   extends Omit<DropdownProps, 'title'>,
     PropsFromToggle,
     BsPrefixProps {
+  toggleClassName?: string
   title: React.ReactNode;
   menuRole?: string;
   renderMenuOnMount?: boolean;
@@ -80,6 +81,8 @@ const propTypes = {
   variant: PropTypes.string,
   /** @ignore */
   size: PropTypes.string,
+  /** @ignore */
+  toggleClassName: PropTypes.string,
 };
 
 /**
@@ -103,6 +106,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
       rootCloseEvent,
       variant,
       size,
+      toggleClassName,
       menuRole,
       renderMenuOnMount,
       disabled,
@@ -117,6 +121,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
     <Dropdown ref={ref} {...props}>
       <DropdownToggle
         id={id}
+        className={toggleClassName}
         href={href}
         size={size}
         variant={variant}
