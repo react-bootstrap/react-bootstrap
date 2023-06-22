@@ -13,8 +13,8 @@ export interface PageItemProps
   active?: boolean;
   activeLabel?: string;
   href?: string;
-  innerStyle?: React.CSSProperties;
-  innerClassName?: string;
+  linkStyle?: React.CSSProperties;
+  linkClassName?: string;
 }
 
 const propTypes = {
@@ -34,10 +34,10 @@ const propTypes = {
   onClick: PropTypes.func,
 
   /** custom style for the inner component of the PageItem */
-  innerStyle: PropTypes.object,
+  linkStyle: PropTypes.object,
 
   /** custom className for the inner component of the PageItem */
-  innerClassName: PropTypes.string,
+  linkClassName: PropTypes.string,
 };
 
 const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
@@ -50,8 +50,8 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         style,
         activeLabel = '(current)',
         children,
-        innerClassName,
-        innerStyle,
+        linkStyle,
+        linkClassName,
         ...props
       }: PageItemProps,
       ref,
@@ -64,8 +64,8 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
           className={classNames(className, 'page-item', { active, disabled })}
         >
           <Component
-            className={classNames('page-link', innerClassName)}
-            style={innerStyle}
+            className={classNames('page-link', linkClassName)}
+            style={linkStyle}
             {...props}
           >
             {children}

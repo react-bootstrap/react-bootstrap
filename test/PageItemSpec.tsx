@@ -49,5 +49,23 @@ describe('<PageItem>', () => {
 
       pageItemInnerElem.classList.contains('page-link').should.be.true;
     });
+
+    it('should apply className to the inner component if linkClassName is set', () => {
+      const { container } = render(
+        <PageItem linkClassName="custom-class-name" />,
+      );
+      const pageItemElem = container.firstElementChild!;
+      const pageItemInnerElem = pageItemElem.firstElementChild!;
+
+      pageItemInnerElem.classList.contains('custom-class-name').should.be.true;
+    });
+
+    it('should apply style to the inner component if linkStyle is set', () => {
+      const { container } = render(<PageItem linkStyle={{ color: 'red' }} />);
+      const pageItemElem = container.firstElementChild!;
+      const pageItemInnerElem = pageItemElem.firstElementChild!;
+
+      pageItemInnerElem.getAttribute('style')!.should.equal('color: red;');
+    });
   });
 });
