@@ -1,3 +1,20 @@
+# [2.8.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.4...v2.8.0) (2023-06-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** fix offset ([#6622](https://github.com/react-bootstrap/react-bootstrap/issues/6622)) ([3c094ec](https://github.com/react-bootstrap/react-bootstrap/commit/3c094ec1ba132c6555bd3e2033fa6b21fff93a23))
+
+
+### Features
+
+* **PageItem:** add linkStyle and linkClassName props ([#6636](https://github.com/react-bootstrap/react-bootstrap/issues/6636)) ([cc8efc3](https://github.com/react-bootstrap/react-bootstrap/commit/cc8efc36b945fccaf384c6909d0652b480f6b759))
+* add underline variant for Nav/Tabs ([#6623](https://github.com/react-bootstrap/react-bootstrap/issues/6623)) ([600364b](https://github.com/react-bootstrap/react-bootstrap/commit/600364bcdba27eb896f65575ccc0424cdbb79069))
+
+
+
+
+
 ## [2.7.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.3...v2.7.4) (2023-04-15)
 
 
