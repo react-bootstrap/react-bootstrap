@@ -13,6 +13,8 @@ export interface PageItemProps
   active?: boolean;
   activeLabel?: string;
   href?: string;
+  linkStyle?: React.CSSProperties;
+  linkClassName?: string;
 }
 
 const propTypes = {
@@ -30,6 +32,12 @@ const propTypes = {
 
   /** A callback function for when this component is clicked. */
   onClick: PropTypes.func,
+
+  /** custom style for the inner component of the PageItem */
+  linkStyle: PropTypes.object,
+
+  /** custom className for the inner component of the PageItem */
+  linkClassName: PropTypes.string,
 };
 
 const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
@@ -42,6 +50,8 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         style,
         activeLabel = '(current)',
         children,
+        linkStyle,
+        linkClassName,
         ...props
       }: PageItemProps,
       ref,
@@ -53,7 +63,11 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
           style={style}
           className={classNames(className, 'page-item', { active, disabled })}
         >
-          <Component className="page-link" {...props}>
+          <Component
+            className={classNames('page-link', linkClassName)}
+            style={linkStyle}
+            {...props}
+          >
             {children}
             {active && activeLabel && (
               <span className="visually-hidden">{activeLabel}</span>
