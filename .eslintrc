@@ -6,7 +6,8 @@
     "prettier/prettier": "warn",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": ["error", { "ignore": ["x-placement"] }]
+    "react/no-unknown-property": ["error", { "ignore": ["x-placement"] }],
+    "react/function-component-definition": "off"
   },
   "overrides": [
     {
