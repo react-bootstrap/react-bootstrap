@@ -199,7 +199,10 @@ function OverlayTrigger({
   const attachRef = (r: React.Component | Element | null | undefined) => {
     mergedRef(safeFindDOMNode(r));
   };
-
+  const getTarget = useCallback(
+    () => safeFindDOMNode(triggerNodeRef.current),
+    [],
+  );
   const handleShow = useCallback(() => {
     timeout.clear();
     hoverStateRef.current = 'show';
@@ -301,7 +304,7 @@ function OverlayTrigger({
         flip={flip}
         placement={placement}
         popperConfig={popperConfig}
-        target={triggerNodeRef.current}
+        target={getTarget as any}
       >
         {overlay}
       </Overlay>
