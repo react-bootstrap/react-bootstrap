@@ -18,6 +18,11 @@ import createWithBsPrefix from './createWithBsPrefix';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { AlignType, alignPropType } from './types';
 
+// These 2 imports are needed for type declarations only and have no affect on the js
+// https://github.com/react-bootstrap/react-bootstrap/issues/6651
+import '@restart/ui/Button';
+import '@restart/ui/types';
+
 const DropdownHeader = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
 });

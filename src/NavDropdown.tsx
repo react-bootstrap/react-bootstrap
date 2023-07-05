@@ -8,6 +8,12 @@ import { DropdownMenuVariant } from './DropdownMenu';
 import NavLink from './NavLink';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
+// These 3 imports are needed for type declarations only and have no affect on the js
+// https://github.com/react-bootstrap/react-bootstrap/issues/6651
+import '@restart/ui/Button';
+import '@restart/ui/DropdownItem';
+import '@restart/ui/types';
+
 export interface NavDropdownProps extends Omit<DropdownProps, 'title'> {
   title: React.ReactNode;
   disabled?: boolean;
