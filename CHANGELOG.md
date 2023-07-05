@@ -1,3 +1,14 @@
+# [2.9.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.8.0...v2.9.0-beta.0) (2023-07-05)
+
+
+### Features
+
+* add initial RSC support ([#6646](https://github.com/react-bootstrap/react-bootstrap/issues/6646)) ([6a5078f](https://github.com/react-bootstrap/react-bootstrap/commit/6a5078f482bf6d63a8dce9164de15e38469f4c37))
+
+
+
+
+
 # [2.8.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.7.4...v2.8.0) (2023-06-23)
 
 
