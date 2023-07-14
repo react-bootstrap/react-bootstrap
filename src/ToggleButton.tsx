@@ -12,6 +12,7 @@ export interface ToggleButtonProps
   name?: string;
   checked?: boolean;
   disabled?: boolean;
+  id: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value: string | ReadonlyArray<string> | number;
   inputRef?: React.Ref<HTMLInputElement>;
@@ -58,7 +59,7 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * The value of the input, should be unique amongst it's siblings when nested in a
+   * The value of the input, should be unique amongst its siblings when nested in a
    * `ToggleButtonGroup`.
    */
   value: PropTypes.oneOfType([
