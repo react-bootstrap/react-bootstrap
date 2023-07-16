@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import BaseDropdownItem, {
+import {
   useDropdownItem,
   DropdownItemProps as BaseDropdownItemProps,
 } from '@restart/ui/DropdownItem';
@@ -45,47 +45,45 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const DropdownItem: BsPrefixRefForwardingComponent<
-  typeof BaseDropdownItem,
-  DropdownItemProps
-> = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      className,
-      eventKey,
-      disabled = false,
-      onClick,
-      active,
-      as: Component = Anchor,
-      ...props
-    },
-    ref,
-  ) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
-    const [dropdownItemProps, meta] = useDropdownItem({
-      key: eventKey,
-      href: props.href,
-      disabled,
-      onClick,
-      active,
-    });
+const DropdownItem: BsPrefixRefForwardingComponent<'a', DropdownItemProps> =
+  React.forwardRef(
+    (
+      {
+        bsPrefix,
+        className,
+        eventKey,
+        disabled = false,
+        onClick,
+        active,
+        as: Component = Anchor,
+        ...props
+      },
+      ref,
+    ) => {
+      const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
+      const [dropdownItemProps, meta] = useDropdownItem({
+        key: eventKey,
+        href: props.href,
+        disabled,
+        onClick,
+        active,
+      });
 
-    return (
-      <Component
-        {...props}
-        {...dropdownItemProps}
-        ref={ref}
-        className={classNames(
-          className,
-          prefix,
-          meta.isActive && 'active',
-          disabled && 'disabled',
-        )}
-      />
-    );
-  },
-);
+      return (
+        <Component
+          {...props}
+          {...dropdownItemProps}
+          ref={ref}
+          className={classNames(
+            className,
+            prefix,
+            meta.isActive && 'active',
+            disabled && 'disabled',
+          )}
+        />
+      );
+    },
+  );
 
 DropdownItem.displayName = 'DropdownItem';
 DropdownItem.propTypes = propTypes;
