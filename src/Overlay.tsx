@@ -179,10 +179,11 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     });
 
     useIsomorphicEffect(() => {
-      if (firstRenderedState) {
+      if (firstRenderedState && outerProps.target) {
+        // Must wait for target element to resolve before updating popper.
         popperRef.current.scheduleUpdate?.();
       }
-    }, [firstRenderedState]);
+    }, [firstRenderedState, outerProps.target]);
 
     useEffect(() => {
       if (!outerShow) {
