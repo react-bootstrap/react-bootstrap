@@ -100,3 +100,19 @@
     position: relative;
   }
 }
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  user-select: none;
+  text-anchor: middle;
+}
+
+.bd-placeholder-img-lg {
+  font-size: calc(1.475rem + 2.7vw);
+}
+
+@media (min-width: 1200px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
