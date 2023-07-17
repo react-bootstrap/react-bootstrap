@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "cross-env USE_SIMPLE_CSS_MINIFIER=true docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.4.1",
     "@tsconfig/docusaurus": "^1.0.7",
+    "cross-env": "^7.0.3",
     "typescript": "^5.1.3"
   },
   "browserslist": {
