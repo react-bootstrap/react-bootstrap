@@ -126,16 +126,6 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
 
-      let classes;
-      if (plaintext) {
-        classes = { [`${bsPrefix}-plaintext`]: true };
-      } else {
-        classes = {
-          [bsPrefix]: true,
-          [`${bsPrefix}-${size}`]: size,
-        };
-      }
-
       warning(
         controlId == null || !id,
         '`controlId` is ignored on `<FormControl>` when `id` is specified.',
@@ -151,10 +141,11 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
           id={id || controlId}
           className={classNames(
             className,
-            classes,
-            isValid && `is-valid`,
-            isInvalid && `is-invalid`,
+            plaintext ? `${bsPrefix}-plaintext` : bsPrefix,
+            size && `${bsPrefix}-${size}`,
             type === 'color' && `${bsPrefix}-color`,
+            isValid && 'is-valid',
+            isInvalid && 'is-invalid',
           )}
         />
       );

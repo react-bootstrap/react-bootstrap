@@ -46,6 +46,16 @@ describe('<FormControl>', () => {
     element.classList.contains('form-control-plaintext').should.be.true;
   });
 
+  it('should support plaintext inputs with size', () => {
+    const { getByTestId } = render(
+      <FormControl plaintext size="sm" data-testid="test-id" />,
+    );
+
+    const element = getByTestId('test-id');
+    element.classList.length.should.equal(2);
+    element.classList.contains('form-control-sm').should.be.true;
+  });
+
   it('should support type=color', () => {
     const { getByTestId } = render(
       <FormControl type="color" data-testid="test-id" />,
