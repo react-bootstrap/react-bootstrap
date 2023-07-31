@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardGroupProps
+export interface CardLinkProps
   extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+    React.AnchorHTMLAttributes<HTMLElement> {}
 
-const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
-  React.forwardRef<HTMLElement, CardGroupProps>(
-    ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
-      bsPrefix = useBootstrapPrefix(bsPrefix, 'card-group');
+const CardLink: BsPrefixRefForwardingComponent<'a', CardLinkProps> =
+  React.forwardRef<HTMLElement, CardLinkProps>(
+    ({ className, bsPrefix, as: Component = 'a', ...props }, ref) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'card-link');
       return (
         <Component
           ref={ref}
@@ -21,6 +21,6 @@ const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
     },
   );
 
-CardGroup.displayName = 'CardGroup';
+CardLink.displayName = 'CardLink';
 
-export default CardGroup;
+export default CardLink;

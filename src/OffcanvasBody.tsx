@@ -1,3 +1,26 @@
-import createWithBsPrefix from './createWithBsPrefix';
+import * as React from 'react';
+import classNames from 'classnames';
+import { useBootstrapPrefix } from './ThemeProvider';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export default createWithBsPrefix('offcanvas-body');
+export interface OffcanvasBodyProps
+  extends BsPrefixProps,
+    React.HTMLAttributes<HTMLElement> {}
+
+const OffcanvasBody: BsPrefixRefForwardingComponent<'div', OffcanvasBodyProps> =
+  React.forwardRef<HTMLElement, OffcanvasBodyProps>(
+    ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas-body');
+      return (
+        <Component
+          ref={ref}
+          className={classNames(className, bsPrefix)}
+          {...props}
+        />
+      );
+    },
+  );
+
+OffcanvasBody.displayName = 'OffcanvasBody';
+
+export default OffcanvasBody;

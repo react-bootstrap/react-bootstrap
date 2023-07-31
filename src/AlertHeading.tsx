@@ -1,19 +1,20 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
+import divWithClassName from './divWithClassName';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const DivStyledAsH4 = divWithClassName('h4');
+DivStyledAsH4.displayName = 'DivStyledAsH4';
 
-export interface ModalTitleProps
+export interface AlertHeadingProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
-const ModalTitle: BsPrefixRefForwardingComponent<'span', ModalTitleProps> =
-  React.forwardRef<HTMLElement, ModalTitleProps>(
+const AlertHeading: BsPrefixRefForwardingComponent<'div', AlertHeadingProps> =
+  React.forwardRef<HTMLElement, AlertHeadingProps>(
     ({ className, bsPrefix, as: Component = DivStyledAsH4, ...props }, ref) => {
-      bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-title');
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'alert-heading');
       return (
         <Component
           ref={ref}
@@ -24,6 +25,6 @@ const ModalTitle: BsPrefixRefForwardingComponent<'span', ModalTitleProps> =
     },
   );
 
-ModalTitle.displayName = 'ModalTitle';
+AlertHeading.displayName = 'AlertHeading';
 
-export default ModalTitle;
+export default AlertHeading;

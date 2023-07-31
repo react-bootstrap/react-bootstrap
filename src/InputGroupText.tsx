@@ -3,16 +3,16 @@ import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FigureCaptionProps
+export interface InputGroupTextProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
-const FigureCaption: BsPrefixRefForwardingComponent<
-  'figcaption',
-  FigureCaptionProps
-> = React.forwardRef<HTMLElement, FigureCaptionProps>(
-  ({ className, bsPrefix, as: Component = 'figcaption', ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'figure-caption');
+const InputGroupText: BsPrefixRefForwardingComponent<
+  'span',
+  InputGroupTextProps
+> = React.forwardRef<HTMLElement, InputGroupTextProps>(
+  ({ className, bsPrefix, as: Component = 'span', ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'input-group-text');
     return (
       <Component
         ref={ref}
@@ -23,6 +23,6 @@ const FigureCaption: BsPrefixRefForwardingComponent<
   },
 );
 
-FigureCaption.displayName = 'FigureCaption';
+InputGroupText.displayName = 'InputGroupText';
 
-export default FigureCaption;
+export default InputGroupText;

@@ -9,25 +9,16 @@ import BaseDropdown, {
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import DropdownContext, { DropDirection } from './DropdownContext';
+import DropdownDivider from './DropdownDivider';
+import DropdownHeader from './DropdownHeader';
 import DropdownItem from './DropdownItem';
+import DropdownItemText from './DropdownItemText';
 import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import createWithBsPrefix from './createWithBsPrefix';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { AlignType, alignPropType } from './types';
-
-const DropdownHeader = createWithBsPrefix('dropdown-header', {
-  defaultProps: { role: 'heading' },
-});
-const DropdownDivider = createWithBsPrefix('dropdown-divider', {
-  Component: 'hr',
-  defaultProps: { role: 'separator' },
-});
-const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
-  Component: 'span',
-});
 
 export interface DropdownProps
   extends BaseDropdownProps,

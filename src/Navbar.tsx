@@ -6,18 +6,14 @@ import SelectableContext from '@restart/ui/SelectableContext';
 import { SelectCallback } from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
 
-import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import NavbarOffcanvas from './NavbarOffcanvas';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
+import NavbarText from './NavbarText';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-
-const NavbarText = createWithBsPrefix('navbar-text', {
-  Component: 'span',
-});
 
 export interface NavbarProps
   extends BsPrefixProps,

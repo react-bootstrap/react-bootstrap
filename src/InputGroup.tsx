@@ -4,23 +4,19 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useMemo } from 'react';
 
-import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
-import FormCheckInput from './FormCheckInput';
+import FormCheckInput, { type FormCheckInputProps } from './FormCheckInput';
 import InputGroupContext from './InputGroupContext';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import InputGroupText from './InputGroupText';
 
-const InputGroupText = createWithBsPrefix('input-group-text', {
-  Component: 'span',
-});
-
-const InputGroupCheckbox = (props) => (
+const InputGroupCheckbox = (props: FormCheckInputProps) => (
   <InputGroupText>
     <FormCheckInput type="checkbox" {...props} />
   </InputGroupText>
 );
 
-const InputGroupRadio = (props) => (
+const InputGroupRadio = (props: FormCheckInputProps) => (
   <InputGroupText>
     <FormCheckInput type="radio" {...props} />
   </InputGroupText>
