@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import useTimeout from '@restart/hooks/useTimeout';
-import { TransitionComponent } from '@restart/ui/types';
+import { TransitionCallbacks, TransitionComponent } from '@restart/ui/types';
 import ToastFade from './ToastFade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
@@ -14,12 +14,14 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
 export interface ToastProps
-  extends BsPrefixProps,
+  extends TransitionCallbacks,
+    BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
   animation?: boolean;
   autohide?: boolean;
   delay?: number;
   onClose?: (e?: React.MouseEvent | React.KeyboardEvent) => void;
+
   show?: boolean;
   transition?: TransitionComponent;
   bg?: Variant;
@@ -52,6 +54,36 @@ const propTypes = {
   onClose: PropTypes.func,
 
   /**
+   * Callback fired before the Modal transitions in
+   */
+  onEnter: PropTypes.func,
+
+  /**
+   * Callback fired as the Modal begins to transition in
+   */
+  onEntering: PropTypes.func,
+
+  /**
+   * Callback fired after the Modal finishes transitioning in
+   */
+  onEntered: PropTypes.func,
+
+  /**
+   * Transition onExit callback when animation is not `false`
+   */
+  onExit: PropTypes.func,
+
+  /**
+   * Transition onExiting callback when animation is not `false`
+   */
+  onExiting: PropTypes.func,
+
+  /**
+   * Transition onExited callback when animation is not `false`
+   */
+  onExited: PropTypes.func,
+
+  /**
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
@@ -81,6 +113,12 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
         delay = 5000,
         autohide = false,
         onClose,
+        onEntered,
+        onExit,
+        onExiting,
+        onEnter,
+        onEntering,
+        onExited,
         bg,
         ...props
       },
@@ -140,7 +178,16 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
       return (
         <ToastContext.Provider value={toastContext}>
           {hasAnimation && Transition ? (
-            <Transition in={show} unmountOnExit>
+            <Transition
+              in={show}
+              onEnter={onEnter}
+              onEntering={onEntering}
+              onEntered={onEntered}
+              onExit={onExit}
+              onExiting={onExiting}
+              onExited={onExited}
+              unmountOnExit
+            >
               {toast}
             </Transition>
           ) : (
