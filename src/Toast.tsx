@@ -54,17 +54,17 @@ const propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Callback fired before the Modal transitions in
+   * Callback fired before the toast transitions in
    */
   onEnter: PropTypes.func,
 
   /**
-   * Callback fired as the Modal begins to transition in
+   * Callback fired as the toast begins to transition in
    */
   onEntering: PropTypes.func,
 
   /**
-   * Callback fired after the Modal finishes transitioning in
+   * Callback fired after the toast finishes transitioning in
    */
   onEntered: PropTypes.func,
 
@@ -84,7 +84,7 @@ const propTypes = {
   onExited: PropTypes.func,
 
   /**
-   * When `true` The modal will show itself.
+   * When `true` The toast will show itself.
    */
   show: PropTypes.bool,
 
