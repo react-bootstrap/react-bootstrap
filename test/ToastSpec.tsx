@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
-
+import { expect } from 'chai';
 import Toast from '../src/Toast';
 
 const getToast = ({
@@ -201,4 +202,56 @@ describe('<Toast>', () => {
     container.firstElementChild!.tagName.toLowerCase().should.equal('div');
     container.firstElementChild!.classList.contains('my-toast');
   });
+
+  it('Should pass transition callbacks to Transition', (done) => {
+    const increment = sinon.spy();
+
+    const Elem = () => {
+      const [show, setShow] = React.useState(false);
+      React.useEffect(() => {
+        setShow(true);
+      }, []);
+
+      return (
+        <Toast
+          show={show}
+          autohide
+          onClose={() => {
+            console.log('close');
+            setShow(false);
+          }}
+          onEnter={() => {
+            console.log('enter');
+            increment();
+          }}
+          onEntering={() => {
+            console.log('entering');
+            increment();
+          }}
+          onEntered={() => {
+            console.log('entered');
+            increment();
+          }}
+          onExit={() => {
+            console.log('exit');
+            increment();
+          }}
+          onExiting={() => {
+            console.log('exiting');
+            increment();
+          }}
+          onExited={() => {
+            console.log('exited');
+            increment();
+            expect(increment.callCount).to.equal(6);
+            done();
+          }}
+        >
+          <Toast.Header />
+          <Toast.Body />
+        </Toast>
+      );
+    };
+    render(<Elem />);
+  }).timeout(10_000);
 });
