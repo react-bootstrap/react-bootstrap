@@ -215,43 +215,28 @@ describe('<Toast>', () => {
       return (
         <Toast
           show={show}
-          autohide
-          onClose={() => {
-            console.log('close');
+          onEnter={increment}
+          onEntering={increment}
+          onEntered={() => {
+            increment();
             setShow(false);
           }}
-          onEnter={() => {
-            console.log('enter');
-            increment();
-          }}
-          onEntering={() => {
-            console.log('entering');
-            increment();
-          }}
-          onEntered={() => {
-            console.log('entered');
-            increment();
-          }}
-          onExit={() => {
-            console.log('exit');
-            increment();
-          }}
-          onExiting={() => {
-            console.log('exiting');
-            increment();
-          }}
+          onExit={increment}
+          onExiting={increment}
           onExited={() => {
-            console.log('exited');
             increment();
             expect(increment.callCount).to.equal(6);
             done();
           }}
         >
           <Toast.Header />
-          <Toast.Body />
+          <Toast.Body>Body</Toast.Body>
         </Toast>
       );
     };
+
     render(<Elem />);
-  }).timeout(10_000);
+
+    clock.tick(250);
+  });
 });
