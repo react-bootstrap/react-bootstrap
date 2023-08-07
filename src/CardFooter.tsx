@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardGroupProps
+export interface CardFooterProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
-const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
-  React.forwardRef<HTMLElement, CardGroupProps>(
+const CardFooter: BsPrefixRefForwardingComponent<'div', CardFooterProps> =
+  React.forwardRef<HTMLElement, CardFooterProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
-      bsPrefix = useBootstrapPrefix(bsPrefix, 'card-group');
+      bsPrefix = useBootstrapPrefix(bsPrefix, 'card-footer');
       return (
         <Component
           ref={ref}
@@ -21,6 +21,6 @@ const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
     },
   );
 
-CardGroup.displayName = 'CardGroup';
+CardFooter.displayName = 'CardFooter';
 
-export default CardGroup;
+export default CardFooter;

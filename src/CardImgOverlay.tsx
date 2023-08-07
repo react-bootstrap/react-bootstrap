@@ -3,16 +3,16 @@ import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FigureCaptionProps
+export interface CardImgOverlayProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
-const FigureCaption: BsPrefixRefForwardingComponent<
-  'figcaption',
-  FigureCaptionProps
-> = React.forwardRef<HTMLElement, FigureCaptionProps>(
-  ({ className, bsPrefix, as: Component = 'figcaption', ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'figure-caption');
+const CardImgOverlay: BsPrefixRefForwardingComponent<
+  'div',
+  CardImgOverlayProps
+> = React.forwardRef<HTMLElement, CardImgOverlayProps>(
+  ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'card-img-overlay');
     return (
       <Component
         ref={ref}
@@ -23,6 +23,6 @@ const FigureCaption: BsPrefixRefForwardingComponent<
   },
 );
 
-FigureCaption.displayName = 'FigureCaption';
+CardImgOverlay.displayName = 'CardImgOverlay';
 
-export default FigureCaption;
+export default CardImgOverlay;

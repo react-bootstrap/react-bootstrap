@@ -3,16 +3,16 @@ import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FigureCaptionProps
+export interface DropdownItemTextProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {}
 
-const FigureCaption: BsPrefixRefForwardingComponent<
-  'figcaption',
-  FigureCaptionProps
-> = React.forwardRef<HTMLElement, FigureCaptionProps>(
-  ({ className, bsPrefix, as: Component = 'figcaption', ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'figure-caption');
+const DropdownItemText: BsPrefixRefForwardingComponent<
+  'span',
+  DropdownItemTextProps
+> = React.forwardRef<HTMLElement, DropdownItemTextProps>(
+  ({ className, bsPrefix, as: Component = 'span', ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'dropdown-item-text');
     return (
       <Component
         ref={ref}
@@ -23,6 +23,6 @@ const FigureCaption: BsPrefixRefForwardingComponent<
   },
 );
 
-FigureCaption.displayName = 'FigureCaption';
+DropdownItemText.displayName = 'DropdownItemText';
 
-export default FigureCaption;
+export default DropdownItemText;
