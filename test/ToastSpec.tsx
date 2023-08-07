@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
-
+import { expect } from 'chai';
 import Toast from '../src/Toast';
 
 const getToast = ({
@@ -200,5 +201,42 @@ describe('<Toast>', () => {
     );
     container.firstElementChild!.tagName.toLowerCase().should.equal('div');
     container.firstElementChild!.classList.contains('my-toast');
+  });
+
+  it('Should pass transition callbacks to Transition', (done) => {
+    const increment = sinon.spy();
+
+    const Elem = () => {
+      const [show, setShow] = React.useState(false);
+      React.useEffect(() => {
+        setShow(true);
+      }, []);
+
+      return (
+        <Toast
+          show={show}
+          onEnter={increment}
+          onEntering={increment}
+          onEntered={() => {
+            increment();
+            setShow(false);
+          }}
+          onExit={increment}
+          onExiting={increment}
+          onExited={() => {
+            increment();
+            expect(increment.callCount).to.equal(6);
+            done();
+          }}
+        >
+          <Toast.Header />
+          <Toast.Body>Body</Toast.Body>
+        </Toast>
+      );
+    };
+
+    render(<Elem />);
+
+    clock.tick(250);
   });
 });
