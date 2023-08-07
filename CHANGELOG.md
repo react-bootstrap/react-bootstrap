@@ -1,3 +1,18 @@
+# [2.9.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0-beta.0...v2.9.0-beta.1) (2023-08-07)
+
+
+### Bug Fixes
+
+* fix RSC error with createWithBsPrefix components ([#6672](https://github.com/react-bootstrap/react-bootstrap/issues/6672)) ([49b3270](https://github.com/react-bootstrap/react-bootstrap/commit/49b3270cb9e93d59abc6768e113db87fae1347dd))
+* **DropdownItem:** simplify component type ([#6659](https://github.com/react-bootstrap/react-bootstrap/issues/6659)) ([d25e5f9](https://github.com/react-bootstrap/react-bootstrap/commit/d25e5f96be69bed93d26e64cfbdfe381329486f3))
+* **FormControl:** add size support when using plaintext ([#6667](https://github.com/react-bootstrap/react-bootstrap/issues/6667)) ([57b4e29](https://github.com/react-bootstrap/react-bootstrap/commit/57b4e29330dccde234a90720ea410020694a65c1))
+* **OverlayTrigger:** position overlay properly when defaultShow set ([#6657](https://github.com/react-bootstrap/react-bootstrap/issues/6657)) ([6bb3842](https://github.com/react-bootstrap/react-bootstrap/commit/6bb3842e53104ef0935b7440947aeb0c37d06841))
+* **ToggleButton:** fix id to be required in props ([#6658](https://github.com/react-bootstrap/react-bootstrap/issues/6658)) ([1b410eb](https://github.com/react-bootstrap/react-bootstrap/commit/1b410eb20fdfdc1bde88abb2d4df8ba87209d73c))
+
+
+
+
+
 # [2.9.0-beta.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.8.0...v2.9.0-beta.0) (2023-07-05)
 
 
