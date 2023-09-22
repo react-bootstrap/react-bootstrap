@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useContext } from 'react';
+import { HTMLInputTypeAttribute, useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
@@ -20,7 +20,7 @@ export interface FormControlProps
   disabled?: boolean;
   value?: string | string[] | number;
   onChange?: React.ChangeEventHandler<FormControlElement>;
-  type?: string;
+  type?: HTMLInputTypeAttribute;
   isValid?: boolean;
   isInvalid?: boolean;
 }
@@ -87,6 +87,8 @@ const propTypes = {
 
   /**
    * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
+   *
+   * @type {('button'|'checkbox'|'color'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'submit'|'tel'|'text'|'time'|'url'|'week')}
    */
   type: PropTypes.string,
 
