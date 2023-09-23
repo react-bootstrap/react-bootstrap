@@ -77,7 +77,7 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
             positioned &&
               pill &&
               `position-absolute top-0 start-100 translate-middle`,
-            positioned && !pill && `border border-light rounded-circle`,
+            positioned && !pill && `position-absolute top-0 start-100 translate-middle border border-light rounded-circle`,
             text && `text-${text}`,
             bg && `bg-${bg}`,
           )}
