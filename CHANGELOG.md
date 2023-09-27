@@ -1,3 +1,14 @@
+# [2.9.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0-beta.1...v2.9.0) (2023-09-27)
+
+
+### Features
+
+* **Toast:** add transition callbacks ([#6674](https://github.com/react-bootstrap/react-bootstrap/issues/6674)) ([57836e2](https://github.com/react-bootstrap/react-bootstrap/commit/57836e20a3b5f7999469a307f0600c2e38403eb0))
+
+
+
+
+
 # [2.9.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0-beta.0...v2.9.0-beta.1) (2023-08-07)
 
 
