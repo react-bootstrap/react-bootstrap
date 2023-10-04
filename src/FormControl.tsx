@@ -21,8 +21,7 @@ export interface FormControlProps
   value?: string | string[] | number;
   onChange?: React.ChangeEventHandler<FormControlElement>;
   type?: string;
-  isValid?: boolean;
-  isInvalid?: boolean;
+  validState?:boolean
 }
 
 const propTypes = {
@@ -95,11 +94,9 @@ const propTypes = {
    */
   id: PropTypes.string,
 
-  /** Add "valid" validation styles to the control */
-  isValid: PropTypes.bool,
+  /** Add "validState" validation to check if field is in a valid state. This is useful for styles to the control */
+  validState: PropTypes.bool,
 
-  /** Add "invalid" validation styles to the control and accompanying label */
-  isInvalid: PropTypes.bool,
 };
 
 const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
@@ -112,8 +109,7 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
         htmlSize,
         id,
         className,
-        isValid = false,
-        isInvalid = false,
+        validState = true,
         plaintext,
         readOnly,
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -144,8 +140,7 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
             plaintext ? `${bsPrefix}-plaintext` : bsPrefix,
             size && `${bsPrefix}-${size}`,
             type === 'color' && `${bsPrefix}-color`,
-            isValid && 'is-valid',
-            isInvalid && 'is-invalid',
+            validState ? 'is-valid' : 'is-invalid'
           )}
         />
       );
