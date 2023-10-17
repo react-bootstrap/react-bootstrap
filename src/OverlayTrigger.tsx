@@ -164,7 +164,7 @@ const propTypes = {
   ]),
 };
 
-function OverlayTrigger({
+const OverlayTrigger = ({
   trigger = ['hover', 'focus'],
   overlay,
   children,
@@ -178,7 +178,7 @@ function OverlayTrigger({
   placement,
   flip = placement && placement.indexOf('auto') !== -1,
   ...props
-}: OverlayTriggerProps) {
+}: OverlayTriggerProps) => {
   const triggerNodeRef = useRef(null);
   const mergedRef = useMergedRefs<unknown>(
     triggerNodeRef,
@@ -307,7 +307,7 @@ function OverlayTrigger({
       </Overlay>
     </>
   );
-}
+};
 
 OverlayTrigger.propTypes = propTypes;
 
