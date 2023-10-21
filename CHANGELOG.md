@@ -1,3 +1,15 @@
+## [2.9.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0...v2.9.1) (2023-10-21)
+
+
+### Bug Fixes
+
+* **OverlayTrigger:** convert to an arrow function to fix type issues ([#6709](https://github.com/react-bootstrap/react-bootstrap/issues/6709)) ([4e609e2](https://github.com/react-bootstrap/react-bootstrap/commit/4e609e2aa69389a6b7be2d55ed8ee4b8572cb93e)), closes [#6708](https://github.com/react-bootstrap/react-bootstrap/issues/6708) [#6708](https://github.com/react-bootstrap/react-bootstrap/issues/6708)
+* **types:** loosen color and gap types ([#6713](https://github.com/react-bootstrap/react-bootstrap/issues/6713)) ([91fb12b](https://github.com/react-bootstrap/react-bootstrap/commit/91fb12b46d705129f0143d9cbede7f2f82a4ad36))
+
+
+
+
+
 # [2.9.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0-beta.1...v2.9.0) (2023-09-27)
 
 
