@@ -32,7 +32,8 @@ export type Color =
   | 'dark'
   | 'light'
   | 'white'
-  | 'muted';
+  | 'muted'
+  | string;
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 
@@ -62,7 +63,7 @@ export const alignPropType = PropTypes.oneOfType([
 
 export type RootCloseEvent = 'click' | 'mousedown';
 
-export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;
+export type GapValue = 0 | 1 | 2 | 3 | 4 | 5 | number;
 
 export interface PopperRef {
   state: State | undefined;
