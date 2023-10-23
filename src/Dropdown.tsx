@@ -147,6 +147,13 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
 
     const handleToggle = useEventCallback(
       (nextShow: boolean, meta: ToggleMetadata) => {
+        const isToggleButton = (
+          meta.originalEvent?.target as HTMLElement
+        )?.classList.contains('dropdown-toggle');
+
+        if (isToggleButton && meta.source === 'mousedown') {
+          return;
+        }
         if (
           meta.originalEvent!.currentTarget === document &&
           (meta.source !== 'keydown' ||
