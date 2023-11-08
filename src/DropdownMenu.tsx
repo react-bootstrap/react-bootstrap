@@ -25,6 +25,7 @@ export interface DropdownMenuProps
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
+  lockPlacement?: boolean;
   align?: AlignType;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: UseDropdownMenuOptions['popperConfig'];
@@ -86,6 +87,13 @@ const propTypes = {
    * Omitting this will use the default light color.
    */
   variant: PropTypes.string,
+
+  /**
+   *Lock the drop down menu such that when scroll down outside
+   * or within the viewport, the dropdown will not jump
+   *
+   */
+  lockPlacement: PropTypes.bool, // New prop to lock the placement
 };
 
 export function getDropdownMenuPlacement(
@@ -128,6 +136,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         as: Component = 'div',
         popperConfig,
         variant,
+        lockPlacement,
         ...props
       },
       ref,
@@ -165,13 +174,28 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
 
       const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
 
+      const mergedPopperConfig = {
+        ...popperConfig,
+        modifiers: [
+          ...(popperConfig?.modifiers || []),
+          {
+            name: 'flip',
+            enabled: !lockPlacement, // Disable flip modifier when lockPlacement is true
+          },
+          {
+            name: 'preventOverflow',
+            enabled: !lockPlacement, // Disable preventOverflow modifier when lockPlacement is true
+          },
+        ],
+      };
+
       const [menuProps, { hasShown, popper, show, toggle }] = useDropdownMenu({
         flip,
         rootCloseEvent,
         show: showProps,
         usePopper: !isNavbar && alignClasses.length === 0,
         offset: [0, 2],
-        popperConfig,
+        popperConfig: mergedPopperConfig, // Use the merged popperConfig here
         placement,
       });
 
