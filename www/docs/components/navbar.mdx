@@ -41,6 +41,7 @@ likely require custom styling to work well.
 </CodeBlock>
 
 ## Forms
+
 Use `<Form inline>` and your various form controls within the Navbar.
 Align the contents as needed with utility classes.
 
@@ -99,13 +100,13 @@ viewports when your navbar is collapsed.
 
 You can use Bootstrap's <DocLink path="/utilities/position/">position utilities</DocLink> to
 place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, or
-stickied to the top (scrolls with the page until it reaches the top, then stays there). Fixed
-navbars use `position: fixed`, meaning they’re pulled from the normal flow of the DOM and may
-require custom CSS (e.g., padding-top on the `<body>`) to prevent overlap with other elements.
-Also note that `.sticky-top` uses `position: sticky`, which
-[isn’t fully supported in every browser](https://caniuse.com/#feat=css-sticky).
+stickied to the top (scrolls with the page until it reaches the top, then stays there), or
+stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
 
-Since these positioning needs are so common for Navbars, we've added convenience props for them.
+Fixed navbars use `position: fixed`, meaning they’re pulled from the normal flow of the DOM and may
+require custom CSS (e.g., padding-top on the `<body>`) to prevent overlap with other elements.
+
+Since these positioning needs are so common for navbars, we've added convenience props for them.
 
 ### Fixed top
 
@@ -123,6 +124,12 @@ Since these positioning needs are so common for Navbars, we've added convenience
 
 ```jsx
 <Navbar sticky="top" />
+```
+
+### Sticky bottom
+
+```jsx
+<Navbar sticky="bottom" />
 ```
 
 ## Scrolling

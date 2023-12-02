@@ -22,7 +22,7 @@ export interface NavbarProps
   expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
   fixed?: 'top' | 'bottom';
-  sticky?: 'top';
+  sticky?: 'top' | 'bottom';
   onToggle?: (expanded: boolean) => void;
   onSelect?: SelectCallback;
   collapseOnSelect?: boolean;
@@ -63,12 +63,10 @@ const propTypes = {
   fixed: PropTypes.oneOf(['top', 'bottom']),
 
   /**
-   * Position the navbar at the top of the viewport, but only after scrolling past it.
-   * A convenience prop for the `sticky-top` positioning class.
-   *
-   *  __Not supported in <= IE11 and other older browsers without a polyfill__
+   * Position the navbar at the top or bottom of the viewport, but only after scrolling past it.
+   * A convenience prop for the `sticky-*` positioning classes.
    */
-  sticky: PropTypes.oneOf(['top']),
+  sticky: PropTypes.oneOf(['top', 'bottom']),
 
   /**
    * Set a custom element for this component.
