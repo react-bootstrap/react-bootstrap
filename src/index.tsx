@@ -11,6 +11,9 @@ export {
 } from './AccordionButton';
 export type { AccordionButtonProps } from './AccordionButton';
 
+export { default as AccordionBody } from './AccordionBody';
+export type { AccordionBodyProps } from './AccordionBody';
+
 export { default as AccordionHeader } from './AccordionHeader';
 export type { AccordionHeaderProps } from './AccordionHeader';
 
