@@ -10,7 +10,7 @@ import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
   extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
-    React.ComponentProps<'div'> {
+    React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   closeButton?: boolean;
   onHide?: () => void;
