@@ -40,10 +40,10 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.4.1",
-    "@tsconfig/docusaurus": "^2.0.0",
+    "@docusaurus/module-type-aliases": "^2.4.3",
+    "@tsconfig/docusaurus": "^2.0.2",
     "cross-env": "^7.0.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "browserslist": {
     "production": [
