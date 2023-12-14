@@ -199,6 +199,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
       animated,
       bsPrefix,
       variant,
+      className,
       children,
       ...wrapperProps
     } = props;
@@ -209,7 +210,6 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
           ? map(children, (child) => cloneElement(child, { isChild: true }))
           : renderProgressBar(
               {
-                ariaLabelledby,
                 min,
                 now,
                 max,
