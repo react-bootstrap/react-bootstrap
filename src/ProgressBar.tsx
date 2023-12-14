@@ -194,41 +194,22 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
       now,
       max,
       label,
-      ariaLabelledBy
       visuallyHidden,
       striped,
       animated,
       bsPrefix,
       variant,
-      interface ProgressBarProps {
-        ariaLabelledBy?: string;
-        min: number;
-        now?: number;
-        max: number;
-        label?: React.ReactNode;
-        visuallyHidden: boolean;
-        striped: boolean;
-        animated: boolean;
-        variant?: string;
-        bsPrefix?: string;
-        as?: React.ElementType;
-        className?: string; // Add className property
-      }
       children,
       ...wrapperProps
     } = props;
 
     return (
-      <div
-        ref={ref}
-        {...wrapperProps}
-        className={classNames(className, bsPrefix)}
-      >
+      <div ref={ref} className={classNames(className, bsPrefix)}>
         {children
           ? map(children, (child) => cloneElement(child, { isChild: true }))
           : renderProgressBar(
               {
-                ariaLabelledBy,
+                ariaLabelledby,
                 min,
                 now,
                 max,
@@ -238,6 +219,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
                 animated,
                 bsPrefix,
                 variant,
+                ...wrapperProps,
               },
               ref,
             )}
