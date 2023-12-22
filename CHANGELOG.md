@@ -1,3 +1,14 @@
+## [1.6.8](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.7...v1.6.8) (2023-12-22)
+
+
+### Bug Fixes
+
+* **ModalHeader:** fix types ([#6735](https://github.com/react-bootstrap/react-bootstrap/issues/6735)) ([54cb179](https://github.com/react-bootstrap/react-bootstrap/commit/54cb179f43e7fe34f101b80a4c6c70186bb2d7f7))
+
+
+
+
+
 ## [1.6.7](https://github.com/react-bootstrap/react-bootstrap/compare/v1.6.6...v1.6.7) (2023-05-03)
 
 
