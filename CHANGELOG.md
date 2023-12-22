@@ -1,3 +1,16 @@
+## [2.9.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.1...v2.9.2) (2023-12-22)
+
+
+### Bug Fixes
+
+* **AccordionBody:** add AccordionBody to index exports ([#6732](https://github.com/react-bootstrap/react-bootstrap/issues/6732)) ([d34244b](https://github.com/react-bootstrap/react-bootstrap/commit/d34244b9ed01eba003699b2a9b7d4228052640cb))
+* **Dropdown:** prevent flickering on 'mousedown' rootCloseEvent ([#6714](https://github.com/react-bootstrap/react-bootstrap/issues/6714)) ([a58a0cd](https://github.com/react-bootstrap/react-bootstrap/commit/a58a0cd6e548c653cda23ed529f3cff69ec123cc))
+* **Navbar:** add missing type for sticky bottom ([#6726](https://github.com/react-bootstrap/react-bootstrap/issues/6726)) ([36d0b7a](https://github.com/react-bootstrap/react-bootstrap/commit/36d0b7a92f9443d856f69b2d8cfbef1b868036c4))
+
+
+
+
+
 ## [2.9.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.0...v2.9.1) (2023-10-21)
 
 
