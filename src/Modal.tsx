@@ -217,6 +217,7 @@ const propTypes = {
    */
   container: PropTypes.any,
 
+  'data-bs-theme': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-describedby': PropTypes.string,
   'aria-label': PropTypes.string,
@@ -243,6 +244,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         contentClassName,
         children,
         dialogAs: Dialog = ModalDialog,
+        'data-bs-theme': dataBsTheme,
         'aria-labelledby': ariaLabelledby,
         'aria-describedby': ariaDescribedby,
         'aria-label': ariaLabel,
@@ -454,6 +456,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           )}
           onClick={backdrop ? handleClick : undefined}
           onMouseUp={handleMouseUp}
+          data-bs-theme={dataBsTheme}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledby}
           aria-describedby={ariaDescribedby}
