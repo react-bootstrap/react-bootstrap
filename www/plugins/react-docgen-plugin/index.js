@@ -29,7 +29,12 @@ module.exports = () => ({
         const filePath = path.join(srcPath, file);
         const buffer = await fs.readFile(filePath);
 
-        const output = reactDocgen.parse(buffer, resolveHocComponents, null, {
+        // const output = reactDocgen.parse(buffer, resolveHocComponents, null, {
+        //   filename: filePath,
+        // });
+
+        const output = reactDocgen.parse(buffer, {
+          resolver: resolveHocComponents,
           filename: filePath,
         });
 
