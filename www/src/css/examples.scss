@@ -8,6 +8,12 @@
     display: block;
   }
 
+  .form-range {
+    &::-webkit-slider-runnable-track {
+      background-color: var(--bs-secondary-bg);
+    }
+  }
+
   .navbar {
     background-color: initial;
     height: auto;
