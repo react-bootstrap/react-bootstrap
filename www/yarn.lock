@@ -2965,6 +2965,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/buble@^0.20.0":
+  version "0.20.5"
+  resolved "https://registry.yarnpkg.com/@types/buble/-/buble-0.20.5.tgz#2c4bcda910c6c46e027273fa8cdb0d34588a22a3"
+  integrity sha512-CNpql2WPrZloamMweLkyM42nPsUVa10NDurkhTB5+tGu8SstDd568dothJi7tFSAsbqJK0rSb83W9ZwGt8My/A==
+  dependencies:
+    magic-string "^0.25.0"
+
 "@types/connect-history-api-fallback@^1.3.5":
   version "1.3.5"
   resolved "https://registry.npmjs.org/@types/connect-history-api-fallback/-/connect-history-api-fallback-1.3.5.tgz"
@@ -3873,6 +3880,18 @@ browserslist@^4.21.10, browserslist@^4.22.2:
     node-releases "^2.0.14"
     update-browserslist-db "^1.0.13"
 
+buble@0.19.6:
+  version "0.19.6"
+  resolved "https://registry.yarnpkg.com/buble/-/buble-0.19.6.tgz#915909b6bd5b11ee03b1c885ec914a8b974d34d3"
+  integrity sha512-9kViM6nJA1Q548Jrd06x0geh+BG2ru2+RMDkIHHgJY/8AcyCs34lTHwra9BX7YdPrZXd5aarkpr/SY8bmPgPdg==
+  dependencies:
+    chalk "^2.4.1"
+    magic-string "^0.25.1"
+    minimist "^1.2.0"
+    os-homedir "^1.0.1"
+    regexpu-core "^4.2.0"
+    vlq "^1.0.0"
+
 buffer-from@^1.0.0:
   version "1.1.2"
   resolved "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz"
@@ -3962,7 +3981,7 @@ ccount@^2.0.0:
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-2.0.1.tgz#17a3bf82302e0870d6da43a01311a8bc02a3ecf5"
   integrity sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==
 
-chalk@^2.0.0, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -4190,6 +4209,16 @@ common-path-prefix@^3.0.0:
   resolved "https://registry.yarnpkg.com/common-path-prefix/-/common-path-prefix-3.0.0.tgz#7d007a7e07c58c4b4d5f433131a19141b29f11e0"
   integrity sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w==
 
+component-props@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/component-props/-/component-props-1.1.1.tgz#f9b7df9b9927b6e6d97c9bd272aa867670f34944"
+  integrity sha512-69pIRJs9fCCHRqCz3390YF2LV1Lu6iEMZ5zuVqqUn+G20V9BNXlMs0cWawWeW9g4Ynmg29JmkG6R7/lUJoGd1Q==
+
+component-xor@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/component-xor/-/component-xor-0.0.4.tgz#c55d83ccc1b94cd5089a4e93fa7891c7263e59aa"
+  integrity sha512-ZIt6sla8gfo+AFVRZoZOertcnD5LJaY2T9CKE2j13NJxQt/mUafD69Bl7/Y4AnpI2LGjiXH7cOfJDx/n2G9edA==
+
 compressible@~2.0.16:
   version "2.0.18"
   resolved "https://registry.npmjs.org/compressible/-/compressible-2.0.18.tgz"
@@ -4317,7 +4346,7 @@ core-js-pure@^3.30.2:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.34.0.tgz#981e462500708664c91b827a75b011f04a8134a0"
   integrity sha512-pmhivkYXkymswFfbXsANmBAewXx86UBfmagP+w0wkK06kLsLlTK5oQmsURPivzMkIBQiYq2cjamcZExIwlFQIg==
 
-core-js@^3.31.1:
+core-js@^3.14.0, core-js@^3.31.1:
   version "3.34.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.34.0.tgz#5705e6ad5982678612e96987d05b27c6c7c274a5"
   integrity sha512-aDdvlDder8QmY91H88GzNi9EtQi2TjvQhpCX6B1v/dAZHU1AuLgHvRh54RiOerpEhEW46Tkf+vgAViB/CWC0ag==
@@ -4752,6 +4781,14 @@ dom-helpers@^5.2.1:
   dependencies:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
+
+dom-iterator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/dom-iterator/-/dom-iterator-1.0.0.tgz#9c09899846ec41c2d257adc4d6015e4759ef05ad"
+  integrity sha512-7dsMOQI07EMU98gQM8NSB3GsAiIeBYIPKpnxR3c9xOvdvBjChAcOM0iJ222I3p5xyiZO9e5oggkNaCusuTdYig==
+  dependencies:
+    component-props "1.1.1"
+    component-xor "0.0.4"
 
 dom-serializer@^1.0.1:
   version "1.4.1"
@@ -6480,7 +6517,7 @@ lru-cache@^6.0.0:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.1.0.tgz#2098d41c2dc56500e6c88584aa656c84de7d0484"
   integrity sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==
 
-magic-string@^0.25.2:
+magic-string@^0.25.0, magic-string@^0.25.1, magic-string@^0.25.2:
   version "0.25.9"
   resolved "https://registry.npmjs.org/magic-string/-/magic-string-0.25.9.tgz"
   integrity sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==
@@ -8060,6 +8097,11 @@ pretty-time@^1.1.0:
   resolved "https://registry.npmjs.org/pretty-time/-/pretty-time-1.1.0.tgz"
   integrity sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==
 
+prism-react-renderer@^1.2.1:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.5.tgz#786bb69aa6f73c32ba1ee813fbe17a0115435085"
+  integrity sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==
+
 prism-react-renderer@^2.0.6, prism-react-renderer@^2.1.0, prism-react-renderer@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-2.3.1.tgz#e59e5450052ede17488f6bc85de1553f584ff8d5"
@@ -8294,6 +8336,20 @@ react-json-view-lite@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-json-view-lite/-/react-json-view-lite-1.2.1.tgz#c59a0bea4ede394db331d482ee02e293d38f8218"
   integrity sha512-Itc0g86fytOmKZoIoJyGgvNqohWSbh3NXIKNgH6W6FT9PC1ck4xas1tT3Rr/b3UlFXyA9Jjaw9QSXdZy2JwGMQ==
 
+react-live@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-live/-/react-live-2.4.1.tgz#65e674ff9ca9a9a95f83117acc21ffd968aca619"
+  integrity sha512-r+32f7oV/kBs3QZBRvaT+9vOkQW47UZrDpgwUe5FiIMOl7sdo5pmISgb7Zpj5PGHgY6XQaiXs3FEh+IWw3KbRg==
+  dependencies:
+    "@types/buble" "^0.20.0"
+    buble "0.19.6"
+    core-js "^3.14.0"
+    dom-iterator "^1.0.0"
+    prism-react-renderer "^1.2.1"
+    prop-types "^15.7.2"
+    react-simple-code-editor "^0.11.0"
+    unescape "^1.0.1"
+
 react-live@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/react-live/-/react-live-4.1.5.tgz#a4fa4cfdcad763503a209a29bace3339764fdfb1"
@@ -8344,6 +8400,11 @@ react-router@5.3.4, react-router@^5.3.4:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-simple-code-editor@^0.11.0:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.11.3.tgz#6e5af1c2e51588aded2c89b86e98fac144212f61"
+  integrity sha512-7bVI4Yd1aNCeuldErXUt8ksaAG5Fi+GZ6vp3mtFBnckKdzsQtrgkDvdwMFXIhwTGG+mUYmk5ZpMo0axSW9JBzA==
 
 react@^18.2.0:
   version "18.2.0"
@@ -8443,7 +8504,7 @@ regenerator-transform@^0.15.2:
   dependencies:
     "@babel/runtime" "^7.8.4"
 
-regexpu-core@^4.5.4:
+regexpu-core@^4.2.0, regexpu-core@^4.5.4:
   version "4.8.0"
   resolved "https://registry.npmjs.org/regexpu-core/-/regexpu-core-4.8.0.tgz"
   integrity sha512-1F6bYsoYiz6is+oz70NWur2Vlh9KWtswuRuzJOfeYUrfPX2o8n74AnUVaOGDbUqVGO9fNHu48/pjJO4sNVwsOg==
@@ -9474,6 +9535,13 @@ typescript@^5.3.3:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
   integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
 
+unescape@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/unescape/-/unescape-1.0.1.tgz#956e430f61cad8a4d57d82c518f5e6cc5d0dda96"
+  integrity sha512-O0+af1Gs50lyH1nUu3ZyYS1cRh01Q/kUKatTOkSs7jukXE6/NebucDVxyiDsA9AQ4JC1V1jUH9EO8JX2nMDgGQ==
+  dependencies:
+    extend-shallow "^2.0.1"
+
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/unicode-canonical-property-names-ecmascript/-/unicode-canonical-property-names-ecmascript-2.0.0.tgz"
@@ -9701,6 +9769,11 @@ vfile@^6.0.0, vfile@^6.0.1:
     "@types/unist" "^3.0.0"
     unist-util-stringify-position "^4.0.0"
     vfile-message "^4.0.0"
+
+vlq@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vlq/-/vlq-1.0.1.tgz#c003f6e7c0b4c1edd623fd6ee50bbc0d6a1de468"
+  integrity sha512-gQpnTgkubC6hQgdIcRdYGDSDc+SaujOdyesZQMv6JlfQee/9Mp0Qhnys6WxDWvQnL5WZdT7o2Ul187aSt0Rq+w==
 
 watchpack@^2.4.0:
   version "2.4.0"
