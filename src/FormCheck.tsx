@@ -120,6 +120,12 @@ const propTypes = {
 
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
+
+  /**
+   * Display `feedback` when the input is in this state.
+   * @type {('valid'|'invalid')}
+   */
+  feedbackType: PropTypes.oneOf(['valid', 'invalid']),
 };
 
 const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
