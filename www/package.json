@@ -23,7 +23,7 @@
     "@restart/hooks": "^0.4.9",
     "ast-types": "^0.14.2",
     "bootstrap": "^5.3.0",
-    "clsx": "^1.2.1",
+    "clsx": "^2.1.0",
     "docusaurus-plugin-sass": "^0.2.3",
     "dom-helpers": "^5.2.1",
     "formik": "^2.2.9",
