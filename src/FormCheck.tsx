@@ -122,7 +122,7 @@ const propTypes = {
   feedback: PropTypes.node,
 
   /**
-   * Display `feedback` when the input is in this state.
+   * Specify whether the feedback is for valid or invalid fields
    * @type {('valid'|'invalid')}
    */
   feedbackType: PropTypes.oneOf(['valid', 'invalid']),
