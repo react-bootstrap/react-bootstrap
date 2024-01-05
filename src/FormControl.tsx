@@ -18,11 +18,12 @@ export interface FormControlProps
   plaintext?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
-  value?: string | string[] | number;
+  value?: string | string[] | ReadonlyArray<string> | number;
   onChange?: React.ChangeEventHandler<FormControlElement>;
   type?: string;
   isValid?: boolean;
   isInvalid?: boolean;
+  placeholder?: string | undefined;
 }
 
 const propTypes = {
