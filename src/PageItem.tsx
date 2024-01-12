@@ -52,11 +52,12 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         children,
         linkStyle,
         linkClassName,
+        as = Anchor,
         ...props
       }: PageItemProps,
       ref,
     ) => {
-      const Component = active || disabled ? 'span' : Anchor;
+      const Component = active || disabled ? 'span' : as;
       return (
         <li
           ref={ref}

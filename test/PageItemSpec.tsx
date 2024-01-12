@@ -67,5 +67,17 @@ describe('<PageItem>', () => {
 
       pageItemInnerElem.getAttribute('style')!.should.equal('color: red;');
     });
+
+    it('should support custom anchor element', () => {
+      const Component = ({ children, ...props }) => (
+        <a {...props} data-anchor="custom">
+          {children}
+        </a>
+      );
+      const { container } = render(<PageItem as={Component} />);
+      const pageItemElem = container.firstElementChild!;
+      const pageItemInnerElem = pageItemElem.firstElementChild!;
+      pageItemInnerElem.getAttribute('data-anchor')!.should.equal('custom');
+    });
   });
 });
