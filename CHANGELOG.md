@@ -1,3 +1,19 @@
+# [2.10.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.2...v2.10.0) (2024-01-17)
+
+
+### Bug Fixes
+
+* **Modal:** properly handle `data-bs-theme` attribute ([#6743](https://github.com/react-bootstrap/react-bootstrap/issues/6743)) ([1ead9ca](https://github.com/react-bootstrap/react-bootstrap/commit/1ead9cac8a617c401a33fa921529d57e56db0718))
+
+
+### Features
+
+* **PageItem:** implement "as" property ([#6754](https://github.com/react-bootstrap/react-bootstrap/issues/6754)) ([430b0c9](https://github.com/react-bootstrap/react-bootstrap/commit/430b0c9589b76d89496b49a5cbdeaa38b9f828a0))
+
+
+
+
+
 ## [2.9.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.1...v2.9.2) (2023-12-22)
 
 
