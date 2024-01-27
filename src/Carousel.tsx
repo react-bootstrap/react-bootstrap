@@ -114,6 +114,7 @@ const propTypes = {
    *
    * ```js
    * (eventKey: number, direction: 'left' | 'right') => void
+   * ```
    */
   onSlide: PropTypes.func,
 
@@ -122,6 +123,7 @@ const propTypes = {
    *
    * ```js
    * (eventKey: number, direction: 'left' | 'right') => void
+   * ```
    */
   onSlid: PropTypes.func,
 
