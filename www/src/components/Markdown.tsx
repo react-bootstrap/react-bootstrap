@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BaseMarkdown from 'markdown-to-jsx';
-import MDXHead from '@theme-original/MDXComponents/Head';
+import Head from '@docusaurus/Head';
 import MDXCode from '@theme-original/MDXComponents/Code';
 import MDXA from '@theme-original/MDXComponents/A';
 import MDXPre from '@theme-original/MDXComponents/Pre';
@@ -11,7 +11,7 @@ import MDXImg from '@theme-original/MDXComponents/Img';
 
 const MARKDOWN_OPTIONS = {
   overrides: {
-    head: MDXHead,
+    head: Head,
     code: MDXCode,
     a: MDXA,
     pre: MDXPre,
