@@ -12,7 +12,7 @@ type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface FormControlProps
   extends BsPrefixProps,
-    React.HTMLAttributes<FormControlElement> {
+    Omit<React.InputHTMLAttributes<FormControlElement>, 'size'> {
   htmlSize?: number;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
