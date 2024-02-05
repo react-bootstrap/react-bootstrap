@@ -1,9 +1,14 @@
 const camelCase = require('lodash.camelcase');
 const { resolver, utils } = require('react-docgen');
 const { namedTypes: types, visit } = require('ast-types');
-const { parse } = require('react-docgen');
+const buildParser = require('react-docgen/dist/babelParser').default;
 
 const upperFirst = (str) => str[0].toUpperCase() + str.slice(1);
+
+const parser = buildParser({
+  // Avoid babel complaining about requiring a filename.
+  filename: 'dummy.ts',
+});
 
 module.exports = (ast) => {
   let components = resolver.findAllComponentDefinitions(ast);
@@ -71,7 +76,7 @@ export default class ${upperFirst(
 }
         `;
 
-      let comp = parse(src);
+      let comp = parser.parse(src);
       comp.__src = src;
       components = components.concat(
         resolver.findExportedComponentDefinition(comp),
