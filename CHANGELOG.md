@@ -1,3 +1,14 @@
+## [2.10.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.0...v2.10.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* **FormControl:** ensures compatibility with @types/react@18.2.48 ([#6763](https://github.com/react-bootstrap/react-bootstrap/issues/6763)) ([652e709](https://github.com/react-bootstrap/react-bootstrap/commit/652e709fe6f3b383e041474f776855431fc8e1ea))
+
+
+
+
+
 # [2.10.0](https://github.com/react-bootstrap/react-bootstrap/compare/v2.9.2...v2.10.0) (2024-01-17)
 
 
