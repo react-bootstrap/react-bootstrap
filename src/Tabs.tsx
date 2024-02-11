@@ -152,7 +152,13 @@ const Tabs = (props: TabsProps) => {
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
-      <Nav {...controlledProps} role="tablist" as="ul" variant={variant}>
+      <Nav
+        id={id}
+        {...controlledProps}
+        role="tablist"
+        as="ul"
+        variant={variant}
+      >
         {map(children, renderTab)}
       </Nav>
 
