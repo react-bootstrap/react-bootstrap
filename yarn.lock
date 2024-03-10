@@ -1403,6 +1403,11 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
+"@socket.io/component-emitter@~3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
+  integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
+
 "@swc/helpers@^0.4.14":
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.4.14.tgz#1352ac6d95e3617ccb7c1498ff019654f1e12a74"
@@ -1454,11 +1459,6 @@
   version "4.3.11"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.11.tgz#e95050bf79a932cb7305dd130254ccdf9bde671c"
   integrity sha512-qQR1dr2rGIHYlJulmr8Ioq3De0Le9E4MJ5AiaeAETJJpndT1uUNHsGFK3L/UIu+rbkQSdj8J/w2bCsBZc/Y5fQ==
-
-"@types/component-emitter@^1.2.10":
-  version "1.2.11"
-  resolved "https://registry.yarnpkg.com/@types/component-emitter/-/component-emitter-1.2.11.tgz#50d47d42b347253817a39709fef03ce66a108506"
-  integrity sha512-SRXjM+tfsSlA9VuG8hGO2nft2p8zjXCK1VcC6N4NXbBbYbSia9kzCChYQajIjzIqOOOuh5Ock6MmV2oux4jDZQ==
 
 "@types/cookie@^0.4.1":
   version "0.4.1"
@@ -3067,7 +3067,7 @@ compare-func@^2.0.0:
     array-ify "^1.0.0"
     dot-prop "^5.1.0"
 
-component-emitter@^1.2.1, component-emitter@~1.3.0:
+component-emitter@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
   integrity sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==
@@ -3457,7 +3457,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@4.3.4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
+debug@4, debug@4.3.4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2, debug@~4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -3811,15 +3811,15 @@ end-of-stream@^1.4.1:
   dependencies:
     once "^1.4.0"
 
-engine.io-parser@~5.0.3:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-5.0.4.tgz#0b13f704fa9271b3ec4f33112410d8f3f41d0fc0"
-  integrity sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg==
+engine.io-parser@~5.2.1:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-5.2.2.tgz#37b48e2d23116919a3453738c5720455e64e1c49"
+  integrity sha512-RcyUFKA93/CXH20l4SoVvzZfrSDMOTUS3bWVpTt2FuFP+XYrL8i8oonHP7WInRyVHXh0n/ORtoeiE1os+8qkSw==
 
-engine.io@~6.2.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.2.1.tgz#e3f7826ebc4140db9bbaa9021ad6b1efb175878f"
-  integrity sha512-ECceEFcAaNRybd3lsGQKas3ZlMVjN3cyWwMP25D2i0zWfyiytVbTpRPa34qrr+FHddtpBVOmq4H/DCv1O0lZRA==
+engine.io@~6.5.2:
+  version "6.5.4"
+  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.5.4.tgz#6822debf324e781add2254e912f8568508850cdc"
+  integrity sha512-KdVSDKhVKyOi+r5uEabrDLZw2qXStVvCsEB/LN3mw4WFi6Gx50jTyuxYVCwAAC0U46FdnzP/ScKRBTXb/NiEOg==
   dependencies:
     "@types/cookie" "^0.4.1"
     "@types/cors" "^2.8.12"
@@ -3829,8 +3829,8 @@ engine.io@~6.2.0:
     cookie "~0.4.1"
     cors "~2.8.5"
     debug "~4.3.1"
-    engine.io-parser "~5.0.3"
-    ws "~8.2.3"
+    engine.io-parser "~5.2.1"
+    ws "~8.11.0"
 
 enhanced-resolve@^0.9.1:
   version "0.9.1"
@@ -6148,13 +6148,13 @@ karma-coverage@^2.2.1:
     istanbul-reports "^3.0.5"
     minimatch "^3.0.4"
 
-karma-firefox-launcher@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/karma-firefox-launcher/-/karma-firefox-launcher-2.1.2.tgz#9a38cc783c579a50f3ed2a82b7386186385cfc2d"
-  integrity sha512-VV9xDQU1QIboTrjtGVD4NCfzIH7n01ZXqy/qpBhnOeGVOkG5JYPEm8kuSd7psHE6WouZaQ9Ool92g8LFweSNMA==
+karma-firefox-launcher@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/karma-firefox-launcher/-/karma-firefox-launcher-2.1.3.tgz#b278a4cbffa92ab81394b1a398813847b0624a85"
+  integrity sha512-LMM2bseebLbYjODBOVt7TCPP9OI2vZIXCavIXhkO9m+10Uj5l7u/SKoeRmYx8FYHTVGZSpk6peX+3BMHC1WwNw==
   dependencies:
     is-wsl "^2.2.0"
-    which "^2.0.1"
+    which "^3.0.0"
 
 karma-mocha-reporter@^2.2.5:
   version "2.2.5"
@@ -6184,19 +6184,19 @@ karma-sourcemap-loader@^0.4.0:
   dependencies:
     graceful-fs "^4.2.10"
 
-karma-webpack@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/karma-webpack/-/karma-webpack-5.0.0.tgz#2a2c7b80163fe7ffd1010f83f5507f95ef39f840"
-  integrity sha512-+54i/cd3/piZuP3dr54+NcFeKOPnys5QeM1IY+0SPASwrtHsliXUiCL50iW+K9WWA7RvamC4macvvQ86l3KtaA==
+karma-webpack@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/karma-webpack/-/karma-webpack-5.0.1.tgz#4eafd31bbe684a747a6e8f3e4ad373e53979ced4"
+  integrity sha512-oo38O+P3W2mSPCSUrQdySSPv1LvPpXP+f+bBimNomS5sW+1V4SuhCuW8TfJzV+rDv921w2fDSDw0xJbPe6U+kQ==
   dependencies:
     glob "^7.1.3"
-    minimatch "^3.0.4"
+    minimatch "^9.0.3"
     webpack-merge "^4.1.5"
 
-karma@^6.4.2:
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/karma/-/karma-6.4.2.tgz#a983f874cee6f35990c4b2dcc3d274653714de8e"
-  integrity sha512-C6SU/53LB31BEgRg+omznBEMY4SjHU3ricV6zBcAe1EeILKkeScr+fZXtaI5WyDbkVowJxxAI6h73NcFPmXolQ==
+karma@^6.4.3:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/karma/-/karma-6.4.3.tgz#763e500f99597218bbb536de1a14acc4ceea7ce8"
+  integrity sha512-LuucC/RE92tJ8mlCwqEoRWXP38UMAqpnq98vktmS9SznSoUPPUJQbc91dHcxcunROvfQjdORVA/YFviH+Xci9Q==
   dependencies:
     "@colors/colors" "1.5.0"
     body-parser "^1.19.0"
@@ -6217,7 +6217,7 @@ karma@^6.4.2:
     qjobs "^1.2.0"
     range-parser "^1.2.1"
     rimraf "^3.0.2"
-    socket.io "^4.4.1"
+    socket.io "^4.7.2"
     source-map "^0.6.1"
     tmp "^0.2.1"
     ua-parser-js "^0.7.30"
@@ -6788,6 +6788,13 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+minimatch@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.3.tgz#a6e00c3de44c3a542bfaae70abfc22420a6da825"
+  integrity sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==
+  dependencies:
+    brace-expansion "^2.0.1"
 
 minimist-options@4.1.0, minimist-options@^4.0.2:
   version "4.1.0"
@@ -8466,31 +8473,34 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-socket.io-adapter@~2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/socket.io-adapter/-/socket.io-adapter-2.4.0.tgz#b50a4a9ecdd00c34d4c8c808224daa1a786152a6"
-  integrity sha512-W4N+o69rkMEGVuk2D/cvca3uYsvGlMwsySWV447y99gUPghxq42BxqLNMndb+a1mm/5/7NeXVQS7RLa2XyXvYg==
-
-socket.io-parser@~4.0.4:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-4.0.5.tgz#cb404382c32324cc962f27f3a44058cf6e0552df"
-  integrity sha512-sNjbT9dX63nqUFIOv95tTVm6elyIU4RvB1m8dOeZt+IgWwcWklFDOdmGcfo3zSiRsnR/3pJkjY5lfoGqEe4Eig==
+socket.io-adapter@~2.5.2:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/socket.io-adapter/-/socket.io-adapter-2.5.4.tgz#4fdb1358667f6d68f25343353bd99bd11ee41006"
+  integrity sha512-wDNHGXGewWAjQPt3pyeYBtpWSq9cLE5UW1ZUPL/2eGK9jtse/FpXib7epSTsz0Q0m+6sg6Y4KtcFTlah1bdOVg==
   dependencies:
-    "@types/component-emitter" "^1.2.10"
-    component-emitter "~1.3.0"
+    debug "~4.3.4"
+    ws "~8.11.0"
+
+socket.io-parser@~4.2.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-4.2.4.tgz#c806966cf7270601e47469ddeec30fbdfda44c83"
+  integrity sha512-/GbIKmo8ioc+NIWIhwdecY0ge+qVBSMdgxGygevmdHj24bsfgtCmcUUcQ5ZzcylGFHsN3k4HB4Cgkl96KVnuew==
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
     debug "~4.3.1"
 
-socket.io@^4.4.1:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-4.5.0.tgz#78ae2e84784c29267086a416620c18ef95b37186"
-  integrity sha512-slTYqU2jCgMjXwresG8grhUi/cC6GjzmcfqArzaH3BN/9I/42eZk9yamNvZJdBfTubkjEdKAKs12NEztId+bUA==
+socket.io@^4.7.2:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-4.7.4.tgz#2401a2d7101e4bdc64da80b140d5d8b6a8c7738b"
+  integrity sha512-DcotgfP1Zg9iP/dH9zvAQcWrE0TtbMVwXmlV4T4mqsvY+gw+LqUGPfx2AoVyRk0FLME+GQhufDMyacFmw7ksqw==
   dependencies:
     accepts "~1.3.4"
     base64id "~2.0.0"
+    cors "~2.8.5"
     debug "~4.3.2"
-    engine.io "~6.2.0"
-    socket.io-adapter "~2.4.0"
-    socket.io-parser "~4.0.4"
+    engine.io "~6.5.2"
+    socket.io-adapter "~2.5.2"
+    socket.io-parser "~4.2.4"
 
 source-map-resolve@^0.5.0:
   version "0.5.3"
@@ -9611,6 +9621,13 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
+which@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/which/-/which-3.0.1.tgz#89f1cd0c23f629a8105ffe69b8172791c87b4be1"
+  integrity sha512-XA1b62dzQzLfaEOSQFTCOd5KFf/1VSzZo7/7TUjnya6u0vGGKzU96UQBZTAThCb2j4/xjBAyii1OhRLJEivHvg==
+  dependencies:
+    isexe "^2.0.0"
+
 wide-align@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.3.tgz#ae074e6bdc0c14a431e804e624549c633b000457"
@@ -9677,10 +9694,10 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-ws@~8.2.3:
-  version "8.2.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.2.3.tgz#63a56456db1b04367d0b721a0b80cae6d8becbba"
-  integrity sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==
+ws@~8.11.0:
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
+  integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
 
 xtend@~4.0.1:
   version "4.0.2"
