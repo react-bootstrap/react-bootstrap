@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -10,6 +11,7 @@ on:
       - master
       - bs3-dev
       - bs4-dev
+
 permissions:
   contents: read
 
@@ -23,30 +25,38 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
           cache: yarn
+
       - name: Update Brew (macOS)
         if: matrix.os == 'macOS-latest'
         run: brew update
+
       - name: Install Chrome (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
         run: brew install --cask google-chrome
+
       - name: Install Firefox (macOS)
         if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
         run: brew install --cask firefox
+
       - name: Install Dependencies
         run: yarn bootstrap
         env:
           YARN_CACHE_FOLDER: .cache/yarn
+
       - name: Run Tests
         run: yarn test
         env:
           BROWSER: ${{ matrix.browser }}
+
       - name: Codecov
         uses: codecov/codecov-action@v3
+
       - name: Build Project
         run: yarn build
