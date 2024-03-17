@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useImperativeHandle } from 'react';
-import { mount } from 'enzyme';
 import { render } from '@testing-library/react';
 import { expect } from 'chai';
 
@@ -54,7 +53,7 @@ describe('useOverlayOffset', () => {
   it('should have offset of [0, 6] for Tooltips', () => {
     const ref = React.createRef<any>();
 
-    mount(
+    render(
       <Wrapper ref={ref}>
         <Tooltip id="test-tooltip" />
       </Wrapper>,
@@ -67,7 +66,7 @@ describe('useOverlayOffset', () => {
   it('should have offset of [0, 0] for any overlay', () => {
     const ref = React.createRef<any>();
 
-    mount(
+    render(
       <Wrapper ref={ref}>
         <div>test</div>
       </Wrapper>,
