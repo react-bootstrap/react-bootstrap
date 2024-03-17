@@ -104,8 +104,6 @@
     "cpy-cli": "^3.1.1",
     "cross-env": "^7.0.3",
     "dtslint": "^4.2.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
     "eslint": "^8.55.0",
     "eslint-config-4catalyzer-typescript": "^3.3.0",
     "eslint-import-resolver-node": "^0.3.9",
@@ -139,7 +137,6 @@
     "simulant": "^0.2.2",
     "sinon": "^15.2.0",
     "sinon-chai": "^3.7.0",
-    "stream-browserify": "^3.0.0",
     "typescript": "^5.3.3",
     "util": "^0.12.5",
     "webpack": "^5.89.0"

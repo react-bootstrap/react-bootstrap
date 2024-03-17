@@ -1,28 +1,5 @@
 import deprecated from 'prop-types-extra/lib/deprecated';
 import Util from 'util';
-import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-
-function assertLength(length) {
-  return function $assertLength(selector) {
-    let result = this.find(selector);
-    expect(
-      result,
-      `Expected to find ${length} match but found ${
-        result.length
-      } for selector "${selector}" on element: \n\n${this.debug()}`,
-    ).to.have.length(length);
-    return result;
-  };
-}
-
-ReactWrapper.prototype.assertSingle = assertLength(1);
-ShallowWrapper.prototype.assertSingle = assertLength(1);
-
-ReactWrapper.prototype.assertNone = assertLength(0);
-ShallowWrapper.prototype.assertNone = assertLength(0);
 
 beforeEach(() => {
   sinon.stub(console, 'error').callsFake((msg, ...args) => {
