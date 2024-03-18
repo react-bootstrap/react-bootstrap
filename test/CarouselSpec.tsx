@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { Simulate } from 'react-dom/test-utils';
-import { fireEvent, render, RenderResult } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+} from '@testing-library/react';
 import sinon from 'sinon';
 
 import Carousel, { CarouselRef } from '../src/Carousel';
@@ -32,7 +38,9 @@ describe('<Carousel>', () => {
       </React.StrictMode>,
     );
 
-    ref.current!.next();
+    act(() => {
+      ref.current!.next();
+    });
   });
 
   it('should show the first item by default and render all', () => {
@@ -130,22 +138,18 @@ describe('<Carousel>', () => {
   });
 
   describe('ref testing', () => {
-    let clock: sinon.SinonFakeTimers;
-
-    beforeEach(() => {
-      clock = sinon.useFakeTimers();
-    });
-
-    afterEach(() => {
-      clock.restore();
-    });
-
-    it('should allow refs to be attached and expose next, prev functions', () => {
+    it('should allow refs to be attached and expose next, prev functions', async () => {
       const ref = React.createRef<CarouselRef>();
       const onSelectSpy = sinon.spy();
+      const onSlidSpy = sinon.spy();
 
       render(
-        <Carousel ref={ref} onSelect={onSelectSpy} defaultActiveIndex={1}>
+        <Carousel
+          ref={ref}
+          onSelect={onSelectSpy}
+          onSlid={onSlidSpy}
+          defaultActiveIndex={1}
+        >
           {items}
         </Carousel>,
       );
@@ -153,62 +157,94 @@ describe('<Carousel>', () => {
       ref.current!.should.have.property('next');
       ref.current!.should.have.property('prev');
       ref.current!.should.have.property('element').and.instanceOf(HTMLElement);
-      ref.current!.next();
-      clock.tick(50);
-      onSelectSpy.should.have.been.calledOnce;
-      ref.current!.prev();
-      clock.tick(50);
-      onSelectSpy.should.have.been.calledTwice;
+
+      act(() => {
+        ref.current!.next();
+      });
+
+      await waitFor(() => onSelectSpy.should.have.been.calledOnce);
+      await waitFor(() => onSlidSpy.should.have.been.calledWith(2, 'start'));
+
+      act(() => {
+        ref.current!.next();
+      });
+
+      await waitFor(() => onSelectSpy.should.have.been.calledTwice);
     });
   });
 
-  ['onSlide', 'onSlid'].forEach((eventName) => {
-    it(`should call ${eventName} with previous index and direction`, (done) => {
-      function onEvent(index, direction) {
-        index.should.equal(0);
-        direction.should.equal('end');
+  it(`should call onSlide with previous index and direction`, () => {
+    const onEventSpy = sinon.spy();
 
-        done();
-      }
+    const { getByLabelText } = render(
+      <Carousel defaultActiveIndex={1} interval={null} onSlide={onEventSpy}>
+        {items}
+      </Carousel>,
+    );
 
-      const { getByLabelText } = render(
-        <Carousel
-          defaultActiveIndex={1}
-          interval={null}
-          {...{ [eventName]: onEvent }}
-        >
-          {items}
-        </Carousel>,
-      );
+    fireEvent.click(
+      getByLabelText('Slide 1', {
+        selector: '.carousel-indicators button',
+      }),
+    );
 
-      fireEvent.click(
-        getByLabelText('Slide 1', { selector: '.carousel-indicators button' }),
-      );
-    });
+    onEventSpy.should.be.calledWith(0, 'end');
+  });
 
-    it(`should call ${eventName} with next index and direction`, (done) => {
-      function onEvent(index, direction) {
-        const lastPossibleIndex = items.length - 1;
-        index.should.equal(lastPossibleIndex);
-        direction.should.equal('start');
+  it(`should call onSlide with next index and direction`, () => {
+    const onEventSpy = sinon.spy();
 
-        done();
-      }
+    const { getByLabelText } = render(
+      <Carousel defaultActiveIndex={1} interval={null} onSlide={onEventSpy}>
+        {items}
+      </Carousel>,
+    );
 
-      const { getByLabelText } = render(
-        <Carousel
-          defaultActiveIndex={1}
-          interval={null}
-          {...{ [eventName]: onEvent }}
-        >
-          {items}
-        </Carousel>,
-      );
+    fireEvent.click(
+      getByLabelText('Slide 3', {
+        selector: '.carousel-indicators button',
+      }),
+    );
 
-      fireEvent.click(
-        getByLabelText('Slide 3', { selector: '.carousel-indicators button' }),
-      );
-    });
+    onEventSpy.should.be.calledWith(items.length - 1, 'start');
+  });
+
+  it(`should call onSlid with previous index and direction`, async () => {
+    const onEventSpy = sinon.spy();
+
+    const { getByLabelText } = render(
+      <Carousel defaultActiveIndex={1} interval={null} onSlid={onEventSpy}>
+        {items}
+      </Carousel>,
+    );
+
+    fireEvent.click(
+      getByLabelText('Slide 1', {
+        selector: '.carousel-indicators button',
+      }),
+    );
+
+    await waitFor(() => onEventSpy.should.be.calledWith(0, 'end'));
+  });
+
+  it(`should call onSlid with next index and direction`, async () => {
+    const onEventSpy = sinon.spy();
+
+    const { getByLabelText } = render(
+      <Carousel defaultActiveIndex={1} interval={null} onSlid={onEventSpy}>
+        {items}
+      </Carousel>,
+    );
+
+    fireEvent.click(
+      getByLabelText('Slide 3', {
+        selector: '.carousel-indicators button',
+      }),
+    );
+
+    await waitFor(() =>
+      onEventSpy.should.be.calledWith(items.length - 1, 'start'),
+    );
   });
 
   describe('Buttons and labels with and without wrapping', () => {
@@ -401,7 +437,10 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
+
       onSelectSpy.should.have.been.calledOnce;
     });
 
@@ -417,7 +456,9 @@ describe('<Carousel>', () => {
       // should be long enough to handle false positive issues
       // but short enough to not trigger auto-play to occur twice
       // (since the interval for the second item should be `5000`)
-      clock.tick(1100);
+      act(() => {
+        clock.tick(1100);
+      });
       onSelectSpy.should.have.been.calledOnceWith(1);
     });
 
@@ -434,11 +475,15 @@ describe('<Carousel>', () => {
       const carousel = getByTestId('test');
 
       fireEvent.mouseOver(carousel);
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
       onSelectSpy.should.not.have.been.called;
 
       fireEvent.mouseOut(carousel);
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
       onSelectSpy.should.have.been.calledOnce;
     });
 
@@ -459,7 +504,9 @@ describe('<Carousel>', () => {
 
       fireEvent.mouseOver(getByTestId('test'));
 
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
       onSelectSpy.should.have.been.calledOnce;
     });
 
@@ -474,7 +521,9 @@ describe('<Carousel>', () => {
       );
 
       unmount();
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
       onSelectSpy.should.not.have.been.called;
     });
   });
@@ -774,41 +823,51 @@ describe('<Carousel>', () => {
       // });
       // fireEvent.touchEnd(target);
 
-      Simulate.touchStart(target, {
-        touches: [{ identifier: 1, target, clientX: startX }] as never,
-      });
-      Simulate.touchMove(target, {
-        touches: [{ identifier: 1, target, clientX: endX }] as never,
-      });
+      act(() => {
+        Simulate.touchStart(target, {
+          touches: [{ identifier: 1, target, clientX: startX }] as never,
+        });
+        Simulate.touchMove(target, {
+          touches: [{ identifier: 1, target, clientX: endX }] as never,
+        });
 
-      Simulate.touchEnd(target);
+        Simulate.touchEnd(target);
+      });
     }
 
     it('should swipe right', () => {
       generateTouchEvents({ target: carousel, startX: 50, endX: 0 });
 
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
       onSelectSpy.should.have.been.calledOnceWith(2);
     });
 
     it('should swipe left', () => {
       generateTouchEvents({ target: carousel, startX: 0, endX: 50 });
 
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
       onSelectSpy.should.have.been.calledOnceWith(0);
     });
 
     it('should not swipe if swipe detected is under the swipe threshold', () => {
       generateTouchEvents({ target: carousel, startX: 0, endX: 35 });
 
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
       onSelectSpy.should.not.have.been.called;
     });
 
     it('should handle a custom touch start and end event', () => {
       generateTouchEvents({ target: carousel, startX: 50, endX: 0 });
 
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
       onTouchStartSpy.should.have.been.calledOnce;
       onTouchMoveSpy.should.have.been.calledOnce;
       onTouchEndSpy.should.have.been.calledOnce;
@@ -851,7 +910,9 @@ describe('<Carousel>', () => {
       const noTouchCarousel = getByTestId('test');
       generateTouchEvents({ target: noTouchCarousel, startX: 50, endX: 0 });
 
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
       onSelectSpy.should.not.have.been.called;
 
       const carouselItems = container.querySelectorAll('.carousel-item');
@@ -886,14 +947,18 @@ describe('<Carousel>', () => {
         container.querySelector<HTMLElement>('a.carousel-control-next')!,
       );
 
-      clock.tick(150);
+      act(() => {
+        clock.tick(150);
+      });
       onSlideSpy.should.have.been.calledOnce;
 
       fireEvent.click(
         container.querySelector<HTMLElement>('a.carousel-control-prev')!,
       );
 
-      clock.tick(150);
+      act(() => {
+        clock.tick(150);
+      });
       onSlideSpy.should.have.been.calledTwice;
     });
 
@@ -910,13 +975,17 @@ describe('<Carousel>', () => {
       fireEvent.click(
         container.querySelector<HTMLElement>('a.carousel-control-next')!,
       );
-      clock.tick(150);
+      act(() => {
+        clock.tick(150);
+      });
       onSlidSpy.should.have.been.calledOnce;
 
       fireEvent.click(
         container.querySelector<HTMLElement>('a.carousel-control-prev')!,
       );
-      clock.tick(150);
+      act(() => {
+        clock.tick(150);
+      });
       onSlidSpy.should.have.been.calledTwice;
     });
 
@@ -933,7 +1002,9 @@ describe('<Carousel>', () => {
       fireEvent.click(prev);
       fireEvent.click(prev);
 
-      clock.tick(1000);
+      act(() => {
+        clock.tick(1000);
+      });
       onSelectSpy.should.have.been.calledOnce;
     });
 
@@ -950,7 +1021,9 @@ describe('<Carousel>', () => {
       fireEvent.click(next);
       fireEvent.click(next);
 
-      clock.tick(1000);
+      act(() => {
+        clock.tick(1000);
+      });
       onSelectSpy.should.have.been.calledOnce;
     });
   });
@@ -980,7 +1053,9 @@ describe('<Carousel>', () => {
       fireEvent.keyDown(getByTestId('test'), {
         key: 'ArrowLeft',
       });
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
 
       onSelectSpy.should.have.been.calledOnceWith(2);
     });
@@ -999,7 +1074,9 @@ describe('<Carousel>', () => {
       fireEvent.keyDown(getByTestId('test'), {
         key: 'ArrowRight',
       });
-      clock.tick(50);
+      act(() => {
+        clock.tick(50);
+      });
 
       onSelectSpy.should.have.been.calledOnceWith(0);
     });
@@ -1016,7 +1093,9 @@ describe('<Carousel>', () => {
         </ThemeProvider>,
       );
 
-      clock.tick(interval * 1.5);
+      act(() => {
+        clock.tick(interval * 1.5);
+      });
 
       onSelectSpy.should.have.been.calledOnceWith(0);
     });

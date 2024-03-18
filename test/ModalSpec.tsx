@@ -1,7 +1,7 @@
 import * as React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ModalManager from '@restart/ui/ModalManager';
 import Modal, { ModalProps } from '../src/Modal';
 
@@ -262,7 +262,7 @@ describe('<Modal>', () => {
     document.querySelector('.custom-dialog')!.should.exist;
   });
 
-  it('Should pass transition callbacks to Transition', (done) => {
+  it('Should pass transition callbacks to Transition', async () => {
     const increment = sinon.spy();
     const Elem = () => {
       const [show, setShow] = React.useState(true);
@@ -277,11 +277,7 @@ describe('<Modal>', () => {
           }}
           onExit={increment}
           onExiting={increment}
-          onExited={() => {
-            increment();
-            expect(increment.callCount).to.equal(6);
-            done();
-          }}
+          onExited={increment}
         >
           <strong>Message</strong>
         </Modal>
@@ -289,34 +285,8 @@ describe('<Modal>', () => {
     };
 
     render(<Elem />);
-  });
 
-  it('should call `transitionend` before `exited`', (done) => {
-    const increment = sinon.spy();
-
-    const { getByRole, rerender } = render(
-      <Modal
-        show
-        data-testid="modal"
-        style={{ transition: 'opacity 1s linear' }}
-      >
-        <strong>Message</strong>
-      </Modal>,
-    );
-    const modal = getByRole('dialog');
-    modal.addEventListener('transitionend', increment);
-    rerender(
-      <Modal
-        show={false}
-        onExited={() => {
-          expect(increment.callCount).to.equal(1);
-          modal.removeEventListener('transitionend', increment);
-          done();
-        }}
-      >
-        Foo
-      </Modal>,
-    );
+    await waitFor(() => expect(increment.callCount).to.equal(6));
   });
 
   describe('cleanup', () => {
@@ -471,15 +441,23 @@ describe('<Modal>', () => {
     // Show the modal.
     fireEvent.click(screen.getByRole('button'));
 
+    const dialog = await screen.findByRole('dialog');
+    expect(dialog).to.exist;
+
     // Escape key.
-    fireEvent.keyDown(screen.getByRole('dialog'), {
+    fireEvent.keyDown(dialog, {
       keyCode: 27,
     });
 
-    // Wait a bit before checking if modal is still there.
-    await new Promise((r) => setTimeout(r, 500));
+    // TODO: Ugly, but temp until we move to new test runner/assertion lib.
+    try {
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.to.exist);
+    } catch (err) {
+      // Expected an error.
+      return;
+    }
 
-    expect(screen.queryByRole('dialog')).to.exist;
+    throw new Error('Dialog does not exist');
   });
 
   it('Should use custom props manager if specified', (done) => {

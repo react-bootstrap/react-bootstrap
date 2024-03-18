@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Toast from '../src/Toast';
@@ -184,11 +184,17 @@ describe('<Toast>', () => {
   it('should not call onClose if show is changed from true to false', () => {
     const onCloseSpy = sinon.spy();
     const { rerender } = render(getToast({ show: true, onCloseSpy }));
-    clock.tick(100);
+
+    act(() => {
+      clock.tick(100);
+    });
 
     rerender(getToast({ show: false, onCloseSpy }));
 
-    clock.tick(300);
+    act(() => {
+      clock.tick(300);
+    });
+
     onCloseSpy.should.not.to.have.been.called;
   });
 
@@ -237,6 +243,13 @@ describe('<Toast>', () => {
 
     render(<Elem />);
 
-    clock.tick(250);
+    act(() => {
+      clock.tick(250);
+    });
+
+    // Trigger onExit.
+    act(() => {
+      clock.tick(250);
+    });
   });
 });

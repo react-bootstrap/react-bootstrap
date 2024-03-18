@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Transition } from 'react-transition-group';
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult, waitFor } from '@testing-library/react';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
@@ -10,14 +9,11 @@ describe('<Collapse>', () => {
   class Component extends React.Component<
     React.PropsWithChildren<Omit<CollapseProps, 'children'>>
   > {
-    collapse: Transition<HTMLElement> | null = null;
-
     render() {
       const { children, ...props } = this.props;
 
       return (
         <Collapse
-          ref={(r) => (this.collapse = r)}
           getDimensionValue={() => 15}
           data-testid="collapse-component"
           {...props}
@@ -122,43 +118,27 @@ describe('<Collapse>', () => {
       expect(node.style.height).to.be.equal(`${node.scrollHeight}px`);
     });
 
-    it('Should transition from collapsing to not collapsing', (done) => {
+    it('Should transition from collapsing to not collapsing', async () => {
       const node = renderResult.getByTestId('collapse-component');
 
-      renderResult.rerender(
-        <Component
-          in
-          onEntered={() => {
-            node.classList.contains('collapse').should.be.true;
-            node.classList.contains('show').should.be.true;
-            done();
-          }}
-        >
-          Panel content
-        </Component>,
-      );
+      renderResult.rerender(<Component in>Panel content</Component>);
 
       node.classList.contains('collapsing').should.be.true;
+
+      await waitFor(() => node.classList.contains('collapse').should.be.true);
+      node.classList.contains('show').should.be.true;
     });
 
-    it('Should clear height after transition complete', (done) => {
+    it('Should clear height after transition complete', async () => {
       const node = renderResult.getByTestId('collapse-component');
 
       expect(node.style.height).to.be.equal('');
 
-      renderResult.rerender(
-        <Component
-          in
-          onEntered={() => {
-            expect(node.style.height).to.be.equal('');
-            done();
-          }}
-        >
-          Panel content
-        </Component>,
-      );
+      renderResult.rerender(<Component in>Panel content</Component>);
 
       expect(node.style.height).to.be.equal(`${node.scrollHeight}px`);
+
+      await waitFor(() => expect(node.style.height).to.be.equal(''));
     });
   });
 
@@ -204,40 +184,24 @@ describe('<Collapse>', () => {
       expect(node.style.height).to.be.equal('');
     });
 
-    it('Should transition from collapsing to not collapsing', (done) => {
+    it('Should transition from collapsing to not collapsing', async () => {
       const node = renderResult.getByTestId('collapse-component');
 
-      renderResult.rerender(
-        <Component
-          in={false}
-          onExited={() => {
-            node.classList.contains('collapse').should.be.true;
-            done();
-          }}
-        >
-          Panel content
-        </Component>,
-      );
+      renderResult.rerender(<Component in={false}>Panel content</Component>);
 
       node.classList.contains('collapsing').should.be.true;
+
+      await waitFor(() => node.classList.contains('collapse').should.be.true);
     });
 
-    it('Should have no height after transition complete', (done) => {
+    it('Should have no height after transition complete', async () => {
       const node = renderResult.getByTestId('collapse-component');
 
       expect(node.style.height).to.be.equal('');
 
-      renderResult.rerender(
-        <Component
-          in={false}
-          onExited={() => {
-            expect(node.style.height).to.be.equal('');
-            done();
-          }}
-        >
-          Panel content
-        </Component>,
-      );
+      renderResult.rerender(<Component in={false}>Panel content</Component>);
+
+      await waitFor(() => expect(node.style.height).to.be.equal(''));
     });
   });
 

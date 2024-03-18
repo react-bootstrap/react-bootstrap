@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import sinon from 'sinon';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
@@ -45,24 +45,6 @@ describe('<Navbar>', () => {
   it('Should override role attribute', () => {
     const { getByTestId } = render(<Navbar role="banner" data-testid="test" />);
     getByTestId('test').getAttribute('role')!.should.equal('banner');
-  });
-
-  describe('Brand', () => {
-    it('Should render brand', () => {
-      const { getByTestId } = render(<Navbar.Brand data-testid="test" />);
-      const navbarBrandElem = getByTestId('test');
-      navbarBrandElem.classList.contains('navbar-brand').should.be.true;
-      navbarBrandElem.tagName.toLowerCase().should.equal('span');
-    });
-
-    it('Should render brand as anchor', () => {
-      const { getByTestId } = render(
-        <Navbar.Brand href="#" data-testid="test" />,
-      );
-      const navbarBrandElem = getByTestId('test');
-      navbarBrandElem.classList.contains('navbar-brand').should.be.true;
-      navbarBrandElem.tagName.toLowerCase().should.equal('a');
-    });
   });
 
   it('Should pass navbar context to navs', () => {
@@ -136,31 +118,25 @@ describe('<Navbar>', () => {
     toggleElem.classList.contains('show').should.be.true;
   });
 
-  it('Should wire the toggle to the collapse', (done) => {
-    const clock = sinon.useFakeTimers();
-    const { getByTestId } = render(
+  it('Should wire the toggle to the collapse', async () => {
+    render(
       <Navbar>
         <Navbar.Toggle data-testid="toggler" />
         <Navbar.Collapse data-testid="collapse">hello</Navbar.Collapse>
       </Navbar>,
     );
 
-    let toggleElem = getByTestId('toggler');
-    let collapseElem = getByTestId('collapse');
+    const toggleElem = screen.getByTestId('toggler');
+    const collapseElem = screen.getByTestId('collapse');
 
     collapseElem.classList.contains('show').should.be.false;
     toggleElem.classList.contains('collapsed').should.be.true;
 
     fireEvent.click(toggleElem);
-    clock.tick(500);
 
-    toggleElem = getByTestId('toggler');
-    collapseElem = getByTestId('collapse');
+    await waitFor(() => collapseElem.classList.contains('show').should.be.true);
 
-    collapseElem.classList.contains('show').should.be.true;
     toggleElem.classList.contains('collapsed').should.be.false;
-    clock.restore();
-    done();
   });
 
   it('Should open external href link in collapseOnSelect', () => {

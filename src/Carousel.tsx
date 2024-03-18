@@ -55,7 +55,6 @@ export interface CarouselProps
   prevLabel?: React.ReactNode;
   nextIcon?: React.ReactNode;
   nextLabel?: React.ReactNode;
-  ref?: React.Ref<CarouselRef>;
   variant?: CarouselVariant;
 }
 
