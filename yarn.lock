@@ -1346,10 +1346,10 @@
   dependencies:
     dequal "^2.0.2"
 
-"@restart/ui@^1.6.6":
-  version "1.6.6"
-  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.6.6.tgz#3481e2eaf15d7cae55bb2f518624e10d19c75800"
-  integrity sha512-eC3puKuWE1SRYbojWHXnvCNHGgf3uzHCb6JOhnF4OXPibOIPEkR1sqDSkL643ydigxwh+ruCa1CmYHlzk7ikKA==
+"@restart/ui@^1.6.8":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.6.8.tgz#61b73503d4690e2f0f58992d4d6ae1e89c276791"
+  integrity sha512-6ndCv3oZ7r9vuP1Ok9KH55TM1/UkdBnP/fSraW0DFDMbPMzWKhVKeFAIEUCRCSdzayjZDcFYK6xbMlipN9dmMA==
   dependencies:
     "@babel/runtime" "^7.21.0"
     "@popperjs/core" "^2.11.6"

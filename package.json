@@ -60,7 +60,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.5",
     "@restart/hooks": "^0.4.9",
-    "@restart/ui": "^1.6.6",
+    "@restart/ui": "^1.6.8",
     "@types/react-transition-group": "^4.4.6",
     "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",
