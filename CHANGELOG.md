@@ -1,3 +1,15 @@
+## [2.10.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.1...v2.10.2) (2024-03-18)
+
+
+### Bug Fixes
+
+* update @restart/ui to v1.6.8 ([#6779](https://github.com/react-bootstrap/react-bootstrap/issues/6779)) ([c86187f](https://github.com/react-bootstrap/react-bootstrap/commit/c86187fe0426109fda9af4eac998d855645c1ee9))
+* **Tabs:** add id attribute to nav ([#6767](https://github.com/react-bootstrap/react-bootstrap/issues/6767)) ([3b4fd9b](https://github.com/react-bootstrap/react-bootstrap/commit/3b4fd9b83985efe97e8895fbe6d99db8548cd246))
+
+
+
+
+
 ## [2.10.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.0...v2.10.1) (2024-02-10)
 
 
