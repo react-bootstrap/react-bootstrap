@@ -16,12 +16,33 @@ export interface ThemeProviderProps extends Partial<ThemeContextValue> {
   children: React.ReactNode;
 }
 
-const ThemeContext = React.createContext<ThemeContextValue>({
+console.log(`serverside: ${typeof window === 'undefined'}`);
+
+// @ts-ignore
+const isServerSide = typeof React.createServerContext !== 'undefined';
+console.log(`has create server context : ${isServerSide}`);
+console.log(
+  `has create client context : ${typeof React.createContext !== 'undefined'}`,
+);
+const contextCreator = isServerSide
+  ? function (defaultValue: ThemeContextValue) {
+      console.log('creating server context');
+      // @ts-ignore
+      return React.createServerContext<ThemeContextValue>(
+        'react-bootstrap',
+        defaultValue,
+      );
+    }
+  : React.createContext<ThemeContextValue>;
+
+const ThemeContext = contextCreator({
   prefixes: {},
   breakpoints: DEFAULT_BREAKPOINTS,
   minBreakpoint: DEFAULT_MIN_BREAKPOINT,
 });
-const { Consumer, Provider } = ThemeContext;
+
+console.log('created context with memo');
+const { Provider } = ThemeContext;
 
 function ThemeProvider({
   prefixes = {},
@@ -79,22 +100,22 @@ export function useBootstrapPrefix(
   prefix: string | undefined,
   defaultPrefix: string,
 ): string {
-  const { prefixes } = useContext(ThemeContext);
+  const { prefixes }: ThemeContextValue = useContext(ThemeContext);
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
 
 export function useBootstrapBreakpoints() {
-  const { breakpoints } = useContext(ThemeContext);
+  const { breakpoints }: ThemeContextValue = useContext(ThemeContext);
   return breakpoints;
 }
 
 export function useBootstrapMinBreakpoint() {
-  const { minBreakpoint } = useContext(ThemeContext);
+  const { minBreakpoint }: ThemeContextValue = useContext(ThemeContext);
   return minBreakpoint;
 }
 
 export function useIsRTL() {
-  const { dir } = useContext(ThemeContext);
+  const { dir }: ThemeContextValue = useContext(ThemeContext);
   return dir === 'rtl';
 }
 
@@ -116,5 +137,5 @@ function createBootstrapComponent(Component, opts) {
   return Wrapped;
 }
 
-export { createBootstrapComponent, Consumer as ThemeConsumer };
+export { createBootstrapComponent };
 export default ThemeProvider;

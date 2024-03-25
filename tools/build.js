@@ -100,7 +100,7 @@ Promise.resolve(true)
     Promise.all([
       has('lib') && buildLib(),
       has('es') && buildEsm(),
-      has('dist') && buildDist(),
+      false && buildDist(), // disabled for now because of an error in the build process on Windows
     ]),
   )
   .then(buildDirectories)

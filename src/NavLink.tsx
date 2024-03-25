@@ -1,3 +1,7 @@
+'use client';
+
+// This is required due to the fact that the server side rendering is not working properly because of the Anchor component
+
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
