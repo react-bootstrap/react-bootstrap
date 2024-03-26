@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { expect } from 'chai';
 import ModalManager from '@restart/ui/ModalManager';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import sinon from 'sinon';
 import Offcanvas from '../src/Offcanvas';
 
@@ -83,7 +83,7 @@ describe('<Offcanvas>', () => {
     offcanvasElem.style.color.should.equal('red');
   });
 
-  it('Should pass transition callbacks to Transition', (done) => {
+  it('Should pass transition callbacks to Transition', async () => {
     const increment = sinon.spy();
     const Elem = () => {
       const [show, setShow] = React.useState(true);
@@ -93,11 +93,7 @@ describe('<Offcanvas>', () => {
           onHide={noop}
           onExit={increment}
           onExiting={increment}
-          onExited={() => {
-            increment();
-            increment.callCount.should.equal(6);
-            done();
-          }}
+          onExited={increment}
           onEnter={increment}
           onEntering={increment}
           onEntered={() => {
@@ -111,6 +107,8 @@ describe('<Offcanvas>', () => {
     };
 
     render(<Elem />);
+
+    await waitFor(() => increment.callCount.should.equal(6));
   });
 
   it('Should close when backdrop clicked', () => {

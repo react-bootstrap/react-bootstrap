@@ -1,6 +1,9 @@
 import deprecated from 'prop-types-extra/lib/deprecated';
 import Util from 'util';
 
+// Resolves "Error: Warning: The current testing environment is not configured to support act(...)"
+global.IS_REACT_ACT_ENVIRONMENT = true;
+
 beforeEach(() => {
   sinon.stub(console, 'error').callsFake((msg, ...args) => {
     let expected = false;
