@@ -5,7 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 
 function LeftTabsExample() {
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container id="left-tabs-example">
       <Row>
         <Col sm={3}>
           <Nav variant="pills" className="flex-column">
