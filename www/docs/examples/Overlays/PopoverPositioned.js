@@ -19,7 +19,7 @@ function PopoverPositionedExample() {
             </Popover>
           }
         >
-          <Button variant="secondary">Popover on {placement}</Button>
+          <Button variant="secondary mx-3">Popover on {placement}</Button>
         </OverlayTrigger>
       ))}
     </>
