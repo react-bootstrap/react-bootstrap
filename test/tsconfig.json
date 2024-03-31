@@ -5,5 +5,5 @@
     "types": ["mocha", "chai", "sinon", "sinon-chai"],
     "rootDir": ".."
   },
-  "include": ["../src", "."]
+  "include": ["../src", ".", "../tests"]
 }

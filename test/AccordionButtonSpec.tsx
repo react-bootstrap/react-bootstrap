@@ -43,6 +43,6 @@ describe('<AccordionButton>', () => {
       </Accordion>,
     );
     fireEvent.click(getByTestId('btn'));
-    getByTestId('btn').getAttribute('aria-expanded').should.equal('true');
+    getByTestId('btn').getAttribute('aria-expanded')!.should.equal('true');
   });
 });

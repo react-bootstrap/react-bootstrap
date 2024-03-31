@@ -39,9 +39,10 @@
     "build-docs": "yarn --cwd www build",
     "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "check-types": "tsc -p ./test/tsconfig.json --noEmit",
     "deploy-docs": "yarn --cwd www deploy",
     "format": "eslint --ext tsx --ext ts src --fix",
-    "lint": "eslint --ext tsx --ext ts src && tsc --noEmit",
+    "lint": "eslint --ext tsx --ext ts src && tsc --noEmit && yarn check-types",
     "prepublishOnly": "npm run build",
     "release": "rollout",
     "start": "yarn --cwd www start",
@@ -54,8 +55,7 @@
     "*.{js,ts,tsx}": "eslint --fix"
   },
   "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",
@@ -76,6 +76,7 @@
     "@4c/tsconfig": "^0.4.1",
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.5",
+    "@babel/eslint-parser": "^7.24.1",
     "@babel/preset-typescript": "^7.23.3",
     "@babel/register": "^7.22.15",
     "@react-bootstrap/babel-preset": "^2.2.0",
@@ -93,7 +94,6 @@
     "@types/warning": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
-    "@babel/eslint-parser": "^7.24.1",
     "babel-loader": "^9.1.3",
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.10",

@@ -1,23 +1,40 @@
 {
-  "extends": ["@react-bootstrap", "4catalyzer-typescript", "prettier"],
-  "plugins": ["prettier"],
+  "extends": [
+    "@react-bootstrap",
+    "4catalyzer-typescript",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
     "import/extensions": "off",
-    "prettier/prettier": "warn",
+    "prettier/prettier": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": ["error", { "ignore": ["x-placement"] }],
+    "react/no-unknown-property": [
+      "error",
+      {
+        "ignore": [
+          "x-placement"
+        ]
+      }
+    ],
     "react/function-component-definition": "off"
   },
   "overrides": [
     {
-      "files": ["test/**/*"],
+      "files": [
+        "test/**/*"
+      ],
       "rules": {
         "@typescript-eslint/no-unused-expressions": "off"
       }
     },
     {
-      "files": ["www/**/*"],
+      "files": [
+        "www/**/*"
+      ],
       "rules": {
         "no-console": "off",
         "react/prop-types": "off",
@@ -29,7 +46,9 @@
       }
     },
     {
-      "files": ["www/docs/examples/**/*"],
+      "files": [
+        "www/docs/examples/**/*"
+      ],
       "rules": {
         "import/no-unresolved": "off"
       }
