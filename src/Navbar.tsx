@@ -109,6 +109,9 @@ const propTypes = {
    * Toggles `expanded` to `false` after the onSelect event of a descendant of a
    * child `<Nav>` fires. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
    *
+   * `<Nav.Link>` descentants of `<Nav>` will not trigger the onSelect event unless
+   * the `eventKey` or `href` props are defined.
+   *
    * Manually controlling `expanded` via the onSelect callback is recommended instead,
    * for more complex operations that need to be executed after
    * the `select` event of `<Nav>` descendants.
