@@ -37,12 +37,16 @@ const propTypes = {
    * */
   role: PropTypes.string,
 
-  /** The HTML href attribute for the `NavLink` */
+  /** 
+   * The HTML href attribute for the `NavLink`. Used as the unique identifier
+   * for the `NavLink` if an `eventKey` is not provided.
+   */
   href: PropTypes.string,
 
   /**
    * Uniquely identifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
+   * as well as onSelect behavior of a parent `Navbar`.
    */
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
