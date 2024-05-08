@@ -9,9 +9,7 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { ButtonVariant } from './types';
 
-export interface ButtonProps
-  extends BaseButtonProps,
-    Omit<BsPrefixProps, 'as'> {
+export interface ButtonProps extends BsPrefixProps, BaseButtonProps {
   active?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
