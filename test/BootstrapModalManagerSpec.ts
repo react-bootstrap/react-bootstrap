@@ -27,6 +27,9 @@ describe('BootstrapModalManager', () => {
     container.appendChild(navbarToggler);
 
     document.body.appendChild(container);
+
+    document.body.style.paddingLeft = '20px';
+    document.body.style.paddingRight = '20px';
   });
 
   afterEach(() => {
@@ -48,7 +51,7 @@ describe('BootstrapModalManager', () => {
       scrollBarWidth: 0,
       style: {
         overflow: '',
-        paddingRight: '',
+        paddingRight: '20px',
       },
     });
   });
