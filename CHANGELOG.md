@@ -1,3 +1,14 @@
+## [2.10.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.2...v2.10.3) (2024-06-19)
+
+
+### Bug Fixes
+
+* update dependencies ([#6810](https://github.com/react-bootstrap/react-bootstrap/issues/6810)) ([2070f34](https://github.com/react-bootstrap/react-bootstrap/commit/2070f345e5a3c19aa061cf5da392b95d00a87469))
+
+
+
+
+
 ## [2.10.2](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.1...v2.10.2) (2024-03-18)
 
 
