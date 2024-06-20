@@ -1,5 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import sinon from 'sinon';
+import { expect } from 'chai';
 import DropdownButton from '../src/DropdownButton';
 import DropdownItem from '../src/DropdownItem';
 
@@ -139,5 +140,50 @@ describe('<DropdownButton>', () => {
 
     const button = getByTestId('test-id').firstElementChild!;
     button.classList.contains('my-button-primary').should.be.true;
+  });
+
+  it('maintains its placement when lockPlacement is set to true', () => {
+    const { container, getByTestId } = render(
+      <DropdownButton
+        title="title"
+        data-testid="test-id"
+        bsPrefix="my-button"
+        lockPlacement
+        align="start"
+      >
+        <DropdownItem eventKey="1">Item 1</DropdownItem>
+        <DropdownItem eventKey="2">Item 2</DropdownItem>
+        <DropdownItem eventKey="3">Item 3</DropdownItem>
+        <DropdownItem eventKey="4">Item 4</DropdownItem>
+        <DropdownItem eventKey="5">Item 5</DropdownItem>
+        <DropdownItem eventKey="6">Item 6</DropdownItem>
+        <DropdownItem eventKey="7">Item 7</DropdownItem>
+        <DropdownItem eventKey="8">Item 8</DropdownItem>
+        <DropdownItem eventKey="9">Item 9</DropdownItem>
+        <DropdownItem eventKey="10">Item 10</DropdownItem>
+        <DropdownItem eventKey="11">Item 11</DropdownItem>
+        <DropdownItem eventKey="12">Item 12</DropdownItem>
+        <DropdownItem eventKey="13">Item 13</DropdownItem>
+        <DropdownItem eventKey="14">Item 14</DropdownItem>
+        <DropdownItem eventKey="15">Item 15</DropdownItem>
+      </DropdownButton>,
+    );
+    console.log({ container });
+
+    fireEvent.click(getByTestId('test-id').firstElementChild!);
+    const initialPlacement = container
+      .querySelector('div[x-placement]')!
+      .getAttribute('x-placement');
+
+    // Simulate a scroll event
+    // Note: You may need to dispatch this event on the window or another scrollable parent,
+    // depending on where you have attached your scroll listener.
+    fireEvent.scroll(window, { target: { scrollY: 100 } });
+
+    const finalPlacement = container
+      .querySelector('div[x-placement]')!
+      .getAttribute('x-placement');
+
+    expect(initialPlacement).equal(finalPlacement);
   });
 });

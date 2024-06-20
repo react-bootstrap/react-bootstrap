@@ -17,6 +17,7 @@ export interface DropdownButtonProps
   rootCloseEvent?: 'click' | 'mousedown';
   menuVariant?: DropdownMenuVariant;
   flip?: boolean;
+  lockPlacement?: boolean;
 }
 
 const propTypes = {
@@ -80,6 +81,7 @@ const propTypes = {
   variant: PropTypes.string,
   /** @ignore */
   size: PropTypes.string,
+  lockPlacement: PropTypes.bool,
 };
 
 /**
@@ -110,6 +112,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
       id,
       menuVariant,
       flip,
+      lockPlacement,
       ...props
     },
     ref,
@@ -126,6 +129,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
         {title}
       </DropdownToggle>
       <DropdownMenu
+        lockPlacement={lockPlacement}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
