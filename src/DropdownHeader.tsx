@@ -25,7 +25,7 @@ const DropdownHeader: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof DropdownHeader;
 
 DropdownHeader.displayName = 'DropdownHeader';
 

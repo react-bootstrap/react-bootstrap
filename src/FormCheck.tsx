@@ -211,7 +211,7 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         </FormContext.Provider>
       );
     },
-  );
+  ) as typeof FormCheck;
 
 FormCheck.displayName = 'FormCheck';
 FormCheck.propTypes = propTypes;

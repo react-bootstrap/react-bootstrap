@@ -19,7 +19,7 @@ const CardLink: BsPrefixRefForwardingComponent<'a', CardLinkProps> =
         />
       );
     },
-  );
+  ) as typeof CardLink;
 
 CardLink.displayName = 'CardLink';
 

@@ -19,7 +19,7 @@ const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
         />
       );
     },
-  );
+  ) as typeof CardGroup;
 
 CardGroup.displayName = 'CardGroup';
 

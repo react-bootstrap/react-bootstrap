@@ -153,7 +153,7 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
         </TabContext.Provider>
       );
     },
-  );
+  ) as typeof TabPane;
 
 TabPane.displayName = 'TabPane';
 TabPane.propTypes = propTypes;

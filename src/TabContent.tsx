@@ -19,7 +19,7 @@ const TabContent: BsPrefixRefForwardingComponent<'div', TabContentProps> =
         />
       );
     },
-  );
+  ) as typeof TabContent;
 
 TabContent.displayName = 'TabContent';
 

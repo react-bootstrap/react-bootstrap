@@ -100,7 +100,7 @@ const AccordionButton: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof AccordionButton;
 
 AccordionButton.propTypes = propTypes;
 AccordionButton.displayName = 'AccordionButton';

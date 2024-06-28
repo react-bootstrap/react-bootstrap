@@ -136,7 +136,7 @@ const DropdownButton: BsPrefixRefForwardingComponent<
       </DropdownMenu>
     </Dropdown>
   ),
-);
+) as typeof DropdownButton;
 
 DropdownButton.displayName = 'DropdownButton';
 DropdownButton.propTypes = propTypes;

@@ -71,7 +71,7 @@ const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
         />
       );
     },
-  );
+  ) as typeof ButtonGroup;
 
 ButtonGroup.displayName = 'ButtonGroup';
 ButtonGroup.propTypes = propTypes;

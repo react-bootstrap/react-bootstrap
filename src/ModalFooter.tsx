@@ -19,7 +19,7 @@ const ModalFooter: BsPrefixRefForwardingComponent<'div', ModalFooterProps> =
         />
       );
     },
-  );
+  ) as typeof ModalFooter;
 
 ModalFooter.displayName = 'ModalFooter';
 

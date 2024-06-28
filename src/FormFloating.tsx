@@ -19,7 +19,7 @@ const FormFloating: BsPrefixRefForwardingComponent<'div', FormFloatingProps> =
         />
       );
     },
-  );
+  ) as typeof FormFloating;
 
 FormFloating.displayName = 'FormFloating';
 

@@ -115,7 +115,7 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
         <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
       );
     },
-  );
+  ) as typeof FormLabel;
 
 FormLabel.displayName = 'FormLabel';
 FormLabel.propTypes = propTypes;

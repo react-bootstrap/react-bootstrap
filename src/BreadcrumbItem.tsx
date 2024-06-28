@@ -95,7 +95,7 @@ const BreadcrumbItem: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-);
+) as typeof BreadcrumbItem;
 
 BreadcrumbItem.displayName = 'BreadcrumbItem';
 BreadcrumbItem.propTypes = propTypes;

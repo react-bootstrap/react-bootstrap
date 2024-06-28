@@ -156,7 +156,7 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
       {...props}
     />
   );
-});
+}) as typeof Nav;
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;

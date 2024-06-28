@@ -92,7 +92,7 @@ const ToastContainer: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof ToastContainer;
 
 ToastContainer.displayName = 'ToastContainer';
 ToastContainer.propTypes = propTypes;

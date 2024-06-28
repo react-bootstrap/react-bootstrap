@@ -354,7 +354,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         </>
       );
     },
-  );
+  ) as typeof Offcanvas;
 
 Offcanvas.displayName = 'Offcanvas';
 Offcanvas.propTypes = propTypes;

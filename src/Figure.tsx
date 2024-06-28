@@ -21,7 +21,7 @@ const Figure: BsPrefixRefForwardingComponent<'figure', FigureProps> =
         />
       );
     },
-  );
+  ) as typeof Figure;
 
 Figure.displayName = 'Figure';
 

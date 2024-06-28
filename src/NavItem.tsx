@@ -19,7 +19,7 @@ const NavItem: BsPrefixRefForwardingComponent<'div', NavItemProps> =
         />
       );
     },
-  );
+  ) as typeof NavItem;
 
 NavItem.displayName = 'NavItem';
 

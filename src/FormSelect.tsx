@@ -92,7 +92,7 @@ const FormSelect: BsPrefixRefForwardingComponent<'select', FormSelectProps> =
         />
       );
     },
-  );
+  ) as typeof FormSelect;
 
 FormSelect.displayName = 'FormSelect';
 FormSelect.propTypes = propTypes;

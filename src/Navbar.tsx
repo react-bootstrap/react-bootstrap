@@ -205,7 +205,7 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
         </SelectableContext.Provider>
       </NavbarContext.Provider>
     );
-  });
+  }) as typeof Navbar;
 
 Navbar.propTypes = propTypes;
 Navbar.displayName = 'Navbar';

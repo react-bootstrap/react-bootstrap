@@ -21,7 +21,7 @@ const FigureCaption: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof FigureCaption;
 
 FigureCaption.displayName = 'FigureCaption';
 

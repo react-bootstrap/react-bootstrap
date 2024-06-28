@@ -19,7 +19,7 @@ const ModalBody: BsPrefixRefForwardingComponent<'div', ModalBodyProps> =
         />
       );
     },
-  );
+  ) as typeof ModalBody;
 
 ModalBody.displayName = 'ModalBody';
 

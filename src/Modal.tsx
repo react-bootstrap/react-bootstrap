@@ -504,7 +504,7 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         </ModalContext.Provider>
       );
     },
-  );
+  ) as typeof Modal;
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;

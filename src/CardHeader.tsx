@@ -50,7 +50,7 @@ const CardHeader: BsPrefixRefForwardingComponent<'div', CardHeaderProps> =
         </CardHeaderContext.Provider>
       );
     },
-  );
+  ) as typeof CardHeader;
 
 CardHeader.displayName = 'CardHeader';
 CardHeader.propTypes = propTypes;

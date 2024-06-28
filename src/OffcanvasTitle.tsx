@@ -24,7 +24,7 @@ const OffcanvasTitle: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof OffcanvasTitle;
 
 OffcanvasTitle.displayName = 'OffcanvasTitle';
 

@@ -28,7 +28,7 @@ export interface BsPrefixRefForwardingComponent<
   <As extends React.ElementType = TInitial>(
     props: React.PropsWithChildren<ReplaceProps<As, BsPrefixProps<As> & P>>,
     context?: any,
-  ): React.ReactNode;
+  ): React.ReactElement | null;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: Partial<P>;

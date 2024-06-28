@@ -37,7 +37,7 @@ const PlaceholderButton: BsPrefixRefForwardingComponent<
 
     return <Button {...placeholderProps} ref={ref} disabled tabIndex={-1} />;
   },
-);
+) as typeof PlaceholderButton;
 
 PlaceholderButton.displayName = 'PlaceholderButton';
 PlaceholderButton.propTypes = propTypes;

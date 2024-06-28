@@ -223,7 +223,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         />
       );
     },
-  );
+  ) as typeof DropdownMenu;
 
 DropdownMenu.displayName = 'DropdownMenu';
 DropdownMenu.propTypes = propTypes;

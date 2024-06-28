@@ -150,7 +150,7 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
         />
       );
     },
-  );
+  ) as typeof FormControl;
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;

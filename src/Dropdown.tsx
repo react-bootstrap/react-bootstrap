@@ -216,7 +216,7 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
         </BaseDropdown>
       </DropdownContext.Provider>
     );
-  });
+  }) as typeof Dropdown;
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;

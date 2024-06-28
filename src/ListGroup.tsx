@@ -91,7 +91,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
         )}
       />
     );
-  });
+  }) as typeof ListGroup;
 
 ListGroup.propTypes = propTypes;
 ListGroup.displayName = 'ListGroup';

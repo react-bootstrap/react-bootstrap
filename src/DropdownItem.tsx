@@ -83,7 +83,7 @@ const DropdownItem: BsPrefixRefForwardingComponent<'a', DropdownItemProps> =
         />
       );
     },
-  );
+  ) as typeof DropdownItem;
 
 DropdownItem.displayName = 'DropdownItem';
 DropdownItem.propTypes = propTypes;

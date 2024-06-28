@@ -19,7 +19,7 @@ const NavbarText: BsPrefixRefForwardingComponent<'span', NavbarTextProps> =
         />
       );
     },
-  );
+  ) as typeof NavbarText;
 
 NavbarText.displayName = 'NavbarText';
 

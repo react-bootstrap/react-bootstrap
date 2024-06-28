@@ -90,7 +90,7 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
       />
     );
   },
-);
+) as typeof DropdownToggle;
 
 DropdownToggle.displayName = 'DropdownToggle';
 DropdownToggle.propTypes = propTypes;

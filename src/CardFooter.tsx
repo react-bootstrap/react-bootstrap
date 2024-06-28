@@ -19,7 +19,7 @@ const CardFooter: BsPrefixRefForwardingComponent<'div', CardFooterProps> =
         />
       );
     },
-  );
+  ) as typeof CardFooter;
 
 CardFooter.displayName = 'CardFooter';
 

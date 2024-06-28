@@ -19,7 +19,7 @@ const PopoverBody: BsPrefixRefForwardingComponent<'div', PopoverBodyProps> =
         />
       );
     },
-  );
+  ) as typeof PopoverBody;
 
 PopoverBody.displayName = 'PopoverBody';
 

@@ -137,7 +137,7 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
       })}
     </ButtonGroup>
   );
-});
+}) as typeof ToggleButtonGroup;
 
 ToggleButtonGroup.propTypes = propTypes;
 

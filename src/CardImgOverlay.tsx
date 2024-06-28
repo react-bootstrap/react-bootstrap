@@ -21,7 +21,7 @@ const CardImgOverlay: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof CardImgOverlay;
 
 CardImgOverlay.displayName = 'CardImgOverlay';
 

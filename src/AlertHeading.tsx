@@ -23,7 +23,7 @@ const AlertHeading: BsPrefixRefForwardingComponent<'div', AlertHeadingProps> =
         />
       );
     },
-  );
+  ) as typeof AlertHeading;
 
 AlertHeading.displayName = 'AlertHeading';
 

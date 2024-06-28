@@ -74,7 +74,7 @@ const NavbarToggle: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-);
+) as typeof NavbarToggle;
 
 NavbarToggle.displayName = 'NavbarToggle';
 NavbarToggle.propTypes = propTypes;

@@ -19,7 +19,7 @@ const CardText: BsPrefixRefForwardingComponent<'p', CardTextProps> =
         />
       );
     },
-  );
+  ) as typeof CardText;
 
 CardText.displayName = 'CardText';
 
