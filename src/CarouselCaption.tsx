@@ -21,7 +21,7 @@ const CarouselCaption: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof CarouselCaption;
 
 CarouselCaption.displayName = 'CarouselCaption';
 

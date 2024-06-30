@@ -21,7 +21,7 @@ const InputGroupText: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof InputGroupText;
 
 InputGroupText.displayName = 'InputGroupText';
 

@@ -126,7 +126,7 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
         />
       );
     },
-  );
+  ) as typeof ListGroupItem;
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.displayName = 'ListGroupItem';

@@ -20,7 +20,7 @@ const AlertLink: BsPrefixRefForwardingComponent<'a', AlertLinkProps> =
         />
       );
     },
-  );
+  ) as typeof AlertLink;
 
 AlertLink.displayName = 'AlertLink';
 

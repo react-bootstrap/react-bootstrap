@@ -85,7 +85,7 @@ const InputGroup: BsPrefixRefForwardingComponent<'div', InputGroupProps> =
         </InputGroupContext.Provider>
       );
     },
-  );
+  ) as typeof InputGroup;
 
 InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';

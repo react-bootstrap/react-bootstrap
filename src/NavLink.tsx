@@ -37,7 +37,7 @@ const propTypes = {
    * */
   role: PropTypes.string,
 
-  /** 
+  /**
    * The HTML href attribute for the `NavLink`. Used as the unique identifier
    * for the `NavLink` if an `eventKey` is not provided.
    */
@@ -91,7 +91,7 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
         />
       );
     },
-  );
+  ) as typeof NavLink;
 
 NavLink.displayName = 'NavLink';
 NavLink.propTypes = propTypes;

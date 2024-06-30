@@ -54,7 +54,7 @@ const Container: BsPrefixRefForwardingComponent<'div', ContainerProps> =
         />
       );
     },
-  );
+  ) as typeof Container;
 
 Container.displayName = 'Container';
 Container.propTypes = propTypes;

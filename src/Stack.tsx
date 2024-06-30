@@ -71,7 +71,7 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
         />
       );
     },
-  );
+  ) as typeof Stack;
 
 Stack.displayName = 'Stack';
 Stack.propTypes = propTypes;

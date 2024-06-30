@@ -111,7 +111,7 @@ const NavDropdown: BsPrefixRefForwardingComponent<'div', NavDropdownProps> =
         </Dropdown>
       );
     },
-  );
+  ) as typeof NavDropdown;
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;

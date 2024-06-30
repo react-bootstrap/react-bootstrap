@@ -88,7 +88,7 @@ const Spinner: BsPrefixRefForwardingComponent<'div', SpinnerProps> =
         />
       );
     },
-  );
+  ) as typeof Spinner;
 
 Spinner.propTypes = propTypes as any;
 Spinner.displayName = 'Spinner';

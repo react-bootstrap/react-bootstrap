@@ -196,7 +196,7 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
         </ToastContext.Provider>
       );
     },
-  );
+  ) as typeof Toast;
 
 Toast.propTypes = propTypes;
 Toast.displayName = 'Toast';

@@ -71,7 +71,7 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
         />
       );
     },
-  );
+  ) as typeof Badge;
 
 Badge.displayName = 'Badge';
 Badge.propTypes = propTypes;

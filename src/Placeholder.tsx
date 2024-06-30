@@ -41,7 +41,7 @@ const Placeholder: BsPrefixRefForwardingComponent<'span', PlaceholderProps> =
 
       return <Component {...placeholderProps} ref={ref} />;
     },
-  );
+  ) as typeof Placeholder;
 
 Placeholder.displayName = 'Placeholder';
 Placeholder.propTypes = propTypes;

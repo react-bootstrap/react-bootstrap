@@ -19,7 +19,7 @@ const OffcanvasBody: BsPrefixRefForwardingComponent<'div', OffcanvasBodyProps> =
         />
       );
     },
-  );
+  ) as typeof OffcanvasBody;
 
 OffcanvasBody.displayName = 'OffcanvasBody';
 

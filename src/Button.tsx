@@ -113,7 +113,7 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
         />
       );
     },
-  );
+  ) as typeof Button;
 
 Button.displayName = 'Button';
 Button.propTypes = propTypes;

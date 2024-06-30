@@ -19,7 +19,7 @@ const ToastBody: BsPrefixRefForwardingComponent<'div', ToastBodyProps> =
         />
       );
     },
-  );
+  ) as typeof ToastBody;
 
 ToastBody.displayName = 'ToastBody';
 

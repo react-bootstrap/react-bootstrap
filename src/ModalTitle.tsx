@@ -22,7 +22,7 @@ const ModalTitle: BsPrefixRefForwardingComponent<'span', ModalTitleProps> =
         />
       );
     },
-  );
+  ) as typeof ModalTitle;
 
 ModalTitle.displayName = 'ModalTitle';
 

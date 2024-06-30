@@ -48,7 +48,7 @@ const AccordionHeader: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-);
+) as typeof AccordionHeader;
 
 AccordionHeader.propTypes = propTypes;
 AccordionHeader.displayName = 'AccordionHeader';

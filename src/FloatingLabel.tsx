@@ -42,7 +42,7 @@ const FloatingLabel: BsPrefixRefForwardingComponent<'div', FloatingLabelProps> =
         </FormGroup>
       );
     },
-  );
+  ) as typeof FloatingLabel;
 
 FloatingLabel.displayName = 'FloatingLabel';
 FloatingLabel.propTypes = propTypes;

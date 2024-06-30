@@ -56,7 +56,7 @@ const Form: BsPrefixRefForwardingComponent<'form', FormProps> =
         className={classNames(className, validated && 'was-validated')}
       />
     ),
-  );
+  ) as typeof Form;
 
 Form.displayName = 'Form';
 Form.propTypes = propTypes as any;

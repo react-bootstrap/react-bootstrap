@@ -77,7 +77,7 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         </li>
       );
     },
-  );
+  ) as typeof PageItem;
 
 PageItem.propTypes = propTypes;
 PageItem.displayName = 'PageItem';

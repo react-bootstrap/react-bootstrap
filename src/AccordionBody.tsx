@@ -85,7 +85,7 @@ const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
         </AccordionCollapse>
       );
     },
-  );
+  ) as typeof AccordionBody;
 
 AccordionBody.propTypes = propTypes;
 AccordionBody.displayName = 'AccordionBody';

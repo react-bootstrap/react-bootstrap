@@ -22,7 +22,7 @@ const CardTitle: BsPrefixRefForwardingComponent<'div', CardTitleProps> =
         />
       );
     },
-  );
+  ) as typeof CardTitle;
 
 CardTitle.displayName = 'CardTitle';
 

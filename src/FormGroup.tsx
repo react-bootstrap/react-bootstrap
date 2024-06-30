@@ -49,7 +49,7 @@ const FormGroup: BsPrefixRefForwardingComponent<'div', FormGroupProps> =
         </FormContext.Provider>
       );
     },
-  );
+  ) as typeof FormGroup;
 
 FormGroup.displayName = 'FormGroup';
 FormGroup.propTypes = propTypes;

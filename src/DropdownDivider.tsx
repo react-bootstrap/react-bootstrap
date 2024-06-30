@@ -25,7 +25,7 @@ const DropdownDivider: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof DropdownDivider;
 
 DropdownDivider.displayName = 'DropdownDivider';
 

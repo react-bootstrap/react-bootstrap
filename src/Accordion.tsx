@@ -91,7 +91,7 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
         />
       </AccordionContext.Provider>
     );
-  });
+  }) as typeof Accordion;
 
 Accordion.displayName = 'Accordion';
 Accordion.propTypes = propTypes;

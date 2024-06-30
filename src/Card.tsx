@@ -97,7 +97,7 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
       </Component>
     );
   },
-);
+) as typeof Card;
 
 Card.displayName = 'Card';
 Card.propTypes = propTypes;

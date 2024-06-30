@@ -22,7 +22,7 @@ const CardSubtitle: BsPrefixRefForwardingComponent<'div', CardSubtitleProps> =
         />
       );
     },
-  );
+  ) as typeof CardSubtitle;
 
 CardSubtitle.displayName = 'CardSubtitle';
 

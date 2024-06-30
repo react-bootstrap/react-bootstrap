@@ -21,7 +21,7 @@ const DropdownItemText: BsPrefixRefForwardingComponent<
       />
     );
   },
-);
+) as typeof DropdownItemText;
 
 DropdownItemText.displayName = 'DropdownItemText';
 

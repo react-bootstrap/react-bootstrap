@@ -19,7 +19,7 @@ const CardBody: BsPrefixRefForwardingComponent<'div', CardBodyProps> =
         />
       );
     },
-  );
+  ) as typeof CardBody;
 
 CardBody.displayName = 'CardBody';
 
