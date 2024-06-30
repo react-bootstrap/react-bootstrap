@@ -1,3 +1,14 @@
+## [2.10.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.3...v2.10.4) (2024-06-30)
+
+
+### Bug Fixes
+
+* fix component type error ([#6821](https://github.com/react-bootstrap/react-bootstrap/issues/6821)) ([ab5e5fb](https://github.com/react-bootstrap/react-bootstrap/commit/ab5e5fbef5b51babb952b8d9b36cae6657218f30))
+
+
+
+
+
 ## [2.10.3](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.2...v2.10.3) (2024-06-19)
 
 
