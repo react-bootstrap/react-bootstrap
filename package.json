@@ -104,7 +104,7 @@
     "cpy-cli": "^3.1.1",
     "cross-env": "^7.0.3",
     "dtslint": "^4.2.1",
-    "eslint": "^8.55.0",
+    "eslint": "^9.6.0",
     "eslint-config-4catalyzer-typescript": "^3.3.0",
     "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-webpack": "^0.13.8",
