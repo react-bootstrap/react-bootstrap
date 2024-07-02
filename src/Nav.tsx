@@ -116,18 +116,13 @@ const propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-const defaultProps = {
-  justify: false,
-  fill: false,
-};
-
-const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
+const Nav: Nav = React.forwardRef((uncontrolledProps: NavProps, ref) => {
   const {
     as = 'div',
     bsPrefix: initialBsPrefix,
     variant,
-    fill,
-    justify,
+    fill = false,
+    justify = false,
     navbar,
     navbarScroll,
     className,
@@ -171,11 +166,10 @@ const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
       {children}
     </AbstractNav>
   );
-}) as unknown) as Nav;
+}) as unknown as Nav;
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
-Nav.defaultProps = defaultProps;
 
 Nav.Item = NavItem;
 Nav.Link = NavLink;

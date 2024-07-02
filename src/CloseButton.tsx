@@ -12,12 +12,11 @@ const propTypes = {
   onClick: PropTypes.func,
 };
 
-const defaultProps = {
-  label: 'Close',
-};
-
 const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label, onClick, className, ...props }: CloseButtonProps, ref) => (
+  (
+    { label = 'Close', onClick, className, ...props }: CloseButtonProps,
+    ref,
+  ) => (
     <button
       ref={ref}
       type="button"
@@ -33,6 +32,5 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
 
 CloseButton.displayName = 'CloseButton';
 CloseButton.propTypes = propTypes;
-CloseButton.defaultProps = defaultProps;
 
 export default CloseButton;
