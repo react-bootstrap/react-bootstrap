@@ -19,17 +19,13 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const defaultProps = {
-  fluid: false,
-};
-
 const Jumbotron: Jumbotron = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       className,
-      fluid,
+      fluid = false,
       bsPrefix,
       ...props
     },
@@ -51,7 +47,6 @@ const Jumbotron: Jumbotron = React.forwardRef(
 );
 
 Jumbotron.propTypes = propTypes;
-Jumbotron.defaultProps = defaultProps;
 Jumbotron.displayName = 'Jumbotron';
 
 export default Jumbotron;

@@ -83,11 +83,7 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  body: false,
-};
-
-const Card: Card = (React.forwardRef(
+const Card: Card = React.forwardRef(
   (
     {
       bsPrefix,
@@ -95,7 +91,7 @@ const Card: Card = (React.forwardRef(
       bg,
       text,
       border,
-      body,
+      body = false,
       children,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -134,11 +130,10 @@ const Card: Card = (React.forwardRef(
       </CardContext.Provider>
     );
   },
-) as unknown) as Card;
+) as unknown as Card;
 
 Card.displayName = 'Card';
 Card.propTypes = propTypes;
-Card.defaultProps = defaultProps;
 
 Card.Img = CardImg;
 Card.Title = CardTitle;

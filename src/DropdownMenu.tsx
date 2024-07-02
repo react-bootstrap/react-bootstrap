@@ -109,23 +109,17 @@ const propTypes = {
   popperConfig: PropTypes.object,
 };
 
-const defaultProps: Partial<DropdownMenuProps> = {
-  align: 'left',
-  alignRight: false,
-  flip: true,
-};
-
 const DropdownMenu: DropdownMenu = React.forwardRef(
   (
     {
       bsPrefix,
       className,
-      align,
+      align = 'left',
       // When we remove alignRight from API, use the var locally to toggle
       // .dropdown-menu-right class below.
-      alignRight,
+      alignRight = false,
       rootCloseEvent,
-      flip,
+      flip = true,
       show: showProps,
       renderOnMount,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -164,20 +158,18 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       }
     }
 
-    const [
-      menuProps,
-      { hasShown, popper, show, alignEnd, toggle },
-    ] = useDropdownMenu({
-      flip,
-      rootCloseEvent,
-      show: showProps,
-      alignEnd: alignRight,
-      usePopper: !isNavbar && alignClasses.length === 0,
-      popperConfig: {
-        ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
-      },
-    });
+    const [menuProps, { hasShown, popper, show, alignEnd, toggle }] =
+      useDropdownMenu({
+        flip,
+        rootCloseEvent,
+        show: showProps,
+        alignEnd: alignRight,
+        usePopper: !isNavbar && alignClasses.length === 0,
+        popperConfig: {
+          ...popperConfig,
+          modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
+        },
+      });
 
     menuProps.ref = useMergedRefs(
       popperRef,
@@ -223,6 +215,5 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
 
 DropdownMenu.displayName = 'DropdownMenu';
 DropdownMenu.propTypes = propTypes;
-DropdownMenu.defaultProps = defaultProps;
 
 export default DropdownMenu;
