@@ -67,21 +67,16 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  disabled: false,
-  as: SafeAnchor,
-};
-
 const NavLink: NavLink = React.forwardRef(
   (
     {
       bsPrefix,
-      disabled,
+      disabled = false,
       className,
       href,
       eventKey,
       onSelect,
-      as,
+      as = SafeAnchor,
       ...props
     }: NavLinkProps,
     ref,
@@ -104,6 +99,5 @@ const NavLink: NavLink = React.forwardRef(
 
 NavLink.displayName = 'NavLink';
 NavLink.propTypes = propTypes;
-NavLink.defaultProps = defaultProps;
 
 export default NavLink;

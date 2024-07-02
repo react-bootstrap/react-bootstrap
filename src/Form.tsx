@@ -62,15 +62,11 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  inline: false,
-};
-
-const FormImpl: Form = (React.forwardRef(
+const FormImpl: Form = React.forwardRef(
   (
     {
       bsPrefix,
-      inline,
+      inline = false,
       className,
       validated,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -92,11 +88,10 @@ const FormImpl: Form = (React.forwardRef(
       />
     );
   },
-) as unknown) as Form;
+) as unknown as Form;
 
 FormImpl.displayName = 'Form';
 FormImpl.propTypes = propTypes;
-FormImpl.defaultProps = defaultProps;
 
 FormImpl.Row = FormRow;
 FormImpl.Group = FormGroup;

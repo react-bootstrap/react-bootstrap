@@ -34,16 +34,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  pill: false,
-};
-
 const Badge: Badge = React.forwardRef(
   (
     {
       bsPrefix,
       variant,
-      pill,
+      pill = false,
       className,
       as: Component = 'span',
       ...props
@@ -68,6 +64,5 @@ const Badge: Badge = React.forwardRef(
 
 Badge.displayName = 'Badge';
 Badge.propTypes = propTypes;
-Badge.defaultProps = defaultProps;
 
 export default Badge;

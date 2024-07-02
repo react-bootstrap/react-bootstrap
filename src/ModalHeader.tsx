@@ -39,17 +39,12 @@ const propTypes = {
   onHide: PropTypes.func,
 };
 
-const defaultProps = {
-  closeLabel: 'Close',
-  closeButton: false,
-};
-
 const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   (
     {
       bsPrefix,
-      closeLabel,
-      closeButton,
+      closeLabel = 'Close',
+      closeButton = false,
       onHide,
       className,
       children,
@@ -80,6 +75,5 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
 
 ModalHeader.displayName = 'ModalHeader';
 ModalHeader.propTypes = propTypes;
-ModalHeader.defaultProps = defaultProps;
 
 export default ModalHeader;

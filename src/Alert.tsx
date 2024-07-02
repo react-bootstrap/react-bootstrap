@@ -85,24 +85,18 @@ const propTypes = {
   transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 };
 
-const defaultProps = {
-  show: true,
-  transition: Fade,
-  closeLabel: 'Close alert',
-};
-
-const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (uncontrolledProps: AlertProps, ref) => {
     const {
       bsPrefix,
-      show,
-      closeLabel,
+      show = true,
+      closeLabel = 'Close alert',
       className,
       children,
       variant,
       onClose,
       dismissible,
-      transition,
+      transition = Fade,
       ...props
     } = useUncontrolled(uncontrolledProps, {
       show: 'onClose',
@@ -142,10 +136,9 @@ const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
       </Transition>
     );
   },
-) as unknown) as Alert;
+) as unknown as Alert;
 
 Alert.displayName = 'Alert';
-Alert.defaultProps = defaultProps as any;
 Alert.propTypes = propTypes;
 Alert.Link = AlertLink;
 Alert.Heading = AlertHeading;

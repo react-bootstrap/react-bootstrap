@@ -36,15 +36,11 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  fluid: false,
-};
-
 const Container: Container = React.forwardRef(
   (
     {
       bsPrefix,
-      fluid,
+      fluid = false,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       className,
@@ -66,6 +62,5 @@ const Container: Container = React.forwardRef(
 
 Container.displayName = 'Container';
 Container.propTypes = propTypes;
-Container.defaultProps = defaultProps;
 
 export default Container;

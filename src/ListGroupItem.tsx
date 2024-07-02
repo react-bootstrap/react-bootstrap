@@ -62,20 +62,14 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  active: false,
-  disabled: false,
-};
-
 const ListGroupItem: ListGroupItem = React.forwardRef(
   (
     {
       bsPrefix,
-      active,
-      disabled,
+      active = false,
+      disabled = false,
       className,
-      variant,
+      variant = undefined,
       action,
       as,
       onClick,
@@ -124,7 +118,6 @@ const ListGroupItem: ListGroupItem = React.forwardRef(
 );
 
 ListGroupItem.propTypes = propTypes;
-ListGroupItem.defaultProps = defaultProps;
 ListGroupItem.displayName = 'ListGroupItem';
 
 export default ListGroupItem;

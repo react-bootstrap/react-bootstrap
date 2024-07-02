@@ -65,19 +65,14 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  column: false,
-  srOnly: false,
-};
-
 const FormLabel: FormLabel = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'label',
       bsPrefix,
-      column,
-      srOnly,
+      column = false,
+      srOnly = false,
       className,
       htmlFor,
       ...props
@@ -125,6 +120,5 @@ const FormLabel: FormLabel = React.forwardRef(
 
 FormLabel.displayName = 'FormLabel';
 FormLabel.propTypes = propTypes;
-FormLabel.defaultProps = defaultProps;
 
 export default FormLabel;
