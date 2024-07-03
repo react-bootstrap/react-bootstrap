@@ -28,17 +28,13 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: null,
-};
-
 const CardImg: CardImg = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
     {
       bsPrefix,
       className,
-      variant,
+      variant = null,
       as: Component = 'img',
       ...props
     }: CardImgProps,
@@ -60,6 +56,5 @@ const CardImg: CardImg = React.forwardRef(
 );
 CardImg.displayName = 'CardImg';
 CardImg.propTypes = propTypes;
-CardImg.defaultProps = defaultProps;
 
 export default CardImg;

@@ -35,10 +35,6 @@ const propTypes = {
   aspectRatio: PropTypes.oneOf(['21by9', '16by9', '4by3', '1by1']),
 };
 
-const defaultProps = {
-  aspectRatio: '1by1' as const,
-};
-
 const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
   HTMLDivElement,
   ResponsiveEmbedProps
@@ -48,7 +44,7 @@ const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
       bsPrefix,
       className,
       children,
-      aspectRatio,
+      aspectRatio = '1by1',
       ...props
     }: ResponsiveEmbedProps,
     ref,
@@ -77,6 +73,5 @@ const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
 );
 
 ResponsiveEmbed.propTypes = propTypes;
-ResponsiveEmbed.defaultProps = defaultProps;
 
 export default ResponsiveEmbed;

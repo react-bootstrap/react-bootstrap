@@ -73,15 +73,11 @@ const propTypes = {
   show: PropTypes.bool,
 };
 
-const defaultProps = {
-  placement: 'right',
-};
-
 const Popover: Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       bsPrefix,
-      placement,
+      placement = 'right',
       className,
       style,
       children,
@@ -117,7 +113,6 @@ const Popover: Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
 ) as unknown as Popover;
 
 Popover.propTypes = propTypes;
-Popover.defaultProps = defaultProps as any;
 
 Popover.Title = PopoverTitle;
 Popover.Content = PopoverContent;

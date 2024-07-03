@@ -69,11 +69,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: SafeAnchor,
-  disabled: false,
-};
-
 const DropdownItem: DropdownItem = React.forwardRef(
   (
     {
@@ -81,12 +76,12 @@ const DropdownItem: DropdownItem = React.forwardRef(
       className,
       children,
       eventKey,
-      disabled,
+      disabled = false,
       href,
       onClick,
       onSelect,
       active: propActive,
-      as: Component,
+      as: Component = SafeAnchor,
       ...props
     }: DropdownItemProps,
     ref,
@@ -137,6 +132,5 @@ const DropdownItem: DropdownItem = React.forwardRef(
 
 DropdownItem.displayName = 'DropdownItem';
 DropdownItem.propTypes = propTypes;
-DropdownItem.defaultProps = defaultProps;
 
 export default DropdownItem;

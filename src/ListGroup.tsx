@@ -55,17 +55,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  variant: undefined,
-  horizontal: undefined,
-};
-
-const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
+const ListGroup: ListGroup = React.forwardRef((props: ListGroupProps, ref) => {
   const {
     className,
     bsPrefix: initialBsPrefix,
-    variant,
-    horizontal,
+    variant = undefined,
+    horizontal = undefined,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as = 'div',
     ...controlledProps
@@ -101,10 +96,9 @@ const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
       )}
     />
   );
-}) as unknown) as ListGroup;
+}) as unknown as ListGroup;
 
 ListGroup.propTypes = propTypes;
-ListGroup.defaultProps = defaultProps;
 ListGroup.displayName = 'ListGroup';
 
 ListGroup.Item = ListGroupItem;

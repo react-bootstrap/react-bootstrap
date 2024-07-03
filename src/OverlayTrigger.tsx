@@ -166,13 +166,8 @@ const propTypes = {
   ]),
 };
 
-const defaultProps = {
-  defaultShow: false,
-  trigger: ['hover', 'focus'],
-};
-
 function OverlayTrigger({
-  trigger,
+  trigger = ['hover', 'focus'],
   overlay,
   children,
   popperConfig = {},
@@ -316,6 +311,5 @@ function OverlayTrigger({
 }
 
 OverlayTrigger.propTypes = propTypes;
-OverlayTrigger.defaultProps = defaultProps;
 
 export default OverlayTrigger;

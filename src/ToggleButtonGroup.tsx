@@ -84,18 +84,12 @@ const defaultProps = {
   vertical: false,
 };
 
-const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
+const ToggleButtonGroup: ToggleButtonGroup<any> = React.forwardRef(
   (props: ToggleButtonGroupProps<any>, ref) => {
-    const {
-      children,
-      type,
-      name,
-      value,
-      onChange,
-      ...controlledProps
-    } = useUncontrolled(props, {
-      value: 'onChange',
-    });
+    const { children, type, name, value, onChange, ...controlledProps } =
+      useUncontrolled(props, {
+        value: 'onChange',
+      });
 
     const getValues: () => any[] = () =>
       value == null ? [] : [].concat(value);
@@ -145,7 +139,7 @@ const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
       </ButtonGroup>
     );
   },
-) as unknown) as ToggleButtonGroup<any>;
+) as unknown as ToggleButtonGroup<any>;
 
 ToggleButtonGroup.propTypes = propTypes;
 ToggleButtonGroup.defaultProps = defaultProps as any;

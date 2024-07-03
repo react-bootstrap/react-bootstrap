@@ -85,11 +85,6 @@ const propTypes = {
   size: PropTypes.string,
 };
 
-const defaultProps = {
-  toggleLabel: 'Toggle dropdown',
-  type: 'button',
-};
-
 /**
  * A convenience component for simple or general use split button dropdowns. Renders a
  * `ButtonGroup` containing a `Button` and a `Button` toggle for the `Dropdown`. All `children`
@@ -108,8 +103,8 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       size,
       variant,
       title,
-      type,
-      toggleLabel,
+      type = 'button',
+      toggleLabel = 'Toggle dropdown',
       children,
       onClick,
       href,
@@ -159,7 +154,6 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
 );
 
 SplitButton.propTypes = propTypes as any;
-SplitButton.defaultProps = defaultProps;
 SplitButton.displayName = 'SplitButton';
 
 export default SplitButton;
