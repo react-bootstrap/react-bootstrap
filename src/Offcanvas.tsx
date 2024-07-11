@@ -203,6 +203,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         className,
         children,
         'aria-labelledby': ariaLabelledby,
+        isNavbarOffcanvas = false,
         placement = 'start',
         responsive,
 
@@ -250,7 +251,9 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       }, [show, responsive, hideResponsiveOffcanvas]);
 
       const handleHide = useEventCallback(() => {
-        onToggle?.();
+        if (isNavbarOffcanvas) {
+          onToggle?.();
+        }
         onHide?.();
       });
 
