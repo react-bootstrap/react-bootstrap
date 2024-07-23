@@ -29,6 +29,7 @@ export interface DropdownProps
   focusFirstItemOnShow?: boolean | 'keyboard';
   navbar?: boolean;
   autoClose?: boolean | 'outside' | 'inside';
+  lockPlacement?: boolean;
 }
 
 const propTypes = {
