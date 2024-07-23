@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { useContext } from 'react';
+import useEventCallback from '@restart/hooks/useEventCallback';
 import Offcanvas, { OffcanvasProps } from './Offcanvas';
 import NavbarContext from './NavbarContext';
 
 export type NavbarOffcanvasProps = Omit<OffcanvasProps, 'show'>;
 
 const NavbarOffcanvas = React.forwardRef<HTMLDivElement, NavbarOffcanvasProps>(
-  (props, ref) => {
+  ({ onHide, ...props }, ref) => {
     const context = useContext(NavbarContext);
+
+    const handleHide = useEventCallback(() => {
+      context?.onToggle?.();
+      onHide?.();
+    });
 
     return (
       <Offcanvas
@@ -15,6 +21,7 @@ const NavbarOffcanvas = React.forwardRef<HTMLDivElement, NavbarOffcanvasProps>(
         show={!!context?.expanded}
         {...props}
         renderStaticNode
+        onHide={handleHide}
       />
     );
   },

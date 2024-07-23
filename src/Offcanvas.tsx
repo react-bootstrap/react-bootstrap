@@ -3,14 +3,7 @@ import useBreakpoint from '@restart/hooks/useBreakpoint';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
@@ -19,7 +12,6 @@ import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
-import NavbarContext from './NavbarContext';
 import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -235,8 +227,8 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
     ) => {
       const modalManager = useRef<BootstrapModalManager>();
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
-      const { onToggle } = useContext(NavbarContext) || {};
       const [showOffcanvas, setShowOffcanvas] = useState(false);
+      const handleHide = useEventCallback(onHide);
 
       const hideResponsiveOffcanvas = useBreakpoint(
         (responsive as any) || 'xs',
@@ -248,11 +240,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         // offcanvas is shown. If `responsive` not provided, just use `show`.
         setShowOffcanvas(responsive ? show && !hideResponsiveOffcanvas : show);
       }, [show, responsive, hideResponsiveOffcanvas]);
-
-      const handleHide = useEventCallback(() => {
-        onToggle?.();
-        onHide?.();
-      });
 
       const modalContext = useMemo(
         () => ({
