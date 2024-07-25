@@ -1,78 +1,73 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Button from '../src/Button';
 import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown.Item>', () => {
   it('renders divider', () => {
-    const { getByRole } = render(<Dropdown.Divider />);
-    getByRole('separator');
+    render(<Dropdown.Divider />);
+    screen.getByRole('separator');
   });
 
   it('renders divider className and style', () => {
-    const { getByRole } = render(
+    render(
       <Dropdown.Divider className="foo bar" style={{ height: '100px' }} />,
     );
 
-    const node = getByRole('separator');
-    node.className.should.match(/\bfoo bar dropdown-divider\b/);
-    node.style.height.should.equal('100px');
+    const node = screen.getByRole('separator');
+    expect(node.className).toMatch(/\bfoo bar dropdown-divider\b/);
+    expect(node.style.height).toEqual('100px');
   });
 
   it('renders header', () => {
-    const { getByRole } = render(
-      <Dropdown.Header>Header text</Dropdown.Header>,
-    );
+    render(<Dropdown.Header>Header text</Dropdown.Header>);
 
-    getByRole('heading').textContent!.should.equal('Header text');
+    expect(screen.getByRole('heading').textContent).toEqual('Header text');
   });
 
   it('renders header className and style', () => {
-    const { getByText } = render(
+    render(
       <Dropdown.Header className="foo bar" style={{ height: '100px' }}>
         Header text
       </Dropdown.Header>,
     );
 
-    const node = getByText('Header text');
-    node.className.should.match(/\bfoo bar dropdown-header\b/);
+    const node = screen.getByText('Header text');
+    expect(node.className).toMatch(/\bfoo bar dropdown-header\b/);
   });
 
   it('renders Dropdown.ItemText', () => {
-    const { getByText } = render(
-      <Dropdown.ItemText>My text</Dropdown.ItemText>,
-    );
+    render(<Dropdown.ItemText>My text</Dropdown.ItemText>);
 
-    getByText('My text').className.should.equal('dropdown-item-text');
+    expect(screen.getByText('My text').className).toEqual('dropdown-item-text');
   });
 
   it('renders Dropdown.ItemText className and style', () => {
-    const { getByText } = render(
+    render(
       <Dropdown.ItemText className="foo bar" style={{ height: '100px' }}>
         My text
       </Dropdown.ItemText>,
     );
 
-    const node = getByText('My text');
-    node.className.should.match(/\bfoo bar dropdown-item-text\b/);
-    node.style.height.should.equal('100px');
+    const node = screen.getByText('My text');
+    expect(node.className).toMatch(/\bfoo bar dropdown-item-text\b/);
+    expect(node.style.height).toEqual('100px');
   });
 
   it('renders menu item link', () => {
-    const onKeyDownSpy = sinon.spy();
+    const onKeyDownSpy = vi.fn();
 
-    const { getByText } = render(
+    render(
       <Dropdown.Item onKeyDown={onKeyDownSpy} href="/herpa-derpa">
         Item
       </Dropdown.Item>,
     );
 
-    const node = getByText('Item');
-    node.getAttribute('href')!.should.equal('/herpa-derpa');
+    const node = screen.getByText('Item');
+    expect(node.getAttribute('href')!).toEqual('/herpa-derpa');
 
     fireEvent.keyDown(node, { key: 'a' });
-    onKeyDownSpy.should.be.called;
+    expect(onKeyDownSpy).toHaveBeenCalled();
   });
 
   it('should render as a button when set', () => {
@@ -80,15 +75,13 @@ describe('<Dropdown.Item>', () => {
       <Dropdown.Item as={Button} variant="success" data-testid="item" />,
     );
 
-    getByTestId('item').classList.should.contain([
-      'dropdown-item',
-      'btn',
-      'btn-success',
-    ]);
+    expect(getByTestId('item').classList).toContain('dropdown-item');
+    expect(getByTestId('item').classList).toContain('btn');
+    expect(getByTestId('item').classList).toContain('btn-success');
   });
 
   it('should pass through props', () => {
-    const { getByText } = render(
+    render(
       <Dropdown.Item
         className="test-class"
         href="#hi-mom!"
@@ -99,17 +92,15 @@ describe('<Dropdown.Item>', () => {
       </Dropdown.Item>,
     );
 
-    const node = getByText('Title');
-    node.className.should.match(/\btest-class\b/);
-    node.style.height.should.equal('100px');
-    node.getAttribute('href')!.should.equal('#hi-mom!');
-    node.getAttribute('title')!.should.equal('hi mom!');
+    const node = screen.getByText('Title');
+    expect(node.className).toMatch(/\btest-class\b/);
+    expect(node.style.height).toEqual('100px');
+    expect(node.getAttribute('href')).toEqual('#hi-mom!');
+    expect(node.getAttribute('title')).toEqual('hi mom!');
   });
 
   it('Should set target attribute on anchor', () => {
-    const { getByText } = render(
-      <Dropdown.Item target="_blank">Title</Dropdown.Item>,
-    );
-    getByText('Title').getAttribute('target')!.should.equal('_blank');
+    render(<Dropdown.Item target="_blank">Title</Dropdown.Item>);
+    expect(screen.getByText('Title').getAttribute('target')).toEqual('_blank');
   });
 });

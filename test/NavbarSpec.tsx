@@ -1,121 +1,116 @@
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import sinon from 'sinon';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
 describe('<Navbar>', () => {
   it('Should create nav element', () => {
-    const { getByTestId } = render(<Navbar data-testid="test" />);
-    const navbarElem = getByTestId('test');
+    render(<Navbar data-testid="test" />);
+    const navbarElem = screen.getByTestId('test');
 
-    navbarElem.classList.contains('navbar').should.be.true;
-    navbarElem.classList.contains('navbar-expand').should.be.true;
-    navbarElem.classList.contains('navbar-light').should.be.true;
+    expect(navbarElem.classList).toContain('navbar');
+    expect(navbarElem.classList).toContain('navbar-expand');
+    expect(navbarElem.classList).toContain('navbar-light');
   });
 
   it('Should add "navigation" role when not using a `<nav>`', () => {
-    const { getByTestId } = render(<Navbar as="div" data-testid="test" />);
-    const navbarElem = getByTestId('test');
+    render(<Navbar as="div" data-testid="test" />);
+    const navbarElem = screen.getByTestId('test');
 
-    navbarElem.tagName.toLowerCase().should.equal('div');
-    navbarElem.getAttribute('role')!.should.equal('navigation');
+    expect(navbarElem.tagName).toEqual('DIV');
+    expect(navbarElem.getAttribute('role')).toEqual('navigation');
   });
 
   it('Should add fixed=top|bottom variation', () => {
-    const { getByTestId: getByFirstTestId } = render(
-      <Navbar fixed="top" data-testid="test1" />,
-    );
-    const firstNavbarElem = getByFirstTestId('test1');
-    firstNavbarElem.classList.contains('fixed-top').should.be.true;
+    render(<Navbar fixed="top" data-testid="test1" />);
+    const firstNavbarElem = screen.getByTestId('test1');
+    expect(firstNavbarElem.classList).toContain('fixed-top');
 
-    const { getByTestId: getBySecondTestId } = render(
-      <Navbar fixed="bottom" data-testid="test2" />,
-    );
-    const navbarElem = getBySecondTestId('test2');
-    navbarElem.classList.contains('fixed-bottom').should.be.true;
+    render(<Navbar fixed="bottom" data-testid="test2" />);
+
+    const navbarElem = screen.getByTestId('test2');
+    expect(navbarElem.classList).toContain('fixed-bottom');
   });
 
   it('Should variant=dark', () => {
-    const { getByTestId } = render(
-      <Navbar variant="dark" data-testid="test" />,
-    );
-    getByTestId('test').classList.contains('navbar-dark').should.be.true;
+    render(<Navbar variant="dark" data-testid="test" />);
+    expect(screen.getByTestId('test').classList).toContain('navbar-dark');
   });
 
   it('Should override role attribute', () => {
-    const { getByTestId } = render(<Navbar role="banner" data-testid="test" />);
-    getByTestId('test').getAttribute('role')!.should.equal('banner');
+    render(<Navbar role="banner" data-testid="test" />);
+    expect(screen.getByTestId('test').getAttribute('role')).toEqual('banner');
   });
 
   it('Should pass navbar context to navs', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Nav data-testid="test" />
       </Navbar>,
     );
-    const navElem = getByTestId('test');
-    navElem.classList.contains('navbar-nav').should.be.true;
+    const navElem = screen.getByTestId('test');
+    expect(navElem.classList).toContain('navbar-nav');
   });
 
   it('Should add custom toggle', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Navbar.Toggle as="p" data-testid="test">
           hi
         </Navbar.Toggle>
       </Navbar>,
     );
-    const navToggleElem = getByTestId('test');
-    navToggleElem.textContent!.should.equal('hi');
-    navToggleElem.classList.contains('navbar-toggler');
-    navToggleElem.tagName.toLowerCase().should.equal('p');
+    const navToggleElem = screen.getByTestId('test');
+    expect(navToggleElem.textContent).toEqual('hi');
+    expect(navToggleElem.classList).toContain('navbar-toggler');
+    expect(navToggleElem.tagName).toEqual('P');
   });
 
   it('Should trigger onToggle', () => {
-    const toggleSpy = sinon.spy();
-    const { getByTestId } = render(
-      <Navbar onToggle={toggleSpy}>
+    const onToggleSpy = vi.fn();
+    render(
+      <Navbar onToggle={onToggleSpy}>
         <Navbar.Toggle data-testid="test" />
       </Navbar>,
     );
-    const toggleElem = getByTestId('test');
+    const toggleElem = screen.getByTestId('test');
     fireEvent.click(toggleElem);
 
-    toggleSpy.should.have.been.calledOnce;
-    toggleSpy.should.have.been.calledWith(true);
+    expect(onToggleSpy).toHaveBeenCalledOnce();
+    expect(onToggleSpy).toHaveBeenCalledWith(true);
   });
 
   it('Should not swallow onClick', () => {
-    const clickSpy = sinon.spy();
+    const onClickSpy = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <Navbar>
-        <Navbar.Toggle onClick={clickSpy} data-testid="test" />
+        <Navbar.Toggle onClick={onClickSpy} data-testid="test" />
       </Navbar>,
     );
-    const toggleElem = getByTestId('test');
+    const toggleElem = screen.getByTestId('test');
     fireEvent.click(toggleElem);
 
-    clickSpy.should.have.been.calledOnce;
+    expect(onClickSpy).toHaveBeenCalledOnce();
   });
 
   it('Should render collapse', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Navbar.Collapse data-testid="test">hello</Navbar.Collapse>
       </Navbar>,
     );
-    getByTestId('test').classList.contains('navbar-collapse').should.be.true;
+    expect(screen.getByTestId('test').classList).toContain('navbar-collapse');
   });
 
   it('Should pass expanded to Collapse', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar expanded>
         <Navbar.Collapse data-testid="test">hello</Navbar.Collapse>
       </Navbar>,
     );
-    const toggleElem = getByTestId('test');
-    toggleElem.classList.contains('show').should.be.true;
+    const toggleElem = screen.getByTestId('test');
+    expect(toggleElem.classList).toContain('show');
   });
 
   it('Should wire the toggle to the collapse', async () => {
@@ -129,23 +124,23 @@ describe('<Navbar>', () => {
     const toggleElem = screen.getByTestId('toggler');
     const collapseElem = screen.getByTestId('collapse');
 
-    collapseElem.classList.contains('show').should.be.false;
-    toggleElem.classList.contains('collapsed').should.be.true;
+    expect(collapseElem.classList).not.toContain('show');
+    expect(toggleElem.classList).toContain('collapsed');
 
     fireEvent.click(toggleElem);
 
-    await waitFor(() => collapseElem.classList.contains('show').should.be.true);
+    await waitFor(() => expect(collapseElem.classList).toContain('show'));
 
-    toggleElem.classList.contains('collapsed').should.be.false;
+    expect(toggleElem.classList).not.toContain('collapsed');
   });
 
   it('Should open external href link in collapseOnSelect', () => {
-    const spy = sinon.spy((e) => {
+    const onClickSpy = vi.fn((e) => {
       // prevent actual redirect
       e.persist();
       e.preventDefault();
     });
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Navbar.Toggle />
         <Navbar.Collapse>
@@ -153,33 +148,32 @@ describe('<Navbar>', () => {
             <Nav.Link
               href="https://www.google.com"
               data-testid="test"
-              onClick={spy}
+              onClick={onClickSpy}
             />
           </Nav>
         </Navbar.Collapse>
       </Navbar>,
     );
-    const linkItem = getByTestId('test');
+    const linkItem = screen.getByTestId('test');
     fireEvent.click(linkItem);
-    spy.should.have.been.calledOnce;
-    getByTestId('test')
-      .getAttribute('href')!
-      .should.equal('https://www.google.com');
+    expect(onClickSpy).toHaveBeenCalledOnce();
+    expect(screen.getByTestId('test').getAttribute('href')).toEqual(
+      'https://www.google.com',
+    );
   });
 
-  it('Should fire external href click', (done) => {
-    const spy = sinon.spy((e) => {
+  it('Should fire external href click', async () => {
+    const onClickSpy = vi.fn((e) => {
       // prevent actual redirect
       e.persist();
       e.preventDefault();
-      done();
     });
-    const { getByTestId } = render(
+    render(
       <Navbar expanded>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav as="div">
-            <Nav.Link href="https://www.google.com" onClick={spy}>
+            <Nav.Link href="https://www.google.com" onClick={onClickSpy}>
               <span className="link-text" data-testid="test">
                 Option 1
               </span>
@@ -188,19 +182,21 @@ describe('<Navbar>', () => {
         </Navbar.Collapse>
       </Navbar>,
     );
-    const innerLinkItem = getByTestId('test');
+    const innerLinkItem = screen.getByTestId('test');
     fireEvent.click(innerLinkItem);
+
+    await waitFor(() => expect(onClickSpy).toHaveBeenCalledOnce());
   });
 
   it('Should collapseOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
-    const toggleSpy = sinon.spy();
-    const navItemSpy = sinon.spy();
-    const { getByTestId } = render(
-      <Navbar collapseOnSelect onToggle={toggleSpy} expanded>
+    const onToggleSpy = vi.fn();
+    const onClickSpy = vi.fn();
+    render(
+      <Navbar collapseOnSelect onToggle={onToggleSpy} expanded>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav as="div">
-            <Nav.Link href="#" onClick={navItemSpy}>
+            <Nav.Link href="#" onClick={onClickSpy}>
               <span className="link-text" data-testid="test">
                 Option 1
               </span>
@@ -209,24 +205,24 @@ describe('<Navbar>', () => {
         </Navbar.Collapse>
       </Navbar>,
     );
-    const innerLinkElem = getByTestId('test');
+    const innerLinkElem = screen.getByTestId('test');
     fireEvent.click(innerLinkElem);
 
-    navItemSpy.should.have.been.calledOnce;
-    toggleSpy.should.have.been.calledOnce;
-    toggleSpy.should.have.been.calledWith(false);
+    expect(onClickSpy).toHaveBeenCalledOnce();
+    expect(onToggleSpy).toHaveBeenCalledOnce();
+    expect(onToggleSpy).toHaveBeenCalledWith(false);
   });
 
   it('Should fire onSelect with eventKey for nav children', () => {
-    const selectSpy = sinon.spy();
-    const navItemSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
+    const onClickSpy = vi.fn();
 
-    const { getByTestId } = render(
-      <Navbar onSelect={selectSpy}>
+    render(
+      <Navbar onSelect={onSelectSpy}>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav as="div">
-            <Nav.Link href="#home" onClick={navItemSpy}>
+            <Nav.Link href="#home" onClick={onClickSpy}>
               <span className="link-text" data-testid="test">
                 Option 1
               </span>
@@ -235,39 +231,38 @@ describe('<Navbar>', () => {
         </Navbar.Collapse>
       </Navbar>,
     );
-    const innerLinkElem = getByTestId('test');
+    const innerLinkElem = screen.getByTestId('test');
     fireEvent.click(innerLinkElem);
 
-    navItemSpy.should.have.been.calledOnce;
-    selectSpy.should.have.been.calledOnce;
-    selectSpy.should.have.been.calledWith('#home');
+    expect(onClickSpy).toHaveBeenCalledOnce();
+    expect(onSelectSpy).toHaveBeenCalledOnce();
+    expect(onSelectSpy).toHaveBeenCalledWith('#home', expect.anything());
   });
 
   it('Should have nav as default component', () => {
-    const { getByTestId } = render(<Navbar data-testid="test" />);
-    getByTestId('test').tagName.toLowerCase().should.equal('nav');
+    render(<Navbar data-testid="test" />);
+    expect(screen.getByTestId('test').tagName).toEqual('NAV');
   });
 
   it('Should render correctly when expand is a string', () => {
-    const { getByTestId } = render(<Navbar expand="sm" data-testid="test" />);
-    getByTestId('test').classList.contains('navbar-expand-sm').should.be.true;
+    render(<Navbar expand="sm" data-testid="test" />);
+    expect(screen.getByTestId('test').classList).toContain('navbar-expand-sm');
   });
 
   it('should allow custom breakpoints for expand', () => {
-    const { getByTestId } = render(
-      <Navbar expand="custom" data-testid="test" />,
+    render(<Navbar expand="custom" data-testid="test" />);
+    expect(screen.getByTestId('test').classList).toContain(
+      'navbar-expand-custom',
     );
-    getByTestId('test').classList.contains('navbar-expand-custom').should.be
-      .true;
   });
 
   it('Should render correctly when bg is set', () => {
-    const { getByTestId } = render(<Navbar bg="light" data-testid="test" />);
-    getByTestId('test').classList.contains('bg-light').should.be.true;
+    render(<Navbar bg="light" data-testid="test" />);
+    expect(screen.getByTestId('test').classList).toContain('bg-light');
   });
 
   it('Should render correctly when sticky is set', () => {
-    const { getByTestId } = render(<Navbar sticky="top" data-testid="test" />);
-    getByTestId('test').classList.contains('sticky-top').should.be.true;
+    render(<Navbar sticky="top" data-testid="test" />);
+    expect(screen.getByTestId('test').classList).toContain('sticky-top');
   });
 });

@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-
 import Toast from '../src/Toast';
 
 describe('Toast.Header', () => {
@@ -9,14 +9,15 @@ describe('Toast.Header', () => {
         <strong>content</strong>
       </Toast.Header>,
     );
-    container.firstElementChild!.tagName.toLowerCase().should.equal('div');
+    expect(container.firstElementChild!.tagName.toLowerCase()).toEqual('div');
 
-    container
-      .firstElementChild!.firstElementChild!.tagName.toLowerCase()
-      .should.equal('strong');
+    expect(
+      container.firstElementChild!.firstElementChild!.tagName.toLowerCase(),
+    ).toEqual('strong');
 
-    container.firstElementChild!.classList.contains('toast-header').should.be
-      .true;
+    expect(
+      container.firstElementChild!.classList.contains('toast-header'),
+    ).toEqual(true);
   });
 
   it('should render close button variant', () => {
@@ -25,8 +26,10 @@ describe('Toast.Header', () => {
         <strong>content</strong>
       </Toast.Header>,
     );
-    container
-      .firstElementChild!.getElementsByTagName('button')[0]
-      .classList.contains('btn-close-white').should.be.true;
+    expect(
+      container
+        .firstElementChild!.getElementsByTagName('button')[0]
+        .classList.contains('btn-close-white'),
+    ).toEqual(true);
   });
 });

@@ -1,11 +1,11 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import DropdownButton from '../src/DropdownButton';
 import DropdownItem from '../src/DropdownItem';
 
 describe('<DropdownButton>', () => {
   it('renders a toggle with the title prop', () => {
-    const { getByTestId } = render(
+    render(
       <DropdownButton title="Simple Dropdown" data-testid="test-id">
         <DropdownItem>Item 1</DropdownItem>
         <DropdownItem>Item 2</DropdownItem>
@@ -13,7 +13,9 @@ describe('<DropdownButton>', () => {
         <DropdownItem>Item 4</DropdownItem>
       </DropdownButton>,
     );
-    getByTestId('test-id').textContent!.should.equal('Simple Dropdown');
+    expect(screen.getByTestId('test-id').textContent).toEqual(
+      'Simple Dropdown',
+    );
   });
 
   it('renders single DropdownItem child', () => {
@@ -22,7 +24,7 @@ describe('<DropdownButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
     );
-    getByText('Item 1');
+    expect(getByText('Item 1')).toBeDefined();
   });
 
   it('forwards align="end" to the Dropdown', () => {
@@ -33,11 +35,11 @@ describe('<DropdownButton>', () => {
     );
 
     const menu = container.querySelector('div[x-placement]');
-    menu!.classList.contains('dropdown-menu-end').should.be.true;
+    expect(menu!.classList).toContain('dropdown-menu-end');
   });
 
   it('passes variant and size to the toggle', () => {
-    const { getByTestId } = render(
+    render(
       <DropdownButton
         title="blah"
         size="sm"
@@ -48,9 +50,9 @@ describe('<DropdownButton>', () => {
       </DropdownButton>,
     );
 
-    const button = getByTestId('test-id').firstElementChild!;
-    button.classList.contains('btn-success').should.be.true;
-    button.classList.contains('btn-sm').should.be.true;
+    const button = screen.getByTestId('test-id').firstElementChild!;
+    expect(button.classList).toContain('btn-success');
+    expect(button.classList).toContain('btn-sm');
   });
 
   it('passes menuVariant to dropdown menu', () => {
@@ -61,13 +63,13 @@ describe('<DropdownButton>', () => {
     );
 
     const menu = container.querySelector('div[x-placement]');
-    menu!.classList.contains('dropdown-menu-dark').should.be.true;
+    expect(menu!.classList).toContain('dropdown-menu-dark');
   });
 
   it('forwards onSelect handler to DropdownItems', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <DropdownButton
         defaultShow
         title="Simple Dropdown"
@@ -85,20 +87,20 @@ describe('<DropdownButton>', () => {
       </DropdownButton>,
     );
 
-    fireEvent.click(getByTestId('key1'));
-    onSelectSpy.should.be.calledWith('1');
-    fireEvent.click(getByTestId('key2'));
-    onSelectSpy.should.be.calledWith('2');
-    fireEvent.click(getByTestId('key3'));
-    onSelectSpy.should.be.calledWith('3');
+    fireEvent.click(screen.getByTestId('key1'));
+    expect(onSelectSpy).toHaveBeenCalledWith('1', expect.anything());
+    fireEvent.click(screen.getByTestId('key2'));
+    expect(onSelectSpy).toHaveBeenCalledWith('2', expect.anything());
+    fireEvent.click(screen.getByTestId('key3'));
+    expect(onSelectSpy).toHaveBeenCalledWith('3', expect.anything());
 
-    onSelectSpy.should.be.calledThrice;
+    expect(onSelectSpy).toBeCalledTimes(3);
   });
 
   it('does not close when onToggle is controlled', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
-    const { container, getByTestId } = render(
+    const { container } = render(
       <DropdownButton
         show
         title="Simple Dropdown"
@@ -111,12 +113,12 @@ describe('<DropdownButton>', () => {
       </DropdownButton>,
     );
 
-    fireEvent.click(getByTestId('test-id').firstElementChild!);
-    fireEvent.click(getByTestId('key1'));
+    fireEvent.click(screen.getByTestId('test-id').firstElementChild!);
+    fireEvent.click(screen.getByTestId('key1'));
 
-    onSelectSpy.should.have.been.calledWith(false);
+    expect(onSelectSpy).toHaveBeenCalledWith(false, expect.anything());
     const menu = container.querySelector('div[x-placement]');
-    menu!.should.exist;
+    expect(menu).toBeDefined();
   });
 
   it('Should pass disabled to button', () => {
@@ -127,17 +129,17 @@ describe('<DropdownButton>', () => {
       </DropdownButton>,
     );
 
-    container.querySelector('button[disabled]')!.should.exist;
+    expect(container.querySelector('button[disabled]')).toBeDefined();
   });
 
   it('should pass bsPrefix to the button', () => {
-    const { getByTestId } = render(
+    render(
       <DropdownButton title="title" data-testid="test-id" bsPrefix="my-button">
         <DropdownItem eventKey="1">Item 1</DropdownItem>
       </DropdownButton>,
     );
 
-    const button = getByTestId('test-id').firstElementChild!;
-    button.classList.contains('my-button-primary').should.be.true;
+    const button = screen.getByTestId('test-id').firstElementChild!;
+    expect(button.classList).toContain('my-button-primary');
   });
 });

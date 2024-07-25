@@ -1,34 +1,35 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormText from '../src/FormText';
 
 describe('<FormText>', () => {
   it('should render correctly', () => {
-    const { getByTestId } = render(
+    render(
       <FormText data-testid="foo" className="my-form-text">
         Help content
       </FormText>,
     );
 
-    const formText = getByTestId('foo');
-    formText.classList.length.should.equal(2);
-    formText.classList.contains('form-text').should.be.true;
-    formText.classList.contains('my-form-text').should.be.true;
-    formText.innerText.should.equal('Help content');
+    const formText = screen.getByTestId('foo');
+    expect(formText.classList).toHaveLength(2);
+    expect(formText.classList).toContain('form-text');
+    expect(formText.classList).toContain('my-form-text');
+    expect(formText.innerText).toEqual('Help content');
   });
 
   it('Should have small as default component', () => {
-    const { getByTestId } = render(<FormText data-testid="foo" />);
+    render(<FormText data-testid="foo" />);
 
-    const formText = getByTestId('foo');
-    formText.tagName.toLowerCase().should.equal('small');
+    const formText = screen.getByTestId('foo');
+    expect(formText.tagName).toEqual('SMALL');
   });
 
   it('Should have "form-text" & "text-muted" class', () => {
-    const { getByTestId } = render(<FormText data-testid="foo" muted />);
+    render(<FormText data-testid="foo" muted />);
 
-    const formText = getByTestId('foo');
-    formText.classList.length.should.equal(2);
-    formText.classList.contains('form-text').should.be.true;
-    formText.classList.contains('text-muted').should.be.true;
+    const formText = screen.getByTestId('foo');
+    expect(formText.classList).toHaveLength(2);
+    expect(formText.classList).toContain('form-text');
+    expect(formText.classList).toContain('text-muted');
   });
 });

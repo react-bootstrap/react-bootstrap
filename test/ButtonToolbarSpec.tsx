@@ -1,28 +1,31 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 
 import Button from '../src/Button';
 import ButtonToolbar from '../src/ButtonToolbar';
 
 describe('ButtonToolbar', () => {
   it('Should output a button toolbar', () => {
-    const { getByRole } = render(
+    render(
       <ButtonToolbar>
         <Button>Title</Button>
       </ButtonToolbar>,
     );
 
-    getByRole('toolbar').classList.contains('btn-toolbar').should.be.true;
+    expect(
+      screen.getByRole('toolbar').classList.contains('btn-toolbar'),
+    ).toEqual(true);
   });
 
   it('Should allow a custom prefix', () => {
-    const { getByRole } = render(
+    render(
       <ButtonToolbar bsPrefix="my-custom-toolbar">
         <Button>Title</Button>
       </ButtonToolbar>,
     );
 
-    const toolbar = getByRole('toolbar');
-    toolbar.classList.contains('my-custom-toolbar').should.be.true;
-    toolbar.classList.contains('btn-toolbar').should.be.false;
+    const toolbar = screen.getByRole('toolbar');
+    expect(toolbar.classList.contains('my-custom-toolbar')).toEqual(true);
+    expect(toolbar.classList.contains('btn-toolbar')).toEqual(false);
   });
 });

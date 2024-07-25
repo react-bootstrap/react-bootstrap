@@ -1,55 +1,54 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import ModalHeader from '../src/ModalHeader';
 
-import Modal from '../src/Modal';
-
-describe('Modal.Header', () => {
+describe('ModalHeader', () => {
   it('uses "div" by default', () => {
-    const { getByTestId } = render(
-      <Modal.Header data-testid="test-modal" className="custom-class">
+    render(
+      <ModalHeader data-testid="test-modal" className="custom-class">
         <strong>Content</strong>
-      </Modal.Header>,
+      </ModalHeader>,
     );
 
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('div');
-    getByTestId('test-modal').classList.contains('modal-header').should.be.true;
-    getByTestId('test-modal').classList.contains('custom-class').should.be.true;
-    getByTestId('test-modal')
-      .querySelector('strong')!
-      .textContent!.should.equal('Content');
+    expect(screen.getByTestId('test-modal').tagName).toEqual('DIV');
+    expect(screen.getByTestId('test-modal').classList).toContain(
+      'modal-header',
+    );
+    expect(screen.getByTestId('test-modal').classList).toContain(
+      'custom-class',
+    );
+    expect(
+      screen.getByTestId('test-modal').querySelector('strong')!.textContent,
+    ).toEqual('Content');
   });
 
   it('has closeButton without a containing Modal and renders', () => {
-    const { getByTestId } = render(
-      <Modal.Header data-testid="test-modal" closeButton />,
-    );
+    render(<ModalHeader data-testid="test-modal" closeButton />);
 
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('div');
-    getByTestId('test-modal').querySelector('button')!.should.exist;
+    expect(screen.getByTestId('test-modal').tagName).toEqual('DIV');
+    expect(
+      screen.getByTestId('test-modal').querySelector('button'),
+    ).toBeDefined();
   });
 
   it('Should trigger onHide when modal is closed', () => {
-    const onHideSpy = sinon.spy();
-    const { getByTestId } = render(
-      <Modal.Header data-testid="test-modal" closeButton onHide={onHideSpy} />,
+    const onHideSpy = vi.fn();
+    render(
+      <ModalHeader data-testid="test-modal" closeButton onHide={onHideSpy} />,
     );
 
-    fireEvent.click(getByTestId('test-modal').querySelector('button')!);
-    onHideSpy.should.be.calledOnce;
+    fireEvent.click(screen.getByTestId('test-modal').querySelector('button')!);
+    expect(onHideSpy).toHaveBeenCalledOnce();
   });
 
   it('should render close button variant', () => {
-    const { getByTestId } = render(
-      <Modal.Header
-        data-testid="test-modal"
-        closeButton
-        closeVariant="white"
-      />,
+    render(
+      <ModalHeader data-testid="test-modal" closeButton closeVariant="white" />,
     );
 
-    const button = getByTestId('test-modal').querySelector('button')!;
+    const button = screen.getByTestId('test-modal').querySelector('button')!;
 
-    button.should.exist;
-    button.classList.contains('btn-close-white').should.be.true;
+    expect(button).toBeDefined();
+    expect(button.classList).toContain('btn-close-white');
   });
 });

@@ -1,24 +1,23 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import NavbarBrand from '../src/NavbarBrand';
 
 describe('<Navbar.Brand>', () => {
   it('Should create NavbarBrand SPAN element', () => {
-    const { getByTestId } = render(
-      <NavbarBrand data-testid="test">Brand</NavbarBrand>,
-    );
-    const navbarBrandElem = getByTestId('test');
-    navbarBrandElem.tagName.toLowerCase().should.equal('span');
-    navbarBrandElem.classList.contains('navbar-brand').should.be.true;
+    render(<NavbarBrand data-testid="test">Brand</NavbarBrand>);
+    const navbarBrandElem = screen.getByTestId('test');
+    expect(navbarBrandElem.tagName).toEqual('SPAN');
+    expect(navbarBrandElem.classList).toContain('navbar-brand');
   });
 
   it('Should create NavbarBrand A (link) element', () => {
-    const { getByTestId } = render(
+    render(
       <NavbarBrand href="/foo" data-testid="test">
         BrandLink
       </NavbarBrand>,
     );
-    const navbarBrandElem = getByTestId('test');
-    navbarBrandElem.tagName.toLowerCase().should.equal('a');
-    navbarBrandElem.classList.contains('navbar-brand').should.be.true;
+    const navbarBrandElem = screen.getByTestId('test');
+    expect(navbarBrandElem.tagName).toEqual('A');
+    expect(navbarBrandElem.classList).toContain('navbar-brand');
   });
 });

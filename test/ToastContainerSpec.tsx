@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import ToastContainer, { ToastPosition } from '../src/ToastContainer';
 
@@ -16,25 +17,27 @@ const expectedClasses: Record<ToastPosition, Array<string>> = {
 describe('ToastContainer', () => {
   it('should render a basic toast container', () => {
     const { container } = render(<ToastContainer />);
-    container.firstElementChild!.classList.contains('toast-container').should.be
-      .true;
+    expect(
+      container.firstElementChild!.classList.contains('toast-container'),
+    ).toEqual(true);
   });
 
   it('should render the containerPosition', () => {
     const { container } = render(
       <ToastContainer containerPosition="relative" />,
     );
-    container.firstElementChild!.classList.contains('position-relative').should
-      .be.true;
+    expect(
+      container.firstElementChild!.classList.contains('position-relative'),
+    ).toEqual(true);
   });
 
   Object.keys(expectedClasses).forEach((position: ToastPosition) => {
     it(`should render position=${position}`, () => {
       const { container } = render(<ToastContainer position={position} />);
-      expectedClasses[position].map(
-        (className) =>
-          container.firstElementChild!.classList.contains(className).should.be
-            .true,
+      expectedClasses[position].map((className) =>
+        expect(
+          container.firstElementChild!.classList.contains(className),
+        ).toEqual(true),
       );
     });
   });

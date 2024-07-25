@@ -1,32 +1,32 @@
 /* eslint-disable no-new-func */
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
 import createChainedFunction from '../src/createChainedFunction';
 
 describe('createChainedFunction', () => {
   it('returns null with no arguments', () => {
-    expect(createChainedFunction()).to.equal(null);
+    expect(createChainedFunction()).toEqual(null);
   });
 
   it('returns original function when single function is provided', () => {
-    const func1 = sinon.stub();
-    createChainedFunction(func1).should.equal(func1);
+    const func1 = vi.fn();
+    expect(createChainedFunction(func1)).toEqual(func1);
   });
 
   it('wraps two functions with another that invokes both when called', () => {
-    const func1 = sinon.stub();
-    const func2 = sinon.stub();
+    const func1 = vi.fn();
+    const func2 = vi.fn();
     const chained = createChainedFunction(func1, func2);
 
-    chained.should.not.equal(func1).and.should.not.equal(func2);
+    expect(chained).not.toEqual(func1);
+    expect(chained).not.toEqual(func2);
 
-    func1.should.not.have.been.called;
-    func2.should.not.have.been.called;
+    expect(func1).not.toHaveBeenCalled();
+    expect(func2).not.toHaveBeenCalled();
 
     chained();
 
-    func1.should.have.been.calledOnce;
-    func2.should.have.been.calledOnce;
+    expect(func1).toHaveBeenCalledOnce();
+    expect(func2).toHaveBeenCalledOnce();
   });
 
   it('wraps multiple functions and invokes them in the order provided', () => {
@@ -36,7 +36,7 @@ describe('createChainedFunction', () => {
     const func3 = () => results.push(3);
     const chained = createChainedFunction(func1, func2, func3);
     chained();
-    results.should.eql([1, 2, 3]);
+    expect(results).toEqual([1, 2, 3]);
   });
 
   it('forwards arguments to all chained functions', () => {
@@ -46,8 +46,8 @@ describe('createChainedFunction', () => {
     };
 
     const func = (arg1: any, arg2: any) => {
-      arg1.should.equal(in1);
-      arg2.should.equal(in2);
+      expect(arg1).toEqual(in1);
+      expect(arg2).toEqual(in2);
     };
 
     const chained = createChainedFunction(func, func, func);
@@ -57,7 +57,7 @@ describe('createChainedFunction', () => {
   it('throws when func is not provided', () => {
     expect(() => {
       createChainedFunction({ herpa: 'derpa' });
-    }).to.throw(/Invalid Argument Type/);
+    }).toThrow(/Invalid Argument Type/);
   });
 
   it('works with new Function call', () => {
@@ -66,6 +66,6 @@ describe('createChainedFunction', () => {
     const func2 = new Function('results', 'results.push(2);');
     const chained = createChainedFunction(func1, func2);
     chained(results);
-    results.should.eql([1, 2]);
+    expect(results).toEqual([1, 2]);
   });
 });

@@ -1,53 +1,58 @@
-import { render } from '@testing-library/react';
-import { expect } from 'chai';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import CardImg from '../src/CardImg';
 
 describe('<CardImg>', () => {
   it('should output an img', () => {
-    const { getByRole } = render(<CardImg src="#" />);
+    render(<CardImg src="#" />);
 
-    getByRole('img').should.exist;
+    expect(screen.getByRole('img')).toBeTruthy();
   });
 
   it('should pass down src to img', () => {
     const url = 'http://fakeurl.com/pic.jpg';
-    const { getByRole } = render(<CardImg src={url} />);
+    render(<CardImg src={url} />);
 
-    expect(getByRole('img').getAttribute('src')).to.be.equal(url);
+    expect(screen.getByRole('img').getAttribute('src')).to.be.equal(url);
   });
 
   it('Should have img as default component', () => {
-    const { getByRole } = render(<CardImg />);
+    render(<CardImg />);
 
-    getByRole('img').should.exist;
+    expect(screen.getByRole('img')).toBeTruthy();
   });
 
   it('accepts as prop', () => {
-    const { getByRole } = render(<CardImg as="figure">img</CardImg>);
+    render(<CardImg as="figure">img</CardImg>);
 
-    const card = getByRole('figure');
-    card.tagName.toLowerCase().should.equal('figure');
-    card.classList.contains('card-img').should.equal(true);
+    const card = screen.getByRole('figure');
+    expect(card.tagName.toLowerCase()).toEqual('figure');
+    expect(card.classList.contains('card-img')).toEqual(true);
   });
 
   describe('variants', () => {
     it('null', () => {
-      const { getByRole } = render(<CardImg />);
+      render(<CardImg />);
 
-      getByRole('img').classList.contains('card-img').should.be.true;
+      expect(screen.getByRole('img').classList.contains('card-img')).toEqual(
+        true,
+      );
     });
 
     it('top', () => {
-      const { getByRole } = render(<CardImg variant="top" />);
+      render(<CardImg variant="top" />);
 
-      getByRole('img').classList.contains('card-img-top').should.be.true;
+      expect(
+        screen.getByRole('img').classList.contains('card-img-top'),
+      ).toEqual(true);
     });
 
     it('bottom', () => {
-      const { getByRole } = render(<CardImg variant="bottom" />);
+      render(<CardImg variant="bottom" />);
 
-      getByRole('img').classList.contains('card-img-bottom').should.be.true;
+      expect(
+        screen.getByRole('img').classList.contains('card-img-bottom'),
+      ).toEqual(true);
     });
   });
 });
