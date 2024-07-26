@@ -1,28 +1,26 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Breadcrumb from '../src/Breadcrumb';
 
 describe('<Breadcrumb>', () => {
   it('Should apply id to the wrapper ol element', () => {
     const { container } = render(<Breadcrumb id="custom-id" />);
 
-    container.querySelectorAll('#custom-id').length.should.equal(1);
+    expect(container.querySelectorAll('#custom-id').length).toEqual(1);
   });
 
   it('Should have breadcrumb class inside ol', () => {
-    const { getByRole } = render(<Breadcrumb />);
+    render(<Breadcrumb />);
 
-    getByRole('list').classList.contains('breadcrumb').should.be.true;
+    expect(screen.getByRole('list').classList).toContain('breadcrumb');
   });
 
   it('Should have custom classes', () => {
-    const { getByTestId } = render(
-      <Breadcrumb className="custom-one custom-two" data-testid="test" />,
-    );
+    render(<Breadcrumb className="custom-one custom-two" data-testid="test" />);
 
-    const breadcrumb = getByTestId('test');
-    breadcrumb.classList.contains('custom-one').should.be.true;
-    breadcrumb.classList.contains('custom-two').should.be.true;
+    const breadcrumb = screen.getByTestId('test');
+    expect(breadcrumb.classList).toContain('custom-one');
+    expect(breadcrumb.classList).toContain('custom-two');
   });
 
   it('Should not have a navigation role', () => {
@@ -30,19 +28,19 @@ describe('<Breadcrumb>', () => {
       <Breadcrumb className="custom-one custom-two" />,
     );
 
-    container.querySelectorAll('ol[role="navigation"]').length.should.equal(0);
+    expect(container.querySelectorAll('ol[role="navigation"]').length).toEqual(
+      0,
+    );
   });
 
   it('Should have an aria-label in ol', () => {
-    const { getByLabelText } = render(
-      <Breadcrumb className="custom-one custom-two" />,
-    );
-    getByLabelText('breadcrumb').should.exist;
+    render(<Breadcrumb className="custom-one custom-two" />);
+    expect(screen.getByLabelText('breadcrumb')).toBeTruthy();
   });
 
   it('Should have nav as default component', () => {
-    const { getByTestId } = render(<Breadcrumb data-testid="test" />);
+    render(<Breadcrumb data-testid="test" />);
 
-    getByTestId('test').tagName.toLowerCase().should.equal('nav');
+    expect(screen.getByTestId('test').tagName).toEqual('NAV');
   });
 });

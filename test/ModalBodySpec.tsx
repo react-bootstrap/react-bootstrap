@@ -1,28 +1,29 @@
+import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-import Modal from '../src/Modal';
+import ModalBody from '../src/ModalBody';
 
-describe('Modal.Body', () => {
+describe('ModalBody', () => {
   it('uses "div" by default', () => {
     const { getByTestId } = render(
-      <Modal.Body data-testid="test-modal" className="custom-class">
+      <ModalBody data-testid="test-modal" className="custom-class">
         <strong>Content</strong>
-      </Modal.Body>,
+      </ModalBody>,
     );
 
     const elem = getByTestId('test-modal');
-    elem.tagName.toLowerCase().should.equal('div');
-    elem.classList.contains('modal-body').should.be.true;
-    elem.classList.contains('custom-class').should.be.true;
-    elem.querySelector('strong')!.textContent!.should.equal('Content');
+    expect(elem.tagName).toEqual('DIV');
+    expect(elem.classList).toContain('modal-body');
+    expect(elem.classList).toContain('custom-class');
+    expect(elem.querySelector('strong')!.textContent).toEqual('Content');
   });
 
   it('should allow custom elements instead of "div"', () => {
     const { getByTestId } = render(
-      <Modal.Body data-testid="test-modal" as="section">
+      <ModalBody data-testid="test-modal" as="section">
         <strong>Content</strong>
-      </Modal.Body>,
+      </ModalBody>,
     );
-    getByTestId('test-modal').classList.contains('modal-body').should.be.true;
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('section');
+    expect(getByTestId('test-modal').classList).toContain('modal-body');
+    expect(getByTestId('test-modal').tagName).toEqual('SECTION');
   });
 });

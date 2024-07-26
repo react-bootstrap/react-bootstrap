@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import DropdownItem from '../src/DropdownItem';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
@@ -7,7 +7,7 @@ import NavDropdown from '../src/NavDropdown';
 
 describe('<NavDropdown>', () => {
   it('Should render li when in nav', () => {
-    const { getByTestId } = render(
+    render(
       <NavDropdown
         defaultShow
         title="Title"
@@ -19,17 +19,16 @@ describe('<NavDropdown>', () => {
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
     );
-    const navDropdownElem = getByTestId('test');
-    navDropdownElem.classList.contains('dropdown').should.be.true;
-    navDropdownElem.classList.contains('test-class').should.be.true;
+    const navDropdownElem = screen.getByTestId('test');
+    expect(navDropdownElem.classList).toContain('dropdown');
+    expect(navDropdownElem.classList).toContain('test-class');
 
-    navDropdownElem.firstElementChild!.classList.contains('nav-link').should.be
-      .true;
-    navDropdownElem.firstElementChild!.textContent!.should.equal('Title');
+    expect(navDropdownElem.firstElementChild!.classList).toContain('nav-link');
+    expect(navDropdownElem.firstElementChild!.textContent).toEqual('Title');
   });
 
   it('renders active toggle', () => {
-    const { getByTestId } = render(
+    render(
       <NavDropdown
         defaultShow
         active
@@ -41,13 +40,12 @@ describe('<NavDropdown>', () => {
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
     );
-    const navDropdownElem = getByTestId('test');
-    navDropdownElem.firstElementChild!.classList.contains('active').should.be
-      .true;
+    const navDropdownElem = screen.getByTestId('test');
+    expect(navDropdownElem.firstElementChild!.classList).toContain('active');
   });
 
   it('should handle child active state', () => {
-    const { getByTestId } = render(
+    render(
       <Nav defaultActiveKey="2">
         <NavDropdown defaultShow id="test-id" title="title">
           <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
@@ -59,25 +57,27 @@ describe('<NavDropdown>', () => {
       </Nav>,
     );
 
-    getByTestId('test').textContent!.should.equal('DropdownItem 2 content');
+    expect(screen.getByTestId('test').textContent).toEqual(
+      'DropdownItem 2 content',
+    );
   });
 
   it('should pass the id to the NavLink element', () => {
-    const { getByTestId } = render(
+    render(
       <NavDropdown id="test-id" title="title" data-testid="test">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </NavDropdown>,
     );
-    getByTestId('test').firstElementChild!.id.should.equal('test-id');
+    expect(screen.getByTestId('test').firstElementChild!.id).toEqual('test-id');
   });
 
   it('should support as as prop', () => {
-    const { getByTestId } = render(
+    render(
       <NavDropdown as="li" id="test-id" title="title" data-testid="test">
         <DropdownItem eventKey="1">Item 1</DropdownItem>
       </NavDropdown>,
     );
-    getByTestId('test').tagName.toLowerCase().should.equal('li');
+    expect(screen.getByTestId('test').tagName).toEqual('LI');
   });
 
   it('passes menuVariant to dropdown menu', () => {
@@ -86,7 +86,7 @@ describe('<NavDropdown>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </NavDropdown>,
     );
-    document.querySelector('.dropdown-menu-dark')!.should.exist;
+    expect(document.querySelector('.dropdown-menu-dark')).toBeDefined();
   });
 
   it('sets data-bs-popper attribute on dropdown menu', () => {
@@ -97,8 +97,8 @@ describe('<NavDropdown>', () => {
         </NavDropdown>
       </Navbar>,
     );
-    document
-      .querySelectorAll('.dropdown-menu[data-bs-popper="static"]')
-      .length.should.equal(1);
+    expect(
+      document.querySelectorAll('.dropdown-menu[data-bs-popper="static"]'),
+    ).toHaveLength(1);
   });
 });

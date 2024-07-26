@@ -1,31 +1,29 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Carousel from '../src/Carousel';
 
 describe('<Carousel.Caption>', () => {
   it('uses "div" by default', () => {
-    const { getByTestId, getByText } = render(
+    render(
       <Carousel.Caption className="custom-class" data-testid="test">
         <strong>Children</strong>
       </Carousel.Caption>,
     );
 
-    const captionWrapper = getByTestId('test');
-    captionWrapper.tagName.toLowerCase().should.equal('div');
-    captionWrapper.classList.contains('carousel-caption').should.be.true;
-    captionWrapper.classList.contains('custom-class').should.be.true;
+    const captionWrapper = screen.getByTestId('test');
+    expect(captionWrapper.tagName).toEqual('DIV');
+    expect(captionWrapper.classList).toContain('carousel-caption');
+    expect(captionWrapper.classList).toContain('custom-class');
 
-    const content = getByText('Children');
-    content.tagName.toLowerCase().should.equal('strong');
+    const content = screen.getByText('Children');
+    expect(content.tagName).toEqual('STRONG');
   });
 
   it('should allow custom elements instead of "div"', () => {
-    const { getByTestId } = render(
-      <Carousel.Caption as="section" data-testid="test" />,
-    );
+    render(<Carousel.Caption as="section" data-testid="test" />);
 
-    const caption = getByTestId('test');
-    caption.tagName.toLowerCase().should.equal('section');
-    caption.classList.contains('carousel-caption').should.be.true;
+    const caption = screen.getByTestId('test');
+    expect(caption.tagName).toEqual('SECTION');
+    expect(caption.classList).toContain('carousel-caption');
   });
 });

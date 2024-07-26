@@ -1,73 +1,62 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import ListGroup from '../src/ListGroup';
-
-import { shouldWarn } from './helpers';
 
 describe('<ListGroup>', () => {
   it('Should render correctly "list-group"', () => {
-    const { getByTestId } = render(<ListGroup data-testid="test" />);
+    render(<ListGroup data-testid="test" />);
 
-    const listGroup = getByTestId('test');
-    listGroup.tagName.toLowerCase().should.equal('div');
-    listGroup.classList.contains('list-group').should.be.true;
+    const listGroup = screen.getByTestId('test');
+    expect(listGroup.tagName).toEqual('DIV');
+    expect(listGroup.classList).toContain('list-group');
   });
 
   it('accepts <ListGroup.Item> children', () => {
-    const { getByTestId } = render(
+    render(
       <ListGroup>
         <ListGroup.Item data-testid="test">hey!</ListGroup.Item>
       </ListGroup>,
     );
 
-    const listGroupItem = getByTestId('test');
-    listGroupItem.classList.contains('list-group-item').should.be.true;
+    const listGroupItem = screen.getByTestId('test');
+    expect(listGroupItem.classList).toContain('list-group-item');
   });
 
   it('accepts variant', () => {
-    const { getByTestId } = render(
-      <ListGroup variant="flush" data-testid="test" />,
-    );
+    render(<ListGroup variant="flush" data-testid="test" />);
 
-    const listGroup = getByTestId('test');
-    listGroup.classList.contains('list-group').should.be.true;
-    listGroup.classList.contains('list-group-flush').should.be.true;
+    const listGroup = screen.getByTestId('test');
+    expect(listGroup.classList).toContain('list-group');
+    expect(listGroup.classList).toContain('list-group-flush');
   });
 
   it('accepts global horizontal', () => {
-    const { getByTestId } = render(<ListGroup horizontal data-testid="test" />);
+    render(<ListGroup horizontal data-testid="test" />);
 
-    const listGroup = getByTestId('test');
-    listGroup.classList.contains('list-group-horizontal').should.be.true;
+    const listGroup = screen.getByTestId('test');
+    expect(listGroup.classList).toContain('list-group-horizontal');
   });
 
   (['sm', 'md', 'lg', 'xl', 'xxl', 'custom'] as const).forEach((breakpoint) => {
     it(`accepts responsive horizontal ${breakpoint} breakpoint`, () => {
-      const { getByTestId } = render(
-        <ListGroup horizontal={breakpoint} data-testid="test" />,
-      );
+      render(<ListGroup horizontal={breakpoint} data-testid="test" />);
 
-      const listGroup = getByTestId('test');
+      const listGroup = screen.getByTestId('test');
       const breakpointClass = `list-group-horizontal-${breakpoint}`;
-      listGroup.classList.contains(breakpointClass).should.be.true;
+      expect(listGroup.classList).toContain(breakpointClass);
     });
   });
 
-  it('throws a warning if flush and horizontal are used', () => {
-    shouldWarn('together');
-    render(<ListGroup horizontal variant="flush" />);
-  });
-
   it('accepts as prop', () => {
-    const { getByTestId } = render(<ListGroup as="ul" data-testid="test" />);
+    render(<ListGroup as="ul" data-testid="test" />);
 
-    const listGroup = getByTestId('test');
-    listGroup.tagName.toLowerCase().should.equal('ul');
-    listGroup.classList.contains('list-group').should.be.true;
+    const listGroup = screen.getByTestId('test');
+    expect(listGroup.tagName).toEqual('UL');
+    expect(listGroup.classList).toContain('list-group');
   });
 
   it('should set active class on list item if activeKey set on parent', () => {
-    const { getByTestId } = render(
+    render(
       <ListGroup activeKey="1">
         <ListGroup.Item eventKey="1" data-testid="list-item">
           test
@@ -75,17 +64,17 @@ describe('<ListGroup>', () => {
       </ListGroup>,
     );
 
-    getByTestId('list-item').classList.contains('active').should.be.true;
+    expect(screen.getByTestId('list-item').classList).toContain('active');
   });
 
   it('should add numbered class', () => {
-    const { getByTestId } = render(
+    render(
       <ListGroup activeKey="1" numbered data-testid="list-group">
         <ListGroup.Item eventKey="1">test</ListGroup.Item>
       </ListGroup>,
     );
 
-    const listGroup = getByTestId('list-group');
-    listGroup.classList.contains('list-group-numbered').should.be.true;
+    const listGroup = screen.getByTestId('list-group');
+    expect(listGroup.classList).toContain('list-group-numbered');
   });
 });

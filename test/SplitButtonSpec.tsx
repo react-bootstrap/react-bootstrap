@@ -1,5 +1,5 @@
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import SplitButton from '../src/SplitButton';
 import DropdownItem from '../src/DropdownItem';
 
@@ -14,44 +14,28 @@ describe('<SplitButton>', () => {
   );
 
   it('should open the menu when dropdown button is clicked', () => {
-    const { getByTestId } = render(simple);
-    const splitButtonElem = getByTestId('test-wrapper');
+    render(simple);
+    const splitButtonElem = screen.getByTestId('test-wrapper');
 
-    splitButtonElem.classList.contains('show').should.be.false;
+    expect(splitButtonElem.classList).not.toContain('show');
     fireEvent.click(splitButtonElem.children[1]);
 
-    splitButtonElem.classList.contains('show').should.be.true;
+    expect(splitButtonElem.classList).toContain('show');
   });
 
   it('should not open the menu when other button is clicked', () => {
-    const { getByTestId } = render(simple);
-    const splitButtonElem = getByTestId('test-wrapper');
+    render(simple);
+    const splitButtonElem = screen.getByTestId('test-wrapper');
 
-    splitButtonElem.classList.contains('show').should.be.false;
+    expect(splitButtonElem.classList).not.toContain('show');
     fireEvent.click(splitButtonElem.children[0]);
-    splitButtonElem.classList.contains('show').should.be.false;
+    expect(splitButtonElem.classList).not.toContain('show');
   });
 
-  it('should invoke onClick when SplitButton.Button is clicked (prop)', (done) => {
-    const { getByTestId } = render(
-      <SplitButton
-        data-testid="test-wrapper"
-        title="Title"
-        id="test-id"
-        onClick={() => done()}
-      >
-        <DropdownItem>Item 1</DropdownItem>
-      </SplitButton>,
-    );
-    const splitButtonElem = getByTestId('test-wrapper');
+  it('should invoke onClick when SplitButton.Button is clicked (prop)', () => {
+    const onClickSpy = vi.fn();
 
-    fireEvent.click(splitButtonElem.firstElementChild!);
-  });
-
-  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', () => {
-    const onClickSpy = sinon.spy();
-
-    const { getByTestId } = render(
+    render(
       <SplitButton
         data-testid="test-wrapper"
         title="Title"
@@ -61,14 +45,34 @@ describe('<SplitButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
-    const splitButtonElem = getByTestId('test-wrapper');
+    const splitButtonElem = screen.getByTestId('test-wrapper');
+
+    fireEvent.click(splitButtonElem.firstElementChild!);
+
+    expect(onClickSpy).toHaveBeenCalled();
+  });
+
+  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', () => {
+    const onClickSpy = vi.fn();
+
+    render(
+      <SplitButton
+        data-testid="test-wrapper"
+        title="Title"
+        id="test-id"
+        onClick={onClickSpy}
+      >
+        <DropdownItem>Item 1</DropdownItem>
+      </SplitButton>,
+    );
+    const splitButtonElem = screen.getByTestId('test-wrapper');
     fireEvent.click(splitButtonElem.children[1]);
 
-    onClickSpy.should.not.have.been.called;
+    expect(onClickSpy).not.toHaveBeenCalled();
   });
 
   it('Should pass disabled to both buttons', () => {
-    const { getByTestId } = render(
+    render(
       <SplitButton
         data-testid="test-wrapper"
         title="Title"
@@ -78,15 +82,15 @@ describe('<SplitButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
-    const splitButtonElem = getByTestId('test-wrapper');
+    const splitButtonElem = screen.getByTestId('test-wrapper');
 
-    splitButtonElem.getAttribute('disabled')!.should.exist;
-    splitButtonElem.children[0].getAttribute('disabled')!.should.exist;
-    splitButtonElem.children[1].getAttribute('disabled')!.should.exist;
+    expect(splitButtonElem.getAttribute('disabled')).toBeDefined();
+    expect(splitButtonElem.children[0].getAttribute('disabled')).toBeDefined();
+    expect(splitButtonElem.children[1].getAttribute('disabled')).toBeDefined();
   });
 
   it('Should set target attribute on anchor', () => {
-    const { getByTestId } = render(
+    render(
       <SplitButton
         title="Title"
         id="test-id"
@@ -97,34 +101,34 @@ describe('<SplitButton>', () => {
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </SplitButton>,
     );
-    const splitButtonElem = getByTestId('test-wrapper');
-    splitButtonElem.firstElementChild!.tagName.toLowerCase().should.equal('a');
-    splitButtonElem
-      .firstElementChild!.getAttribute('href')!
-      .should.equal('/some/unique-thing/');
-    splitButtonElem
-      .firstElementChild!.getAttribute('target')!
-      .should.equal('_blank');
+    const splitButtonElem = screen.getByTestId('test-wrapper');
+    expect(splitButtonElem.firstElementChild!.tagName).toEqual('A');
+    expect(splitButtonElem.firstElementChild!.getAttribute('href')).toEqual(
+      '/some/unique-thing/',
+    );
+    expect(splitButtonElem.firstElementChild!.getAttribute('target')).toEqual(
+      '_blank',
+    );
   });
 
   it('should set accessible label on toggle', () => {
-    const { getByText } = render(simple);
-    const toggleLabelElem = getByText('Toggle dropdown');
-    toggleLabelElem.classList.contains('visually-hidden').should.be.true;
+    render(simple);
+    const toggleLabelElem = screen.getByText('Toggle dropdown');
+    expect(toggleLabelElem.classList).toContain('visually-hidden');
   });
 
   it('should set aria-label on toggle from toggleLabel', () => {
-    const { getByText } = render(
+    render(
       <SplitButton title="Title" id="test-id" toggleLabel="Label">
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
-    const labelElem = getByText('Label');
-    labelElem.classList.contains('visually-hidden').should.be.true;
+    const labelElem = screen.getByText('Label');
+    expect(labelElem.classList).toContain('visually-hidden');
   });
 
   it('should set type attribute from type', () => {
-    const { getByTestId } = render(
+    render(
       <SplitButton
         data-testid="test-wrapper"
         title="Title"
@@ -134,9 +138,9 @@ describe('<SplitButton>', () => {
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
-    const splitButtonElem = getByTestId('test-wrapper');
-    splitButtonElem
-      .firstElementChild!.getAttribute('type')!
-      .should.equal('submit');
+    const splitButtonElem = screen.getByTestId('test-wrapper');
+    expect(splitButtonElem.firstElementChild!.getAttribute('type')).toEqual(
+      'submit',
+    );
   });
 });

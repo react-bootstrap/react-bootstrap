@@ -1,38 +1,38 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Container from '../src/Container';
 
 describe('<Container>', () => {
   it('should render props correctly', () => {
-    const { getByText } = render(
-      <Container className="whatever">Container</Container>,
-    );
-    getByText('Container').classList.contains('whatever').should.be.true;
+    render(<Container className="whatever">Container</Container>);
+    expect(screen.getByText('Container').classList).toContain('whatever');
   });
 
   it('turns grid into "full-width" layout via "fluid" property set', () => {
-    const { getByText } = render(<Container fluid>Container</Container>);
-    getByText('Container').classList.contains('container-fluid').should.be.true;
+    render(<Container fluid>Container</Container>);
+    expect(screen.getByText('Container').classList).toContain(
+      'container-fluid',
+    );
   });
 
   it('Should include size breakpoint class when fluid is set to sm, md, lg or xl', () => {
-    const { getByText } = render(<Container fluid="sm">Container</Container>);
-    getByText('Container').classList.contains('container-sm').should.be.true;
+    render(<Container fluid="sm">Container</Container>);
+    expect(screen.getByText('Container').classList).toContain('container-sm');
   });
 
   it('allows custom elements instead of "div"', () => {
-    const { getByText } = render(<Container as="section">Container</Container>);
-    getByText('Container').classList.contains('container').should.be.true;
-    getByText('Container').tagName.toLowerCase().should.equal('section');
+    render(<Container as="section">Container</Container>);
+    expect(screen.getByText('Container').classList).toContain('container');
+    expect(screen.getByText('Container').tagName).toEqual('SECTION');
   });
 
   it('Should have div as default component', () => {
-    const { getByText } = render(<Container>Container</Container>);
-    getByText('Container').tagName.toLowerCase().should.equal('div');
+    render(<Container>Container</Container>);
+    expect(screen.getByText('Container').tagName).toEqual('DIV');
   });
 
   it('should allow custom breakpoints', () => {
-    const { getByText } = render(<Container fluid="custom">test</Container>);
-    getByText('test').classList.contains('container-custom').should.be.true;
+    render(<Container fluid="custom">test</Container>);
+    expect(screen.getByText('test').classList).toContain('container-custom');
   });
 });

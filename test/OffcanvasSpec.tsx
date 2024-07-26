@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { expect } from 'chai';
+import { describe, expect, it, vi } from 'vitest';
 import ModalManager from '@restart/ui/ModalManager';
-import { fireEvent, render, waitFor } from '@testing-library/react';
-import sinon from 'sinon';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Offcanvas from '../src/Offcanvas';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -11,55 +10,55 @@ const noop = () => {};
 
 describe('<Offcanvas>', () => {
   it('Should render the modal content', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas show onHide={noop}>
         <strong data-testid="test">Message</strong>
       </Offcanvas>,
     );
-    const strongElem = getByTestId('test');
-    strongElem.tagName.toLowerCase().should.equal('strong');
-    strongElem.textContent!.should.equal('Message');
+    const strongElem = screen.getByTestId('test');
+    expect(strongElem.tagName).toEqual('STRONG');
+    expect(strongElem.textContent).toEqual('Message');
   });
 
   it('Should set `visibility: visible` to `offcanvas`', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas data-testid="test" show>
         <strong>Message</strong>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
+    const offcanvasElem = screen.getByTestId('test');
 
-    offcanvasElem.tagName.toLowerCase().should.equal('div');
-    offcanvasElem.classList.contains('offcanvas').should.be.true;
-    offcanvasElem.style.visibility!.should.equal('visible');
+    expect(offcanvasElem.tagName).toEqual('DIV');
+    expect(offcanvasElem.classList).toContain('offcanvas');
+    expect(offcanvasElem.style.visibility).toEqual('visible');
   });
 
-  it('Should close the offcanvas when the modal close button is clicked', (done) => {
-    const doneOp = () => {
-      done();
-    };
+  it('Should close the offcanvas when the modal close button is clicked', async () => {
+    const onHideSpy = vi.fn();
 
     render(
-      <Offcanvas show onHide={doneOp}>
+      <Offcanvas show onHide={onHideSpy}>
         <Offcanvas.Header closeButton />
         <strong>Message</strong>
       </Offcanvas>,
     );
     const buttonElem = document.getElementsByClassName('btn-close')[0];
 
-    buttonElem.classList.contains('btn-close').should.be.true;
+    expect(buttonElem.classList).toContain('btn-close');
 
     fireEvent.click(buttonElem);
+
+    await waitFor(() => expect(onHideSpy).toHaveBeenCalled());
   });
 
   it('Should pass className to the offcanvas', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas show className="myoffcanvas" onHide={noop} data-testid="test">
         <strong>Message</strong>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
-    offcanvasElem.classList.contains('myoffcanvas').should.be.true;
+    const offcanvasElem = screen.getByTestId('test');
+    expect(offcanvasElem.classList).toContain('myoffcanvas');
   });
 
   it('Should pass backdropClassName to the backdrop', () => {
@@ -70,21 +69,21 @@ describe('<Offcanvas>', () => {
     );
     const backdropElem =
       document.getElementsByClassName('offcanvas-backdrop')[0];
-    backdropElem.classList.contains('custom-backdrop').should.be.true;
+    expect(backdropElem.classList).toContain('custom-backdrop');
   });
 
   it('Should pass style to the offcanvas', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas show style={{ color: 'red' }} onHide={noop} data-testid="test">
         <strong>Message</strong>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
-    offcanvasElem.style.color.should.equal('red');
+    const offcanvasElem = screen.getByTestId('test');
+    expect(offcanvasElem.style.color).toEqual('red');
   });
 
   it('Should pass transition callbacks to Transition', async () => {
-    const increment = sinon.spy();
+    const increment = vi.fn();
     const Elem = () => {
       const [show, setShow] = React.useState(true);
       return (
@@ -108,11 +107,11 @@ describe('<Offcanvas>', () => {
 
     render(<Elem />);
 
-    await waitFor(() => increment.callCount.should.equal(6));
+    await waitFor(() => expect(increment).toHaveBeenCalledTimes(6));
   });
 
   it('Should close when backdrop clicked', () => {
-    const onHideSpy = sinon.spy();
+    const onHideSpy = vi.fn();
     render(
       <Offcanvas show onHide={onHideSpy}>
         <strong>Message</strong>
@@ -123,11 +122,11 @@ describe('<Offcanvas>', () => {
 
     fireEvent.click(backdropElem);
 
-    onHideSpy.should.have.been.called;
+    expect(onHideSpy).toHaveBeenCalled();
   });
 
   it('should not close when static backdrop is clicked', () => {
-    const onHideSpy = sinon.spy();
+    const onHideSpy = vi.fn();
     render(
       <Offcanvas show onHide={onHideSpy} backdrop="static">
         <strong>Message</strong>
@@ -138,13 +137,13 @@ describe('<Offcanvas>', () => {
 
     fireEvent.click(backdropElem);
 
-    onHideSpy.should.not.have.been.called;
+    expect(onHideSpy).not.toHaveBeenCalled();
   });
 
   // TODO: unsure if we need this, since it seems like Offcanvas is still undergoing some
   // changes upstream.
   // it('Should close when anything outside offcanvas clicked and backdrop=false', () => {
-  //   const onHideSpy = sinon.spy();
+  //   const onHideSpy = vi.fn();
   //   render(
   //     <>
   //       <Offcanvas show onHide={onHideSpy} backdrop={false}>
@@ -158,12 +157,12 @@ describe('<Offcanvas>', () => {
 
   //   fireEvent.click(document.body);
 
-  //   onHideSpy.should.have.been.called;
+  //   onHideSpy).toHaveBeenCalled()
   // });
 
   it('Should not call onHide if the click target comes from inside the offcanvas', () => {
-    const onHideSpy = sinon.spy();
-    const { getByTestId } = render(
+    const onHideSpy = vi.fn();
+    render(
       <>
         <Offcanvas show onHide={onHideSpy} data-testid="test">
           <strong>Message</strong>
@@ -171,14 +170,14 @@ describe('<Offcanvas>', () => {
         <div id="outside">outside</div>
       </>,
     );
-    const offcanvasElem = getByTestId('test');
+    const offcanvasElem = screen.getByTestId('test');
     fireEvent.click(offcanvasElem);
 
-    onHideSpy.should.not.have.been.called;
+    expect(onHideSpy).not.toHaveBeenCalled();
   });
 
   it('Should set aria-labelledby to the role="dialog" element if aria-labelledby set', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas
         show
         onHide={noop}
@@ -192,16 +191,16 @@ describe('<Offcanvas>', () => {
         </Offcanvas.Header>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
-    offcanvasElem.classList.contains('show').should.be.true;
-    offcanvasElem.getAttribute('role')!.should.equal('dialog');
-    offcanvasElem
-      .getAttribute('aria-labelledby')!
-      .should.equal('offcanvas-title');
+    const offcanvasElem = screen.getByTestId('test');
+    expect(offcanvasElem.classList).toContain('show');
+    expect(offcanvasElem.getAttribute('role')).toEqual('dialog');
+    expect(offcanvasElem.getAttribute('aria-labelledby')).toEqual(
+      'offcanvas-title',
+    );
   });
 
   it('Should call onEscapeKeyDown when keyboard is true', () => {
-    const onEscapeKeyDownSpy = sinon.spy();
+    const onEscapeKeyDownSpy = vi.fn();
     render(
       <Offcanvas
         show
@@ -214,11 +213,11 @@ describe('<Offcanvas>', () => {
     );
 
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
-    onEscapeKeyDownSpy.should.have.been.called;
+    expect(onEscapeKeyDownSpy).toHaveBeenCalled();
   });
 
   it('Should not call onEscapeKeyDown when keyboard is false', () => {
-    const onEscapeKeyDownSpy = sinon.spy();
+    const onEscapeKeyDownSpy = vi.fn();
     render(
       <Offcanvas
         show
@@ -231,14 +230,16 @@ describe('<Offcanvas>', () => {
     );
 
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
-    onEscapeKeyDownSpy.should.not.have.been.called;
+    expect(onEscapeKeyDownSpy).not.toHaveBeenCalled();
   });
 
-  it('Should use custom props manager if specified', (done) => {
+  it('Should use custom props manager if specified', async () => {
+    const addSpy = vi.fn();
+
     class MyModalManager extends ModalManager {
+      // @ts-ignore
       add() {
-        done();
-        return 0;
+        addSpy();
       }
     }
 
@@ -250,6 +251,8 @@ describe('<Offcanvas>', () => {
         <strong>Message</strong>
       </Offcanvas>,
     );
+
+    await waitFor(() => expect(addSpy).toHaveBeenCalled());
   });
 
   it('should not change overflow style when scroll=true', () => {
@@ -263,26 +266,26 @@ describe('<Offcanvas>', () => {
       </div>,
     );
 
-    containerRef.current.style.overflow.should.equal('scroll');
+    expect(containerRef.current.style.overflow).toEqual('scroll');
   });
 
   it('should set responsive class', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas data-testid="test" responsive="lg" show onHide={noop}>
         <strong>Message</strong>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
-    offcanvasElem.classList.contains('offcanvas-lg').should.be.true;
+    const offcanvasElem = screen.getByTestId('test');
+    expect(offcanvasElem.classList).toContain('offcanvas-lg');
   });
 
   it('should render offcanvas when show=false', () => {
-    const { getByTestId } = render(
+    render(
       <Offcanvas data-testid="test" responsive="lg" onHide={noop}>
         <strong>Message</strong>
       </Offcanvas>,
     );
-    const offcanvasElem = getByTestId('test');
+    const offcanvasElem = screen.getByTestId('test');
     expect(offcanvasElem.getAttribute('role')).to.not.exist;
   });
 
@@ -298,8 +301,8 @@ describe('<Offcanvas>', () => {
       return <div>Content</div>;
     };
 
-    const onMountSpy = sinon.spy();
-    const onUnmountSpy = sinon.spy();
+    const onMountSpy = vi.fn();
+    const onUnmountSpy = vi.fn();
 
     const { unmount } = render(
       <Offcanvas data-testid="test" onHide={noop} show>
@@ -307,10 +310,10 @@ describe('<Offcanvas>', () => {
       </Offcanvas>,
     );
 
-    onMountSpy.callCount.should.equal(1);
+    expect(onMountSpy).toHaveBeenCalledOnce();
 
     unmount();
 
-    onUnmountSpy.callCount.should.equal(1);
+    expect(onUnmountSpy).toHaveBeenCalledOnce();
   });
 });

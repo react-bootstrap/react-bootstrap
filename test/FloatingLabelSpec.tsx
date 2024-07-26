@@ -1,42 +1,41 @@
-import { render } from '@testing-library/react';
-import { expect } from 'chai';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FloatingLabel from '../src/FloatingLabel';
 import Form from '../src/Form';
 
 describe('<FloatingLabel>', () => {
   it('should render correctly', () => {
-    const { getByText, getByRole, getByTestId } = render(
+    render(
       <FloatingLabel label="MyLabel" data-testid="test">
         <Form.Control type="text" />
       </FloatingLabel>,
     );
 
-    getByTestId('test').classList.contains('form-floating').should.be.true;
-    getByText('MyLabel').should.exist;
-    getByRole('textbox').should.exist;
+    expect(screen.getByTestId('test').classList).toContain('form-floating');
+    expect(screen.getByText('MyLabel')).toBeDefined();
+    expect(screen.getByRole('textbox')).toBeDefined();
   });
 
   it('should pass controlId to input and label', () => {
-    const { getByRole, getByText } = render(
+    render(
       <FloatingLabel label="MyLabel" controlId="MyId">
         <Form.Control type="text" />
       </FloatingLabel>,
     );
 
-    expect(getByRole('textbox').getAttribute('id')).to.be.equal('MyId');
-    expect(getByText('MyLabel').getAttribute('for')).to.be.equal('MyId');
+    expect(screen.getByRole('textbox').getAttribute('id')).toEqual('MyId');
+    expect(screen.getByText('MyLabel').getAttribute('for')).toEqual('MyId');
   });
 
   it('should support "as"', () => {
-    const { getByTestId } = render(
+    render(
       <FloatingLabel label="MyLabel" as="span" data-testid="test">
         <Form.Control type="text" />
       </FloatingLabel>,
     );
 
-    const label = getByTestId('test');
-    label.tagName.toLowerCase().should.be.equal('span');
-    label.classList.contains('form-floating').should.be.true;
+    const label = screen.getByTestId('test');
+    expect(label.tagName).toEqual('SPAN');
+    expect(label.classList).toContain('form-floating');
   });
 });

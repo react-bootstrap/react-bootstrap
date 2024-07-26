@@ -1,9 +1,15 @@
-import { expect } from 'chai';
-import getScrollbarSize from 'dom-helpers/scrollbarSize';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import ModalManager from '@restart/ui/ModalManager';
 import { injectCss } from './helpers';
 import BootstrapModalManager, {
   getSharedManager,
 } from '../src/BootstrapModalManager';
+
+const SCROLLBAR_SIZE = 10;
+
+vi.spyOn(ModalManager.prototype, 'getScrollbarWidth').mockImplementation(
+  () => SCROLLBAR_SIZE,
+);
 
 const createModal = () => ({ dialog: null, backdrop: null });
 
@@ -41,11 +47,11 @@ describe('BootstrapModalManager', () => {
 
     manager.add(modal);
 
-    expect(manager.modals.length).to.equal(1);
-    expect(manager.modals[0]).to.equal(modal);
+    expect(manager.modals.length).toEqual(1);
+    expect(manager.modals[0]).toEqual(modal);
 
-    expect(manager.state).to.eql({
-      scrollBarWidth: 0,
+    expect(manager.state).toEqual({
+      scrollBarWidth: SCROLLBAR_SIZE,
       style: {
         overflow: '',
         paddingRight: '',
@@ -55,19 +61,19 @@ describe('BootstrapModalManager', () => {
 
   it('should return a shared modal manager', () => {
     const localManager = getSharedManager();
-    localManager.should.exist;
+    expect(localManager).toBeDefined();
   });
 
   it('should return a same modal manager if called twice', () => {
     let localManager = getSharedManager();
-    localManager.should.exist;
+    expect(localManager).toBeDefined();
 
     const modal = createModal();
     localManager.add(modal as any);
-    localManager.modals.length.should.equal(1);
+    expect(localManager.modals).toHaveLength(1);
 
     localManager = getSharedManager();
-    localManager.modals.length.should.equal(1);
+    expect(localManager.modals).toHaveLength(1);
 
     localManager.remove(modal as any);
   });
@@ -93,8 +99,8 @@ describe('BootstrapModalManager', () => {
       const modal = createModal();
       manager.add(modal);
 
-      expect(document.body.style.paddingRight).to.equal(
-        `${getScrollbarSize() + 20}px`,
+      expect(document.body.style.paddingRight).toEqual(
+        `${SCROLLBAR_SIZE + 20}px`,
       );
     });
 
@@ -103,8 +109,8 @@ describe('BootstrapModalManager', () => {
 
       new BootstrapModalManager({ isRTL: true }).add(modal as any);
 
-      expect(document.body.style.paddingLeft).to.equal(
-        `${getScrollbarSize() + 20}px`,
+      expect(document.body.style.paddingLeft).toEqual(
+        `${SCROLLBAR_SIZE + 20}px`,
       );
     });
 
@@ -113,12 +119,12 @@ describe('BootstrapModalManager', () => {
 
       document.body.style.overflow = 'scroll';
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
 
       manager.add(modal);
       manager.remove(modal);
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
       document.body.style.overflow = '';
     });
 
@@ -127,13 +133,13 @@ describe('BootstrapModalManager', () => {
 
       document.body.style.overflow = 'scroll';
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
 
       const localManager = new BootstrapModalManager({ isRTL: true });
       localManager.add(modal as any);
       localManager.remove(modal as any);
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
       document.body.style.overflow = '';
     });
   });

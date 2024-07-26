@@ -1,31 +1,31 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import ModalTitle from '../src/ModalTitle';
 
-import Modal from '../src/Modal';
-
-describe('Modal.Title', () => {
+describe('ModalTitle', () => {
   it('uses "div" by default', () => {
-    const { getByTestId } = render(
-      <Modal.Title data-testid="test-modal" className="custom-class">
+    render(
+      <ModalTitle data-testid="test-modal" className="custom-class">
         <strong>Content</strong>
-      </Modal.Title>,
+      </ModalTitle>,
     );
 
-    const elem = getByTestId('test-modal');
-    elem.tagName.toLowerCase().should.equal('div');
-    elem.classList.contains('h4').should.be.true;
-    elem.classList.contains('modal-title').should.be.true;
-    elem.classList.contains('custom-class').should.be.true;
-    elem.querySelector('strong')!.textContent!.should.equal('Content');
+    const elem = screen.getByTestId('test-modal');
+    expect(elem.tagName).toEqual('DIV');
+    expect(elem.classList).toContain('h4');
+    expect(elem.classList).toContain('modal-title');
+    expect(elem.classList).toContain('custom-class');
+    expect(elem.querySelector('strong')!.textContent!).toEqual('Content');
   });
 
   it('should allow custom elements instead of "div"', () => {
-    const { getByTestId } = render(
-      <Modal.Title data-testid="test-modal" as="h4">
+    render(
+      <ModalTitle data-testid="test-modal" as="h4">
         <strong>Content</strong>
-      </Modal.Title>,
+      </ModalTitle>,
     );
 
-    getByTestId('test-modal').classList.contains('modal-title').should.be.true;
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('h4');
+    expect(screen.getByTestId('test-modal').classList).toContain('modal-title');
+    expect(screen.getByTestId('test-modal').tagName).toEqual('H4');
   });
 });

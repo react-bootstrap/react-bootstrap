@@ -1,27 +1,26 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Button from '../src/Button';
 
 describe('<Button>', () => {
   it('Should output a button', () => {
-    const { getByRole } = render(<Button>Title</Button>);
+    render(<Button>Title</Button>);
 
-    getByRole('button').should.exist;
+    expect(screen.getByRole('button')).toBeTruthy();
   });
 
   it('Should have type=button by default', () => {
-    const { getByRole } = render(<Button>Title</Button>);
+    render(<Button>Title</Button>);
 
-    expect(getByRole('button').getAttribute('type')).to.be.equal('button');
+    expect(screen.getByRole('button').getAttribute('type')).toEqual('button');
   });
 
   it('Should show the type if passed one', () => {
-    const { getByRole } = render(<Button type="submit">Title</Button>);
+    render(<Button type="submit">Title</Button>);
 
-    expect(getByRole('button').getAttribute('type')).to.be.equal('submit');
+    expect(screen.getByRole('button').getAttribute('type')).toEqual('submit');
   });
 
   it('Should show the type if explicitly passed in when "as" is used', () => {
@@ -31,7 +30,7 @@ describe('<Button>', () => {
       </Button>,
     );
 
-    expect(getByTestId('test').getAttribute('type')).to.be.equal('submit');
+    expect(getByTestId('test').getAttribute('type')).toEqual('submit');
   });
 
   it('Should not have default type=button when "as" is used', () => {
@@ -52,7 +51,7 @@ describe('<Button>', () => {
       </div>,
     );
 
-    expect(ref.current?.tagName).to.be.equal('BUTTON');
+    expect(ref.current?.tagName).toEqual('BUTTON');
 
     render(
       <div>
@@ -62,106 +61,106 @@ describe('<Button>', () => {
       </div>,
     );
 
-    expect(ref.current?.tagName).to.be.equal('A');
+    expect(ref.current?.tagName).toEqual('A');
   });
 
   it('Should output an anchor if called with a href', () => {
     const href = '/url';
 
-    const { getByRole } = render(<Button href={href}>Title</Button>);
+    render(<Button href={href}>Title</Button>);
 
-    expect(getByRole('button').getAttribute('href')).to.be.equal(href);
+    expect(screen.getByRole('button').getAttribute('href')).toEqual(href);
   });
 
   it('Should call onClick callback', () => {
-    const onClick = sinon.spy();
+    const onClick = vi.fn();
 
-    const { getByRole } = render(<Button onClick={onClick}>Title</Button>);
+    render(<Button onClick={onClick}>Title</Button>);
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
-    onClick.should.have.been.calledOnce;
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('Should be disabled', () => {
-    const { getByRole } = render(<Button disabled>Title</Button>);
+    render(<Button disabled>Title</Button>);
 
-    getByRole('button').matches('[disabled]').should.be.true;
+    expect(screen.getByRole('button').matches('[disabled]')).toEqual(true);
   });
 
   it('Should be disabled link', () => {
-    const { getByRole } = render(
+    render(
       <Button disabled href="#">
         Title
       </Button>,
     );
 
-    getByRole('button').classList.contains('disabled').should.be.true;
+    expect(screen.getByRole('button').classList).toContain('disabled');
   });
 
   it('Should apply variant class', () => {
-    const { getByRole } = render(<Button variant="danger">Title</Button>);
+    render(<Button variant="danger">Title</Button>);
 
-    getByRole('button').classList.contains('btn-danger').should.be.true;
+    expect(screen.getByRole('button').classList).toContain('btn-danger');
   });
 
   it('Should have size class', () => {
-    const { getByRole } = render(<Button size="lg">Title</Button>);
+    render(<Button size="lg">Title</Button>);
 
-    getByRole('button').classList.contains('btn-lg').should.be.true;
+    expect(screen.getByRole('button').classList).toContain('btn-lg');
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {
-    const { getByRole } = render(
+    render(
       <Button className="bob" variant="danger">
         Title
       </Button>,
     );
 
-    const button = getByRole('button');
-    button.classList.contains('bob').should.be.true;
-    button.classList.contains('btn-danger').should.be.true;
+    const button = screen.getByRole('button');
+    expect(button.classList).toContain('bob');
+    expect(button.classList).toContain('btn-danger');
   });
 
   it('Should default to variant="primary"', () => {
-    const { getByRole } = render(<Button>Title</Button>);
+    render(<Button>Title</Button>);
 
-    getByRole('button').classList.contains('btn-primary').should.be.true;
+    expect(screen.getByRole('button').classList).toContain('btn-primary');
   });
 
   it('Should remove default variant', () => {
-    const { getByRole } = render(<Button variant={null as any}>Title</Button>);
+    render(<Button variant={null as any}>Title</Button>);
 
-    getByRole('button').classList.contains('btn-primary').should.be.false;
+    expect(screen.getByRole('button').classList).not.toContain('btn-primary');
   });
 
   it('Should not output null variant', () => {
-    const { getByRole } = render(<Button variant="">Title</Button>);
+    render(<Button variant="">Title</Button>);
 
-    getByRole('button').classList.contains('btn-null').should.be.false;
+    expect(screen.getByRole('button').classList).not.toContain('btn-null');
   });
 
   it('Should not output empty variant', () => {
-    const { getByRole } = render(<Button variant="">Title</Button>);
+    render(<Button variant="">Title</Button>);
 
-    getByRole('button').classList.contains('btn-').should.be.false;
+    expect(screen.getByRole('button').classList).not.toContain('btn-');
   });
 
   it('Should be active', () => {
-    const { getByRole } = render(<Button active>Title</Button>);
+    render(<Button active>Title</Button>);
 
-    getByRole('button').classList.contains('active').should.be.true;
+    expect(screen.getByRole('button').classList).toContain('active');
   });
 
   it('Should allow a custom prefix', () => {
-    const { getByRole } = render(
+    render(
       <Button bsPrefix="my-btn" variant="danger">
         Title
       </Button>,
     );
 
-    const button = getByRole('button');
-    button.classList.contains('my-btn').should.be.true;
-    button.classList.contains('my-btn-danger').should.be.true;
+    const button = screen.getByRole('button');
+    expect(button.classList).toContain('my-btn');
+    expect(button.classList).toContain('my-btn-danger');
   });
 });

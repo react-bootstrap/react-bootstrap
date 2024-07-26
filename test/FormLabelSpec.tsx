@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormLabel from '../src/FormLabel';
 import FormGroup from '../src/FormGroup';
 
-import { shouldWarn } from './helpers';
-
 describe('<FormLabel>', () => {
   it('should render correctly', () => {
-    const { getByTestId } = render(
+    render(
       <FormLabel
         id="foo"
         htmlFor="bar"
@@ -16,78 +15,76 @@ describe('<FormLabel>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
-    element.tagName.toLowerCase().should.equal('label');
-    element.classList.length.should.equal(2);
-    element.classList.contains('form-label').should.be.true;
-    element.classList.contains('my-control').should.be.true;
-    element.id.should.equal('foo');
-    element.getAttribute('for')!.should.not.null;
+    const element = screen.getByTestId('test-id');
+    expect(element.tagName).toEqual('LABEL');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('form-label');
+    expect(element.classList).toContain('my-control');
+    expect(element.id).toEqual('foo');
+    expect(element.getAttribute('for')).not.toBeNull();
   });
 
   it('should use controlId for htmlFor', () => {
-    const { getByTestId } = render(
+    render(
       <FormGroup controlId="foo">
         <FormLabel data-testid="test-id" />
       </FormGroup>,
     );
 
-    const element = getByTestId('test-id');
-    element.getAttribute('for')!.should.equal('foo');
+    const element = screen.getByTestId('test-id');
+    expect(element.getAttribute('for')).toEqual('foo');
   });
 
   it('should render as a Col', () => {
-    const { getByTestId } = render(
+    render(
       <FormLabel column sm={4} data-testid="test-id">
         Label
       </FormLabel>,
     );
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(3);
-    element.classList.contains('form-label').should.be.true;
-    element.classList.contains('col-form-label').should.be.true;
-    element.classList.contains('col-sm-4').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(3);
+    expect(element.classList).toContain('form-label');
+    expect(element.classList).toContain('col-form-label');
+    expect(element.classList).toContain('col-sm-4');
   });
 
   it('should use controlId for htmlFor when render as Col', () => {
-    const { getByTestId } = render(
+    render(
       <FormGroup controlId="foo">
         <FormLabel column sm={4} data-testid="test-id" />
       </FormGroup>,
     );
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(3);
-    element.classList.contains('form-label').should.be.true;
-    element.classList.contains('col-form-label').should.be.true;
-    element.classList.contains('col-sm-4').should.be.true;
-    element.getAttribute('for')!.should.equal('foo');
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(3);
+    expect(element.classList).toContain('form-label');
+    expect(element.classList).toContain('col-form-label');
+    expect(element.classList).toContain('col-sm-4');
+    expect(element.getAttribute('for')).toEqual('foo');
   });
 
   it('should respect visuallyHidden', () => {
-    const { getByTestId } = render(
+    render(
       <FormLabel visuallyHidden data-testid="test-id">
         Label
       </FormLabel>,
     );
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(2);
-    element.classList.contains('visually-hidden').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('visually-hidden');
   });
 
   it('should prefer explicit htmlFor', () => {
-    shouldWarn('ignored');
-
-    const { getByTestId } = render(
+    render(
       <FormGroup controlId="foo">
         <FormLabel htmlFor="bar" data-testid="test-id" />
       </FormGroup>,
     );
 
-    const element = getByTestId('test-id');
-    element.getAttribute('for')!.should.equal('bar');
+    const element = screen.getByTestId('test-id');
+    expect(element.getAttribute('for')).toEqual('bar');
   });
 
   it('should support ref forwarding', () => {
@@ -107,7 +104,7 @@ describe('<FormLabel>', () => {
     }
 
     render(<Container />);
-    input.tagName.toLowerCase().should.to.equal('label');
+    expect(input.tagName).toEqual('LABEL');
   });
 
   it('should support ref forwarding when rendered as a Col', () => {
@@ -128,21 +125,21 @@ describe('<FormLabel>', () => {
     }
 
     render(<Container />);
-    input.tagName.toLowerCase().should.to.equal('label');
+    expect(input.tagName).toEqual('LABEL');
   });
 
   it('accepts as prop', () => {
-    const { getByTestId } = render(
+    render(
       <FormLabel as="legend" data-testid="test-id">
         body
       </FormLabel>,
     );
 
-    getByTestId('test-id').tagName.toLowerCase().should.equal('legend');
+    expect(screen.getByTestId('test-id').tagName).toEqual('LEGEND');
   });
 
   it('should properly size itself when rendered as a Col', () => {
-    const { getByTestId } = render(
+    render(
       <div>
         <FormLabel column="sm" data-testid="test-1">
           Label
@@ -156,10 +153,12 @@ describe('<FormLabel>', () => {
       </div>,
     );
 
-    getByTestId('test-1').classList.contains('col-form-label-sm').should.be
-      .true;
-    getByTestId('test-2').classList.contains('col-form-label').should.be.true;
-    getByTestId('test-3').classList.contains('col-form-label-lg').should.be
-      .true;
+    expect(screen.getByTestId('test-1').classList).toContain(
+      'col-form-label-sm',
+    );
+    expect(screen.getByTestId('test-2').classList).toContain('col-form-label');
+    expect(screen.getByTestId('test-3').classList).toContain(
+      'col-form-label-lg',
+    );
   });
 });

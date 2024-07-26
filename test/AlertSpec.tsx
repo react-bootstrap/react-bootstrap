@@ -1,116 +1,122 @@
 import * as React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
-import { fireEvent, render } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Alert from '../src/Alert';
 
 describe('<Alert>', () => {
   it('Should output a alert with message', () => {
-    const { getByTestId } = render(
+    render(
       <Alert data-testid="test-alert">
         <strong>Message</strong>
       </Alert>,
     );
-    getByTestId('test-alert').children.length.should.equal(1);
-    getByTestId('test-alert')
-      .children[0].tagName.toLowerCase()
-      .should.equal('strong');
+    expect(screen.getByTestId('test-alert').children.length).toEqual(1);
+    expect(screen.getByTestId('test-alert').children[0].tagName).toEqual(
+      'STRONG',
+    );
   });
 
   it('Should have dismissible style', () => {
-    const { getByTestId } = render(
+    render(
       <Alert data-testid="test-alert" dismissible>
         <strong>Message</strong>
       </Alert>,
     );
-    getByTestId('test-alert').classList.contains('alert-dismissible').should.be
-      .true;
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-dismissible',
+    );
   });
 
   it('Should call onClose callback on dismiss click', () => {
-    const onCloseSpy = sinon.spy();
-    const { getByLabelText } = render(
+    const onCloseSpy = vi.fn();
+    render(
       <Alert dismissible data-testid="test-alert" onClose={onCloseSpy}>
         Message
       </Alert>,
     );
-    fireEvent.click(getByLabelText('Close alert'));
-    onCloseSpy.should.be.calledOnce;
+    fireEvent.click(screen.getByLabelText('Close alert'));
+    expect(onCloseSpy).toHaveBeenCalledTimes(1);
   });
 
   it('Should default to variant="primary"', () => {
-    const { getByTestId } = render(
-      <Alert data-testid="test-alert">Message</Alert>,
+    render(<Alert data-testid="test-alert">Message</Alert>);
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-primary',
     );
-    getByTestId('test-alert').classList.contains('alert-primary').should.be
-      .true;
   });
 
   it('Should use variant class', () => {
-    const { getByTestId } = render(
+    render(
       <Alert variant="danger" data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').classList.contains('alert-danger').should.be.true;
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-danger',
+    );
   });
 
   it('Should not have variant class when variant=null', () => {
-    const { getByTestId } = render(
+    render(
       <Alert variant={null as any} data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').classList.contains('alert-primary').should.not.be
-      .true;
+    expect(screen.getByTestId('test-alert').classList).not.toContain(
+      'alert-primary',
+    );
   });
 
   it('should forward refs to the alert', () => {
     const ref = React.createRef<HTMLDivElement>();
-    const { getByTestId } = render(
+    render(
       <Alert ref={ref} data-testid="test-alert">
         message
       </Alert>,
     );
-    getByTestId('test-alert').tagName.toLowerCase().should.equal('div');
+    expect(screen.getByTestId('test-alert').tagName).toEqual('DIV');
   });
 
   it('should not have fade class when transition=false', () => {
-    const { getByTestId } = render(
+    render(
       <Alert transition={false} data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').classList.contains('fade').should.not.be.true;
+    expect(screen.getByTestId('test-alert').classList).not.toContain('fade');
   });
 
   it('should spread props to alert when transition=false', () => {
     const alertId = 'alert-id';
-    const { getByTestId } = render(
+    render(
       <Alert transition={false} id={alertId} data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').getAttribute('id')!.should.equal(alertId);
+    expect(screen.getByTestId('test-alert').getAttribute('id')).toEqual(
+      alertId,
+    );
   });
 
   it('should spread props to alert when transition=true', () => {
     const alertId = 'alert-id';
-    const { getByTestId } = render(
+    render(
       <Alert transition id={alertId} data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').getAttribute('id')!.should.equal(alertId);
+    expect(screen.getByTestId('test-alert').getAttribute('id')).toEqual(
+      alertId,
+    );
   });
 
   it('should use Fade when transition=true', () => {
-    const { getByTestId } = render(
+    render(
       <Alert variant="danger" transition data-testid="test-alert">
         Message
       </Alert>,
     );
-    getByTestId('test-alert').classList.contains('fade').should.be.true;
+    expect(screen.getByTestId('test-alert').classList).toContain('fade');
   });
 
   it('should render null when transition and show are false', () => {
@@ -124,52 +130,54 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(container.innerHTML).equals('');
+    expect(container.innerHTML).toEqual('');
   });
 
   it('should render close button variant', () => {
-    const { getByLabelText } = render(
+    render(
       <Alert dismissible closeVariant="white">
         Message
       </Alert>,
     );
-    getByLabelText('Close alert').classList.contains('btn-close-white').should
-      .be.true;
+    expect(screen.getByLabelText('Close alert').classList).toContain(
+      'btn-close-white',
+    );
   });
 
   describe('Web Accessibility', () => {
     it('Should have alert role', () => {
-      const { getByTestId } = render(
-        <Alert data-testid="test-alert">Message</Alert>,
+      render(<Alert data-testid="test-alert">Message</Alert>);
+      expect(screen.getByTestId('test-alert').getAttribute('role')).toEqual(
+        'alert',
       );
-      getByTestId('test-alert').getAttribute('role')!.should.equal('alert');
     });
   });
 
   describe('Alert alert-heading', () => {
     it('Should have alert-heading', () => {
-      const { getByTestId } = render(
+      render(
         <Alert>
           <Alert.Heading data-testid="test-alert">Well done</Alert.Heading>
           Message
         </Alert>,
       );
-      getByTestId('test-alert').classList.contains('alert-heading').should.be
-        .true;
+      expect(screen.getByTestId('test-alert').classList).toContain(
+        'alert-heading',
+      );
     });
 
     it('Should have div styled as an h4 by default', () => {
-      const { getByTestId } = render(
+      render(
         <Alert>
           <Alert.Heading data-testid="test-alert">Well done</Alert.Heading>
           Message
         </Alert>,
       );
-      getByTestId('test-alert').classList.contains('h4').should.be.true;
+      expect(screen.getByTestId('test-alert').classList).toContain('h4');
     });
 
     it('Should support Heading as as prop', () => {
-      const { getByTestId } = render(
+      render(
         <Alert>
           <Alert.Heading as="h1" data-testid="test-alert">
             Well done
@@ -177,7 +185,7 @@ describe('<Alert>', () => {
           Message
         </Alert>,
       );
-      getByTestId('test-alert').tagName.toLowerCase().should.equal('h1');
+      expect(screen.getByTestId('test-alert').tagName).toEqual('H1');
     });
   });
 });

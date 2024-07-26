@@ -1,7 +1,5 @@
-import sinon from 'sinon';
-import { render, fireEvent } from '@testing-library/react';
-import { expect } from 'chai';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Breadcrumb from '../src/Breadcrumb';
 import Button from '../src/Button';
 
@@ -11,61 +9,59 @@ describe('<Breadcrumb.Item>', () => {
       <Breadcrumb.Item href="#">Crumb</Breadcrumb.Item>,
     );
 
-    container.querySelectorAll('button.active').length.should.equal(0);
+    expect(container.querySelectorAll('button.active').length).toEqual(0);
   });
 
   it('Should render `li` with no children as inner element when active.', () => {
-    const { queryAllByRole, getByText } = render(
-      <Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>,
-    );
+    render(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>);
 
-    queryAllByRole('listitem').length.should.equal(1);
-    getByText('Active Crumb').should.exist;
+    expect(screen.queryAllByRole('listitem').length).toEqual(1);
+    expect(screen.getByText('Active Crumb')).toBeTruthy();
   });
 
   it('Should render `li` with no children as inner element when active and has href', () => {
-    const { queryAllByRole, getByText } = render(
+    render(
       <Breadcrumb.Item href="#" active>
         Active Crumb
       </Breadcrumb.Item>,
     );
 
-    queryAllByRole('listitem').length.should.equal(1);
-    getByText('Active Crumb').should.exist;
+    expect(screen.queryAllByRole('listitem').length).toEqual(1);
+    expect(screen.getByText('Active Crumb')).toBeTruthy();
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {
-    const { getByTestId } = render(
+    render(
       <Breadcrumb.Item className="custom-one custom-two" data-testid="test">
         a
       </Breadcrumb.Item>,
     );
 
-    const item = getByTestId('test');
-    item.classList.contains('custom-one').should.be.true;
-    item.classList.contains('custom-two').should.be.true;
+    const item = screen.getByTestId('test');
+    expect(item.classList).toContain('custom-one');
+    expect(item.classList).toContain('custom-two');
   });
 
   it('Should add aria-current to active element', () => {
-    const { queryAllByRole } = render(
-      <Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>,
-    );
+    render(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>);
 
-    queryAllByRole('listitem', { current: 'page' }).length.should.equal(1);
+    expect(
+      screen.queryAllByRole('listitem', { current: 'page' }).length,
+    ).toEqual(1);
   });
 
   it('Should spread additional props onto inner element', () => {
-    const handleClick = sinon.spy();
+    const handleClick = vi.fn();
 
-    const { getByRole } = render(
+    render(
       <Breadcrumb.Item href="#" onClick={handleClick}>
         Crumb
       </Breadcrumb.Item>,
     );
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
-    handleClick.should.have.been.calledOnce;
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
   it('Should apply id onto the li element', () => {
@@ -75,22 +71,22 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     );
 
-    container.querySelectorAll('#test-link-id').length.should.equal(1);
+    expect(container.querySelectorAll('#test-link-id').length).toEqual(1);
   });
 
   it('Should apply `href` property onto `a` inner element', () => {
-    const { getByRole } = render(
+    render(
       <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
       </Breadcrumb.Item>,
     );
 
-    const href = getByRole('link').getAttribute('href') || '';
-    href.should.equal('http://getbootstrap.com/components/#breadcrumbs');
+    const href = screen.getByRole('link').getAttribute('href') || '';
+    expect(href).toEqual('http://getbootstrap.com/components/#breadcrumbs');
   });
 
   it('Should apply `title` property onto `a` inner element', () => {
-    const { getByTitle } = render(
+    render(
       <Breadcrumb.Item
         title="test-title"
         href="http://getbootstrap.com/components/#breadcrumbs"
@@ -99,7 +95,7 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     );
 
-    getByTitle('test-title').should.exist;
+    expect(screen.getByTitle('test-title')).toBeTruthy();
   });
 
   it('Should not apply properties for inner `anchor` onto `li` wrapper element', () => {
@@ -109,12 +105,14 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     );
 
-    container.querySelectorAll('li[href="/hi"]').length.should.equal(0);
-    container.querySelectorAll('li[title="test-title"]').length.should.equal(0);
+    expect(container.querySelectorAll('li[href="/hi"]').length).toEqual(0);
+    expect(container.querySelectorAll('li[title="test-title"]').length).toEqual(
+      0,
+    );
   });
 
   it('Should set `target` attribute on `anchor`', () => {
-    const { getByRole } = render(
+    render(
       <Breadcrumb.Item
         target="_blank"
         href="http://getbootstrap.com/components/#breadcrumbs"
@@ -122,43 +120,43 @@ describe('<Breadcrumb.Item>', () => {
         Crumb
       </Breadcrumb.Item>,
     );
-    expect(getByRole('link').getAttribute('target')).to.be.equal('_blank');
+    expect(screen.getByRole('link').getAttribute('target')).to.be.equal(
+      '_blank',
+    );
   });
 
   it('Should have li as default component', () => {
-    const { getByTestId } = render(<Breadcrumb.Item data-testid="test" />);
+    render(<Breadcrumb.Item data-testid="test" />);
 
-    getByTestId('test').tagName.toLowerCase().should.equal('li');
+    expect(screen.getByTestId('test').tagName).toEqual('LI');
   });
 
   it('Should be able to customize inner link element', () => {
     const { container } = render(<Breadcrumb.Item linkAs={Button} />);
 
-    container.querySelectorAll('a').length.should.equal(0);
-    container.querySelectorAll('button').length.should.equal(1);
+    expect(container.querySelectorAll('a').length).toEqual(0);
+    expect(container.querySelectorAll('button').length).toEqual(1);
   });
 
   it('Should be able to pass props to the customized inner link element', () => {
-    const { getByRole } = render(
-      <Breadcrumb.Item linkAs={Button} linkProps={{ type: 'submit' }} />,
-    );
+    render(<Breadcrumb.Item linkAs={Button} linkProps={{ type: 'submit' }} />);
 
-    expect(getByRole('button').getAttribute('type')).to.be.equal('submit');
+    expect(screen.getByRole('button').getAttribute('type')).to.be.equal(
+      'submit',
+    );
   });
 
   it('Should be able to pass attributes to the link element', () => {
-    const { getByRole } = render(
-      <Breadcrumb.Item linkProps={{ foo: 'bar' }}>Crumb</Breadcrumb.Item>,
-    );
+    render(<Breadcrumb.Item linkProps={{ foo: 'bar' }}>Crumb</Breadcrumb.Item>);
 
-    expect(getByRole('button').getAttribute('foo')).to.be.equal('bar');
+    expect(screen.getByRole('button').getAttribute('foo')).to.be.equal('bar');
   });
 
   it('Should be able to pass attributes to the li element', () => {
-    const { getByRole } = render(
-      <Breadcrumb.Item data-foo="bar">Crumb</Breadcrumb.Item>,
-    );
+    render(<Breadcrumb.Item data-foo="bar">Crumb</Breadcrumb.Item>);
 
-    expect(getByRole('listitem').getAttribute('data-foo')).to.be.equal('bar');
+    expect(screen.getByRole('listitem').getAttribute('data-foo')).to.be.equal(
+      'bar',
+    );
   });
 });

@@ -1,17 +1,15 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Spinner from '../src/Spinner';
 
 describe('<Spinner>', () => {
   it('Should render a basic spinner correctly', () => {
-    const { getByTestId } = render(
-      <Spinner data-testid="test" animation="border" />,
-    );
-    getByTestId('test').classList.contains('spinner-border').should.be.true;
+    render(<Spinner data-testid="test" animation="border" />);
+    expect(screen.getByTestId('test').classList).toContain('spinner-border');
   });
 
   it('Should render a spinner with a custom element, variant and size ', () => {
-    const { getByTestId } = render(
+    render(
       <Spinner
         data-testid="test"
         as="span"
@@ -20,39 +18,35 @@ describe('<Spinner>', () => {
         size="sm"
       />,
     );
-    const spinnerElem = getByTestId('test');
+    const spinnerElem = screen.getByTestId('test');
 
-    spinnerElem.tagName.toLowerCase().should.equal('span');
-    spinnerElem.classList.contains('spinner-grow').should.be.true;
-    spinnerElem.classList.contains('spinner-grow-sm').should.be.true;
-    spinnerElem.classList.contains('text-primary').should.be.true;
+    expect(spinnerElem.tagName).toEqual('SPAN');
+    expect(spinnerElem.classList).toContain('spinner-grow');
+    expect(spinnerElem.classList).toContain('spinner-grow-sm');
+    expect(spinnerElem.classList).toContain('text-primary');
   });
 
   it('Should render a spinner with other properties', () => {
-    const { getByTestId } = render(
-      <Spinner data-testid="test" animation="grow" role="status" />,
-    );
-    const spinnerElem = getByTestId('test');
+    render(<Spinner data-testid="test" animation="grow" role="status" />);
+    const spinnerElem = screen.getByTestId('test');
 
-    spinnerElem.classList.contains('spinner-grow').should.be.true;
-    spinnerElem.getAttribute('role')!.should.equal('status');
+    expect(spinnerElem.classList).toContain('spinner-grow');
+    expect(spinnerElem.getAttribute('role')!).toEqual('status');
   });
 
   it('Should render child elements', () => {
-    const { getByTestId } = render(
+    render(
       <Spinner data-testid="test" animation="grow">
         <span id="testChild" />
       </Spinner>,
     );
-    const spinnerElem = getByTestId('test');
-    spinnerElem.children.length.should.equal(1);
+    const spinnerElem = screen.getByTestId('test');
+    expect(spinnerElem.children.length).toEqual(1);
   });
 
   it('Should have div as default component', () => {
-    const { getByTestId } = render(
-      <Spinner data-testid="test" animation="border" />,
-    );
-    const spinnerElem = getByTestId('test');
-    spinnerElem.tagName.toLowerCase().should.equal('div');
+    render(<Spinner data-testid="test" animation="border" />);
+    const spinnerElem = screen.getByTestId('test');
+    expect(spinnerElem.tagName).toEqual('DIV');
   });
 });

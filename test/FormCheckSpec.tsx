@@ -1,11 +1,12 @@
-import { render } from '@testing-library/react';
 import * as React from 'react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormCheck from '../src/FormCheck';
 import Switch from '../src/Switch';
 
 describe('<FormCheck>', () => {
   it('should render correctly', () => {
-    const { getByTestId, container } = render(
+    const { container } = render(
       <FormCheck
         id="foo"
         name="foo"
@@ -17,31 +18,31 @@ describe('<FormCheck>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
+    const element = screen.getByTestId('test-id');
 
-    element.parentElement!.classList.length.should.equal(2);
-    element.parentElement!.classList.contains('form-check').should.be.true;
-    element.parentElement!.classList.contains('my-checkbox').should.be.true;
+    expect(element.parentElement!.classList).toHaveLength(2);
+    expect(element.parentElement!.classList).toContain('form-check');
+    expect(element.parentElement!.classList).toContain('my-checkbox');
 
-    element.id.should.equal('foo');
-    element.classList.length.should.equal(1);
-    element.classList.contains('form-check-input').should.be.true;
-    element.getAttribute('name')!.should.equal('foo');
-    element.getAttribute('type')!.should.equal('checkbox');
-    element.getAttribute('value')!.should.equal('foo');
-    element.getAttribute('checked')!.should.equal('');
+    expect(element.id).toEqual('foo');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('form-check-input');
+    expect(element.getAttribute('name')).toEqual('foo');
+    expect(element.getAttribute('type')).toEqual('checkbox');
+    expect(element.getAttribute('value')).toEqual('foo');
+    expect(element.getAttribute('checked')).toEqual('');
 
     const labels = container.getElementsByTagName('label');
-    labels.length.should.equal(1);
+    expect(labels).toHaveLength(1);
     const label = labels[0];
-    label.classList.length.should.equal(1);
-    label.classList.contains('form-check-label').should.be.true;
-    label.getAttribute('for')!.should.equal('foo');
-    label.innerText.should.equal('My label');
+    expect(label.classList).toHaveLength(1);
+    expect(label.classList).toContain('form-check-label');
+    expect(label.getAttribute('for')).toEqual('foo');
+    expect(label.innerText).toEqual('My label');
   });
 
   it('should render radio correctly', () => {
-    const { getByTestId, container } = render(
+    const { container } = render(
       <FormCheck
         id="foo"
         name="foo"
@@ -54,27 +55,27 @@ describe('<FormCheck>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
+    const element = screen.getByTestId('test-id');
 
-    element.parentElement!.classList.length.should.equal(2);
-    element.parentElement!.classList.contains('form-check').should.be.true;
-    element.parentElement!.classList.contains('my-radio').should.be.true;
+    expect(element.parentElement!.classList).toHaveLength(2);
+    expect(element.parentElement!.classList).toContain('form-check');
+    expect(element.parentElement!.classList).toContain('my-radio');
 
-    element.id.should.equal('foo');
-    element.classList.length.should.equal(1);
-    element.classList.contains('form-check-input').should.be.true;
-    element.getAttribute('name')!.should.equal('foo');
-    element.getAttribute('type')!.should.equal('radio');
-    element.getAttribute('value')!.should.equal('foo');
-    element.getAttribute('checked')!.should.equal('');
+    expect(element.id).toEqual('foo');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('form-check-input');
+    expect(element.getAttribute('name')).toEqual('foo');
+    expect(element.getAttribute('type')).toEqual('radio');
+    expect(element.getAttribute('value')).toEqual('foo');
+    expect(element.getAttribute('checked')).toEqual('');
 
     const labels = container.getElementsByTagName('label');
-    labels.length.should.equal(1);
+    expect(labels).toHaveLength(1);
     const label = labels[0];
-    label.classList.length.should.equal(1);
-    label.classList.contains('form-check-label').should.be.true;
-    label.getAttribute('for')!.should.equal('foo');
-    label.innerText.should.equal('My label');
+    expect(label.classList).toHaveLength(1);
+    expect(label.classList).toContain('form-check-label');
+    expect(label.getAttribute('for')).toEqual('foo');
+    expect(label.innerText).toEqual('My label');
   });
 
   it('should support inline', () => {
@@ -82,8 +83,8 @@ describe('<FormCheck>', () => {
       container: { firstElementChild: element },
     } = render(<FormCheck inline label="My label" />);
 
-    element!.classList.length.should.equal(2);
-    element!.classList.contains('form-check-inline').should.be.true;
+    expect(element!.classList).toHaveLength(2);
+    expect(element!.classList).toContain('form-check-inline');
   });
 
   it('should support in reverse', () => {
@@ -91,26 +92,24 @@ describe('<FormCheck>', () => {
       container: { firstElementChild: element },
     } = render(<FormCheck reverse label="My label" />);
 
-    element!.classList.length.should.equal(2);
-    element!.classList.contains('form-check-reverse').should.be.true;
+    expect(element!.classList).toHaveLength(2);
+    expect(element!.classList).toContain('form-check-reverse');
   });
 
   it('should support isValid', () => {
-    const { getByTestId } = render(<FormCheck isValid data-testid="test-id" />);
+    render(<FormCheck isValid data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(2);
-    element.classList.contains('is-valid').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element!.classList).toHaveLength(2);
+    expect(element.classList).toContain('is-valid');
   });
 
   it('should support isInvalid', () => {
-    const { getByTestId } = render(
-      <FormCheck isInvalid data-testid="test-id" />,
-    );
+    render(<FormCheck isInvalid data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(2);
-    element.classList.contains('is-invalid').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element!.classList).toHaveLength(2);
+    expect(element.classList).toContain('is-invalid');
   });
 
   it('should support ref forwarding', () => {
@@ -128,7 +127,7 @@ describe('<FormCheck>', () => {
     }
 
     render(<Container />);
-    input.tagName.toLowerCase().should.equal('input');
+    expect(input.tagName).toEqual('INPUT');
   });
 
   it('should not render bsPrefix if no label is specified', () => {
@@ -136,11 +135,11 @@ describe('<FormCheck>', () => {
       <FormCheck id="foo" name="foo" value="foo" type="radio" />,
     );
 
-    container.getElementsByClassName('form-check').length.should.equal(0);
+    expect(container.getElementsByClassName('form-check')).toHaveLength(0);
   });
 
   it('should support type switch', () => {
-    const { getByTestId, container } = render(
+    const { container } = render(
       <FormCheck
         type="switch"
         label="My label"
@@ -149,64 +148,62 @@ describe('<FormCheck>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
+    const element = screen.getByTestId('test-id');
 
-    element.parentElement!.classList.length.should.equal(2);
-    element.parentElement!.classList.contains('form-check').should.be.true;
-    element.parentElement!.classList.contains('form-switch').should.be.true;
+    expect(element.parentElement!.classList).toHaveLength(2);
+    expect(element.parentElement!.classList).toContain('form-check');
+    expect(element.parentElement!.classList).toContain('form-switch');
 
-    element.id.should.equal('switch-id');
-    element.classList.length.should.equal(1);
-    element.classList.contains('form-check-input').should.be.true;
-    element.id.should.equal('switch-id');
-    element.getAttribute('type')!.should.equal('checkbox');
+    expect(element.id).toEqual('switch-id');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('form-check-input');
+    expect(element.id).toEqual('switch-id');
+    expect(element.getAttribute('type')).toEqual('checkbox');
 
     const labels = container.getElementsByTagName('label');
-    labels.length.should.equal(1);
+    expect(labels).toHaveLength(1);
     const label = labels[0];
-    label.classList.length.should.equal(1);
-    label.classList.contains('form-check-label').should.be.true;
-    label.getAttribute('for')!.should.equal('switch-id');
-    label.innerText.should.equal('My label');
+    expect(label.classList).toHaveLength(1);
+    expect(label.classList).toContain('form-check-label');
+    expect(label.getAttribute('for')).toEqual('switch-id');
+    expect(label.innerText).toEqual('My label');
   });
 
   it('should support Switch', () => {
-    const { getByTestId, container } = render(
+    const { container } = render(
       <Switch label="My label" id="switch-id" data-testid="test-id" />,
     );
 
-    const element = getByTestId('test-id');
+    const element = screen.getByTestId('test-id');
 
-    element.parentElement!.classList.length.should.equal(2);
-    element.parentElement!.classList.contains('form-check').should.be.true;
-    element.parentElement!.classList.contains('form-switch').should.be.true;
+    expect(element.parentElement!.classList).toHaveLength(2);
+    expect(element.parentElement!.classList).toContain('form-check');
+    expect(element.parentElement!.classList).toContain('form-switch');
 
-    element.id.should.equal('switch-id');
-    element.classList.length.should.equal(1);
-    element.classList.contains('form-check-input').should.be.true;
-    element.id.should.equal('switch-id');
-    element.getAttribute('type')!.should.equal('checkbox');
+    expect(element.id).toEqual('switch-id');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('form-check-input');
+    expect(element.id).toEqual('switch-id');
+    expect(element.getAttribute('type')).toEqual('checkbox');
 
     const labels = container.getElementsByTagName('label');
-    labels.length.should.equal(1);
+    expect(labels).toHaveLength(1);
     const label = labels[0];
-    label.classList.length.should.equal(1);
-    label.classList.contains('form-check-label').should.be.true;
-    label.getAttribute('for')!.should.equal('switch-id');
-    label.innerText.should.equal('My label');
+    expect(label.classList).toHaveLength(1);
+    expect(label.classList).toContain('form-check-label');
+    expect(label.getAttribute('for')).toEqual('switch-id');
+    expect(label.innerText).toEqual('My label');
   });
 
   it('should support "as"', () => {
     const Surrogate = ({ className = '', ...rest }) => (
       <input className={`extraClass ${className}'`} {...rest} />
     );
-    const { getByTestId } = render(
-      <FormCheck as={Surrogate} data-testid="test-id" />,
-    );
+    render(<FormCheck as={Surrogate} data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(2);
-    element.classList.contains('extraClass').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('extraClass');
   });
 
   it('Should render valid feedback properly', () => {
@@ -215,8 +212,8 @@ describe('<FormCheck>', () => {
     );
 
     const feedbacks = container.getElementsByClassName('valid-feedback');
-    feedbacks.length.should.equal(1);
-    feedbacks[0].textContent!.should.equal('test');
+    expect(feedbacks).toHaveLength(1);
+    expect(feedbacks[0].textContent!).toEqual('test');
   });
 
   it('Should render invalid feedback properly', () => {
@@ -225,8 +222,8 @@ describe('<FormCheck>', () => {
     );
 
     const feedbacks = container.getElementsByClassName('invalid-feedback');
-    feedbacks.length.should.equal(1);
-    feedbacks[0].textContent!.should.equal('test');
+    expect(feedbacks).toHaveLength(1);
+    expect(feedbacks[0].textContent).toEqual('test');
   });
 
   it('Should render valid feedback tooltip properly', () => {
@@ -240,8 +237,8 @@ describe('<FormCheck>', () => {
     );
 
     const feedbacks = container.getElementsByClassName('valid-tooltip');
-    feedbacks.length.should.equal(1);
-    feedbacks[0].textContent!.should.equal('test');
+    expect(feedbacks).toHaveLength(1);
+    expect(feedbacks[0].textContent).toEqual('test');
   });
 
   it('Should render invalid feedback tooltip properly', () => {
@@ -255,7 +252,7 @@ describe('<FormCheck>', () => {
     );
 
     const feedbacks = container.getElementsByClassName('invalid-tooltip');
-    feedbacks.length.should.equal(1);
-    feedbacks[0].textContent!.should.equal('test');
+    expect(feedbacks).toHaveLength(1);
+    expect(feedbacks[0].textContent).toEqual('test');
   });
 });

@@ -1,8 +1,7 @@
 import * as React from 'react';
+import { describe, expect, it } from 'vitest';
 import { useImperativeHandle } from 'react';
 import { render } from '@testing-library/react';
-import { expect } from 'chai';
-
 import { Offset } from '@restart/ui/usePopper';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -34,7 +33,7 @@ describe('useOverlayOffset', () => {
     );
 
     const offset = ref.current.modifiers[0].options.offset();
-    expect(offset).to.eql([0, 8]);
+    expect(offset).toEqual([0, 8]);
   });
 
   it('should apply custom offset', () => {
@@ -47,7 +46,7 @@ describe('useOverlayOffset', () => {
     );
 
     const offset = ref.current.modifiers[0].options.offset();
-    expect(offset).to.eql([200, 200]);
+    expect(offset).toEqual([200, 200]);
   });
 
   it('should have offset of [0, 6] for Tooltips', () => {
@@ -60,7 +59,7 @@ describe('useOverlayOffset', () => {
     );
 
     const offset = ref.current.modifiers[0].options.offset();
-    expect(offset).to.eql([0, 6]);
+    expect(offset).toEqual([0, 6]);
   });
 
   it('should have offset of [0, 0] for any overlay', () => {
@@ -73,6 +72,6 @@ describe('useOverlayOffset', () => {
     );
 
     const offset = ref.current.modifiers[0].options.offset();
-    expect(offset).to.eql([0, 0]);
+    expect(offset).toEqual([0, 0]);
   });
 });

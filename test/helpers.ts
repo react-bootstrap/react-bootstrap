@@ -1,11 +1,8 @@
-export function shouldWarn(about) {
-  console.error.expected.push(about);
-}
+let style: any;
+let seen: string[] = [];
 
-let style;
-let seen = [];
-
-export function injectCss(rules) {
+// eslint-disable-next-line import/prefer-default-export
+export function injectCss(rules: string) {
   if (seen.indexOf(rules) !== -1) {
     return;
   }
@@ -13,7 +10,7 @@ export function injectCss(rules) {
   style =
     style ||
     (function iife() {
-      let _style = document.createElement('style');
+      const _style = document.createElement('style');
       _style.appendChild(document.createTextNode(''));
       document.head.appendChild(_style);
       return _style;

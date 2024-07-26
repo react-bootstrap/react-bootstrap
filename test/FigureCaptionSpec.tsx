@@ -1,41 +1,42 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Figure from '../src/Figure';
 
 describe('<Figure.Caption>', () => {
   it('uses "figcaption" by default', () => {
-    const { getByTestId } = render(
+    render(
       <Figure>
         <Figure.Caption data-testid="test-figure">Caption</Figure.Caption>
       </Figure>,
     );
-    getByTestId('test-figure').tagName.toLowerCase().should.equal('figcaption');
+    expect(screen.getByTestId('test-figure').tagName).toEqual('FIGCAPTION');
   });
 
   it('has "figure-caption" class', () => {
-    const { getByTestId } = render(
-      <Figure.Caption data-testid="test-figure">Caption</Figure.Caption>,
+    render(<Figure.Caption data-testid="test-figure">Caption</Figure.Caption>);
+    expect(screen.getByTestId('test-figure').classList).toContain(
+      'figure-caption',
     );
-    getByTestId('test-figure').classList.contains('figure-caption').should.be
-      .true;
   });
 
   it('Should merge additional classes passed in', () => {
-    const { getByTestId } = render(
+    render(
       <Figure.Caption className="bob" data-testid="test-figure">
         Caption
       </Figure.Caption>,
     );
-    getByTestId('test-figure').classList.contains('bob').should.be.true;
-    getByTestId('test-figure').classList.contains('figure-caption').should.be
-      .true;
+    expect(screen.getByTestId('test-figure').classList).toContain('bob');
+    expect(screen.getByTestId('test-figure').classList).toContain(
+      'figure-caption',
+    );
   });
 
   it('allows custom elements instead of "figcaption"', () => {
-    const { getByTestId } = render(
+    render(
       <Figure.Caption as="section" data-testid="test-figure">
         Caption
       </Figure.Caption>,
     );
-    getByTestId('test-figure').tagName.toLowerCase().should.equal('section');
+    expect(screen.getByTestId('test-figure').tagName).toEqual('SECTION');
   });
 });

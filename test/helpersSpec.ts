@@ -1,21 +1,22 @@
+import { describe, expect, it } from 'vitest';
 import { getOverlayDirection } from '../src/helpers';
 
 describe('Helpers', () => {
   describe('getOverlayDirection', () => {
     it('should return start for left', () => {
-      getOverlayDirection('left', false).should.equal('start');
+      expect(getOverlayDirection('left', false)).toEqual('start');
     });
 
     it('should return end for left in RTL', () => {
-      getOverlayDirection('left', true).should.equal('end');
+      expect(getOverlayDirection('left', true)).toEqual('end');
     });
 
     it('should return end for right', () => {
-      getOverlayDirection('right', false).should.equal('end');
+      expect(getOverlayDirection('right', false)).toEqual('end');
     });
 
     it('should return start for right in RTL', () => {
-      getOverlayDirection('right', true).should.equal('start');
+      expect(getOverlayDirection('right', true)).toEqual('start');
     });
   });
 });

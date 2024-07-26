@@ -1,50 +1,50 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
 describe('ButtonGroup', () => {
   it('Should output a button group', () => {
-    const { getByRole } = render(
+    render(
       <ButtonGroup>
         <Button>Title</Button>
       </ButtonGroup>,
     );
 
-    getByRole('group').should.exist;
+    expect(screen.getByRole('group')).toBeDefined();
   });
 
   it('Should add size', () => {
-    const { getByRole } = render(
+    render(
       <ButtonGroup size="lg">
         <Button>Title</Button>
       </ButtonGroup>,
     );
 
-    getByRole('group').classList.contains('btn-group-lg').should.be.true;
+    expect(screen.getByRole('group').classList).toContain('btn-group-lg');
   });
 
   it('Should add vertical variation', () => {
-    const { getByRole } = render(
+    render(
       <ButtonGroup vertical>
         <Button>Title</Button>
       </ButtonGroup>,
     );
 
-    const group = getByRole('group');
-    group.classList.contains('btn-group-vertical').should.be.true;
-    group.classList.contains('btn-group').should.be.false;
+    const group = screen.getByRole('group');
+    expect(group.classList).toContain('btn-group-vertical');
+    expect(group.classList).not.toContain('btn-group');
   });
 
   it('Should have div as default component', () => {
-    const { getByRole } = render(<ButtonGroup />);
+    render(<ButtonGroup />);
 
-    getByRole('group').tagName.toLowerCase().should.equal('div');
+    expect(screen.getByRole('group').tagName).toEqual('DIV');
   });
 
   it('Should allow component tag customization', () => {
-    const { getByRole } = render(<ButtonGroup as="article" />);
+    render(<ButtonGroup as="article" />);
 
-    getByRole('group').tagName.toLowerCase().should.equal('article');
+    expect(screen.getByRole('group').tagName).toEqual('ARTICLE');
   });
 });

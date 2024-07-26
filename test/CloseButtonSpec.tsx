@@ -1,47 +1,49 @@
-import { fireEvent, render } from '@testing-library/react';
-import { expect } from 'chai';
-import sinon from 'sinon';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import CloseButton from '../src/CloseButton';
 
 describe('<CloseButton>', () => {
   it('Should output a button', () => {
-    const { getAllByRole } = render(<CloseButton />);
+    render(<CloseButton />);
 
-    getAllByRole('button').should.have.lengthOf(1);
+    expect(screen.getAllByRole('button')).toHaveLength(1);
   });
 
   it('Should have type=button by default', () => {
-    const { getByRole } = render(<CloseButton />);
+    render(<CloseButton />);
 
-    expect(getByRole('button').getAttribute('type')).to.be.equal('button');
+    expect(screen.getByRole('button').getAttribute('type')).toEqual('button');
   });
 
   it('Should have class .btn-close', () => {
-    const { getByRole } = render(<CloseButton />);
+    render(<CloseButton />);
 
-    getByRole('button').classList.contains('btn-close');
+    expect(screen.getByRole('button').classList).toContain('btn-close');
   });
 
   it('Should call onClick callback', () => {
-    const onClickSpy = sinon.spy();
+    const onClickSpy = vi.fn();
 
-    const { getByRole } = render(<CloseButton onClick={onClickSpy} />);
+    render(<CloseButton onClick={onClickSpy} />);
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
-    onClickSpy.should.have.been.calledOnce;
+    expect(onClickSpy).toHaveBeenCalledOnce();
   });
 
   it('Should have a aria-label defaulted to "Close"', () => {
-    const { getByLabelText } = render(<CloseButton />);
+    render(<CloseButton />);
 
-    getByLabelText('Close', { selector: '[aria-label]' }).should.exist;
+    expect(
+      screen.getByLabelText('Close', { selector: '[aria-label]' }),
+    ).toBeTruthy();
   });
 
   it('Should allow override of aria-label', () => {
-    const { getByLabelText } = render(<CloseButton aria-label="My Close" />);
+    render(<CloseButton aria-label="My Close" />);
 
-    getByLabelText('My Close', { selector: '[aria-label]' }).should.exist;
+    expect(
+      screen.getByLabelText('My Close', { selector: '[aria-label]' }),
+    ).toBeTruthy();
   });
 });

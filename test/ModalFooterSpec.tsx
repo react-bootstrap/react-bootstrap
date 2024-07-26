@@ -1,29 +1,31 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import ModalFooter from '../src/ModalFooter';
 
-import Modal from '../src/Modal';
-
-describe('Modal.Footer', () => {
+describe('ModalFooter', () => {
   it('uses "div" by default', () => {
-    const { getByTestId } = render(
-      <Modal.Footer data-testid="test-modal" className="custom-class">
+    render(
+      <ModalFooter data-testid="test-modal" className="custom-class">
         <strong>Content</strong>
-      </Modal.Footer>,
+      </ModalFooter>,
     );
 
-    const elem = getByTestId('test-modal');
-    elem.tagName.toLowerCase().should.equal('div');
-    elem.classList.contains('modal-footer').should.be.true;
-    elem.classList.contains('custom-class').should.be.true;
-    elem.querySelector('strong')!.textContent!.should.equal('Content');
+    const elem = screen.getByTestId('test-modal');
+    expect(elem.tagName).toEqual('DIV');
+    expect(elem.classList).toContain('modal-footer');
+    expect(elem.classList).toContain('custom-class');
+    expect(elem.querySelector('strong')!.textContent).toEqual('Content');
   });
 
   it('should allow custom elements instead of "div"', () => {
-    const { getByTestId } = render(
-      <Modal.Footer data-testid="test-modal" as="section">
+    render(
+      <ModalFooter data-testid="test-modal" as="section">
         <strong>Content</strong>
-      </Modal.Footer>,
+      </ModalFooter>,
     );
-    getByTestId('test-modal').classList.contains('modal-footer').should.be.true;
-    getByTestId('test-modal').tagName.toLowerCase().should.equal('section');
+    expect(screen.getByTestId('test-modal').classList).toContain(
+      'modal-footer',
+    );
+    expect(screen.getByTestId('test-modal').tagName).toEqual('SECTION');
   });
 });
