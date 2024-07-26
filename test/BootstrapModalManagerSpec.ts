@@ -1,9 +1,15 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import getScrollbarSize from 'dom-helpers/scrollbarSize';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import ModalManager from '@restart/ui/ModalManager';
 import { injectCss } from './helpers';
 import BootstrapModalManager, {
   getSharedManager,
 } from '../src/BootstrapModalManager';
+
+const SCROLLBAR_SIZE = 10;
+
+vi.spyOn(ModalManager.prototype, 'getScrollbarWidth').mockImplementation(
+  () => SCROLLBAR_SIZE,
+);
 
 const createModal = () => ({ dialog: null, backdrop: null });
 
@@ -45,7 +51,7 @@ describe('BootstrapModalManager', () => {
     expect(manager.modals[0]).toEqual(modal);
 
     expect(manager.state).toEqual({
-      scrollBarWidth: 0,
+      scrollBarWidth: SCROLLBAR_SIZE,
       style: {
         overflow: '',
         paddingRight: '',
@@ -94,7 +100,7 @@ describe('BootstrapModalManager', () => {
       manager.add(modal);
 
       expect(document.body.style.paddingRight).toEqual(
-        `${getScrollbarSize() + 20}px`,
+        `${SCROLLBAR_SIZE + 20}px`,
       );
     });
 
@@ -104,7 +110,7 @@ describe('BootstrapModalManager', () => {
       new BootstrapModalManager({ isRTL: true }).add(modal as any);
 
       expect(document.body.style.paddingLeft).toEqual(
-        `${getScrollbarSize() + 20}px`,
+        `${SCROLLBAR_SIZE + 20}px`,
       );
     });
 
