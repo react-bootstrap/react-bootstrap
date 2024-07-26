@@ -17,27 +17,23 @@ const expectedClasses: Record<ToastPosition, Array<string>> = {
 describe('ToastContainer', () => {
   it('should render a basic toast container', () => {
     const { container } = render(<ToastContainer />);
-    expect(
-      container.firstElementChild!.classList.contains('toast-container'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain('toast-container');
   });
 
   it('should render the containerPosition', () => {
     const { container } = render(
       <ToastContainer containerPosition="relative" />,
     );
-    expect(
-      container.firstElementChild!.classList.contains('position-relative'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'position-relative',
+    );
   });
 
   Object.keys(expectedClasses).forEach((position: ToastPosition) => {
     it(`should render position=${position}`, () => {
       const { container } = render(<ToastContainer position={position} />);
       expectedClasses[position].map((className) =>
-        expect(
-          container.firstElementChild!.classList.contains(className),
-        ).toEqual(true),
+        expect(container.firstElementChild!.classList).toContain(className),
       );
     });
   });

@@ -10,15 +10,15 @@ describe('<Accordion>', () => {
   it('should output a div', () => {
     render(<Accordion data-testid="test" />);
 
-    expect(screen.getByTestId('test').tagName.toLowerCase()).toEqual('div');
+    expect(screen.getByTestId('test').tagName).toEqual('DIV');
   });
 
   it('should render flush prop', () => {
     render(<Accordion flush data-testid="test" />);
 
     const node = screen.getByTestId('test');
-    expect(node.classList.contains('accordion')).toEqual(true);
-    expect(node.classList.contains('accordion-flush')).toEqual(true);
+    expect(node.classList).toContain('accordion');
+    expect(node.classList).toContain('accordion-flush');
   });
 
   it('should output a h1', () => {
@@ -31,9 +31,7 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    expect(screen.getByTestId('test-collapse').tagName.toLowerCase()).toEqual(
-      'h1',
-    );
+    expect(screen.getByTestId('test-collapse').tagName).toEqual('H1');
   });
 
   it('should only have second item collapsed', () => {

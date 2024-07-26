@@ -7,7 +7,7 @@ describe('<ListGroupItem>', () => {
     render(<ListGroupItem data-testid="test" />);
 
     const item = screen.getByTestId('test');
-    expect(item.tagName.toLowerCase()).toEqual('div');
+    expect(item.tagName).toEqual('DIV');
     expect(item.classList).toContain('list-group-item');
   });
 

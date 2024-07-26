@@ -95,25 +95,19 @@ describe('<Button>', () => {
       </Button>,
     );
 
-    expect(screen.getByRole('button').classList.contains('disabled')).toEqual(
-      true,
-    );
+    expect(screen.getByRole('button').classList).toContain('disabled');
   });
 
   it('Should apply variant class', () => {
     render(<Button variant="danger">Title</Button>);
 
-    expect(screen.getByRole('button').classList.contains('btn-danger')).toEqual(
-      true,
-    );
+    expect(screen.getByRole('button').classList).toContain('btn-danger');
   });
 
   it('Should have size class', () => {
     render(<Button size="lg">Title</Button>);
 
-    expect(screen.getByRole('button').classList.contains('btn-lg')).toEqual(
-      true,
-    );
+    expect(screen.getByRole('button').classList).toContain('btn-lg');
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {
@@ -124,48 +118,38 @@ describe('<Button>', () => {
     );
 
     const button = screen.getByRole('button');
-    expect(button.classList.contains('bob')).toEqual(true);
-    expect(button.classList.contains('btn-danger')).toEqual(true);
+    expect(button.classList).toContain('bob');
+    expect(button.classList).toContain('btn-danger');
   });
 
   it('Should default to variant="primary"', () => {
     render(<Button>Title</Button>);
 
-    expect(
-      screen.getByRole('button').classList.contains('btn-primary'),
-    ).toEqual(true);
+    expect(screen.getByRole('button').classList).toContain('btn-primary');
   });
 
   it('Should remove default variant', () => {
     render(<Button variant={null as any}>Title</Button>);
 
-    expect(
-      screen.getByRole('button').classList.contains('btn-primary'),
-    ).toEqual(false);
+    expect(screen.getByRole('button').classList).not.toContain('btn-primary');
   });
 
   it('Should not output null variant', () => {
     render(<Button variant="">Title</Button>);
 
-    expect(screen.getByRole('button').classList.contains('btn-null')).toEqual(
-      false,
-    );
+    expect(screen.getByRole('button').classList).not.toContain('btn-null');
   });
 
   it('Should not output empty variant', () => {
     render(<Button variant="">Title</Button>);
 
-    expect(screen.getByRole('button').classList.contains('btn-')).toEqual(
-      false,
-    );
+    expect(screen.getByRole('button').classList).not.toContain('btn-');
   });
 
   it('Should be active', () => {
     render(<Button active>Title</Button>);
 
-    expect(screen.getByRole('button').classList.contains('active')).toEqual(
-      true,
-    );
+    expect(screen.getByRole('button').classList).toContain('active');
   });
 
   it('Should allow a custom prefix', () => {
@@ -176,7 +160,7 @@ describe('<Button>', () => {
     );
 
     const button = screen.getByRole('button');
-    expect(button.classList.contains('my-btn')).toEqual(true);
-    expect(button.classList.contains('my-btn-danger')).toEqual(true);
+    expect(button.classList).toContain('my-btn');
+    expect(button.classList).toContain('my-btn-danger');
   });
 });

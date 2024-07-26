@@ -5,36 +5,28 @@ import Card from '../src/Card';
 describe('<Card>', () => {
   it('should output a div', () => {
     render(<Card>Card</Card>);
-    expect(screen.getByText('Card').tagName.toLowerCase()).toEqual('div');
-    expect(screen.getByText('Card').classList.contains('card')).toEqual(true);
+    expect(screen.getByText('Card').tagName).toEqual('DIV');
+    expect(screen.getByText('Card').classList).toContain('card');
   });
 
   it('should have additional classes', () => {
     render(<Card className="custom-class">Card</Card>);
-    expect(screen.getByText('Card').classList.contains('custom-class')).toEqual(
-      true,
-    );
+    expect(screen.getByText('Card').classList).toContain('custom-class');
   });
 
   it('accepts a bg prop', () => {
     render(<Card bg="primary">Card</Card>);
-    expect(screen.getByText('Card').classList.contains('bg-primary')).toEqual(
-      true,
-    );
+    expect(screen.getByText('Card').classList).toContain('bg-primary');
   });
 
   it('accepts a text prop', () => {
     render(<Card text="success">Card</Card>);
-    expect(screen.getByText('Card').classList.contains('text-success')).toEqual(
-      true,
-    );
+    expect(screen.getByText('Card').classList).toContain('text-success');
   });
 
   it('accepts a border prop', () => {
     render(<Card border="danger">Card</Card>);
-    expect(
-      screen.getByText('Card').classList.contains('border-danger'),
-    ).toEqual(true);
+    expect(screen.getByText('Card').classList).toContain('border-danger');
   });
 
   it('should render children', () => {
@@ -44,27 +36,21 @@ describe('<Card>', () => {
       </Card>,
     );
     expect(screen.getByTestId('test-card').children.length).toEqual(1);
-    expect(
-      screen.getByTestId('test-card').children[0].tagName.toLowerCase(),
-    ).toEqual('p');
+    expect(screen.getByTestId('test-card').children[0].tagName).toEqual('P');
   });
 
   it('accepts as prop', () => {
     render(<Card as="section">body</Card>);
-    expect(screen.getByText('body').tagName.toLowerCase()).toEqual('section');
+    expect(screen.getByText('body').tagName).toEqual('SECTION');
   });
 
   it('allows for the body shorthand', () => {
     render(<Card body>test</Card>);
-    expect(screen.getByText('test').classList.contains('card-body')).toEqual(
-      true,
-    );
+    expect(screen.getByText('test').classList).toContain('card-body');
   });
 
   it('Should have div as default component', () => {
     render(<Card data-testid="default-test" />);
-    expect(screen.getByTestId('default-test').tagName.toLowerCase()).toEqual(
-      'div',
-    );
+    expect(screen.getByTestId('default-test').tagName).toEqual('DIV');
   });
 });

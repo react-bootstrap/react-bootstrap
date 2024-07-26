@@ -11,9 +11,9 @@ describe('<Alert>', () => {
       </Alert>,
     );
     expect(screen.getByTestId('test-alert').children.length).toEqual(1);
-    expect(
-      screen.getByTestId('test-alert').children[0].tagName.toLowerCase(),
-    ).toEqual('strong');
+    expect(screen.getByTestId('test-alert').children[0].tagName).toEqual(
+      'STRONG',
+    );
   });
 
   it('Should have dismissible style', () => {
@@ -22,9 +22,9 @@ describe('<Alert>', () => {
         <strong>Message</strong>
       </Alert>,
     );
-    expect(
-      screen.getByTestId('test-alert').classList.contains('alert-dismissible'),
-    ).toEqual(true);
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-dismissible',
+    );
   });
 
   it('Should call onClose callback on dismiss click', () => {
@@ -40,9 +40,9 @@ describe('<Alert>', () => {
 
   it('Should default to variant="primary"', () => {
     render(<Alert data-testid="test-alert">Message</Alert>);
-    expect(
-      screen.getByTestId('test-alert').classList.contains('alert-primary'),
-    ).toEqual(true);
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-primary',
+    );
   });
 
   it('Should use variant class', () => {
@@ -51,9 +51,9 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(
-      screen.getByTestId('test-alert').classList.contains('alert-danger'),
-    ).toEqual(true);
+    expect(screen.getByTestId('test-alert').classList).toContain(
+      'alert-danger',
+    );
   });
 
   it('Should not have variant class when variant=null', () => {
@@ -62,9 +62,9 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(
-      screen.getByTestId('test-alert').classList.contains('alert-primary'),
-    ).toEqual(false);
+    expect(screen.getByTestId('test-alert').classList).not.toContain(
+      'alert-primary',
+    );
   });
 
   it('should forward refs to the alert', () => {
@@ -74,9 +74,7 @@ describe('<Alert>', () => {
         message
       </Alert>,
     );
-    expect(screen.getByTestId('test-alert').tagName.toLowerCase()).toEqual(
-      'div',
-    );
+    expect(screen.getByTestId('test-alert').tagName).toEqual('DIV');
   });
 
   it('should not have fade class when transition=false', () => {
@@ -85,9 +83,7 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(screen.getByTestId('test-alert').classList.contains('fade')).toEqual(
-      false,
-    );
+    expect(screen.getByTestId('test-alert').classList).not.toContain('fade');
   });
 
   it('should spread props to alert when transition=false', () => {
@@ -120,9 +116,7 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(screen.getByTestId('test-alert').classList.contains('fade')).toEqual(
-      true,
-    );
+    expect(screen.getByTestId('test-alert').classList).toContain('fade');
   });
 
   it('should render null when transition and show are false', () => {
@@ -145,11 +139,9 @@ describe('<Alert>', () => {
         Message
       </Alert>,
     );
-    expect(
-      screen
-        .getByLabelText('Close alert')
-        .classList.contains('btn-close-white'),
-    ).toEqual(true);
+    expect(screen.getByLabelText('Close alert').classList).toContain(
+      'btn-close-white',
+    );
   });
 
   describe('Web Accessibility', () => {
@@ -169,9 +161,9 @@ describe('<Alert>', () => {
           Message
         </Alert>,
       );
-      expect(
-        screen.getByTestId('test-alert').classList.contains('alert-heading'),
-      ).toEqual(true);
+      expect(screen.getByTestId('test-alert').classList).toContain(
+        'alert-heading',
+      );
     });
 
     it('Should have div styled as an h4 by default', () => {
@@ -181,9 +173,7 @@ describe('<Alert>', () => {
           Message
         </Alert>,
       );
-      expect(screen.getByTestId('test-alert').classList.contains('h4')).toEqual(
-        true,
-      );
+      expect(screen.getByTestId('test-alert').classList).toContain('h4');
     });
 
     it('Should support Heading as as prop', () => {
@@ -195,9 +185,7 @@ describe('<Alert>', () => {
           Message
         </Alert>,
       );
-      expect(screen.getByTestId('test-alert').tagName.toLowerCase()).toEqual(
-        'h1',
-      );
+      expect(screen.getByTestId('test-alert').tagName).toEqual('H1');
     });
   });
 });

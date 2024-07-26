@@ -9,15 +9,13 @@ describe('Toast.Header', () => {
         <strong>content</strong>
       </Toast.Header>,
     );
-    expect(container.firstElementChild!.tagName.toLowerCase()).toEqual('div');
+    expect(container.firstElementChild!.tagName).toEqual('DIV');
 
-    expect(
-      container.firstElementChild!.firstElementChild!.tagName.toLowerCase(),
-    ).toEqual('strong');
+    expect(container.firstElementChild!.firstElementChild!.tagName).toEqual(
+      'STRONG',
+    );
 
-    expect(
-      container.firstElementChild!.classList.contains('toast-header'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain('toast-header');
   });
 
   it('should render close button variant', () => {
@@ -27,9 +25,7 @@ describe('Toast.Header', () => {
       </Toast.Header>,
     );
     expect(
-      container
-        .firstElementChild!.getElementsByTagName('button')[0]
-        .classList.contains('btn-close-white'),
-    ).toEqual(true);
+      container.firstElementChild!.getElementsByTagName('button')[0].classList,
+    ).toContain('btn-close-white');
   });
 });

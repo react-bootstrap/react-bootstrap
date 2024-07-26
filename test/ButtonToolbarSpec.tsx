@@ -12,9 +12,7 @@ describe('ButtonToolbar', () => {
       </ButtonToolbar>,
     );
 
-    expect(
-      screen.getByRole('toolbar').classList.contains('btn-toolbar'),
-    ).toEqual(true);
+    expect(screen.getByRole('toolbar').classList).toContain('btn-toolbar');
   });
 
   it('Should allow a custom prefix', () => {
@@ -25,7 +23,7 @@ describe('ButtonToolbar', () => {
     );
 
     const toolbar = screen.getByRole('toolbar');
-    expect(toolbar.classList.contains('my-custom-toolbar')).toEqual(true);
-    expect(toolbar.classList.contains('btn-toolbar')).toEqual(false);
+    expect(toolbar.classList).toContain('my-custom-toolbar');
+    expect(toolbar.classList).not.toContain('btn-toolbar');
   });
 });

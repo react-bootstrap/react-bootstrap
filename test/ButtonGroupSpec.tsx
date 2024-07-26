@@ -11,7 +11,7 @@ describe('ButtonGroup', () => {
       </ButtonGroup>,
     );
 
-    expect(screen.getByRole('group')).toBeTruthy();
+    expect(screen.getByRole('group')).toBeDefined();
   });
 
   it('Should add size', () => {
@@ -21,9 +21,7 @@ describe('ButtonGroup', () => {
       </ButtonGroup>,
     );
 
-    expect(
-      screen.getByRole('group').classList.contains('btn-group-lg'),
-    ).toEqual(true);
+    expect(screen.getByRole('group').classList).toContain('btn-group-lg');
   });
 
   it('Should add vertical variation', () => {
@@ -34,19 +32,19 @@ describe('ButtonGroup', () => {
     );
 
     const group = screen.getByRole('group');
-    expect(group.classList.contains('btn-group-vertical')).toEqual(true);
-    expect(group.classList.contains('btn-group')).toEqual(false);
+    expect(group.classList).toContain('btn-group-vertical');
+    expect(group.classList).not.toContain('btn-group');
   });
 
   it('Should have div as default component', () => {
     render(<ButtonGroup />);
 
-    expect(screen.getByRole('group').tagName.toLowerCase()).toEqual('div');
+    expect(screen.getByRole('group').tagName).toEqual('DIV');
   });
 
   it('Should allow component tag customization', () => {
     render(<ButtonGroup as="article" />);
 
-    expect(screen.getByRole('group').tagName.toLowerCase()).toEqual('article');
+    expect(screen.getByRole('group').tagName).toEqual('ARTICLE');
   });
 });

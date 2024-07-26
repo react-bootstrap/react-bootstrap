@@ -38,8 +38,8 @@ describe('<Breadcrumb.Item>', () => {
     );
 
     const item = screen.getByTestId('test');
-    expect(item.classList.contains('custom-one')).toEqual(true);
-    expect(item.classList.contains('custom-two')).toEqual(true);
+    expect(item.classList).toContain('custom-one');
+    expect(item.classList).toContain('custom-two');
   });
 
   it('Should add aria-current to active element', () => {
@@ -128,7 +128,7 @@ describe('<Breadcrumb.Item>', () => {
   it('Should have li as default component', () => {
     render(<Breadcrumb.Item data-testid="test" />);
 
-    expect(screen.getByTestId('test').tagName.toLowerCase()).toEqual('li');
+    expect(screen.getByTestId('test').tagName).toEqual('LI');
   });
 
   it('Should be able to customize inner link element', () => {

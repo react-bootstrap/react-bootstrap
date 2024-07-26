@@ -12,17 +12,15 @@ describe('<Breadcrumb>', () => {
   it('Should have breadcrumb class inside ol', () => {
     render(<Breadcrumb />);
 
-    expect(screen.getByRole('list').classList.contains('breadcrumb')).toEqual(
-      true,
-    );
+    expect(screen.getByRole('list').classList).toContain('breadcrumb');
   });
 
   it('Should have custom classes', () => {
     render(<Breadcrumb className="custom-one custom-two" data-testid="test" />);
 
     const breadcrumb = screen.getByTestId('test');
-    expect(breadcrumb.classList.contains('custom-one')).toEqual(true);
-    expect(breadcrumb.classList.contains('custom-two')).toEqual(true);
+    expect(breadcrumb.classList).toContain('custom-one');
+    expect(breadcrumb.classList).toContain('custom-two');
   });
 
   it('Should not have a navigation role', () => {
@@ -43,6 +41,6 @@ describe('<Breadcrumb>', () => {
   it('Should have nav as default component', () => {
     render(<Breadcrumb data-testid="test" />);
 
-    expect(screen.getByTestId('test').tagName.toLowerCase()).toEqual('nav');
+    expect(screen.getByTestId('test').tagName).toEqual('NAV');
   });
 });

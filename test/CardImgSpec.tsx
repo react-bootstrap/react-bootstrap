@@ -26,33 +26,27 @@ describe('<CardImg>', () => {
     render(<CardImg as="figure">img</CardImg>);
 
     const card = screen.getByRole('figure');
-    expect(card.tagName.toLowerCase()).toEqual('figure');
-    expect(card.classList.contains('card-img')).toEqual(true);
+    expect(card.tagName).toEqual('FIGURE');
+    expect(card.classList).toContain('card-img');
   });
 
   describe('variants', () => {
     it('null', () => {
       render(<CardImg />);
 
-      expect(screen.getByRole('img').classList.contains('card-img')).toEqual(
-        true,
-      );
+      expect(screen.getByRole('img').classList).toContain('card-img');
     });
 
     it('top', () => {
       render(<CardImg variant="top" />);
 
-      expect(
-        screen.getByRole('img').classList.contains('card-img-top'),
-      ).toEqual(true);
+      expect(screen.getByRole('img').classList).toContain('card-img-top');
     });
 
     it('bottom', () => {
       render(<CardImg variant="bottom" />);
 
-      expect(
-        screen.getByRole('img').classList.contains('card-img-bottom'),
-      ).toEqual(true);
+      expect(screen.getByRole('img').classList).toContain('card-img-bottom');
     });
   });
 });

@@ -28,12 +28,8 @@ describe('<Toast>', () => {
 
   it('should apply bg prop', () => {
     const { container } = render(<Toast bg="primary">Card</Toast>);
-    expect(
-      container.firstElementChild!.classList.contains('bg-primary'),
-    ).toEqual(true);
-    expect(container.firstElementChild!.classList.contains('toast')).toEqual(
-      true,
-    );
+    expect(container.firstElementChild!.classList).toContain('bg-primary');
+    expect(container.firstElementChild!.classList).toContain('toast');
   });
 
   it('should render an entire toast', () => {
@@ -45,9 +41,7 @@ describe('<Toast>', () => {
     );
 
     ['fade', 'toast', 'show'].map((className) =>
-      expect(
-        container.firstElementChild!.classList.contains(className),
-      ).toEqual(true),
+      expect(container.firstElementChild!.classList).toContain(className),
     );
 
     (
@@ -73,9 +67,7 @@ describe('<Toast>', () => {
     );
 
     ['toast', 'show'].map((className) =>
-      expect(
-        container.firstElementChild!.classList.contains(className),
-      ).toEqual(true),
+      expect(container.firstElementChild!.classList).toContain(className),
     );
   });
 
@@ -208,7 +200,7 @@ describe('<Toast>', () => {
         <Toast.Body />
       </Toast>,
     );
-    expect(container.firstElementChild!.tagName.toLowerCase()).toEqual('div');
+    expect(container.firstElementChild!.tagName).toEqual('DIV');
     expect(container.firstElementChild!.classList).toContain('my-toast');
   });
 

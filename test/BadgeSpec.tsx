@@ -12,9 +12,9 @@ describe('Badge', () => {
 
     const badge = screen.getByTestId('test');
     expect(badge.innerText).toEqual('Message');
-    expect(badge.classList.contains('badge')).toEqual(true);
-    expect(badge.classList.contains('bg-primary')).toEqual(true);
-    expect(badge.classList.contains('rounded-pill')).toEqual(true);
+    expect(badge.classList).toContain('badge');
+    expect(badge.classList).toContain('bg-primary');
+    expect(badge.classList).toContain('rounded-pill');
   });
 
   it('should support custom `as`', () => {
@@ -25,7 +25,7 @@ describe('Badge', () => {
     );
 
     const badge = screen.getByTestId('test');
-    expect(badge.tagName.toLowerCase()).toEqual('a');
+    expect(badge.tagName).toEqual('A');
     expect(badge.getAttribute('href')).toEqual('#');
   });
 
@@ -33,7 +33,7 @@ describe('Badge', () => {
     render(<Badge data-testid="test">Message</Badge>);
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList.contains('bg-primary')).toEqual(true);
+    expect(badge.classList).toContain('bg-primary');
   });
 
   it('Should use bg class', () => {
@@ -44,7 +44,7 @@ describe('Badge', () => {
     );
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList.contains('bg-danger')).toEqual(true);
+    expect(badge.classList).toContain('bg-danger');
   });
 
   it('Should not have bg class when bg=null', () => {
@@ -55,6 +55,6 @@ describe('Badge', () => {
     );
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList.contains('bg-primary')).toEqual(false);
+    expect(badge.classList).not.toContain('bg-primary');
   });
 });

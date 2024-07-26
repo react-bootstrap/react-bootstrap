@@ -6,9 +6,9 @@ import Accordion from '../src/Accordion';
 describe('<AccordionButton>', () => {
   it('Should have button as default component', () => {
     render(<AccordionButton data-testid="test-accordion-button" />);
-    expect(
-      screen.getByTestId('test-accordion-button').tagName.toLowerCase(),
-    ).toEqual('button');
+    expect(screen.getByTestId('test-accordion-button').tagName).toEqual(
+      'BUTTON',
+    );
     expect(
       screen.getByTestId('test-accordion-button').getAttribute('type'),
     ).toEqual('button');
@@ -16,9 +16,7 @@ describe('<AccordionButton>', () => {
 
   it('Should allow rendering as different component', () => {
     render(<AccordionButton data-testid="test-accordion-button" as="div" />);
-    expect(
-      screen.getByTestId('test-accordion-button').tagName.toLowerCase(),
-    ).toEqual('div');
+    expect(screen.getByTestId('test-accordion-button').tagName).toEqual('DIV');
   });
 
   it('Should call onClick', () => {

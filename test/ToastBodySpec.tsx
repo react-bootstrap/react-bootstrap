@@ -8,11 +8,7 @@ describe('Toast.Body', () => {
     const { container } = render(
       <Toast.Body className="custom-class">{content}</Toast.Body>,
     );
-    expect(
-      container.firstElementChild!.classList.contains('custom-class'),
-    ).toEqual(true);
-    expect(
-      container.firstElementChild!.classList.contains('toast-body'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain('custom-class');
+    expect(container.firstElementChild!.classList).toContain('toast-body');
   });
 });

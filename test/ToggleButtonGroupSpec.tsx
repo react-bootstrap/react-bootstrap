@@ -19,9 +19,7 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(1);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain('btn-group');
 
     expect(screen.getByLabelText('Option 1')!.getAttribute('type')!).toEqual(
       'checkbox',
@@ -50,9 +48,9 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(1);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
   });
 
   it('should render checkboxes vertically and small', () => {
@@ -71,12 +69,10 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(2);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-sm'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-sm');
   });
 
   it('should render checkboxes vertically and large', () => {
@@ -95,12 +91,10 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(2);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-lg'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-lg');
   });
 
   it('should render radios', () => {
@@ -119,9 +113,7 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(1);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain('btn-group');
 
     expect(screen.getByLabelText('Option 1')!.getAttribute('type')).toEqual(
       'radio',
@@ -150,9 +142,9 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(1);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
   });
 
   it('should render radios vertically and small', () => {
@@ -171,12 +163,10 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(2);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-sm'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-sm');
   });
 
   it('should render radios vertically and large', () => {
@@ -195,12 +185,10 @@ describe('ToggleButtonGroup', () => {
     );
 
     expect(container.firstElementChild!.classList.length).toEqual(2);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-vertical'),
-    ).toEqual(true);
-    expect(
-      container.firstElementChild!.classList.contains('btn-group-lg'),
-    ).toEqual(true);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-lg');
   });
 
   it('should select initial values', () => {
@@ -254,15 +242,10 @@ describe('ToggleButtonGroup', () => {
       (screen.getByLabelText('Option 3') as HTMLInputElement)!.disabled,
     ).toEqual(false);
 
-    expect(screen.getByText('Option 1').classList.contains('disabled')).toEqual(
-      true,
-    );
-    expect(screen.getByText('Option 2').classList.contains('disabled')).toEqual(
-      true,
-    );
-    expect(screen.getByText('Option 3').classList.contains('disabled')).toEqual(
-      false,
-    );
+    expect(screen.getByText('Option 1').classList).toContain('disabled');
+
+    expect(screen.getByText('Option 2').classList).toContain('disabled');
+    expect(screen.getByText('Option 3').classList).not.toContain('disabled');
   });
 
   it('should return an array of values', () => {
