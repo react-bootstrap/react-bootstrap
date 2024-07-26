@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import { injectCss } from './helpers';
 import BootstrapModalManager, {
@@ -41,10 +41,10 @@ describe('BootstrapModalManager', () => {
 
     manager.add(modal);
 
-    expect(manager.modals.length).to.equal(1);
-    expect(manager.modals[0]).to.equal(modal);
+    expect(manager.modals.length).toEqual(1);
+    expect(manager.modals[0]).toEqual(modal);
 
-    expect(manager.state).to.eql({
+    expect(manager.state).toEqual({
       scrollBarWidth: 0,
       style: {
         overflow: '',
@@ -55,19 +55,19 @@ describe('BootstrapModalManager', () => {
 
   it('should return a shared modal manager', () => {
     const localManager = getSharedManager();
-    localManager.should.exist;
+    expect(localManager).toBeDefined();
   });
 
   it('should return a same modal manager if called twice', () => {
     let localManager = getSharedManager();
-    localManager.should.exist;
+    expect(localManager).toBeDefined();
 
     const modal = createModal();
     localManager.add(modal as any);
-    localManager.modals.length.should.equal(1);
+    expect(localManager.modals).toHaveLength(1);
 
     localManager = getSharedManager();
-    localManager.modals.length.should.equal(1);
+    expect(localManager.modals).toHaveLength(1);
 
     localManager.remove(modal as any);
   });
@@ -93,7 +93,7 @@ describe('BootstrapModalManager', () => {
       const modal = createModal();
       manager.add(modal);
 
-      expect(document.body.style.paddingRight).to.equal(
+      expect(document.body.style.paddingRight).toEqual(
         `${getScrollbarSize() + 20}px`,
       );
     });
@@ -103,7 +103,7 @@ describe('BootstrapModalManager', () => {
 
       new BootstrapModalManager({ isRTL: true }).add(modal as any);
 
-      expect(document.body.style.paddingLeft).to.equal(
+      expect(document.body.style.paddingLeft).toEqual(
         `${getScrollbarSize() + 20}px`,
       );
     });
@@ -113,12 +113,12 @@ describe('BootstrapModalManager', () => {
 
       document.body.style.overflow = 'scroll';
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
 
       manager.add(modal);
       manager.remove(modal);
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
       document.body.style.overflow = '';
     });
 
@@ -127,13 +127,13 @@ describe('BootstrapModalManager', () => {
 
       document.body.style.overflow = 'scroll';
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
 
       const localManager = new BootstrapModalManager({ isRTL: true });
       localManager.add(modal as any);
       localManager.remove(modal as any);
 
-      expect(document.body.style.overflow).to.equal('scroll');
+      expect(document.body.style.overflow).toEqual('scroll');
       document.body.style.overflow = '';
     });
   });

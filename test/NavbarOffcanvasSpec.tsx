@@ -1,25 +1,24 @@
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Navbar from '../src/Navbar';
 import Offcanvas from '../src/Offcanvas';
 
 describe('<NavbarOffcanvas>', () => {
   it('should should open the offcanvas', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Navbar.Toggle data-testid="toggle" />
         <Navbar.Offcanvas data-testid="offcanvas">hello</Navbar.Offcanvas>
       </Navbar>,
     );
 
-    fireEvent.click(getByTestId('toggle'));
-    getByTestId('offcanvas').classList.contains('show').should.be.true;
+    fireEvent.click(screen.getByTestId('toggle'));
+    expect(screen.getByTestId('offcanvas').classList).toContain('show');
   });
 
   it('should close the offcanvas on header close button click', () => {
-    const onToggleSpy = sinon.spy();
-    const { getByLabelText } = render(
+    const onToggleSpy = vi.fn();
+    render(
       <Navbar onToggle={onToggleSpy} expanded>
         <Navbar.Toggle data-testid="toggle" />
         <Navbar.Offcanvas data-testid="offcanvas">
@@ -28,18 +27,18 @@ describe('<NavbarOffcanvas>', () => {
       </Navbar>,
     );
 
-    fireEvent.click(getByLabelText('Close'));
-    onToggleSpy.should.have.been.calledWith(false);
+    fireEvent.click(screen.getByLabelText('Close'));
+    expect(onToggleSpy).toHaveBeenCalledWith(false);
   });
 
   it('should render nav items with expand prop', () => {
-    const { getByText } = render(
+    render(
       <Navbar expand="sm">
         <Navbar.Toggle data-testid="toggle" />
         <Navbar.Offcanvas data-testid="offcanvas">hello</Navbar.Offcanvas>
       </Navbar>,
     );
 
-    getByText('hello').should.exist;
+    expect(screen.getByText('hello')).toBeDefined();
   });
 });
