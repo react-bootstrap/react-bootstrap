@@ -1,11 +1,10 @@
-import { render } from '@testing-library/react';
-import { expect } from 'chai';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import NavLink from '../src/NavLink';
 
 describe('<NavLink>', () => {
   it('renders correctly', () => {
-    const { getByTestId } = render(
+    render(
       <NavLink
         className="custom-class"
         href="/some/unique-thing/"
@@ -15,55 +14,55 @@ describe('<NavLink>', () => {
         <strong>Children</strong>
       </NavLink>,
     );
-    const navLinkElem = getByTestId('test');
-    navLinkElem.classList.contains('nav-link').should.be.true;
-    navLinkElem.classList.contains('custom-class').should.be.true;
-    navLinkElem.getAttribute('href')!.should.equal('/some/unique-thing/');
-    navLinkElem.getAttribute('title')!.should.equal('content');
-    navLinkElem.firstElementChild!.tagName.toLowerCase().should.equal('strong');
+    const navLinkElem = screen.getByTestId('test');
+    expect(navLinkElem.classList).toContain('nav-link');
+    expect(navLinkElem.classList).toContain('custom-class');
+    expect(navLinkElem.getAttribute('href')).toEqual('/some/unique-thing/');
+    expect(navLinkElem.getAttribute('title')).toEqual('content');
+    expect(navLinkElem.firstElementChild!.tagName).toEqual('STRONG');
   });
 
   it('Should add active class', () => {
-    const { getByTestId } = render(
+    render(
       <NavLink active data-testid="test">
         Item content
       </NavLink>,
     );
-    const navLinkElem = getByTestId('test');
-    navLinkElem.classList.contains('active').should.be.true;
+    const navLinkElem = screen.getByTestId('test');
+    expect(navLinkElem.classList).toContain('active');
   });
 
   it('Should add disabled class', () => {
-    const { getByTestId } = render(
+    render(
       <NavLink disabled data-testid="test">
         Item content
       </NavLink>,
     );
-    const navLinkElem = getByTestId('test');
-    navLinkElem.classList.contains('disabled').should.be.true;
+    const navLinkElem = screen.getByTestId('test');
+    expect(navLinkElem.classList).toContain('disabled');
   });
 
   describe('Web Accessibility', () => {
     it('Should add aria-selected to the link when role is "tab"', () => {
-      const { getByTestId } = render(
+      render(
         <NavLink role="tab" active data-testid="test">
           Item content
         </NavLink>,
       );
-      const navLinkElem = getByTestId('test');
-      navLinkElem.tagName.toLowerCase().should.equal('a');
-      navLinkElem.getAttribute('aria-selected')!.should.equal('true');
+      const navLinkElem = screen.getByTestId('test');
+      expect(navLinkElem.tagName).toEqual('A');
+      expect(navLinkElem.getAttribute('aria-selected')).toEqual('true');
     });
 
     it('Should not add aria-selected to the link when role is not "tab"', () => {
-      const { getByTestId } = render(
+      render(
         <NavLink role="button" active data-testid="test">
           Item content
         </NavLink>,
       );
-      const navLinkElem = getByTestId('test');
-      navLinkElem.tagName.toLowerCase().should.equal('a');
-      expect(navLinkElem.getAttribute('aria-selected')).to.be.null;
+      const navLinkElem = screen.getByTestId('test');
+      expect(navLinkElem.tagName).toEqual('A');
+      expect(navLinkElem.getAttribute('aria-selected')).toBeNull();
     });
   });
 });

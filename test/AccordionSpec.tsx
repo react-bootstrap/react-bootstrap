@@ -1,7 +1,5 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
-import sinon from 'sinon';
-import { expect } from 'chai';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Accordion from '../src/Accordion';
 import AccordionCollapse from '../src/AccordionCollapse';
 import Dropdown from '../src/Dropdown';
@@ -10,21 +8,21 @@ import Nav from '../src/Nav';
 
 describe('<Accordion>', () => {
   it('should output a div', () => {
-    const { getByTestId } = render(<Accordion data-testid="test" />);
+    render(<Accordion data-testid="test" />);
 
-    getByTestId('test').tagName.toLowerCase().should.equal('div');
+    expect(screen.getByTestId('test').tagName).toEqual('DIV');
   });
 
   it('should render flush prop', () => {
-    const { getByTestId } = render(<Accordion flush data-testid="test" />);
+    render(<Accordion flush data-testid="test" />);
 
-    const node = getByTestId('test');
-    node.classList.contains('accordion').should.be.true;
-    node.classList.contains('accordion-flush').should.be.true;
+    const node = screen.getByTestId('test');
+    expect(node.classList).toContain('accordion');
+    expect(node.classList).toContain('accordion-flush');
   });
 
   it('should output a h1', () => {
-    const { getByTestId } = render(
+    render(
       <Accordion>
         <Accordion.Button>Hi</Accordion.Button>
         <AccordionCollapse as="h1" eventKey="0" data-testid="test-collapse">
@@ -33,11 +31,11 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    getByTestId('test-collapse').tagName.toLowerCase().should.equal('h1');
+    expect(screen.getByTestId('test-collapse').tagName).toEqual('H1');
   });
 
   it('should only have second item collapsed', () => {
-    const { getByTestId } = render(
+    render(
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
@@ -50,14 +48,16 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    expect(getByTestId('item-0').querySelector('.show')).to.exist;
-    expect(getByTestId('item-1').querySelector('.collapse')).to.exist;
+    expect(screen.getByTestId('item-0').querySelector('.show')).toBeTruthy();
+    expect(
+      screen.getByTestId('item-1').querySelector('.collapse'),
+    ).toBeTruthy();
   });
 
   it('should expand next item and collapse current item on click', async () => {
-    const onClickSpy = sinon.spy();
+    const onClickSpy = vi.fn();
 
-    const { getByTestId, getByText } = render(
+    render(
       <Accordion>
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header onClick={onClickSpy} />
@@ -72,24 +72,26 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('Button item 1'));
+    fireEvent.click(screen.getByText('Button item 1'));
 
-    onClickSpy.should.be.calledOnce;
+    expect(onClickSpy).toBeCalledTimes(1);
 
-    expect(getByTestId('item-0').querySelector('.collapse')).to.exist;
+    expect(
+      screen.getByTestId('item-0').querySelector('.collapse'),
+    ).toBeTruthy();
 
-    const item1 = getByTestId('item-1');
-    expect(item1.querySelector('.collapsing')).to.exist;
+    const item1 = screen.getByTestId('item-1');
+    expect(item1.querySelector('.collapsing')).toBeTruthy();
 
-    await waitFor(() => expect(item1.querySelector('.show')).to.exist, {
+    await waitFor(() => expect(item1.querySelector('.show')).toBeTruthy(), {
       container: item1,
     });
   });
 
   it('should collapse current item on click', async () => {
-    const onClickSpy = sinon.spy();
+    const onClickSpy = vi.fn();
 
-    const { getByTestId, getByText } = render(
+    render(
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header onClick={onClickSpy}>
@@ -104,14 +106,16 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('Button item 0'));
+    fireEvent.click(screen.getByText('Button item 0'));
 
-    onClickSpy.should.be.calledOnce;
+    expect(onClickSpy).toBeCalledTimes(1);
 
-    expect(getByTestId('item-1').querySelector('.collapse')).to.exist;
+    expect(
+      screen.getByTestId('item-1').querySelector('.collapse'),
+    ).toBeTruthy();
 
-    const item0 = getByTestId('item-0');
-    expect(item0.querySelector('.collapsing')).to.exist;
+    const item0 = screen.getByTestId('item-0');
+    expect(item0.querySelector('.collapsing')).toBeTruthy();
     await waitFor(() => expect(item0.querySelector('.show')).to.not.exist, {
       container: item0,
     });
@@ -119,7 +123,7 @@ describe('<Accordion>', () => {
 
   // https://github.com/react-bootstrap/react-bootstrap/issues/4176
   it('Should not close accordion when child dropdown clicked', () => {
-    const { getByTestId, getByText } = render(
+    render(
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
@@ -137,14 +141,15 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('Dropdown Action'));
+    fireEvent.click(screen.getByText('Dropdown Action'));
 
-    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
-      .exist;
+    expect(
+      screen.getByTestId('item-0').querySelector('.accordion-collapse.show'),
+    ).toBeTruthy();
   });
 
   it('Should not close accordion when child ListGroup clicked', () => {
-    const { getByTestId, getByText } = render(
+    render(
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
@@ -159,14 +164,15 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('List Group Item 1'));
+    fireEvent.click(screen.getByText('List Group Item 1'));
 
-    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
-      .exist;
+    expect(
+      screen.getByTestId('item-0').querySelector('.accordion-collapse.show'),
+    ).toBeTruthy();
   });
 
   it('Should not close accordion when child Nav clicked', () => {
-    const { getByTestId, getByText } = render(
+    render(
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0" data-testid="item-0">
           <Accordion.Header />
@@ -181,16 +187,17 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('Nav Link Item 0'));
+    fireEvent.click(screen.getByText('Nav Link Item 0'));
 
-    expect(getByTestId('item-0').querySelector('.accordion-collapse.show')).to
-      .exist;
+    expect(
+      screen.getByTestId('item-0').querySelector('.accordion-collapse.show'),
+    ).toBeTruthy();
   });
 
   it('should allow multiple items to stay open', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
-    const { getByText } = render(
+    render(
       <Accordion onSelect={onSelectSpy} alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>header0</Accordion.Header>
@@ -203,14 +210,14 @@ describe('<Accordion>', () => {
       </Accordion>,
     );
 
-    fireEvent.click(getByText('header0'));
-    fireEvent.click(getByText('header1'));
+    fireEvent.click(screen.getByText('header0'));
+    fireEvent.click(screen.getByText('header1'));
 
-    onSelectSpy.should.be.calledWith(['0', '1']);
+    expect(onSelectSpy).toHaveBeenCalledWith(['0', '1'], expect.anything());
   });
 
   it('should remove only one of the active indices', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
     const { getByText } = render(
       <Accordion
@@ -231,11 +238,11 @@ describe('<Accordion>', () => {
 
     fireEvent.click(getByText('header1'));
 
-    onSelectSpy.should.be.calledWith(['0']);
+    expect(onSelectSpy).toHaveBeenCalledWith(['0'], expect.anything());
   });
 
   it('should pass transition callbacks to underlying AccordionCollapse', async () => {
-    const increment = sinon.spy();
+    const increment = vi.fn();
 
     const { getByText } = render(
       <Accordion>
@@ -258,11 +265,11 @@ describe('<Accordion>', () => {
     fireEvent.click(getByText('header0'));
 
     // Wait for body to open.
-    await waitFor(() => increment.callCount.should.equal(3));
+    await waitFor(() => expect(increment).toBeCalledTimes(3));
 
     fireEvent.click(getByText('header0'));
 
     // Wait for body to close.
-    await waitFor(() => increment.callCount.should.equal(6));
+    await waitFor(() => expect(increment).toBeCalledTimes(6));
   });
 });

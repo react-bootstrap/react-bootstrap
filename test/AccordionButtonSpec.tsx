@@ -1,48 +1,42 @@
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AccordionButton from '../src/AccordionButton';
 import Accordion from '../src/Accordion';
 
 describe('<AccordionButton>', () => {
   it('Should have button as default component', () => {
-    const { getByTestId } = render(
-      <AccordionButton data-testid="test-accordion-button" />,
+    render(<AccordionButton data-testid="test-accordion-button" />);
+    expect(screen.getByTestId('test-accordion-button').tagName).toEqual(
+      'BUTTON',
     );
-    getByTestId('test-accordion-button')
-      .tagName.toLowerCase()
-      .should.equal('button');
-    getByTestId('test-accordion-button')
-      .getAttribute('type')!
-      .should.equal('button');
+    expect(
+      screen.getByTestId('test-accordion-button').getAttribute('type'),
+    ).toEqual('button');
   });
 
   it('Should allow rendering as different component', () => {
-    const { getByTestId } = render(
-      <AccordionButton data-testid="test-accordion-button" as="div" />,
-    );
-    getByTestId('test-accordion-button')
-      .tagName.toLowerCase()
-      .should.equal('div');
+    render(<AccordionButton data-testid="test-accordion-button" as="div" />);
+    expect(screen.getByTestId('test-accordion-button').tagName).toEqual('DIV');
   });
 
   it('Should call onClick', () => {
-    const onClickSpy = sinon.spy();
-    const { getByTestId } = render(
-      <AccordionButton data-testid="btn" onClick={onClickSpy} />,
-    );
-    fireEvent.click(getByTestId('btn'));
+    const onClickSpy = vi.fn();
+    render(<AccordionButton data-testid="btn" onClick={onClickSpy} />);
+    fireEvent.click(screen.getByTestId('btn'));
 
-    onClickSpy.should.be.calledOnce;
+    expect(onClickSpy).toBeCalledTimes(1);
   });
 
   it('Should have toggled aria-expanded attribute in alwaysOpen accordion', () => {
-    const onClickSpy = sinon.spy();
-    const { getByTestId } = render(
+    const onClickSpy = vi.fn();
+    render(
       <Accordion alwaysOpen>
         <AccordionButton data-testid="btn" onClick={onClickSpy} />
       </Accordion>,
     );
-    fireEvent.click(getByTestId('btn'));
-    getByTestId('btn').getAttribute('aria-expanded')!.should.equal('true');
+    fireEvent.click(screen.getByTestId('btn'));
+    expect(screen.getByTestId('btn').getAttribute('aria-expanded')).toEqual(
+      'true',
+    );
   });
 });

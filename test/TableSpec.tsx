@@ -1,78 +1,76 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Table from '../src/Table';
 
 describe('Table', () => {
   it('Should be a table', () => {
-    const { getByTestId } = render(<Table data-testid="test" />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table').should.be.true;
-    tableElem.tagName.toLowerCase().should.equal('table');
+    expect(tableElem.classList).toContain('table');
+    expect(tableElem.tagName).toEqual('TABLE');
   });
 
   it('Should have correct class when using striped row', () => {
-    const { getByTestId } = render(<Table data-testid="test" striped />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" striped />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-striped').should.be.true;
+    expect(tableElem.classList).toContain('table-striped');
   });
 
   it('Should have correct class when using striped column', () => {
-    const { getByTestId } = render(
-      <Table data-testid="test" striped="columns" />,
-    );
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" striped="columns" />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-striped-columns').should.be.true;
+    expect(tableElem.classList).toContain('table-striped-columns');
   });
 
   it('Should have correct class when hover', () => {
-    const { getByTestId } = render(<Table data-testid="test" hover />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" hover />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-hover').should.be.true;
+    expect(tableElem.classList).toContain('table-hover');
   });
 
   it('Should have correct class when bordered', () => {
-    const { getByTestId } = render(<Table data-testid="test" bordered />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" bordered />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-bordered').should.be.true;
+    expect(tableElem.classList).toContain('table-bordered');
   });
 
   it('Should have correct class when borderless', () => {
-    const { getByTestId } = render(<Table data-testid="test" borderless />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" borderless />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-borderless').should.be.true;
+    expect(tableElem.classList).toContain('table-borderless');
   });
 
   it('Should have correct class when small', () => {
-    const { getByTestId } = render(<Table data-testid="test" size="sm" />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" size="sm" />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-sm').should.be.true;
+    expect(tableElem.classList).toContain('table-sm');
   });
 
   it('Should have correct class when dark', () => {
-    const { getByTestId } = render(<Table data-testid="test" variant="dark" />);
-    const tableElem = getByTestId('test');
+    render(<Table data-testid="test" variant="dark" />);
+    const tableElem = screen.getByTestId('test');
 
-    tableElem.classList.contains('table-dark').should.be.true;
+    expect(tableElem.classList).toContain('table-dark');
   });
 
   it('Should have responsive wrapper', () => {
     const { container } = render(<Table responsive />);
     const tableElem = container.firstElementChild!;
 
-    tableElem!.classList.contains('table-responsive').should.be.true;
+    expect(tableElem.classList).toContain('table-responsive');
   });
 
   it('Should have responsive breakpoints', () => {
     const { container } = render(<Table responsive="sm" />);
     const tableElem = container.firstElementChild!;
 
-    tableElem!.classList.contains('table-responsive-sm').should.be.true;
+    expect(tableElem.classList).toContain('table-responsive-sm');
   });
 });
