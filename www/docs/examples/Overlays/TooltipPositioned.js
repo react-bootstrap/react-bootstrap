@@ -15,7 +15,7 @@ function TooltipPositionedExample() {
             </Tooltip>
           }
         >
-          <Button variant="secondary">Tooltip on {placement}</Button>
+          <Button variant="secondary mx-3">Tooltip on {placement}</Button>
         </OverlayTrigger>
       ))}
     </>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unknown-property */
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
