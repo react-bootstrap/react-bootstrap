@@ -1,3 +1,15 @@
+## [2.10.5](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.4...v2.10.5) (2024-09-26)
+
+
+### Bug Fixes
+
+* **Fade:** fix ref warning for react 18.3+ ([#6820](https://github.com/react-bootstrap/react-bootstrap/issues/6820)) ([9b8bcd7](https://github.com/react-bootstrap/react-bootstrap/commit/9b8bcd783c65632f43cb3fc544547a93ed670c1b))
+* **Offcanvas:** do not trigger Navbar onToggle when closing ([#6829](https://github.com/react-bootstrap/react-bootstrap/issues/6829)) ([6836e99](https://github.com/react-bootstrap/react-bootstrap/commit/6836e997305bbb5d899e1e5de196f584685456ad))
+
+
+
+
+
 ## [2.10.4](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.3...v2.10.4) (2024-06-30)
 
 
