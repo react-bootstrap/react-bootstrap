@@ -14,7 +14,11 @@ export default defineConfig({
       enabled: true,
       name: 'chromium',
       provider: 'playwright',
-      providerOptions: {},
+      providerOptions: {
+        context: {
+          hasTouch: true,
+        },
+      },
     },
     coverage: {
       provider: 'istanbul',
