@@ -17,5 +17,8 @@ export default defineConfig({
       // https://playwright.dev
       providerOptions: {},
     },
+    coverage: {
+      provider: 'istanbul',
+    },
   },
 });

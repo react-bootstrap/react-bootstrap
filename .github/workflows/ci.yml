@@ -37,13 +37,16 @@ jobs:
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
 
+      - name: Run lint
+        run: yarn lint
+
       - name: Run Tests
-        run: yarn test --browser.name=${{ env.BROWSER }} --browser.headless
+        run: yarn test-browser --browser.name=${{ env.BROWSER }} --browser.headless --coverage
         env:
           BROWSER: ${{ matrix.browser }}
 
       - name: Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
 
       - name: Build Project
         run: yarn build
