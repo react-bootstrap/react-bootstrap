@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -14,11 +14,16 @@ export default defineConfig({
       enabled: true,
       name: 'chromium',
       provider: 'playwright',
-      // https://playwright.dev
       providerOptions: {},
     },
     coverage: {
       provider: 'istanbul',
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        'www/**',
+        'tools/**',
+        '**/*.js',
+      ],
     },
   },
 });
