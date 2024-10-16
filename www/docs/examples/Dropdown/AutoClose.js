@@ -2,8 +2,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 function AutoCloseExample() {
   return (
-    <>
-      <Dropdown className="d-inline mx-2">
+    <div className="dropdown-btn-spacing">
+      <Dropdown className="d-inline">
         <Dropdown.Toggle id="dropdown-autoclose-true">
           Default Dropdown
         </Dropdown.Toggle>
@@ -15,7 +15,7 @@ function AutoCloseExample() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Dropdown className="d-inline mx-2" autoClose="inside">
+      <Dropdown className="d-inline" autoClose="inside">
         <Dropdown.Toggle id="dropdown-autoclose-inside">
           Clickable Outside
         </Dropdown.Toggle>
@@ -27,7 +27,7 @@ function AutoCloseExample() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Dropdown className="d-inline mx-2" autoClose="outside">
+      <Dropdown className="d-inline" autoClose="outside">
         <Dropdown.Toggle id="dropdown-autoclose-outside">
           Clickable Inside
         </Dropdown.Toggle>
@@ -39,7 +39,7 @@ function AutoCloseExample() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Dropdown className="d-inline mx-2" autoClose={false}>
+      <Dropdown className="d-inline" autoClose={false}>
         <Dropdown.Toggle id="dropdown-autoclose-false">
           Manual Close
         </Dropdown.Toggle>
@@ -50,7 +50,7 @@ function AutoCloseExample() {
           <Dropdown.Item href="#">Menu Item</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-    </>
+    </div>
   );
 }
 

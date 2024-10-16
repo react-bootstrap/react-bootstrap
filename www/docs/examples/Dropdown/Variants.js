@@ -4,7 +4,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function VariantsExample() {
   return (
-    <>
+    <div className="dropdown-btn-spacing">
       {['Primary', 'Secondary', 'Success', 'Info', 'Warning', 'Danger'].map(
         (variant) => (
           <DropdownButton
@@ -24,7 +24,7 @@ function VariantsExample() {
           </DropdownButton>
         ),
       )}
-    </>
+    </div>
   );
 }
 

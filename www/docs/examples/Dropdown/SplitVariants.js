@@ -3,7 +3,7 @@ import SplitButton from 'react-bootstrap/SplitButton';
 
 function SplitVariantExample() {
   return (
-    <>
+    <div className="dropdown-btn-spacing">
       {['Primary', 'Secondary', 'Success', 'Info', 'Warning', 'Danger'].map(
         (variant) => (
           <SplitButton
@@ -22,7 +22,7 @@ function SplitVariantExample() {
           </SplitButton>
         ),
       )}
-    </>
+    </div>
   );
 }
 
