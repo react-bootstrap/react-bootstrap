@@ -6,7 +6,7 @@ import SplitButton from 'react-bootstrap/SplitButton';
 function ButtonSizesExample() {
   return (
     <>
-      <div className="mb-2">
+      <div className="mb-2 dropdown-btn-spacing">
         {[DropdownButton, SplitButton].map((DropdownType, idx) => (
           <DropdownType
             as={ButtonGroup}
@@ -23,7 +23,7 @@ function ButtonSizesExample() {
           </DropdownType>
         ))}
       </div>
-      <div>
+      <div className="dropdown-btn-spacing">
         {[DropdownButton, SplitButton].map((DropdownType, idx) => (
           <DropdownType
             as={ButtonGroup}
