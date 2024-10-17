@@ -2,8 +2,10 @@
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "lib": ["DOM"],
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
     "noEmit": true,
     "types": [
       "node",
