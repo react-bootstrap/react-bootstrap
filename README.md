@@ -9,9 +9,9 @@
 [![Discord][discord-badge]][discord]
 [![Netlify][netlify-badge]][netlify]
 
-## Bootstrap compatibility
+## Bootstrap Compatibility
 
-React-Bootstrap is compatible with various versions of Bootstrap.  As such, you need to ensure you are using the correct combination of versions.  
+React-Bootstrap is compatible with various versions of Bootstrap. As such, you need to ensure you are using the correct combination of versions.
 
 See the below table on which version of React-Bootstrap you should be using in your project.
 
@@ -21,7 +21,7 @@ See the below table on which version of React-Bootstrap you should be using in y
 | v4.x | 1.x (not maintained) | [Link][v4-documentation] |
 | v3.x | 0.33.x (not maintained) | [Link][v3-documentation] |
 
-## Migrating from previous versions
+## Migrating from Previous Versions
 
 ### Bootstrap 4 to Bootstrap 5
 
@@ -31,22 +31,20 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1][v4-migration]**.
 
-## Related modules
+## Related Modules
 
 - [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
-- [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
+- [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch, and sliders.
 
-## Local setup
+## Local Setup
 
-Yarn is our package manager of choice here. Check out setup
-instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
-After that you can run `yarn run bootstrap` to install all the needed dependencies.
+Yarn is our package manager of choice here. Check out setup instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already. After that, you can run `yarn run bootstrap` to install all the needed dependencies.
 
 From there you can:
 
-- Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
-- Start a local copy of the docs site with `yarn start`
-- Or build a local copy of the library with `yarn run build`
+- Run the tests once with `yarn test` (or run them in watch mode with `yarn run tdd`).
+- Start a local copy of the docs site with `yarn start`.
+- Build a local copy of the library with `yarn run build`.
 
 ## CodeSandbox Examples
 
@@ -66,19 +64,18 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [v4-migration]: https://react-bootstrap-v4.netlify.app/migrating
 [v3-documentation]: https://react-bootstrap-v3.netlify.app
 [contributing]: CONTRIBUTING.md
-[travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
-[travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
+[travis-badge]: https://travis-ci.org/Devyalamaddi/react-bootstrap.svg?branch=main
+[travis]: https://travis-ci.org/Devyalamaddi/react-bootstrap
 [npm-badge]: https://badge.fury.io/js/react-bootstrap.svg
 [npm]: http://badge.fury.io/js/react-bootstrap
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
 [react-router]: https://github.com/reactjs/react-router
-[react-bootstrap-extended]: https://github.com/rbalicki2/react-bootstrap-extended
 [awesome-react-bootstrap-components]: https://github.com/Hermanya/awesome-react-bootstrap-components
-[codecov-badge]: https://img.shields.io/codecov/c/github/react-bootstrap/react-bootstrap/master.svg
-[codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
+[codecov-badge]: https://img.shields.io/codecov/c/github/Devyalamaddi/react-bootstrap/master.svg
+[codecov]: https://codecov.io/gh/Devyalamaddi/react-bootstrap
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
 [discord]: https://discord.gg/AKfs9vpvRW
 [netlify-badge]: https://api.netlify.com/api/v1/badges/f09d443f-11b2-4454-812b-0645aeaca824/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
-[gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
-[gh-actions]: https://github.com/react-bootstrap/react-bootstrap/actions
+[gh-actions-badge]: https://github.com/Devyalamaddi/react-bootstrap/workflows/CI/badge.svg
+[gh-actions]: https://github.com/Devyalamaddi/react-bootstrap/actions
