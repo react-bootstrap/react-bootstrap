@@ -1,0 +1,149 @@
+---
+title: Modals
+description: Add dialogs to your site for lightboxes, user notifications, or completely custom content.
+---
+
+import ModalStatic from '!!raw-loader!../examples/Modal/Static';
+import ModalBasic from '!!raw-loader!../examples/Modal/Basic';
+import ModalStaticBackdrop from '!!raw-loader!../examples/Modal/StaticBackdrop';
+import ModalDefaultSizing from '!!raw-loader!../examples/Modal/DefaultSizing';
+import ModalFullScreen from '!!raw-loader!../examples/Modal/FullScreen';
+import ModalCustomSizing from '!!raw-loader!../examples/Modal/CustomSizing';
+import ModalVerticallyCentered from '!!raw-loader!../examples/Modal/VerticallyCentered';
+import ModalWithoutAnimation from '!!raw-loader!../examples/Modal/WithoutAnimation';
+import ModalGrid from '!!raw-loader!../examples/Modal/Grid';
+import ModalFocus from '!!raw-loader!../examples/Modal/Focus';
+
+## Overview
+
+- Modals are positioned over everything else in the document and remove scroll from the
+  `<body>` so that modal content scrolls instead.
+- Modals are <em>unmounted</em> when closed.
+- Bootstrap only supports **one** modal window at a time. Nested modals aren't supported,
+  but if you really need them, the underlying `@restart/ui` library can support them if
+  you're willing.
+- Modal's "trap" focus in them, ensuring the keyboard navigation cycles through the modal,
+  and not the rest of the page.
+- Unlike vanilla Bootstrap, `autoFocus` works in Modals because React handles the implementation.
+
+## Examples
+
+### Static Markup
+
+Below is a <em>static</em> modal dialog (without the positioning) to demonstrate the look and
+feel of the Modal.
+
+<CodeBlock language="jsx" live>
+  {ModalStatic}
+</CodeBlock>
+
+### Live demo
+
+A modal with header, body, and set of actions in the footer. Use `<Modal/>` in combination with
+other components to show or hide your Modal. The `<Modal/>` Component comes with a few convenient
+"sub components": `<Modal.Header/>`, `<Modal.Title/>`, `<Modal.Body/>`, and `<Modal.Footer/>`,
+which you can use to build the Modal content.
+
+<CodeBlock language="jsx" live>
+  {ModalBasic}
+</CodeBlock>
+
+### Static backdrop
+
+When backdrop is set to static, the modal will not close when clicking outside it. Click the button
+below to try it.
+
+<CodeBlock language="jsx" live>
+  {ModalStaticBackdrop}
+</CodeBlock>
+
+### Without Animation
+
+A Modal can also be without an animation. For that set the `animation` prop to `false`.
+
+<CodeBlock language="jsx" live>
+  {ModalWithoutAnimation}
+</CodeBlock>
+
+:::info Additional Import Options
+
+The Modal Header, Title, Body, and Footer components are available as static properties the `<Modal/>`
+component, but you can also, import them directly like: `require("react-bootstrap/ModalHeader")`.
+
+:::
+
+### Vertically centered
+
+You can vertically center a modal by passing the `centered` prop.
+
+<CodeBlock language="jsx" live noInline>
+  {ModalVerticallyCentered}
+</CodeBlock>
+
+### Using the grid
+
+You can use grid layouts within a model using regular grid components inside the modal content.
+
+<CodeBlock language="jsx" live noInline>
+  {ModalGrid}
+</CodeBlock>
+
+### Focus on specific element
+
+You can focus on an element inside the modal using `autoFocus` attribute on the element.
+
+<CodeBlock language="jsx" live>
+  {ModalFocus}
+</CodeBlock>
+
+## Optional Sizes
+
+You can specify a Bootstrap large or small modal by using the `size` prop.
+
+<CodeBlock language="jsx" live>
+  {ModalDefaultSizing}
+</CodeBlock>
+
+### Fullscreen Modal
+
+You can use the `fullscreen` prop to make the modal fullscreen. Specifying a breakpoint will
+only set the modal as fullscreen **below** the breakpoint size.
+
+<CodeBlock language="jsx" live>
+  {ModalFullScreen}
+</CodeBlock>
+
+### Sizing modals using custom CSS
+
+You can apply custom css to the modal dialog div using the `dialogClassName` prop. Example
+is using a custom css class with width set to 90%.
+
+<CodeBlock language="jsx" live previewClassName="modal-90w">
+  {ModalCustomSizing}
+</CodeBlock>
+
+## API
+
+### Modal
+
+<PropsTable name="Modal" />
+
+### ModalDialog
+
+<PropsTable name="ModalDialog" />
+
+### ModalHeader
+
+<PropsTable name="ModalHeader" />
+
+### ModalTitle
+
+<PropsTable name="ModalTitle" />
+
+### ModalBody
+
+<PropsTable name="ModalBody" />
+
+### ModalFooter
+
+<PropsTable name="ModalFooter" />

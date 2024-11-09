@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { State } from '@restart/ui/usePopper';
+import { State, UsePopperOptions } from '@restart/ui/usePopper';
 
 export type Variant =
   | 'primary'
@@ -32,7 +32,8 @@ export type Color =
   | 'dark'
   | 'light'
   | 'white'
-  | 'muted';
+  | 'muted'
+  | string;
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 
@@ -62,11 +63,12 @@ export const alignPropType = PropTypes.oneOfType([
 
 export type RootCloseEvent = 'click' | 'mousedown';
 
-export type GapValue = 0 | 1 | 2 | 3 | 4 | 5;
+export type GapValue = 0 | 1 | 2 | 3 | 4 | 5 | number;
 
 export interface PopperRef {
   state: State | undefined;
   outOfBoundaries: boolean;
   placement: Placement | undefined;
   scheduleUpdate?: () => void;
+  strategy: UsePopperOptions['strategy'];
 }

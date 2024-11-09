@@ -32,10 +32,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  label: 'Toggle navigation',
-};
-
 const NavbarToggle: BsPrefixRefForwardingComponent<
   'button',
   NavbarToggleProps
@@ -45,7 +41,7 @@ const NavbarToggle: BsPrefixRefForwardingComponent<
       bsPrefix,
       className,
       children,
-      label,
+      label = 'Toggle navigation',
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'button',
       onClick,
@@ -78,10 +74,9 @@ const NavbarToggle: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-);
+) as typeof NavbarToggle;
 
 NavbarToggle.displayName = 'NavbarToggle';
 NavbarToggle.propTypes = propTypes;
-NavbarToggle.defaultProps = defaultProps;
 
 export default NavbarToggle;

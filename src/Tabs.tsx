@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
 import BaseTabs, { TabsProps as BaseTabsProps } from '@restart/ui/Tabs';
-import Nav from './Nav';
+import Nav, { NavProps } from './Nav';
 import NavLink from './NavLink';
 import NavItem from './NavItem';
 import TabContent from './TabContent';
@@ -14,8 +14,8 @@ import { TransitionType } from './helpers';
 
 export interface TabsProps
   extends Omit<BaseTabsProps, 'transition'>,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  variant?: 'tabs' | 'pills';
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+    NavProps {
   transition?: TransitionType;
 }
 
@@ -33,7 +33,7 @@ const propTypes = {
   /**
    * Navigation style
    *
-   * @type {('tabs'| 'pills')}
+   * @type {('tabs'| 'pills' | 'underline')}
    */
   variant: PropTypes.string,
 
@@ -82,12 +82,16 @@ const propTypes = {
    * Unmount tabs (remove it from the DOM) when it is no longer visible
    */
   unmountOnExit: PropTypes.bool,
-};
 
-const defaultProps = {
-  variant: 'tabs',
-  mountOnEnter: false,
-  unmountOnExit: false,
+  /**
+   * Have all `Tabs`s proportionately fill all available width.
+   */
+  fill: PropTypes.bool,
+
+  /**
+   * Have all `Tab`s evenly fill all available width.
+   */
+  justify: PropTypes.bool,
 };
 
 function getDefaultActiveKey(children) {
@@ -129,8 +133,9 @@ const Tabs = (props: TabsProps) => {
     id,
     onSelect,
     transition,
-    mountOnEnter,
-    unmountOnExit,
+    mountOnEnter = false,
+    unmountOnExit = false,
+    variant = 'tabs',
     children,
     activeKey = getDefaultActiveKey(children),
     ...controlledProps
@@ -147,7 +152,13 @@ const Tabs = (props: TabsProps) => {
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
     >
-      <Nav {...controlledProps} role="tablist" as="ul">
+      <Nav
+        id={id}
+        {...controlledProps}
+        role="tablist"
+        as="ul"
+        variant={variant}
+      >
         {map(children, renderTab)}
       </Nav>
 
@@ -168,7 +179,6 @@ const Tabs = (props: TabsProps) => {
 };
 
 Tabs.propTypes = propTypes;
-Tabs.defaultProps = defaultProps;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

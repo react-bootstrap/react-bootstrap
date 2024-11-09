@@ -1,0 +1,20 @@
+---
+title: Server-side Rendering
+sidebar_position: 7
+---
+
+React-Bootstrap automatically generates an `id` for some
+components (such as `DropdownToggle`) if they are not provided.
+This is done for accessibility purposes.
+
+In server-side rendered applications, a `SSRProvider` must wrap
+the application in order to ensure that the auto-generated ids
+are consistent between the server and client.
+
+```jsx
+import SSRProvider from 'react-bootstrap/SSRProvider';
+
+<SSRProvider>
+  <App />
+</SSRProvider>;
+```

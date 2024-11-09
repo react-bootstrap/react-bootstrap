@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import {
   useNavItem,
@@ -26,7 +27,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Sets contextual classes for list item
+   * Sets contextual classes for list item.
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
    */
   variant: PropTypes.string,
@@ -36,24 +37,26 @@ const propTypes = {
    */
   action: PropTypes.bool,
   /**
-   * Sets list item as active
+   * Sets list item as active.
    */
   active: PropTypes.bool,
 
   /**
-   * Sets list item state as disabled
+   * Sets list item state as disabled.
    */
   disabled: PropTypes.bool,
 
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
+  /** A callback function for when this component is clicked.  */
   onClick: PropTypes.func,
 
+  /** Providing a `href` and setting `action` to `true`, it will render the ListGroup.Item as an `<a>` element (unless `as` is provided). */
   href: PropTypes.string,
 
   /**
    * You can use a custom element type for this component. For none `action` items, items render as `li`.
-   * For actions the default is an achor or button element depending on whether a `href` is provided.
+   * For actions the default is an anchor or button element depending on whether a `href` is provided.
    *
    * @default {'div' | 'a' | 'button'}
    */
@@ -101,6 +104,11 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
       // eslint-disable-next-line no-nested-ternary
       const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
 
+      warning(
+        as || !(!action && props.href),
+        '`action=false` and `href` should not be used together.',
+      );
+
       return (
         <Component
           ref={ref}
@@ -118,7 +126,7 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
         />
       );
     },
-  );
+  ) as typeof ListGroupItem;
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.displayName = 'ListGroupItem';

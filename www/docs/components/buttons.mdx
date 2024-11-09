@@ -1,0 +1,146 @@
+---
+title: Buttons
+description: Use Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+---
+
+import ButtonActive from '!!raw-loader!../examples/Button/Active';
+import ButtonBlock from '!!raw-loader!../examples/Button/Block';
+import ButtonDisabled from '!!raw-loader!../examples/Button/Disabled';
+import ButtonLoading from '!!raw-loader!../examples/Button/Loading';
+import ButtonOutlineTypes from '!!raw-loader!../examples/Button/OutlineTypes';
+import ButtonSizes from '!!raw-loader!../examples/Button/Sizes';
+import ButtonTagTypes from '!!raw-loader!../examples/Button/TagTypes';
+import ToggleButton from '!!raw-loader!../examples/Button/ToggleButton';
+import ToggleButtonGroupControlled from '!!raw-loader!../examples/Button/ToggleButtonGroupControlled';
+import ToggleButtonGroupUncontrolled from '!!raw-loader!../examples/Button/ToggleButtonGroupUncontrolled';
+import ButtonTypes from '!!raw-loader!../examples/Button/Types';
+
+## Examples
+
+Use any of the available button style types to quickly create a styled
+button. Just modify the `variant` prop.
+
+<CodeBlock language="jsx" live>
+  {ButtonTypes}
+</CodeBlock>
+
+### Outline buttons
+
+For a lighter touch, Buttons also come in `outline-*`
+variants with no background color.
+
+<CodeBlock language="jsx" live>
+  {ButtonOutlineTypes}
+</CodeBlock>
+
+## Button tags
+
+Normally `<Button>` components will render a HTML
+`<button>` element. However you can render whatever you'd
+like, adding a `href` prop will automatically render an
+`<a />` element. You can use the `as` prop to
+render whatever your heart desires. React Bootstrap will take care of
+the proper ARIA roles for you.
+
+<CodeBlock language="jsx" live>
+  {ButtonTagTypes}
+</CodeBlock>
+
+## Sizes
+
+Fancy larger or smaller buttons? Add `size="lg"`,
+`size="sm"` for additional sizes.
+
+<CodeBlock language="jsx" live>
+  {ButtonSizes}
+</CodeBlock>
+
+## Block buttons
+
+Create responsive stacks of full-width, “block buttons” like those in Bootstrap 4
+with a mix of our display and gap utilities.
+
+<CodeBlock language="jsx" live>
+  {ButtonBlock}
+</CodeBlock>
+
+## Active state
+
+To set a button's active state simply set the component's
+`active` prop.
+
+<CodeBlock language="jsx" live>
+  {ButtonActive}
+</CodeBlock>
+
+### Disabled state
+
+Make buttons look inactive by adding the `disabled` prop to.
+
+<CodeBlock language="jsx" live>
+  {ButtonDisabled}
+</CodeBlock>
+
+Watch out! `<a>` elements don't naturally support a
+`disabled` attribute. In browsers that support it this is handled with a
+`point-events: none` style but not all browsers support it
+yet.
+
+React Bootstrap will prevent any `onClick` handlers from
+firing regardless of the rendered element.
+
+## Button loading state
+
+When activating an asynchronous action from a button it is a good UX
+pattern to give the user feedback as to the loading state, this can
+easily be done by updating your `<Button />`s
+props from a state change like below.
+
+<CodeBlock language="jsx" live>
+  {ButtonLoading}
+</CodeBlock>
+
+## Checkbox / Radio
+
+Buttons can also be used to style `checkbox` and
+`radio` form elements. This is helpful when you want a toggle
+button that works neatly inside an HTML form.
+
+<CodeBlock language="jsx" live>
+  {ToggleButton}
+</CodeBlock>
+
+The above handles styling, But requires manually controlling the
+`checked` state for each radio or checkbox in the group.
+
+For a nicer experience with checked state management use the
+`<ToggleButtonGroup>` instead of a `<ButtonGroup>` component.
+The group behaves as a form component, where the `value` is an array of the selected
+`value`s for a named checkbox group or the single toggled
+`value` in a similarly named radio group.
+
+#### Uncontrolled
+
+<CodeBlock language="jsx" live>
+  {ToggleButtonGroupUncontrolled}
+</CodeBlock>
+
+#### Controlled
+
+<CodeBlock language="jsx" live>
+  {ToggleButtonGroupControlled}
+</CodeBlock>
+
+## API
+
+### Button
+
+<PropsTable name="Button" />
+
+### ToggleButtonGroup
+
+<PropsTable name="ToggleButtonGroup" />
+
+### ToggleButton
+
+<PropsTable name="ToggleButton" />

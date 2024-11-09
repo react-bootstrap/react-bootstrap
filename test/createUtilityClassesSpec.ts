@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import createUtilityClasses from '../src/createUtilityClasses';
 
 describe('createUtilityClassName', () => {
@@ -6,7 +7,7 @@ describe('createUtilityClassName', () => {
       gap: undefined,
     });
 
-    classList.length.should.equal(0);
+    expect(classList).toHaveLength(0);
   });
 
   it('should handle falsy values', () => {
@@ -14,8 +15,8 @@ describe('createUtilityClassName', () => {
       gap: 0,
     });
 
-    classList.length.should.equal(1);
-    classList.should.include.all.members(['gap-0']);
+    expect(classList).toHaveLength(1);
+    expect(classList).toEqual(expect.arrayContaining(['gap-0']));
   });
 
   it('should handle responsive falsy values', () => {
@@ -23,8 +24,8 @@ describe('createUtilityClassName', () => {
       gap: { xs: 0, md: 0 },
     });
 
-    classList.length.should.equal(2);
-    classList.should.include.all.members(['gap-0', 'gap-md-0']);
+    expect(classList).toHaveLength(2);
+    expect(classList).toEqual(expect.arrayContaining(['gap-0', 'gap-md-0']));
   });
 
   it('should return `utilityName-value` when value is a primitive', () => {
@@ -32,8 +33,8 @@ describe('createUtilityClassName', () => {
       gap: 2,
     });
 
-    classList.length.should.equal(1);
-    classList.should.include.all.members(['gap-2']);
+    expect(classList).toHaveLength(1);
+    expect(classList).toEqual(expect.arrayContaining(['gap-2']));
   });
 
   it('should return responsive class when value is a responsive type', () => {
@@ -41,8 +42,10 @@ describe('createUtilityClassName', () => {
       gap: { xs: 2, lg: 3, xxl: 4 },
     });
 
-    classList.length.should.equal(3);
-    classList.should.include.all.members(['gap-2', 'gap-lg-3', 'gap-xxl-4']);
+    expect(classList).toHaveLength(3);
+    expect(classList).toEqual(
+      expect.arrayContaining(['gap-2', 'gap-lg-3', 'gap-xxl-4']),
+    );
   });
 
   it('should return multiple classes', () => {
@@ -51,15 +54,17 @@ describe('createUtilityClassName', () => {
       text: { xs: 'start', md: 'end', xl: 'start' },
     });
 
-    classList.length.should.equal(6);
-    classList.should.include.all.members([
-      'gap-2',
-      'gap-lg-3',
-      'gap-xxl-4',
-      'text-start',
-      'text-md-end',
-      'text-xl-start',
-    ]);
+    expect(classList).toHaveLength(6);
+    expect(classList).toEqual(
+      expect.arrayContaining([
+        'gap-2',
+        'gap-lg-3',
+        'gap-xxl-4',
+        'text-start',
+        'text-md-end',
+        'text-xl-start',
+      ]),
+    );
   });
 
   it('should handle custom breakpoints', () => {
@@ -70,7 +75,9 @@ describe('createUtilityClassName', () => {
       ['xs', 'custom'],
     );
 
-    classList.length.should.equal(2);
-    classList.should.include.all.members(['gap-2', 'gap-custom-3']);
+    expect(classList).toHaveLength(2);
+    expect(classList).toEqual(
+      expect.arrayContaining(['gap-2', 'gap-custom-3']),
+    );
   });
 });

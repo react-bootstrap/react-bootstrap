@@ -1,0 +1,25 @@
+---
+title: Range
+description: Use our custom range inputs for consistent cross-browser styling and built-in customization.
+sidebar_position: 6
+---
+
+import Range from '!!raw-loader!../examples/Form/Range';
+
+## Overview
+
+Create custom `<input type="range">` controls with `<FormRange>`. The track
+(the background) and thumb (the value) are both styled to appear the same
+across browsers. As only Firefox supports “filling” their track from the left
+or right of the thumb as a means to visually indicate progress, we do not
+currently support it.
+
+<CodeBlock language="jsx" live>
+  {Range}
+</CodeBlock>
+
+## API
+
+### FormRange
+
+<PropsTable name="FormRange" />

@@ -1,0 +1,214 @@
+---
+title: Cards
+description: Bootstrap’s cards provide a flexible and extensible content container with multiple variants and options.
+---
+
+import CardBasic from '!!raw-loader!../examples/Card/Basic';
+import CardBgColor from '!!raw-loader!../examples/Card/BgColor';
+import CardBodyOnly from '!!raw-loader!../examples/Card/BodyOnly';
+import CardBodyShorthand from '!!raw-loader!../examples/Card/BodyShorthand';
+import CardBorder from '!!raw-loader!../examples/Card/Border';
+import CardGrid from '!!raw-loader!../examples/Card/Grid';
+import CardGroup from '!!raw-loader!../examples/Card/Group';
+import CardHeaderAndFooter from '!!raw-loader!../examples/Card/HeaderAndFooter';
+import CardImageAndText from '!!raw-loader!../examples/Card/ImageAndText';
+import CardImgOverlay from '!!raw-loader!../examples/Card/ImgOverlay';
+import CardKitchenSink from '!!raw-loader!../examples/Card/KitchenSink';
+import CardListGroups from '!!raw-loader!../examples/Card/ListGroups';
+import CardListGroupWithHeader from '!!raw-loader!../examples/Card/ListGroupWithHeader';
+import CardNavPills from '!!raw-loader!../examples/Card/NavPills';
+import CardNavTabs from '!!raw-loader!../examples/Card/NavTabs';
+import CardText from '!!raw-loader!../examples/Card/Text';
+import CardWithHeader from '!!raw-loader!../examples/Card/WithHeader';
+import CardWithHeaderAndQuote from '!!raw-loader!../examples/Card/WithHeaderAndQuote';
+import CardWithHeaderStyled from '!!raw-loader!../examples/Card/WithHeaderStyled';
+
+## Basic Example
+
+<CodeBlock language="jsx" live>
+  {CardBasic}
+</CodeBlock>
+
+## Content types
+
+### Body
+
+Use `<Card.Body>` to pad content inside a `<Card>`.
+
+<CodeBlock language="jsx" live>
+  {CardBodyOnly}
+</CodeBlock>
+
+Alternatively, you can use this shorthand version for Cards with body
+only, and no other children
+
+<CodeBlock language="jsx" live>
+  {CardBodyShorthand}
+</CodeBlock>
+
+### Title, text, and links
+
+Using `<Card.Title>`, `<Card.Subtitle>`, and
+`<Card.Text>` inside the `<Card.Body>` will line them up nicely.
+`<Card.Link>`s are used to line up links next to each other.
+
+`<Card.Text>` outputs `<p>` tags around the content, so you can
+use multiple `<Card.Text>`s to create separate paragraphs.
+
+<CodeBlock language="jsx" live>
+  {CardText}
+</CodeBlock>
+
+### List Groups
+
+Create lists of content in a card with a flush list group.
+
+<CodeBlock language="jsx" live>
+  {CardListGroups}
+</CodeBlock>
+<CodeBlock language="jsx" live>
+  {CardListGroupWithHeader}
+</CodeBlock>
+
+### Kitchen Sink
+
+<CodeBlock language="jsx" live>
+  {CardKitchenSink}
+</CodeBlock>
+
+### Header and Footer
+
+You may add a header by adding a `<Card.Header>` component.
+
+<CodeBlock language="jsx" live>
+  {CardWithHeader}
+</CodeBlock>
+
+A `<CardHeader>` can be styled by passing a heading element
+through the `<as>` prop
+
+<CodeBlock language="jsx" live>
+  {CardWithHeaderStyled}
+</CodeBlock>
+<CodeBlock language="jsx" live>
+  {CardWithHeaderAndQuote}
+</CodeBlock>
+<CodeBlock language="jsx" live>
+  {CardHeaderAndFooter}
+</CodeBlock>
+
+## Images
+
+Cards include a few options for working with images. Choose from
+appending “image caps” at either end of a card, overlaying images with
+card content, or simply embedding the image in a card.
+
+### Image caps
+
+Similar to headers and footers, cards can include top and bottom “image
+caps”—images at the top or bottom of a card.
+
+<CodeBlock language="jsx" live>
+  {CardImageAndText}
+</CodeBlock>
+
+### Image Overlays
+
+Turn an image into a card background and overlay your card’s text.
+Depending on the image, you may or may not need additional styles or
+utilities.
+
+<CodeBlock language="jsx" live>
+  {CardImgOverlay}
+</CodeBlock>
+
+## Navigation
+
+Add some navigation to a card’s header (or block) with React Bootstrap’s
+[Nav](navs) components.
+
+<CodeBlock language="jsx" live>
+  {CardNavTabs}
+</CodeBlock>
+
+<CodeBlock language="jsx" live>
+  {CardNavPills}
+</CodeBlock>
+
+## Card Styles
+
+### Background Color
+
+You can change a card's appearance by changing their `<bg>`, and `<text>` props.
+
+<CodeBlock language="jsx" live>
+  {CardBgColor}
+</CodeBlock>
+
+### Border Color
+
+<CodeBlock language="jsx" live>
+  {CardBorder}
+</CodeBlock>
+
+## Card layout
+
+### Card Groups
+
+<CodeBlock language="jsx" live>
+  {CardGroup}
+</CodeBlock>
+
+### Grid cards
+
+Use `Row`'s [grid column](../layout/grid#setting-column-widths-in-row) props to control how many cards to show per row.
+
+<CodeBlock language="jsx" live>
+  {CardGrid}
+</CodeBlock>
+
+## API
+
+### Card
+
+<PropsTable name="Card" />
+
+### CardBody
+
+<PropsTable name="CardBody" />
+
+### CardFooter
+
+<PropsTable name="CardFooter" />
+
+### CardHeader
+
+<PropsTable name="CardHeader" />
+
+### CardImg
+
+<PropsTable name="CardImg" />
+
+### CardImgOverlay
+
+<PropsTable name="CardImgOverlay" />
+
+### CardLink
+
+<PropsTable name="CardLink" />
+
+### CardSubtitle
+
+<PropsTable name="CardSubtitle" />
+
+### CardText
+
+<PropsTable name="CardText" />
+
+### CardTitle
+
+<PropsTable name="CardTitle" />
+
+### CardGroup
+
+<PropsTable name="CardGroup" />

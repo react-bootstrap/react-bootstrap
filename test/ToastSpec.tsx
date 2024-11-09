@@ -1,6 +1,6 @@
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
-
+import * as React from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { act, fireEvent, render } from '@testing-library/react';
 import Toast from '../src/Toast';
 
 const getToast = ({
@@ -16,21 +16,20 @@ const getToast = ({
 );
 
 describe('<Toast>', () => {
-  let clock;
+  let clock: ReturnType<typeof vi.useFakeTimers>;
 
   beforeEach(() => {
-    clock = sinon.useFakeTimers();
+    clock = vi.useFakeTimers();
   });
 
   afterEach(() => {
-    clock.restore();
+    clock.useRealTimers();
   });
 
   it('should apply bg prop', () => {
     const { container } = render(<Toast bg="primary">Card</Toast>);
-    container.firstElementChild!.classList.contains('bg-primary').should.be
-      .true;
-    container.firstElementChild!.classList.contains('toast').should.be.true;
+    expect(container.firstElementChild!.classList).toContain('bg-primary');
+    expect(container.firstElementChild!.classList).toContain('toast');
   });
 
   it('should render an entire toast', () => {
@@ -40,23 +39,22 @@ describe('<Toast>', () => {
         <Toast.Body />
       </Toast>,
     );
-    ['fade', 'toast', 'show'].map(
-      (className) =>
-        container.firstElementChild!.classList.contains(className).should.be
-          .true,
+
+    ['fade', 'toast', 'show'].map((className) =>
+      expect(container.firstElementChild!.classList).toContain(className),
     );
+
     (
       [
         ['role', 'alert'],
         ['aria-live', 'assertive'],
-        ['aria-atomic', true],
+        ['aria-atomic', 'true'],
       ] as const
-    ).map(
-      ([attrName, attrVal]) =>
-        (
-          container.firstElementChild!.attributes.getNamedItem(attrName)!
-            .textContent === `${attrVal}`
-        ).should.be.true,
+    ).map(([attrName, attrVal]) =>
+      expect(
+        container.firstElementChild!.attributes.getNamedItem(attrName)!
+          .textContent,
+      ).toEqual(attrVal),
     );
   });
 
@@ -68,15 +66,13 @@ describe('<Toast>', () => {
       </Toast>,
     );
 
-    ['toast', 'show'].map(
-      (className) =>
-        container.firstElementChild!.classList.contains(className).should.be
-          .true,
+    ['toast', 'show'].map((className) =>
+      expect(container.firstElementChild!.classList).toContain(className),
     );
   });
 
   it('should trigger the onClose event after clicking on the close button', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
 
     const { container } = render(
       <Toast onClose={onCloseSpy}>
@@ -87,35 +83,35 @@ describe('<Toast>', () => {
     fireEvent.click(
       container.firstElementChild!.getElementsByTagName('button')[0],
     );
-    onCloseSpy.should.have.been.calledOnce;
+    expect(onCloseSpy).toHaveBeenCalledOnce();
   });
 
   it('should trigger the onClose event after the autohide delay', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     render(
       <Toast onClose={onCloseSpy} delay={500} show autohide>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
       </Toast>,
     );
-    clock.tick(1000);
-    onCloseSpy.should.have.been.calledOnce;
+    clock.advanceTimersByTime(1000);
+    expect(onCloseSpy).toHaveBeenCalledOnce();
   });
 
   it('should not trigger the onClose event if autohide is not set', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     render(
       <Toast onClose={onCloseSpy}>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
       </Toast>,
     );
-    clock.tick(3000);
-    onCloseSpy.should.not.to.have.been.called;
+    clock.advanceTimersByTime(3000);
+    expect(onCloseSpy).not.toHaveBeenCalled();
   });
 
   it('should clearTimeout after unmount', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     const { unmount } = render(
       <Toast delay={500} onClose={onCloseSpy} show autohide>
         <Toast.Header>header-content</Toast.Header>
@@ -123,72 +119,78 @@ describe('<Toast>', () => {
       </Toast>,
     );
     unmount();
-    clock.tick(1000);
-    onCloseSpy.should.not.to.have.been.called;
+    clock.advanceTimersByTime(1000);
+    expect(onCloseSpy).not.toHaveBeenCalled();
   });
 
   it('should not reset autohide timer when element re-renders with same props', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     const toast = getToast({ onCloseSpy });
     const { rerender } = render(toast);
 
-    clock.tick(250);
+    clock.advanceTimersByTime(250);
 
     // Trigger render with no props changes.
     rerender(toast);
 
-    clock.tick(300);
-    onCloseSpy.should.have.been.calledOnce;
+    clock.advanceTimersByTime(300);
+    expect(onCloseSpy).toHaveBeenCalledOnce();
   });
 
   it('should not reset autohide timer when delay is changed', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     const { rerender } = render(getToast({ delay: 500, onCloseSpy }));
 
-    clock.tick(250);
+    clock.advanceTimersByTime(250);
 
     rerender(getToast({ delay: 10000, onCloseSpy }));
 
-    clock.tick(300);
-    onCloseSpy.should.have.been.calledOnce;
+    clock.advanceTimersByTime(300);
+    expect(onCloseSpy).toHaveBeenCalledOnce();
   });
 
   it('should not reset autohide timer when onClosed is changed', () => {
-    const onCloseSpy = sinon.spy();
-    const onCloseSpy2 = sinon.spy();
+    const onCloseSpy = vi.fn();
+    const onCloseSpy2 = vi.fn();
 
     const { rerender } = render(getToast({ onCloseSpy }));
 
-    clock.tick(250);
+    clock.advanceTimersByTime(250);
 
     rerender(getToast({ onCloseSpy: onCloseSpy2 }));
 
-    clock.tick(300);
-    onCloseSpy.should.not.to.have.been.called;
-    onCloseSpy2.should.have.been.calledOnce;
+    clock.advanceTimersByTime(300);
+    expect(onCloseSpy).not.toHaveBeenCalled();
+    expect(onCloseSpy2).toHaveBeenCalledOnce();
   });
 
   it('should not call onClose if autohide is changed from true to false', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     const { rerender } = render(getToast({ onCloseSpy, autohide: true }));
 
-    clock.tick(250);
+    clock.advanceTimersByTime(250);
 
     rerender(getToast({ onCloseSpy, autohide: false }));
 
-    clock.tick(300);
-    onCloseSpy.should.not.to.have.been.called;
+    clock.advanceTimersByTime(300);
+    expect(onCloseSpy).not.toHaveBeenCalled();
   });
 
   it('should not call onClose if show is changed from true to false', () => {
-    const onCloseSpy = sinon.spy();
+    const onCloseSpy = vi.fn();
     const { rerender } = render(getToast({ show: true, onCloseSpy }));
-    clock.tick(100);
+
+    act(() => {
+      clock.advanceTimersByTime(100);
+    });
 
     rerender(getToast({ show: false, onCloseSpy }));
 
-    clock.tick(300);
-    onCloseSpy.should.not.to.have.been.called;
+    act(() => {
+      clock.advanceTimersByTime(300);
+    });
+
+    expect(onCloseSpy).not.toHaveBeenCalled();
   });
 
   it('should render with bsPrefix', () => {
@@ -198,7 +200,49 @@ describe('<Toast>', () => {
         <Toast.Body />
       </Toast>,
     );
-    container.firstElementChild!.tagName.toLowerCase().should.equal('div');
-    container.firstElementChild!.classList.contains('my-toast');
+    expect(container.firstElementChild!.tagName).toEqual('DIV');
+    expect(container.firstElementChild!.classList).toContain('my-toast');
+  });
+
+  it('Should pass transition callbacks to Transition', () => {
+    const increment = vi.fn();
+
+    const Elem = () => {
+      const [show, setShow] = React.useState(false);
+      React.useEffect(() => {
+        setShow(true);
+      }, []);
+
+      return (
+        <Toast
+          show={show}
+          onEnter={increment}
+          onEntering={increment}
+          onEntered={() => {
+            increment();
+            setShow(false);
+          }}
+          onExit={increment}
+          onExiting={increment}
+          onExited={increment}
+        >
+          <Toast.Header />
+          <Toast.Body>Body</Toast.Body>
+        </Toast>
+      );
+    };
+
+    render(<Elem />);
+
+    act(() => {
+      clock.advanceTimersByTime(250);
+    });
+
+    // Trigger onExit.
+    act(() => {
+      clock.advanceTimersByTime(250);
+    });
+
+    expect(increment).toHaveBeenCalledTimes(6);
   });
 });

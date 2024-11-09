@@ -1,0 +1,57 @@
+---
+title: Close Button
+description: A generic close button for dismissing content such as modals and alerts.
+---
+
+import CloseButtonBasic from '!!raw-loader!../examples/CloseButton/Basic';
+import CloseButtonDisabled from '!!raw-loader!../examples/CloseButton/Disabled';
+import CloseButtonVariants from '!!raw-loader!../examples/CloseButton/Variants';
+import CloseButtonLabelled from '!!raw-loader!../examples/CloseButton/Labelled';
+
+## Example
+
+<CodeBlock language="jsx" live>
+  {CloseButtonBasic}
+</CodeBlock>
+
+## Disabled state
+
+Bootstrap adds relevant styling to a disabled close button to prevent user
+interactions.
+
+<CodeBlock language="jsx" live>
+  {CloseButtonDisabled}
+</CodeBlock>
+
+## Variants
+
+Change the default dark color to white using `variant="white"`.
+
+:::caution Heads up!
+
+Dark variants for components were deprecated in Bootstrap v5.3.0 with the introduction
+of color modes. Instead of adding `variant="white"`, set `data-bs-theme="dark"` on the root
+element, a parent wrapper, or the component itself.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {CloseButtonVariants}
+</CodeBlock>
+
+## Accessibility
+
+To ensure the maximum accessibility for Close Button components, it is
+recommended that you provide relevant text for screen readers. The example
+below provides an example of accessible usage of this component by way of the
+`aria-label` property.
+
+<CodeBlock language="jsx" live>
+  {CloseButtonLabelled}
+</CodeBlock>
+
+## API
+
+### CloseButton
+
+<PropsTable name="CloseButton" />

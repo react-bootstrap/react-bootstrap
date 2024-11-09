@@ -37,21 +37,21 @@ const propTypes = {
    * */
   role: PropTypes.string,
 
-  /** The HTML href attribute for the `NavLink` */
+  /**
+   * The HTML href attribute for the `NavLink`. Used as the unique identifier
+   * for the `NavLink` if an `eventKey` is not provided.
+   */
   href: PropTypes.string,
 
   /**
    * Uniquely identifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
+   * as well as onSelect behavior of a parent `Navbar`.
    */
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /** @default 'a' */
   as: PropTypes.elementType,
-};
-
-const defaultProps = {
-  disabled: false,
 };
 
 const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
@@ -63,6 +63,7 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
         as: Component = Anchor,
         active,
         eventKey,
+        disabled = false,
         ...props
       },
       ref,
@@ -71,6 +72,7 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
       const [navItemProps, meta] = useNavItem({
         key: makeEventKey(eventKey, props.href),
         active,
+        disabled,
         ...props,
       });
 
@@ -79,19 +81,19 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
           {...props}
           {...navItemProps}
           ref={ref}
+          disabled={disabled}
           className={classNames(
             className,
             bsPrefix,
-            props.disabled && 'disabled',
+            disabled && 'disabled',
             meta.isActive && 'active',
           )}
         />
       );
     },
-  );
+  ) as typeof NavLink;
 
 NavLink.displayName = 'NavLink';
 NavLink.propTypes = propTypes;
-NavLink.defaultProps = defaultProps;
 
 export default NavLink;

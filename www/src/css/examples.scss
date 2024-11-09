@@ -1,0 +1,125 @@
+// Reset the styles for BS due to conflicts from Docusaurus.
+.bs-example {
+  .btn-group {
+    display: inline-flex !important;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .form-range {
+    &::-webkit-slider-runnable-track {
+      background-color: var(--bs-secondary-bg);
+    }
+  }
+
+  .navbar {
+    background-color: initial;
+    height: auto;
+  }
+
+  .list-group {
+    max-width: 400px;
+  }
+
+  .breadcrumb-item,
+  .nav-item,
+  .page-item {
+    margin-top: 0;
+  }
+}
+
+.ratio-example {
+  .ratio {
+    display: inline-block;
+    width: 10rem;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-right: 5px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.stack-example {
+  .vstack,
+  .vstack > div:not(.vr),
+  .hstack,
+  .hstack > div:not(.vr) {
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.15);
+    border: 1px solid rgba(112.520718, 44.062154, 249.437846, 0.3);
+  }
+}
+
+.static-dropdown-menu {
+  .dropdown-menu {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    display: block !important;
+    opacity: 1 !important;
+  }
+}
+.custom-dropdown-menu {
+  .super-colors {
+    background: linear-gradient(
+      to bottom,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      violet
+    );
+  }
+}
+
+.grid-example {
+  .row > .col,
+  .row > [class^='col-'] {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.15);
+    border: 1px solid rgba(112.520718, 44.062154, 249.437846, 0.3);
+  }
+
+  .row + .row {
+    margin-top: 1rem;
+  }
+}
+
+.modal-90w {
+  width: 90%;
+  max-width: none !important;
+}
+
+.overlay-contained {
+  height: 200px;
+  & > div {
+    position: relative;
+  }
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  user-select: none;
+  text-anchor: middle;
+}
+
+.bd-placeholder-img-lg {
+  font-size: calc(1.475rem + 2.7vw);
+}
+
+@media (min-width: 1200px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}

@@ -3,14 +3,7 @@ import useBreakpoint from '@restart/hooks/useBreakpoint';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BaseModal, {
   ModalProps as BaseModalProps,
   ModalHandle,
@@ -19,7 +12,6 @@ import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
 import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
-import NavbarContext from './NavbarContext';
 import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
 import { BsPrefixRefForwardingComponent } from './helpers';
@@ -45,6 +37,7 @@ export interface OffcanvasProps
   scroll?: boolean;
   placement?: OffcanvasPlacement;
   responsive?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string;
+  renderStaticNode?: boolean;
 }
 
 const propTypes = {
@@ -176,18 +169,14 @@ const propTypes = {
    */
   container: PropTypes.any,
 
-  'aria-labelledby': PropTypes.string,
-};
+  /**
+   * For internal use to render static node from NavbarOffcanvas.
+   *
+   * @private
+   */
+  renderStaticNode: PropTypes.bool,
 
-const defaultProps: Partial<OffcanvasProps> = {
-  show: false,
-  backdrop: true,
-  keyboard: true,
-  scroll: false,
-  autoFocus: true,
-  enforceFocus: true,
-  restoreFocus: true,
-  placement: 'start',
+  'aria-labelledby': PropTypes.string,
 };
 
 function DialogTransition(props) {
@@ -206,22 +195,22 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         className,
         children,
         'aria-labelledby': ariaLabelledby,
-        placement,
+        placement = 'start',
         responsive,
 
         /* BaseModal props */
 
-        show,
-        backdrop,
-        keyboard,
-        scroll,
+        show = false,
+        backdrop = true,
+        keyboard = true,
+        scroll = false,
         onEscapeKeyDown,
         onShow,
         onHide,
         container,
-        autoFocus,
-        enforceFocus,
-        restoreFocus,
+        autoFocus = true,
+        enforceFocus = true,
+        restoreFocus = true,
         restoreFocusOptions,
         onEntered,
         onExit,
@@ -231,14 +220,15 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         onExited,
         backdropClassName,
         manager: propsManager,
+        renderStaticNode = false,
         ...props
       },
       ref,
     ) => {
       const modalManager = useRef<BootstrapModalManager>();
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
-      const { onToggle } = useContext(NavbarContext) || {};
       const [showOffcanvas, setShowOffcanvas] = useState(false);
+      const handleHide = useEventCallback(onHide);
 
       const hideResponsiveOffcanvas = useBreakpoint(
         (responsive as any) || 'xs',
@@ -250,11 +240,6 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         // offcanvas is shown. If `responsive` not provided, just use `show`.
         setShowOffcanvas(responsive ? show && !hideResponsiveOffcanvas : show);
       }, [show, responsive, hideResponsiveOffcanvas]);
-
-      const handleHide = useEventCallback(() => {
-        onToggle?.();
-        onHide?.();
-      });
 
       const modalContext = useMemo(
         () => ({
@@ -317,9 +302,14 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         <>
           {/* 
             Only render static elements when offcanvas isn't shown so we 
-            don't duplicate elements 
+            don't duplicate elements.
+
+            TODO: Should follow bootstrap behavior and don't unmount children
+            when show={false} in BaseModal. Will do this next major version.
           */}
-          {!showOffcanvas && renderDialog({})}
+          {!showOffcanvas &&
+            (responsive || renderStaticNode) &&
+            renderDialog({})}
 
           <ModalContext.Provider value={modalContext}>
             <BaseModal
@@ -351,11 +341,10 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
         </>
       );
     },
-  );
+  ) as typeof Offcanvas;
 
 Offcanvas.displayName = 'Offcanvas';
 Offcanvas.propTypes = propTypes;
-Offcanvas.defaultProps = defaultProps;
 
 export default Object.assign(Offcanvas, {
   Body: OffcanvasBody,

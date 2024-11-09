@@ -38,23 +38,19 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  vertical: false,
-  role: 'group',
-};
-
 const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
   React.forwardRef(
     (
       {
         bsPrefix,
         size,
-        vertical,
+        vertical = false,
         className,
+        role = 'group',
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
         as: Component = 'div',
         ...rest
-      }: ButtonGroupProps,
+      },
       ref,
     ) => {
       const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
@@ -66,6 +62,7 @@ const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
         <Component
           {...rest}
           ref={ref}
+          role={role}
           className={classNames(
             className,
             baseClass,
@@ -74,10 +71,9 @@ const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
         />
       );
     },
-  );
+  ) as typeof ButtonGroup;
 
 ButtonGroup.displayName = 'ButtonGroup';
 ButtonGroup.propTypes = propTypes;
-ButtonGroup.defaultProps = defaultProps;
 
 export default ButtonGroup;

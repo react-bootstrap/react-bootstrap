@@ -1,0 +1,144 @@
+---
+title: Navs and tabs
+description: Documentation and examples for how to use Bootstrap’s included navigation components.
+---
+
+import NavAlignment from '!!raw-loader!../examples/Nav/Alignment';
+import NavBasic from '!!raw-loader!../examples/Nav/Basic';
+import NavList from '!!raw-loader!../examples/Nav/List';
+import NavDropdown from '!!raw-loader!../examples/Nav/Dropdown';
+import NavDropdownImpl from '!!raw-loader!../examples/Nav/DropdownImpl';
+import NavFill from '!!raw-loader!../examples/Nav/Fill';
+import NavJustified from '!!raw-loader!../examples/Nav/Justified';
+import NavStacked from '!!raw-loader!../examples/Nav/Stacked';
+import Tabs from '!!raw-loader!../examples/Nav/Tabs';
+import Pills from '!!raw-loader!../examples/Nav/Pills';
+import Underline from '!!raw-loader!../examples/Nav/Underline';
+
+## Base Nav
+
+Navigation bits in Bootstrap all share a general `Nav`
+component and styles. Swap `variant`s to switch between each
+style. The base `Nav` component is built with flexbox and
+provide a strong foundation for building all types of navigation
+components.
+
+:::caution
+
+The basic, variant-less, `Nav` component does not include any
+`active` prop styling!
+
+:::
+
+<CodeBlock language="jsx" live>
+  {NavBasic}
+</CodeBlock>
+
+`<Nav>` markup is very flexible and styling is controlled via classes so you can
+use whatever elements you like to build your navs. By default `<Nav>` and `<Nav.Item>` both
+render `<div>`s instead of `<ul>` and `<li>` elements respectively.
+This because it's possible (and common) to leave off the `<Nav.Item>`'s and
+render a `<Nav.Link>` directly, which would create invalid markup by default (`ul > a`).
+
+When a `<ul>` is appropriate you can render one via the `as` prop; be sure to
+also set your items to `<li>` as well!
+
+<CodeBlock language="jsx" live>
+  {NavList}
+</CodeBlock>
+
+## Available styles
+
+You can control the the direction and orientation of the
+`Nav` by making use of the <DocLink path="/utilities/flex#justify-content">flexbox utility</DocLink>
+classes. By default, navs are left-aligned, but that is easily changed to center or right-aligned.
+
+<CodeBlock language="jsx" live>
+  {NavAlignment}
+</CodeBlock>
+
+### Vertical
+
+Create stacked navs by changing the flex item direction with the `.flex-column` class, or
+your own css. You can even use the responsive versions to stack in some viewports but not
+others (e.g. `.flex-sm-column`).
+
+<CodeBlock language="jsx" live>
+  {NavStacked}
+</CodeBlock>
+
+### Tabs
+
+Visually represent nav items as "tabs". This style pairs nicely with
+tabbable regions created by our [Tab components](./tabs).
+
+Note: creating a vertical nav (`.flex-column`) with tabs styling is unsupported by Bootstrap's
+default stylesheet.
+
+<CodeBlock language="jsx" live>
+  {Tabs}
+</CodeBlock>
+
+### Pills
+
+<CodeBlock language="jsx" live>
+  {Pills}
+</CodeBlock>
+
+### Underline
+
+<CodeBlock language="jsx" live>
+  {Underline}
+</CodeBlock>
+
+## Fill and justify
+
+Force the contents of your nav to extend the full available width. To
+proportionately fill the space use `fill`. Notice that the
+nav is the entire width but each nav item is a different size.
+
+<CodeBlock language="jsx" live>
+  {NavFill}
+</CodeBlock>
+
+If you want each NavItem to be the same size use `justify`.
+
+<CodeBlock language="jsx" live>
+  {NavJustified}
+</CodeBlock>
+
+## Using dropdowns
+
+You can mix and match the Dropdown components with the NavLink and
+NavItem components to create a Dropdown that plays well in a Nav
+component
+
+<CodeBlock language="jsx" live>
+  {NavDropdownImpl}
+</CodeBlock>
+
+The above demonstrates how flexible the component model can be. But if
+you didn't want to roll your own versions we've included a
+straight-forward `<NavDropdown>` that works for most cases.
+
+<CodeBlock language="jsx" live>
+  {NavDropdown}
+</CodeBlock>
+
+## API
+
+### Nav
+
+<PropsTable name="Nav" />
+
+### NavItem
+
+<PropsTable name="NavItem" />
+
+### NavLink
+
+<PropsTable name="NavLink" />
+
+### NavDropdown
+
+<PropsTable name="NavDropdown" />

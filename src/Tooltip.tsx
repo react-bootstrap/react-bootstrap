@@ -5,6 +5,7 @@ import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import { Placement, PopperRef } from './types';
 import { BsPrefixProps, getOverlayDirection } from './helpers';
+import getInitialPopperStyles from './getInitialPopperStyles';
 
 export interface TooltipProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -13,6 +14,7 @@ export interface TooltipProps
   arrowProps?: Partial<OverlayArrowProps>;
   show?: boolean;
   popper?: PopperRef;
+  hasDoneInitialMeasure?: boolean;
 }
 
 const propTypes = {
@@ -63,6 +65,11 @@ const propTypes = {
     style: PropTypes.object,
   }),
 
+  /**
+   * Whether or not Popper has done its initial measurement and positioning.
+   */
+  hasDoneInitialMeasure: PropTypes.bool,
+
   /** @private */
   popper: PropTypes.object,
 
@@ -70,21 +77,18 @@ const propTypes = {
   show: PropTypes.any,
 };
 
-const defaultProps = {
-  placement: 'right',
-};
-
 const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       bsPrefix,
-      placement,
+      placement = 'right',
       className,
       style,
       children,
       arrowProps,
-      popper: _,
-      show: _2,
+      hasDoneInitialMeasure,
+      popper,
+      show,
       ...props
     }: TooltipProps,
     ref,
@@ -95,10 +99,18 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     const [primaryPlacement] = placement?.split('-') || [];
     const bsDirection = getOverlayDirection(primaryPlacement, isRTL);
 
+    let computedStyle = style;
+    if (show && !hasDoneInitialMeasure) {
+      computedStyle = {
+        ...style,
+        ...getInitialPopperStyles(popper?.strategy),
+      };
+    }
+
     return (
       <div
         ref={ref}
-        style={style}
+        style={computedStyle}
         role="tooltip"
         x-placement={primaryPlacement}
         className={classNames(className, bsPrefix, `bs-tooltip-${bsDirection}`)}
@@ -112,7 +124,10 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 );
 
 Tooltip.propTypes = propTypes as any;
-Tooltip.defaultProps = defaultProps as any;
 Tooltip.displayName = 'Tooltip';
 
-export default Tooltip;
+export default Object.assign(Tooltip, {
+  // Default tooltip offset.
+  // https://github.com/twbs/bootstrap/blob/beca2a6c7f6bc88b6449339fc76edcda832c59e5/js/src/tooltip.js#L65
+  TOOLTIP_OFFSET: [0, 6],
+});

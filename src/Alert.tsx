@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider';
+import AlertHeading from './AlertHeading';
+import AlertLink from './AlertLink';
 import Fade from './Fade';
 import CloseButton, { CloseButtonVariant } from './CloseButton';
 import { Variant } from './types';
-import divWithClassName from './divWithClassName';
-import createWithBsPrefix from './createWithBsPrefix';
 import { TransitionType } from './helpers';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,17 +22,6 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   closeVariant?: CloseButtonVariant;
   transition?: TransitionType;
 }
-
-const DivStyledAsH4 = divWithClassName('h4');
-DivStyledAsH4.displayName = 'DivStyledAsH4';
-
-const AlertHeading = createWithBsPrefix('alert-heading', {
-  Component: DivStyledAsH4,
-});
-
-const AlertLink = createWithBsPrefix('alert-link', {
-  Component: Anchor,
-});
 
 const propTypes = {
   /**
@@ -86,26 +74,19 @@ const propTypes = {
   transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 };
 
-const defaultProps = {
-  variant: 'primary',
-  show: true,
-  transition: Fade,
-  closeLabel: 'Close alert',
-};
-
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (uncontrolledProps: AlertProps, ref) => {
     const {
       bsPrefix,
-      show,
-      closeLabel,
+      show = true,
+      closeLabel = 'Close alert',
       closeVariant,
       className,
       children,
-      variant,
+      variant = 'primary',
       onClose,
       dismissible,
-      transition,
+      transition = Fade,
       ...props
     } = useUncontrolled(uncontrolledProps, {
       show: 'onClose',
@@ -152,7 +133,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 );
 
 Alert.displayName = 'Alert';
-Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
 
 export default Object.assign(Alert, {

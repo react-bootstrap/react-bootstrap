@@ -24,21 +24,22 @@ const propTypes = {
   role: PropTypes.string,
 };
 
-const defaultProps = {
-  role: 'toolbar',
-};
-
 const ButtonToolbar = React.forwardRef<HTMLDivElement, ButtonToolbarProps>(
-  ({ bsPrefix, className, ...props }, ref) => {
+  ({ bsPrefix, className, role = 'toolbar', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'btn-toolbar');
 
     return (
-      <div {...props} ref={ref} className={classNames(className, prefix)} />
+      <div
+        {...props}
+        ref={ref}
+        className={classNames(className, prefix)}
+        role={role}
+      />
     );
   },
 );
 
 ButtonToolbar.displayName = 'ButtonToolbar';
 ButtonToolbar.propTypes = propTypes;
-ButtonToolbar.defaultProps = defaultProps;
+
 export default ButtonToolbar;

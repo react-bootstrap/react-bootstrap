@@ -52,7 +52,7 @@ const FormText: BsPrefixRefForwardingComponent<'small', FormTextProps> =
         />
       );
     },
-  );
+  ) as typeof FormText;
 
 FormText.displayName = 'FormText';
 FormText.propTypes = propTypes;

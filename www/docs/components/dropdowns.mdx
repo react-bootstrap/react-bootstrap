@@ -1,0 +1,257 @@
+---
+title: Dropdowns
+description: Toggle contextual overlays for displaying lists of links and more with the Bootstrap dropdown plugin
+---
+
+import DropdownBasic from '!!raw-loader!../examples/Dropdown/Basic';
+import DropdownBasicButton from '!!raw-loader!../examples/Dropdown/BasicButton';
+import DropdownButtonCustom from '!!raw-loader!../examples/Dropdown/ButtonCustom';
+import DropdownButtonCustomMenu from '!!raw-loader!../examples/Dropdown/ButtonCustomMenu';
+import DropdownButtonSizes from '!!raw-loader!../examples/Dropdown/ButtonSizes';
+import DropDirections from '!!raw-loader!../examples/Dropdown/DropDirections';
+import DropdownItemTags from '!!raw-loader!../examples/Dropdown/DropdownItemTags';
+import MenuAlignEnd from '!!raw-loader!../examples/Dropdown/MenuAlignEnd';
+import MenuAlignResponsive from '!!raw-loader!../examples/Dropdown/MenuAlignResponsive';
+import MenuDividers from '!!raw-loader!../examples/Dropdown/MenuDividers';
+import MenuHeaders from '!!raw-loader!../examples/Dropdown/MenuHeaders';
+import SplitBasic from '!!raw-loader!../examples/Dropdown/SplitBasic';
+import SplitVariants from '!!raw-loader!../examples/Dropdown/SplitVariants';
+import DropdownVariants from '!!raw-loader!../examples/Dropdown/Variants';
+import ButtonDark from '!!raw-loader!../examples/Dropdown/ButtonDark';
+import NavbarDark from '!!raw-loader!../examples/Dropdown/NavbarDark';
+import AutoClose from '!!raw-loader!../examples/Dropdown/AutoClose';
+
+## Overview
+
+Dropdowns are toggleable, contextual overlays for displaying lists of
+links and more. Like overlays, Dropdowns are built using a third-party
+library <a href="https://popper.js.org/">Popper.js</a>, which provides
+dynamic positioning and viewport detection.
+
+## Accessibility
+
+The <a href="https://www.w3.org/TR/wai-aria/"><abbr title="Web Accessibility Initiative">WAI</abbr> <AriaAbbr /></a> standard
+defines a [`role="menu"` widget][1], but it's very specific to a certain kind of menu. <AriaAbbr /> menus, must
+only contain `role="menuitem"`, `role="menuitemcheckbox"`, or `role="menuitemradio"`.
+
+On the other hand, Bootstrap's dropdowns are designed to more generic
+and application in a variety of situations. For this reason we don't
+automatically add the menu roles to the markup. We do implement some
+basic keyboard navigation, and if you do provide the "menu" role,
+react-bootstrap will do its best to ensure the focus management is
+compliant with the <AriaAbbr /> authoring guidelines for menus.
+
+## Examples
+
+### Single button dropdowns
+
+The basic Dropdown is composed of a wrapping `Dropdown` and
+inner `<DropdownMenu>`, and `<DropdownToggle>`. By
+default the `<DropdownToggle>` will render a
+`Button` component and accepts all the same props.
+
+<CodeBlock language="jsx" live>
+  {DropdownBasic}
+</CodeBlock>
+
+Since the above is such a common configuration react-bootstrap provides
+the `<DropdownButton>` component to help reduce typing. Provide
+a `title` prop and some `<DropdownItem>`s and you're
+ready to go.
+
+<CodeBlock language="jsx" live>
+  {DropdownBasicButton}
+</CodeBlock>
+
+DropdownButton will forward Button props to the underlying Toggle
+component
+
+<CodeBlock language="jsx" live>
+  {DropdownVariants}
+</CodeBlock>
+
+### Split button dropdowns
+
+Similarly, You create a split dropdown by combining the Dropdown
+components with another Button and a ButtonGroup.
+
+<CodeBlock language="jsx" live>
+  {SplitBasic}
+</CodeBlock>
+
+As with DropdownButton, `SplitButton` is provided as
+convenience component.
+
+<CodeBlock language="jsx" live>
+  {SplitVariants}
+</CodeBlock>
+
+## Sizing
+
+Dropdowns work with buttons of all sizes.
+
+<CodeBlock language="jsx" live>
+  {DropdownButtonSizes}
+</CodeBlock>
+
+## Dark dropdowns
+
+Opt into darker dropdowns to match a dark navbar or custom style by adding
+`variant="dark"` onto an existing `DropdownMenu`. Alternatively, use
+`menuVariant="dark"` when using the `DropdownButton` component.
+
+:::caution Heads up!
+
+Dark variants for components were deprecated in Bootstrap v5.3.0 with the introduction
+of color modes. Instead of adding `variant="dark"`, set `data-bs-theme="dark"` on the root
+element, a parent wrapper, or the component itself.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {ButtonDark}
+</CodeBlock>
+
+Using `menuVariant="dark"` in a `NavDropdown`:
+
+<CodeBlock language="jsx" live>
+  {NavbarDark}
+</CodeBlock>
+
+## Drop directions
+
+Trigger dropdown menus above, below, left, or to the right of their
+toggle elements, with the `drop` prop.
+
+<CodeBlock language="jsx" live>
+  {DropDirections}
+</CodeBlock>
+
+## Dropdown items
+
+Historically dropdown menu contents had to be links, but that’s no
+longer the case with v4. Now you can optionally use
+`<button>` elements in your dropdowns instead of just `<a>`s.
+
+You can also create non-interactive dropdown items with `<Dropdown.ItemText>`.
+Feel free to style further with custom CSS or text utilities.
+
+<CodeBlock language="jsx" live>
+  {DropdownItemTags}
+</CodeBlock>
+
+## Menu alignment
+
+By default, a dropdown menu is aligned to the left, but you can switch
+it by passing `align="end"` to a `<Dropdown>`, `<DropdownButton>`, or `<SplitButton>`.
+
+<CodeBlock language="jsx" live>
+  {MenuAlignEnd}
+</CodeBlock>
+
+### Responsive alignment
+
+If you want to use responsive menu alignment, pass an object containing a breakpoint to the
+`align` prop on the `<DropdownMenu>`, `<DropdownButton>`, or `<SplitButton>`.
+You can specify `start` or `end` for the various breakpoints.
+
+:::danger Warning
+
+Using responsive alignment will disable Popper usage so any dynamic
+positioning features such as <code>flip</code> will not work.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {MenuAlignResponsive}
+</CodeBlock>
+
+## Menu headers
+
+Add a header to label sections of actions.
+
+<CodeBlock language="jsx" live previewClassName="static-dropdown-menu">
+  {MenuHeaders}
+</CodeBlock>
+
+## Menu dividers
+
+Separate groups of related menu items with a divider.
+
+<CodeBlock language="jsx" live previewClassName="static-dropdown-menu">
+  {MenuDividers}
+</CodeBlock>
+
+## AutoClose
+
+By default, the dropdown menu is closed when selecting a menu item or clicking outside of the
+dropdown menu. This behaviour can be changed by using the `autoClose` property.
+
+By default, `autoClose` is set to the default value `true` and behaves like expected. By choosing `false`, the dropdown
+menu can only be toggled by clicking on the dropdown button. `inside` makes the dropdown disappear **only**
+by choosing a menu item and `outside` closes the dropdown menu **only** by clicking outside.
+
+**Notice** how the dropdown is toggled in each scenario by clicking on the button.
+
+<CodeBlock language="jsx" live>
+  {AutoClose}
+</CodeBlock>
+
+## Customization
+
+If the default handling of the dropdown menu and toggle components
+aren't to your liking, you can customize them, by using the more basic
+`<Dropdown>` Component to explicitly specify the Toggle and
+Menu components
+
+<CodeBlock language="jsx" live previewClassName="custom-dropdown-menu">
+  {DropdownButtonCustom}
+</CodeBlock>
+
+### Custom Dropdown Components
+
+For those that want to customize everything, you can forgo the included
+Toggle and Menu components, and create your own. By providing custom
+components to the `as` prop, you can control how each
+component behaves. Custom toggle and menu components **must** be able to accept refs.
+
+<CodeBlock language="jsx" live noInline>
+  {DropdownButtonCustomMenu}
+</CodeBlock>
+
+## API
+
+### DropdownButton
+
+<PropsTable name="DropdownButton" />
+
+### SplitButton
+
+<PropsTable name="SplitButton" />
+
+### Dropdown
+
+<PropsTable name="Dropdown" />
+
+### DropdownToggle
+
+<PropsTable name="DropdownToggle" />
+
+### DropdownMenu
+
+<PropsTable name="DropdownMenu" />
+
+### DropdownItem
+
+<PropsTable name="DropdownItem" />
+
+### DropdownHeader
+
+<PropsTable name="DropdownHeader" />
+
+### DropdownDivider
+
+<PropsTable name="DropdownDivider" />
+
+[0]: https://www.w3.org/TR/wai-aria/
+[1]: https://www.w3.org/TR/wai-aria-1.1/#menu

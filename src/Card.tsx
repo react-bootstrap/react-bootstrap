@@ -3,26 +3,17 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import createWithBsPrefix from './createWithBsPrefix';
-import divWithClassName from './divWithClassName';
-import CardImg from './CardImg';
+import CardBody from './CardBody';
+import CardFooter from './CardFooter';
 import CardHeader from './CardHeader';
+import CardImg from './CardImg';
+import CardImgOverlay from './CardImgOverlay';
+import CardLink from './CardLink';
+import CardSubtitle from './CardSubtitle';
+import CardText from './CardText';
+import CardTitle from './CardTitle';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Color, Variant } from './types';
-
-const DivStyledAsH5 = divWithClassName('h5');
-const DivStyledAsH6 = divWithClassName('h6');
-const CardBody = createWithBsPrefix('card-body');
-const CardTitle = createWithBsPrefix('card-title', {
-  Component: DivStyledAsH5,
-});
-const CardSubtitle = createWithBsPrefix('card-subtitle', {
-  Component: DivStyledAsH6,
-});
-const CardLink = createWithBsPrefix('card-link', { Component: 'a' });
-const CardText = createWithBsPrefix('card-text', { Component: 'p' });
-const CardFooter = createWithBsPrefix('card-footer');
-const CardImgOverlay = createWithBsPrefix('card-img-overlay');
 
 export interface CardProps
   extends BsPrefixProps,
@@ -69,10 +60,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  body: false,
-};
-
 const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
   HTMLElement,
   CardProps
@@ -84,7 +71,7 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
       bg,
       text,
       border,
-      body,
+      body = false,
       children,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -110,11 +97,10 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
       </Component>
     );
   },
-);
+) as typeof Card;
 
 Card.displayName = 'Card';
 Card.propTypes = propTypes;
-Card.defaultProps = defaultProps;
 
 export default Object.assign(Card, {
   Img: CardImg,

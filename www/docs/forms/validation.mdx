@@ -1,0 +1,72 @@
+---
+title: Validation
+description: Provide valuable, actionable feedback to your users with HTML5 form validation, via browser default behaviors or custom styles and JavaScript.
+sidebar_position: 10
+---
+
+import ValidationFormik from '!!raw-loader!../examples/Form/ValidationFormik';
+import ValidationInputGroup from '!!raw-loader!../examples/Form/ValidationInputGroup';
+import ValidationNative from '!!raw-loader!../examples/Form/ValidationNative';
+import ValidationTooltips from '!!raw-loader!../examples/Form/ValidationTooltips';
+
+## Native HTML5 form validation
+
+For native HTML form validation–[available in all our supported browsers](https://caniuse.com/#feat=form-validation),
+the `:valid` and `:invalid` pseudo selectors are used to apply validation
+styles as well as display feedback messages.
+
+Bootstrap scopes the `:valid` and `:invalid` styles to parent `.was-validated`
+class, usually applied to the `<Form>` (you can use the `validated` prop
+as a shortcut). Otherwise, any required field without a value shows up
+as invalid on page load. This way, you may choose when to activate them
+(typically after form submission is attempted).
+
+:::caution Watch out!
+
+Browsers provide their own validation UI by default on `form`s. You can disable the
+default UI by adding the HTML `noValidate` attribute to your `<Form>` or `<form>` element.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {ValidationNative}
+</CodeBlock>
+
+## Form libraries and server-rendered styles
+
+It's often beneficial (especially in React) to handle form validation
+via a library like Formik, or react-formal. In those cases, `isValid`
+and `isInvalid` props can be added to form controls to manually apply
+validation styles. Below is a quick example integrating with
+[Formik](https://github.com/jaredpalmer/formik).
+
+<CodeBlock language="jsx" live>
+  {ValidationFormik}
+</CodeBlock>
+
+## Tooltips
+
+If your form layout allows it, you can use the `tooltip` prop to display
+validation feedback in a styled tooltip. Be sure to have a parent with
+`position: relative` on it for tooltip positioning. In the example below,
+our column classes have this already, but your project may require an
+alternative setup.
+
+<CodeBlock language="jsx" live>
+  {ValidationTooltips}
+</CodeBlock>
+
+## Input group validation
+
+To properly show rounded corners in an `<InputGroup>` with validation,
+the `<InputGroup>` requires the `hasValidation` prop.
+
+<CodeBlock language="jsx" live>
+  {ValidationInputGroup}
+</CodeBlock>
+
+## API
+
+### Feedback
+
+<PropsTable name="Feedback" />

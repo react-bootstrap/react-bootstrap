@@ -8,6 +8,7 @@ import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
 import safeFindDOMNode from './safeFindDOMNode';
+import { Placement } from './types';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
 
@@ -36,6 +37,7 @@ export interface OverlayTriggerProps
 
   target?: never;
   onHide?: never;
+  placement?: Placement;
 }
 
 function normalizeDelay(delay?: OverlayDelay) {
@@ -66,7 +68,11 @@ function handleMouseOverOut(
   }
 }
 
-const triggerType = PropTypes.oneOf(['click', 'hover', 'focus']);
+const triggerType = PropTypes.oneOf<OverlayTriggerType>([
+  'click',
+  'hover',
+  'focus',
+]);
 
 const propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
@@ -74,18 +80,23 @@ const propTypes = {
   /**
    * Specify which action or actions trigger Overlay visibility
    *
+   * The `click` trigger ignores the configured `delay`.
+   *
    * @type {'hover' | 'click' |'focus' | Array<'hover' | 'click' |'focus'>}
    */
-  trigger: PropTypes.oneOfType([triggerType, PropTypes.arrayOf(triggerType)]),
+  trigger: PropTypes.oneOfType([
+    triggerType.isRequired,
+    PropTypes.arrayOf(triggerType.isRequired),
+  ]),
 
   /**
    * A millisecond delay amount to show and hide the Overlay once triggered
    */
   delay: PropTypes.oneOfType([
-    PropTypes.number,
+    PropTypes.number.isRequired,
     PropTypes.shape({
-      show: PropTypes.number,
-      hide: PropTypes.number,
+      show: PropTypes.number.isRequired,
+      hide: PropTypes.number.isRequired,
     }),
   ]),
 
@@ -122,10 +133,11 @@ const propTypes = {
   /**
    * An element or text to overlay next to the target.
    */
-  overlay: PropTypes.oneOfType([PropTypes.func, PropTypes.element.isRequired]),
+  overlay: PropTypes.oneOfType([PropTypes.func, PropTypes.element.isRequired])
+    .isRequired,
 
   /**
-   * A Popper.js config object passed to the the underlying popper instance.
+   * A Popper.js config object passed to the underlying popper instance.
    */
   popperConfig: PropTypes.object,
 
@@ -143,7 +155,7 @@ const propTypes = {
   /**
    * The placement of the Overlay in relation to it's `target`.
    */
-  placement: PropTypes.oneOf([
+  placement: PropTypes.oneOf<Placement>([
     'auto-start',
     'auto',
     'auto-end',
@@ -162,13 +174,8 @@ const propTypes = {
   ]),
 };
 
-const defaultProps = {
-  defaultShow: false,
-  trigger: ['hover', 'focus'],
-};
-
-function OverlayTrigger({
-  trigger,
+const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
+  trigger = ['hover', 'focus'],
   overlay,
   children,
   popperConfig = {},
@@ -181,7 +188,7 @@ function OverlayTrigger({
   placement,
   flip = placement && placement.indexOf('auto') !== -1,
   ...props
-}: OverlayTriggerProps) {
+}: OverlayTriggerProps) => {
   const triggerNodeRef = useRef(null);
   const mergedRef = useMergedRefs<unknown>(
     triggerNodeRef,
@@ -199,7 +206,7 @@ function OverlayTrigger({
       ? React.Children.only(children).props
       : ({} as any);
 
-  const attachRef = (r: React.ComponentClass | Element | null | undefined) => {
+  const attachRef = (r: React.Component | Element | null | undefined) => {
     mergedRef(safeFindDOMNode(r));
   };
 
@@ -310,9 +317,8 @@ function OverlayTrigger({
       </Overlay>
     </>
   );
-}
+};
 
 OverlayTrigger.propTypes = propTypes;
-OverlayTrigger.defaultProps = defaultProps;
 
 export default OverlayTrigger;

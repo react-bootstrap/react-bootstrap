@@ -41,7 +41,7 @@ const NavbarBrand: BsPrefixRefForwardingComponent<'a', NavbarBrandProps> =
         />
       );
     },
-  );
+  ) as typeof NavbarBrand;
 
 NavbarBrand.displayName = 'NavbarBrand';
 NavbarBrand.propTypes = propTypes;

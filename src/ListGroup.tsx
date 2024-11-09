@@ -10,7 +10,7 @@ import ListGroupItem from './ListGroupItem';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
-  variant?: 'flush';
+  variant?: 'flush' | string;
   horizontal?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   defaultActiveKey?: EventKey;
   numbered?: boolean;
@@ -91,7 +91,7 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
         )}
       />
     );
-  });
+  }) as typeof ListGroup;
 
 ListGroup.propTypes = propTypes;
 ListGroup.displayName = 'ListGroup';

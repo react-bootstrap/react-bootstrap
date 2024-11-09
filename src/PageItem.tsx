@@ -13,6 +13,8 @@ export interface PageItemProps
   active?: boolean;
   activeLabel?: string;
   href?: string;
+  linkStyle?: React.CSSProperties;
+  linkClassName?: string;
 }
 
 const propTypes = {
@@ -22,41 +24,51 @@ const propTypes = {
   /** Styles PageItem as active, and renders a `<span>` instead of an `<a>`. */
   active: PropTypes.bool,
 
-  /** An accessible label indicating the active state.. */
+  /** An accessible label indicating the active state. */
   activeLabel: PropTypes.string,
 
-  /** A callback function for when this component is clicked */
-  onClick: PropTypes.func,
-};
+  /** The HTML href attribute for the `PageItem`. */
+  href: PropTypes.string,
 
-const defaultProps = {
-  active: false,
-  disabled: false,
-  activeLabel: '(current)',
+  /** A callback function for when this component is clicked. */
+  onClick: PropTypes.func,
+
+  /** custom style for the inner component of the PageItem */
+  linkStyle: PropTypes.object,
+
+  /** custom className for the inner component of the PageItem */
+  linkClassName: PropTypes.string,
 };
 
 const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
   React.forwardRef<HTMLLIElement, PageItemProps>(
     (
       {
-        active,
-        disabled,
+        active = false,
+        disabled = false,
         className,
         style,
-        activeLabel,
+        activeLabel = '(current)',
         children,
+        linkStyle,
+        linkClassName,
+        as = Anchor,
         ...props
       }: PageItemProps,
       ref,
     ) => {
-      const Component = active || disabled ? 'span' : Anchor;
+      const Component = active || disabled ? 'span' : as;
       return (
         <li
           ref={ref}
           style={style}
           className={classNames(className, 'page-item', { active, disabled })}
         >
-          <Component className="page-link" disabled={disabled} {...props}>
+          <Component
+            className={classNames('page-link', linkClassName)}
+            style={linkStyle}
+            {...props}
+          >
             {children}
             {active && activeLabel && (
               <span className="visually-hidden">{activeLabel}</span>
@@ -65,10 +77,9 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         </li>
       );
     },
-  );
+  ) as typeof PageItem;
 
 PageItem.propTypes = propTypes;
-PageItem.defaultProps = defaultProps;
 PageItem.displayName = 'PageItem';
 
 export default PageItem;

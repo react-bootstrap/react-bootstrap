@@ -1,7 +1,8 @@
-module.exports = api => {
+module.exports = (api) => {
   const env = api.env();
 
   let dev = false;
+  let setUseClient = false;
   let modules;
 
   switch (env) {
@@ -12,12 +13,17 @@ module.exports = api => {
       modules = false;
       break;
     case 'dist-prod':
+      modules = false;
+      break;
     case 'esm':
       modules = false;
+      setUseClient = true;
       break;
     case 'cjs':
     default:
       modules = 'commonjs';
+      setUseClient = true;
+      break;
   }
 
   return {
@@ -28,6 +34,8 @@ module.exports = api => {
           dev,
           modules,
           removePropTypes: !dev,
+          setUseClient,
+          customClientImports: ['useBootstrapPrefix', 'createWithBsPrefix'],
         },
       ],
       '@babel/preset-typescript',

@@ -1,0 +1,71 @@
+---
+title: Transitions
+sidebar_position: 1
+---
+
+import Collapse from '!!raw-loader!../examples/Collapse';
+import CollapseHorizontal from '!!raw-loader!../examples/CollapseHorizontal';
+import Fade from '!!raw-loader!../examples/Fade';
+
+Bootstrap includes a few general use CSS transitions that can be applied
+to a number of components. React Bootstrap, bundles them up into a few composable
+`<Transition>` components from [react-transition-group](https://github.com/reactjs/react-transition-group),
+a commonly used animation wrapper for React.
+
+Encapsulating animations into components has the added benefit of making them more broadly useful,
+as well as portable for using in other libraries. All React-bootstrap components that can be animated,
+support pluggable `<Transition>` components.
+
+## Collapse
+
+### Basic Example
+
+Add a collapse toggle animation to an element or component.
+
+:::caution Smooth animations
+
+If you're noticing choppy animations, and the component that's being collapsed
+has non-zero margin or padding, try wrapping the contents of your
+`<Collapse>` inside a node with no margin or padding, like the `<div>` in the example below.
+This will allow the height to be computed properly, so the animation can proceed smoothly.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {Collapse}
+</CodeBlock>
+
+### Horizontal
+
+Add a collapse toggle animation to an element or component to transition the width instead of height.
+
+:::caution Smooth animations
+
+If you're noticing choppy animations, and the component that's being collapsed
+has non-zero margin or padding, try wrapping the contents of your
+`<Collapse>` inside a node with no margin or padding, like the `<div>` in the example below.
+This will allow the height to be computed properly, so the animation can proceed smoothly.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {CollapseHorizontal}
+</CodeBlock>
+
+## Fade
+
+Add a fade animation to a child element or component.
+
+<CodeBlock language="jsx" live>
+  {Fade}
+</CodeBlock>
+
+## API
+
+### Collapse
+
+<PropsTable name="Collapse" />
+
+### Fade
+
+<PropsTable name="Fade" />

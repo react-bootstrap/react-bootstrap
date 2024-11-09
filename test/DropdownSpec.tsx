@@ -1,8 +1,6 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import * as React from 'react';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Dropdown from '../src/Dropdown';
 import { DropDirection } from '../src/DropdownContext';
 import InputGroup from '../src/InputGroup';
@@ -24,7 +22,7 @@ describe('<Dropdown>', () => {
 
   it('renders div with dropdown class', () => {
     const { container } = render(simpleDropdown);
-    container.firstElementChild!.classList.should.contain(['dropdown']);
+    expect(container.firstElementChild!.classList).toContain('dropdown');
   });
 
   ['up', 'end', 'start'].forEach((dir: DropDirection) => {
@@ -35,17 +33,39 @@ describe('<Dropdown>', () => {
         </Dropdown>,
       );
 
-      container.firstElementChild!.classList.should.not.contain(['dropdown']);
-      container.firstElementChild!.classList.should.contain([`drop${dir}`]);
+      expect(container.firstElementChild!.classList).not.toContain('dropdown');
+      expect(container.firstElementChild!.classList).toContain(`drop${dir}`);
     });
   });
 
-  it('renders toggle with Dropdown.Toggle', () => {
-    const { getByText } = render(simpleDropdown);
+  it('renders div with drop=down-centered', () => {
+    const { container } = render(
+      <Dropdown title="Drop" drop="down-centered">
+        {dropdownChildren}
+      </Dropdown>,
+    );
 
-    const toggle = getByText('Child Title');
-    toggle.getAttribute('aria-expanded')!.should.equal('false');
-    toggle.id.should.be.ok;
+    expect(container.firstElementChild!.classList).not.toContain('dropdown');
+    expect(container.firstElementChild!.classList).toContain('dropdown-center');
+  });
+
+  it('renders div with drop=up-centered', () => {
+    const { container } = render(
+      <Dropdown title="Drop" drop="up-centered">
+        {dropdownChildren}
+      </Dropdown>,
+    );
+
+    expect(container.firstElementChild!.classList).not.toContain('dropdown');
+    expect(container.firstElementChild!.classList).toContain('dropup-center');
+    expect(container.firstElementChild!.classList).toContain('dropup');
+  });
+
+  it('renders toggle with Dropdown.Toggle', () => {
+    render(simpleDropdown);
+
+    const toggle = screen.getByText('Child Title');
+    expect(toggle.getAttribute('aria-expanded')).toEqual('false');
   });
 
   it('forwards align="end" to menu', () => {
@@ -67,29 +87,30 @@ describe('<Dropdown>', () => {
       </Dropdown>,
     );
 
-    container.querySelector('[data-align="end"]')!.should.exist;
+    expect(container.querySelector('[data-align="end"]')).toBeDefined();
   });
 
   it('toggles open/closed when clicked', () => {
-    const { container, getByText, getByTestId } = render(simpleDropdown);
+    const { container } = render(simpleDropdown);
     const dropdown = container.firstElementChild!;
-    const toggle = getByText('Child Title');
+    const toggle = screen.getByText('Child Title');
 
-    dropdown.classList.should.not.contain(['show']);
+    expect(dropdown.classList).not.toContain('show');
     fireEvent.click(toggle);
-    dropdown.classList.should.contain(['show']);
+    expect(dropdown.classList).toContain('show');
 
-    getByTestId('menu').classList.should.contain(['dropdown-menu', 'show']);
+    expect(screen.getByTestId('menu').classList).toContain('dropdown-menu');
+    expect(screen.getByTestId('menu').classList).toContain('show');
 
     fireEvent.click(toggle);
-    dropdown.classList.should.not.contain(['show']);
-    toggle.getAttribute('aria-expanded')!.should.equal('false');
+    expect(dropdown.classList).not.toContain('show');
+    expect(toggle.getAttribute('aria-expanded')).toEqual('false');
   });
 
   it('closes when child Dropdown.Item is selected', () => {
-    const onToggleSpy = sinon.spy();
+    const onToggleSpy = vi.fn();
 
-    const { container, getByTestId } = render(
+    const { container } = render(
       <Dropdown show onToggle={onToggleSpy}>
         <Dropdown.Toggle id="test-id" key="toggle">
           Child Title
@@ -103,14 +124,14 @@ describe('<Dropdown>', () => {
       </Dropdown>,
     );
 
-    container.firstElementChild!.classList.should.contain(['show']);
+    expect(container.firstElementChild!.classList).toContain('show');
 
-    fireEvent.click(getByTestId('item1'));
-    onToggleSpy.should.have.been.calledWith(false);
+    fireEvent.click(screen.getByTestId('item1'));
+    expect(onToggleSpy).toHaveBeenCalledWith(false, expect.anything());
   });
 
   it('has aria-labelledby same id as toggle button', () => {
-    const { getByTestId } = render(
+    render(
       <Dropdown show>
         <Dropdown.Toggle data-testid="toggle">Toggle</Dropdown.Toggle>
         <Dropdown.Menu data-testid="menu" key="menu">
@@ -119,50 +140,50 @@ describe('<Dropdown>', () => {
       </Dropdown>,
     );
 
-    getByTestId('toggle').id.should.equal(
-      getByTestId('menu').getAttribute('aria-labelledby'),
+    expect(screen.getByTestId('toggle').id).toEqual(
+      screen.getByTestId('menu').getAttribute('aria-labelledby'),
     );
   });
 
   describe('DOM event and source passed to onToggle', () => {
     it('passes open, event, and source correctly when opened with click', () => {
-      const onToggleSpy = sinon.spy();
-      const { getByText } = render(
-        <Dropdown onToggle={onToggleSpy}>{dropdownChildren}</Dropdown>,
+      const onToggleSpy = vi.fn();
+      render(<Dropdown onToggle={onToggleSpy}>{dropdownChildren}</Dropdown>);
+
+      expect(onToggleSpy).not.toHaveBeenCalled();
+
+      fireEvent.click(screen.getByText('Child Title'));
+
+      expect(onToggleSpy).toHaveBeenCalledOnce();
+      expect(onToggleSpy).toHaveBeenCalledWith(
+        true,
+        expect.objectContaining({ source: 'click' }),
       );
-
-      onToggleSpy.should.not.have.been.called;
-
-      fireEvent.click(getByText('Child Title'));
-
-      onToggleSpy.should.have.been.calledOnce;
-      onToggleSpy.getCall(0).args.length.should.equal(2);
-      onToggleSpy.getCall(0).args[0].should.equal(true);
-      onToggleSpy.getCall(0).args[1].source.should.equal('click');
     });
 
     it('passes open, event, and source correctly when closed with click', () => {
-      const onToggleSpy = sinon.spy();
-      const { getByText } = render(
+      const onToggleSpy = vi.fn();
+      render(
         <Dropdown show onToggle={onToggleSpy}>
           {dropdownChildren}
         </Dropdown>,
       );
 
-      const toggle = getByText('Child Title');
+      const toggle = screen.getByText('Child Title');
 
-      onToggleSpy.should.not.have.been.called;
+      expect(onToggleSpy).not.toHaveBeenCalled();
 
       fireEvent.click(toggle);
 
-      onToggleSpy.getCall(0).args.length.should.equal(2);
-      onToggleSpy.getCall(0).args[0].should.equal(false);
-      onToggleSpy.getCall(0).args[1].source.should.equal('click');
+      expect(onToggleSpy).toHaveBeenCalledWith(
+        false,
+        expect.objectContaining({ source: 'click' }),
+      );
     });
 
     it('passes open, event, and source correctly when child selected', () => {
-      const onToggleSpy = sinon.spy();
-      const { getByTestId } = render(
+      const onToggleSpy = vi.fn();
+      render(
         <Dropdown onToggle={onToggleSpy}>
           <Dropdown.Toggle data-testid="toggle">Toggle</Dropdown.Toggle>
           <Dropdown.Menu>
@@ -173,21 +194,22 @@ describe('<Dropdown>', () => {
         </Dropdown>,
       );
 
-      fireEvent.click(getByTestId('toggle'));
+      fireEvent.click(screen.getByTestId('toggle'));
 
-      onToggleSpy.should.have.been.called;
+      expect(onToggleSpy).toHaveBeenCalledOnce();
 
-      fireEvent.click(getByTestId('item1'));
+      fireEvent.click(screen.getByTestId('item1'));
 
-      onToggleSpy.should.have.been.calledTwice;
-      onToggleSpy.getCall(1).args.length.should.equal(2);
-      onToggleSpy.getCall(1).args[0].should.equal(false);
-      onToggleSpy.getCall(1).args[1].source.should.equal('select');
+      expect(onToggleSpy).toHaveBeenCalledTimes(2);
+      expect(onToggleSpy).toHaveBeenCalledWith(
+        false,
+        expect.objectContaining({ source: 'select' }),
+      );
     });
 
     it('passes open, event, and source correctly when opened with keydown', () => {
-      const onToggleSpy = sinon.spy();
-      const { getByTestId } = render(
+      const onToggleSpy = vi.fn();
+      render(
         <Dropdown onToggle={onToggleSpy}>
           <Dropdown.Toggle data-testid="toggle">Toggle</Dropdown.Toggle>
           <Dropdown.Menu>
@@ -198,17 +220,23 @@ describe('<Dropdown>', () => {
         </Dropdown>,
       );
 
-      fireEvent.keyDown(getByTestId('toggle'), { key: 'ArrowDown' });
+      fireEvent.keyDown(screen.getByTestId('toggle'), { key: 'ArrowDown' });
 
-      onToggleSpy.should.have.been.calledOnce;
-      onToggleSpy.getCall(0).args.length.should.equal(2);
-      onToggleSpy.getCall(0).args[0].should.equal(true);
-      onToggleSpy.getCall(0).args[1].source.should.equal('keydown');
+      expect(onToggleSpy).toHaveBeenCalledOnce();
+      expect(onToggleSpy).toHaveBeenCalledWith(
+        true,
+        expect.objectContaining({ source: 'keydown' }),
+      );
+    });
+
+    it('Should render .show on the dropdown toggle when outside an InputGroup', () => {
+      render(<Dropdown show>{dropdownChildren}</Dropdown>);
+      expect(screen.getByText('Child Title').classList).toContain('show');
     });
   });
 
   it('should use each components bsPrefix', () => {
-    const { getByTestId } = render(
+    render(
       <Dropdown defaultShow bsPrefix="my-dropdown" data-testid="dropdown">
         <Dropdown.Toggle data-testid="toggle" bsPrefix="my-toggle">
           Child Title
@@ -219,13 +247,14 @@ describe('<Dropdown>', () => {
       </Dropdown>,
     );
 
-    getByTestId('dropdown').classList.should.contain(['show', 'my-dropdown']);
-    getByTestId('toggle').classList.should.contain(['my-toggle']);
-    getByTestId('menu').classList.should.contain(['my-menu']);
+    expect(screen.getByTestId('dropdown').classList).toContain('show');
+    expect(screen.getByTestId('dropdown').classList).toContain('my-dropdown');
+    expect(screen.getByTestId('toggle').classList).toContain('my-toggle');
+    expect(screen.getByTestId('menu').classList).toContain('my-menu');
   });
 
   it('Should have div as default component', () => {
-    const { getByTestId } = render(
+    render(
       <Dropdown defaultShow bsPrefix="my-dropdown" data-testid="dropdown">
         <Dropdown.Toggle data-testid="toggle" bsPrefix="my-toggle">
           Child Title
@@ -236,7 +265,7 @@ describe('<Dropdown>', () => {
       </Dropdown>,
     );
 
-    getByTestId('dropdown').tagName.should.equal('DIV');
+    expect(screen.getByTestId('dropdown').tagName).toEqual('DIV');
   });
 
   it('Should also accept a custom component', () => {
@@ -252,41 +281,41 @@ describe('<Dropdown>', () => {
         ref,
       ) => <div ref={ref} id="custom-component" {...props} />,
     );
-    const { getByTestId } = render(
+    render(
       <Dropdown.Menu data-testid="menu" show as={customComponent}>
         <Dropdown.Item>Example Item</Dropdown.Item>
       </Dropdown.Menu>,
     );
 
-    getByTestId('menu').id.should.equal('custom-component');
+    expect(screen.getByTestId('menu').id).toEqual('custom-component');
   });
 
   describe('InputGroup Dropdowns', () => {
     it('should not render a .dropdown element when inside input group', () => {
-      const { queryByTestId } = render(
+      render(
         <InputGroup>
           <Dropdown data-testid="dropdown">{dropdownChildren}</Dropdown>
         </InputGroup>,
       );
 
-      expect(queryByTestId('dropdown')!).not.to.exist;
+      expect(screen.queryByTestId('dropdown')).toBeNull();
     });
 
     it('should render .show on the dropdown toggle', () => {
-      const { getByText } = render(
+      render(
         <InputGroup>
           <Dropdown show>{dropdownChildren}</Dropdown>
         </InputGroup>,
       );
 
-      getByText('Child Title').classList.contains('show').should.be.true;
+      expect(screen.getByText('Child Title').classList).toContain('show');
     });
   });
 
   describe('autoClose behaviour', () => {
     describe('autoClose="true"', () => {
       it('should close on outer click', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
         render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose>
@@ -299,15 +328,15 @@ describe('<Dropdown>', () => {
 
         fireEvent.click(document.body);
 
-        onToggleSpy.should.have.been.calledWith(false);
+        expect(onToggleSpy).toHaveBeenCalledWith(false, expect.anything());
       });
     });
 
     describe('autoClose="inside"', () => {
       it('should close on child selection', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
-        const { getByTestId } = render(
+        render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose="inside">
             <Dropdown.Toggle>Toggle</Dropdown.Toggle>
             <Dropdown.Menu>
@@ -316,13 +345,13 @@ describe('<Dropdown>', () => {
           </Dropdown>,
         );
 
-        fireEvent.click(getByTestId('item1'));
+        fireEvent.click(screen.getByTestId('item1'));
 
-        onToggleSpy.should.have.been.calledWith(false);
+        expect(onToggleSpy).toHaveBeenCalledWith(false, expect.anything());
       });
 
       it('should not close on outer click', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
         render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose="inside">
@@ -335,15 +364,15 @@ describe('<Dropdown>', () => {
 
         fireEvent.click(document.body);
 
-        onToggleSpy.should.not.have.been.called;
+        expect(onToggleSpy).not.toHaveBeenCalled();
       });
     });
 
     describe('autoClose="outside"', () => {
       it('should not close on child selection', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
-        const { getByTestId } = render(
+        render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose="outside">
             <Dropdown.Toggle>Toggle</Dropdown.Toggle>
             <Dropdown.Menu>
@@ -352,13 +381,13 @@ describe('<Dropdown>', () => {
           </Dropdown>,
         );
 
-        fireEvent.click(getByTestId('item1'));
+        fireEvent.click(screen.getByTestId('item1'));
 
-        onToggleSpy.should.not.have.been.called;
+        expect(onToggleSpy).not.toHaveBeenCalled();
       });
 
       it('should close on outer click', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
         render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose="outside">
@@ -371,15 +400,15 @@ describe('<Dropdown>', () => {
 
         fireEvent.click(document.body);
 
-        onToggleSpy.should.be.calledWith(false);
+        expect(onToggleSpy).toHaveBeenCalledWith(false, expect.anything());
       });
     });
 
     describe('autoClose="false"', () => {
       it('should not close on child selection', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
-        const { getByTestId } = render(
+        render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose={false}>
             <Dropdown.Toggle>Toggle</Dropdown.Toggle>
             <Dropdown.Menu>
@@ -388,13 +417,13 @@ describe('<Dropdown>', () => {
           </Dropdown>,
         );
 
-        fireEvent.click(getByTestId('item1'));
+        fireEvent.click(screen.getByTestId('item1'));
 
-        onToggleSpy.should.not.have.been.called;
+        expect(onToggleSpy).not.toHaveBeenCalled();
       });
 
       it('should not close on outer click', () => {
-        const onToggleSpy = sinon.spy();
+        const onToggleSpy = vi.fn();
 
         render(
           <Dropdown defaultShow onToggle={onToggleSpy} autoClose={false}>
@@ -407,7 +436,7 @@ describe('<Dropdown>', () => {
 
         fireEvent.click(document.body);
 
-        onToggleSpy.should.not.have.been.called;
+        expect(onToggleSpy).not.toHaveBeenCalled();
       });
     });
   });

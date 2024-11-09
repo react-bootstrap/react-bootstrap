@@ -1,0 +1,62 @@
+---
+title: Stacks
+description: Shorthand helpers that build on top of our flexbox utilities to make component layout faster and easier than ever.
+---
+
+import StackButtons from '!!raw-loader!../examples/Stack/Buttons';
+import StackForm from '!!raw-loader!../examples/Stack/Form';
+import StackHorizontal from '!!raw-loader!../examples/Stack/Horizontal';
+import StackHorizontalMarginStart from '!!raw-loader!../examples/Stack/HorizontalMarginStart';
+import StackHorizontalVerticalRules from '!!raw-loader!../examples/Stack/HorizontalVerticalRules';
+import StackVertical from '!!raw-loader!../examples/Stack/Vertical';
+
+## Vertical
+
+Stacks are vertical by default and stacked items are full-width by default. Use the `gap`
+prop to add space between items.
+
+<CodeBlock language="jsx" live previewClassName="stack-example">
+  {StackVertical}
+</CodeBlock>
+
+## Horizontal
+
+Use `direction="horizontal"` for horizontal layouts. Stacked items are vertically centered
+by default and only take up their necessary width. Use the `gap` prop to add space between
+items.
+
+<CodeBlock language="jsx" live previewClassName="stack-example">
+  {StackHorizontal}
+</CodeBlock>
+
+Using horizontal margin utilities like `.ms-auto` as spacers:
+
+<CodeBlock language="jsx" live previewClassName="stack-example">
+  {StackHorizontalMarginStart}
+</CodeBlock>
+
+And with vertical rules:
+
+<CodeBlock language="jsx" live previewClassName="stack-example">
+  {StackHorizontalVerticalRules}
+</CodeBlock>
+
+## Examples
+
+Use a vertical `Stack` to stack buttons and other elements:
+
+<CodeBlock language="jsx" live>
+  {StackButtons}
+</CodeBlock>
+
+Create an inline form with a horizontal `Stack`:
+
+<CodeBlock language="jsx" live>
+  {StackForm}
+</CodeBlock>
+
+## API
+
+### Stack
+
+<PropsTable name="Stack" />

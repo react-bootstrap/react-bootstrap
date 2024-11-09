@@ -188,7 +188,7 @@ const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
       />
     );
   },
-);
+) as typeof Col;
 
 Col.displayName = 'Col';
 Col.propTypes = propTypes;

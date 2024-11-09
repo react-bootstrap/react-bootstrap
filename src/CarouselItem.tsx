@@ -39,7 +39,7 @@ const CarouselItem: BsPrefixRefForwardingComponent<'div', CarouselItemProps> =
       );
       return <Component ref={ref} {...props} className={finalClassName} />;
     },
-  );
+  ) as typeof CarouselItem;
 
 CarouselItem.displayName = 'CarouselItem';
 CarouselItem.propTypes = propTypes;

@@ -1,34 +1,34 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-
+import * as React from 'react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
 describe('<Feedback>', () => {
   it('should render default success', () => {
-    const { getByTestId } = render(
+    render(
       <FormGroup>
         <FormControl isValid />
         <FormControl.Feedback type="valid" data-testid="test-id" />
       </FormGroup>,
     );
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(1);
-    element.classList.contains('valid-feedback').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('valid-feedback');
   });
 
   it('should render default error', () => {
-    const { getByTestId } = render(
+    render(
       <FormGroup>
         <FormControl isInvalid />
         <FormControl.Feedback type="invalid" data-testid="test-id" />
       </FormGroup>,
     );
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(1);
-    element.classList.contains('invalid-feedback').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('invalid-feedback');
   });
 
   it('should render custom component', () => {
@@ -38,13 +38,11 @@ describe('<Feedback>', () => {
       }
     }
 
-    const { getByTestId } = render(
-      <FormControl.Feedback as={MyComponent} data-testid="test-id" />,
-    );
+    render(<FormControl.Feedback as={MyComponent} data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.id.should.equal('my-component');
-    element.classList.length.should.equal(1);
-    element.classList.contains('valid-feedback').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.id).toEqual('my-component');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('valid-feedback');
   });
 });

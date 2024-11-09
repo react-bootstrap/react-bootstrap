@@ -1,0 +1,101 @@
+---
+title: Accordion
+description: Build vertically collapsing accordions in combination with the Collapse component
+---
+
+import Basic from '!!raw-loader!../examples/Accordion/Basic';
+import AllCollapse from '!!raw-loader!../examples/Accordion/AllCollapse';
+import Flush from '!!raw-loader!../examples/Accordion/Flush';
+import AlwaysOpen from '!!raw-loader!../examples/Accordion/AlwaysOpen';
+import CustomToggle from '!!raw-loader!../examples/Accordion/CustomToggle.js';
+import ContextAwareToggle from '!!raw-loader!../examples/Accordion/ContextAwareToggle.js';
+
+## Examples
+
+Click the accordions below to expand/collapse the accordion content.
+
+### Basic Example
+
+<CodeBlock language="jsx" live>
+  {Basic}
+</CodeBlock>
+
+### Fully Collapsed State
+
+If you want your `Accordion` to start in a fully-collapsed state, then simply don't pass in a `defaultActiveKey` prop to `Accordion`.
+
+<CodeBlock language="jsx" live>
+  {AllCollapse}
+</CodeBlock>
+
+### Flush
+
+Add `flush` to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.
+
+<CodeBlock language="jsx" live>
+  {Flush}
+</CodeBlock>
+
+### Always open
+
+You can make accordion items stay open when another item is opened by using the `alwaysOpen` prop. If you're looking to
+control the component, you must use an array of strings for `activeKey` or `defaultActiveKey`.
+
+<CodeBlock language="jsx" live>
+  {AlwaysOpen}
+</CodeBlock>
+
+## Custom Accordions
+
+You can still create card-based accordions like those in Bootstrap 4. You can hook
+into the Accordion toggle functionality via `useAccordionButton` to make custom
+toggle components.
+
+### Custom Toggle
+
+<CodeBlock language="jsx" live noInline>
+  {CustomToggle}
+</CodeBlock>
+
+### Custom Toggle with Expansion Awareness
+
+You may wish to have different styles for the toggle if it's associated section is expanded,
+this can be achieved with a custom toggle that is context aware and also takes advantage of the `useAccordionButton` hook.
+
+<CodeBlock language="jsx" live noInline>
+  {ContextAwareToggle}
+</CodeBlock>
+
+## API
+
+### Accordion
+
+<PropsTable name="Accordion" />
+
+### AccordionItem
+
+<PropsTable name="AccordionItem" />
+
+### AccordionHeader
+
+<PropsTable name="AccordionHeader" />
+
+### AccordionBody
+
+<PropsTable name="AccordionBody" />
+
+### AccordionButton
+
+<PropsTable name="AccordionButton" />
+
+### AccordionCollapse
+
+<PropsTable name="AccordionCollapse" />
+
+### useAccordionButton
+
+```jsx
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+
+const decoratedOnClick = useAccordionButton(eventKey, onClick);
+```

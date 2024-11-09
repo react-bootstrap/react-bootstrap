@@ -9,25 +9,16 @@ import BaseDropdown, {
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import DropdownContext, { DropDirection } from './DropdownContext';
+import DropdownDivider from './DropdownDivider';
+import DropdownHeader from './DropdownHeader';
 import DropdownItem from './DropdownItem';
+import DropdownItemText from './DropdownItemText';
 import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import createWithBsPrefix from './createWithBsPrefix';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { AlignType, alignPropType } from './types';
-
-const DropdownHeader = createWithBsPrefix('dropdown-header', {
-  defaultProps: { role: 'heading' },
-});
-const DropdownDivider = createWithBsPrefix('dropdown-divider', {
-  Component: 'hr',
-  defaultProps: { role: 'separator' },
-});
-const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
-  Component: 'span',
-});
 
 export interface DropdownProps
   extends BaseDropdownProps,
@@ -35,7 +26,6 @@ export interface DropdownProps
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'children'> {
   drop?: DropDirection;
   align?: AlignType;
-  flip?: boolean;
   focusFirstItemOnShow?: boolean | 'keyboard';
   navbar?: boolean;
   autoClose?: boolean | 'outside' | 'inside';
@@ -47,7 +37,14 @@ const propTypes = {
   /**
    * Determines the direction and location of the Menu in relation to it's Toggle.
    */
-  drop: PropTypes.oneOf(['up', 'start', 'end', 'down']),
+  drop: PropTypes.oneOf<DropDirection>([
+    'up',
+    'up-centered',
+    'start',
+    'end',
+    'down',
+    'down-centered',
+  ]),
 
   as: PropTypes.elementType,
 
@@ -68,13 +65,6 @@ const propTypes = {
    * @controllable onToggle
    */
   show: PropTypes.bool,
-
-  /**
-   * Allow Dropdown to flip in case of an overlapping on the reference element. For more information refer to
-   * Popper.js's flip [docs](https://popper.js.org/docs/v2/modifiers/flip/).
-   *
-   */
-  flip: PropTypes.bool,
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
@@ -120,27 +110,21 @@ const propTypes = {
   autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
 };
 
-const defaultProps: Partial<DropdownProps> = {
-  navbar: false,
-  align: 'start',
-  autoClose: true,
-};
-
 const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
   React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
     const {
       bsPrefix,
-      drop,
+      drop = 'down',
       show,
       className,
-      align,
+      align = 'start',
       onSelect,
       onToggle,
       focusFirstItemOnShow,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       navbar: _4,
-      autoClose,
+      autoClose = true,
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
 
@@ -163,6 +147,17 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
 
     const handleToggle = useEventCallback(
       (nextShow: boolean, meta: ToggleMetadata) => {
+        /** Checking if target of event is ToggleButton,
+         * if it is then nullify mousedown event
+         */
+        const isToggleButton = (
+          meta.originalEvent?.target as HTMLElement
+        )?.classList.contains('dropdown-toggle');
+
+        if (isToggleButton && meta.source === 'mousedown') {
+          return;
+        }
+
         if (
           meta.originalEvent!.currentTarget === document &&
           (meta.source !== 'keydown' ||
@@ -186,6 +181,15 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
       [align, drop, isRTL],
     );
 
+    const directionClasses = {
+      down: prefix,
+      'down-centered': `${prefix}-center`,
+      up: 'dropup',
+      'up-centered': 'dropup-center dropup',
+      end: 'dropend',
+      start: 'dropstart',
+    };
+
     return (
       <DropdownContext.Provider value={contextValue}>
         <BaseDropdown
@@ -205,21 +209,17 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
               className={classNames(
                 className,
                 show && 'show',
-                (!drop || drop === 'down') && prefix,
-                drop === 'up' && 'dropup',
-                drop === 'end' && 'dropend',
-                drop === 'start' && 'dropstart',
+                directionClasses[drop!],
               )}
             />
           )}
         </BaseDropdown>
       </DropdownContext.Provider>
     );
-  });
+  }) as typeof Dropdown;
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
-Dropdown.defaultProps = defaultProps;
 
 export default Object.assign(Dropdown, {
   Toggle: DropdownToggle,

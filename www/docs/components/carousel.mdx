@@ -1,0 +1,87 @@
+---
+title: Carousels
+description: A slideshow component for cycling through elements—images or slides of text—like a carousel.
+---
+
+import CarouselControlled from '!!raw-loader!../examples/Carousel/Controlled';
+import CarouselUncontrolled from '!!raw-loader!../examples/Carousel/Uncontrolled';
+import CarouselFade from '!!raw-loader!../examples/Carousel/CarouselFade';
+import IndividualIntervals from '!!raw-loader!../examples/Carousel/IndividualIntervals';
+import DarkVariant from '!!raw-loader!../examples/Carousel/DarkVariant';
+import NoTransition from '!!raw-loader!../examples/Carousel/NoTransition';
+
+## Example
+
+Carousels don’t automatically normalize slide dimensions. As such, you
+may need to use additional utilities or custom styles to appropriately
+size content. While carousels support previous/next controls and
+indicators, they’re not explicitly required. Add and customize as you
+see fit.
+
+<CodeBlock language="jsx" live>
+  {CarouselUncontrolled}
+</CodeBlock>
+
+## Controlled
+
+You can also _control_ the Carousel state, via the
+`activeIndex` prop and `onSelect` handler.
+
+<CodeBlock language="jsx" live>
+  {CarouselControlled}
+</CodeBlock>
+
+## Crossfade
+
+Add the `fade` prop to your carousel to animate slides with a fade transition instead of a slide.
+
+<CodeBlock language="jsx" live>
+  {CarouselFade}
+</CodeBlock>
+
+## No transition animation
+
+Set the `slide` prop to false to disable the transition animation between slides.
+
+<CodeBlock language="jsx" live>
+  {NoTransition}
+</CodeBlock>
+
+## Individual Item Intervals
+
+You can specify individual intervals for each carousel item via the `interval`
+prop.
+
+<CodeBlock language="jsx" live>
+  {IndividualIntervals}
+</CodeBlock>
+
+## Dark variant
+
+Add `variant="dark"` to the `Carousel` for darker controls, indicators, and captions.
+
+:::caution Heads up!
+
+Dark variants for components were deprecated in Bootstrap v5.3.0 with the introduction
+of color modes. Instead of adding `variant="dark"`, set `data-bs-theme="dark"` on the root
+element, a parent wrapper, or the component itself.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {DarkVariant}
+</CodeBlock>
+
+## API
+
+### Carousel
+
+<PropsTable name="Carousel" />
+
+### CarouselItem
+
+<PropsTable name="CarouselItem" />
+
+### CarouselCaption
+
+<PropsTable name="CarouselCaption" />

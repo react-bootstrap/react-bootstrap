@@ -1,0 +1,200 @@
+---
+title: Overlay
+description: A set of components for positioning beautiful overlays, tooltips, popovers, and anything else you need.
+---
+
+import Disabled from '!!raw-loader!../examples/Overlays/Disabled';
+import Overlay from '!!raw-loader!../examples/Overlays/Overlay';
+import OverlayTrigger from '!!raw-loader!../examples/Overlays/Trigger';
+import TriggerRenderProp from '!!raw-loader!../examples/Overlays/TriggerRenderProp';
+import PopoverBasic from '!!raw-loader!../examples/Overlays/PopoverBasic';
+import PopoverContained from '!!raw-loader!../examples/Overlays/PopoverContained';
+import PopoverPositioned from '!!raw-loader!../examples/Overlays/PopoverPositioned';
+import ScheduleUpdate from '!!raw-loader!../examples/Overlays/ScheduleUpdate';
+import TooltipInCopy from '!!raw-loader!../examples/Overlays/TooltipInCopy';
+import TooltipOverlay from '!!raw-loader!../examples/Overlays/TooltipOverlay';
+import TooltipPositioned from '!!raw-loader!../examples/Overlays/TooltipPositioned';
+
+## Overview
+
+Things to know about the React-Bootstrap Overlay components.
+
+- Overlays rely on the third-party library [Popper.js](https://popper.js.org).
+  It's included automatically with React-Bootstrap, but you should reference the API
+  for more advanced use cases.
+- The `<Tooltip>` and `<Popover>` components do not position themselves. Instead the
+  `<Overlay>` (or `<OverlayTrigger>`) components, inject `ref` and `style` props.
+- Tooltip expects specific props injected by the `<Overlay>` component.
+- Tooltips for `disabled` elements must be triggered on a wrapper element.
+
+## Overlay
+
+`Overlay` is the fundamental component for positioning and
+controlling tooltip visibility. It's a wrapper around Popper.js, that
+adds support for transitions, and visibility toggling.
+
+### Creating an Overlay
+
+Overlays consist of at least two elements, the "overlay", the element to
+be positioned, as well as a "target", the element the overlay is
+positioned in relation to. You can also have an "arrow" element,
+like the tooltips and popovers, but that is optional. Be sure to
+check out the [Popper](https://popper.js.org/docs/v2)
+documentation for more details about the injected props.
+
+<CodeBlock language="jsx" live>
+  {Overlay}
+</CodeBlock>
+
+### Customizing Overlay rendering
+
+The `Overlay` injects a number of props that you can use to customize the
+rendering behavior. There is a case where you would need to show the overlay
+before `Popper` can measure and position it properly. In React-Bootstrap,
+tooltips and popovers sets the opacity and position to avoid issues where
+the initial positioning of the overlay is incorrect. See the
+[Tooltip](https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Tooltip.tsx)
+implementation for an example on how this is done.
+
+## OverlayTrigger
+
+Since the above pattern is pretty common, but verbose, we've included
+`<OverlayTrigger>` component to help with common
+use-cases. It even has functionality to delayed show or hides, and a few
+different "trigger" events you can mix and match.
+
+Note that triggering components must be able to accept [a ref](https://reactjs.org/docs/refs-and-the-dom.html)
+since `<OverlayTrigger>` will attempt to add one. You can use
+[forwardRef()](https://reactjs.org/docs/react-api.html#reactforwardref) for function components.
+
+<CodeBlock language="jsx" live>
+  {OverlayTrigger}
+</CodeBlock>
+
+### Customizing trigger behavior
+
+For more advanced behaviors `<OverlayTrigger>` accepts a
+function child that passes in the injected `ref` and event
+handlers that correspond to the configured `trigger` prop.
+
+You can manually apply the props to any element you want or split them
+up. The example below shows how to position the overlay to a different
+element than the one that triggers its visibility.
+
+:::info Pro Tip
+
+Using the function form of OverlayTrigger avoids a
+`React.findDOMNode` call, for those trying to be strict mode
+compliant.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {TriggerRenderProp}
+</CodeBlock>
+
+## Tooltips
+
+<p className="lead">
+  A tooltip component for a more stylish alternative to that anchor tag{' '}
+  <code>title</code> attribute.
+</p>
+
+### Examples
+
+Hover over the links below to see tooltips.
+
+<CodeBlock language="jsx" live>
+  {TooltipInCopy}
+</CodeBlock>
+
+You can pass the `Overlay` injected props directly to the
+Tooltip component.
+
+<CodeBlock language="jsx" live>
+  {TooltipOverlay}
+</CodeBlock>
+
+Or pass a Tooltip element to `OverlayTrigger` instead.
+
+<CodeBlock language="jsx" live>
+  {TooltipPositioned}
+</CodeBlock>
+
+## Popovers
+
+<p className="lead">A popover component, like those found in iOS.</p>
+
+### Examples
+
+<CodeBlock language="jsx" live noInline>
+  {PopoverBasic}
+</CodeBlock>
+
+As with `<Tooltip>`s, you can control the placement of the Popover.
+
+<CodeBlock language="jsx" live>
+  {PopoverPositioned}
+</CodeBlock>
+
+## Disabled elements
+
+Elements with the `disabled` attribute aren’t interactive,
+meaning users cannot hover or click them to trigger a popover (or
+tooltip). As a workaround, you’ll want to trigger the overlay from a
+wrapper `<div>` or `<span>` and override the `pointer-events` on the
+disabled element.
+
+<CodeBlock language="jsx" live>
+  {Disabled}
+</CodeBlock>
+
+## Changing containers
+
+You can specify a `container` to control the DOM element the
+overlay is appended to. This is especially useful when styles conflict
+with your Overlays.
+
+<CodeBlock language="jsx" live previewClassName="overlay-contained">
+  {PopoverContained}
+</CodeBlock>
+
+## Updating position dynamically
+
+Since we can't know every time your overlay changes size, to reposition
+it, you need to take manual action if you want to update the position of
+an Overlay in response to a change.
+
+For this, the Overlay component also injects a `popper`
+prop with a `scheduleUpdate()` method that an overlay
+component can use to reposition itself.
+
+<CodeBlock language="jsx" live noInline>
+  {ScheduleUpdate}
+</CodeBlock>
+
+## API
+
+### Overlay
+
+<PropsTable name="Overlay" />
+
+### OverlayTrigger
+
+<PropsTable name="OverlayTrigger" />
+
+### Tooltip
+
+<PropsTable name="Tooltip" />
+
+### Popover
+
+<PropsTable name="Popover" />
+
+### PopoverBody
+
+<PropsTable name="PopoverBody" />
+
+### PopoverHeader
+
+<PropsTable name="PopoverHeader" />

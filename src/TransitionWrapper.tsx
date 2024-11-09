@@ -39,9 +39,7 @@ const TransitionWrapper = React.forwardRef<
     const nodeRef = useRef<HTMLElement>(null);
     const mergedRef = useMergedRefs(nodeRef, childRef);
 
-    const attachRef = (
-      r: React.ComponentClass | Element | null | undefined,
-    ) => {
+    const attachRef = (r: React.Component | Element | null | undefined) => {
       mergedRef(safeFindDOMNode(r));
     };
 
@@ -78,11 +76,12 @@ const TransitionWrapper = React.forwardRef<
         nodeRef={nodeRef}
       >
         {typeof children === 'function'
-          ? (status: TransitionStatus, innerProps: Record<string, unknown>) =>
+          ? (((status: TransitionStatus, innerProps: Record<string, unknown>) =>
+              // TODO: Types for RTG missing innerProps, so need to cast.
               children(status, {
                 ...innerProps,
                 ref: attachRef,
-              })
+              })) as any)
           : React.cloneElement(children as React.ReactElement, {
               ref: attachRef,
             })}

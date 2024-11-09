@@ -8,6 +8,7 @@ import Transition, {
   ENTERING,
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from '@restart/ui/types';
+import { getReactVersion } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';
@@ -89,28 +90,32 @@ const propTypes = {
   transitionClasses: PropTypes.object,
 };
 
-const defaultProps = {
-  in: false,
-  timeout: 300,
-  mountOnEnter: false,
-  unmountOnExit: false,
-  appear: false,
-};
-
 const fadeStyles = {
   [ENTERING]: 'show',
   [ENTERED]: 'show',
 };
 
 const Fade = React.forwardRef<Transition<any>, FadeProps>(
-  ({ className, children, transitionClasses = {}, ...props }, ref) => {
+  ({ className, children, transitionClasses = {}, onEnter, ...rest }, ref) => {
+    const props = {
+      in: false,
+      timeout: 300,
+      mountOnEnter: false,
+      unmountOnExit: false,
+      appear: false,
+      ...rest,
+    };
+
     const handleEnter = useCallback(
       (node, isAppearing) => {
         triggerBrowserReflow(node);
-        props.onEnter?.(node, isAppearing);
+        onEnter?.(node, isAppearing);
       },
-      [props],
+      [onEnter],
     );
+
+    const { major } = getReactVersion();
+    const childRef = major >= 19 ? (children as any).props.ref : (children as any).ref;
 
     return (
       <TransitionWrapper
@@ -118,7 +123,7 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
         addEndListener={transitionEndListener}
         {...props}
         onEnter={handleEnter}
-        childRef={(children as any).ref}
+        childRef={childRef}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
@@ -138,7 +143,6 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
 );
 
 Fade.propTypes = propTypes as any;
-Fade.defaultProps = defaultProps;
 Fade.displayName = 'Fade';
 
 export default Fade;

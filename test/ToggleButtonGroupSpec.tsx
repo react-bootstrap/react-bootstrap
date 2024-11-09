@@ -1,11 +1,10 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
-
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ToggleButtonGroup from '../src/ToggleButtonGroup';
 
 describe('ToggleButtonGroup', () => {
   it('should render checkboxes', () => {
-    const { container, getByLabelText } = render(
+    const { container } = render(
       <ToggleButtonGroup type="checkbox">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -19,12 +18,18 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(1);
-    container.firstElementChild!.classList.contains('btn-group').should.be.true;
+    expect(container.firstElementChild!.classList.length).toEqual(1);
+    expect(container.firstElementChild!.classList).toContain('btn-group');
 
-    getByLabelText('Option 1')!.getAttribute('type')!.should.equal('checkbox');
-    getByLabelText('Option 2')!.getAttribute('type')!.should.equal('checkbox');
-    getByLabelText('Option 3')!.getAttribute('type')!.should.equal('checkbox');
+    expect(screen.getByLabelText('Option 1')!.getAttribute('type')!).toEqual(
+      'checkbox',
+    );
+    expect(screen.getByLabelText('Option 2')!.getAttribute('type')!).toEqual(
+      'checkbox',
+    );
+    expect(screen.getByLabelText('Option 3')!.getAttribute('type')!).toEqual(
+      'checkbox',
+    );
   });
 
   it('should render checkboxes vertically', () => {
@@ -42,9 +47,10 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(1);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
+    expect(container.firstElementChild!.classList.length).toEqual(1);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
   });
 
   it('should render checkboxes vertically and small', () => {
@@ -62,11 +68,11 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(2);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
-    container.firstElementChild!.classList.contains('btn-group-sm').should.be
-      .true;
+    expect(container.firstElementChild!.classList.length).toEqual(2);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-sm');
   });
 
   it('should render checkboxes vertically and large', () => {
@@ -84,15 +90,15 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(2);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
-    container.firstElementChild!.classList.contains('btn-group-lg').should.be
-      .true;
+    expect(container.firstElementChild!.classList.length).toEqual(2);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-lg');
   });
 
   it('should render radios', () => {
-    const { container, getByLabelText } = render(
+    const { container } = render(
       <ToggleButtonGroup type="radio" name="items">
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -106,12 +112,18 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(1);
-    container.firstElementChild!.classList.contains('btn-group').should.be.true;
+    expect(container.firstElementChild!.classList.length).toEqual(1);
+    expect(container.firstElementChild!.classList).toContain('btn-group');
 
-    getByLabelText('Option 1')!.getAttribute('type')!.should.equal('radio');
-    getByLabelText('Option 2')!.getAttribute('type')!.should.equal('radio');
-    getByLabelText('Option 3')!.getAttribute('type')!.should.equal('radio');
+    expect(screen.getByLabelText('Option 1')!.getAttribute('type')).toEqual(
+      'radio',
+    );
+    expect(screen.getByLabelText('Option 2')!.getAttribute('type')).toEqual(
+      'radio',
+    );
+    expect(screen.getByLabelText('Option 3')!.getAttribute('type')).toEqual(
+      'radio',
+    );
   });
 
   it('should render radios vertically', () => {
@@ -129,9 +141,10 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(1);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
+    expect(container.firstElementChild!.classList.length).toEqual(1);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
   });
 
   it('should render radios vertically and small', () => {
@@ -149,11 +162,11 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(2);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
-    container.firstElementChild!.classList.contains('btn-group-sm').should.be
-      .true;
+    expect(container.firstElementChild!.classList.length).toEqual(2);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-sm');
   });
 
   it('should render radios vertically and large', () => {
@@ -171,15 +184,15 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    container.firstElementChild!.classList.length.should.equal(2);
-    container.firstElementChild!.classList.contains('btn-group-vertical').should
-      .be.true;
-    container.firstElementChild!.classList.contains('btn-group-lg').should.be
-      .true;
+    expect(container.firstElementChild!.classList.length).toEqual(2);
+    expect(container.firstElementChild!.classList).toContain(
+      'btn-group-vertical',
+    );
+    expect(container.firstElementChild!.classList).toContain('btn-group-lg');
   });
 
   it('should select initial values', () => {
-    const { getByLabelText } = render(
+    render(
       <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]}>
         <ToggleButtonGroup.Button id="id1" data-testid="id1" value={1}>
           Option 1
@@ -193,13 +206,19 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    (getByLabelText('Option 1') as HTMLInputElement)!.checked.should.be.true;
-    (getByLabelText('Option 2') as HTMLInputElement)!.checked.should.be.false;
-    (getByLabelText('Option 3') as HTMLInputElement)!.checked.should.be.true;
+    expect(
+      (screen.getByLabelText('Option 1') as HTMLInputElement)!.checked,
+    ).toEqual(true);
+    expect(
+      (screen.getByLabelText('Option 2') as HTMLInputElement)!.checked,
+    ).toEqual(false);
+    expect(
+      (screen.getByLabelText('Option 3') as HTMLInputElement)!.checked,
+    ).toEqual(true);
   });
 
   it('should disable radios', () => {
-    const { getByText, getByLabelText } = render(
+    render(
       <ToggleButtonGroup type="radio" name="items">
         <ToggleButtonGroup.Button id="id1" value={1} disabled>
           Option 1
@@ -213,18 +232,25 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    (getByLabelText('Option 1') as HTMLInputElement)!.disabled.should.be.true;
-    (getByLabelText('Option 2') as HTMLInputElement)!.disabled.should.be.true;
-    (getByLabelText('Option 3') as HTMLInputElement)!.disabled.should.be.false;
+    expect(
+      (screen.getByLabelText('Option 1') as HTMLInputElement)!.disabled,
+    ).toEqual(true);
+    expect(
+      (screen.getByLabelText('Option 2') as HTMLInputElement)!.disabled,
+    ).toEqual(true);
+    expect(
+      (screen.getByLabelText('Option 3') as HTMLInputElement)!.disabled,
+    ).toEqual(false);
 
-    getByText('Option 1').classList.contains('disabled').should.be.true;
-    getByText('Option 2').classList.contains('disabled').should.be.true;
-    getByText('Option 3').classList.contains('disabled').should.be.false;
+    expect(screen.getByText('Option 1').classList).toContain('disabled');
+
+    expect(screen.getByText('Option 2').classList).toContain('disabled');
+    expect(screen.getByText('Option 3').classList).not.toContain('disabled');
   });
 
   it('should return an array of values', () => {
-    const spy = sinon.spy();
-    const { getByLabelText } = render(
+    const spy = vi.fn();
+    render(
       <ToggleButtonGroup type="checkbox" onChange={spy}>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -238,13 +264,13 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    fireEvent.click(getByLabelText('Option 2'));
-    spy.should.have.been.calledWith([2]);
+    fireEvent.click(screen.getByLabelText('Option 2'));
+    expect(spy).toHaveBeenCalledWith([2], expect.anything());
   });
 
   it('should return a single value', () => {
-    const spy = sinon.spy();
-    const { getByLabelText } = render(
+    const spy = vi.fn();
+    render(
       <ToggleButtonGroup type="radio" name="items" onChange={spy}>
         <ToggleButtonGroup.Button id="id1" value={1}>
           Option 1
@@ -258,13 +284,13 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    fireEvent.click(getByLabelText('Option 2'));
-    spy.should.have.been.calledWith(2);
+    fireEvent.click(screen.getByLabelText('Option 2'));
+    expect(spy).toHaveBeenCalledWith(2, expect.anything());
   });
 
   it('should filter out value when deselected', () => {
-    const spy = sinon.spy();
-    const { getByLabelText } = render(
+    const spy = vi.fn();
+    render(
       <ToggleButtonGroup
         type="checkbox"
         name="items"
@@ -280,7 +306,7 @@ describe('ToggleButtonGroup', () => {
       </ToggleButtonGroup>,
     );
 
-    fireEvent.click(getByLabelText('Option 1'));
-    spy.should.have.been.calledWith([2]);
+    fireEvent.click(screen.getByLabelText('Option 1'));
+    expect(spy).toHaveBeenCalledWith([2], expect.anything());
   });
 });

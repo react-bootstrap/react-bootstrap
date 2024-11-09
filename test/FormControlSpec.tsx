@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
-import { shouldWarn } from './helpers';
-
 describe('<FormControl>', () => {
   it('should render correctly', () => {
-    const { getByTestId } = render(
+    render(
       <FormControl
         type="text"
         id="foo"
@@ -18,62 +16,62 @@ describe('<FormControl>', () => {
       />,
     );
 
-    const element = getByTestId('test-id');
-    element.tagName.toLowerCase().should.equal('input');
-    element.id.should.equal('foo');
-    element.classList.length.should.equal(2);
-    element.classList.contains('form-control').should.be.true;
-    element.classList.contains('my-control').should.be.true;
-    element.getAttribute('name')!.should.equal('bar');
-    element.getAttribute('type')!.should.equal('text');
+    const element = screen.getByTestId('test-id');
+    expect(element.tagName).toEqual('INPUT');
+    expect(element.id).toEqual('foo');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('form-control');
+    expect(element.classList).toContain('my-control');
+    expect(element.getAttribute('name')).toEqual('bar');
+    expect(element.getAttribute('type')).toEqual('text');
   });
 
   it('should support textarea', () => {
-    const { getByTestId } = render(
-      <FormControl as="textarea" data-testid="test-id" />,
-    );
+    render(<FormControl as="textarea" data-testid="test-id" />);
 
-    getByTestId('test-id').tagName.toLowerCase().should.equal('textarea');
+    expect(screen.getByTestId('test-id').tagName).toEqual('TEXTAREA');
   });
 
   it('should support plaintext inputs', () => {
-    const { getByTestId } = render(
-      <FormControl plaintext data-testid="test-id" />,
-    );
+    render(<FormControl plaintext data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(1);
-    element.classList.contains('form-control-plaintext').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(1);
+    expect(element.classList).toContain('form-control-plaintext');
+  });
+
+  it('should support plaintext inputs with size', () => {
+    render(<FormControl plaintext size="sm" data-testid="test-id" />);
+
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('form-control-sm');
   });
 
   it('should support type=color', () => {
-    const { getByTestId } = render(
-      <FormControl type="color" data-testid="test-id" />,
-    );
+    render(<FormControl type="color" data-testid="test-id" />);
 
-    getByTestId('test-id').getAttribute('type')!.should.equal('color');
+    expect(screen.getByTestId('test-id').getAttribute('type')).toEqual('color');
   });
 
   it('should use controlId for id', () => {
-    const { getByTestId } = render(
+    render(
       <FormGroup controlId="foo">
         <FormControl type="text" data-testid="test-id" />
       </FormGroup>,
     );
 
-    getByTestId('test-id').id.should.equal('foo');
+    expect(screen.getByTestId('test-id').id).toEqual('foo');
   });
 
   it('should prefer explicit id', () => {
-    shouldWarn('ignored');
-
-    const { getByTestId } = render(
+    render(
       <FormGroup controlId="foo">
         <FormControl type="text" id="bar" data-testid="test-id" />
       </FormGroup>,
     );
 
-    getByTestId('test-id').id.should.equal('bar');
+    expect(screen.getByTestId('test-id').id).toEqual('bar');
   });
 
   it('should support ref forwarding', () => {
@@ -94,35 +92,31 @@ describe('<FormControl>', () => {
     }
 
     render(<Container />);
-    input.tagName.toLowerCase().should.to.equal('input');
+    expect(input.tagName).toEqual('INPUT');
   });
 
   it('should properly display size of FormControl', () => {
-    const { getByTestId } = render(
-      <FormControl type="text" size="lg" data-testid="test-id" />,
-    );
+    render(<FormControl type="text" size="lg" data-testid="test-id" />);
 
-    const element = getByTestId('test-id');
-    element.classList.length.should.equal(2);
-    element.classList.contains('form-control-lg').should.be.true;
+    const element = screen.getByTestId('test-id');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('form-control-lg');
   });
 
   it('should properly display html size of FormControl', () => {
-    const { getByTestId } = render(
-      <FormControl type="text" htmlSize={42} data-testid="test-id" />,
-    );
+    render(<FormControl type="text" htmlSize={42} data-testid="test-id" />);
 
-    getByTestId('test-id').getAttribute('size')!.should.equal('42');
+    expect(screen.getByTestId('test-id').getAttribute('size')).toEqual('42');
   });
 
   it('Should have input as default component', () => {
-    const { getByTestId } = render(<FormControl data-testid="test-id" />);
+    render(<FormControl data-testid="test-id" />);
 
-    getByTestId('test-id').tagName.toLowerCase().should.equal('input');
+    expect(screen.getByTestId('test-id').tagName).toEqual('INPUT');
   });
 
   it('should support numbers as values', () => {
-    const { getByTestId } = render(
+    render(
       <FormControl
         value={10}
         onChange={() => undefined}
@@ -130,11 +124,11 @@ describe('<FormControl>', () => {
       />,
     );
 
-    getByTestId('test-id').getAttribute('value')!.should.equal('10');
+    expect(screen.getByTestId('test-id').getAttribute('value')).toEqual('10');
   });
 
   it('should support an array of strings as values', () => {
-    const { getByTestId } = render(
+    render(
       <FormControl
         value={['hello', 'world']}
         onChange={() => undefined}
@@ -142,6 +136,8 @@ describe('<FormControl>', () => {
       />,
     );
 
-    getByTestId('test-id').getAttribute('value')!.should.equal('hello,world');
+    expect(screen.getByTestId('test-id').getAttribute('value')).toEqual(
+      'hello,world',
+    );
   });
 });

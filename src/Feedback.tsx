@@ -51,7 +51,7 @@ const Feedback: BsPrefixRefForwardingComponent<'div', FeedbackProps> =
         )}
       />
     ),
-  );
+  ) as typeof Feedback;
 
 Feedback.displayName = 'Feedback';
 Feedback.propTypes = propTypes;

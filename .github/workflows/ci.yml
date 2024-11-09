@@ -1,15 +1,13 @@
 name: CI
+
 on:
   push:
     branches:
       - master
-      - bs3-dev
-      - bs4-dev
   pull_request:
     branches:
       - master
-      - bs3-dev
-      - bs4-dev
+
 permissions:
   contents: read
 
@@ -19,34 +17,36 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        browser: [ChromeHeadless, FirefoxHeadless]
+        browser: [chromium, firefox]
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 20.x
           cache: yarn
-      - name: Update Brew (macOS)
-        if: matrix.os == 'macOS-latest'
-        run: brew update
-      - name: Install Chrome (macOS)
-        if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
-        run: brew install --cask google-chrome
-      - name: Install Firefox (macOS)
-        if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
-        run: brew install --cask firefox
+
       - name: Install Dependencies
         run: yarn bootstrap
         env:
           YARN_CACHE_FOLDER: .cache/yarn
+
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
+      - name: Run lint
+        run: yarn lint
+
       - name: Run Tests
-        run: yarn test
+        run: yarn test-browser --browser.name=${{ env.BROWSER }} --browser.headless --coverage
         env:
           BROWSER: ${{ matrix.browser }}
+
       - name: Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
+
       - name: Build Project
         run: yarn build

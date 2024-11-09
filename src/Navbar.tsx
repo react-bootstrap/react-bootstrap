@@ -6,27 +6,23 @@ import SelectableContext from '@restart/ui/SelectableContext';
 import { SelectCallback } from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
 
-import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import NavbarOffcanvas from './NavbarOffcanvas';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
+import NavbarText from './NavbarText';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-
-const NavbarText = createWithBsPrefix('navbar-text', {
-  Component: 'span',
-});
 
 export interface NavbarProps
   extends BsPrefixProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  variant?: 'light' | 'dark';
+  variant?: 'light' | 'dark' | string;
   expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
   fixed?: 'top' | 'bottom';
-  sticky?: 'top';
+  sticky?: 'top' | 'bottom';
   onToggle?: (expanded: boolean) => void;
   onSelect?: SelectCallback;
   collapseOnSelect?: boolean;
@@ -50,7 +46,7 @@ const propTypes = {
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
@@ -67,12 +63,10 @@ const propTypes = {
   fixed: PropTypes.oneOf(['top', 'bottom']),
 
   /**
-   * Position the navbar at the top of the viewport, but only after scrolling past it.
-   * A convenience prop for the `sticky-top` positioning class.
-   *
-   *  __Not supported in <= IE11 and other older browsers without a polyfill__
+   * Position the navbar at the top or bottom of the viewport, but only after scrolling past it.
+   * A convenience prop for the `sticky-*` positioning classes.
    */
-  sticky: PropTypes.oneOf(['top']),
+  sticky: PropTypes.oneOf(['top', 'bottom']),
 
   /**
    * Set a custom element for this component.
@@ -115,6 +109,9 @@ const propTypes = {
    * Toggles `expanded` to `false` after the onSelect event of a descendant of a
    * child `<Nav>` fires. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
    *
+   * `<NavLink>` descendants of `<Nav>` will not trigger the `onSelect` event unless
+   * an `eventKey` or `href` prop is defined.
+   *
    * Manually controlling `expanded` via the onSelect callback is recommended instead,
    * for more complex operations that need to be executed after
    * the `select` event of `<Nav>` descendants.
@@ -122,7 +119,7 @@ const propTypes = {
   collapseOnSelect: PropTypes.bool,
 
   /**
-   * Controls the visiblity of the navbar body
+   * Controls the visibility of the navbar body
    *
    * @controllable onToggle
    */
@@ -137,18 +134,12 @@ const propTypes = {
   role: PropTypes.string,
 };
 
-const defaultProps = {
-  expand: true,
-  variant: 'light' as const,
-  collapseOnSelect: false,
-};
-
 const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
   React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
     const {
       bsPrefix: initialBsPrefix,
-      expand,
-      variant,
+      expand = true,
+      variant = 'light',
       bg,
       fixed,
       sticky,
@@ -158,7 +149,7 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
       expanded,
       onToggle,
       onSelect,
-      collapseOnSelect,
+      collapseOnSelect = false,
       ...controlledProps
     } = useUncontrolled(props, {
       expanded: 'onToggle',
@@ -214,10 +205,9 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
         </SelectableContext.Provider>
       </NavbarContext.Provider>
     );
-  });
+  }) as typeof Navbar;
 
 Navbar.propTypes = propTypes;
-Navbar.defaultProps = defaultProps;
 Navbar.displayName = 'Navbar';
 
 export default Object.assign(Navbar, {

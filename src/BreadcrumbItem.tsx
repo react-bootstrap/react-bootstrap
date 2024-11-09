@@ -50,11 +50,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  active: false,
-  linkProps: {},
-};
-
 const BreadcrumbItem: BsPrefixRefForwardingComponent<
   'li',
   BreadcrumbItemProps
@@ -62,13 +57,13 @@ const BreadcrumbItem: BsPrefixRefForwardingComponent<
   (
     {
       bsPrefix,
-      active,
+      active = false,
       children,
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'li',
       linkAs: LinkComponent = Anchor,
-      linkProps,
+      linkProps = {},
       href,
       title,
       target,
@@ -100,10 +95,9 @@ const BreadcrumbItem: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-);
+) as typeof BreadcrumbItem;
 
 BreadcrumbItem.displayName = 'BreadcrumbItem';
 BreadcrumbItem.propTypes = propTypes;
-BreadcrumbItem.defaultProps = defaultProps;
 
 export default BreadcrumbItem;

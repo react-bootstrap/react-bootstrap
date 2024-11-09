@@ -44,9 +44,7 @@ const propTypes = {
   ]),
 
   /**
-   * By default the container is rendered with `position-absolute` utility class. Provide a string to use other `position-*` utility classes, or an empty string to remove it.
-   *
-   * @default 'absolute'
+   * Specify the positioning method for the container.
    */
   containerPosition: PropTypes.string,
 };
@@ -71,7 +69,7 @@ const ToastContainer: BsPrefixRefForwardingComponent<
     {
       bsPrefix,
       position,
-      containerPosition = 'absolute',
+      containerPosition,
       className,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
@@ -87,16 +85,14 @@ const ToastContainer: BsPrefixRefForwardingComponent<
         {...props}
         className={classNames(
           bsPrefix,
-          position && [
-            containerPosition ? `position-${containerPosition}` : null,
-            positionClasses[position],
-          ],
+          position && positionClasses[position],
+          containerPosition && `position-${containerPosition}`,
           className,
         )}
       />
     );
   },
-);
+) as typeof ToastContainer;
 
 ToastContainer.displayName = 'ToastContainer';
 ToastContainer.propTypes = propTypes;

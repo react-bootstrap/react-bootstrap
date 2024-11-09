@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import FormRange from '../src/FormRange';
 import FormGroup from '../src/FormGroup';
 
 describe('<FormRange>', () => {
   it('should render correctly', () => {
-    const { getByTestId } = render(
+    render(
       <FormRange
         id="foo"
         name="bar"
@@ -13,33 +13,33 @@ describe('<FormRange>', () => {
         data-testid="test-id"
       />,
     );
-    const element = getByTestId('test-id');
-    element.tagName.toLowerCase().should.equal('input');
-    element.id.should.equal('foo');
-    element.classList.length.should.equal(2);
-    element.classList.contains('form-range').should.be.true;
-    element.classList.contains('my-control').should.be.true;
-    element.getAttribute('name')!.should.equal('bar');
-    element.getAttribute('type')!.should.equal('range');
+    const element = screen.getByTestId('test-id');
+    expect(element.tagName).toEqual('INPUT');
+    expect(element.id).toEqual('foo');
+    expect(element.classList).toHaveLength(2);
+    expect(element.classList).toContain('form-range');
+    expect(element.classList).toContain('my-control');
+    expect(element.getAttribute('name')).toEqual('bar');
+    expect(element.getAttribute('type')).toEqual('range');
   });
 
   it('should render controlId as id correctly', () => {
-    const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+    render(
+      <FormGroup controlId="control-id">
         <FormRange data-testid="test-id" />
       </FormGroup>,
     );
-    const element = getByTestId('test-id');
-    element.id.should.equal('controll-id');
+    const element = screen.getByTestId('test-id');
+    expect(element.id).toEqual('control-id');
   });
 
   it('should override controlId correctly', () => {
-    const { getByTestId } = render(
-      <FormGroup controlId="controll-id">
+    render(
+      <FormGroup controlId="control-id">
         <FormRange id="overridden-id" data-testid="test-id" />
       </FormGroup>,
     );
-    const element = getByTestId('test-id');
-    element.id.should.equal('overridden-id');
+    const element = screen.getByTestId('test-id');
+    expect(element.id).toEqual('overridden-id');
   });
 });

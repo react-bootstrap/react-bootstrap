@@ -1,0 +1,112 @@
+---
+title: Tabbed components
+description: Dynamic tabbed interfaces
+sidebar_label: Tabs
+---
+
+import TabsControlled from '!!raw-loader!../examples/Tabs/Controlled';
+import LeftTabs from '!!raw-loader!../examples/Tabs/LeftTabs';
+import TabsNoAnimation from '!!raw-loader!../examples/Tabs/NoAnimation';
+import TabsUncontrolled from '!!raw-loader!../examples/Tabs/Uncontrolled';
+import TabsFill from '!!raw-loader!../examples/Tabs/Fill';
+import TabsJustified from '!!raw-loader!../examples/Tabs/Justified';
+
+## Examples
+
+Create dynamic tabbed interfaces, as described in the
+[<abbr title="Web Accessibility Initiative">WAI</abbr> <AriaAbbr /> Authoring Practices](https://www.w3.org/TR/wai-aria-practices/#tabpanel).
+`Tabs` is a higher-level component for quickly creating a
+`Nav` matched with a set of `TabPane`s.
+
+<CodeBlock language="jsx" live previewClassName="bs-example-tabs">
+  {TabsUncontrolled}
+</CodeBlock>
+
+## Controlled
+
+`Tabs` can be controlled directly when you want to handle the
+selection logic personally.
+
+<CodeBlock language="jsx" live previewClassName="bs-example-tabs">
+  {TabsControlled}
+</CodeBlock>
+
+## No animation
+
+Set the `transition` prop to `false`.
+
+<CodeBlock language="jsx" live previewClassName="bs-example-tabs">
+  {TabsNoAnimation}
+</CodeBlock>
+
+## Fill and justify
+
+Similar to the `Nav` component, you can force the contents of your `Tabs` to extend the full available width. To
+proportionately fill the space use `fill`. Notice that the
+`Tabs` is the entire width but each `Tab` item is a different size.
+
+<CodeBlock language="jsx" live>
+  {TabsFill}
+</CodeBlock>
+
+If you want each `Tab` to be the same size use `justify`.
+
+<CodeBlock language="jsx" live>
+  {TabsJustified}
+</CodeBlock>
+
+## Dropdowns?
+
+Dynamic tabbed interfaces should not contain dropdown menus, as this
+causes both usability and accessibility issues. From a usability
+perspective, the fact that the currently displayed tab’s trigger element
+is not immediately visible (as it’s inside the closed dropdown menu) can
+cause confusion. From an accessibility point of view, there is currently
+no sensible way to map this sort of construct to a standard WAI ARIA
+pattern, meaning that it cannot be easily made understandable to users
+of assistive technologies.
+
+That said, it Dropdowns do work technically (sans focus management), but
+we don't make any claims about support.
+
+## Custom Tab Layout
+
+For more complex layouts the flexible `TabContainer`,
+
+`TabContent`, and `TabPane` components along with any
+style of `Nav` allow you to quickly piece together your own Tabs
+component with additional markup needed.
+
+Create a set of NavItems each with an `eventKey`
+corresponding to the eventKey of a `TabPane`. Wrap the whole
+thing in a `TabContainer` and you have fully functioning
+custom tabs component. Check out the below example making use of the
+grid system, pills and underline.
+
+## Pills
+
+<CodeBlock language="jsx" live previewClassName="bs-example-tabs">
+  {LeftTabs}
+</CodeBlock>
+
+## API
+
+### Tabs
+
+<PropsTable name="Tabs" />
+
+### Tab
+
+<PropsTable name="Tab" />
+
+### TabContainer
+
+<PropsTable name="TabContainer" />
+
+### TabContent
+
+<PropsTable name="TabContent" />
+
+### TabPane
+
+<PropsTable name="TabPane" />

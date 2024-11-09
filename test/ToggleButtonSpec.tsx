@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { render } from '@testing-library/react';
-import { expect } from 'chai';
-
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import ToggleButton from '../src/ToggleButton';
 
 describe('ToggleButton', () => {
@@ -13,7 +12,7 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
 
-    ref.current!.tagName.should.equal('LABEL');
+    expect(ref.current!.tagName).toEqual('LABEL');
   });
 
   it('should add an inputRef', () => {
@@ -24,16 +23,16 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
 
-    ref.current!.tagName.should.equal('INPUT');
+    expect(ref.current!.tagName).toEqual('INPUT');
   });
 
   it('should not have a role on the label button', () => {
-    const { getByText } = render(
+    render(
       <ToggleButton id="id" value={1}>
         Option
       </ToggleButton>,
     );
 
-    expect(getByText('Option').getAttribute('role')).to.not.exist;
+    expect(screen.getByText('Option').getAttribute('role')).not.toBeTruthy();
   });
 });

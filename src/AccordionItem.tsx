@@ -59,7 +59,7 @@ const AccordionItem: BsPrefixRefForwardingComponent<'div', AccordionItemProps> =
         </AccordionItemContext.Provider>
       );
     },
-  );
+  ) as typeof AccordionItem;
 
 AccordionItem.propTypes = propTypes;
 AccordionItem.displayName = 'AccordionItem';

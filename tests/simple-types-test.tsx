@@ -66,11 +66,7 @@ const RefTest = () => {
   carouselRef?.current?.prev();
   carouselRef?.current?.next();
 
-  return (
-    <>
-      <Carousel ref={carouselRef} />
-    </>
-  );
+  return <Carousel ref={carouselRef} />
 };
 
 class ClassComponent extends React.Component {
@@ -82,7 +78,7 @@ class ClassComponent extends React.Component {
 const FunctionComponent: React.FC = () => <div>abc</div>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
+const noop = () => { };
 
 const MegaComponent = () => (
   <>
@@ -320,7 +316,6 @@ const MegaComponent = () => (
       align="end"
       as="div"
       drop="up"
-      flip
       focusFirstItemOnShow="keyboard"
       navbar
       onSelect={noop}
@@ -518,7 +513,7 @@ const MegaComponent = () => (
           Horizontal
         </Form.Label>
         <Col sm={10}>
-          <Form.Control type="text" placeholder="Hoizontal" />
+          <Form.Control type="text" placeholder="Horizontal" />
         </Col>
       </Form.Group>
       <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
@@ -526,7 +521,7 @@ const MegaComponent = () => (
           Horizontal
         </Form.Label>
         <Col sm={10}>
-          <Form.Control type="text" placeholder="Hoizontal" />
+          <Form.Control type="text" placeholder="Horizontal" />
         </Col>
       </Form.Group>
       <Form.Switch label="Switch" disabled />
@@ -684,7 +679,7 @@ const MegaComponent = () => (
       onKeyDown={noop}
       variant="pills"
       activeKey="1"
-      onSelect={(k: string) => {
+      onSelect={(k: string | null) => {
         // eslint-disable-next-line no-console
         console.log(k);
       }}
@@ -731,7 +726,6 @@ const MegaComponent = () => (
         drop="up"
         align="end"
         show
-        flip={false}
         onToggle={noop}
         onSelect={noop}
         focusFirstItemOnShow
@@ -874,7 +868,7 @@ const MegaComponent = () => (
       id="test-popover"
       body
       placement="auto"
-      popper={{}}
+      popper={{} as any}
       show
       bsPrefix="popover"
       style={style}
@@ -1008,11 +1002,12 @@ const MegaComponent = () => (
         type="checkbox"
         size="lg"
         style={style}
+        id="abc"
       >
         Radio 1 (pre-checked)
       </ToggleButton>
-      <ToggleButton value={2}>Radio 2</ToggleButton>
-      <ToggleButton value={3}>Radio 3</ToggleButton>
+      <ToggleButton id="abc" value={2}>Radio 2</ToggleButton>
+      <ToggleButton id="abc" value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
     <Stack direction="horizontal" gap={1} />
     <Stack

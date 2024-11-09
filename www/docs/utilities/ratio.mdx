@@ -1,0 +1,48 @@
+---
+title: Ratios
+description: Use generated pseudo elements to make an element maintain the aspect ratio of your choosing. Perfect for responsively handling video or slideshow embeds based on the width of the parent.
+sidebar_position: 2
+---
+
+import RatioCustom from '!!raw-loader!../examples/Ratio/Custom';
+import RatioDefault from '!!raw-loader!../examples/Ratio/Default';
+import RatioExample from '!!raw-loader!../examples/Ratio/Example';
+
+## About
+
+Use the ratio helper to manage the aspect ratios of external content like
+`<iframe>`s, `<embed>`s, `<video>`s, and `<object>`s. These helpers also can be used on
+any standard HTML child element (e.g., a `<div>` or `<img>`). Styles are applied from
+the parent .ratio class directly to the child.
+
+You don't need to include `frameborder="0"` in your `iframe`s.
+
+## Example
+
+<CodeBlock language="jsx" live>
+  {RatioExample}
+</CodeBlock>
+
+## Aspect ratios
+
+Aspect ratios can be customized using `aspectRatio`. By default the following `aspectRatio`
+values are provided:
+
+<CodeBlock language="jsx" live previewClassName="ratio-example">
+  {RatioDefault}
+</CodeBlock>
+
+## Custom
+
+Create custom aspect ratios by passing a number to `aspectRatio` instead of using the above
+pre-defined values. You can use either a fraction or percentage to define the custom ratio.
+
+<CodeBlock language="jsx" live previewClassName="ratio-example">
+  {RatioCustom}
+</CodeBlock>
+
+## API
+
+### Ratio
+
+<PropsTable name="Ratio" />

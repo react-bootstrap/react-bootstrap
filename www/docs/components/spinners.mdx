@@ -1,0 +1,86 @@
+---
+title: Spinners
+description: Spinners can be used to show the loading state in your projects.
+---
+
+import SpinnerBasic from '!!raw-loader!../examples/Spinner/Basic';
+import SpinnerBorder from '!!raw-loader!../examples/Spinner/Border';
+import SpinnerGrow from '!!raw-loader!../examples/Spinner/Grow';
+import SpinnerVariants from '!!raw-loader!../examples/Spinner/Variants';
+import SpinnerSizes from '!!raw-loader!../examples/Spinner/Sizes';
+import SpinnerButtons from '!!raw-loader!../examples/Spinner/Buttons';
+
+## Example
+
+<CodeBlock language="jsx" live>
+  {SpinnerBasic}
+</CodeBlock>
+
+## Animations
+
+Bootstrap offers two animation styles for spinners. The animation style
+can be configured with the `animation` property. An animation style
+must always be provided when creating a spinner.
+
+** Border Spinner - `border`**
+
+<CodeBlock language="jsx" live>
+  {SpinnerBorder}
+</CodeBlock>
+
+** Grow Spinner - `grow` **
+
+<CodeBlock language="jsx" live>
+  {SpinnerGrow}
+</CodeBlock>
+
+## Variants
+
+All standard visual variants are available for both animation styles by
+setting the `variant` property. Alternatively spinners can be custom
+sized with the `style` property, or custom CSS classes.
+
+<CodeBlock language="jsx" live>
+  {SpinnerVariants}
+</CodeBlock>
+
+## Sizing
+
+In addition to the standard size, a smaller additional preconfigured
+size is available by configuring the `size` property to `sm`.
+
+<CodeBlock language="jsx" live>
+  {SpinnerSizes}
+</CodeBlock>
+
+## Buttons
+
+Like the original Bootstrap spinners, these can also be used with
+buttons. To use this component out-of-the-box it is recommended you
+change the element type to `span` by configuring the `as` property when
+using spinners inside buttons.
+
+<CodeBlock language="jsx" live>
+  {SpinnerButtons}
+</CodeBlock>
+
+## Accessibility
+
+To ensure the maximum accessibility for spinner components it is
+recommended you provide a relevant ARIA `role` property,
+and include screenreader-only readable text representation of the
+spinner's meaning inside the component using Bootstrap's `visually-hidden`
+class.
+
+The example below provides an example of accessible usage of this
+component.
+
+<CodeBlock language="jsx" live>
+  {SpinnerBasic}
+</CodeBlock>
+
+## API
+
+### Spinner
+
+<PropsTable name="Spinner" />

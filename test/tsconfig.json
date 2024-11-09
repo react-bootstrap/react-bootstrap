@@ -2,8 +2,8 @@
   "extends": "..",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "types": ["mocha", "chai", "sinon", "sinon-chai"],
+    "lib": ["DOM", "ESNext"],
     "rootDir": ".."
   },
-  "include": ["../src", "."]
+  "include": ["../src", ".", "../tests"]
 }

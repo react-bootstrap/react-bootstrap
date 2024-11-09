@@ -1,0 +1,80 @@
+---
+title: Offcanvas
+description: Build hidden sidebars into your project for navigation, shopping carts, and more.
+---
+
+import Basic from '!!raw-loader!../examples/Offcanvas/Basic';
+import Backdrop from '!!raw-loader!../examples/Offcanvas/Backdrop';
+import StaticBackdrop from '!!raw-loader!../examples/Offcanvas/StaticBackdrop';
+import Responsive from '!!raw-loader!../examples/Offcanvas/Responsive';
+import Placement from '!!raw-loader!../examples/Offcanvas/Placement';
+
+## Examples
+
+Offcanvas includes support for a header with a close button and an optional body class
+for some initial padding. We suggest that you include offcanvas headers with dismiss
+actions whenever possible, or provide an explicit dismiss action.
+
+### Basic Example
+
+<CodeBlock language="jsx" live>
+  {Basic}
+</CodeBlock>
+
+### Responsive
+
+Responsive offcanvas classes hide content outside the viewport from a specified breakpoint
+and down. Above that breakpoint, the contents within will behave as usual.
+
+<CodeBlock language="jsx" live>
+  {Responsive}
+</CodeBlock>
+
+### Placement
+
+Offcanvas supports a few different placements:
+
+- `start` places offcanvas on the left of the viewport
+- `end` places offcanvas on the right of the viewport
+- `top` places offcanvas on the top of the viewport
+- `bottom` places offcanvas on the bottom of the viewport
+
+<CodeBlock language="jsx" live noInline>
+  {Placement}
+</CodeBlock>
+
+### Backdrop
+
+Scrolling the `<body>` element is disabled when an offcanvas and its backdrop are
+visible. Use the `scroll` prop to toggle `<body>` scrolling and the `backdrop` prop
+to toggle the backdrop.
+
+<CodeBlock language="jsx" live noInline>
+  {Backdrop}
+</CodeBlock>
+
+### Static backdrop
+
+When `backdrop` is set to `static`, the offcanvas will not close when clicking outside of it.
+
+<CodeBlock language="jsx" live>
+  {StaticBackdrop}
+</CodeBlock>
+
+## API
+
+### Offcanvas
+
+<PropsTable name="Offcanvas" />
+
+### OffcanvasHeader
+
+<PropsTable name="OffcanvasHeader" />
+
+### OffcanvasTitle
+
+<PropsTable name="OffcanvasTitle" />
+
+### OffcanvasBody
+
+<PropsTable name="OffcanvasBody" />

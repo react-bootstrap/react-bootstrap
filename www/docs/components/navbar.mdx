@@ -1,0 +1,193 @@
+---
+title: Navbars
+description: A powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more.
+---
+
+import NavbarBasic from '!!raw-loader!../examples/Navbar/Basic';
+import NavbarBrand from '!!raw-loader!../examples/Navbar/Brand';
+import NavbarForm from '!!raw-loader!../examples/Navbar/Form';
+import NavbarCollapsible from '!!raw-loader!../examples/Navbar/Collapsible';
+import NavbarColorSchemes from '!!raw-loader!../examples/Navbar/ColorSchemes';
+import NavScroll from '!!raw-loader!../examples/Navbar/NavScroll';
+import NavbarOffcanvas from '!!raw-loader!../examples/Navbar/Offcanvas';
+import NavbarTextLink from '!!raw-loader!../examples/Navbar/TextLink';
+import ContainerOutside from '!!raw-loader!../examples/Navbar/ContainerOutside';
+import ContainerInside from '!!raw-loader!../examples/Navbar/ContainerInside';
+
+## Overview
+
+Here’s what you need to know before getting started with the Navbar:
+
+- Use the `expand` prop to allow for collapsing the `Navbar` at lower breakpoints.
+- `Navbar`s and their contents are fluid by default. Use optional
+  [containers](#containers) to limit their horizontal width.
+- Use spacing and flex utilities to size and position content
+
+A responsive navigation header, including support for branding, navigation, and more.
+Here’s an example of all the sub-components included in a responsive light-themed
+navbar that automatically collapses at the lg (large) breakpoint.
+
+<CodeBlock language="jsx" live>
+  {NavbarBasic}
+</CodeBlock>
+
+## Brand
+
+A simple flexible branding component. Images are supported but will
+likely require custom styling to work well.
+
+<CodeBlock language="jsx" live>
+  {NavbarBrand}
+</CodeBlock>
+
+## Forms
+
+Use `<Form inline>` and your various form controls within the Navbar.
+Align the contents as needed with utility classes.
+
+<CodeBlock language="jsx" live>
+  {NavbarForm}
+</CodeBlock>
+
+## Text and Non-nav links
+
+Loose text and links can be wrapped `Navbar.Text` in order to
+correctly align it vertically.
+
+<CodeBlock language="jsx" live>
+  {NavbarTextLink}
+</CodeBlock>
+
+## Color schemes
+
+Theming the navbar has never been easier thanks to the combination of theming classes
+and background-color utilities. Choose from `variant="light"` for use with light
+background colors, or `variant="dark"` for dark background colors. Then, customize
+with the `bg` prop or any custom css!
+
+:::caution Heads up!
+
+Dark variants for components were deprecated in Bootstrap v5.3.0 with the introduction
+of color modes. Instead of adding `variant="dark"`, set `data-bs-theme="dark"` on the
+`Navbar`.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {NavbarColorSchemes}
+</CodeBlock>
+
+## Containers
+
+While not required, you can wrap the Navbar in a `<Container>` component
+to center it on a page, or add one within to only center the contents of a
+[fixed or static top navbar](#placement).
+
+<CodeBlock language="jsx" live>
+  {ContainerOutside}
+</CodeBlock>
+
+When the container is within your navbar, its horizontal padding is removed at
+breakpoints lower than your specified `expand={'sm' | 'md' | 'lg' | 'xl' | 'xxl'}`
+prop. This ensures we’re not doubling up on padding unnecessarily on lower
+viewports when your navbar is collapsed.
+
+<CodeBlock language="jsx" live>
+  {ContainerInside}
+</CodeBlock>
+
+## Placement
+
+You can use Bootstrap's <DocLink path="/utilities/position/">position utilities</DocLink> to
+place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, or
+stickied to the top (scrolls with the page until it reaches the top, then stays there), or
+stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
+
+Fixed navbars use `position: fixed`, meaning they’re pulled from the normal flow of the DOM and may
+require custom CSS (e.g., padding-top on the `<body>`) to prevent overlap with other elements.
+
+Since these positioning needs are so common for navbars, we've added convenience props for them.
+
+### Fixed top
+
+```jsx
+<Navbar fixed="top" />
+```
+
+### Fixed bottom
+
+```jsx
+<Navbar fixed="bottom" />
+```
+
+### Sticky top
+
+```jsx
+<Navbar sticky="top" />
+```
+
+### Sticky bottom
+
+```jsx
+<Navbar sticky="bottom" />
+```
+
+## Scrolling
+
+You can use the `navbarScroll` prop in a `<Nav>` to enable vertical scrolling within the toggleable
+contents of a collapsed navbar. See the <DocLink path="/components/navbar/#scrolling">Bootstrap docs</DocLink>
+for more information.
+
+<CodeBlock language="jsx" live>
+  {NavScroll}
+</CodeBlock>
+
+## Responsive behaviors
+
+Use the `expand` prop as well as the `Navbar.Toggle` and `Navbar.Collapse` components to control
+when content collapses behind a button.
+
+Set the `defaultExpanded` prop to make the Navbar start expanded. Set `collapseOnSelect` to make
+the Navbar collapse automatically when the user selects an item. You can also finely control
+the collapsing behavior by using the `expanded` and `onToggle` props.
+
+:::caution
+
+Watch out! You **need** to provide a breakpoint value to `expand` in order for the Navbar to collapse at all.
+
+:::
+
+<CodeBlock language="jsx" live>
+  {NavbarCollapsible}
+</CodeBlock>
+
+### Offcanvas
+
+Transform your expanding and collapsing navbar into an offcanvas drawer with the offcanvas component.
+We extend both the offcanvas default styles and use the `expand` prop to create a dynamic and
+flexible navigation sidebar.
+
+In the example below, to create an offcanvas navbar that is always collapsed across all breakpoints,
+set the `expand` prop to `false`.
+
+<CodeBlock language="jsx" live>
+  {NavbarOffcanvas}
+</CodeBlock>
+
+## API
+
+### Navbar
+
+<PropsTable name="Navbar" />
+
+### NavbarBrand
+
+<PropsTable name="NavbarBrand" />
+
+### NavbarToggle
+
+<PropsTable name="NavbarToggle" />
+
+### NavbarCollapse
+
+<PropsTable name="NavbarCollapse" />

@@ -1,0 +1,22 @@
+---
+title: RTL
+sidebar_position: 6
+---
+
+import DismissibleControlled from '!!raw-loader!../examples/Alert/DismissibleControlled';
+
+We recommend first reading <DocLink path="/getting-started/rtl">Bootstrap's documentation</DocLink>
+to become familiar with how Bootstrap's RTL support works.
+
+In order to enable RTL support with React-Bootstrap, follow these steps:
+
+1. Set `dir="rtl"` on the `<html>` element.
+2. Add an appropriate lang attribute, like `lang="ar"`, on the `<html>` element.
+3. Include the RTL version of the CSS `bootstrap.rtl.min.css` in your project.
+4. Set `dir="rtl"` in a `ThemeProvider`:
+
+```jsx
+<ThemeProvider dir="rtl">
+  <App />
+</ThemeProvider>
+```

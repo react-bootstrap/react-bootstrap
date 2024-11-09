@@ -150,7 +150,7 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
       />
     );
   },
-);
+) as typeof Row;
 
 Row.displayName = 'Row';
 Row.propTypes = propTypes;

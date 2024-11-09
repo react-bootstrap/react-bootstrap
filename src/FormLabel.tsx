@@ -63,11 +63,6 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  column: false,
-  visuallyHidden: false,
-};
-
 const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
   React.forwardRef<HTMLElement, FormLabelProps>(
     (
@@ -75,8 +70,8 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
         as: Component = 'label',
         bsPrefix,
-        column,
-        visuallyHidden,
+        column = false,
+        visuallyHidden = false,
         className,
         htmlFor,
         ...props
@@ -120,10 +115,9 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
         <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
       );
     },
-  );
+  ) as typeof FormLabel;
 
 FormLabel.displayName = 'FormLabel';
 FormLabel.propTypes = propTypes;
-FormLabel.defaultProps = defaultProps;
 
 export default FormLabel;

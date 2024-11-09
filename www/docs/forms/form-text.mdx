@@ -1,0 +1,35 @@
+---
+title: Form text
+description: Create block-level or inline-level form text.
+sidebar_position: 3
+---
+
+import FormText from '!!raw-loader!../examples/Form/FormText';
+
+## Overview
+
+Block-level help text in forms can be created using `<Form.Text>`. Inline help
+text can be flexibly implemented using any inline HTML element and utility classes
+like `.text-muted`.
+
+:::tip Associating help text with form controls
+
+Help text should be explicitly associated with the form control it relates to using
+the `aria-describedby` attribute. This will ensure that assistive technologies—such
+as screen readers—will announce this help text when the user focuses or enters
+the control.
+
+:::
+
+Form text below inputs can be styled with `<Form.Text>`. This component includes
+`display: block` and adds some top margin for easy spacing from the inputs above.
+
+<CodeBlock language="jsx" live>
+  {FormText}
+</CodeBlock>
+
+## API
+
+### FormText
+
+<PropsTable name="FormText" />

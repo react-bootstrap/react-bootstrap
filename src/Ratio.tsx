@@ -32,18 +32,17 @@ const propTypes = {
   aspectRatio: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-const defaultProps = {
-  aspectRatio: '1x1' as const,
-};
-
 function toPercent(num: number): string {
-  if (num <= 0 || num > 100) return '100%';
+  if (num <= 0) return '100%';
   if (num < 1) return `${num * 100}%`;
   return `${num}%`;
 }
 
 const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
-  ({ bsPrefix, className, children, aspectRatio, style, ...props }, ref) => {
+  (
+    { bsPrefix, className, children, aspectRatio = '1x1', style, ...props },
+    ref,
+  ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'ratio');
     const isCustomRatio = typeof aspectRatio === 'number';
 
@@ -70,6 +69,5 @@ const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
 );
 
 Ratio.propTypes = propTypes;
-Ratio.defaultProps = defaultProps;
 
 export default Ratio;

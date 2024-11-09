@@ -1,66 +1,65 @@
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import CardHeader from '../src/CardHeader';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 import NavDropdown from '../src/NavDropdown';
-import { shouldWarn } from './helpers';
 
 describe('<Nav>', () => {
   it('should have div as default component', () => {
-    const { getByTestId } = render(<Nav data-testid="test" />);
-    getByTestId('test').tagName.toLowerCase().should.equal('div');
+    render(<Nav data-testid="test" />);
+    expect(screen.getByTestId('test').tagName).toEqual('DIV');
   });
 
   it('should set the correct item active', () => {
-    const { getByTestId } = render(
+    render(
       <Nav variant="pills" defaultActiveKey={1} data-testid="test">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
     );
-    const navLinks = getByTestId('test').children;
+    const navLinks = screen.getByTestId('test').children;
 
-    navLinks[0].classList.contains('active').should.be.true;
-    navLinks[1].classList.contains('active').should.not.be.true;
+    expect(navLinks[0].classList).toContain('active');
+    expect(navLinks[1].classList).not.toContain('active');
   });
 
   it('should add variant class', () => {
-    const { getByTestId } = render(
+    render(
       <Nav variant="tabs" data-testid="test">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
     );
-    const navElem = getByTestId('test');
-    navElem.classList.contains('nav-tabs').should.be.true;
-    navElem.classList.contains('nav').should.be.true;
+    const navElem = screen.getByTestId('test');
+    expect(navElem.classList).toContain('nav-tabs');
+    expect(navElem.classList).toContain('nav');
   });
 
   it('should add justified class', () => {
-    const { getByTestId } = render(
+    render(
       <Nav justify data-testid="test">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
     );
-    const navElem = getByTestId('test');
-    navElem.classList.contains('nav-justified').should.be.true;
+    const navElem = screen.getByTestId('test');
+    expect(navElem.classList).toContain('nav-justified');
   });
 
   it('should add fill class', () => {
-    const { getByTestId } = render(
+    render(
       <Nav fill data-testid="test">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
     );
-    const navElem = getByTestId('test');
-    navElem.classList.contains('nav-fill').should.be.true;
+    const navElem = screen.getByTestId('test');
+    expect(navElem.classList).toContain('nav-fill');
   });
 
   it('should be navbar aware', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Nav data-testid="test">
           <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -68,29 +67,29 @@ describe('<Nav>', () => {
         </Nav>
       </Navbar>,
     );
-    const navItem = getByTestId('test');
-    navItem.classList.contains('navbar-nav').should.be.true;
+    const navItem = screen.getByTestId('test');
+    expect(navItem.classList).toContain('navbar-nav');
   });
 
   it('should handle navbarScroll if within navbar', () => {
-    const { getByTestId } = render(
+    render(
       <Navbar>
         <Nav navbarScroll data-testid="test" />
       </Navbar>,
     );
-    const navItem = getByTestId('test');
-    navItem.classList.contains('navbar-nav-scroll').should.be.true;
+    const navItem = screen.getByTestId('test');
+    expect(navItem.classList).toContain('navbar-nav-scroll');
   });
 
   it('should not add navbarScroll when not within navbar', () => {
-    const { getByTestId } = render(<Nav navbarScroll data-testid="test" />);
+    render(<Nav navbarScroll data-testid="test" />);
 
-    const navItem = getByTestId('test');
-    navItem.classList.contains('navbar-nav-scroll').should.be.false;
+    const navItem = screen.getByTestId('test');
+    expect(navItem.classList).not.toContain('navbar-nav-scroll');
   });
 
   it('should be card header aware', () => {
-    const { getByTestId } = render(
+    render(
       <CardHeader>
         <Nav variant="pills" data-testid="test">
           <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -98,14 +97,14 @@ describe('<Nav>', () => {
         </Nav>
       </CardHeader>,
     );
-    const navItem = getByTestId('test');
-    navItem.classList.contains('card-header-pills').should.be.true;
+    const navItem = screen.getByTestId('test');
+    expect(navItem.classList).toContain('card-header-pills');
   });
 
   it('should call onSelect when a Nav.Link is selected', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       // eslint-disable-next-line react/jsx-no-bind
       <Nav onSelect={onSelectSpy} data-testid="test">
         <Nav.Link eventKey={1}>Tab 1 content</Nav.Link>
@@ -114,15 +113,15 @@ describe('<Nav>', () => {
         </Nav.Link>
       </Nav>,
     );
-    const navItem = getByTestId('test');
+    const navItem = screen.getByTestId('test');
     fireEvent.click(navItem.lastElementChild!);
-    onSelectSpy.should.have.been.calledWith('2');
+    expect(onSelectSpy).toHaveBeenCalledWith('2', expect.anything());
   });
 
   it('should call onSelect when a NavDropdown.Item is selected', () => {
-    const onSelectSpy = sinon.spy();
+    const onSelectSpy = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <Nav onSelect={onSelectSpy}>
         <NavDropdown title="Dropdown" id="nav-dropdown-test" renderMenuOnMount>
           <NavDropdown.Item eventKey={1} data-testid="test">
@@ -131,14 +130,14 @@ describe('<Nav>', () => {
         </NavDropdown>
       </Nav>,
     );
-    const dropdownItem = getByTestId('test');
+    const dropdownItem = screen.getByTestId('test');
     fireEvent.click(dropdownItem!);
 
-    onSelectSpy.should.have.been.calledOnce;
+    expect(onSelectSpy).toHaveBeenCalledOnce();
   });
 
   it('should set the correct item active by href', () => {
-    const { getByTestId } = render(
+    render(
       <Nav defaultActiveKey="#item1" data-testid="test">
         <Nav.Link href="#item1" className="test-selected">
           Pill 1 content
@@ -146,14 +145,8 @@ describe('<Nav>', () => {
         <Nav.Link href="#item2">Pill 2 content</Nav.Link>
       </Nav>,
     );
-    const navItem = getByTestId('test');
-    navItem.firstElementChild!.classList.contains('active').should.be.true;
-  });
-
-  it('should warn when attempting to use a justify navbar nav', () => {
-    shouldWarn('justify navbar `Nav`s are not supported');
-
-    render(<Nav navbar justify />);
+    const navItem = screen.getByTestId('test');
+    expect(navItem.firstElementChild!.classList).toContain('active');
   });
 
   describe('Web Accessibility', () => {
@@ -164,12 +157,12 @@ describe('<Nav>', () => {
           <Nav.Link key={2}>Tab 2 content</Nav.Link>
         </Nav>
       );
-      const { rerender, getByTestId } = render(<Component />);
+      const { rerender } = render(<Component />);
 
       rerender(<Component role="tablist" />);
-      const navItem = getByTestId('test');
-      navItem.getAttribute('role')!.should.equal('tablist');
-      navItem.querySelectorAll('a[role="tab"]').length.should.equal(2);
+      const navItem = screen.getByTestId('test');
+      expect(navItem.getAttribute('role')).toEqual('tablist');
+      expect(navItem.querySelectorAll('a[role="tab"]')).toHaveLength(2);
     });
   });
 });

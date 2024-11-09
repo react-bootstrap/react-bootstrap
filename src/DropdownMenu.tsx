@@ -88,10 +88,6 @@ const propTypes = {
   variant: PropTypes.string,
 };
 
-const defaultProps: Partial<DropdownMenuProps> = {
-  flip: true,
-};
-
 export function getDropdownMenuPlacement(
   alignEnd: boolean,
   dropDirection?: DropDirection,
@@ -112,6 +108,8 @@ export function getDropdownMenuPlacement(
     placement = alignEnd ? rightEnd : rightStart;
   else if (dropDirection === 'start')
     placement = alignEnd ? leftEnd : leftStart;
+  else if (dropDirection === 'down-centered') placement = 'bottom';
+  else if (dropDirection === 'up-centered') placement = 'top';
   return placement;
 }
 
@@ -123,7 +121,7 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         className,
         align,
         rootCloseEvent,
-        flip,
+        flip = true,
         show: showProps,
         renderOnMount,
         // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -225,10 +223,9 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         />
       );
     },
-  );
+  ) as typeof DropdownMenu;
 
 DropdownMenu.displayName = 'DropdownMenu';
 DropdownMenu.propTypes = propTypes;
-DropdownMenu.defaultProps = defaultProps;
 
 export default DropdownMenu;

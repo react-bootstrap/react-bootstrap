@@ -1,0 +1,97 @@
+---
+title: Checks and radios
+description: Create consistent cross-browser and cross-device checkboxes and radios with our completely rewritten checks component.
+sidebar_position: 5
+---
+
+import Check from '!!raw-loader!../examples/Form/Check';
+import CheckApi from '!!raw-loader!../examples/Form/CheckApi';
+import CheckInline from '!!raw-loader!../examples/Form/CheckInline';
+import CheckReverse from '!!raw-loader!../examples/Form/CheckReverse';
+import NoLabels from '!!raw-loader!../examples/Form/NoLabels';
+import Switch from '!!raw-loader!../examples/Form/Switch';
+
+For the non-textual checkbox and radio controls, `FormCheck`
+provides a single component for both types that adds some additional
+styling and improved layout.
+
+## Default (stacked)
+
+By default, any number of checkboxes and radios that are immediate
+sibling will be vertically stacked and appropriately spaced with
+FormCheck.
+
+<CodeBlock language="jsx" live>
+  {Check}
+</CodeBlock>
+
+## Switches
+
+A switch has the markup of a custom checkbox but uses `type="switch"`
+to render a toggle switch. Switches also support the same customizable
+children as `<FormCheck>`.
+
+<CodeBlock language="jsx" live>
+  {Switch}
+</CodeBlock>
+
+:::tip
+
+You can also use the `<Form.Switch>` alias which encapsulates
+the above, in a very small component wrapper.
+
+:::
+
+## Inline
+
+Group checkboxes or radios on the same horizontal row by adding the `inline` prop.
+
+<CodeBlock language="jsx" live>
+  {CheckInline}
+</CodeBlock>
+
+## Reverse
+
+Put your checkboxes, radios, and switches on the opposite side with the `reverse` prop.
+
+<CodeBlock language="jsx" live>
+  {CheckReverse}
+</CodeBlock>
+
+## Without labels
+
+When you render a FormCheck without a label (no `children`)
+some additional styling is applied to keep the inputs from collapsing.
+
+**Remember to add an `aria-label` when omitting labels!**
+
+<CodeBlock language="jsx" live>
+  {NoLabels}
+</CodeBlock>
+
+## Customizing FormCheck rendering
+
+When you need tighter control, or want to customize how the `FormCheck` component
+renders, it may better to use its constituent parts directly.
+
+By provided `children` to the `FormCheck` you can forgo the default rendering and
+handle it yourself. (You can still provide an `id` to the `FormCheck` or
+`FormGroup` and have it propagate to the label and input).
+
+<CodeBlock language="jsx" live>
+  {CheckApi}
+</CodeBlock>
+
+## API
+
+### FormCheck
+
+<PropsTable name="FormCheck" />
+
+### FormCheckInput
+
+<PropsTable name="FormCheckInput" />
+
+### FormCheckLabel
+
+<PropsTable name="FormCheckLabel" />

@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
-
-import { fireEvent, render } from '@testing-library/react';
-import sinon from 'sinon';
-import { expect } from 'chai';
+import PropTypes from 'prop-types';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -25,7 +30,7 @@ describe('<OverlayTrigger>', () => {
   );
 
   it('should not throw an error with StrictMode', () => {
-    const { getByTestId } = render(
+    render(
       <React.StrictMode>
         <OverlayTrigger overlay={<TemplateDiv>test</TemplateDiv>}>
           <button type="button" data-testid="test-button">
@@ -34,65 +39,65 @@ describe('<OverlayTrigger>', () => {
         </OverlayTrigger>
       </React.StrictMode>,
     );
-    const buttonElem = getByTestId('test-button');
+    const buttonElem = screen.getByTestId('test-button');
     fireEvent.click(buttonElem);
   });
 
   it('Should render OverlayTrigger element', () => {
-    const { getByTestId } = render(
+    render(
       <OverlayTrigger overlay={<TemplateDiv>test</TemplateDiv>}>
         <button type="button" data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    const buttonElem = getByTestId('test-button');
-    buttonElem.should.exist;
+    const buttonElem = screen.getByTestId('test-button');
+    expect(buttonElem).toBeDefined();
   });
 
   it('Should show after click trigger', () => {
-    const { queryByTestId, getByTestId } = render(
+    render(
       <OverlayTrigger trigger="click" overlay={<TemplateDiv />}>
         <button type="button" data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    let overlayElem = queryByTestId('test-overlay');
-    const buttonElem = getByTestId('test-button');
+    let overlayElem = screen.queryByTestId('test-overlay');
+    const buttonElem = screen.getByTestId('test-button');
 
-    expect(overlayElem).to.be.null;
+    expect(overlayElem).toBeNull();
     fireEvent.click(buttonElem);
 
-    overlayElem = queryByTestId('test-overlay');
-    expect(overlayElem).to.not.be.null;
+    overlayElem = screen.queryByTestId('test-overlay');
+    expect(overlayElem).not.toBeNull();
   });
 
   it('Should accept a function as an overlay render prop', () => {
     const overlay = () => <TemplateDiv />;
-    const { queryByTestId, getByTestId } = render(
+    render(
       <OverlayTrigger trigger="click" overlay={overlay}>
         <button type="button" data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    let overlayElem = queryByTestId('test-overlay');
-    const buttonElem = getByTestId('test-button');
+    let overlayElem = screen.queryByTestId('test-overlay');
+    const buttonElem = screen.getByTestId('test-button');
 
-    expect(overlayElem).to.be.null;
+    expect(overlayElem).toBeNull();
 
     fireEvent.click(buttonElem);
 
-    overlayElem = queryByTestId('test-overlay');
-    expect(overlayElem).to.not.be.null;
+    overlayElem = screen.queryByTestId('test-overlay');
+    expect(overlayElem).not.toBeNull();
   });
 
   it('Should show the tooltip when transitions are disabled', () => {
     const overlay = ({ className }: any) => (
       <TemplateDiv className={`${className} test`} />
     );
-    const { getByTestId, queryByTestId } = render(
+    render(
       <OverlayTrigger
         transition={false}
         trigger={['hover', 'focus']}
@@ -103,39 +108,39 @@ describe('<OverlayTrigger>', () => {
         </button>
       </OverlayTrigger>,
     );
-    let overlayElem = queryByTestId('test-overlay');
-    const buttonElem = getByTestId('test-button');
+    let overlayElem = screen.queryByTestId('test-overlay');
+    const buttonElem = screen.getByTestId('test-button');
 
-    expect(overlayElem).to.be.null;
+    expect(overlayElem).toBeNull();
 
     fireEvent.focus(buttonElem);
 
-    overlayElem = queryByTestId('test-overlay');
-    expect(overlayElem).to.not.be.null;
+    overlayElem = screen.queryByTestId('test-overlay');
+    expect(overlayElem).not.toBeNull();
 
-    overlayElem!.classList.contains('show').should.be.true;
+    expect(overlayElem!.classList).toContain('show');
   });
 
   it('Should call OverlayTrigger onClick prop to child', () => {
-    const callback = sinon.spy();
+    const callback = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <OverlayTrigger overlay={<TemplateDiv>test</TemplateDiv>} trigger="click">
         <button type="button" onClick={callback} data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    const buttonElem = getByTestId('test-button');
+    const buttonElem = screen.getByTestId('test-button');
     fireEvent.click(buttonElem);
 
-    callback.should.have.been.called;
+    expect(callback).toHaveBeenCalled();
   });
 
   it('Should be controllable', () => {
-    const callback = sinon.spy();
+    const callback = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <OverlayTrigger
         show
         trigger="click"
@@ -147,103 +152,96 @@ describe('<OverlayTrigger>', () => {
         </button>
       </OverlayTrigger>,
     );
-    const overlayElem = getByTestId('test-overlay');
-    const buttonElem = getByTestId('test-button');
+    const overlayElem = screen.getByTestId('test-overlay');
+    const buttonElem = screen.getByTestId('test-button');
 
-    overlayElem.classList.contains('show').should.be.true;
+    expect(overlayElem.classList).toContain('show');
     fireEvent.click(buttonElem);
 
-    callback.should.have.been.calledOnce.and.calledWith(false);
+    expect(callback).toHaveBeenCalledOnce();
+    expect(callback).toHaveBeenCalledWith(false);
   });
 
-  it('Should show after mouseover trigger', (done) => {
-    const clock = sinon.useFakeTimers();
-
-    const { getByTestId, queryByTestId } = render(
+  it('Should show after mouseover trigger', async () => {
+    render(
       <OverlayTrigger overlay={<TemplateDiv />}>
         <span data-testid="test-hover">hover me</span>
       </OverlayTrigger>,
     );
-    let overlayElem = queryByTestId('test-overlay');
-    const hoverElem = getByTestId('test-hover');
+    const overlayElem = screen.queryByTestId('test-overlay');
+    const hoverElem = screen.getByTestId('test-hover');
 
-    expect(overlayElem).to.be.null;
+    expect(overlayElem).toBeNull();
 
     fireEvent.mouseOver(hoverElem);
 
-    overlayElem = queryByTestId('test-overlay');
-    expect(overlayElem).to.not.be.null;
+    await waitFor(() =>
+      expect(screen.queryByTestId('test-overlay')).not.toBeNull(),
+    );
 
     fireEvent.mouseOut(hoverElem);
 
-    clock.tick(50);
-
-    overlayElem = queryByTestId('test-overlay');
-    expect(overlayElem).to.be.null;
-
-    clock.restore();
-    done();
+    await waitFor(() =>
+      expect(screen.queryByTestId('test-overlay')).toBeNull(),
+    );
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
-    const { getByTestId } = render(
+    render(
       <OverlayTrigger trigger="click" overlay={<TemplateDiv />}>
         <button type="button" data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    const buttonElem = getByTestId('test-button');
+    const buttonElem = screen.getByTestId('test-button');
 
-    expect(buttonElem.getAttribute('aria-describedby')).to.be.null;
+    expect(buttonElem.getAttribute('aria-describedby')).toBeNull();
   });
 
-  it('Should set aria-describedby for tooltips if the state is show', (done) => {
-    const { getByTestId } = render(
+  it('Should set aria-describedby for tooltips if the state is show', async () => {
+    render(
       <OverlayTrigger trigger="click" overlay={<TemplateDiv />}>
         <button type="button" data-testid="test-button">
           button
         </button>
       </OverlayTrigger>,
     );
-    let buttonElem = getByTestId('test-button');
+    const buttonElem = screen.getByTestId('test-button');
 
     fireEvent.click(buttonElem);
-    buttonElem = getByTestId('test-button');
 
     // aria-describedby gets assigned after a slight delay
-    setTimeout(() => {
-      buttonElem.getAttribute('aria-describedby')!.should.equal('test-tooltip');
-      done();
-    });
+    await waitFor(() =>
+      expect(buttonElem.getAttribute('aria-describedby')).toBeDefined(),
+    );
+
+    expect(buttonElem.getAttribute('aria-describedby')).toEqual('test-tooltip');
   });
 
-  describe('trigger handlers', () => {
-    it('Should keep trigger handlers', (done) => {
-      const { getByTestId } = render(
-        <div>
-          <OverlayTrigger
-            trigger="click"
-            overlay={<TemplateDiv>test</TemplateDiv>}
-          >
-            <button
-              type="button"
-              data-testid="test-button"
-              onClick={() => done()}
-            >
-              button
-            </button>
-          </OverlayTrigger>
-          <input id="target" />
-        </div>,
-      );
-      const buttonElem = getByTestId('test-button');
-      fireEvent.click(buttonElem);
-    });
+  it('Should keep trigger handlers', () => {
+    const onClickSpy = vi.fn();
+    render(
+      <div>
+        <OverlayTrigger
+          trigger="click"
+          overlay={<TemplateDiv>test</TemplateDiv>}
+        >
+          <button type="button" data-testid="test-button" onClick={onClickSpy}>
+            button
+          </button>
+        </OverlayTrigger>
+        <input id="target" />
+      </div>,
+    );
+
+    fireEvent.click(screen.getByTestId('test-button'));
+
+    expect(onClickSpy).toHaveBeenCalled();
   });
 
   it('Should maintain overlay classname', () => {
-    const { getByTestId, queryByTestId } = render(
+    render(
       <OverlayTrigger
         trigger="click"
         overlay={<TemplateDiv className="test-overlay">test</TemplateDiv>}
@@ -253,35 +251,29 @@ describe('<OverlayTrigger>', () => {
         </button>
       </OverlayTrigger>,
     );
-    const buttonElem = getByTestId('test-button');
+    const buttonElem = screen.getByTestId('test-button');
     fireEvent.click(buttonElem);
 
-    const overlayElem = queryByTestId('test-overlay');
-    overlayElem!.should.not.be.null;
-    overlayElem!.classList.contains('test-overlay').should.be.true;
+    const overlayElem = screen.queryByTestId('test-overlay');
+    expect(overlayElem).not.toBeNull();
+    expect(overlayElem!.classList).toContain('test-overlay');
   });
 
-  it('Should pass transition callbacks to Transition', (done) => {
-    const increment = sinon.spy();
+  it('Should pass transition callbacks to Transition', async () => {
+    const increment = vi.fn();
+    const onEnteredSpy = vi.fn();
+    const onExitedSpy = vi.fn();
 
-    const { getByTestId } = render(
+    render(
       <OverlayTrigger
         trigger="click"
         overlay={<TemplateDiv>test</TemplateDiv>}
         onExit={increment}
         onExiting={increment}
-        onExited={() => {
-          increment();
-          increment.callCount.should.equal(6);
-          done();
-        }}
+        onExited={onExitedSpy}
         onEnter={increment}
         onEntering={increment}
-        onEntered={() => {
-          increment();
-          const buttonElem = getByTestId('test-button');
-          fireEvent.click(buttonElem);
-        }}
+        onEntered={onEnteredSpy}
       >
         <button type="button" data-testid="test-button">
           button
@@ -289,8 +281,18 @@ describe('<OverlayTrigger>', () => {
       </OverlayTrigger>,
     );
 
-    const buttonElem = getByTestId('test-button');
-    fireEvent.click(buttonElem);
+    fireEvent.click(screen.getByTestId('test-button'));
+
+    await screen.findByTestId('test-overlay');
+
+    await waitFor(() => expect(onEnteredSpy).toHaveBeenCalledOnce());
+
+    fireEvent.click(screen.getByTestId('test-button'));
+
+    await waitForElementToBeRemoved(() => screen.getByTestId('test-overlay'));
+
+    await waitFor(() => expect(onExitedSpy).toHaveBeenCalledOnce());
+    expect(increment).toHaveBeenCalledTimes(4);
   });
 
   it('Should forward requested context', () => {
@@ -298,13 +300,13 @@ describe('<OverlayTrigger>', () => {
       key: PropTypes.string,
     };
 
-    const contextSpy = sinon.spy();
+    const contextSpy = vi.fn();
 
     class ContextReader extends React.Component {
       static contextTypes = contextTypes;
 
       render() {
-        contextSpy(this.context.key);
+        contextSpy((this.context as any).key);
         return <div />;
       }
     }
@@ -327,42 +329,57 @@ describe('<OverlayTrigger>', () => {
       }
     }
 
-    const { getByTestId } = render(<ContextHolder />);
-    const buttonElem = getByTestId('test-button');
+    render(<ContextHolder />);
+    const buttonElem = screen.getByTestId('test-button');
     fireEvent.click(buttonElem);
 
-    contextSpy.calledWith('value').should.be.true;
+    expect(contextSpy).toHaveBeenCalledWith('value');
   });
 
-  describe('overlay types', () => {
-    [
-      {
-        name: 'Popover',
-        overlay: <Popover id="test-popover">test</Popover>,
-      },
-      {
-        name: 'Tooltip',
-        overlay: <Tooltip id="test-tooltip">test</Tooltip>,
-      },
-    ].forEach((testCase) => {
-      describe(testCase.name, () => {
-        it('Should handle trigger without warnings', (done) => {
-          const { getByTestId } = render(
-            <OverlayTrigger trigger="click" overlay={testCase.overlay}>
-              <button type="button" data-testid="test-button">
-                button
-              </button>
-            </OverlayTrigger>,
-          );
-          const buttonElem = getByTestId('test-button');
-          fireEvent.click(buttonElem);
+  it('Should handle popover trigger without warnings', async () => {
+    render(
+      <OverlayTrigger
+        trigger="click"
+        overlay={
+          <Popover id="test-popover" data-testid="test-overlay">
+            test
+          </Popover>
+        }
+      >
+        <button type="button" data-testid="test-button">
+          button
+        </button>
+      </OverlayTrigger>,
+    );
 
-          // The use of Popper means that errors above will show up
-          //  asynchronously.
-          setTimeout(done, 10);
-        });
-      });
-    });
+    const buttonElem = screen.getByTestId('test-button');
+    fireEvent.click(buttonElem);
+
+    const overlay = await screen.findByTestId('test-overlay');
+    expect(overlay).toBeDefined();
+  });
+
+  it('Should handle tooltip trigger without warnings', async () => {
+    render(
+      <OverlayTrigger
+        trigger="click"
+        overlay={
+          <Tooltip id="test-tooltip" data-testid="test-overlay">
+            test
+          </Tooltip>
+        }
+      >
+        <button type="button" data-testid="test-button">
+          button
+        </button>
+      </OverlayTrigger>,
+    );
+
+    const buttonElem = screen.getByTestId('test-button');
+    fireEvent.click(buttonElem);
+
+    const overlay = await screen.findByTestId('test-overlay');
+    expect(overlay).toBeDefined();
   });
 
   describe('rootClose', () => {
@@ -380,7 +397,7 @@ describe('<OverlayTrigger>', () => {
     ].forEach((testCase) => {
       describe(testCase.label, () => {
         it('Should have correct show state', () => {
-          const { getByTestId } = render(
+          render(
             <OverlayTrigger
               overlay={<TemplateDiv>test</TemplateDiv>}
               trigger="click"
@@ -391,104 +408,94 @@ describe('<OverlayTrigger>', () => {
               </button>
             </OverlayTrigger>,
           );
-          const buttonElem = getByTestId('test-button');
+          const buttonElem = screen.getByTestId('test-button');
           fireEvent.click(buttonElem);
-          const overlayElem = getByTestId('test-overlay');
-          overlayElem.classList.contains('show').should.be.true;
+          const overlayElem = screen.getByTestId('test-overlay');
+          expect(overlayElem.classList).toContain('show');
 
           // Need to click this way for it to propagate to document element.
-          document.documentElement.click();
+          act(() => {
+            document.documentElement.click();
+          });
 
-          overlayElem.classList
-            .contains('show')
-            .should.equal(testCase.shownAfterClick);
+          expect(overlayElem.classList.contains('show')).toEqual(
+            testCase.shownAfterClick,
+          );
         });
       });
     });
 
-    describe('clicking on trigger to hide', () => {
-      it('should hide after clicking on trigger', () => {
-        const { getByTestId } = render(
-          <OverlayTrigger
-            overlay={<TemplateDiv>test</TemplateDiv>}
-            trigger="click"
-            rootClose
-          >
-            <button type="button" data-testid="test-button">
-              button
-            </button>
-          </OverlayTrigger>,
-        );
-        const buttonElem = getByTestId('test-button');
-        fireEvent.click(buttonElem);
+    it('should hide after clicking on trigger', () => {
+      render(
+        <OverlayTrigger
+          overlay={<TemplateDiv>test</TemplateDiv>}
+          trigger="click"
+          rootClose
+        >
+          <button type="button" data-testid="test-button">
+            button
+          </button>
+        </OverlayTrigger>,
+      );
+      const buttonElem = screen.getByTestId('test-button');
+      fireEvent.click(buttonElem);
 
-        let overlayElem = getByTestId('test-overlay');
-        overlayElem.classList.contains('show').should.be.true;
+      let overlayElem = screen.getByTestId('test-overlay');
+      expect(overlayElem.classList).toContain('show');
 
-        // Need to click this way for it to propagate to document element.
-        fireEvent.click(buttonElem);
-        overlayElem = getByTestId('test-overlay');
-        overlayElem.classList.contains('show').should.be.false;
-      });
+      // Need to click this way for it to propagate to document element.
+      fireEvent.click(buttonElem);
+      overlayElem = screen.getByTestId('test-overlay');
+      expect(overlayElem.classList).not.toContain('show');
     });
 
-    describe('replaced overlay', () => {
-      it('Should still be shown', () => {
-        const ReplacedOverlay = React.forwardRef(
-          ({ className = '' }: any, ref: any) => {
-            const [state, setState] = React.useState(false);
-            const handleClick = () => {
-              setState(true);
-            };
+    it('Should still be show a replaced overlay', () => {
+      const ReplacedOverlay = React.forwardRef(
+        ({ className = '' }: any, ref: any) => {
+          const [state, setState] = React.useState(false);
+          const handleClick = () => {
+            setState(true);
+          };
 
-            if (state) {
-              return (
-                <div
-                  data-testid="test-replaced"
-                  className={className}
-                  ref={ref}
-                >
-                  replaced
-                </div>
-              );
-            }
-
+          if (state) {
             return (
-              <div>
-                <a
-                  id="replace-overlay"
-                  onClick={handleClick}
-                  data-testid="test-not-replaced"
-                  className={className}
-                  ref={ref}
-                >
-                  original
-                </a>
+              <div data-testid="test-replaced" className={className} ref={ref}>
+                replaced
               </div>
             );
-          },
-        );
+          }
 
-        const { getByTestId } = render(
-          <OverlayTrigger
-            overlay={<ReplacedOverlay />}
-            trigger="click"
-            rootClose
-          >
-            <button type="button" data-testid="test-button">
-              button
-            </button>
-          </OverlayTrigger>,
-        );
-        const buttonElem = getByTestId('test-button');
-        fireEvent.click(buttonElem);
+          return (
+            <div>
+              <a
+                id="replace-overlay"
+                onClick={handleClick}
+                data-testid="test-not-replaced"
+                className={className}
+                ref={ref}
+              >
+                original
+              </a>
+            </div>
+          );
+        },
+      );
 
-        const toBeReplacedElem = getByTestId('test-not-replaced');
-        fireEvent.click(toBeReplacedElem);
+      render(
+        <OverlayTrigger overlay={<ReplacedOverlay />} trigger="click" rootClose>
+          <button type="button" data-testid="test-button">
+            button
+          </button>
+        </OverlayTrigger>,
+      );
+      const buttonElem = screen.getByTestId('test-button');
+      fireEvent.click(buttonElem);
 
-        const replacedElem = getByTestId('test-replaced');
-        replacedElem.classList.contains('show').should.be.true;
-      });
+      const toBeReplacedElem = screen.getByTestId('test-not-replaced');
+      fireEvent.click(toBeReplacedElem);
+
+      const replacedElem = screen.getByTestId('test-replaced');
+      expect(replacedElem.classList).toContain('show');
     });
   });
 });

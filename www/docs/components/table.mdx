@@ -1,0 +1,82 @@
+---
+title: Tables
+---
+
+import TableBasic from '!!raw-loader!../examples/Table/Basic';
+import TableDark from '!!raw-loader!../examples/Table/Dark';
+import TableStripedRow from '!!raw-loader!../examples/Table/StripedRow';
+import TableStripedColumns from '!!raw-loader!../examples/Table/StripedColumns';
+import TableResponsive from '!!raw-loader!../examples/Table/Responsive';
+import TableResponsiveBreakpoints from '!!raw-loader!../examples/Table/ResponsiveBreakpoints';
+import TableSmall from '!!raw-loader!../examples/Table/Small';
+
+## Example
+
+Use the `striped`, `bordered` and `hover` props to customise the table.
+
+<CodeBlock language="jsx" live>
+  {TableBasic}
+</CodeBlock>
+
+## Small Table
+
+Use `size="sm"` to make tables compact by cutting cell padding in half.
+
+<CodeBlock language="jsx" live>
+  {TableSmall}
+</CodeBlock>
+
+## Dark Table
+
+Use `variant="dark"` to invert the colors of the table and get light text
+on a dark background.
+
+<CodeBlock language="jsx" live>
+  {TableDark}
+</CodeBlock>
+
+## Striped rows
+
+Use `striped` to add zebra-striping to any table row within the table.
+
+<CodeBlock language="jsx" live>
+  {TableStripedRow}
+</CodeBlock>
+
+## Striped columns
+
+Use `striped="columns"` to add zebra-striping to any table column.
+
+<CodeBlock language="jsx" live>
+  {TableStripedColumns}
+</CodeBlock>
+
+## Responsive
+
+Responsive tables allow tables to be scrolled horizontally with ease.
+
+### Always Responsive
+
+Across every breakpoint, use `responsive` for horizontally scrolling tables.
+Responsive tables are wrapped automatically in a `div`. The following example
+has 12 columns that are scrollable horizontally.
+
+<CodeBlock language="jsx" live>
+  {TableResponsive}
+</CodeBlock>
+
+### Breakpoint specific
+
+Use `responsive="sm"`, `responsive="md"`, `responsive="lg"`, or `responsive="xl"`
+as needed to create responsive tables up to a particular breakpoint. From that
+breakpoint and up, the table will behave normally and not scroll horizontally.
+
+<CodeBlock language="jsx" live>
+  {TableResponsiveBreakpoints}
+</CodeBlock>
+
+## API
+
+### Table
+
+<PropsTable name="Table" />

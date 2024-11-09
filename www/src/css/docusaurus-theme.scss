@@ -1,0 +1,118 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #712cf9;
+  --ifm-color-primary-dark: #6528e0;
+  --ifm-color-primary-darker: #6528e0;
+  --ifm-color-primary-darkest: #6528e0;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-hero-background-color: #f8f9fa;
+  --ifm-footer-background-color: #f8f9fa;
+
+  --ifm-navbar-background-color: #712cf9;
+  --ifm-navbar-link-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-link-hover-color: #fff;
+
+  --ifm-menu-color-active: #712cf9;
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.85)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+
+  @media (min-width: 768px) {
+    --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.5)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+  }
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  body {
+    background-color: initial;
+  }
+
+  --ifm-color-primary: #712cf9;
+  --ifm-color-primary-dark: #6528e0;
+  --ifm-color-primary-darker: #6528e0;
+  --ifm-color-primary-darkest: #6528e0;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-hero-background-color: var(--bs-body-bg);
+  --ifm-footer-background-color: #2b3035;
+
+  --ifm-menu-color-active: var(--bs-emphasis-color);
+  --ifm-toc-link-color: var(--bs-body-color);
+
+  --ifm-breadcrumb-color-active: var(--bs-emphasis-color);
+  --ifm-button-color: var(--bs-emphasis-color);
+
+  .table-of-contents__link--active {
+    color: var(--bs-emphasis-color);
+  }
+}
+
+// Override Bootstrap styles.
+.navbar {
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
+
+  &.navbar--fixed-top {
+    position: sticky;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .navbar__toggle {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .navbar-sidebar {
+    color: rgba(255, 255, 255, 0.85);
+
+    .menu__link,
+    .menu__link--active {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+.theme-doc-sidebar-container {
+  a {
+    text-decoration: none;
+  }
+}
+
+a.button {
+  text-decoration: none;
+}
+
+.pagination-nav__link {
+  text-decoration: none;
+}
+
+.alert-info svg {
+  fill: var(--bs-info-text-emphasis);
+}
+
+.alert-warning svg {
+  fill: var(--bs-warning-text-emphasis);
+}
+
+.alert-danger svg {
+  fill: var(--bs-danger-text-emphasis);
+}
+
+.alert-success svg {
+  fill: var(--bs-success-text-emphasis);
+}

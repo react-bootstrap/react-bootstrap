@@ -1,0 +1,96 @@
+---
+title: Placeholders
+description: Use loading placeholders for your components or pages to indicate something may still be loading.
+---
+
+import PlaceholderAnimation from '!!raw-loader!../examples/Placeholder/Animation';
+import PlaceholderCard from '!!raw-loader!../examples/Placeholder/Card';
+import PlaceholderColor from '!!raw-loader!../examples/Placeholder/Color';
+import PlaceholderExample from '!!raw-loader!../examples/Placeholder/Example';
+import PlaceholderSize from '!!raw-loader!../examples/Placeholder/Size';
+import PlaceholderWidth from '!!raw-loader!../examples/Placeholder/Width';
+
+## About
+
+Placeholders can be used to enhance the experience of your application. They’re
+built only with HTML and CSS, meaning you don’t need any JavaScript to create them.
+You will, however, need some custom JavaScript to toggle their visibility. Their
+appearance, color, and sizing can be easily customized with our utility classes.
+
+## Example
+
+In the example below, we take a typical card component and recreate it with placeholders
+applied to create a “loading card”. Size and proportions are the same between the two.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderCard}
+</CodeBlock>
+
+## How it works
+
+Create placeholders with the `Placeholder` component and a grid column prop (e.g., `xs={6}`)
+to set the `width`. They can replace the text inside an element or be added to an existing
+component via the `as` prop.
+
+Additional styling is applied to `PlaceholderButton`s via `::before` to ensure the `height`
+is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;`
+within the element to reflect the height when actual text is rendered in its place.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderExample}
+</CodeBlock>
+
+:::info
+
+The use of `aria-hidden="true"` only indicates that the element
+should be hidden to screen readers. The _loading_ behaviour of the
+placeholder depends on how authors will actually use the placeholder styles,
+how they plan to update things, etc. Some JavaScript code may be needed to
+_swap_ the state of the placeholder and inform AT users of the update.
+
+:::
+
+## Width
+
+You can change the `width` through grid column classes, width utilities, or inline styles.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderWidth}
+</CodeBlock>
+
+## Color
+
+By default, the `Placeholder` uses `currentColor`. This can be overridden with a custom color
+or utility class.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderColor}
+</CodeBlock>
+
+## Sizing
+
+The size of `Placeholder`s are based on the typographic style of the parent element.
+Customize them with sizing props: `lg`, `sm`, or `xs`.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderSize}
+</CodeBlock>
+
+## Animation
+
+Animate placeholders by setting the prop `animation` to `glow` or `wave` to better
+convey the perception of something being _actively_ loaded.
+
+<CodeBlock language="jsx" live>
+  {PlaceholderAnimation}
+</CodeBlock>
+
+## API
+
+### Placeholder
+
+<PropsTable name="Placeholder" />
+
+### PlaceholderButton
+
+<PropsTable name="PlaceholderButton" />

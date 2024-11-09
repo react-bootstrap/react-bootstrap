@@ -1,0 +1,171 @@
+---
+title: Migrating to v2
+sidebar_label: Migrating
+sidebar_position: 7
+---
+
+React-Bootstrap v2 adds full compatibility with Bootstrap 5. Because Bootstrap 5 is a major rewrite of the project, there
+are significant breaking changes from React-Bootstrap v1.
+
+**PLEASE FIRST READ THE UPSTREAM BOOTSTRAP MIGRATION GUIDE**
+
+> <DocLink path="/migration">View migration guide</DocLink>
+
+React-Bootstrap _only_ contains components that are present in vanilla Bootstrap. If functionality
+was removed from Bootstrap, then it was also removed from React-Bootstrap. This guide does not
+repeat information found in the upstream migration guide. Its goal is to document React-Bootstrap-specific
+API changes and additions.
+
+## Versioning
+
+We will continue to provide general maintenance for Bootstrap 4 components, because there are many projects that continue to depend on Bootstrap 4 support in `react-bootstrap`. `react-bootstrap` package versions will be as follows:
+
+- Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
+- Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
+- Bootstrap 5 support will be in react-bootstrap versions >= `v2.0.0`
+
+We are **not** committing to keeping breaking changes in lockstep with bootstraps major releases,
+there may be a React-Bootstrap v3 targeting Bootstrap 6 depending on what's best for the project.
+
+## Summary of breaking changes from v1.x
+
+Below is a _rough_ account of the breaking API changes as well as the minimal change to migrate
+
+### General
+
+- React >= 16.14.0 is now required to support the new JSX transform
+
+### Accordion
+
+- accordion is no longer card-based and has been rewritten with different markup.
+- `AccordionContext`'s value interface has changed.
+- `AccordionToggle` has been renamed to `AccordionButton`.
+- `useAccordionToggle` has been renamed to `useAccordionButton`.
+
+### Badge
+
+- `variant` has been renamed to `bg`.
+
+### ButtonGroup
+
+- removed `toggle`.
+
+### CardColumns
+
+- dropped `CardColumns`.
+
+### CloseButton
+
+- Removed `label` prop in favor of `aria-label`.
+- Added `variant` prop.
+
+### Col
+
+- `ColOrder` is now maximum 5 instead of 12.
+- When using objects in breakpoint props, `span` is no longer `true` by default.
+
+### Dropdown
+
+- dropdown dividers use `hr` by default instead of `div`.
+- Alignment values `left` and `right` changed to `start` and `end` respectively.
+- Removed `alignRight`. Use `align="end"` instead.
+
+### DropdownButton
+
+- Removed `menuAlign` prop in favor of `align`.
+
+### DropdownItem
+
+- removed `onSelect`. Use `onSelect` in the parent `Dropdown` instead.
+
+### DropdownMenu
+
+- Removed `alignRight`. Use `align="end"` instead.
+
+### Form
+
+- removed `inline`.
+- removed `bsPrefix`.
+
+### FormCheck
+
+- removed `bsCustomPrefix` and `custom` in favor of `bsSwitchPrefix`.
+- feedback type is now controlled by `feedbackType` instead of `isValid` and `isInvalid`.
+
+#### FormCheckInput
+
+- removed `bsCustomPrefix`.
+- removed `isStatic`.
+
+#### FormCheckLabel
+
+- removed `bsCustomPrefix`.
+- changed base class from `form-check-input` to `form-check-label`.
+
+### FormControl
+
+- dropped `as` prop supporting `select` tags in favor of FormSelect.
+- removed `custom`.
+- removed `bsCustomPrefix`.
+- dropped support for `type` supporting the `range` value in favor of FormRange.
+- add color picker
+
+### FormFile
+
+- dropped all file-related components. Use `<Form.Control type="file" />` instead.
+
+### FormGroup
+
+- removed `bsPrefix`. The `.form-group` class is no longer supported in Bootstrap,
+  but this component is useful for passing `controlId` to labels and inputs. To handle
+  spacing, use margin utilities instead.
+
+### FormRow
+
+- removed. Use `Row` instead.
+
+### InputGroup
+
+- dropped `InputGroupPrepend` and `InputGroupAppend`. Buttons and `InputGroupText` can now be added as direct children.
+
+### Nav
+
+- keyboard navigation has been removed. If you need this, use `Tabs` instead.
+
+### NavLink
+
+- removed `onSelect`. Use `onSelect` in the parent `Nav` instead.
+
+### Popover
+
+- renamed `content` prop to `body` to coincide with PopoverContent component name change.
+
+### PopoverContent
+
+- renamed to PopoverBody to match class name.
+
+### PopoverTitle
+
+- renamed to PopoverHeader to match class name.
+
+### ResponsiveEmbed
+
+- renamed to Ratio.
+- aspectRatio options changed to '1x1' | '4x3' | '16x9' | '21x9'.
+
+### SafeAnchor
+
+- renamed to Anchor.
+
+### SplitButton
+
+- Removed `menuAlign` prop in favor of `align`.
+
+### Toast
+
+- `delay` is now default 5000 ms.
+
+### ToggleButton
+
+- add `bsPrefix`.
+- `id` is now required. This is to allow toggling of the input due to markup changes in Bootstrap.

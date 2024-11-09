@@ -17,7 +17,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
-  variant?: 'tabs' | 'pills';
+  variant?: 'tabs' | 'pills' | 'underline' | string;
   defaultActiveKey?: EventKey;
   fill?: boolean;
   justify?: boolean;
@@ -39,7 +39,7 @@ const propTypes = {
   /**
    * The visual variant of the nav items.
    *
-   * @type {('tabs'|'pills')}
+   * @type {('tabs'| 'pills' | 'underline')}
    */
   variant: PropTypes.string,
 
@@ -106,11 +106,6 @@ const propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-const defaultProps = {
-  justify: false,
-  fill: false,
-};
-
 const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
   HTMLElement,
   NavProps
@@ -119,8 +114,8 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
     as = 'div',
     bsPrefix: initialBsPrefix,
     variant,
-    fill,
-    justify,
+    fill = false,
+    justify = false,
     navbar,
     navbarScroll,
     className,
@@ -161,11 +156,10 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
       {...props}
     />
   );
-});
+}) as typeof Nav;
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
-Nav.defaultProps = defaultProps;
 
 export default Object.assign(Nav, {
   Item: NavItem,

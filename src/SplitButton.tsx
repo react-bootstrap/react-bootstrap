@@ -19,6 +19,7 @@ export interface SplitButtonProps
   title: React.ReactNode;
   toggleLabel?: string;
   type?: ButtonType;
+  flip?: boolean;
 }
 
 const propTypes = {
@@ -74,17 +75,19 @@ const propTypes = {
    */
   rootCloseEvent: PropTypes.string,
 
+  /**
+   * Allow Dropdown to flip in case of an overlapping on the reference element. For more information refer to
+   * Popper.js's flip [docs](https://popper.js.org/docs/v2/modifiers/flip/).
+   *
+   */
+  flip: PropTypes.bool,
+
   /** @ignore */
   bsPrefix: PropTypes.string,
   /** @ignore */
   variant: PropTypes.string,
   /** @ignore */
   size: PropTypes.string,
-};
-
-const defaultProps: Partial<SplitButtonProps> = {
-  toggleLabel: 'Toggle dropdown',
-  type: 'button',
 };
 
 /**
@@ -105,8 +108,8 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       size,
       variant,
       title,
-      type,
-      toggleLabel,
+      type = 'button',
+      toggleLabel = 'Toggle dropdown',
       children,
       onClick,
       href,
@@ -114,6 +117,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       menuRole,
       renderMenuOnMount,
       rootCloseEvent,
+      flip,
       ...props
     },
     ref,
@@ -146,6 +150,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
+        flip={flip}
       >
         {children}
       </Dropdown.Menu>
@@ -154,7 +159,6 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
 );
 
 SplitButton.propTypes = propTypes as any;
-SplitButton.defaultProps = defaultProps;
 SplitButton.displayName = 'SplitButton';
 
 export default SplitButton;

@@ -1,30 +1,30 @@
-import { render, fireEvent } from '@testing-library/react';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import DropdownToggle from '../src/DropdownToggle';
 
 describe('<DropdownToggle>', () => {
   it('renders toggle button', () => {
-    const { getByText } = render(
-      <DropdownToggle id="test-id">herpa derpa</DropdownToggle>,
-    );
+    render(<DropdownToggle id="test-id">herpa derpa</DropdownToggle>);
 
-    const toggle = getByText('herpa derpa');
-    toggle.getAttribute('aria-expanded')!.should.equal('false');
-    toggle.classList.should.contain(['dropdown-toggle', 'btn', 'btn-primary']);
+    const toggle = screen.getByText('herpa derpa');
+    expect(toggle.getAttribute('aria-expanded')).toEqual('false');
+    expect(toggle.classList).toContain('dropdown-toggle');
+    expect(toggle.classList).toContain('btn');
+    expect(toggle.classList).toContain('btn-primary');
   });
 
   it('renders children', () => {
-    const { getByText } = render(
+    render(
       <DropdownToggle id="test-id">
         <h3>herpa derpa</h3>
       </DropdownToggle>,
     );
 
-    getByText('herpa derpa').should.exist;
+    expect(screen.getByText('herpa derpa')).toBeDefined();
   });
 
   it('forwards onClick handler', () => {
-    const onClickSpy = sinon.spy();
+    const onClickSpy = vi.fn();
 
     const { container } = render(
       <DropdownToggle
@@ -35,12 +35,12 @@ describe('<DropdownToggle>', () => {
     );
 
     fireEvent.click(container.firstElementChild!);
-    onClickSpy.should.be.called;
+    expect(onClickSpy).toHaveBeenCalled();
   });
 
   it('forwards id', () => {
     const { container } = render(<DropdownToggle id="testid" />);
-    container.firstElementChild!.id.should.equal('testid');
+    expect(container.firstElementChild!.id).toEqual('testid');
   });
 
   it('does not forward bsPrefix', () => {
@@ -51,9 +51,9 @@ describe('<DropdownToggle>', () => {
         id="test-id"
       />,
     );
-    container.firstElementChild!.classList.should.contain([
+    expect(container.firstElementChild!.classList).toContain(
       'my-custom-bsPrefix',
-      'btn',
-    ]);
+    );
+    expect(container.firstElementChild!.classList).toContain('btn');
   });
 });

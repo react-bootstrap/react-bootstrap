@@ -42,15 +42,18 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  bg: 'primary',
-  pill: false,
-};
-
 const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
   React.forwardRef<HTMLElement, BadgeProps>(
     (
-      { bsPrefix, bg, pill, text, className, as: Component = 'span', ...props },
+      {
+        bsPrefix,
+        bg = 'primary',
+        pill = false,
+        text,
+        className,
+        as: Component = 'span',
+        ...props
+      },
       ref,
     ) => {
       const prefix = useBootstrapPrefix(bsPrefix, 'badge');
@@ -68,10 +71,9 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
         />
       );
     },
-  );
+  ) as typeof Badge;
 
 Badge.displayName = 'Badge';
 Badge.propTypes = propTypes;
-Badge.defaultProps = defaultProps;
 
 export default Badge;

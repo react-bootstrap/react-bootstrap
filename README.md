@@ -18,7 +18,7 @@ See the below table on which version of React-Bootstrap you should be using in y
 | Bootstrap Version | React-Bootstrap Version | Documentation |
 | ------------- |:-------------:| -----:|
 | v5.x | 2.x | [Link][v5-documentation] |
-| v4.x | 1.x | [Link][v4-documentation] |
+| v4.x | 1.x (not maintained) | [Link][v4-documentation] |
 | v3.x | 0.33.x (not maintained) | [Link][v3-documentation] |
 
 ## Migrating from previous versions
@@ -61,7 +61,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
 [v5-documentation]: https://react-bootstrap.github.io
-[v5-migration]: https://react-bootstrap.github.io/migrating
+[v5-migration]: https://react-bootstrap.github.io/docs/migrating
 [v4-documentation]: https://react-bootstrap-v4.netlify.app
 [v4-migration]: https://react-bootstrap-v4.netlify.app/migrating
 [v3-documentation]: https://react-bootstrap-v3.netlify.app

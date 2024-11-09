@@ -1,28 +1,26 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-
+import * as React from 'react';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Pagination from '../src/Pagination';
 
 describe('<Pagination>', () => {
   it('should have class', () => {
-    const { getByTestId } = render(
-      <Pagination data-testid="test">Item content</Pagination>,
-    );
-    const paginationElem = getByTestId('test');
-    paginationElem.classList.contains('pagination').should.be.true;
+    render(<Pagination data-testid="test">Item content</Pagination>);
+    const paginationElem = screen.getByTestId('test');
+    expect(paginationElem.classList).toContain('pagination');
   });
 
   it('should render correctly when size is set', () => {
-    const { getByTestId } = render(
+    render(
       <Pagination data-testid="test" size="sm">
         Item content
       </Pagination>,
     );
-    const paginationElem = getByTestId('test');
-    paginationElem.classList.contains('pagination-sm').should.be.true;
+    const paginationElem = screen.getByTestId('test');
+    expect(paginationElem.classList).toContain('pagination-sm');
   });
 
-  it('sub-compontents should forward ref correctly', () => {
+  it('sub-components should forward ref correctly', () => {
     const ref = React.createRef<HTMLLIElement>();
     render(
       <Pagination data-testid="test" size="sm">
@@ -30,6 +28,6 @@ describe('<Pagination>', () => {
         <Pagination.Next ref={ref} data-testid="next" />
       </Pagination>,
     );
-    ref.current?.tagName.toLowerCase().should.be.equal('li');
+    expect(ref.current?.tagName).toEqual('LI');
   });
 });

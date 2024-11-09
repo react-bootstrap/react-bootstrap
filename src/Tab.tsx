@@ -42,8 +42,6 @@ const Tab: React.FC<TabProps> = () => {
       "It's an abstract component that is only valid as a direct Child of the `Tabs` Component. " +
       'For custom tabs components use TabPane and TabsContainer directly',
   );
-  // Needed otherwise docs error out.
-  return <></>;
 };
 
 Tab.propTypes = propTypes;

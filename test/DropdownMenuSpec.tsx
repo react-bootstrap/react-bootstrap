@@ -1,4 +1,6 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import Dropdown from '../src/Dropdown';
 import DropdownItem from '../src/DropdownItem';
 import DropdownMenu, { getDropdownMenuPlacement } from '../src/DropdownMenu';
 
@@ -13,8 +15,7 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu').should.be
-      .true;
+    expect(container.firstElementChild!.classList).toContain('dropdown-menu');
   });
 
   it('Should pass props to dropdown', () => {
@@ -24,8 +25,7 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('new-fancy-class').should.be
-      .true;
+    expect(container.firstElementChild!.classList).toContain('new-fancy-class');
   });
 
   it('applies align="end"', () => {
@@ -35,8 +35,9 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu-end').should
-      .be.true;
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-end',
+    );
   });
 
   it('renders on mount with prop', () => {
@@ -46,8 +47,7 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu').should.be
-      .true;
+    expect(container.firstElementChild!.classList).toContain('dropdown-menu');
   });
 
   it('does not add any extra classes when align="start"', () => {
@@ -57,7 +57,9 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.className.should.equal('dropdown-menu show');
+    expect(container.firstElementChild!.className).toEqual(
+      'dropdown-menu show',
+    );
   });
 
   it('adds responsive start alignment classes', () => {
@@ -66,10 +68,12 @@ describe('<Dropdown.Menu>', () => {
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     );
-    container.firstElementChild!.classList.contains('dropdown-menu-end').should
-      .be.true;
-    container.firstElementChild!.classList.contains('dropdown-menu-lg-start')
-      .should.be.true;
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-end',
+    );
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-lg-start',
+    );
   });
 
   it('adds responsive end alignment classes', () => {
@@ -79,9 +83,11 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu-lg-end')
-      .should.be.true;
-    container.querySelector('[data-bs-popper="static"]')!.should.exist;
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-lg-end',
+    );
+
+    expect(container.querySelector('[data-bs-popper="static"]')).toBeDefined();
   });
 
   it('allows custom responsive alignment classes', () => {
@@ -91,8 +97,9 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu-custom-end')
-      .should.be.true;
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-custom-end',
+    );
   });
 
   it('should render variant', () => {
@@ -102,55 +109,103 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     );
 
-    container.firstElementChild!.classList.contains('dropdown-menu-dark').should
-      .be.true;
+    expect(container.firstElementChild!.classList).toContain(
+      'dropdown-menu-dark',
+    );
+  });
+
+  it('does not flicker when rootCloseEvent is set to "mousedown" and toggle button is clicked', () => {
+    const { container } = render(
+      <Dropdown>
+        <Dropdown.Toggle id="dropdown-basic" data-testid="dropdown-toggle">
+          Dropdown Button
+        </Dropdown.Toggle>
+        <Dropdown.Menu rootCloseEvent="mousedown">
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    );
+    // Click the toggle button to open the menu
+    fireEvent.click(screen.getByTestId('dropdown-toggle'));
+    // The menu should now be in the DOM
+    expect(container.firstElementChild!.classList).toContain('show');
+    // Click the toggle button again to close the menu
+    fireEvent.click(screen.getByTestId('dropdown-toggle'));
+    // The menu should no longer be in the DOM
+    expect(container.firstElementChild!.classList).not.toContain('show');
   });
 
   describe('getDropdownMenuPlacement', () => {
     it('should return top placement', () => {
-      getDropdownMenuPlacement(false, 'up', false).should.equal('top-start');
-      getDropdownMenuPlacement(true, 'up', false).should.equal('top-end');
+      expect(getDropdownMenuPlacement(false, 'up', false)).toEqual('top-start');
+      expect(getDropdownMenuPlacement(true, 'up', false)).toEqual('top-end');
+      expect(getDropdownMenuPlacement(true, 'up-centered', false)).toEqual(
+        'top',
+      );
     });
 
     it('should return top placement for RTL', () => {
-      getDropdownMenuPlacement(false, 'up', true).should.equal('top-end');
-      getDropdownMenuPlacement(true, 'up', true).should.equal('top-start');
+      expect(getDropdownMenuPlacement(false, 'up', true)).toEqual('top-end');
+      expect(getDropdownMenuPlacement(true, 'up', true)).toEqual('top-start');
+      expect(getDropdownMenuPlacement(true, 'up-centered', true)).toEqual(
+        'top',
+      );
     });
 
     it('should return end placement', () => {
-      getDropdownMenuPlacement(false, 'end', false).should.equal('right-start');
-      getDropdownMenuPlacement(true, 'end', false).should.equal('right-end');
+      expect(getDropdownMenuPlacement(false, 'end', false)).toEqual(
+        'right-start',
+      );
+      expect(getDropdownMenuPlacement(true, 'end', false)).toEqual('right-end');
     });
 
     it('should return end placement for RTL', () => {
-      getDropdownMenuPlacement(false, 'end', true).should.equal('left-start');
-      getDropdownMenuPlacement(true, 'end', true).should.equal('left-end');
+      expect(getDropdownMenuPlacement(false, 'end', true)).toEqual(
+        'left-start',
+      );
+      expect(getDropdownMenuPlacement(true, 'end', true)).toEqual('left-end');
     });
 
     it('should return bottom placement', () => {
-      getDropdownMenuPlacement(false, 'down', false).should.equal(
+      expect(getDropdownMenuPlacement(false, 'down', false)).toEqual(
         'bottom-start',
       );
-      getDropdownMenuPlacement(true, 'down', false).should.equal('bottom-end');
+      expect(getDropdownMenuPlacement(true, 'down', false)).toEqual(
+        'bottom-end',
+      );
+      expect(getDropdownMenuPlacement(true, 'down-centered', false)).toEqual(
+        'bottom',
+      );
     });
 
     it('should return bottom placement for RTL', () => {
-      getDropdownMenuPlacement(false, 'down', true).should.equal('bottom-end');
-      getDropdownMenuPlacement(true, 'down', true).should.equal('bottom-start');
+      expect(getDropdownMenuPlacement(false, 'down', true)).toEqual(
+        'bottom-end',
+      );
+      expect(getDropdownMenuPlacement(true, 'down', true)).toEqual(
+        'bottom-start',
+      );
+      expect(getDropdownMenuPlacement(true, 'down-centered', true)).toEqual(
+        'bottom',
+      );
     });
 
     it('should return start placement', () => {
-      getDropdownMenuPlacement(false, 'start', false).should.equal(
+      expect(getDropdownMenuPlacement(false, 'start', false)).toEqual(
         'left-start',
       );
-      getDropdownMenuPlacement(true, 'start', false).should.equal('left-end');
+      expect(getDropdownMenuPlacement(true, 'start', false)).toEqual(
+        'left-end',
+      );
     });
 
     it('should return start placement for RTL', () => {
-      getDropdownMenuPlacement(false, 'start', true).should.equal(
+      expect(getDropdownMenuPlacement(false, 'start', true)).toEqual(
         'right-start',
       );
-      getDropdownMenuPlacement(true, 'start', true).should.equal('right-end');
+      expect(getDropdownMenuPlacement(true, 'start', true)).toEqual(
+        'right-end',
+      );
     });
   });
 });

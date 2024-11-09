@@ -1,0 +1,159 @@
+---
+title: Grid system
+sidebar_label: Grid
+---
+
+import GridContainer from '!!raw-loader!../examples/Grid/Container';
+import GridContainerFluid from '!!raw-loader!../examples/Grid/ContainerFluid';
+import GridContainerFluidBreakpoint from '!!raw-loader!../examples/Grid/ContainerFluidBreakpoint';
+import GridAutoLayout from '!!raw-loader!../examples/Grid/AutoLayout';
+import GridRowColLayout from '!!raw-loader!../examples/Grid/RowColLayout';
+import GridRowColLayoutColWidthBreakpoint from '!!raw-loader!../examples/Grid/RowColLayoutColWidthBreakpoint';
+import GridAutoLayoutSizing from '!!raw-loader!../examples/Grid/AutoLayoutSizing';
+import GridAutoLayoutVariable from '!!raw-loader!../examples/Grid/AutoLayoutVariable';
+import GridOffsetting from '!!raw-loader!../examples/Grid/Offsetting';
+import GridOrdering from '!!raw-loader!../examples/Grid/Ordering';
+import GridOrderingFirstLast from '!!raw-loader!../examples/Grid/OrderingFirstLast';
+import GridResponsive from '!!raw-loader!../examples/Grid/Responsive';
+import GridResponsiveAuto from '!!raw-loader!../examples/Grid/ResponsiveAuto';
+
+Bootstrap’s grid system uses a series of containers, rows, and columns
+to layout and align content. It’s built with
+[flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes)
+and is fully responsive. Below is an example and an in-depth look at how the
+grid comes together.
+
+**New to or unfamiliar with flexbox?** [Read this CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)
+for background, terminology, guidelines, and code snippets.
+
+## Container
+
+Containers provide a means to center and horizontally pad your site’s
+contents. Use `Container` for a responsive pixel width.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridContainer}
+</CodeBlock>
+
+### Fluid Container
+
+You can use `<Container fluid />` for width: 100% across
+all viewport and device sizes.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridContainerFluid}
+</CodeBlock>
+
+You can set breakpoints for the `fluid` prop. Setting it to a
+breakpoint (`sm, md, lg, xl, xxl`) will set the
+`Container` as fluid until the specified breakpoint.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridContainerFluidBreakpoint}
+</CodeBlock>
+
+## Auto-layout columns
+
+When no column widths are specified the `Col` component will
+render equal width columns
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridAutoLayout}
+</CodeBlock>
+
+### Setting one column width
+
+Auto-layout for flexbox grid columns also means you can set the width of
+one column and have the sibling columns automatically resize around it.
+You may use predefined grid classes (as shown below), grid mixins, or
+inline widths. Note that the other columns will resize no matter the
+width of the center column.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridAutoLayoutSizing}
+</CodeBlock>
+
+### Variable width content
+
+Set the column value (for any breakpoint size) to `auto` to
+size columns based on the natural width of their content.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridAutoLayoutVariable}
+</CodeBlock>
+
+## Responsive grids
+
+The `Col` lets you specify column widths across 6 breakpoint
+sizes (xs, sm, md, lg, xl and xxl). For every breakpoint, you can
+specify the amount of columns to span, or set the prop to
+`<Col lg={true} />` for auto layout widths.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridResponsiveAuto}
+</CodeBlock>
+
+You can also mix and match breakpoints to create different grids
+depending on the screen size.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridResponsive}
+</CodeBlock>
+
+The `Col` breakpoint props also have a more complicated
+`object` prop form: `{span: number, order: number, offset: number}` for
+specifying offsets and ordering effects.
+
+You can use the `order` property to control the **visual order** of your content.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridOrdering}
+</CodeBlock>
+
+The `order` property also supports `first` (`order: -1`) and `last` (`order: $columns+1`).
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridOrderingFirstLast}
+</CodeBlock>
+
+For offsetting grid columns you can set an `offset` value or for a
+more general layout, use the margin class utilities.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridOffsetting}
+</CodeBlock>
+
+### Setting column widths in Row
+
+The `Row` lets you specify column widths across 6 breakpoint
+sizes (xs, sm, md, lg, xl and xxl). For every breakpoint, you can
+specify the amount of columns that will fit next to each other. You can
+also specify `auto` to set the columns to their natural
+widths.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridRowColLayout}
+</CodeBlock>
+
+Note that `Row` column widths will override `Col` widths
+set on lower breakpoints when viewed on larger screens. The
+`<Col xs={6} />` size will be overridden by `<Row md={4} />`
+on medium and larger screens.
+
+<CodeBlock language="jsx" live previewClassName="grid-example">
+  {GridRowColLayoutColWidthBreakpoint}
+</CodeBlock>
+
+## API
+
+### Container
+
+<PropsTable name="Container" />
+
+### Row
+
+<PropsTable name="Row" />
+
+### Col
+
+<PropsTable name="Col" />
