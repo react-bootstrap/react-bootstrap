@@ -4,6 +4,11 @@
     display: inline-flex !important;
   }
 
+  > .btn,
+  > .btn-group {
+    margin: 0.25rem 0.25rem;
+  }
+
   .dropdown {
     display: block;
   }

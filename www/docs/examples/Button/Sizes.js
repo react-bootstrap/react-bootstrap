@@ -3,18 +3,18 @@ import Button from 'react-bootstrap/Button';
 function SizesExample() {
   return (
     <>
-      <div className="mb-2">
+      <div className="d-flex gap-2 mb-2">
         <Button variant="primary" size="lg">
           Large button
-        </Button>{' '}
+        </Button>
         <Button variant="secondary" size="lg">
           Large button
         </Button>
       </div>
-      <div>
+      <div className="d-flex gap-2">
         <Button variant="primary" size="sm">
           Small button
-        </Button>{' '}
+        </Button>
         <Button variant="secondary" size="sm">
           Small button
         </Button>
