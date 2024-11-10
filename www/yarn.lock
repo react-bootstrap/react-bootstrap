@@ -2217,6 +2217,24 @@
     "@docsearch/css" "3.5.2"
     algoliasearch "^4.19.1"
 
+"@docusaurus/babel@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@docusaurus/babel/-/babel-3.5.2.tgz#1720e47e770d3b0c5423bb2f8a066f41954eea39"
+  integrity sha512-8+7kUabwL7rocnxWRy6TTAvGlGxEe4H5nBQLOe2qSYi4i5PlxwCZcE6Sju8t5Mzp+u23xZy1GExg/DNeQIMMJg==
+  dependencies:
+    "@babel/core" "^7.23.3"
+    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
+    "@babel/plugin-transform-runtime" "^7.22.9"
+    "@babel/preset-env" "^7.22.9"
+    "@babel/preset-react" "^7.22.5"
+    "@babel/preset-typescript" "^7.22.5"
+    "@babel/runtime" "^7.22.6"
+    "@babel/runtime-corejs3" "^7.22.6"
+    "@docusaurus/utils" "3.5.2"
+    babel-loader "^9.1.3"
+    babel-plugin-dynamic-import-node "^2.3.3"
+    fs-extra "^11.1.1"
+
 "@docusaurus/core@3.5.2", "@docusaurus/core@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@docusaurus/core/-/core-3.5.2.tgz#3adedb90e7b6104592f1231043bd6bf91680c39c"

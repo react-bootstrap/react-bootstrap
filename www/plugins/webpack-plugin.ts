@@ -1,7 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'node:path';
+import webpack from 'webpack';
+import type { Plugin } from '@docusaurus/types';
 
-module.exports = () => ({
+const plugin: Plugin = () => ({
   name: 'webpack-plugin',
   configureWebpack(_, isServer, { getJSLoader }) {
     return {
@@ -33,3 +34,5 @@ module.exports = () => ({
     };
   },
 });
+
+export default plugin;

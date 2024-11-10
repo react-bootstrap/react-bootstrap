@@ -1,8 +1,10 @@
+import type { Plugin } from '@docusaurus/types';
+
 // This ensures we only load a single copy of React from the Docusaurus node_modules
 // directory. Without this, importing aliased modules from another directory with React
 // installed would result in the "Invalid Hooks" error due to multiple copies of React
 // being used.
-module.exports = () => ({
+const plugin: Plugin = () => ({
   name: 'react-resolver-plugin',
   configureWebpack() {
     return {
@@ -18,3 +20,5 @@ module.exports = () => ({
     };
   },
 });
+
+export default plugin;

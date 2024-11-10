@@ -1,11 +1,12 @@
-const fs = require('node:fs/promises');
-const path = require('node:path');
-const reactDocgen = require('react-docgen');
-const resolveHocComponents = require('./resolveHocComponents');
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import type { Plugin } from '@docusaurus/types';
+import * as reactDocgen from 'react-docgen';
+import resolveHocComponents from './resolveHocComponents';
 
 const DOCLET_PATTERN = /^@(\w+)(?:$|\s((?:[^](?!^@\w))*))/gim;
 
-module.exports = () => ({
+const plugin: Plugin = () => ({
   name: 'react-docgen-plugin',
   configureWebpack(config) {
     return {
@@ -47,7 +48,7 @@ module.exports = () => ({
   async contentLoaded({ content, actions }) {
     const { createData } = actions;
 
-    const promises = [];
+    const promises: any[] = [];
     for (const componentData of content) {
       // Attach doclets to each prop.
       if (componentData.props) {
@@ -82,3 +83,5 @@ module.exports = () => ({
     await Promise.all(promises);
   },
 });
+
+export default plugin;

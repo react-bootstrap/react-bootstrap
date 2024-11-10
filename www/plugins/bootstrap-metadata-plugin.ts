@@ -1,7 +1,8 @@
-const crypto = require('node:crypto');
-const fs = require('node:fs/promises');
-const bootstrapPackageJson = require('bootstrap/package.json');
-const rbPackageJson = require('../../package.json');
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import type { Plugin } from '@docusaurus/types';
+import bootstrapPackageJson from 'bootstrap/package.json';
+import rbPackageJson from '../../package.json';
 
 async function getIntegrity(filePath) {
   const algo = 'sha384';
@@ -11,7 +12,7 @@ async function getIntegrity(filePath) {
   return `${algo}-${hash}`;
 }
 
-module.exports = () => ({
+const plugin: Plugin = () => ({
   name: 'bootstrap-metadata-plugin',
   async loadContent() {
     const bsShortVersion = bootstrapPackageJson.version
@@ -36,3 +37,5 @@ module.exports = () => ({
     setGlobalData(content);
   },
 });
+
+export default plugin;

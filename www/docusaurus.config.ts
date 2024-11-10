@@ -27,11 +27,11 @@ const config: Config = {
     locales: ['en'],
   },
   plugins: [
-    './plugins/react-resolver-plugin',
-    './plugins/webpack-plugin',
+    './plugins/react-resolver-plugin.ts',
+    './plugins/webpack-plugin.ts',
     'docusaurus-plugin-sass',
-    './plugins/bootstrap-metadata-plugin',
-    './plugins/react-docgen-plugin',
+    './plugins/bootstrap-metadata-plugin.ts',
+    './plugins/react-docgen-plugin/index.ts',
   ],
   presets: [
     [
