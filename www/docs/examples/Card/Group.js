@@ -23,7 +23,7 @@ function GroupExample() {
           <Card.Title>Card title</Card.Title>
           <Card.Text>
             This card has supporting text below as a natural lead-in to
-            additional content.{' '}
+            additional content.
           </Card.Text>
         </Card.Body>
         <Card.Footer>

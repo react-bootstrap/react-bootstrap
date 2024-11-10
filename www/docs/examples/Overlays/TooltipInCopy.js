@@ -1,13 +1,13 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-function TooltipInCopyExample() {
-  const Link = ({ id, children, title }) => (
-    <OverlayTrigger overlay={<Tooltip id={id}>{title}</Tooltip>}>
-      <a href="#">{children}</a>
-    </OverlayTrigger>
-  );
+const Link = ({ id, children, title }) => (
+  <OverlayTrigger overlay={<Tooltip id={id}>{title}</Tooltip>}>
+    <a href="#">{children}</a>
+  </OverlayTrigger>
+);
 
+function TooltipInCopyExample() {
   return (
     <p>
       Tight pants next level keffiyeh{' '}
@@ -34,4 +34,4 @@ function TooltipInCopyExample() {
   );
 }
 
-export default TooltipInCopyExample;
+render(<TooltipInCopyExample />);

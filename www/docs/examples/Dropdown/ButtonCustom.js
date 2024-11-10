@@ -16,7 +16,7 @@ function ButtonCustomExample() {
           <Dropdown.Divider />
           <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>{' '}
+      </Dropdown>
       <Dropdown as={ButtonGroup}>
         <Button variant="info">mix it up style-wise</Button>
         <Dropdown.Toggle split variant="success" id="dropdown-custom-2" />

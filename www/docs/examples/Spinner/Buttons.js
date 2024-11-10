@@ -13,7 +13,7 @@ function ButtonExample() {
           aria-hidden="true"
         />
         <span className="visually-hidden">Loading...</span>
-      </Button>{' '}
+      </Button>
       <Button variant="primary" disabled>
         <Spinner
           as="span"
