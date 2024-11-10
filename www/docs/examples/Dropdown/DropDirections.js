@@ -5,7 +5,7 @@ import SplitButton from 'react-bootstrap/SplitButton';
 function DropDirectioExample() {
   return (
     <>
-      <div className="mb-2">
+      <div className="mb-2 dropdown-btn-spacing">
         {['up', 'up-centered', 'down', 'down-centered', 'start', 'end'].map(
           (direction) => (
             <DropdownButton
@@ -26,7 +26,7 @@ function DropDirectioExample() {
         )}
       </div>
 
-      <div>
+      <div className="dropdown-btn-spacing">
         {['up', 'up-centered', 'down', 'down-centered', 'start', 'end'].map(
           (direction) => (
             <SplitButton
