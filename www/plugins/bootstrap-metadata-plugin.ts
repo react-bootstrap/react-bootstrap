@@ -4,7 +4,14 @@ import type { Plugin } from '@docusaurus/types';
 import bootstrapPackageJson from 'bootstrap/package.json';
 import rbPackageJson from '../../package.json';
 
-async function getIntegrity(filePath) {
+interface BootstrapMetadata {
+  bootstrapVersion: string;
+  bootstrapDocsUrl: string;
+  bootstrapCssHash: string;
+  rbVersion: string;
+}
+
+async function getIntegrity(filePath: string): Promise<string> {
   const algo = 'sha384';
   const content = await fs.readFile(require.resolve(filePath), 'utf8');
   const hash = crypto.createHash(algo).update(content, 'utf8').digest('base64');
@@ -12,30 +19,29 @@ async function getIntegrity(filePath) {
   return `${algo}-${hash}`;
 }
 
-const plugin: Plugin = () => ({
-  name: 'bootstrap-metadata-plugin',
-  async loadContent() {
-    const bsShortVersion = bootstrapPackageJson.version
-      .split('.')
-      .slice(0, 2)
-      .join('.');
+export default () =>
+  ({
+    name: 'bootstrap-metadata-plugin',
+    async loadContent() {
+      const bsShortVersion = bootstrapPackageJson.version
+        .split('.')
+        .slice(0, 2)
+        .join('.');
 
-    const bootstrapCssHash = await getIntegrity(
-      'bootstrap/dist/css/bootstrap.min.css',
-    );
+      const bootstrapCssHash = await getIntegrity(
+        'bootstrap/dist/css/bootstrap.min.css',
+      );
 
-    return {
-      bootstrapVersion: bootstrapPackageJson.version,
-      bootstrapDocsUrl: `https://getbootstrap.com/docs/${bsShortVersion}`,
-      bootstrapCssHash,
-      rbVersion: rbPackageJson.version,
-    };
-  },
-  async contentLoaded({ content, actions }) {
-    const { setGlobalData } = actions;
+      return {
+        bootstrapVersion: bootstrapPackageJson.version,
+        bootstrapDocsUrl: `https://getbootstrap.com/docs/${bsShortVersion}`,
+        bootstrapCssHash,
+        rbVersion: rbPackageJson.version,
+      };
+    },
+    async contentLoaded({ content, actions }) {
+      const { setGlobalData } = actions;
 
-    setGlobalData(content);
-  },
-});
-
-export default plugin;
+      setGlobalData(content);
+    },
+  }) satisfies Plugin<BootstrapMetadata>;
