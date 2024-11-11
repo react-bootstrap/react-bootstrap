@@ -1,11 +1,10 @@
 import path from 'node:path';
-import webpack from 'webpack';
 import type { Plugin } from '@docusaurus/types';
 
 export default () =>
   ({
     name: 'webpack-plugin',
-    configureWebpack(_, isServer, { getJSLoader }) {
+    configureWebpack(_, isServer, { currentBundler, getJSLoader }) {
       return {
         devtool: 'inline-cheap-module-source-map',
         module: {
@@ -30,7 +29,7 @@ export default () =>
           },
         },
         plugins: [
-          new webpack.DefinePlugin({
+          new currentBundler.instance.DefinePlugin({
             __DEV__: process.env.NODE_ENV === 'development',
           }),
         ],
