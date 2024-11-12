@@ -55,9 +55,17 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
     },
   );
 
+
+  const handleCustomRedirect = (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('a[href]')) {
+      e.preventDefault(); 
+    }
+  };
+
   return (
-    <div ref={exampleRef}>
-      <LivePreview className={className} />
+    <div ref={exampleRef} >
+      <LivePreview className={className} onClick={handleCustomRedirect}/>
     </div>
   );
 };
