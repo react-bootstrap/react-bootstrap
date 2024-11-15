@@ -62,7 +62,6 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
     }
   })
 
-
   return (
     <div ref={exampleRef}>
       <LivePreview className={className} onClick={handleCustomRedirect}/>
