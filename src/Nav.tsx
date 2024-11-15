@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import all from 'prop-types-extra/lib/all';
+import { all } from 'prop-types-extra';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
