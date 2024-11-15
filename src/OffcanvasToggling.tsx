@@ -8,6 +8,7 @@ import Transition, {
   EXITING,
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from '@restart/ui/types';
+import { getReactVersion } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import { BsPrefixOnlyProps } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
@@ -104,6 +105,9 @@ const OffcanvasToggling = React.forwardRef<
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
 
+    const { major } = getReactVersion();
+    const childRef = major >= 19 ? (children as any).props.ref : (children as any).ref;
+
     return (
       <TransitionWrapper
         ref={ref}
@@ -113,7 +117,7 @@ const OffcanvasToggling = React.forwardRef<
         unmountOnExit={unmountOnExit}
         appear={appear}
         {...props}
-        childRef={(children as any).ref}
+        childRef={childRef}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
