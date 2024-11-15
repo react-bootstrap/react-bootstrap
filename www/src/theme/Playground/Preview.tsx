@@ -4,7 +4,7 @@ import { LiveContext, LivePreview } from 'react-live';
 import qsa from 'dom-helpers/querySelectorAll';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMutationObserver from '@restart/hooks/useMutationObserver';
-import { useEventCallback } from '@restart/hooks';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
 export interface PreviewProps {
   className?: string | undefined;
