@@ -4,6 +4,7 @@ import { LiveContext, LivePreview } from 'react-live';
 import qsa from 'dom-helpers/querySelectorAll';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMutationObserver from '@restart/hooks/useMutationObserver';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
 export interface PreviewProps {
   className?: string | undefined;
@@ -55,9 +56,15 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
     },
   );
 
+  const handleCustomRedirect = useEventCallback((e: React.MouseEvent<HTMLElement>) => {
+    if (e.target.tagName === 'A') {
+      e.preventDefault();
+    }
+  })
+
   return (
     <div ref={exampleRef}>
-      <LivePreview className={className} />
+      <LivePreview className={className} onClick={handleCustomRedirect}/>
     </div>
   );
 };
