@@ -8,7 +8,7 @@ import Transition, {
   ENTERING,
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from '@restart/ui/types';
-import { getReactVersion } from '@restart/ui/utils';
+import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';
@@ -114,8 +114,7 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
       [onEnter],
     );
 
-    const { major } = getReactVersion();
-    const childRef = major >= 19 ? (children as any).props.ref : (children as any).ref;
+    const childRef = getChildRef(children);
 
     return (
       <TransitionWrapper

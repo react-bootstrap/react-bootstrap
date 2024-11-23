@@ -8,6 +8,7 @@ import Transition, {
   EXITING,
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from '@restart/ui/types';
+import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import { BsPrefixOnlyProps } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
@@ -113,7 +114,7 @@ const OffcanvasToggling = React.forwardRef<
         unmountOnExit={unmountOnExit}
         appear={appear}
         {...props}
-        childRef={(children as any).ref}
+        childRef={getChildRef(children)}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
