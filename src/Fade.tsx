@@ -114,15 +114,13 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
       [onEnter],
     );
 
-    const childRef = getChildRef(children);
-
     return (
       <TransitionWrapper
         ref={ref}
         addEndListener={transitionEndListener}
         {...props}
         onEnter={handleEnter}
-        childRef={childRef}
+        childRef={getChildRef(children)}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children, {
