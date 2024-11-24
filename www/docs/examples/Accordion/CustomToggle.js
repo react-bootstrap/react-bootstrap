@@ -1,6 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
@@ -8,13 +9,9 @@ function CustomToggle({ children, eventKey }) {
   );
 
   return (
-    <button
-      type="button"
-      style={{ backgroundColor: 'pink' }}
-      onClick={decoratedOnClick}
-    >
+    <Button variant="primary" onClick={decoratedOnClick}>
       {children}
-    </button>
+    </Button>
   );
 }
 
