@@ -10,6 +10,7 @@ import Transition, {
   EXITING,
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from '@restart/ui/types';
+import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
@@ -229,7 +230,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
         onEntered={handleEntered}
         onExit={handleExit}
         onExiting={handleExiting}
-        childRef={(children as any).ref}
+        childRef={getChildRef(children)}
         in={inProp}
         timeout={timeout}
         mountOnEnter={mountOnEnter}
