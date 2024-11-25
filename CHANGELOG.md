@@ -1,3 +1,16 @@
+## [2.10.6](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.5...v2.10.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* **AccordionHeader:** apply aria-controls to button ([#6868](https://github.com/react-bootstrap/react-bootstrap/issues/6868)) ([8475119](https://github.com/react-bootstrap/react-bootstrap/commit/8475119a6c8e9606d5e5cc87e19cf91f1670e224))
+* fix ref access in React 19 ([#6869](https://github.com/react-bootstrap/react-bootstrap/issues/6869)) ([2c65f5d](https://github.com/react-bootstrap/react-bootstrap/commit/2c65f5de1a50d28e4c4e6c4c7d0dc332a68e6bd7))
+* **Nav:** remove prop-types-extra import from build ([#6854](https://github.com/react-bootstrap/react-bootstrap/issues/6854)) ([ab81d6b](https://github.com/react-bootstrap/react-bootstrap/commit/ab81d6b1fda1175bc635978a493da49c60db9b25))
+
+
+
+
+
 ## [2.10.5](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.4...v2.10.5) (2024-09-26)
 
 
