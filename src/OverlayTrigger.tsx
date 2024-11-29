@@ -6,6 +6,7 @@ import useTimeout from '@restart/hooks/useTimeout';
 import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import { getChildRef } from '@restart/ui/utils';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
 import safeFindDOMNode from './safeFindDOMNode';
 import { Placement } from './types';
@@ -192,7 +193,7 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   const triggerNodeRef = useRef(null);
   const mergedRef = useMergedRefs<unknown>(
     triggerNodeRef,
-    (children as any).ref,
+    getChildRef(children),
   );
   const timeout = useTimeout();
   const hoverStateRef = useRef<string>('');

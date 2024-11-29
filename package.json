@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "2.10.5",
+  "version": "2.10.6",
   "description": "Bootstrap 5 components built with React",
   "keywords": [
     "bootstrap",
@@ -60,7 +60,7 @@
   "dependencies": {
     "@babel/runtime": "^7.24.7",
     "@restart/hooks": "^0.4.9",
-    "@restart/ui": "^1.6.9",
+    "@restart/ui": "^1.9.0",
     "@types/react-transition-group": "^4.4.6",
     "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",

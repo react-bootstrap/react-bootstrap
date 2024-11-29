@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useRef, useState } from 'react';
 import clsx from 'clsx';
-import useIsBrowser from '@docusaurus/useIsBrowser';
 import { LiveContext, LiveProvider, LiveEditor, LiveError } from 'react-live';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -9,6 +8,7 @@ import { usePrismTheme } from '@docusaurus/theme-common';
 import type { Props } from '@theme/Playground';
 import type { ThemeConfig } from '@docusaurus/theme-live-codeblock';
 import CopyButton from '@theme-original/CodeBlock/CopyButton';
+import Button from 'react-bootstrap/Button';
 import Preview from './Preview';
 import EditorInfoMessage from './EditorInfoMessage';
 
@@ -52,8 +52,8 @@ function ResultWithHeader({ className }: any) {
 let uid = 0;
 
 function ThemedLiveEditor() {
-  const { code } = useContext(LiveContext);
-  const isBrowser = useIsBrowser();
+  const { code, onChange }:any = useContext(LiveContext);
+  const [editorKey, seteditorKey] = useState(0);
   const [focused, setFocused] = useState(false);
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
@@ -99,6 +99,18 @@ function ThemedLiveEditor() {
     ignoreTabKey: ignoreTab,
   };
 
+  const handleCodeChange = useCallback(
+    (newCode) => {
+      onChange(newCode); 
+    },
+    [onChange]
+  );
+
+  const handleReset = useCallback(() => {
+    onChange(code); 
+    seteditorKey((prevKey) => prevKey + 1); 
+  }, [code, onChange]);
+
   const showMessage = keyboardFocused || (focused && !ignoreTab);
 
   return (
@@ -106,7 +118,8 @@ function ThemedLiveEditor() {
       <LiveEditor
         // We force remount the editor on hydration,
         // otherwise dark prism theme is not applied
-        key={String(isBrowser)}
+        key={editorKey}
+        onChange={handleCodeChange}
         className={styles.playgroundEditor}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -132,6 +145,9 @@ function ThemedLiveEditor() {
         <div className={styles.buttonGroup}>
           <CopyButton code={code} />
         </div>
+        <Button className="h-75" onClick={handleReset}>
+          Reset
+        </Button>
       </div>
     </div>
   );
