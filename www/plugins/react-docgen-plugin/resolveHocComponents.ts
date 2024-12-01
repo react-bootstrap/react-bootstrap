@@ -1,7 +1,7 @@
-const camelCase = require('lodash.camelcase');
-const { resolver, utils } = require('react-docgen');
-const { namedTypes: types, visit } = require('ast-types');
-const buildParser = require('react-docgen/dist/babelParser').default;
+import camelCase from 'lodash.camelcase';
+import { resolver, utils } from 'react-docgen';
+import { namedTypes as types, visit } from 'ast-types';
+import buildParser from 'react-docgen/dist/babelParser';
 
 const upperFirst = (str) => str[0].toUpperCase() + str.slice(1);
 
@@ -10,7 +10,7 @@ const parser = buildParser({
   filename: 'dummy.ts',
 });
 
-module.exports = (ast) => {
+export default (ast) => {
   let components = resolver.findAllComponentDefinitions(ast);
 
   const getComment = (path) => {
@@ -45,7 +45,7 @@ module.exports = (ast) => {
 
       const property =
         optionsNode &&
-        optionsNode.properties.find((p) => p.key.name === 'Component');
+        (optionsNode as any).properties.find((p) => p.key.name === 'Component');
 
       if (property) {
         type =
@@ -60,10 +60,10 @@ import PropTypes from 'prop-types';
 
 ${comment || ''}
 export default class ${upperFirst(
-        camelCase(prefixNode.value),
+        camelCase((prefixNode as any).value),
       )} extends React.Component {
   static propTypes = {
-    /** @default ${prefixNode.raw} */
+    /** @default ${(prefixNode as any).raw} */
     bsPrefix: PropTypes.string.isRequired,
     as: PropTypes.elementType,
   }
@@ -77,7 +77,7 @@ export default class ${upperFirst(
         `;
 
       let comp = parser.parse(src);
-      comp.__src = src;
+      (comp as any).__src = src;
       components = components.concat(
         resolver.findExportedComponentDefinition(comp),
       );
