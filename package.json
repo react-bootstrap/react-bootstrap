@@ -68,7 +68,7 @@
     "prop-types": "^15.8.1",
     "prop-types-extra": "^1.1.0",
     "react-transition-group": "^4.4.5",
-    "uncontrollable": "^7.2.1",
+    "uncontrollable": "^8.0.4",
     "warning": "^4.0.3"
   },
   "devDependencies": {
