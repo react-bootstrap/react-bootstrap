@@ -5,7 +5,8 @@
     "prettier"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "@typescript-eslint"
   ],
   "rules": {
     "import/extensions": "off",
@@ -20,7 +21,11 @@
         ]
       }
     ],
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",  // Optional: Disable explicit types for function boundaries
+    "@typescript-eslint/no-unused-vars": "warn",  // Optional: Warn for unused variables
+    "@typescript-eslint/no-explicit-any": "off",  // Optional: Allow `any` type, if necessary
+    "@typescript-eslint/ban-ts-comment": "warn"  // Optional: Warn about TS comments
   },
   "overrides": [
     {
@@ -55,3 +60,8 @@
     }
   ]
 }
+
+      
+     
+        
+   
