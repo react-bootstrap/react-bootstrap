@@ -128,7 +128,7 @@ function renderTab(child) {
   );
 }
 
-const Tabs = (props: TabsProps) => {
+const Tabs: React.FC<TabsProps> = (props) => {
   const {
     id,
     onSelect,
