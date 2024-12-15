@@ -1,3 +1,14 @@
+## [2.10.7](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.6...v2.10.7) (2024-12-15)
+
+
+### Bug Fixes
+
+* fix type conflicts with react 19 types ([#6880](https://github.com/react-bootstrap/react-bootstrap/issues/6880)) ([416145f](https://github.com/react-bootstrap/react-bootstrap/commit/416145f8815e35c1326a47983964c092700b4cda))
+
+
+
+
+
 ## [2.10.6](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.5...v2.10.6) (2024-11-25)
 
 
