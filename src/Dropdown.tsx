@@ -23,7 +23,10 @@ import { AlignType, alignPropType } from './types';
 export interface DropdownProps
   extends BaseDropdownProps,
     BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'children'> {
+    Omit<
+      React.HTMLAttributes<HTMLElement>,
+      'onSelect' | 'children' | 'onToggle'
+    > {
   drop?: DropDirection;
   align?: AlignType;
   focusFirstItemOnShow?: boolean | 'keyboard';

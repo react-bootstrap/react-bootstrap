@@ -60,7 +60,8 @@
   "dependencies": {
     "@babel/runtime": "^7.24.7",
     "@restart/hooks": "^0.4.9",
-    "@restart/ui": "^1.9.0",
+    "@restart/ui": "^1.9.2",
+    "@types/prop-types": "^15.7.12",
     "@types/react-transition-group": "^4.4.6",
     "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",
@@ -85,7 +86,6 @@
     "@testing-library/react": "^16.0.0",
     "@types/invariant": "^2.2.37",
     "@types/mocha": "^10.0.6",
-    "@types/prop-types": "^15.7.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/warning": "^3.0.3",

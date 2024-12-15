@@ -10,7 +10,7 @@ export type AspectRatio = '1x1' | '4x3' | '16x9' | '21x9' | string;
 export interface RatioProps
   extends BsPrefixProps,
     React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactChild;
+  children: React.ReactElement | string | number;
   aspectRatio?: AspectRatio | number;
 }
 
