@@ -10,7 +10,7 @@ export type Variant =
   | 'info'
   | 'dark'
   | 'light'
-  | string;
+  | (string & {});
 export type ButtonVariant =
   | Variant
   | 'link'
@@ -33,7 +33,7 @@ export type Color =
   | 'light'
   | 'white'
   | 'muted'
-  | string;
+  | (string & {});
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 
