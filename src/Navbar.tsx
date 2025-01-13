@@ -17,7 +17,7 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavbarProps
   extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'> {
   variant?: 'light' | 'dark' | string;
   expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   bg?: string;
