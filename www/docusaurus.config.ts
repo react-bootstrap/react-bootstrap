@@ -31,7 +31,7 @@ const config: Config = {
     './plugins/webpack-plugin.ts',
     'docusaurus-plugin-sass',
     './plugins/bootstrap-metadata-plugin.ts',
-    './plugins/react-docgen-plugin/index.ts',
+    './plugins/react-docgen-plugin.ts',
   ],
   presets: [
     [
