@@ -2,7 +2,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Plugin } from '@docusaurus/types';
 import * as reactDocgen from 'react-docgen';
-import resolveHocComponents from './resolveHocComponents';
 
 const DOCLET_PATTERN = /^@(\w+)(?:$|\s((?:[^](?!^@\w))*))/gim;
 
@@ -23,7 +22,7 @@ export default () =>
       };
     },
     async loadContent() {
-      const srcPath = path.join(__dirname, '../../../src');
+      const srcPath = path.join(__dirname, '../../src');
       const files = await fs.readdir(srcPath);
 
       const promises = files.map(async (file) => {
@@ -31,7 +30,7 @@ export default () =>
           const filePath = path.join(srcPath, file);
           const buffer = await fs.readFile(filePath);
 
-          const output = reactDocgen.parse(buffer, resolveHocComponents, null, {
+          const output = reactDocgen.parse(buffer, {
             filename: filePath,
           });
 
@@ -42,9 +41,7 @@ export default () =>
       });
 
       let data = await Promise.all(promises);
-      data = data.flat().filter(Boolean);
-
-      return data;
+      return data.flat().filter(Boolean);
     },
     async contentLoaded({ content, actions }) {
       const { createData } = actions;

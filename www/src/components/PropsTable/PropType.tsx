@@ -1,16 +1,21 @@
 import * as React from 'react';
 
-function renderValue(valueArray: string[]) {
-  const renderedEnumValues = [];
-  valueArray.forEach((value: any, i: number) => {
-    if (i > 0) {
-      renderedEnumValues.push(<span key={`${i}c`}> | </span>);
-    }
+function parseTsType(tsType: any) {
+  if (!tsType) {
+    return null;
+  }
 
-    renderedEnumValues.push(<code key={i}>{value}</code>);
-  });
+  if (tsType.name === 'union') {
+    return tsType.elements.map(parseTsType).join(' | ');
+  }
 
-  return <>{renderedEnumValues}</>;
+  if (tsType.name === 'signature' && tsType.type === 'object') {
+    return `{ ${tsType.signature.properties
+      .map(({ key, value }) => `${key}: ${parseTsType(value)}`)
+      .join(', ')} }`;
+  }
+
+  return tsType.raw ?? tsType.value ?? tsType.name;
 }
 
 export interface PropTypeProps {
@@ -18,31 +23,11 @@ export interface PropTypeProps {
 }
 
 const PropType: React.FC<PropTypeProps> = ({ prop }) => {
-  if (prop.doclets.type) {
-    // This takes precedence.
-    return renderValue(
-      prop.doclets.type
-        .trim()
-        .replace(/^\{/, '')
-        .replace(/\}$/, '')
-        .replace(/^\(/, '')
-        .replace(/\)$/, '')
-        .split('|'),
-    );
-  }
+  const { tsType, type } = prop;
 
-  const { type } = prop;
-  const { name, value } = type || {};
+  const parsedType = parseTsType(tsType) ?? type?.name;
 
-  if (name === 'union') {
-    return renderValue(value.map((v) => v.name));
-  }
-
-  if (name === 'enum') {
-    return renderValue(value.map((v) => v.value));
-  }
-
-  return name ?? null;
+  return parsedType ? <code>{parsedType}</code> : null;
 };
 
 export default PropType;

@@ -10,6 +10,9 @@ import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionCollapseProps extends BsPrefixProps, CollapseProps {
   eventKey: string;
+
+  /** @default 'accordion-collapse' */
+  bsPrefix?: string;
 }
 
 const propTypes = {

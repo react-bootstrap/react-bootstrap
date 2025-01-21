@@ -39,6 +39,9 @@ const propTypes = {
 
   split: PropTypes.bool,
 
+  /**
+   * @default Button
+   */
   as: PropTypes.elementType,
 
   /**
