@@ -1911,10 +1911,10 @@
   dependencies:
     dequal "^2.0.3"
 
-"@restart/ui@^1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.9.2.tgz#dad8f084e6a56f87f9799dbc248af04168ffc03b"
-  integrity sha512-MWWqJqSyqUWWPBOOiRQrX57CBc/9CoYONg7sE+uag72GCAuYrHGU5c49vU5s4BUSBgiKNY6rL7TULqGDrouUaA==
+"@restart/ui@^1.9.3":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.9.3.tgz#32771ba81f27aa255f26387c1b9fc1a372f26638"
+  integrity sha512-2QwCC42ISRAu7nafKeO4khG1F65Xfu2n+cwQT30Ck5bxszKDXuT2AZMDIX2auXxHRednG2ynr8ffSA1fRrkOGg==
   dependencies:
     "@babel/runtime" "^7.26.0"
     "@popperjs/core" "^2.11.8"
