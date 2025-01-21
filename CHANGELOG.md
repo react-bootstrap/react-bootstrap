@@ -1,3 +1,15 @@
+## [2.10.8](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.7...v2.10.8) (2025-01-21)
+
+
+### Bug Fixes
+
+* **Navbar:** fix react 19 type compatibility ([#6886](https://github.com/react-bootstrap/react-bootstrap/issues/6886)) ([7f69899](https://github.com/react-bootstrap/react-bootstrap/commit/7f69899f1b3be4bfbe09d88ca34c373ebb0ad9c3))
+* update @restart/ui to v1.9.3 ([#6890](https://github.com/react-bootstrap/react-bootstrap/issues/6890)) ([1277678](https://github.com/react-bootstrap/react-bootstrap/commit/127767889217f5c6097fa7e6e00b4ff51b100b98))
+
+
+
+
+
 ## [2.10.7](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.6...v2.10.7) (2024-12-15)
 
 
