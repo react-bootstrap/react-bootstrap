@@ -1,12 +1,6 @@
 {
-  "extends": [
-    "@react-bootstrap",
-    "4catalyzer-typescript",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["@react-bootstrap", "4catalyzer-typescript", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "import/extensions": "off",
     "prettier/prettier": "off",
@@ -15,26 +9,21 @@
     "react/no-unknown-property": [
       "error",
       {
-        "ignore": [
-          "x-placement"
-        ]
-      }
+        "ignore": ["x-placement"],
+      },
     ],
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "@typescript-eslint/ban-types": "off",
   },
   "overrides": [
     {
-      "files": [
-        "test/**/*"
-      ],
+      "files": ["test/**/*"],
       "rules": {
-        "@typescript-eslint/no-unused-expressions": "off"
-      }
+        "@typescript-eslint/no-unused-expressions": "off",
+      },
     },
     {
-      "files": [
-        "www/**/*"
-      ],
+      "files": ["www/**/*"],
       "rules": {
         "no-console": "off",
         "react/prop-types": "off",
@@ -42,16 +31,14 @@
         "no-alert": "off",
         "no-restricted-syntax": "off",
         "no-undef": "off",
-        "jsx-a11y/label-has-associated-control": "off"
-      }
+        "jsx-a11y/label-has-associated-control": "off",
+      },
     },
     {
-      "files": [
-        "www/docs/examples/**/*"
-      ],
+      "files": ["www/docs/examples/**/*"],
       "rules": {
-        "import/no-unresolved": "off"
-      }
-    }
-  ]
+        "import/no-unresolved": "off",
+      },
+    },
+  ],
 }
