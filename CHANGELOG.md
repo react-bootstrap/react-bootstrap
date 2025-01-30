@@ -1,3 +1,15 @@
+## [2.10.9](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.8...v2.10.9) (2025-01-30)
+
+
+### Bug Fixes
+
+* update @restart/ui to v1.9.4 ([#6893](https://github.com/react-bootstrap/react-bootstrap/issues/6893)) ([bbbba51](https://github.com/react-bootstrap/react-bootstrap/commit/bbbba515fec1a2dadd15025f968f5ea166d81e35))
+* Variant/Color type infer ([#6885](https://github.com/react-bootstrap/react-bootstrap/issues/6885)) ([0e3ab61](https://github.com/react-bootstrap/react-bootstrap/commit/0e3ab6172211edad063b5d04d6efb2e61ee3d825))
+
+
+
+
+
 ## [2.10.8](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.7...v2.10.8) (2025-01-21)
 
 
