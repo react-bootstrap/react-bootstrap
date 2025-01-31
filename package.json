@@ -102,6 +102,7 @@
     "fs-extra": "^10.1.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",
     "playwright": "^1.50.0",
     "prettier": "^3.4.2",
