@@ -7,7 +7,6 @@ export default defineConfig({
   },
   plugins: [react()],
   test: {
-    environment: 'jsdom',
     include: ['test/**/*Spec.ts', 'test/**/*Spec.tsx'],
     setupFiles: ['vitest.setup.ts'],
     browser: {
