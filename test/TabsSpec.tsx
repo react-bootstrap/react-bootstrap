@@ -159,7 +159,7 @@ describe('<Tabs>', () => {
   it('Should not render a Tab without a title', () => {
     render(
       <Tabs data-testid="testid" id="test" defaultActiveKey={1}>
-        {/* @ts-ignore */}
+        {/* @ts-expect-error test with no title */}
         <Tab eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2} disabled>
           Tab 2 content

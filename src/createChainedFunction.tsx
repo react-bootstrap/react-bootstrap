@@ -20,9 +20,9 @@ function createChainedFunction(...funcs) {
       if (acc === null) return f;
 
       return function chainedFunction(...args) {
-        // @ts-ignore
+        // @ts-expect-error ignore "this" error
         acc.apply(this, args);
-        // @ts-ignore
+        // @ts-expect-error ignore "this" error
         f.apply(this, args);
       };
     }, null);

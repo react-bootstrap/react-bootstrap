@@ -101,7 +101,6 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
         props['aria-disabled'] = true;
       }
 
-      // eslint-disable-next-line no-nested-ternary
       const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
 
       warning(

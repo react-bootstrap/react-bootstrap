@@ -105,7 +105,6 @@ describe('<Nav>', () => {
     const onSelectSpy = vi.fn();
 
     render(
-      // eslint-disable-next-line react/jsx-no-bind
       <Nav onSelect={onSelectSpy} data-testid="test">
         <Nav.Link eventKey={1}>Tab 1 content</Nav.Link>
         <Nav.Link eventKey={2}>

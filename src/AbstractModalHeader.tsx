@@ -77,6 +77,7 @@ const AbstractModalHeader = React.forwardRef<
   },
 );
 
+AbstractModalHeader.displayName = 'AbstractModalHeader';
 AbstractModalHeader.propTypes = propTypes;
 
 export default AbstractModalHeader;

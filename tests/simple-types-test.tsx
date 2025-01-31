@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 
@@ -66,7 +64,7 @@ const RefTest = () => {
   carouselRef?.current?.prev();
   carouselRef?.current?.next();
 
-  return <Carousel ref={carouselRef} />
+  return <Carousel ref={carouselRef} />;
 };
 
 class ClassComponent extends React.Component {
@@ -77,8 +75,7 @@ class ClassComponent extends React.Component {
 
 const FunctionComponent: React.FC = () => <div>abc</div>;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => { };
+const noop = () => {};
 
 const MegaComponent = () => (
   <>
@@ -680,7 +677,6 @@ const MegaComponent = () => (
       variant="pills"
       activeKey="1"
       onSelect={(k: string | null) => {
-        // eslint-disable-next-line no-console
         console.log(k);
       }}
       role="role"
@@ -1006,8 +1002,12 @@ const MegaComponent = () => (
       >
         Radio 1 (pre-checked)
       </ToggleButton>
-      <ToggleButton id="abc" value={2}>Radio 2</ToggleButton>
-      <ToggleButton id="abc" value={3}>Radio 3</ToggleButton>
+      <ToggleButton id="abc" value={2}>
+        Radio 2
+      </ToggleButton>
+      <ToggleButton id="abc" value={3}>
+        Radio 3
+      </ToggleButton>
     </ToggleButtonGroup>
     <Stack direction="horizontal" gap={1} />
     <Stack

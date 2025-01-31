@@ -55,7 +55,7 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
     return (
-      <img // eslint-disable-line jsx-a11y/alt-text
+      <img
         ref={ref}
         {...props}
         className={classNames(

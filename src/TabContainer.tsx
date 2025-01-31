@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs, { TabsProps } from '@restart/ui/Tabs';
 import getTabTransitionComponent from './getTabTransitionComponent';

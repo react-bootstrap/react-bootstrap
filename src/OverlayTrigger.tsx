@@ -55,7 +55,6 @@ function normalizeDelay(delay?: OverlayDelay) {
 // for cases when the trigger is disabled and mouseOut/Over can cause flicker
 // moving from one child element to another.
 function handleMouseOverOut(
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   handler: (...args: [React.MouseEvent, ...any[]]) => any,
   args: [React.MouseEvent, ...any[]],
   relatedNative: 'fromElement' | 'toElement',

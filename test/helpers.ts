@@ -1,7 +1,6 @@
 let style: any;
 let seen: string[] = [];
 
-// eslint-disable-next-line import/prefer-default-export
 export function injectCss(rules: string) {
   if (seen.indexOf(rules) !== -1) {
     return;

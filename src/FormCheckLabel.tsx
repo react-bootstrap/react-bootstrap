@@ -28,7 +28,7 @@ const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-label');
 
     return (
-      <label // eslint-disable-line jsx-a11y/label-has-associated-control
+      <label
         {...props}
         ref={ref}
         htmlFor={htmlFor || controlId}

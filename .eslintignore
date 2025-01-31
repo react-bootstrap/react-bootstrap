@@ -1,8 +1,0 @@
-lib/
-node_modules/**
-coverage/
-**/node_modules/**
-www/.cache
-www/public
-www/plugins
-**/*.d.ts

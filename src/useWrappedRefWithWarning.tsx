@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 
 export default function useWrappedRefWithWarning(ref, componentName) {
-  // @ts-ignore
+  // @ts-expect-error Ignore global __DEV__ variable
   if (!__DEV__) return ref;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks

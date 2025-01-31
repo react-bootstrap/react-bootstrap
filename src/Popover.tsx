@@ -135,6 +135,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   },
 );
 
+Popover.displayName = 'Popover';
 Popover.propTypes = propTypes as any;
 
 export default Object.assign(Popover, {

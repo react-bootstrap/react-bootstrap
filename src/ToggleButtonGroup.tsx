@@ -139,6 +139,7 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
   );
 }) as typeof ToggleButtonGroup;
 
+ToggleButtonGroup.displayName = 'ToggleButtonGroup';
 ToggleButtonGroup.propTypes = propTypes;
 
 export default Object.assign(ToggleButtonGroup, {

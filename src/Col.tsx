@@ -29,7 +29,7 @@ type ColOrder = ColOrderNumber | 'first' | 'last';
 type ColSize = boolean | 'auto' | NumberAttr;
 type ColSpec =
   | ColSize
-  | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
+  | { span?: ColSize | null; offset?: NumberAttr; order?: ColOrder };
 
 export interface ColProps
   extends BsPrefixProps,

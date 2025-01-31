@@ -5,7 +5,6 @@ import ModalManager from '@restart/ui/ModalManager';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Offcanvas from '../src/Offcanvas';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 describe('<Offcanvas>', () => {
@@ -237,7 +236,7 @@ describe('<Offcanvas>', () => {
     const addSpy = vi.fn();
 
     class MyModalManager extends ModalManager {
-      // @ts-ignore
+      // @ts-expect-error test only method
       add() {
         addSpy();
       }
