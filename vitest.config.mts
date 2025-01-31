@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   define: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     __DEV__: true,
   },
   plugins: [react()],
