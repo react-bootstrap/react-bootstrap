@@ -11,13 +11,21 @@ export default defineConfig({
     setupFiles: ['vitest.setup.ts'],
     browser: {
       enabled: true,
-      name: 'chromium',
       provider: 'playwright',
-      providerOptions: {
-        context: {
-          hasTouch: true,
+      instances: [
+        {
+          browser: 'chromium',
+          context: {
+            hasTouch: true,
+          },
         },
-      },
+        {
+          browser: 'firefox',
+          context: {
+            hasTouch: true,
+          },
+        },
+      ],
     },
     coverage: {
       provider: 'istanbul',
