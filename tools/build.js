@@ -89,9 +89,7 @@ const buildDirectories = step('Linking directories', async () => {
 
   await fse.writeJSON(
     path.join(esRoot, 'package.json'),
-    {
-      type: 'module',
-    },
+    { type: 'module' },
     { spaces: 2 },
   );
 });
