@@ -79,14 +79,22 @@ const buildDist = step(
     }),
 );
 
-const buildDirectories = step('Linking directories', () =>
-  cherryPick({
+const buildDirectories = step('Linking directories', async () => {
+  await cherryPick({
     inputDir: '../src',
     cjsDir: 'cjs',
     esmDir: 'esm',
     cwd: libRoot,
-  }),
-);
+  });
+
+  await fse.writeJSON(
+    path.join(esRoot, 'package.json'),
+    {
+      type: 'module',
+    },
+    { spaces: 2 },
+  );
+});
 
 console.log(
   green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`),
