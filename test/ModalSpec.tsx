@@ -258,7 +258,6 @@ describe('<Modal>', () => {
     }
 
     render(
-      // eslint-disable-next-line react/jsx-no-bind
       <Modal show dialogAs={CustomDialog}>
         <strong>Message</strong>
       </Modal>,
@@ -475,15 +474,15 @@ describe('<Modal>', () => {
     const addSpy = vi.fn();
 
     class MyModalManager extends ModalManager {
-      // @ts-ignore
+      // @ts-expect-error Test function
       add() {
         addSpy();
       }
     }
 
-    const managerRef = React.createRef<ModalManager | null>();
-    // @ts-ignore
-    managerRef.current = new MyModalManager();
+    const managerRef: React.MutableRefObject<ModalManager | null> =
+      React.createRef<ModalManager | null>();
+    managerRef.current = new MyModalManager() as any;
 
     render(
       <Modal show manager={managerRef.current as any}>

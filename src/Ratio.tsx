@@ -68,6 +68,7 @@ const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
   },
 );
 
+Ratio.displayName = 'Ratio';
 Ratio.propTypes = propTypes;
 
 export default Ratio;

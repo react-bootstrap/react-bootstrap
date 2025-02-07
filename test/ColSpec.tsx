@@ -49,7 +49,6 @@ describe('Col', () => {
 
   it('Should allow span to be null', () => {
     render(
-      // @ts-ignore
       <Col xs="6" md={{ span: null, order: 1 }}>
         Column
       </Col>,

@@ -1,4 +1,3 @@
-/* eslint-disable no-new-func */
 import { describe, expect, it, vi } from 'vitest';
 import createChainedFunction from '../src/createChainedFunction';
 

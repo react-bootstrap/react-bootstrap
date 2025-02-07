@@ -223,7 +223,6 @@ const propTypes = {
   'aria-label': PropTypes.string,
 };
 
-/* eslint-disable no-use-before-define, react/no-multi-comp */
 function DialogTransition(props) {
   return <Fade {...props} timeout={null} />;
 }
@@ -232,7 +231,6 @@ function BackdropTransition(props) {
   return <Fade {...props} timeout={null} />;
 }
 
-/* eslint-enable no-use-before-define */
 const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
   React.forwardRef(
     (
@@ -461,8 +459,6 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
           aria-labelledby={ariaLabelledby}
           aria-describedby={ariaDescribedby}
         >
-          {/*
-        // @ts-ignore */}
           <Dialog
             {...props}
             onMouseDown={handleDialogMouseDown}

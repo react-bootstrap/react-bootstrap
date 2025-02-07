@@ -11,7 +11,6 @@ export interface TabProps extends Omit<TabPaneProps, 'title'> {
   tabAttrs?: Record<string, any>;
 }
 
-/* eslint-disable react/no-unused-prop-types */
 const propTypes = {
   eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 

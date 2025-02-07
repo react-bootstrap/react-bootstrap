@@ -5,7 +5,6 @@ interface ModalContextType {
 }
 
 const ModalContext = React.createContext<ModalContextType>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onHide() {},
 });
 

@@ -50,7 +50,6 @@ const TransitionWrapper = React.forwardRef<
         }
       };
 
-    /* eslint-disable react-hooks/exhaustive-deps */
     const handleEnter = useCallback(normalize(onEnter), [onEnter]);
     const handleEntering = useCallback(normalize(onEntering), [onEntering]);
     const handleEntered = useCallback(normalize(onEntered), [onEntered]);
@@ -60,7 +59,6 @@ const TransitionWrapper = React.forwardRef<
     const handleAddEndListener = useCallback(normalize(addEndListener), [
       addEndListener,
     ]);
-    /* eslint-enable react-hooks/exhaustive-deps */
 
     return (
       <Transition
@@ -89,5 +87,7 @@ const TransitionWrapper = React.forwardRef<
     );
   },
 );
+
+TransitionWrapper.displayName = 'TransitionWrapper';
 
 export default TransitionWrapper;

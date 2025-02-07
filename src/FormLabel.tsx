@@ -111,7 +111,6 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
         );
 
       return (
-        // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
         <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
       );
     },

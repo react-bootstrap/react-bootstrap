@@ -35,7 +35,7 @@ export interface CarouselRef {
 
 export interface CarouselProps
   extends BsPrefixProps,
-  Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
   slide?: boolean;
   fade?: boolean;
   controls?: boolean;
@@ -56,7 +56,9 @@ export interface CarouselProps
   nextIcon?: React.ReactNode;
   nextLabel?: React.ReactNode;
   variant?: CarouselVariant;
-  ref?: React.Ref<CarouselRef> | React.MutableRefObject<CarouselRef | undefined>
+  ref?:
+    | React.Ref<CarouselRef>
+    | React.MutableRefObject<CarouselRef | undefined>;
 }
 
 const SWIPE_THRESHOLD = 40;
@@ -197,6 +199,7 @@ function isVisible(element) {
 }
 
 const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
+  // eslint-disable-next-line react/display-name
   React.forwardRef<CarouselRef, CarouselProps>(
     ({ defaultActiveIndex = 0, ...uncontrolledProps }, ref) => {
       const {
@@ -589,9 +592,9 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
                         child.props.className,
                         isActive && status !== 'entered' && orderClassName,
                         (status === 'entered' || status === 'exiting') &&
-                        'active',
+                          'active',
                         (status === 'entering' || status === 'exiting') &&
-                        directionalClassName,
+                          directionalClassName,
                       ),
                     })
                   }

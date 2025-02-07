@@ -47,9 +47,9 @@ function getDefaultDimensionValue(
 
   return (
     value +
-    // @ts-ignore
+    // @ts-expect-error TODO
     parseInt(css(elem, margins[0]), 10) +
-    // @ts-ignore
+    // @ts-expect-error TODO
     parseInt(css(elem, margins[1]), 10)
   );
 }
@@ -253,7 +253,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
   },
 );
 
-// @ts-ignore
+Collapse.displayName = 'Collapse';
 Collapse.propTypes = propTypes;
 
 export default Collapse;
