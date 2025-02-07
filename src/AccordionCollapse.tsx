@@ -46,13 +46,22 @@ const AccordionCollapse: BsPrefixRefForwardingComponent<
     },
     ref,
   ) => {
-    const { activeEventKey } = useContext(AccordionContext);
+    const { activeEventKey, onComplete } = useContext(AccordionContext);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
 
+    const onCollapseComplete = () => {
+      onComplete?.(
+        activeEventKey,
+        eventKey,
+        isAccordionItemSelected(activeEventKey, eventKey),
+      );
+    };
     return (
       <Collapse
         ref={ref}
         in={isAccordionItemSelected(activeEventKey, eventKey)}
+        onEntered={onCollapseComplete}
+        onExited={onCollapseComplete}
         {...props}
         className={classNames(className, bsPrefix)}
       >

@@ -10,6 +10,7 @@ import AccordionCollapse from './AccordionCollapse';
 import AccordionContext, {
   AccordionSelectCallback,
   AccordionEventKey,
+  AccordionCompleteCallback,
 } from './AccordionContext';
 import AccordionHeader from './AccordionHeader';
 import AccordionItem from './AccordionItem';
@@ -23,6 +24,7 @@ export interface AccordionProps
   onSelect?: AccordionSelectCallback;
   flush?: boolean;
   alwaysOpen?: boolean;
+  onComplete?: AccordionCompleteCallback;
 }
 
 const propTypes = {
@@ -67,6 +69,7 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
       onSelect,
       flush,
       alwaysOpen,
+      onComplete,
       ...controlledProps
     } = useUncontrolled(props, {
       activeKey: 'onSelect',
@@ -78,8 +81,9 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
         activeEventKey: activeKey,
         onSelect,
         alwaysOpen,
+        onComplete,
       }),
-      [activeKey, onSelect, alwaysOpen],
+      [activeKey, onSelect, alwaysOpen, onComplete],
     );
 
     return (
