@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixProps } from './helpers';
+import type { BsPrefixProps } from './helpers';
 
 export interface ButtonToolbarProps
   extends BsPrefixProps,

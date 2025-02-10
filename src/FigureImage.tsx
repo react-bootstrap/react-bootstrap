@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import Image, { ImageProps, propTypes as imagePropTypes } from './Image';
+import Image, { type ImageProps, propTypes as imagePropTypes } from './Image';
 
 const FigureImage = React.forwardRef<HTMLImageElement, ImageProps>(
   ({ className, fluid = true, ...props }, ref) => (

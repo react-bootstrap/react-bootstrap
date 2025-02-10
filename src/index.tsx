@@ -281,9 +281,6 @@ export type { SpinnerProps } from './Spinner';
 export { default as SplitButton } from './SplitButton';
 export type { SplitButtonProps } from './SplitButton';
 
-export { default as SSRProvider } from './SSRProvider';
-export type { SSRProviderProps } from './SSRProvider';
-
 export { default as Stack } from './Stack';
 export type { StackProps } from './Stack';
 

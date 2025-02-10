@@ -1,6 +1,5 @@
-
-
 lib/
+cjs/
 coverage/
 www/.cache/
 www/public/
@@ -93,3 +92,6 @@ typings/
 
 # Generated types
 /types
+
+.yalc
+yalc.lock

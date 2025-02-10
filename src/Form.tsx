@@ -11,7 +11,7 @@ import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
 import FloatingLabel from './FloatingLabel';
-import { BsPrefixRefForwardingComponent, AsProp } from './helpers';
+import type { BsPrefixRefForwardingComponent, AsProp } from './helpers';
 
 export interface FormProps
   extends React.FormHTMLAttributes<HTMLFormElement>,

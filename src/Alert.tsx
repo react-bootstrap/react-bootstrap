@@ -8,9 +8,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import AlertHeading from './AlertHeading';
 import AlertLink from './AlertLink';
 import Fade from './Fade';
-import CloseButton, { CloseButtonVariant } from './CloseButton';
-import { Variant } from './types';
-import { TransitionType } from './helpers';
+import CloseButton, { type CloseButtonVariant } from './CloseButton';
+import type { Variant } from './types';
+import type { TransitionType } from './helpers';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   bsPrefix?: string;

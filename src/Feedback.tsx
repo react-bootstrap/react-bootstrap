@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
+import type { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
 export type FeedbackType = 'valid' | 'invalid';
 

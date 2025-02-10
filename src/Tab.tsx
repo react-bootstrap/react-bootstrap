@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
-import TabPane, { TabPaneProps } from './TabPane';
+import TabPane, { type TabPaneProps } from './TabPane';
 
 export interface TabProps extends Omit<TabPaneProps, 'title'> {
   title: React.ReactNode;

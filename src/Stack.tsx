@@ -6,10 +6,10 @@ import {
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
 } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { GapValue } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { GapValue } from './types';
 import createUtilityClassName, {
-  ResponsiveUtilityValue,
+  type ResponsiveUtilityValue,
   responsivePropType,
 } from './createUtilityClasses';
 

@@ -1,4 +1,4 @@
-import Anchor, { AnchorProps } from '@restart/ui/Anchor';
+import Anchor, { type AnchorProps } from '@restart/ui/Anchor';
 
 export type { AnchorProps };
 

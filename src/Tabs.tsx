@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
 import BaseTabs, { TabsProps as BaseTabsProps } from '@restart/ui/Tabs';
-import Nav, { NavProps } from './Nav';
+import Nav, { type NavProps } from './Nav';
 import NavLink from './NavLink';
 import NavItem from './NavItem';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
 import { forEach, map } from './ElementChildren';
 import getTabTransitionComponent from './getTabTransitionComponent';
-import { TransitionType } from './helpers';
+import type { TransitionType } from './helpers';
 
 export interface TabsProps
   extends Omit<BaseTabsProps, 'transition'>,

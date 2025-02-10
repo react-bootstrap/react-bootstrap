@@ -13,8 +13,8 @@ import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
-import { TransitionType } from './helpers';
-import { Placement, PopperRef, RootCloseEvent } from './types';
+import type { TransitionType } from './helpers';
+import type { Placement, PopperRef, RootCloseEvent } from './types';
 import safeFindDOMNode from './safeFindDOMNode';
 
 export interface OverlayInjectedProps {
@@ -168,7 +168,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
       null,
     );
     const [ref, modifiers] = useOverlayOffset(outerProps.offset);
-    const mergedRef = useMergedRefs(outerRef, ref);
+    const mergedRef = useMergedRefs(outerRef as any, ref);
 
     const actualTransition =
       transition === true ? Fade : transition || undefined;
