@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "2.10.9",
+  "version": "3.0.0-beta.0",
   "description": "Bootstrap 5 components built with React",
   "keywords": [
     "bootstrap",
@@ -63,7 +63,7 @@
     "build:esm:types": "tsc --emitDeclarationOnly",
     "build:cjs:types": "tsc --emitDeclarationOnly --outDir cjs",
     "build-docs": "yarn --cwd www build",
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc -p ./test/tsconfig.json --noEmit",
     "deploy-docs": "yarn --cwd www deploy",
     "lint": "eslint src test",
     "prepublishOnly": "npm run build",
@@ -83,7 +83,7 @@
   "dependencies": {
     "@babel/runtime": "^7.26.7",
     "@restart/hooks": "^0.6.2",
-    "@restart/ui": "file:.yalc/@restart/ui",
+    "@restart/ui": "^2.0.0-beta.2",
     "@types/prop-types": "^15.7.14",
     "@types/react-transition-group": "^4.4.12",
     "classnames": "^2.3.2",
@@ -92,7 +92,7 @@
     "prop-types": "^15.8.1",
     "prop-types-extra": "^1.1.0",
     "react-transition-group": "^4.4.5",
-    "uncontrollable": "^7.2.1",
+    "uncontrollable": "^9.0.0",
     "warning": "^4.0.3"
   },
   "devDependencies": {
@@ -101,7 +101,7 @@
     "@babel/core": "^7.26.8",
     "@babel/preset-typescript": "^7.26.0",
     "@babel/register": "^7.25.9",
-    "@react-bootstrap/babel-preset": "^2.2.0",
+    "@react-bootstrap/babel-preset": "^2.3.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/invariant": "^2.2.37",
@@ -140,7 +140,7 @@
     }
   },
   "publishConfig": {
-    "directory": "lib"
+    "access": "public"
   },
   "release": {
     "conventionalCommits": true

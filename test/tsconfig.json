@@ -1,0 +1,9 @@
+{
+  "extends": "..",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["DOM", "ESNext"],
+    "rootDir": ".."
+  },
+  "include": ["../src", ".", "../tests"]
+}

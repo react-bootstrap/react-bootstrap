@@ -319,6 +319,6 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   );
 };
 
-OverlayTrigger.propTypes = propTypes;
+OverlayTrigger.propTypes = propTypes as any;
 
 export default OverlayTrigger;

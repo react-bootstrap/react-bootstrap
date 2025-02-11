@@ -178,7 +178,7 @@ const Tabs: React.FC<TabsProps> = (props) => {
   );
 };
 
-Tabs.propTypes = propTypes;
+Tabs.propTypes = propTypes as any;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

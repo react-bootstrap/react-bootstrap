@@ -43,7 +43,7 @@ const Tab: React.FC<TabProps> = () => {
   );
 };
 
-Tab.propTypes = propTypes;
+Tab.propTypes = propTypes as any;
 
 export default Object.assign(Tab, {
   Container: TabContainer,

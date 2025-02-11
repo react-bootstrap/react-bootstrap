@@ -254,6 +254,6 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
 );
 
 Collapse.displayName = 'Collapse';
-Collapse.propTypes = propTypes;
+Collapse.propTypes = propTypes as any;
 
 export default Collapse;
