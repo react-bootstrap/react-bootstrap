@@ -7,7 +7,7 @@ import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
 import { EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ListGroupItem from './ListGroupItem';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
   variant?: 'flush' | string;

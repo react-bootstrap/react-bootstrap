@@ -25,10 +25,10 @@ describe('<Dropdown>', () => {
     expect(container.firstElementChild!.classList).toContain('dropdown');
   });
 
-  ['up', 'end', 'start'].forEach((dir: DropDirection) => {
+  ['up', 'end', 'start'].forEach((dir) => {
     it(`renders div with drop${dir} class`, () => {
       const { container } = render(
-        <Dropdown title="Dropup" drop={dir}>
+        <Dropdown title="Dropup" drop={dir as DropDirection}>
           {dropdownChildren}
         </Dropdown>,
       );

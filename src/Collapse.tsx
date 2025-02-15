@@ -3,13 +3,13 @@ import css from 'dom-helpers/css';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import Transition, {
-  TransitionStatus,
+  type TransitionStatus,
   ENTERED,
   ENTERING,
   EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
-import { TransitionCallbacks } from '@restart/ui/types';
+import type { TransitionCallbacks } from '@restart/ui/types';
 import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import createChainedFunction from './createChainedFunction';
@@ -254,6 +254,6 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
 );
 
 Collapse.displayName = 'Collapse';
-Collapse.propTypes = propTypes;
+Collapse.propTypes = propTypes as any;
 
 export default Collapse;

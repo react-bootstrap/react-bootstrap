@@ -9,13 +9,18 @@ import {
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import warning from 'warning';
-import DropdownContext, { DropDirection } from './DropdownContext';
+import DropdownContext, { type DropDirection } from './DropdownContext';
 import InputGroupContext from './InputGroupContext';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { AlignType, AlignDirection, alignPropType, Placement } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import {
+  type AlignType,
+  type AlignDirection,
+  alignPropType,
+  type Placement,
+} from './types';
 
 export type DropdownMenuVariant = 'dark' | string;
 

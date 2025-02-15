@@ -5,8 +5,8 @@ import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
-import { Placement, PopperRef } from './types';
-import { BsPrefixProps, getOverlayDirection } from './helpers';
+import type { Placement, PopperRef } from './types';
+import { type BsPrefixProps, getOverlayDirection } from './helpers';
 import getInitialPopperStyles from './getInitialPopperStyles';
 
 export interface PopoverProps

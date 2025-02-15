@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 import Button from './Button';
-import usePlaceholder, { UsePlaceholderProps } from './usePlaceholder';
-import { ButtonVariant } from './types';
+import usePlaceholder, { type UsePlaceholderProps } from './usePlaceholder';
+import type { ButtonVariant } from './types';
 
 export interface PlaceholderButtonProps extends UsePlaceholderProps {
   variant?: ButtonVariant;

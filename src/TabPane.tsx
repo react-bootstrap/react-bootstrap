@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import SelectableContext from '@restart/ui/SelectableContext';
 import TabContext from '@restart/ui/TabContext';
 import { useTabPanel } from '@restart/ui/TabPanel';
-import { EventKey, TransitionCallbacks } from '@restart/ui/types';
+import type { EventKey, TransitionCallbacks } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import getTabTransitionComponent from './getTabTransitionComponent';
-import {
+import type {
   BsPrefixProps,
   BsPrefixRefForwardingComponent,
   TransitionType,

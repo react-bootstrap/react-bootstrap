@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { Variant } from './types';
 
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLElement>,

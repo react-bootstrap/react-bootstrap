@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type ToastPosition =
   | 'top-start'

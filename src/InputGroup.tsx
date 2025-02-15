@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import FormCheckInput, { type FormCheckInputProps } from './FormCheckInput';
 import InputGroupContext from './InputGroupContext';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import InputGroupText from './InputGroupText';
 
 const InputGroupCheckbox = (props: FormCheckInputProps) => (

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
-import FormGroup, { FormGroupProps } from './FormGroup';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import FormGroup, { type FormGroupProps } from './FormGroup';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 export interface FloatingLabelProps extends FormGroupProps, BsPrefixProps {

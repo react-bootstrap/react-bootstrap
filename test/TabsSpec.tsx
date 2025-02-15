@@ -6,7 +6,7 @@ import Tabs from '../src/Tabs';
 const checkEventKey = (elem: Element, eventKey: string | number) =>
   elem.getAttribute('data-rr-ui-event-key') === `${eventKey}` &&
   elem.getAttribute('id') === `test-tab-${eventKey}` &&
-  elem.getAttribute('aria-controls') === `test-tabpane-${eventKey}`;
+  elem.getAttribute('aria-controls') === `test-pane-${eventKey}`;
 
 describe('<Tabs>', () => {
   it('Should show the correct tab and assign correct eventKeys', () => {
@@ -20,6 +20,7 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     );
+
     const firstTabButton = screen.getByText('Tab 1 title');
     const firstTabContent = screen.getByText('Tab 1 content');
     const secondTabButton = screen.getByText('Tab 2 title');

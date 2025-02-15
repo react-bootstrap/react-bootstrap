@@ -4,7 +4,7 @@ import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import Anchor from '@restart/ui/Anchor';
 import classNames from 'classnames';
-import { TransitionStatus } from 'react-transition-group/Transition';
+import type { TransitionStatus } from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import {
@@ -22,7 +22,7 @@ import { map, forEach } from './ElementChildren';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 
 export type CarouselVariant = 'dark' | string;

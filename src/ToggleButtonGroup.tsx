@@ -5,9 +5,9 @@ import { useUncontrolled } from 'uncontrollable';
 
 import chainFunction from './createChainedFunction';
 import { map } from './ElementChildren';
-import ButtonGroup, { ButtonGroupProps } from './ButtonGroup';
+import ButtonGroup, { type ButtonGroupProps } from './ButtonGroup';
 import ToggleButton from './ToggleButton';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 
 type BaseToggleButtonProps = Omit<
   ButtonGroupProps,

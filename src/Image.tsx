@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixOnlyProps } from './helpers';
+import type { BsPrefixOnlyProps } from './helpers';
 
 export interface ImageProps
   extends BsPrefixOnlyProps,

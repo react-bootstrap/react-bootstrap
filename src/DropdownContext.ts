@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AlignType } from './types';
+import type { AlignType } from './types';
 
 export type DropDirection =
   | 'up'

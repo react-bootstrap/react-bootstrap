@@ -5,9 +5,9 @@ import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import CloseButton, { CloseButtonVariant } from './CloseButton';
+import CloseButton, { type CloseButtonVariant } from './CloseButton';
 import ToastContext from './ToastContext';
-import { BsPrefixOnlyProps } from './helpers';
+import type { BsPrefixOnlyProps } from './helpers';
 
 export interface ToastHeaderProps
   extends BsPrefixOnlyProps,

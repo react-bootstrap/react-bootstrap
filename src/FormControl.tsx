@@ -6,7 +6,7 @@ import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 

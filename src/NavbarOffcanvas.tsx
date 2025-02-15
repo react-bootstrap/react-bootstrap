@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import Offcanvas, { OffcanvasProps } from './Offcanvas';
+import Offcanvas, { type OffcanvasProps } from './Offcanvas';
 import NavbarContext from './NavbarContext';
 
 export type NavbarOffcanvasProps = Omit<OffcanvasProps, 'show'>;

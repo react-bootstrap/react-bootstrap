@@ -7,7 +7,7 @@ import {
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
 } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type NumberAttr =
   | number

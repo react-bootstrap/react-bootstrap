@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { useCol, ColProps } from './Col';
-import { Variant } from './types';
+import { useCol, type ColProps } from './Col';
+import type { Variant } from './types';
 
 export type PlaceholderAnimation = 'glow' | 'wave';
 export type PlaceholderSize = 'xs' | 'sm' | 'lg';

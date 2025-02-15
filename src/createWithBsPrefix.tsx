@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 

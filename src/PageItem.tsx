@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { ReactNode } from 'react';
 import Anchor from '@restart/ui/Anchor';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface PageItemProps
   extends React.HTMLAttributes<HTMLElement>,

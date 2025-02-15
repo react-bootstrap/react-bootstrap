@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useMemo } from 'react';
 
 import FormContext from './FormContext';
-import { AsProp, BsPrefixRefForwardingComponent } from './helpers';
+import type { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormGroupProps
   extends React.HTMLAttributes<HTMLElement>,

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BaseModal, {
-  ModalProps as BaseModalProps,
-  ModalHandle,
+  type ModalProps as BaseModalProps,
+  type ModalHandle,
 } from '@restart/ui/Modal';
 import Fade from './Fade';
 import OffcanvasBody from './OffcanvasBody';
@@ -14,7 +14,7 @@ import OffcanvasToggling from './OffcanvasToggling';
 import ModalContext from './ModalContext';
 import OffcanvasHeader from './OffcanvasHeader';
 import OffcanvasTitle from './OffcanvasTitle';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 import BootstrapModalManager, {
   getSharedManager,

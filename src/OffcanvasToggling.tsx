@@ -2,15 +2,15 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import Transition, {
-  TransitionStatus,
+  type TransitionStatus,
   ENTERED,
   ENTERING,
   EXITING,
 } from 'react-transition-group/Transition';
-import { TransitionCallbacks } from '@restart/ui/types';
+import type { TransitionCallbacks } from '@restart/ui/types';
 import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
-import { BsPrefixOnlyProps } from './helpers';
+import type { BsPrefixOnlyProps } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 import { useBootstrapPrefix } from './ThemeProvider';
 

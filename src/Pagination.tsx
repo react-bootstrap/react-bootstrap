@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
-import { BsPrefixProps } from './helpers';
+import type { BsPrefixProps } from './helpers';
 
 type PaginationSize = 'sm' | 'lg';
 

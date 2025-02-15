@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Tabs, { TabsProps } from '@restart/ui/Tabs';
 import getTabTransitionComponent from './getTabTransitionComponent';
-import { TransitionType } from './helpers';
+import type { TransitionType } from './helpers';
 
 export interface TabContainerProps extends Omit<TabsProps, 'transition'> {
   transition?: TransitionType;

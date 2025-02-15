@@ -12,8 +12,10 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import BaseModal, { BaseModalProps } from '@restart/ui/Modal';
-import { ModalInstance } from '@restart/ui/ModalManager';
+import BaseModal, {
+  type BaseModalProps,
+  type ModalHandle,
+} from '@restart/ui/Modal';
 import { getSharedManager } from './BootstrapModalManager';
 import Fade from './Fade';
 import ModalBody from './ModalBody';
@@ -22,7 +24,7 @@ import ModalDialog from './ModalDialog';
 import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 
 export interface ModalProps
@@ -271,15 +273,15 @@ const Modal: BsPrefixRefForwardingComponent<'div', ModalProps> =
         manager: propsManager,
         ...props
       },
-      ref,
+      ref: React.Ref<ModalHandle>,
     ) => {
       const [modalStyle, setStyle] = useState({});
       const [animateStaticModal, setAnimateStaticModal] = useState(false);
       const waitingForMouseUpRef = useRef(false);
       const ignoreBackdropClickRef = useRef(false);
       const removeStaticModalAnimationRef = useRef<(() => void) | null>(null);
-      const [modal, setModalRef] = useCallbackRef<ModalInstance>();
-      const mergedRef = useMergedRefs(ref, setModalRef);
+      const [modal, setModalRef] = useCallbackRef<ModalHandle>();
+      const mergedRef = useMergedRefs(ref as any, setModalRef);
       const handleHide = useEventCallback(onHide);
       const isRTL = useIsRTL();
 

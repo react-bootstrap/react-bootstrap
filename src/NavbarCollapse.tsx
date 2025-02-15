@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Collapse, { CollapseProps } from './Collapse';
+import Collapse, { type CollapseProps } from './Collapse';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import { BsPrefixProps } from './helpers';
+import type { BsPrefixProps } from './helpers';
 
 export interface NavbarCollapseProps
   extends Omit<CollapseProps, 'children'>,

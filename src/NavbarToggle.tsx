@@ -6,7 +6,7 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavbarToggleProps
   extends BsPrefixProps,

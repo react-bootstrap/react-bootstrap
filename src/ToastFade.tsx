@@ -3,7 +3,7 @@ import Transition, {
   ENTERING,
   EXITING,
 } from 'react-transition-group/Transition';
-import Fade, { FadeProps } from './Fade';
+import Fade, { type FadeProps } from './Fade';
 
 const fadeStyles = {
   [ENTERING]: 'showing',

@@ -12,8 +12,8 @@ import CardLink from './CardLink';
 import CardSubtitle from './CardSubtitle';
 import CardText from './CardText';
 import CardTitle from './CardTitle';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Color, Variant } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { Color, Variant } from './types';
 
 export interface CardProps
   extends BsPrefixProps,

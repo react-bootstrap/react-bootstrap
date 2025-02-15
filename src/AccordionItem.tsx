@@ -4,9 +4,9 @@ import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionItemContext, {
-  AccordionItemContextValue,
+  type AccordionItemContextValue,
 } from './AccordionItemContext';
-import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
+import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionItemProps
   extends BsPrefixProps,

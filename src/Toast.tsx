@@ -10,8 +10,8 @@ import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { Variant } from './types';
 
 export interface ToastProps
   extends TransitionCallbacks,
