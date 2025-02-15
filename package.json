@@ -58,8 +58,8 @@
   "scripts": {
     "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www --network-timeout 100000",
     "build": "rimraf lib && yarn build:esm && yarn build:esm:types && yarn build:cjs && yarn build:cjs:types",
-    "build:esm": "babel src --out-dir lib --delete-dir-on-start --env-name esm --extensions .ts,.tsx --ignore '**/*.d.ts'",
-    "build:cjs": "babel src --out-dir cjs --env-name cjs --delete-dir-on-start --extensions .ts,.tsx --ignore '**/*.d.ts' && echo '{\"type\": \"commonjs\"}' > cjs/package.json",
+    "build:esm": "babel src --out-dir lib --delete-dir-on-start --env-name esm --extensions .ts,.tsx --ignore '**/*.d.ts' && echo {\"type\": \"module\"} > lib/package.json",
+    "build:cjs": "babel src --out-dir cjs --env-name cjs --delete-dir-on-start --extensions .ts,.tsx --ignore '**/*.d.ts' && echo {\"type\": \"commonjs\"} > cjs/package.json",
     "build:esm:types": "tsc --emitDeclarationOnly",
     "build:cjs:types": "tsc --emitDeclarationOnly --outDir cjs",
     "build-docs": "yarn --cwd www build",
