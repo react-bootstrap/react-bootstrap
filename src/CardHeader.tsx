@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import CardHeaderContext from './CardHeaderContext';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface CardHeaderProps
   extends BsPrefixProps,

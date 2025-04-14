@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { State, UsePopperOptions } from '@restart/ui/usePopper';
+import type { State, UsePopperOptions } from '@restart/ui/usePopper';
 
 export type Variant =
   | 'primary'

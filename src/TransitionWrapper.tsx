@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import Transition, {
-  TransitionProps,
-  TransitionStatus,
+  type TransitionProps,
+  type TransitionStatus,
 } from 'react-transition-group/Transition';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import safeFindDOMNode from './safeFindDOMNode';
@@ -40,7 +40,7 @@ const TransitionWrapper = React.forwardRef<
     const mergedRef = useMergedRefs(nodeRef, childRef);
 
     const attachRef = (r: React.Component | Element | null | undefined) => {
-      mergedRef(safeFindDOMNode(r));
+      mergedRef(safeFindDOMNode(r) as any);
     };
 
     const normalize =

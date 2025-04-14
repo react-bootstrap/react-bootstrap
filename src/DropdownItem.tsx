@@ -7,7 +7,7 @@ import {
 } from '@restart/ui/DropdownItem';
 import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownItemProps
   extends BaseDropdownItemProps,

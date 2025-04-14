@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import BreadcrumbItem from './BreadcrumbItem';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface BreadcrumbProps
   extends BsPrefixProps,

@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
-import Feedback, { FeedbackType } from './Feedback';
+import Feedback, { type FeedbackType } from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { hasChildOfType } from './ElementChildren';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';

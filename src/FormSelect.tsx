@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixOnlyProps, BsPrefixRefForwardingComponent } from './helpers';
+import type {
+  BsPrefixOnlyProps,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 import FormContext from './FormContext';
 
 export interface FormSelectProps

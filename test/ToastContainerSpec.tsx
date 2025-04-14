@@ -29,9 +29,11 @@ describe('ToastContainer', () => {
     );
   });
 
-  Object.keys(expectedClasses).forEach((position: ToastPosition) => {
+  Object.keys(expectedClasses).forEach((position) => {
     it(`should render position=${position}`, () => {
-      const { container } = render(<ToastContainer position={position} />);
+      const { container } = render(
+        <ToastContainer position={position as ToastPosition} />,
+      );
       expectedClasses[position].map((className) =>
         expect(container.firstElementChild!.classList).toContain(className),
       );

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixProps } from './helpers';
+import type { BsPrefixProps } from './helpers';
 
 export interface ModalDialogProps
   extends React.HTMLAttributes<HTMLDivElement>,

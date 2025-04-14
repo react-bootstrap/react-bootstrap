@@ -3,8 +3,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import { Placement, PopperRef } from './types';
-import { BsPrefixProps, getOverlayDirection } from './helpers';
+import type { Placement, PopperRef } from './types';
+import { type BsPrefixProps, getOverlayDirection } from './helpers';
 import getInitialPopperStyles from './getInitialPopperStyles';
 
 export interface TooltipProps

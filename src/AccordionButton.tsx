@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import AccordionContext, {
   isAccordionItemSelected,
-  AccordionEventKey,
+  type AccordionEventKey,
 } from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 type EventHandler = React.EventHandler<React.SyntheticEvent>;

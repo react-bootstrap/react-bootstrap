@@ -3,10 +3,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import Dropdown, { DropdownProps } from './Dropdown';
-import { DropdownMenuVariant } from './DropdownMenu';
+import Dropdown, { type DropdownProps } from './Dropdown';
+import type { DropdownMenuVariant } from './DropdownMenu';
 import NavLink from './NavLink';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavDropdownProps extends Omit<DropdownProps, 'title'> {
   title: React.ReactNode;

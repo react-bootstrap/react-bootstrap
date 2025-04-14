@@ -3,11 +3,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
   useButtonProps,
-  ButtonProps as BaseButtonProps,
+  type ButtonProps as BaseButtonProps,
 } from '@restart/ui/Button';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { ButtonVariant } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { ButtonVariant } from './types';
 
 export interface ButtonProps
   extends BaseButtonProps,

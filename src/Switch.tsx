@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FormCheck, { FormCheckProps } from './FormCheck';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 
 type SwitchProps = Omit<FormCheckProps, 'type'>;
 

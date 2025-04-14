@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 import { map } from './ElementChildren';
-import { BsPrefixProps } from './helpers';
+import type { BsPrefixProps } from './helpers';
 
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -231,6 +231,6 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
 );
 
 ProgressBar.displayName = 'ProgressBar';
-ProgressBar.propTypes = propTypes;
+ProgressBar.propTypes = propTypes as any;
 
 export default ProgressBar;

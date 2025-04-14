@@ -8,7 +8,7 @@ import BaseDropdown, {
 } from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import DropdownContext, { DropDirection } from './DropdownContext';
+import DropdownContext, { type DropDirection } from './DropdownContext';
 import DropdownDivider from './DropdownDivider';
 import DropdownHeader from './DropdownHeader';
 import DropdownItem from './DropdownItem';
@@ -17,8 +17,8 @@ import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { AlignType, alignPropType } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { type AlignType, alignPropType } from './types';
 
 export interface DropdownProps
   extends BaseDropdownProps,

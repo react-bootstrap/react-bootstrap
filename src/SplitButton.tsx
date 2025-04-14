@@ -1,11 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonType } from '@restart/ui/Button';
+import type { ButtonType } from '@restart/ui/Button';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import Dropdown, { DropdownProps } from './Dropdown';
-import { PropsFromToggle } from './DropdownToggle';
-import { BsPrefixProps } from './helpers';
+import Dropdown, { type DropdownProps } from './Dropdown';
+import type { PropsFromToggle } from './DropdownToggle';
+import type { BsPrefixProps } from './helpers';
 import { alignPropType } from './types';
 
 export interface SplitButtonProps

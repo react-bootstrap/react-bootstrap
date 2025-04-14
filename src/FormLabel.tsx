@@ -4,10 +4,10 @@ import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
 
-import Col, { ColProps } from './Col';
+import Col, { type ColProps } from './Col';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 interface FormLabelBaseProps
   extends BsPrefixProps,

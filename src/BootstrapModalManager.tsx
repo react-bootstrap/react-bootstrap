@@ -3,8 +3,8 @@ import css from 'dom-helpers/css';
 import qsa from 'dom-helpers/querySelectorAll';
 import removeClass from 'dom-helpers/removeClass';
 import ModalManager, {
-  ContainerState,
-  ModalManagerOptions,
+  type ContainerState,
+  type ModalManagerOptions,
 } from '@restart/ui/ModalManager';
 
 const Selector = {

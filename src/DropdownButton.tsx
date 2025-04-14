@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown, { DropdownProps } from './Dropdown';
-import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, { DropdownMenuVariant } from './DropdownMenu';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import Dropdown, { type DropdownProps } from './Dropdown';
+import DropdownToggle, { type PropsFromToggle } from './DropdownToggle';
+import DropdownMenu, { type DropdownMenuVariant } from './DropdownMenu';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { alignPropType } from './types';
 
 export interface DropdownButtonProps

@@ -9,8 +9,8 @@ import {
 } from '@restart/ui/NavItem';
 import { makeEventKey } from '@restart/ui/SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { Variant } from './types';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { Variant } from './types';
 
 export interface ListGroupItemProps
   extends Omit<BaseNavItemProps, 'onSelect'>,

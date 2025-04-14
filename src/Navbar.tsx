@@ -11,9 +11,9 @@ import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import NavbarOffcanvas from './NavbarOffcanvas';
 import { useBootstrapPrefix } from './ThemeProvider';
-import NavbarContext, { NavbarContextType } from './NavbarContext';
+import NavbarContext, { type NavbarContextType } from './NavbarContext';
 import NavbarText from './NavbarText';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavbarProps
   extends BsPrefixProps,

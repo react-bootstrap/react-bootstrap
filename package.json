@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "2.10.9",
+  "version": "3.0.0-beta.0",
   "description": "Bootstrap 5 components built with React",
   "keywords": [
     "bootstrap",
@@ -22,12 +22,34 @@
   "files": [
     "CHANGELOG.md",
     "lib",
-    "dist",
-    "es"
+    "cjs"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/esm/index.d.ts",
+  "main": "cjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "import": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
+    },
+    "./*": {
+      "require": {
+        "types": "./cjs/*.d.ts",
+        "default": "./cjs/*.js"
+      },
+      "import": {
+        "types": "./lib/*.d.ts",
+        "default": "./lib/*.js"
+      }
+    }
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -35,10 +57,12 @@
   },
   "scripts": {
     "bootstrap": "yarn --network-timeout 100000 && yarn --cwd www --network-timeout 100000",
-    "build": "node tools/build.js",
+    "build": "rimraf lib && yarn build:esm && yarn build:esm:types && yarn build:cjs && yarn build:cjs:types",
+    "build:esm": "babel src --out-dir lib --delete-dir-on-start --env-name esm --extensions .ts,.tsx --ignore '**/*.d.ts' && echo {\"type\": \"module\"} > lib/package.json",
+    "build:cjs": "babel src --out-dir cjs --env-name cjs --delete-dir-on-start --extensions .ts,.tsx --ignore '**/*.d.ts' && echo {\"type\": \"commonjs\"} > cjs/package.json",
+    "build:esm:types": "tsc --emitDeclarationOnly",
+    "build:cjs:types": "tsc --emitDeclarationOnly --outDir cjs",
     "build-docs": "yarn --cwd www build",
-    "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "check-types": "tsc -p ./test/tsconfig.json --noEmit",
     "deploy-docs": "yarn --cwd www deploy",
     "lint": "eslint src test",
@@ -57,60 +81,53 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.7",
-    "@restart/hooks": "^0.4.9",
-    "@restart/ui": "^1.9.4",
-    "@types/prop-types": "^15.7.12",
-    "@types/react-transition-group": "^4.4.6",
+    "@babel/runtime": "^7.26.7",
+    "@restart/hooks": "^0.6.2",
+    "@restart/ui": "^2.0.0-beta.2",
+    "@types/prop-types": "^15.7.14",
+    "@types/react-transition-group": "^4.4.12",
     "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "prop-types-extra": "^1.1.0",
     "react-transition-group": "^4.4.5",
-    "uncontrollable": "^7.2.1",
+    "uncontrollable": "^9.0.0",
     "warning": "^4.0.3"
   },
   "devDependencies": {
     "@4c/rollout": "^4.0.2",
-    "@4c/tsconfig": "^0.4.1",
-    "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.5",
-    "@babel/preset-typescript": "^7.23.3",
-    "@babel/register": "^7.22.15",
-    "@react-bootstrap/babel-preset": "^2.2.0",
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.8",
+    "@babel/preset-typescript": "^7.26.0",
+    "@babel/register": "^7.25.9",
+    "@react-bootstrap/babel-preset": "^2.3.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/invariant": "^2.2.37",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@types/warning": "^3.0.3",
     "@vitejs/plugin-react": "^4.3.4",
-    "@vitest/browser": "^3.0.4",
-    "@vitest/coverage-istanbul": "^3.0.4",
-    "babel-loader": "^9.1.3",
-    "chalk": "^4.1.2",
-    "cherry-pick": "^0.5.0",
-    "cpy-cli": "^5.0.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^9.19.0",
+    "@vitest/browser": "^3.0.5",
+    "@vitest/coverage-istanbul": "^3.0.5",
+    "babel-loader": "^9.2.1",
+    "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "execa": "^5.1.1",
-    "fs-extra": "^10.1.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
-    "playwright": "^1.50.0",
-    "prettier": "^3.4.2",
+    "playwright": "^1.50.1",
+    "prettier": "^3.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.22.0",
-    "vitest": "^3.0.4",
-    "webpack": "^5.93.0"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0",
+    "vitest": "^3.0.5"
   },
   "peerDependencies": {
     "@types/react": ">=16.14.8",
@@ -123,7 +140,7 @@
     }
   },
   "publishConfig": {
-    "directory": "lib"
+    "access": "public"
   },
   "release": {
     "conventionalCommits": true

@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
-import Button, { ButtonProps, CommonButtonProps } from './Button';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import Button, { type ButtonProps, type CommonButtonProps } from './Button';
+import type { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 

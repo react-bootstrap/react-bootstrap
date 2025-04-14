@@ -12,7 +12,7 @@ import NavbarContext from './NavbarContext';
 import CardHeaderContext from './CardHeaderContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavProps extends BsPrefixProps, BaseNavProps {
   navbarBsPrefix?: string;

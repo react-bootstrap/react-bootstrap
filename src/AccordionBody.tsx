@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { TransitionCallbacks } from '@restart/ui/types';
+import type { TransitionCallbacks } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionCollapse from './AccordionCollapse';
 import AccordionItemContext from './AccordionItemContext';
-import { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
+import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionBodyProps
   extends BsPrefixProps,

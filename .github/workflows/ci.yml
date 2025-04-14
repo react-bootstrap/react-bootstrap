@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  ci:
-    name: CI
+  test:
+    name: Run tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,19 +26,16 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: yarn
 
       - name: Install Dependencies
-        run: yarn bootstrap
+        run: yarn --network-timeout 100000
         env:
           YARN_CACHE_FOLDER: .cache/yarn
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
-
-      - name: Run lint
-        run: yarn lint
 
       - name: Run Tests
         run: yarn test-browser --browser.name=${{ env.BROWSER }} --browser.headless --coverage
@@ -47,6 +44,27 @@ jobs:
 
       - name: Codecov
         uses: codecov/codecov-action@v4
+
+  build-lint:
+    name: Build and lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install Dependencies
+        run: yarn --network-timeout 100000
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Check types
+        run: yarn check-types
 
       - name: Build Project
         run: yarn build
