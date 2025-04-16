@@ -28,7 +28,7 @@ import TransitionWrapper from './TransitionWrapper';
 export type CarouselVariant = 'dark' | string;
 
 export interface CarouselRef {
-  element?: HTMLElement;
+  element?: HTMLElement | null;
   prev: (e?: React.SyntheticEvent) => void;
   next: (e?: React.SyntheticEvent) => void;
 }
@@ -335,7 +335,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
         onSelect?.(nextActiveIndex, event);
       });
 
-      const elementRef = useRef<HTMLElement>();
+      const elementRef = useRef<HTMLElement>(null);
 
       useImperativeHandle(ref, () => ({
         element: elementRef.current,
@@ -492,7 +492,7 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
 
       const shouldPlay = interval != null && !paused && !isSliding;
 
-      const intervalHandleRef = useRef<number | null>();
+      const intervalHandleRef = useRef<number | null>(null);
 
       useEffect(() => {
         if (!shouldPlay) {

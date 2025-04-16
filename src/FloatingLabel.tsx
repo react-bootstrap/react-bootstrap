@@ -26,7 +26,7 @@ const propTypes = {
 };
 
 const FloatingLabel: BsPrefixRefForwardingComponent<'div', FloatingLabelProps> =
-  React.forwardRef(
+  React.forwardRef<HTMLElement, FloatingLabelProps>(
     ({ bsPrefix, className, children, controlId, label, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-floating');
 

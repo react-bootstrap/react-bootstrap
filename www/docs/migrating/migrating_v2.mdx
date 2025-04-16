@@ -1,0 +1,44 @@
+---
+title: Migrating to v3
+sidebar_label: Migrating
+sidebar_position: 7
+---
+
+React-Bootstrap v2 adds full compatibility with Bootstrap 5. Because Bootstrap 5 is a major rewrite of the project, there
+are significant breaking changes from React-Bootstrap v1.
+
+**PLEASE FIRST READ THE UPSTREAM BOOTSTRAP MIGRATION GUIDE**
+
+> <DocLink path="/migration">View migration guide</DocLink>
+
+React-Bootstrap _only_ contains components that are present in vanilla Bootstrap. If functionality
+was removed from Bootstrap, then it was also removed from React-Bootstrap. This guide does not
+repeat information found in the upstream migration guide. Its goal is to document React-Bootstrap-specific
+API changes and additions.
+
+## Versioning
+
+We will continue to provide general maintenance for Bootstrap 4 components, because there are many projects that continue to depend on Bootstrap 4 support in `react-bootstrap`. `react-bootstrap` package versions will be as follows:
+
+- Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
+- Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
+- Bootstrap 5 support will be in react-bootstrap versions >= `v2.0.0`
+
+We are **not** committing to keeping breaking changes in lockstep with bootstraps major releases,
+there may be a React-Bootstrap v3 targeting Bootstrap 6 depending on what's best for the project.
+
+## Summary of breaking changes from v2.x
+
+Below is a _rough_ account of the breaking API changes as well as the minimal change to migrate
+
+### General
+
+- React >= 18.3.1 is now required
+
+### Collapse
+
+- collapse now requires a child component that forwards the ref to the underlying HTML element.
+
+### Fade
+
+- fade now requires a child component that forwards the ref to the underlying HTML element.

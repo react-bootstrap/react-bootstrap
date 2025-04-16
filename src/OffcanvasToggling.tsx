@@ -117,11 +117,11 @@ const OffcanvasToggling = React.forwardRef<
         childRef={getChildRef(children)}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
-          React.cloneElement(children, {
+          React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               className,
-              children.props.className,
+              (children.props as any).className,
               (status === ENTERING || status === EXITING) &&
                 `${bsPrefix}-toggling`,
               transitionStyles[status],

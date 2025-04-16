@@ -225,7 +225,7 @@ const Offcanvas: BsPrefixRefForwardingComponent<'div', OffcanvasProps> =
       },
       ref,
     ) => {
-      const modalManager = useRef<BootstrapModalManager>();
+      const modalManager = useRef<BootstrapModalManager>(null);
       bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
       const [showOffcanvas, setShowOffcanvas] = useState(false);
       const handleHide = useEventCallback(onHide);

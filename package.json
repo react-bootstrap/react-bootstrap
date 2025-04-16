@@ -105,8 +105,8 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/invariant": "^2.2.37",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "@types/warning": "^3.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/browser": "^3.0.5",
@@ -122,17 +122,17 @@
     "lint-staged": "^15.4.3",
     "playwright": "^1.50.1",
     "prettier": "^3.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0",
     "vitest": "^3.0.5"
   },
   "peerDependencies": {
-    "@types/react": ">=16.14.8",
-    "react": ">=16.14.0",
-    "react-dom": ">=16.14.0"
+    "@types/react": ">=18.3.12",
+    "react": ">=18.3.1",
+    "react-dom": ">=18.3.1"
   },
   "peerDependenciesMeta": {
     "@types/react": {
