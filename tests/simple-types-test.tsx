@@ -58,7 +58,7 @@ const style: React.CSSProperties = {
 };
 
 const RefTest = () => {
-  const carouselRef = React.useRef<CarouselRef>();
+  const carouselRef = React.useRef<CarouselRef>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   carouselRef?.current?.element;
   carouselRef?.current?.prev();

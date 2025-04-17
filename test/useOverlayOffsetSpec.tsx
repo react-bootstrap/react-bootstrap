@@ -18,7 +18,7 @@ describe('useOverlayOffset', () => {
       modifiers,
     }));
 
-    return React.cloneElement(props.children as React.ReactElement, {
+    return React.cloneElement(props.children as React.ReactElement<any>, {
       ref,
     });
   });
