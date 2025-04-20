@@ -38,10 +38,6 @@ const TransitionWrapper = React.forwardRef<
     const nodeRef = useRef<HTMLElement>(null);
     const mergedRef = useMergedRefs(nodeRef, childRef);
 
-    const attachRef = (r: React.Component | Element | null | undefined) => {
-      mergedRef(r as any);
-    };
-
     const normalize =
       (callback?: (node: HTMLElement, param: any) => void) => (param: any) => {
         if (callback && nodeRef.current) {
@@ -77,12 +73,12 @@ const TransitionWrapper = React.forwardRef<
               // TODO: Types for RTG missing innerProps, so need to cast.
               children(status, {
                 ...innerProps,
-                ref: attachRef,
+                ref: mergedRef,
               })) as any)
           : React.cloneElement(
               children as React.ReactElement,
               {
-                ref: attachRef,
+                ref: mergedRef,
               } as any,
             )}
       </Transition>
