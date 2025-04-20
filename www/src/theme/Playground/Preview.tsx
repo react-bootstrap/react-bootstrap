@@ -66,7 +66,12 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
 
   return (
     <div ref={exampleRef}>
-      <LivePreview className={className} onClick={handleCustomRedirect} />
+      <LivePreview
+        className={className}
+        onClick={handleCustomRedirect}
+        // @ts-expect-error missing TS type.
+        Component="div"
+      />
     </div>
   );
 };

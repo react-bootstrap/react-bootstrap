@@ -57,42 +57,48 @@ function ThemedLiveEditor() {
   const [focused, setFocused] = useState(false);
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
-  // const mouseDownRef = useRef(false);
+  const mouseDownRef = useRef(false);
   const idRef = useRef(null);
 
   if (idRef.current === null) idRef.current = `described-by-${++uid}`;
   const id = idRef.current;
 
-  // const handleKeyDown = useCallback(
-  //   (e) => {
-  //     if (ignoreTab) {
-  //       if (e.key !== 'Tab' && e.key !== 'Shift') {
-  //         if (e.key === 'Enter') e.preventDefault();
-  //         setIgnoreTab(false);
-  //       }
-  //     } else if (e.key === 'Escape') {
-  //       setIgnoreTab(true);
-  //     }
-  //   },
-  //   [ignoreTab],
-  // );
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (ignoreTab) {
+        if (e.key !== 'Tab' && e.key !== 'Shift') {
+          if (e.key === 'Enter') e.preventDefault();
+          setIgnoreTab(false);
+        }
+      } else if (e.key === 'Escape') {
+        setIgnoreTab(true);
+      }
+    },
+    [ignoreTab],
+  );
 
-  // const handleFocus = useCallback(() => {
-  //   setFocused(true);
-  //   setIgnoreTab(!mouseDownRef.current);
-  //   setKeyboardFocused(!mouseDownRef.current);
-  // }, []);
+  const handleFocus = useCallback(() => {
+    setFocused(true);
+    setIgnoreTab(!mouseDownRef.current);
+    setKeyboardFocused(!mouseDownRef.current);
+  }, []);
 
-  // const handleBlur = useCallback(() => {
-  //   setFocused(false);
-  // }, []);
+  const handleBlur = useCallback(() => {
+    setFocused(false);
+    setKeyboardFocused(false);
+  }, []);
 
-  // const handleMouseDown = useCallback(() => {
-  //   mouseDownRef.current = true;
-  //   window.setTimeout(() => {
-  //     mouseDownRef.current = false;
-  //   });
-  // }, []);
+  const handleMouseDown = useCallback(() => {
+    mouseDownRef.current = true;
+    window.setTimeout(() => {
+      mouseDownRef.current = false;
+    });
+  }, []);
+
+  // Hack because LiveEditor doesn't define this type
+  const props = {
+    ignoreTabKey: ignoreTab,
+  };
 
   const showMessage = keyboardFocused || (focused && !ignoreTab);
 
@@ -103,11 +109,12 @@ function ThemedLiveEditor() {
         // otherwise dark prism theme is not applied
         key={String(isBrowser)}
         className={styles.playgroundEditor}
-        // onFocus={handleFocus}
-        // onBlur={handleBlur}
-        // onKeyDown={handleKeyDown}
-        // onMouseDown={handleMouseDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
         aria-describedby={showMessage ? id : null}
+        {...props}
       />
       <div className={clsx(styles.editorToolbar)}>
         {showMessage && (
