@@ -34,30 +34,6 @@ describe('<Collapse>', () => {
     );
   });
 
-  it('should work with a class component as children', () => {
-    class InnerComponent extends React.Component {
-      render() {
-        return <div {...this.props}>Inner</div>;
-      }
-    }
-
-    const onEnteringSpy = vi.fn();
-
-    const { rerender } = render(
-      <Collapse onEntering={onEnteringSpy}>
-        <InnerComponent />
-      </Collapse>,
-    );
-
-    rerender(
-      <Collapse in onEntering={onEnteringSpy}>
-        <InnerComponent />
-      </Collapse>,
-    );
-
-    expect(onEnteringSpy).toHaveBeenCalledOnce();
-  });
-
   it('Should default to collapsed', () => {
     render(<Component data-testid="test">Panel content</Component>);
 

@@ -8,7 +8,6 @@ import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import { getChildRef } from '@restart/ui/utils';
 import Overlay, { type OverlayChildren, type OverlayProps } from './Overlay';
-import safeFindDOMNode from './safeFindDOMNode';
 import type { Placement } from './types';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
@@ -206,10 +205,6 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
       ? React.Children.only(children).props
       : ({} as any);
 
-  const attachRef = (r: React.Component | Element | null | undefined) => {
-    mergedRef(safeFindDOMNode(r));
-  };
-
   const handleShow = useCallback(() => {
     timeout.clear();
     hoverStateRef.current = 'show';
@@ -278,7 +273,7 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
 
   const triggers: string[] = trigger == null ? [] : [].concat(trigger as any);
   const triggerProps: any = {
-    ref: attachRef,
+    ref: mergedRef,
   };
 
   if (triggers.indexOf('click') !== -1) {

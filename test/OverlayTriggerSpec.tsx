@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { describe, expect, it, vi } from 'vitest';
 import {
   act,
@@ -293,47 +292,6 @@ describe('<OverlayTrigger>', () => {
 
     await waitFor(() => expect(onExitedSpy).toHaveBeenCalledOnce());
     expect(increment).toHaveBeenCalledTimes(4);
-  });
-
-  it('Should forward requested context', () => {
-    const contextTypes = {
-      key: PropTypes.string,
-    };
-
-    const contextSpy = vi.fn();
-
-    class ContextReader extends React.Component {
-      static contextTypes = contextTypes;
-
-      render() {
-        contextSpy((this.context as any).key);
-        return <div />;
-      }
-    }
-
-    class ContextHolder extends React.Component {
-      static childContextTypes = contextTypes;
-
-      getChildContext() {
-        return { key: 'value' };
-      }
-
-      render() {
-        return (
-          <OverlayTrigger trigger="click" overlay={<ContextReader />}>
-            <button type="button" data-testid="test-button">
-              button
-            </button>
-          </OverlayTrigger>
-        );
-      }
-    }
-
-    render(<ContextHolder />);
-    const buttonElem = screen.getByTestId('test-button');
-    fireEvent.click(buttonElem);
-
-    expect(contextSpy).toHaveBeenCalledWith('value');
   });
 
   it('Should handle popover trigger without warnings', async () => {

@@ -11,7 +11,7 @@ export interface PreviewProps {
 }
 
 const Preview: React.FC<PreviewProps> = ({ className }) => {
-  const exampleRef = useRef();
+  const exampleRef = useRef(null);
   const [hjs, setHjs] = useState(null);
   const live = useContext(LiveContext);
 
@@ -56,15 +56,22 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
     },
   );
 
-  const handleCustomRedirect = useEventCallback((e: React.MouseEvent<HTMLElement>) => {
-    if (e.target.tagName === 'A') {
-      e.preventDefault();
-    }
-  })
+  const handleCustomRedirect = useEventCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if ((e.target as HTMLElement).tagName === 'A') {
+        e.preventDefault();
+      }
+    },
+  );
 
   return (
     <div ref={exampleRef}>
-      <LivePreview className={className} onClick={handleCustomRedirect}/>
+      <LivePreview
+        className={className}
+        onClick={handleCustomRedirect}
+        // @ts-expect-error missing TS type.
+        Component="div"
+      />
     </div>
   );
 };

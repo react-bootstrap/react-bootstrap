@@ -85,6 +85,7 @@ function ThemedLiveEditor() {
 
   const handleBlur = useCallback(() => {
     setFocused(false);
+    setKeyboardFocused(false);
   }, []);
 
   const handleMouseDown = useCallback(() => {
@@ -158,7 +159,7 @@ export default function Playground({
   transformCode,
   previewClassName,
   ...props
-}: Props & { previewClassName?: string }): JSX.Element {
+}: Props & { previewClassName?: string }): React.JSX.Element {
   const {
     siteConfig: { themeConfig },
   } = useDocusaurusContext();
@@ -171,7 +172,6 @@ export default function Playground({
 
   return (
     <div className={styles.playgroundContainer}>
-      {/* @ts-expect-error: type incompatibility with refs */}
       <LiveProvider
         code={children.replace(/\n$/, '')}
         noInline={noInline}

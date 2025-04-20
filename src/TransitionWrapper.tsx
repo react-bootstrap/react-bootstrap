@@ -4,7 +4,6 @@ import Transition, {
   type TransitionStatus,
 } from 'react-transition-group/Transition';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import safeFindDOMNode from './safeFindDOMNode';
 
 export type TransitionWrapperProps = TransitionProps & {
   childRef?: React.Ref<unknown>;
@@ -38,10 +37,6 @@ const TransitionWrapper = React.forwardRef<
   ) => {
     const nodeRef = useRef<HTMLElement>(null);
     const mergedRef = useMergedRefs(nodeRef, childRef);
-
-    const attachRef = (r: React.Component | Element | null | undefined) => {
-      mergedRef(safeFindDOMNode(r) as any);
-    };
 
     const normalize =
       (callback?: (node: HTMLElement, param: any) => void) => (param: any) => {
@@ -78,11 +73,14 @@ const TransitionWrapper = React.forwardRef<
               // TODO: Types for RTG missing innerProps, so need to cast.
               children(status, {
                 ...innerProps,
-                ref: attachRef,
+                ref: mergedRef,
               })) as any)
-          : React.cloneElement(children as React.ReactElement, {
-              ref: attachRef,
-            })}
+          : React.cloneElement(
+              children as React.ReactElement,
+              {
+                ref: mergedRef,
+              } as any,
+            )}
       </Transition>
     );
   },

@@ -15,7 +15,6 @@ import useOverlayOffset from './useOverlayOffset';
 import Fade from './Fade';
 import type { TransitionType } from './helpers';
 import type { Placement, PopperRef, RootCloseEvent } from './types';
-import safeFindDOMNode from './safeFindDOMNode';
 
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;
@@ -145,9 +144,8 @@ function wrapRefs(props, arrowProps) {
   const { ref } = props;
   const { ref: aRef } = arrowProps;
 
-  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(safeFindDOMNode(r)));
-  arrowProps.ref =
-    aRef.__wrapped || (aRef.__wrapped = (r) => aRef(safeFindDOMNode(r)));
+  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(r));
+  arrowProps.ref = aRef.__wrapped || (aRef.__wrapped = (r) => aRef(r));
 }
 
 const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
@@ -231,18 +229,18 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
               hasDoneInitialMeasure,
             });
 
-          return React.cloneElement(overlay as React.ReactElement, {
+          return React.cloneElement(overlay, {
             ...overlayProps,
             placement: updatedPlacement,
             arrowProps,
             popper,
             hasDoneInitialMeasure,
             className: classNames(
-              (overlay as React.ReactElement).props.className,
+              overlay.props.className,
               !transition && show && 'show',
             ),
             style: {
-              ...(overlay as React.ReactElement).props.style,
+              ...overlay.props.style,
               ...overlayProps.style,
             },
           });

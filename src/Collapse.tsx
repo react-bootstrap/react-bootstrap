@@ -238,11 +238,11 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
         appear={appear}
       >
         {(state: TransitionStatus, innerProps: Record<string, unknown>) =>
-          React.cloneElement(children, {
+          React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               className,
-              children.props.className,
+              (children.props as any).className,
               collapseStyles[state],
               computedDimension === 'width' && 'collapse-horizontal',
             ),

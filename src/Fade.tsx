@@ -123,12 +123,12 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
         childRef={getChildRef(children)}
       >
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
-          React.cloneElement(children, {
+          React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               'fade',
               className,
-              children.props.className,
+              (children.props as any).className,
               fadeStyles[status],
               transitionClasses[status],
             ),
