@@ -20,9 +20,9 @@
     "@docusaurus/theme-common": "^3.7.0",
     "@docusaurus/theme-live-codeblock": "^3.7.0",
     "@mdx-js/react": "^3.1.0",
-    "@restart/hooks": "^0.5.0",
+    "@restart/hooks": "^0.6.2",
     "ast-types": "^0.14.2",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.5",
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "dom-helpers": "^5.2.1",
@@ -36,7 +36,7 @@
     "react-docgen": "^7.1.1",
     "react-dom": "^19.1.0",
     "react-live": "^2.4.1",
-    "sass": "1.85.0",
+    "sass": "1.86.3",
     "yup": "^1.6.1"
   },
   "devDependencies": {
