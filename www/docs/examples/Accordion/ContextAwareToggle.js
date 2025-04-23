@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import AccordionContext from 'react-bootstrap/AccordionContext';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import useAccordionButton from 'react-bootstrap/useAccordionButton';
 import Card from 'react-bootstrap/Card';
 
 const PINK = 'rgba(255, 192, 203, 0.6)';

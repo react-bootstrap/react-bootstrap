@@ -5,10 +5,7 @@ export { default as AccordionContext } from './AccordionContext';
 export { default as AccordionCollapse } from './AccordionCollapse';
 export type { AccordionCollapseProps } from './AccordionCollapse';
 
-export {
-  default as AccordionButton,
-  useAccordionButton,
-} from './AccordionButton';
+export { default as AccordionButton } from './AccordionButton';
 export type { AccordionButtonProps } from './AccordionButton';
 
 export { default as AccordionBody } from './AccordionBody';
@@ -329,3 +326,5 @@ export type {
 
 export { default as Tooltip } from './Tooltip';
 export type { TooltipProps } from './Tooltip';
+
+export { default as useAccordionButton } from './useAccordionButton';
