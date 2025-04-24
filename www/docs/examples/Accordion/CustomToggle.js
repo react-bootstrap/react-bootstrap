@@ -1,5 +1,5 @@
 import Accordion from 'react-bootstrap/Accordion';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import useAccordionButton from 'react-bootstrap/useAccordionButton';
 import Card from 'react-bootstrap/Card';
 
 function CustomToggle({ children, eventKey }) {

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { useCol, type ColProps } from './Col';
+import type { ColProps } from './Col';
+import useCol from './useCol';
 import type { Variant } from './types';
 
 export type PlaceholderAnimation = 'glow' | 'wave';

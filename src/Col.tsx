@@ -1,15 +1,10 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
-import {
-  useBootstrapPrefix,
-  useBootstrapBreakpoints,
-  useBootstrapMinBreakpoint,
-} from './ThemeProvider';
 import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import useCol from './useCol';
 
-type NumberAttr =
+export type NumberAttr =
   | number
   | '1'
   | '2'
@@ -24,10 +19,10 @@ type NumberAttr =
   | '11'
   | '12';
 
-type ColOrderNumber = number | '1' | '2' | '3' | '4' | '5';
-type ColOrder = ColOrderNumber | 'first' | 'last';
-type ColSize = boolean | 'auto' | NumberAttr;
-type ColSpec =
+export type ColOrderNumber = number | '1' | '2' | '3' | '4' | '5';
+export type ColOrder = ColOrderNumber | 'first' | 'last';
+export type ColSize = boolean | 'auto' | NumberAttr;
+export type ColSpec =
   | ColSize
   | { span?: ColSize | null; offset?: NumberAttr; order?: ColOrder };
 
@@ -114,60 +109,6 @@ const propTypes = {
    */
   xxl: column,
 };
-
-export interface UseColMetadata {
-  as?: React.ElementType;
-  bsPrefix: string;
-  spans: string[];
-}
-
-export function useCol({
-  as,
-  bsPrefix,
-  className,
-  ...props
-}: ColProps): [any, UseColMetadata] {
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'col');
-  const breakpoints = useBootstrapBreakpoints();
-  const minBreakpoint = useBootstrapMinBreakpoint();
-
-  const spans: string[] = [];
-  const classes: string[] = [];
-
-  breakpoints.forEach((brkPoint) => {
-    const propValue = props[brkPoint];
-    delete props[brkPoint];
-
-    let span: ColSize | undefined;
-    let offset: NumberAttr | undefined;
-    let order: ColOrder | undefined;
-
-    if (typeof propValue === 'object' && propValue != null) {
-      ({ span, offset, order } = propValue);
-    } else {
-      span = propValue;
-    }
-
-    const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : '';
-
-    if (span)
-      spans.push(
-        span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`,
-      );
-
-    if (order != null) classes.push(`order${infix}-${order}`);
-    if (offset != null) classes.push(`offset${infix}-${offset}`);
-  });
-
-  return [
-    { ...props, className: classNames(className, ...spans, ...classes) },
-    {
-      as,
-      bsPrefix,
-      spans,
-    },
-  ];
-}
 
 const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
   HTMLElement,
