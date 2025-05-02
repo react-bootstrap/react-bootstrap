@@ -33,7 +33,7 @@
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.1.0",
-    "react-docgen": "^7.1.1",
+    "react-docgen": "^8.0.0",
     "react-dom": "^19.1.0",
     "react-live": "^2.4.1",
     "sass": "1.86.3",
