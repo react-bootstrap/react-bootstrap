@@ -11,6 +11,7 @@ export interface BadgeProps
     React.HTMLAttributes<HTMLElement> {
   bg?: Variant;
   pill?: boolean;
+  positioned?: boolean;
   text?: Color;
 }
 
@@ -32,6 +33,13 @@ const propTypes = {
   pill: PropTypes.bool,
 
   /**
+   * Add the `positioned`
+   * with the `pill` to modify a badge and position it in the corner of a link or button
+   * without the `pill` is an empty circle without a count for a more generic indicator
+   */
+  positioned: PropTypes.bool,
+
+  /**
    * Sets badge text color
    *
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
@@ -49,6 +57,7 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
         bsPrefix,
         bg = 'primary',
         pill = false,
+        positioned = false,
         text,
         className,
         as: Component = 'span',
@@ -65,6 +74,10 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
             className,
             prefix,
             pill && `rounded-pill`,
+            positioned &&
+              pill &&
+              `position-absolute top-0 start-100 translate-middle`,
+            positioned && !pill && `position-absolute top-0 start-100 translate-middle border border-light rounded-circle`,
             text && `text-${text}`,
             bg && `bg-${bg}`,
           )}
