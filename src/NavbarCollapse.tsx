@@ -1,21 +1,17 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
-
 import Collapse, { type CollapseProps } from './Collapse';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import type { BsPrefixProps } from './helpers';
 
 export interface NavbarCollapseProps
   extends Omit<CollapseProps, 'children'>,
-    React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {}
-
-const propTypes = {
-  /** @default 'navbar-collapse' */
-  bsPrefix: PropTypes.string,
-};
+    React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * @default 'navbar-collapse'
+   */
+  bsPrefix?: string | undefined;
+}
 
 const NavbarCollapse = React.forwardRef<HTMLDivElement, NavbarCollapseProps>(
   ({ children, bsPrefix, ...props }, ref) => {
@@ -33,6 +29,5 @@ const NavbarCollapse = React.forwardRef<HTMLDivElement, NavbarCollapseProps>(
 );
 
 NavbarCollapse.displayName = 'NavbarCollapse';
-NavbarCollapse.propTypes = propTypes;
 
 export default NavbarCollapse;

@@ -1,34 +1,30 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionItemContext, {
   type AccordionItemContextValue,
 } from './AccordionItemContext';
-import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
-export interface AccordionItemProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  eventKey: string;
-}
+export interface AccordionItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
-
-  /** @default 'accordion-item' */
-  bsPrefix: PropTypes.string,
+  /**
+   * @default 'accordion-item'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * A unique key used to control this item's collapse/expand.
-   * @required
    */
-  eventKey: PropTypes.string.isRequired,
-};
+  eventKey: string;
+}
 
-const AccordionItem: BsPrefixRefForwardingComponent<'div', AccordionItemProps> =
+const AccordionItem: DynamicRefForwardingComponent<'div', AccordionItemProps> =
   React.forwardRef<HTMLElement, AccordionItemProps>(
     (
       {
@@ -59,9 +55,8 @@ const AccordionItem: BsPrefixRefForwardingComponent<'div', AccordionItemProps> =
         </AccordionItemContext.Provider>
       );
     },
-  ) as typeof AccordionItem;
+  );
 
-AccordionItem.propTypes = propTypes;
 AccordionItem.displayName = 'AccordionItem';
 
 export default AccordionItem;

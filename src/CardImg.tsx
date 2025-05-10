@@ -1,34 +1,27 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface CardImgProps
-  extends BsPrefixProps,
-    React.ImgHTMLAttributes<HTMLImageElement> {
-  variant?: 'top' | 'bottom' | string;
-}
+  extends React.ImgHTMLAttributes<HTMLImageElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'card-img'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
-   * Defines image position inside
-   * the card.
-   *
-   * @type {('top'|'bottom')}
+   * Defines image position inside the card.
    */
-  variant: PropTypes.oneOf(['top', 'bottom']),
+  variant?: 'top' | 'bottom' | string;
+}
 
-  as: PropTypes.elementType,
-};
-
-const CardImg: BsPrefixRefForwardingComponent<'img', CardImgProps> =
+const CardImg: DynamicRefForwardingComponent<'img', CardImgProps> =
   React.forwardRef(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     (
@@ -54,8 +47,8 @@ const CardImg: BsPrefixRefForwardingComponent<'img', CardImgProps> =
         />
       );
     },
-  ) as typeof CardImg;
+  );
+
 CardImg.displayName = 'CardImg';
-CardImg.propTypes = propTypes;
 
 export default CardImg;

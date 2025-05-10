@@ -1,28 +1,24 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
 } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import type { GapValue } from './types';
 import createUtilityClassName, {
   type ResponsiveUtilityValue,
-  responsivePropType,
 } from './createUtilityClasses';
 
 export type StackDirection = 'horizontal' | 'vertical';
 
-export interface StackProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  direction?: StackDirection;
-  gap?: ResponsiveUtilityValue<GapValue>;
-}
+export interface StackProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * Change the underlying component CSS base class name and modifier class names prefix.
    * **This is an escape hatch** for working with heavily customized bootstrap css.
@@ -32,15 +28,20 @@ const propTypes = {
    *
    * @default 'hstack | vstack'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+
+  /**
+   * Flex direction.
+   */
+  direction?: StackDirection | undefined;
 
   /**
    * Sets the spacing between each item. Valid values are `0-5`.
    */
-  gap: responsivePropType(PropTypes.number),
-};
+  gap?: ResponsiveUtilityValue<GapValue> | undefined;
+}
 
-const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
+const Stack: DynamicRefForwardingComponent<'span', StackProps> =
   React.forwardRef<HTMLElement, StackProps>(
     (
       { as: Component = 'div', bsPrefix, className, direction, gap, ...props },
@@ -71,9 +72,8 @@ const Stack: BsPrefixRefForwardingComponent<'span', StackProps> =
         />
       );
     },
-  ) as typeof Stack;
+  );
 
 Stack.displayName = 'Stack';
-Stack.propTypes = propTypes;
 
 export default Stack;

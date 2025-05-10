@@ -1,31 +1,32 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormGroup, { type FormGroupProps } from './FormGroup';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-export interface FloatingLabelProps extends FormGroupProps, BsPrefixProps {
-  controlId?: string;
-  label: React.ReactNode;
-}
+export interface FloatingLabelProps extends FormGroupProps {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  as: PropTypes.elementType,
+  /**
+   * @default 'form-floating'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<label>`.
    */
-  controlId: PropTypes.string,
+  controlId?: string | undefined;
 
   /**
    * Form control label.
    */
-  label: PropTypes.node.isRequired,
-};
+  label: React.ReactNode;
+}
 
-const FloatingLabel: BsPrefixRefForwardingComponent<'div', FloatingLabelProps> =
+const FloatingLabel: DynamicRefForwardingComponent<'div', FloatingLabelProps> =
   React.forwardRef<HTMLElement, FloatingLabelProps>(
     ({ bsPrefix, className, children, controlId, label, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-floating');
@@ -42,9 +43,8 @@ const FloatingLabel: BsPrefixRefForwardingComponent<'div', FloatingLabelProps> =
         </FormGroup>
       );
     },
-  ) as typeof FloatingLabel;
+  );
 
 FloatingLabel.displayName = 'FloatingLabel';
-FloatingLabel.propTypes = propTypes;
 
 export default FloatingLabel;

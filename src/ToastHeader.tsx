@@ -1,42 +1,34 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
-
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton, { type CloseButtonVariant } from './CloseButton';
 import ToastContext from './ToastContext';
-import type { BsPrefixOnlyProps } from './helpers';
 
-export interface ToastHeaderProps
-  extends BsPrefixOnlyProps,
-    React.HTMLAttributes<HTMLDivElement> {
-  closeLabel?: string;
-  closeVariant?: CloseButtonVariant;
-  closeButton?: boolean;
-}
-
-const propTypes = {
-  bsPrefix: PropTypes.string,
+export interface ToastHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * @default 'toast-header'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * Provides an accessible label for the close
    * button. It is used for Assistive Technology when the label text is not
    * readable.
    */
-  closeLabel: PropTypes.string,
+  closeLabel?: string | undefined;
 
   /**
    * Sets the variant for close button.
    */
-  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
+  closeVariant?: CloseButtonVariant | undefined;
 
   /**
    * Specify whether the Component should contain a close button
    */
-  closeButton: PropTypes.bool,
-};
+  closeButton?: boolean | undefined;
+}
 
 const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
   (
@@ -77,6 +69,5 @@ const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
 );
 
 ToastHeader.displayName = 'ToastHeader';
-ToastHeader.propTypes = propTypes;
 
 export default ToastHeader;

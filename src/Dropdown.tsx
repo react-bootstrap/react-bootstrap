@@ -1,14 +1,11 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
-import BaseDropdown, {
-  DropdownProps as BaseDropdownProps,
-  ToggleMetadata,
-} from '@restart/ui/Dropdown';
+import BaseDropdown, { ToggleMetadata } from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import DropdownContext, { type DropDirection } from './DropdownContext';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
+import DropdownContext from './DropdownContext';
 import DropdownDivider from './DropdownDivider';
 import DropdownHeader from './DropdownHeader';
 import DropdownItem from './DropdownItem';
@@ -17,103 +14,16 @@ import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import InputGroupContext from './InputGroupContext';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import { type AlignType, alignPropType } from './types';
+import type { BsDropdownProps } from './types';
 
 export interface DropdownProps
-  extends BaseDropdownProps,
-    BsPrefixProps,
+  extends BsDropdownProps,
     Omit<
       React.HTMLAttributes<HTMLElement>,
       'onSelect' | 'children' | 'onToggle'
-    > {
-  drop?: DropDirection;
-  align?: AlignType;
-  focusFirstItemOnShow?: boolean | 'keyboard';
-  navbar?: boolean;
-  autoClose?: boolean | 'outside' | 'inside';
-}
+    > {}
 
-const propTypes = {
-  /** @default 'dropdown' */
-  bsPrefix: PropTypes.string,
-  /**
-   * Determines the direction and location of the Menu in relation to it's Toggle.
-   */
-  drop: PropTypes.oneOf<DropDirection>([
-    'up',
-    'up-centered',
-    'start',
-    'end',
-    'down',
-    'down-centered',
-  ]),
-
-  as: PropTypes.elementType,
-
-  /**
-   * Aligns the dropdown menu to the specified side of the Dropdown toggle. You can
-   * also align the menu responsively for breakpoints starting at `sm` and up.
-   * The alignment direction will affect the specified breakpoint or larger.
-   *
-   * *Note: Using responsive alignment will disable Popper usage for positioning.*
-   *
-   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
-   */
-  align: alignPropType,
-
-  /**
-   * Whether or not the Dropdown is visible.
-   *
-   * @controllable onToggle
-   */
-  show: PropTypes.bool,
-
-  /**
-   * A callback fired when the Dropdown wishes to change visibility. Called with the requested
-   * `show` value, the DOM event, and the source that fired it: `'click'`,`'keydown'`,`'rootClose'`, or `'select'`.
-   *
-   * ```js
-   * function(
-   *   nextShow: boolean,
-   *   meta: ToggleMetadata,
-   * ): void
-   * ```
-   *
-   * @controllable show
-   */
-  onToggle: PropTypes.func,
-
-  /**
-   * A callback fired when a menu item is selected.
-   *
-   * ```js
-   * (eventKey: any, event: Object) => any
-   * ```
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * Controls the focus behavior for when the Dropdown is opened. Set to
-   * `true` to always focus the first menu item, `keyboard` to focus only when
-   * navigating via the keyboard, or `false` to disable completely
-   *
-   * The Default behavior is `false` **unless** the Menu has a `role="menu"`
-   * where it will default to `keyboard` to match the recommended [ARIA Authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton).
-   */
-  focusFirstItemOnShow: PropTypes.oneOf([false, true, 'keyboard']),
-
-  /** @private */
-  navbar: PropTypes.bool,
-
-  /**
-   * Controls the auto close behaviour of the dropdown when clicking outside of
-   * the button or the list.
-   */
-  autoClose: PropTypes.oneOf([true, 'outside', 'inside', false]),
-};
-
-const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
+const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
   React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
     const {
       bsPrefix,
@@ -219,10 +129,9 @@ const Dropdown: BsPrefixRefForwardingComponent<'div', DropdownProps> =
         </BaseDropdown>
       </DropdownContext.Provider>
     );
-  }) as typeof Dropdown;
+  });
 
 Dropdown.displayName = 'Dropdown';
-Dropdown.propTypes = propTypes;
 
 export default Object.assign(Dropdown, {
   Toggle: DropdownToggle,

@@ -1,22 +1,40 @@
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import DropdownContext from '@restart/ui/DropdownContext';
 import { useDropdownToggle } from '@restart/ui/DropdownToggle';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import Button, { type ButtonProps, type CommonButtonProps } from './Button';
-import type { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 
 export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
-  as?: React.ElementType;
+  /**
+   * Element used to render the component.
+   *
+   * @default {Button}
+   */
+  as?: React.ElementType | undefined;
+
+  /**
+   * @default 'dropdown-toggle'
+   */
+  bsPrefix?: string | undefined;
+
+  /**
+   * Renders a split button dropdown toggle.
+   */
   split?: boolean;
+
+  /**
+   * To passthrough to the underlying button or whatever from DropdownButton
+   * @private
+   */
   childBsPrefix?: string;
 }
 
-type DropdownToggleComponent = BsPrefixRefForwardingComponent<
+type DropdownToggleComponent = DynamicRefForwardingComponent<
   'button',
   DropdownToggleProps
 >;
@@ -24,32 +42,6 @@ type DropdownToggleComponent = BsPrefixRefForwardingComponent<
 export type PropsFromToggle = Partial<
   Pick<React.ComponentPropsWithRef<DropdownToggleComponent>, CommonButtonProps>
 >;
-
-const propTypes = {
-  /**
-   * @default 'dropdown-toggle'
-   */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * An html id attribute, necessary for assistive technologies, such as screen readers.
-   * @type {string|number}
-   */
-  id: PropTypes.string,
-
-  split: PropTypes.bool,
-
-  /**
-   * @default Button
-   */
-  as: PropTypes.elementType,
-
-  /**
-   * to passthrough to the underlying button or whatever from DropdownButton
-   * @private
-   */
-  childBsPrefix: PropTypes.string,
-};
 
 const DropdownToggle: DropdownToggleComponent = React.forwardRef(
   (
@@ -93,9 +85,8 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
       />
     );
   },
-) as typeof DropdownToggle;
+);
 
 DropdownToggle.displayName = 'DropdownToggle';
-DropdownToggle.propTypes = propTypes;
 
 export default DropdownToggle;

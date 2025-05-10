@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import invariant from 'invariant';
 import { useUncontrolled } from 'uncontrollable';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import chainFunction from './createChainedFunction';
 import { map } from './ElementChildren';
 import ButtonGroup, { type ButtonGroupProps } from './ButtonGroup';
 import ToggleButton from './ToggleButton';
-import type { BsPrefixRefForwardingComponent } from './helpers';
 
 type BaseToggleButtonProps = Omit<
   ButtonGroupProps,
@@ -15,39 +13,30 @@ type BaseToggleButtonProps = Omit<
 >;
 
 export interface ToggleButtonRadioProps<T> extends BaseToggleButtonProps {
+  /**
+   * The input `type` of the rendered buttons, determines the toggle behavior
+   * of the buttons
+   */
   type?: 'radio';
-  name: string;
-  value?: T;
-  defaultValue?: T;
-  onChange?: (value: T, event: any) => void;
-}
 
-export interface ToggleButtonCheckboxProps<T> extends BaseToggleButtonProps {
-  type: 'checkbox';
-  name?: string;
-  value?: T[];
-  defaultValue?: T[];
-  onChange?: (value: T[]) => void;
-}
-
-export type ToggleButtonGroupProps<T> =
-  | ToggleButtonRadioProps<T>
-  | ToggleButtonCheckboxProps<T>;
-
-const propTypes = {
   /**
    * An HTML `<input>` name for each child button.
    *
    * __Required if `type` is set to `'radio'`__
    */
-  name: PropTypes.string,
+  name: string;
 
   /**
    * The value, or array of values, of the active (pressed) buttons
    *
    * @controllable onChange
    */
-  value: PropTypes.any,
+  value?: T;
+
+  /**
+   * The default value, or array of values, of the active (pressed) buttons
+   */
+  defaultValue?: T;
 
   /**
    * Callback fired when a button is pressed, depending on whether the `type`
@@ -56,26 +45,50 @@ const propTypes = {
    *
    * @controllable value
    */
-  onChange: PropTypes.func,
+  onChange?: (value: T, event: any) => void;
+}
 
+export interface ToggleButtonCheckboxProps<T> extends BaseToggleButtonProps {
   /**
    * The input `type` of the rendered buttons, determines the toggle behavior
    * of the buttons
    */
-  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+  type: 'checkbox';
 
   /**
-   * Sets the size for all Buttons in the group.
+   * An HTML `<input>` name for each child button.
    *
-   * @type ('sm'|'lg')
+   * __Required if `type` is set to `'radio'`__
    */
-  size: PropTypes.string,
+  name?: string;
 
-  /** Make the set of Buttons appear vertically stacked. */
-  vertical: PropTypes.bool,
-};
+  /**
+   * The value, or array of values, of the active (pressed) buttons
+   *
+   * @controllable onChange
+   */
+  value?: T[];
 
-const ToggleButtonGroup: BsPrefixRefForwardingComponent<
+  /**
+   * The default value, or array of values, of the active (pressed) buttons
+   */
+  defaultValue?: T[];
+
+  /**
+   * Callback fired when a button is pressed, depending on whether the `type`
+   * is `'radio'` or `'checkbox'`, `onChange` will be called with the value or
+   * array of active values
+   *
+   * @controllable value
+   */
+  onChange?: (value: T[]) => void;
+}
+
+export type ToggleButtonGroupProps<T> =
+  | ToggleButtonRadioProps<T>
+  | ToggleButtonCheckboxProps<T>;
+
+const ToggleButtonGroup: DynamicRefForwardingComponent<
   'a',
   ToggleButtonGroupProps<any>
 > = React.forwardRef<HTMLElement, ToggleButtonGroupProps<any>>((props, ref) => {
@@ -137,10 +150,9 @@ const ToggleButtonGroup: BsPrefixRefForwardingComponent<
       })}
     </ButtonGroup>
   );
-}) as typeof ToggleButtonGroup;
+});
 
 ToggleButtonGroup.displayName = 'ToggleButtonGroup';
-ToggleButtonGroup.propTypes = propTypes;
 
 export default Object.assign(ToggleButtonGroup, {
   Button: ToggleButton,

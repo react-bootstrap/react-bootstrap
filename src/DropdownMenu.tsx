@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import {
   useDropdownMenu,
   UseDropdownMenuOptions,
 } from '@restart/ui/DropdownMenu';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import warning from 'warning';
@@ -14,42 +14,39 @@ import InputGroupContext from './InputGroupContext';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import {
-  type AlignType,
-  type AlignDirection,
-  alignPropType,
-  type Placement,
-} from './types';
+import type { AlignType, AlignDirection, Placement } from './types';
 
 export type DropdownMenuVariant = 'dark' | string;
 
-export interface DropdownMenuProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  show?: boolean;
-  renderOnMount?: boolean;
-  flip?: boolean;
-  align?: AlignType;
-  rootCloseEvent?: 'click' | 'mousedown';
-  popperConfig?: UseDropdownMenuOptions['popperConfig'];
-  variant?: DropdownMenuVariant;
-}
+export interface DropdownMenuProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Control the rendering of the DropdownMenu. All non-menu props
+   * (listed here) are passed through to the `as` Component.
+   *
+   * If providing a custom, non DOM, component. the `show`, `close` and `align` props
+   * are also injected and should be handled appropriately.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'dropdown-menu'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
-  /** Controls the visibility of the Dropdown menu  */
-  show: PropTypes.bool,
+  /**
+   * Controls the visibility of the Dropdown menu
+   */
+  show?: boolean | undefined;
 
-  /** Whether to render the dropdown menu in the DOM before the first time it is shown */
-  renderOnMount: PropTypes.bool,
+  /**
+   * Whether to render the dropdown menu in the DOM before the first time it is shown
+   */
+  renderOnMount?: boolean | undefined;
 
-  /** Have the dropdown switch to it's opposite placement when necessary to stay on screen. */
-  flip: PropTypes.bool,
+  /**
+   * Have the dropdown switch to it's opposite placement when necessary to stay on screen.
+   */
+  flip?: boolean | undefined;
 
   /**
    * Aligns the dropdown menu to the specified side of the container. You can also align
@@ -57,10 +54,8 @@ const propTypes = {
    * direction will affect the specified breakpoint or larger.
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
-   *
-   * @type {"start"|"end"|{ sm: "start"|"end" }|{ md: "start"|"end" }|{ lg: "start"|"end" }|{ xl: "start"|"end"}|{ xxl: "start"|"end"} }
    */
-  align: alignPropType,
+  align?: AlignType | undefined;
 
   /**
    * Which event when fired outside the component will cause it to be closed
@@ -69,29 +64,20 @@ const propTypes = {
    * `rootCloseEvent` to `<RootCloseWrapper>` in your custom dropdown menu
    * component ([similarly to how it is implemented in `<Dropdown.Menu>`](https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119)).*
    */
-  rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
-
-  /**
-   * Control the rendering of the DropdownMenu. All non-menu props
-   * (listed here) are passed through to the `as` Component.
-   *
-   * If providing a custom, non DOM, component. the `show`, `close` and `align` props
-   * are also injected and should be handled appropriately.
-   */
-  as: PropTypes.elementType,
+  rootCloseEvent?: 'click' | 'mousedown' | undefined;
 
   /**
    * A set of popper options and props passed directly to Popper.
    */
-  popperConfig: PropTypes.object,
+  popperConfig?: UseDropdownMenuOptions['popperConfig'] | undefined;
 
   /**
    * Menu color variant.
    *
    * Omitting this will use the default light color.
    */
-  variant: PropTypes.string,
-};
+  variant?: DropdownMenuVariant | undefined;
+}
 
 export function getDropdownMenuPlacement(
   alignEnd: boolean,
@@ -118,7 +104,7 @@ export function getDropdownMenuPlacement(
   return placement;
 }
 
-const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
+const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
   React.forwardRef<HTMLElement, DropdownMenuProps>(
     (
       {
@@ -228,9 +214,8 @@ const DropdownMenu: BsPrefixRefForwardingComponent<'div', DropdownMenuProps> =
         />
       );
     },
-  ) as typeof DropdownMenu;
+  );
 
 DropdownMenu.displayName = 'DropdownMenu';
-DropdownMenu.propTypes = propTypes;
 
 export default DropdownMenu;

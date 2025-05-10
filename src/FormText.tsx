@@ -1,41 +1,27 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 import * as React from 'react';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-
-export interface FormTextProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  muted?: boolean;
-}
-
-const propTypes = {
-  /** @default 'form-text' */
-  bsPrefix: PropTypes.string,
+export interface FormTextProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
   /**
-   * The FormText `ref` will be forwarded to the underlying element.
-   * Unless the FormText is rendered `as` a composite component,
-   * it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
+   * @default 'form-text'
    */
-  _ref: PropTypes.any,
+  bsPrefix?: string | undefined;
 
   /**
    * A convenience prop for add the `text-muted` class,
    * since it's so commonly used here.
    */
-  muted: PropTypes.bool,
-  as: PropTypes.elementType,
-};
+  muted?: boolean | undefined;
+}
 
-const FormText: BsPrefixRefForwardingComponent<'small', FormTextProps> =
+const FormText: DynamicRefForwardingComponent<'small', FormTextProps> =
   React.forwardRef<HTMLElement, FormTextProps>(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     (
@@ -52,9 +38,8 @@ const FormText: BsPrefixRefForwardingComponent<'small', FormTextProps> =
         />
       );
     },
-  ) as typeof FormText;
+  );
 
 FormText.displayName = 'FormText';
-FormText.propTypes = propTypes;
 
 export default FormText;

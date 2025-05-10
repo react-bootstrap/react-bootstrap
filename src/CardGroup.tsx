@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardGroupProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface CardGroupProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
+  /**
+   * @default 'card-group'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CardGroup: DynamicRefForwardingComponent<'div', CardGroupProps> =
   React.forwardRef<HTMLElement, CardGroupProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'card-group');
@@ -19,7 +27,7 @@ const CardGroup: BsPrefixRefForwardingComponent<'div', CardGroupProps> =
         />
       );
     },
-  ) as typeof CardGroup;
+  );
 
 CardGroup.displayName = 'CardGroup';
 

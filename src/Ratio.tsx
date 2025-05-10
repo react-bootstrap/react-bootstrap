@@ -1,36 +1,26 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps } from './helpers';
 
 export type AspectRatio = '1x1' | '4x3' | '16x9' | '21x9' | string;
 
-export interface RatioProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactElement | string | number;
-  aspectRatio?: AspectRatio | number;
-}
-
-const propTypes = {
+export interface RatioProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default 'ratio'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * This component requires a single child element
    */
-  children: PropTypes.element.isRequired,
+  children: React.ReactElement | string | number;
 
   /**
    * Set the aspect ratio of the embed. A fraction or a percentage can also
    * be used to create custom aspect ratios.
    */
-  aspectRatio: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-};
+  aspectRatio?: AspectRatio | number | undefined;
+}
 
 function toPercent(num: number): string {
   if (num <= 0) return '100%';
@@ -69,6 +59,5 @@ const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
 );
 
 Ratio.displayName = 'Ratio';
-Ratio.propTypes = propTypes;
 
 export default Ratio;

@@ -1,108 +1,86 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface FormControlProps
-  extends BsPrefixProps,
-    Omit<React.InputHTMLAttributes<FormControlElement>, 'size'> {
-  htmlSize?: number;
-  size?: 'sm' | 'lg';
-  plaintext?: boolean;
-  readOnly?: boolean;
-  disabled?: boolean;
-  value?: string | string[] | number;
-  onChange?: React.ChangeEventHandler<FormControlElement>;
-  type?: string;
-  isValid?: boolean;
-  isInvalid?: boolean;
-}
-
-const propTypes = {
+  extends Omit<React.InputHTMLAttributes<FormControlElement>, 'size'> {
   /**
-   * @default {'form-control'}
+   * Element used to render the component.
    */
-  bsPrefix: PropTypes.string,
+  as?: React.ElementType | undefined;
 
   /**
-   * The FormControl `ref` will be forwarded to the underlying input element,
-   * which means unless `as` is a composite component,
-   * it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
+   * @default 'form-control'
    */
-  _ref: PropTypes.any,
-  /**
-   * Input size variants
-   *
-   * @type {('sm'|'lg')}
-   */
-  size: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * The size attribute of the underlying HTML element.
    * Specifies the visible width in characters if `as` is `'input'`.
    */
-  htmlSize: PropTypes.number,
+  htmlSize?: number | undefined;
 
   /**
-   * The underlying HTML element to use when rendering the FormControl.
-   *
-   * @type {('input'|'textarea'|elementType)}
+   * Input size variants
    */
-  as: PropTypes.elementType,
+  size?: 'sm' | 'lg' | undefined;
 
   /**
    * Render the input as plain text. Generally used along side `readOnly`.
    */
-  plaintext: PropTypes.bool,
+  plaintext?: boolean | undefined;
 
-  /** Make the control readonly */
-  readOnly: PropTypes.bool,
+  /**
+   * Make the control readonly
+   */
+  readOnly?: boolean | undefined;
 
-  /** Make the control disabled */
-  disabled: PropTypes.bool,
+  /**
+   * Make the control disabled
+   */
+  disabled?: boolean | undefined;
 
   /**
    * The `value` attribute of underlying input
    *
    * @controllable onChange
    * */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.number,
-  ]),
+  value?: string | string[] | number | undefined;
 
-  /** A callback fired when the `value` prop changes */
-  onChange: PropTypes.func,
+  /**
+   * A callback fired when the `value` prop changes
+   */
+  onChange?: React.ChangeEventHandler<FormControlElement> | undefined;
 
   /**
    * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
    */
-  type: PropTypes.string,
+  type?: string | undefined;
 
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
-  id: PropTypes.string,
+  id?: string | undefined;
 
-  /** Add "valid" validation styles to the control */
-  isValid: PropTypes.bool,
+  /**
+   * Add "valid" validation styles to the control
+   */
+  isValid?: boolean | undefined;
 
-  /** Add "invalid" validation styles to the control and accompanying label */
-  isInvalid: PropTypes.bool,
-};
+  /**
+   * Add "invalid" validation styles to the control and accompanying label
+   */
+  isInvalid?: boolean | undefined;
+}
 
-const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
+const FormControl: DynamicRefForwardingComponent<'input', FormControlProps> =
   React.forwardRef<FormControlElement, FormControlProps>(
     (
       {
@@ -150,9 +128,10 @@ const FormControl: BsPrefixRefForwardingComponent<'input', FormControlProps> =
         />
       );
     },
-  ) as typeof FormControl;
+  );
 
 FormControl.displayName = 'FormControl';
-FormControl.propTypes = propTypes;
 
-export default Object.assign(FormControl, { Feedback });
+export default Object.assign(FormControl, {
+  Feedback,
+});

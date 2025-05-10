@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface TabContentProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface TabContentProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const TabContent: BsPrefixRefForwardingComponent<'div', TabContentProps> =
+  /**
+   * @default 'tab-content'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const TabContent: DynamicRefForwardingComponent<'div', TabContentProps> =
   React.forwardRef<HTMLElement, TabContentProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'tab-content');
@@ -19,7 +27,7 @@ const TabContent: BsPrefixRefForwardingComponent<'div', TabContentProps> =
         />
       );
     },
-  ) as typeof TabContent;
+  );
 
 TabContent.displayName = 'TabContent';
 

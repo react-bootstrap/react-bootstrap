@@ -1,32 +1,25 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
-
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
-import type { BsPrefixProps } from './helpers';
-
-type PaginationSize = 'sm' | 'lg';
 
 export interface PaginationProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLUListElement> {
-  size?: 'sm' | 'lg';
-}
+  extends React.HTMLAttributes<HTMLUListElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'pagination'
-   * */
-  bsPrefix: PropTypes.string,
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * Sets the size of all PageItems.
-   *
-   * @type {('sm'|'lg')}
    */
-  size: PropTypes.oneOf<PaginationSize>(['sm', 'lg']),
-};
+  size?: 'sm' | 'lg' | undefined;
+}
 
 const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
   ({ bsPrefix, className, size, ...props }, ref) => {
@@ -45,7 +38,6 @@ const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
   },
 );
 
-Pagination.propTypes = propTypes;
 Pagination.displayName = 'Pagination';
 
 export default Object.assign(Pagination, {

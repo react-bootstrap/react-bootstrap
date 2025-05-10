@@ -668,11 +668,9 @@ const MegaComponent = () => (
     />
     <Nav
       as="div"
-      cardHeaderBsPrefix="prefix"
       fill
       justify
       navbar
-      navbarBsPrefix="prefix"
       onKeyDown={noop}
       variant="pills"
       activeKey="1"

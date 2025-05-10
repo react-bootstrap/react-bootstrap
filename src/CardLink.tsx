@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardLinkProps
-  extends BsPrefixProps,
-    React.AnchorHTMLAttributes<HTMLElement> {}
+export interface CardLinkProps extends React.AnchorHTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CardLink: BsPrefixRefForwardingComponent<'a', CardLinkProps> =
+  /**
+   * @default 'card-link'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CardLink: DynamicRefForwardingComponent<'a', CardLinkProps> =
   React.forwardRef<HTMLElement, CardLinkProps>(
     ({ className, bsPrefix, as: Component = 'a', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'card-link');
@@ -19,7 +27,7 @@ const CardLink: BsPrefixRefForwardingComponent<'a', CardLinkProps> =
         />
       );
     },
-  ) as typeof CardLink;
+  );
 
 CardLink.displayName = 'CardLink';
 

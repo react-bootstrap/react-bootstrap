@@ -1,57 +1,25 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import type { Placement, PopperRef } from './types';
-import { type BsPrefixProps, getOverlayDirection } from './helpers';
+import { getOverlayDirection } from './helpers';
 import getInitialPopperStyles from './getInitialPopperStyles';
 
-export interface TooltipProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {
-  placement?: Placement;
-  arrowProps?: Partial<OverlayArrowProps>;
-  show?: boolean;
-  popper?: PopperRef;
-  hasDoneInitialMeasure?: boolean;
-}
-
-const propTypes = {
+export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default 'tooltip'
    */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * An html id attribute, necessary for accessibility
-   * @type {string}
-   * @required
-   */
-  id: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Sets the direction the Tooltip is positioned towards.
    *
    * > This is generally provided by the `Overlay` component positioning the tooltip
+   *
+   * @type {Placement | undefined}
    */
-  placement: PropTypes.oneOf([
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start',
-  ]),
+  placement?: Placement | undefined;
 
   /**
    * An Overlay injected set of props for positioning the tooltip arrow.
@@ -60,22 +28,25 @@ const propTypes = {
    *
    * @type {{ ref: ReactRef, style: Object }}
    */
-  arrowProps: PropTypes.shape({
-    ref: PropTypes.any,
-    style: PropTypes.object,
-  }),
+  arrowProps?: Partial<OverlayArrowProps> | undefined;
+
+  /**
+   * @private
+   */
+  show?: boolean;
+
+  /**
+   * @private
+   */
+  popper?: PopperRef | undefined;
 
   /**
    * Whether or not Popper has done its initial measurement and positioning.
+   *
+   * @private
    */
-  hasDoneInitialMeasure: PropTypes.bool,
-
-  /** @private */
-  popper: PropTypes.object,
-
-  /** @private */
-  show: PropTypes.any,
-};
+  hasDoneInitialMeasure?: boolean | undefined;
+}
 
 const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -123,7 +94,6 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   },
 );
 
-Tooltip.propTypes = propTypes as any;
 Tooltip.displayName = 'Tooltip';
 
 export default Object.assign(Tooltip, {

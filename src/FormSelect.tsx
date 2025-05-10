@@ -1,103 +1,92 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type {
-  BsPrefixOnlyProps,
-  BsPrefixRefForwardingComponent,
-} from './helpers';
 import FormContext from './FormContext';
 
 export interface FormSelectProps
-  extends BsPrefixOnlyProps,
-    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
-  htmlSize?: number;
-  size?: 'sm' | 'lg';
-  isValid?: boolean;
-  isInvalid?: boolean;
-}
-
-const propTypes = {
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   /**
-   * @default {'form-select'}
+   * @default 'form-select'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+
+  /**
+   * The size attribute of the underlying HTML element.
+   * Specifies the number of visible options.
+   */
+  htmlSize?: number | undefined;
 
   /**
    * Size variants
    *
    * @type {('sm'|'lg')}
    */
-  size: PropTypes.string,
+  size?: 'sm' | 'lg' | undefined;
 
   /**
-   * The size attribute of the underlying HTML element.
-   * Specifies the number of visible options.
+   * Make the control disabled
    */
-  htmlSize: PropTypes.number,
-
-  /** Make the control disabled */
-  disabled: PropTypes.bool,
+  disabled?: boolean | undefined;
 
   /**
    * The `value` attribute of underlying input
    *
    * @controllable onChange
    * */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.number,
-  ]),
+  value?: string | string[] | number | undefined;
 
-  /** A callback fired when the `value` prop changes */
-  onChange: PropTypes.func,
+  /**
+   * A callback fired when the `value` prop changes
+   */
+  onChange?: React.ChangeEventHandler<HTMLSelectElement> | undefined;
 
-  /** Add "valid" validation styles to the control */
-  isValid: PropTypes.bool,
+  /**
+   * Add "valid" validation styles to the control
+   */
+  isValid?: boolean | undefined;
 
-  /** Add "invalid" validation styles to the control and accompanying label */
-  isInvalid: PropTypes.bool,
-};
+  /**
+   * Add "invalid" validation styles to the control and accompanying label
+   */
+  isInvalid?: boolean | undefined;
+}
 
-const FormSelect: BsPrefixRefForwardingComponent<'select', FormSelectProps> =
-  React.forwardRef<HTMLSelectElement, FormSelectProps>(
-    (
-      {
-        bsPrefix,
-        size,
-        htmlSize,
-        className,
-        isValid = false,
-        isInvalid = false,
-        id,
-        ...props
-      },
-      ref,
-    ) => {
-      const { controlId } = useContext(FormContext);
-      bsPrefix = useBootstrapPrefix(bsPrefix, 'form-select');
-
-      return (
-        <select
-          {...props}
-          size={htmlSize}
-          ref={ref}
-          className={classNames(
-            className,
-            bsPrefix,
-            size && `${bsPrefix}-${size}`,
-            isValid && `is-valid`,
-            isInvalid && `is-invalid`,
-          )}
-          id={id || controlId}
-        />
-      );
+const FormSelect = React.forwardRef<HTMLSelectElement, FormSelectProps>(
+  (
+    {
+      bsPrefix,
+      size,
+      htmlSize,
+      className,
+      isValid = false,
+      isInvalid = false,
+      id,
+      ...props
     },
-  ) as typeof FormSelect;
+    ref,
+  ) => {
+    const { controlId } = useContext(FormContext);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-select');
+
+    return (
+      <select
+        {...props}
+        size={htmlSize}
+        ref={ref}
+        className={classNames(
+          className,
+          bsPrefix,
+          size && `${bsPrefix}-${size}`,
+          isValid && `is-valid`,
+          isInvalid && `is-invalid`,
+        )}
+        id={id || controlId}
+      />
+    );
+  },
+);
 
 FormSelect.displayName = 'FormSelect';
-FormSelect.propTypes = propTypes;
 
 export default FormSelect;

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import type { ModalHandle } from '@restart/ui/Modal';
 import ModalManager from '@restart/ui/ModalManager';
-import Modal, { ModalProps } from '../src/Modal';
+import Modal from '../src/Modal';
 
 describe('<Modal>', () => {
   it('Should forward ref to BaseModal', () => {
-    const ref = React.createRef<ModalProps>();
+    const ref = React.createRef<ModalHandle>();
     render(
       <Modal show animation={false} ref={ref}>
         <strong>Message</strong>
@@ -28,14 +29,14 @@ describe('<Modal>', () => {
   });
 
   it('Should sets `display: block` to `div.modal` when animation is false', () => {
-    const ref = React.createRef<ModalProps>();
+    const ref = React.createRef<ModalHandle>();
     render(
       <Modal show animation={false} ref={ref}>
         <strong>Message</strong>
       </Modal>,
     );
 
-    expect(ref.current!.dialog.style.display).toEqual('block');
+    expect(ref.current!.dialog!.style.display).toEqual('block');
   });
 
   it('Should close the modal when the modal dialog is clicked', async () => {

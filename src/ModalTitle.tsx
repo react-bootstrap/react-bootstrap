@@ -1,16 +1,24 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const DivStyledAsH4 = divWithClassName('h4');
 
-export interface ModalTitleProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface ModalTitleProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const ModalTitle: BsPrefixRefForwardingComponent<'span', ModalTitleProps> =
+  /**
+   * @default 'modal-title'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const ModalTitle: DynamicRefForwardingComponent<'span', ModalTitleProps> =
   React.forwardRef<HTMLElement, ModalTitleProps>(
     ({ className, bsPrefix, as: Component = DivStyledAsH4, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-title');
@@ -22,7 +30,7 @@ const ModalTitle: BsPrefixRefForwardingComponent<'span', ModalTitleProps> =
         />
       );
     },
-  ) as typeof ModalTitle;
+  );
 
 ModalTitle.displayName = 'ModalTitle';
 

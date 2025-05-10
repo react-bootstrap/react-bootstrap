@@ -1,48 +1,46 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
 export interface FormCheckInputProps
-  extends BsPrefixProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
-  type?: FormCheckInputType;
-  isValid?: boolean;
-  isInvalid?: boolean;
-}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'form-check-input'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
-   * The underlying HTML element to use when rendering the FormCheckInput.
-   *
-   * @type {('input'|elementType)}
+   * A HTML id attribute, necessary for proper form accessibility.
    */
-  as: PropTypes.elementType,
+  id?: string | undefined;
 
-  /** A HTML id attribute, necessary for proper form accessibility. */
-  id: PropTypes.string,
+  /**
+   * The type of checkable.
+   */
+  type?: FormCheckInputType | undefined;
 
-  /** The type of checkable. */
-  type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
+  /**
+   * Manually style the input as valid
+   */
+  isValid?: boolean | undefined;
 
-  /** Manually style the input as valid */
-  isValid: PropTypes.bool,
+  /**
+   * Manually style the input as invalid
+   */
+  isInvalid?: boolean | undefined;
+}
 
-  /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool,
-};
-
-const FormCheckInput: BsPrefixRefForwardingComponent<
+const FormCheckInput: DynamicRefForwardingComponent<
   'input',
   FormCheckInputProps
 > = React.forwardRef<HTMLInputElement, FormCheckInputProps>(
@@ -78,9 +76,8 @@ const FormCheckInput: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof FormCheckInput;
+);
 
 FormCheckInput.displayName = 'FormCheckInput';
-FormCheckInput.propTypes = propTypes;
 
 export default FormCheckInput;

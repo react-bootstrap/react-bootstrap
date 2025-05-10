@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FormFloatingProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface FormFloatingProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const FormFloating: BsPrefixRefForwardingComponent<'div', FormFloatingProps> =
+  /**
+   * @default 'form-floating'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const FormFloating: DynamicRefForwardingComponent<'div', FormFloatingProps> =
   React.forwardRef<HTMLElement, FormFloatingProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-floating');
@@ -19,7 +27,7 @@ const FormFloating: BsPrefixRefForwardingComponent<'div', FormFloatingProps> =
         />
       );
     },
-  ) as typeof FormFloating;
+  );
 
 FormFloating.displayName = 'FormFloating';
 

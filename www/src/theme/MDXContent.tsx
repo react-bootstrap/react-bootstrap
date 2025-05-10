@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import MDXContent from '@theme-original/MDXContent';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import type MDXContentType from '@theme/MDXContent';
@@ -7,7 +7,7 @@ import CarbonAds from '../components/CarbonAds';
 
 type Props = WrapperProps<typeof MDXContentType>;
 
-export default function MDXContentWrapper(props: Props): JSX.Element {
+export default function MDXContentWrapper(props: Props): React.JSX.Element {
   const { frontMatter } = useDoc();
 
   return (

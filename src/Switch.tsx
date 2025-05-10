@@ -1,13 +1,13 @@
 import * as React from 'react';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormCheck, { FormCheckProps } from './FormCheck';
-import type { BsPrefixRefForwardingComponent } from './helpers';
 
 type SwitchProps = Omit<FormCheckProps, 'type'>;
 
-const Switch: BsPrefixRefForwardingComponent<typeof FormCheck, SwitchProps> =
+const Switch: DynamicRefForwardingComponent<typeof FormCheck, SwitchProps> =
   React.forwardRef<typeof FormCheck, SwitchProps>((props, ref) => (
     <FormCheck {...props} ref={ref} type="switch" />
-  )) as typeof Switch;
+  ));
 
 Switch.displayName = 'Switch';
 
