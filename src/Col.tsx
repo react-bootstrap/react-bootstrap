@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import useCol from './useCol';
 
 export type NumberAttr =
@@ -26,91 +25,50 @@ export type ColSpec =
   | ColSize
   | { span?: ColSize | null; offset?: NumberAttr; order?: ColOrder };
 
-export interface ColProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  xs?: ColSpec;
-  sm?: ColSpec;
-  md?: ColSpec;
-  lg?: ColSpec;
-  xl?: ColSpec;
-  xxl?: ColSpec;
-  [key: string]: any;
-}
+export interface ColProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const colSize = PropTypes.oneOfType([
-  PropTypes.bool,
-  PropTypes.number,
-  PropTypes.string,
-  PropTypes.oneOf(['auto']),
-]);
-
-const stringOrNumber = PropTypes.oneOfType([
-  PropTypes.number,
-  PropTypes.string,
-]);
-
-const column = PropTypes.oneOfType([
-  colSize,
-  PropTypes.shape({
-    size: colSize,
-    order: stringOrNumber,
-    offset: stringOrNumber,
-  }),
-]);
-
-const propTypes = {
   /**
    * @default 'col'
    */
-  bsPrefix: PropTypes.string,
-
-  as: PropTypes.elementType,
+  bsPrefix?: string | undefined;
 
   /**
-   * The number of columns to span on extra small devices (<576px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on extra small devices (<576px).
    */
-  xs: column,
+  xs?: ColSpec | undefined;
 
   /**
-   * The number of columns to span on small devices (≥576px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on small devices (≥576px).
    */
-  sm: column,
+  sm?: ColSpec | undefined;
 
   /**
-   * The number of columns to span on medium devices (≥768px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on medium devices (≥768px).
    */
-  md: column,
+  md?: ColSpec | undefined;
 
   /**
-   * The number of columns to span on large devices (≥992px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on large devices (≥992px).
    */
-  lg: column,
+  lg?: ColSpec | undefined;
 
   /**
-   * The number of columns to span on extra large devices (≥1200px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on extra large devices (≥1200px).
    */
-  xl: column,
+  xl?: ColSpec | undefined;
 
   /**
-   * The number of columns to span on extra extra large devices (≥1400px)
-   *
-   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
+   * The number of columns to span on extra extra large devices (≥1400px).
    */
-  xxl: column,
-};
+  xxl?: ColSpec | undefined;
+  [key: string]: any;
+}
 
-const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
+const Col: DynamicRefForwardingComponent<'div', ColProps> = React.forwardRef<
   HTMLElement,
   ColProps
 >(
@@ -129,9 +87,8 @@ const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef<
       />
     );
   },
-) as typeof Col;
+);
 
 Col.displayName = 'Col';
-Col.propTypes = propTypes;
 
 export default Col;

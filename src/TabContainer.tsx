@@ -1,42 +1,30 @@
-import PropTypes from 'prop-types';
-import Tabs, { TabsProps } from '@restart/ui/Tabs';
+import Tabs from '@restart/ui/Tabs';
+import type { EventKey, SelectCallback } from '@restart/ui/types';
 import getTabTransitionComponent from './getTabTransitionComponent';
 import type { TransitionType } from './helpers';
 
-export interface TabContainerProps extends Omit<TabsProps, 'transition'> {
-  transition?: TransitionType;
-}
-
-const propTypes = {
+export interface TabContainerProps {
   /**
-   * HTML id attribute, required if no `generateChildId` prop
-   * is specified.
-   *
-   * @type {string}
+   * ID of the TabContainer.
    */
-  id: PropTypes.string,
+  id?: string | undefined;
 
   /**
    * Sets a default animation strategy for all children `<TabPane>`s.
    * Defaults to `<Fade>` animation; else, use `false` to disable, or a
    * custom react-transition-group `<Transition/>` component.
-   *
-   * @type {{Transition | false}}
-   * @default {Fade}
    */
-  transition: PropTypes.oneOfType([
-    PropTypes.oneOf([false]),
-    PropTypes.elementType,
-  ]),
+  transition?: TransitionType | undefined;
+
   /**
    * Wait until the first "enter" transition to mount tabs (add them to the DOM)
    */
-  mountOnEnter: PropTypes.bool,
+  mountOnEnter?: boolean | undefined;
 
   /**
    * Unmount tabs (remove it from the DOM) when they are no longer visible
    */
-  unmountOnExit: PropTypes.bool,
+  unmountOnExit?: boolean | undefined;
 
   /**
    * A function that takes an `eventKey` and `type` and returns a unique id for
@@ -47,30 +35,37 @@ const propTypes = {
    *
    * The `type` argument will either be `"tab"` or `"pane"`.
    *
+   * @type {((eventKey: EventKey, type: 'tab' | 'pane') => string) | undefined}
    * @defaultValue (eventKey, type) => `${props.id}-${type}-${eventKey}`
    */
-  generateChildId: PropTypes.func,
+  generateChildId?:
+    | ((eventKey: EventKey, type: 'tab' | 'pane') => string)
+    | undefined;
 
   /**
    * A callback fired when a tab is selected.
    *
    * @controllable activeKey
    */
-  onSelect: PropTypes.func,
+  onSelect?: SelectCallback | undefined;
 
   /**
    * The `eventKey` of the currently active tab.
    *
    * @controllable onSelect
    */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+  activeKey?: EventKey | undefined;
+
+  /**
+   * Default value for `eventKey`.
+   */
+  defaultActiveKey?: EventKey | undefined;
+}
 
 const TabContainer = ({ transition, ...props }: TabContainerProps) => (
   <Tabs {...props} transition={getTabTransitionComponent(transition)} />
 );
 
-TabContainer.propTypes = propTypes;
 TabContainer.displayName = 'TabContainer';
 
 export default TabContainer;

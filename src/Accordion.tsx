@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useUncontrolled } from 'uncontrollable';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionBody from './AccordionBody';
 import AccordionButton from './AccordionButton';
@@ -13,30 +13,28 @@ import AccordionContext, {
 } from './AccordionContext';
 import AccordionHeader from './AccordionHeader';
 import AccordionItem from './AccordionItem';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AccordionProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
-    BsPrefixProps {
-  activeKey?: AccordionEventKey;
-  defaultActiveKey?: AccordionEventKey;
-  onSelect?: AccordionSelectCallback;
-  flush?: boolean;
-  alwaysOpen?: boolean;
-}
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
+  /**
+   * @default 'accordion'
+   */
+  bsPrefix?: string | undefined;
 
-  /** @default 'accordion' */
-  bsPrefix: PropTypes.string,
+  /**
+   * The current active key that corresponds to the currently expanded card.
+   */
+  activeKey?: AccordionEventKey | undefined;
 
-  /** The current active key that corresponds to the currently expanded card */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /** The default active key that is expanded on start */
-  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  /**
+   * The default active key that is expanded on start
+   */
+  defaultActiveKey?: AccordionEventKey | undefined;
 
   /**
    * Callback fired when the active item changes.
@@ -47,16 +45,20 @@ const propTypes = {
    *
    * @controllable activeIndex
    */
-  onSelect: PropTypes.func,
+  onSelect?: AccordionSelectCallback | undefined;
 
-  /** Renders accordion edge-to-edge with its parent container */
-  flush: PropTypes.bool,
+  /**
+   * Renders accordion edge-to-edge with its parent container.
+   */
+  flush?: boolean | undefined;
 
-  /** Allow accordion items to stay open when another item is opened */
-  alwaysOpen: PropTypes.bool,
-};
+  /**
+   * Allow accordion items to stay open when another item is opened.
+   */
+  alwaysOpen?: boolean | undefined;
+}
 
-const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
+const Accordion: DynamicRefForwardingComponent<'div', AccordionProps> =
   React.forwardRef<HTMLElement, AccordionProps>((props, ref) => {
     const {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -91,10 +93,9 @@ const Accordion: BsPrefixRefForwardingComponent<'div', AccordionProps> =
         />
       </AccordionContext.Provider>
     );
-  }) as typeof Accordion;
+  });
 
 Accordion.displayName = 'Accordion';
-Accordion.propTypes = propTypes;
 
 export default Object.assign(Accordion, {
   Button: AccordionButton,

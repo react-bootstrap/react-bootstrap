@@ -1,13 +1,27 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownDividerProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+  extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const DropdownDivider: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'dropdown-divider'
+   */
+  bsPrefix?: string | undefined;
+
+  /**
+   * An ARIA accessible role.
+   */
+  role?: string | undefined;
+}
+
+const DropdownDivider: DynamicRefForwardingComponent<
   'hr',
   DropdownDividerProps
 > = React.forwardRef<HTMLElement, DropdownDividerProps>(
@@ -25,7 +39,7 @@ const DropdownDivider: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof DropdownDivider;
+);
 
 DropdownDivider.displayName = 'DropdownDivider';
 

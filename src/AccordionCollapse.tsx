@@ -1,37 +1,33 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { Transition } from 'react-transition-group';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Collapse, { type CollapseProps } from './Collapse';
 import AccordionContext, { isAccordionItemSelected } from './AccordionContext';
-import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
-export interface AccordionCollapseProps extends BsPrefixProps, CollapseProps {
-  eventKey: string;
-
-  /** @default 'accordion-collapse' */
-  bsPrefix?: string;
-}
-
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
+export interface AccordionCollapseProps extends CollapseProps {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
   /**
    * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
    */
-  eventKey: PropTypes.string.isRequired,
+  eventKey: string;
 
-  /** Children prop should only contain a single child, and is enforced as such */
-  children: PropTypes.element.isRequired,
-};
+  /**
+   * @default 'accordion-collapse'
+   */
+  bsPrefix?: string | undefined;
+}
 
 /**
  * This component accepts all of [`Collapse`'s props](/docs/utilities/transitions#collapse-1).
  */
-const AccordionCollapse: BsPrefixRefForwardingComponent<
+const AccordionCollapse: DynamicRefForwardingComponent<
   'div',
   AccordionCollapseProps
 > = React.forwardRef<Transition<any>, AccordionCollapseProps>(
@@ -60,9 +56,8 @@ const AccordionCollapse: BsPrefixRefForwardingComponent<
       </Collapse>
     );
   },
-) as any;
+);
 
-AccordionCollapse.propTypes = propTypes;
 AccordionCollapse.displayName = 'AccordionCollapse';
 
 export default AccordionCollapse;

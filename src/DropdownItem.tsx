@@ -1,52 +1,47 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
-import {
-  useDropdownItem,
-  DropdownItemProps as BaseDropdownItemProps,
-} from '@restart/ui/DropdownItem';
+import { useDropdownItem } from '@restart/ui/DropdownItem';
 import Anchor from '@restart/ui/Anchor';
+import type {
+  DynamicRefForwardingComponent,
+  EventKey,
+} from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface DropdownItemProps
-  extends BaseDropdownItemProps,
-    BsPrefixProps {}
+export interface DropdownItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** @default 'dropdown-item' */
-  bsPrefix: PropTypes.string,
+  /**
+   * @default 'dropdown-item'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * Highlight the menu item as active.
    */
-  active: PropTypes.bool,
+  active?: boolean | undefined;
 
   /**
    * Disable the menu item, making it unselectable.
    */
-  disabled: PropTypes.bool,
+  disabled?: boolean | undefined;
 
   /**
    * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
    */
-  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  eventKey?: EventKey | undefined;
 
   /**
    * HTML `href` attribute corresponding to `a.href`.
    */
-  href: PropTypes.string,
+  href?: string | undefined;
+}
 
-  /**
-   * Callback fired when the menu item is clicked.
-   */
-  onClick: PropTypes.func,
-
-  as: PropTypes.elementType,
-};
-
-const DropdownItem: BsPrefixRefForwardingComponent<'a', DropdownItemProps> =
-  React.forwardRef(
+const DropdownItem: DynamicRefForwardingComponent<'a', DropdownItemProps> =
+  React.forwardRef<HTMLElement, DropdownItemProps>(
     (
       {
         bsPrefix,
@@ -83,9 +78,8 @@ const DropdownItem: BsPrefixRefForwardingComponent<'a', DropdownItemProps> =
         />
       );
     },
-  ) as typeof DropdownItem;
+  );
 
 DropdownItem.displayName = 'DropdownItem';
-DropdownItem.propTypes = propTypes;
 
 export default DropdownItem;

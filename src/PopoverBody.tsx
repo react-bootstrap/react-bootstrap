@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface PopoverBodyProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface PopoverBodyProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const PopoverBody: BsPrefixRefForwardingComponent<'div', PopoverBodyProps> =
+  /**
+   * @default 'popover-body'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const PopoverBody: DynamicRefForwardingComponent<'div', PopoverBodyProps> =
   React.forwardRef<HTMLElement, PopoverBodyProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'popover-body');
@@ -19,7 +27,7 @@ const PopoverBody: BsPrefixRefForwardingComponent<'div', PopoverBodyProps> =
         />
       );
     },
-  ) as typeof PopoverBody;
+  );
 
 PopoverBody.displayName = 'PopoverBody';
 

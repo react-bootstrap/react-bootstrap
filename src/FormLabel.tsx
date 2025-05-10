@@ -1,69 +1,54 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Col, { type ColProps } from './Col';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-interface FormLabelBaseProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  htmlFor?: string;
-  visuallyHidden?: boolean;
-}
+interface FormLabelBaseProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-export interface FormLabelOwnProps extends FormLabelBaseProps {
-  column?: false;
-}
-
-export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
-  column: true | 'sm' | 'lg';
-}
-
-export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
-
-const propTypes = {
   /**
    * @default 'form-label'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
-  htmlFor: PropTypes.string,
-
-  /**
-   * Renders the FormLabel as a `<Col>` component (accepting all the same props),
-   * as well as adding additional styling for horizontal forms.
-   */
-  column: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['sm', 'lg'])]),
-
-  /**
-   * The FormLabel `ref` will be forwarded to the underlying element.
-   * Unless the FormLabel is rendered `as` a composite component,
-   * it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
-   */
-  _ref: PropTypes.any,
+  htmlFor?: string | undefined;
 
   /**
    * Hides the label visually while still allowing it to be
    * read by assistive technologies.
    */
-  visuallyHidden: PropTypes.bool,
+  visuallyHidden?: boolean | undefined;
+}
 
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
-};
+export interface FormLabelOwnProps extends FormLabelBaseProps {
+  /**
+   * Renders the FormLabel as a `<Col>` component (accepting all the same props),
+   * as well as adding additional styling for horizontal forms.
+   */
+  column?: false;
+}
 
-const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
+export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
+  /**
+   * Renders the FormLabel as a `<Col>` component (accepting all the same props),
+   * as well as adding additional styling for horizontal forms.
+   */
+  column: true | 'sm' | 'lg';
+}
+
+export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
+
+const FormLabel: DynamicRefForwardingComponent<'label', FormLabelProps> =
   React.forwardRef<HTMLElement, FormLabelProps>(
     (
       {
@@ -114,9 +99,8 @@ const FormLabel: BsPrefixRefForwardingComponent<'label', FormLabelProps> =
         <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
       );
     },
-  ) as typeof FormLabel;
+  );
 
 FormLabel.displayName = 'FormLabel';
-FormLabel.propTypes = propTypes;
 
 export default FormLabel;

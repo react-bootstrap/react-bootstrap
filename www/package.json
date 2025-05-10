@@ -29,14 +29,14 @@
     "formik": "^2.4.6",
     "holderjs": "^2.9.9",
     "lodash.camelcase": "^4.3.0",
-    "markdown-to-jsx": "^7.7.4",
+    "markdown-to-jsx": "^7.7.6",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.1.0",
-    "react-docgen": "^7.1.1",
+    "react-docgen": "^8.0.0",
     "react-dom": "^19.1.0",
     "react-live": "^2.4.1",
-    "sass": "1.86.3",
+    "sass": "1.87.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {

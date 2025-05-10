@@ -1,44 +1,33 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixOnlyProps } from './helpers';
 
-export interface ImageProps
-  extends BsPrefixOnlyProps,
-    React.ImgHTMLAttributes<HTMLImageElement> {
-  fluid?: boolean;
-  rounded?: boolean;
-  roundedCircle?: boolean;
-  thumbnail?: boolean;
-}
-
-export const propTypes = {
+export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /**
    * @default 'img'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+
   /**
    * Sets image as fluid image.
    */
-  fluid: PropTypes.bool,
+  fluid?: boolean | undefined;
 
   /**
    * Sets image shape as rounded.
    */
-  rounded: PropTypes.bool,
+  rounded?: boolean | undefined;
 
   /**
    * Sets image shape as circle.
    */
-  roundedCircle: PropTypes.bool,
+  roundedCircle?: boolean | undefined;
 
   /**
    * Sets image shape as thumbnail.
    */
-  thumbnail: PropTypes.bool,
-};
+  thumbnail?: boolean | undefined;
+}
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   (
@@ -71,6 +60,5 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
 );
 
 Image.displayName = 'Image';
-Image.propTypes = propTypes;
 
 export default Image;

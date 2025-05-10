@@ -1,89 +1,58 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import PopoverHeader from './PopoverHeader';
 import PopoverBody from './PopoverBody';
 import type { Placement, PopperRef } from './types';
-import { type BsPrefixProps, getOverlayDirection } from './helpers';
+import { getOverlayDirection } from './helpers';
 import getInitialPopperStyles from './getInitialPopperStyles';
 
-export interface PopoverProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {
-  placement?: Placement;
-  title?: string;
-  arrowProps?: Partial<OverlayArrowProps>;
-  body?: boolean;
-  popper?: PopperRef;
-  show?: boolean;
-  hasDoneInitialMeasure?: boolean;
-}
-
-const propTypes = {
+export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default 'popover'
    */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * An html id attribute, necessary for accessibility
-   * @type {string}
-   * @required
-   */
-  id: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Sets the direction the Popover is positioned towards.
    *
    * > This is generally provided by the `Overlay` component positioning the popover
+   *
+   * @type {Placement | undefined}
    */
-  placement: PropTypes.oneOf<Placement>([
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start',
-  ]),
+  placement?: Placement | undefined;
 
   /**
    * An Overlay injected set of props for positioning the popover arrow.
    *
    * > This is generally provided by the `Overlay` component positioning the popover
    */
-  arrowProps: PropTypes.shape({
-    ref: PropTypes.any,
-    style: PropTypes.object,
-  }),
+  arrowProps?: Partial<OverlayArrowProps> | undefined;
 
   /**
    * When this prop is set, it creates a Popover with a Popover.Body inside
    * passing the children directly to it
    */
-  body: PropTypes.bool,
+  body?: boolean | undefined;
+
+  /**
+   * @private
+   */
+  popper?: PopperRef | undefined;
+
+  /**
+   * @private
+   */
+  show?: boolean | undefined;
 
   /**
    * Whether or not Popper has done its initial measurement and positioning.
+   *
+   * @private
    */
-  hasDoneInitialMeasure: PropTypes.bool,
-
-  /** @private */
-  popper: PropTypes.object,
-
-  /** @private */
-  show: PropTypes.bool,
-};
+  hasDoneInitialMeasure?: boolean | undefined;
+}
 
 const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   (
@@ -136,7 +105,6 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
 );
 
 Popover.displayName = 'Popover';
-Popover.propTypes = propTypes as any;
 
 export default Object.assign(Popover, {
   Header: PopoverHeader,

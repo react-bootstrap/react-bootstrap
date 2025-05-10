@@ -1,69 +1,53 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import warning from 'warning';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import {
-  useNavItem,
-  NavItemProps as BaseNavItemProps,
-} from '@restart/ui/NavItem';
+import { useNavItem } from '@restart/ui/NavItem';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { makeEventKey } from '@restart/ui/SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import type { Variant } from './types';
+import type { BaseNavItemProps, Variant } from './types';
 
-export interface ListGroupItemProps
-  extends Omit<BaseNavItemProps, 'onSelect'>,
-    BsPrefixProps {
-  action?: boolean;
-  onClick?: React.MouseEventHandler;
-  variant?: Variant;
-}
-
-const propTypes = {
-  /**
-   * @default 'list-group-item'
-   */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * Sets contextual classes for list item.
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
-   */
-  variant: PropTypes.string,
-  /**
-   * Marks a ListGroupItem as actionable, applying additional hover, active and disabled styles
-   * for links and buttons.
-   */
-  action: PropTypes.bool,
-  /**
-   * Sets list item as active.
-   */
-  active: PropTypes.bool,
-
-  /**
-   * Sets list item state as disabled.
-   */
-  disabled: PropTypes.bool,
-
-  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** A callback function for when this component is clicked.  */
-  onClick: PropTypes.func,
-
-  /** Providing a `href` and setting `action` to `true`, it will render the ListGroup.Item as an `<a>` element (unless `as` is provided). */
-  href: PropTypes.string,
-
+export interface ListGroupItemProps extends BaseNavItemProps {
   /**
    * You can use a custom element type for this component. For none `action` items, items render as `li`.
    * For actions the default is an anchor or button element depending on whether a `href` is provided.
    *
-   * @default {'div' | 'a' | 'button'}
+   * @default 'div' | 'a' | 'button'
    */
-  as: PropTypes.elementType,
-};
+  as?: React.ElementType | undefined;
 
-const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
+  /**
+   * @default 'list-group-item'
+   */
+  bsPrefix?: string | undefined;
+
+  /**
+   * Marks a ListGroupItem as actionable, applying additional hover, active and disabled styles
+   * for links and buttons.
+   */
+  action?: boolean | undefined;
+
+  /**
+   * A callback function for when this component is clicked.
+   */
+  onClick?: React.MouseEventHandler;
+
+  /**
+   * Sets contextual classes for list item.
+   *
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | undefined}
+   */
+  variant?: Variant | undefined;
+
+  /**
+   * Providing a `href` and setting `action` to `true`, it will render the ListGroup.Item as
+   * an `<a>` element (unless `as` is provided).
+   */
+  href?: string | undefined;
+}
+
+const ListGroupItem: DynamicRefForwardingComponent<'a', ListGroupItemProps> =
   React.forwardRef<HTMLElement, ListGroupItemProps>(
     (
       {
@@ -125,9 +109,8 @@ const ListGroupItem: BsPrefixRefForwardingComponent<'a', ListGroupItemProps> =
         />
       );
     },
-  ) as typeof ListGroupItem;
+  );
 
-ListGroupItem.propTypes = propTypes;
 ListGroupItem.displayName = 'ListGroupItem';
 
 export default ListGroupItem;

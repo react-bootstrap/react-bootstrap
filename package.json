@@ -84,13 +84,10 @@
     "@babel/runtime": "^7.27.0",
     "@restart/hooks": "^0.6.2",
     "@restart/ui": "^2.0.0-beta.2",
-    "@types/prop-types": "^15.7.14",
     "@types/react-transition-group": "^4.4.12",
     "classnames": "^2.3.2",
     "dom-helpers": "^5.2.1",
     "invariant": "^2.2.4",
-    "prop-types": "^15.8.1",
-    "prop-types-extra": "^1.1.0",
     "react-transition-group": "^4.4.5",
     "uncontrollable": "^9.0.0",
     "warning": "^4.0.3"

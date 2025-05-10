@@ -1,83 +1,57 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
-import { all } from 'prop-types-extra';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
-import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
-import { EventKey } from '@restart/ui/types';
+import BaseNav from '@restart/ui/Nav';
+import { DynamicRefForwardingComponent, EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import CardHeaderContext from './CardHeaderContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BaseNavProps } from './types';
 
-export interface NavProps extends BsPrefixProps, BaseNavProps {
-  navbarBsPrefix?: string;
-  cardHeaderBsPrefix?: string;
-  variant?: 'tabs' | 'pills' | 'underline' | string;
-  defaultActiveKey?: EventKey;
-  fill?: boolean;
-  justify?: boolean;
-  navbar?: boolean;
-  navbarScroll?: boolean;
-}
+export interface NavProps extends BaseNavProps {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'nav'
    */
-  bsPrefix: PropTypes.string,
-
-  /** @private */
-  navbarBsPrefix: PropTypes.string,
-  /** @private */
-  cardHeaderBsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * The visual variant of the nav items.
-   *
-   * @type {('tabs'| 'pills' | 'underline')}
    */
-  variant: PropTypes.string,
-
-  /**
-   * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
-   */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  variant?: 'tabs' | 'pills' | 'underline' | string | undefined;
 
   /**
    * The default active key that is selected on start.
    */
-  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  defaultActiveKey?: EventKey | undefined;
 
   /**
    * Have all `NavItem`s proportionately fill all available width.
    */
-  fill: PropTypes.bool,
+  fill?: boolean | undefined;
 
   /**
    * Have all `NavItem`s evenly fill all available width.
-   *
-   * @type {boolean}
    */
-  justify: all(PropTypes.bool, ({ justify, navbar }) =>
-    justify && navbar ? Error('justify navbar `Nav`s are not supported') : null,
-  ),
+  justify?: boolean | undefined;
 
   /**
-   * A callback fired when a NavItem is selected.
-   *
-   * ```js
-   * function (
-   *  Any eventKey,
-   *  SyntheticEvent event?
-   * )
-   * ```
+   * Apply styling an alignment for use in a Navbar. This prop will be set
+   * automatically when the Nav is used inside a Navbar.
    */
-  onSelect: PropTypes.func,
+  navbar?: boolean | undefined;
+
+  /**
+   * Enable vertical scrolling within the toggleable contents of a collapsed Navbar.
+   */
+  navbarScroll?: boolean | undefined;
 
   /**
    * ARIA role for the Nav, in the context of a TabContainer, the default will
@@ -87,26 +61,10 @@ const propTypes = {
    * the ARIA authoring practices for tabs:
    * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
    */
-  role: PropTypes.string,
+  role?: string | undefined;
+}
 
-  /**
-   * Apply styling an alignment for use in a Navbar. This prop will be set
-   * automatically when the Nav is used inside a Navbar.
-   */
-  navbar: PropTypes.bool,
-
-  /**
-   * Enable vertical scrolling within the toggleable contents of a collapsed Navbar.
-   */
-  navbarScroll: PropTypes.bool,
-
-  as: PropTypes.elementType,
-
-  /** @private */
-  onKeyDown: PropTypes.func,
-};
-
-const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
+const Nav: DynamicRefForwardingComponent<'div', NavProps> = React.forwardRef<
   HTMLElement,
   NavProps
 >((uncontrolledProps, ref) => {
@@ -156,10 +114,9 @@ const Nav: BsPrefixRefForwardingComponent<'div', NavProps> = React.forwardRef<
       {...props}
     />
   );
-}) as typeof Nav;
+});
 
 Nav.displayName = 'Nav';
-Nav.propTypes = propTypes;
 
 export default Object.assign(Nav, {
   Item: NavItem,

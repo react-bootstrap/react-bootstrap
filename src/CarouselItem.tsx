@@ -1,27 +1,26 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CarouselItemProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  interval?: number;
+export interface CarouselItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
+
+  /**
+   * @default 'carousel-item'
+   */
+  bsPrefix?: string | undefined;
+
+  /** The amount of time to delay between automatically cycling this specific item.
+   * Will default to the Carousel's `interval` prop value if none is specified.
+   */
+  interval?: number | undefined;
 }
 
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
-
-  /** @default 'carousel-item' */
-  bsPrefix: PropTypes.string,
-
-  /** The amount of time to delay between automatically cycling this specific item. Will default to the Carousel's `interval` prop value if none is specified. */
-  interval: PropTypes.number,
-};
-
-const CarouselItem: BsPrefixRefForwardingComponent<'div', CarouselItemProps> =
+const CarouselItem: DynamicRefForwardingComponent<'div', CarouselItemProps> =
   React.forwardRef<HTMLElement, CarouselItemProps>(
     (
       {
@@ -39,9 +38,8 @@ const CarouselItem: BsPrefixRefForwardingComponent<'div', CarouselItemProps> =
       );
       return <Component ref={ref} {...props} className={finalClassName} />;
     },
-  ) as typeof CarouselItem;
+  );
 
 CarouselItem.displayName = 'CarouselItem';
-CarouselItem.propTypes = propTypes;
 
 export default CarouselItem;

@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardImgOverlayProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface CardImgOverlayProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CardImgOverlay: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'card-img-overlay'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CardImgOverlay: DynamicRefForwardingComponent<
   'div',
   CardImgOverlayProps
 > = React.forwardRef<HTMLElement, CardImgOverlayProps>(
@@ -21,7 +29,7 @@ const CardImgOverlay: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof CardImgOverlay;
+);
 
 CardImgOverlay.displayName = 'CardImgOverlay';
 

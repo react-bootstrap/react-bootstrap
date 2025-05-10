@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import classNames from 'classnames';
 
@@ -6,23 +5,18 @@ export type CloseButtonVariant = 'white' | string;
 
 export interface CloseButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: CloseButtonVariant;
-}
-
-const propTypes = {
-  /** An accessible label indicating the relevant information about the Close Button. */
-  'aria-label': PropTypes.string,
-
-  /** A callback fired after the Close Button is clicked. */
-  onClick: PropTypes.func,
+  /**
+   * An accessible label indicating the relevant information about the Close Button.
+   */
+  'aria-label'?: string | undefined;
 
   /**
    * Render different color variant for the button.
    *
    * Omitting this will render the default dark color.
    */
-  variant: PropTypes.oneOf<CloseButtonVariant>(['white']),
-};
+  variant?: CloseButtonVariant | undefined;
+}
 
 const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
   (
@@ -44,6 +38,5 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
 );
 
 CloseButton.displayName = 'CloseButton';
-CloseButton.propTypes = propTypes;
 
 export default CloseButton;

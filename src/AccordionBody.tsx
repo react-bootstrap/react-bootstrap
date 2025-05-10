@@ -1,52 +1,27 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
-import type { TransitionCallbacks } from '@restart/ui/types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionCollapse from './AccordionCollapse';
 import AccordionItemContext from './AccordionItemContext';
-import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
+import type { TransitionCallbacks } from './types';
 
 export interface AccordionBodyProps
-  extends BsPrefixProps,
-    TransitionCallbacks,
-    React.HTMLAttributes<HTMLElement> {}
-
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
-
-  /** @default 'accordion-body' */
-  bsPrefix: PropTypes.string,
+  extends TransitionCallbacks,
+    React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
   /**
-   * Callback fired before the component expands
+   * @default 'accordion-body'
    */
-  onEnter: PropTypes.func,
-  /**
-   * Callback fired after the component starts to expand
-   */
-  onEntering: PropTypes.func,
-  /**
-   * Callback fired after the component has expanded
-   */
-  onEntered: PropTypes.func,
-  /**
-   * Callback fired before the component collapses
-   */
-  onExit: PropTypes.func,
-  /**
-   * Callback fired after the component starts to collapse
-   */
-  onExiting: PropTypes.func,
-  /**
-   * Callback fired after the component has collapsed
-   */
-  onExited: PropTypes.func,
-};
+  bsPrefix?: string | undefined;
+}
 
-const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
+const AccordionBody: DynamicRefForwardingComponent<'div', AccordionBodyProps> =
   React.forwardRef<HTMLElement, AccordionBodyProps>(
     (
       {
@@ -85,9 +60,8 @@ const AccordionBody: BsPrefixRefForwardingComponent<'div', AccordionBodyProps> =
         </AccordionCollapse>
       );
     },
-  ) as typeof AccordionBody;
+  );
 
-AccordionBody.propTypes = propTypes;
 AccordionBody.displayName = 'AccordionBody';
 
 export default AccordionBody;

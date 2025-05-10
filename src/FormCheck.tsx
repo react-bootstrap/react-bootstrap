@@ -1,61 +1,34 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Feedback, { type FeedbackType } from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { hasChildOfType } from './ElementChildren';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
-  extends BsPrefixProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
-  inline?: boolean;
-  reverse?: boolean;
-  disabled?: boolean;
-  label?: React.ReactNode;
-  type?: FormCheckType;
-  isValid?: boolean;
-  isInvalid?: boolean;
-  feedbackTooltip?: boolean;
-  feedback?: React.ReactNode;
-  feedbackType?: FeedbackType;
-  bsSwitchPrefix?: string;
-}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'form-check'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * bsPrefix override for the base switch class.
    *
    * @default 'form-switch'
    */
-  bsSwitchPrefix: PropTypes.string,
-
-  /**
-   * The FormCheck `ref` will be forwarded to the underlying input element,
-   * which means it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
-   */
-  _ref: PropTypes.any,
-
-  /**
-   * The underlying HTML element to use when rendering the FormCheck.
-   *
-   * @type {('input'|elementType)}
-   */
-  as: PropTypes.elementType,
+  bsSwitchPrefix?: string | undefined;
 
   /**
    * A HTML id attribute, necessary for proper form accessibility.
@@ -63,7 +36,7 @@ const propTypes = {
    *
    * This is **required** when `type="switch"` due to how they are rendered.
    */
-  id: PropTypes.string,
+  id?: string | undefined;
 
   /**
    * Provide a function child to manually handle the layout of the FormCheck's inner components.
@@ -76,59 +49,65 @@ const propTypes = {
    * </FormCheck>
    * ```
    */
-  children: PropTypes.node,
+  children?: React.ReactNode | undefined;
 
   /**
    * Groups controls horizontally with other `FormCheck`s.
    */
-  inline: PropTypes.bool,
+  inline?: boolean | undefined;
 
   /**
    * Put your checkboxes, radios, and switches on the opposite side.
    */
-  reverse: PropTypes.bool,
+  reverse?: boolean | undefined;
 
   /**
    * Disables the control.
    */
-  disabled: PropTypes.bool,
+  disabled?: boolean | undefined;
 
   /**
    * `title` attribute for the underlying `FormCheckLabel`.
    */
-  title: PropTypes.string,
+  title?: string | undefined;
 
   /**
    * Label for the control.
    */
-  label: PropTypes.node,
+  label?: React.ReactNode | undefined;
 
   /**
    * The type of checkable.
-   * @type {('radio' | 'checkbox' | 'switch')}
    */
-  type: PropTypes.oneOf(['radio', 'checkbox', 'switch']),
+  type?: FormCheckType | undefined;
 
-  /** Manually style the input as valid */
-  isValid: PropTypes.bool,
+  /**
+   * Manually style the input as valid
+   */
+  isValid?: boolean | undefined;
 
-  /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool,
+  /**
+   * Manually style the input as invalid
+   */
+  isInvalid?: boolean;
 
-  /** Display feedback as a tooltip. */
-  feedbackTooltip: PropTypes.bool,
+  /**
+   * Display feedback as a tooltip.
+   */
+  feedbackTooltip?: boolean | undefined;
 
-  /** A message to display when the input is in a validation state */
-  feedback: PropTypes.node,
+  /**
+   * A message to display when the input is in a validation state
+   */
+  feedback?: React.ReactNode | undefined;
 
   /**
    * Specify whether the feedback is for valid or invalid fields
-   * @type {('valid'|'invalid')}
    */
-  feedbackType: PropTypes.oneOf(['valid', 'invalid']),
-};
+  feedbackType?: FeedbackType | undefined;
+}
 
-const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
+const FormCheck: DynamicRefForwardingComponent<'input', FormCheckProps> =
   React.forwardRef<HTMLInputElement, FormCheckProps>(
     (
       {
@@ -211,10 +190,9 @@ const FormCheck: BsPrefixRefForwardingComponent<'input', FormCheckProps> =
         </FormContext.Provider>
       );
     },
-  ) as typeof FormCheck;
+  );
 
 FormCheck.displayName = 'FormCheck';
-FormCheck.propTypes = propTypes;
 
 export default Object.assign(FormCheck, {
   Input: FormCheckInput,

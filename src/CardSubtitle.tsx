@@ -1,16 +1,24 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import divWithClassName from './divWithClassName';
 
 const DivStyledAsH6 = divWithClassName('h6');
 
-export interface CardSubtitleProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface CardSubtitleProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CardSubtitle: BsPrefixRefForwardingComponent<'div', CardSubtitleProps> =
+  /**
+   * @default 'card-subtitle'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CardSubtitle: DynamicRefForwardingComponent<'div', CardSubtitleProps> =
   React.forwardRef<HTMLElement, CardSubtitleProps>(
     ({ className, bsPrefix, as: Component = DivStyledAsH6, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'card-subtitle');
@@ -22,7 +30,7 @@ const CardSubtitle: BsPrefixRefForwardingComponent<'div', CardSubtitleProps> =
         />
       );
     },
-  ) as typeof CardSubtitle;
+  );
 
 CardSubtitle.displayName = 'CardSubtitle';
 

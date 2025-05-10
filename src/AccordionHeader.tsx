@@ -1,26 +1,23 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionButton from './AccordionButton';
-import type { BsPrefixRefForwardingComponent, BsPrefixProps } from './helpers';
 
 export interface AccordionHeaderProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+  extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
+  /**
+   * @default 'accordion-header'
+   */
+  bsPrefix?: string | undefined;
+}
 
-  /** @default 'accordion-header' */
-  bsPrefix: PropTypes.string,
-
-  /** Click handler for the `AccordionButton` element */
-  onClick: PropTypes.func,
-};
-
-const AccordionHeader: BsPrefixRefForwardingComponent<
+const AccordionHeader: DynamicRefForwardingComponent<
   'h2',
   AccordionHeaderProps
 > = React.forwardRef<HTMLElement, AccordionHeaderProps>(
@@ -51,9 +48,8 @@ const AccordionHeader: BsPrefixRefForwardingComponent<
       </Component>
     );
   },
-) as typeof AccordionHeader;
+);
 
-AccordionHeader.propTypes = propTypes;
 AccordionHeader.displayName = 'AccordionHeader';
 
 export default AccordionHeader;

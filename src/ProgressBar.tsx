@@ -1,127 +1,65 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { cloneElement } from 'react';
-import PropTypes from 'prop-types';
-
 import { useBootstrapPrefix } from './ThemeProvider';
-
 import { map } from './ElementChildren';
-import type { BsPrefixProps } from './helpers';
 
-export interface ProgressBarProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {
-  min?: number;
-  now?: number;
-  max?: number;
-  label?: React.ReactNode;
-  visuallyHidden?: boolean;
-  striped?: boolean;
-  animated?: boolean;
-  variant?: 'success' | 'danger' | 'warning' | 'info' | string;
-  isChild?: boolean;
-}
+export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * @default 'progress'
+   */
+  bsPrefix?: string | undefined;
 
-const ROUND_PRECISION = 1000;
-
-/**
- * Validate that children, if any, are instances of `ProgressBar`.
- */
-function onlyProgressBar(props, propName, componentName): Error | null {
-  const children = props[propName];
-  if (!children) {
-    return null;
-  }
-
-  let error: Error | null = null;
-
-  React.Children.forEach(children, (child) => {
-    if (error) {
-      return;
-    }
-
-    /**
-     * Compare types in a way that works with libraries that patch and proxy
-     * components like react-hot-loader.
-     *
-     * see https://github.com/gaearon/react-hot-loader#checking-element-types
-     */
-    const element = <ProgressBar />;
-    if (child.type === element.type) return;
-
-    const childType: any = child.type;
-    const childIdentifier = React.isValidElement(child)
-      ? childType.displayName || childType.name || childType
-      : child;
-    error = new Error(
-      `Children of ${componentName} can contain only ProgressBar ` +
-        `components. Found ${childIdentifier}.`,
-    );
-  });
-
-  return error;
-}
-
-const propTypes = {
   /**
    * Minimum value progress can begin from
    */
-  min: PropTypes.number,
+  min?: number | undefined;
 
   /**
    * Current value of progress
    */
-  now: PropTypes.number,
+  now?: number | undefined;
 
   /**
    * Maximum value progress can reach
    */
-  max: PropTypes.number,
+  max?: number | undefined;
 
   /**
    * Show label that represents visual percentage.
    * EG. 60%
    */
-  label: PropTypes.node,
+  label?: React.ReactNode | undefined;
 
   /**
    * Hide's the label visually.
    */
-  visuallyHidden: PropTypes.bool,
+  visuallyHidden?: boolean | undefined;
 
   /**
    * Uses a gradient to create a striped effect.
    */
-  striped: PropTypes.bool,
+  striped?: boolean | undefined;
 
   /**
    * Animate's the stripes from right to left
    */
-  animated: PropTypes.bool,
-
-  /**
-   * @private
-   * @default 'progress-bar'
-   */
-  bsPrefix: PropTypes.string,
+  animated?: boolean | undefined;
 
   /**
    * Sets the background class of the progress bar.
    *
-   * @type ('success'|'danger'|'warning'|'info')
+   * @type {'success' | 'danger' | 'warning' | 'info' | string | undefined}
    */
-  variant: PropTypes.string,
-
-  /**
-   * Child elements (only allows elements of type <ProgressBar />)
-   */
-  children: onlyProgressBar,
+  variant?: 'success' | 'danger' | 'warning' | 'info' | string | undefined;
 
   /**
    * @private
    */
-  isChild: PropTypes.bool,
-};
+  isChild?: boolean | undefined;
+}
+
+const ROUND_PRECISION = 1000;
 
 function getPercentage(now, min, max) {
   const percentage = ((now - min) / (max - min)) * 100;
@@ -168,8 +106,6 @@ function renderProgressBar(
     </div>
   );
 }
-
-renderProgressBar.propTypes = propTypes;
 
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
   ({ isChild = false, ...rest }: ProgressBarProps, ref) => {
@@ -231,6 +167,5 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
 );
 
 ProgressBar.displayName = 'ProgressBar';
-ProgressBar.propTypes = propTypes as any;
 
 export default ProgressBar;

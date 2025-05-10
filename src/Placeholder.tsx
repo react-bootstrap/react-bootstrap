@@ -1,50 +1,30 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import usePlaceholder, { type UsePlaceholderProps } from './usePlaceholder';
 import PlaceholderButton from './PlaceholderButton';
 
-export interface PlaceholderProps extends UsePlaceholderProps, BsPrefixProps {}
+export interface PlaceholderProps extends UsePlaceholderProps {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'placeholder'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+}
 
-  /**
-   * Changes the animation of the placeholder.
-   *
-   * @type ('glow'|'wave')
-   */
-  animation: PropTypes.string,
-
-  /**
-   * Change the background color of the placeholder.
-   *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
-   */
-  bg: PropTypes.string,
-
-  /**
-   * Component size variations.
-   *
-   * @type ('xs'|'sm'|'lg')
-   */
-  size: PropTypes.string,
-};
-
-const Placeholder: BsPrefixRefForwardingComponent<'span', PlaceholderProps> =
+const Placeholder: DynamicRefForwardingComponent<'span', PlaceholderProps> =
   React.forwardRef<HTMLElement, PlaceholderProps>(
     ({ as: Component = 'span', ...props }, ref) => {
       const placeholderProps = usePlaceholder(props);
 
       return <Component {...placeholderProps} ref={ref} />;
     },
-  ) as typeof Placeholder;
+  );
 
 Placeholder.displayName = 'Placeholder';
-Placeholder.propTypes = propTypes;
 
 export default Object.assign(Placeholder, {
   Button: PlaceholderButton,

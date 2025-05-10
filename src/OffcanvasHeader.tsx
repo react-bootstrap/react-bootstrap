@@ -1,47 +1,16 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { CloseButtonVariant } from './CloseButton';
 import AbstractModalHeader, {
   type AbstractModalHeaderProps,
 } from './AbstractModalHeader';
-import type { BsPrefixOnlyProps } from './helpers';
 
-export interface OffcanvasHeaderProps
-  extends AbstractModalHeaderProps,
-    BsPrefixOnlyProps {}
-
-const propTypes = {
+export interface OffcanvasHeaderProps extends AbstractModalHeaderProps {
   /**
    * @default 'offcanvas-header'
    */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * Provides an accessible label for the close
-   * button. It is used for Assistive Technology when the label text is not
-   * readable.
-   */
-  closeLabel: PropTypes.string,
-
-  /**
-   * Sets the variant for close button.
-   */
-  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
-
-  /**
-   * Specify whether the Component should contain a close button
-   */
-  closeButton: PropTypes.bool,
-
-  /**
-   * A Callback fired when the close button is clicked. If used directly inside
-   * a Offcanvas component, the onHide will automatically be propagated up to the
-   * parent Offcanvas `onHide`.
-   */
-  onHide: PropTypes.func,
-};
+  bsPrefix?: string | undefined;
+}
 
 const OffcanvasHeader = React.forwardRef<HTMLDivElement, OffcanvasHeaderProps>(
   (
@@ -68,6 +37,5 @@ const OffcanvasHeader = React.forwardRef<HTMLDivElement, OffcanvasHeaderProps>(
 );
 
 OffcanvasHeader.displayName = 'OffcanvasHeader';
-OffcanvasHeader.propTypes = propTypes;
 
 export default OffcanvasHeader;

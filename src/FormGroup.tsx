@@ -1,36 +1,21 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useMemo } from 'react';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormContext from './FormContext';
-import type { AsProp, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FormGroupProps
-  extends React.HTMLAttributes<HTMLElement>,
-    AsProp {
-  controlId?: string;
-}
-
-const propTypes = {
-  as: PropTypes.elementType,
+export interface FormGroupProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
    */
-  controlId: PropTypes.string,
+  controlId?: string | undefined;
+}
 
-  /**
-   * The FormGroup `ref` will be forwarded to the underlying element.
-   * Unless the FormGroup is rendered `as` a composite component,
-   * it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
-   */
-  _ref: PropTypes.any,
-};
-
-const FormGroup: BsPrefixRefForwardingComponent<'div', FormGroupProps> =
+const FormGroup: DynamicRefForwardingComponent<'div', FormGroupProps> =
   React.forwardRef(
     (
       {
@@ -49,9 +34,8 @@ const FormGroup: BsPrefixRefForwardingComponent<'div', FormGroupProps> =
         </FormContext.Provider>
       );
     },
-  ) as typeof FormGroup;
+  );
 
 FormGroup.displayName = 'FormGroup';
-FormGroup.propTypes = propTypes;
 
 export default FormGroup;

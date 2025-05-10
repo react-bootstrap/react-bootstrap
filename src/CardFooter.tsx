@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardFooterProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface CardFooterProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CardFooter: BsPrefixRefForwardingComponent<'div', CardFooterProps> =
+  /**
+   * @default 'card-footer'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CardFooter: DynamicRefForwardingComponent<'div', CardFooterProps> =
   React.forwardRef<HTMLElement, CardFooterProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'card-footer');
@@ -19,7 +27,7 @@ const CardFooter: BsPrefixRefForwardingComponent<'div', CardFooterProps> =
         />
       );
     },
-  ) as typeof CardFooter;
+  );
 
 CardFooter.displayName = 'CardFooter';
 

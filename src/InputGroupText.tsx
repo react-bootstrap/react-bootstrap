@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface InputGroupTextProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface InputGroupTextProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const InputGroupText: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'input-group-text'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const InputGroupText: DynamicRefForwardingComponent<
   'span',
   InputGroupTextProps
 > = React.forwardRef<HTMLElement, InputGroupTextProps>(
@@ -21,7 +29,7 @@ const InputGroupText: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof InputGroupText;
+);
 
 InputGroupText.displayName = 'InputGroupText';
 

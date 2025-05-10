@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { DEFAULT_BREAKPOINTS, DEFAULT_MIN_BREAKPOINT } from './ThemeProvider';
 
 export type ResponsiveUtilityValue<T> =
@@ -11,20 +10,6 @@ export type ResponsiveUtilityValue<T> =
       xl?: T;
       xxl?: T;
     };
-
-export function responsivePropType(propType: any) {
-  return PropTypes.oneOfType([
-    propType,
-    PropTypes.shape({
-      xs: propType,
-      sm: propType,
-      md: propType,
-      lg: propType,
-      xl: propType,
-      xxl: propType,
-    }),
-  ]);
-}
 
 export default function createUtilityClassName(
   utilityValues: Record<string, ResponsiveUtilityValue<unknown>>,

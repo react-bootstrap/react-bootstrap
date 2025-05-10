@@ -8,9 +8,22 @@ export type PlaceholderAnimation = 'glow' | 'wave';
 export type PlaceholderSize = 'xs' | 'sm' | 'lg';
 
 export interface UsePlaceholderProps extends Omit<ColProps, 'as'> {
-  animation?: PlaceholderAnimation;
-  bg?: Variant;
-  size?: PlaceholderSize;
+  /**
+   * Changes the animation of the placeholder.
+   */
+  animation?: PlaceholderAnimation | undefined;
+
+  /**
+   * Change the background color of the placeholder.
+   *
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
+   */
+  bg?: Variant | undefined;
+
+  /**
+   * Component size variations.
+   */
+  size?: PlaceholderSize | undefined;
 }
 
 export default function usePlaceholder({

@@ -1,48 +1,41 @@
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import * as React from 'react';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import type { Color, Variant } from './types';
 
-export interface BadgeProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  bg?: Variant;
-  pill?: boolean;
-  text?: Color;
-}
+export interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** @default 'badge' */
-  bsPrefix: PropTypes.string,
+  /**
+   * @default 'badge'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * The visual style of the badge
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | undefined}
    */
-  bg: PropTypes.string,
+  bg?: Variant | undefined;
 
   /**
-   * Add the `pill` modifier to make badges more rounded with
-   * some additional horizontal padding
+   * Make badges more rounded with some additional horizontal padding
    */
-  pill: PropTypes.bool,
+  pill?: boolean | undefined;
 
   /**
    * Sets badge text color
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'white' | 'muted' | undefined}
    */
-  text: PropTypes.string,
+  text?: Color | undefined;
+}
 
-  /** @default span */
-  as: PropTypes.elementType,
-};
-
-const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
+const Badge: DynamicRefForwardingComponent<'span', BadgeProps> =
   React.forwardRef<HTMLElement, BadgeProps>(
     (
       {
@@ -71,9 +64,8 @@ const Badge: BsPrefixRefForwardingComponent<'span', BadgeProps> =
         />
       );
     },
-  ) as typeof Badge;
+  );
 
 Badge.displayName = 'Badge';
-Badge.propTypes = propTypes;
 
 export default Badge;

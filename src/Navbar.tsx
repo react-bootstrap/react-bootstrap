@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import SelectableContext from '@restart/ui/SelectableContext';
-import { SelectCallback } from '@restart/ui/types';
+import {
+  DynamicRefForwardingComponent,
+  SelectCallback,
+} from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
-
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
@@ -13,40 +14,44 @@ import NavbarOffcanvas from './NavbarOffcanvas';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext, { type NavbarContextType } from './NavbarContext';
 import NavbarText from './NavbarText';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface NavbarProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'> {
-  variant?: 'light' | 'dark' | string;
-  expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  bg?: string;
-  fixed?: 'top' | 'bottom';
-  sticky?: 'top' | 'bottom';
-  onToggle?: (expanded: boolean) => void;
-  onSelect?: SelectCallback;
-  collapseOnSelect?: boolean;
-  expanded?: boolean;
-}
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** @default 'navbar' */
-  bsPrefix: PropTypes.string,
+  /**
+   * @default 'navbar'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * The general visual variant a the Navbar.
    * Use in combination with the `bg` prop, `background-color` utilities,
    * or your own background styles.
-   *
-   * @type {('light'|'dark')}
    */
-  variant: PropTypes.string,
+  variant?: 'light' | 'dark' | string | undefined;
 
   /**
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+
+  /**
+   * Default expanded state of the Navbar.
+   */
+  defaultExpand?:
+    | boolean
+    | string
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | 'xxl'
+    | undefined;
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
@@ -54,33 +59,29 @@ const propTypes = {
    *
    * Pairs nicely with the `variant` prop.
    */
-  bg: PropTypes.string,
+  bg?: string | undefined;
 
   /**
    * Create a fixed navbar along the top or bottom of the screen, that scrolls with the
    * page. A convenience prop for the `fixed-*` positioning classes.
    */
-  fixed: PropTypes.oneOf(['top', 'bottom']),
+  fixed?: 'top' | 'bottom' | undefined;
 
   /**
    * Position the navbar at the top or bottom of the viewport, but only after scrolling past it.
    * A convenience prop for the `sticky-*` positioning classes.
    */
-  sticky: PropTypes.oneOf(['top', 'bottom']),
-
-  /**
-   * Set a custom element for this component.
-   */
-  as: PropTypes.elementType,
+  sticky?: 'top' | 'bottom' | undefined;
 
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
    * a `<Navbar.Toggle>` is clicked and called with the new `expanded`
    * boolean value.
    *
+   * @type {((expanded: boolean) => void) | undefined}
    * @controllable expanded
    */
-  onToggle: PropTypes.func,
+  onToggle?: ((expanded: boolean) => void) | undefined;
 
   /**
    * A callback fired when a descendant of a child `<Nav>` is selected. Should
@@ -103,7 +104,7 @@ const propTypes = {
    * ensure that you are setting `expanded` to false and not *toggling* between
    * true and false.
    */
-  onSelect: PropTypes.func,
+  onSelect?: SelectCallback | undefined;
 
   /**
    * Toggles `expanded` to `false` after the onSelect event of a descendant of a
@@ -116,14 +117,14 @@ const propTypes = {
    * for more complex operations that need to be executed after
    * the `select` event of `<Nav>` descendants.
    */
-  collapseOnSelect: PropTypes.bool,
+  collapseOnSelect?: boolean | undefined;
 
   /**
    * Controls the visibility of the navbar body
    *
    * @controllable onToggle
    */
-  expanded: PropTypes.bool,
+  expanded?: boolean | undefined;
 
   /**
    * The ARIA role for the navbar, will default to 'navigation' for
@@ -131,10 +132,10 @@ const propTypes = {
    *
    * @default 'navigation'
    */
-  role: PropTypes.string,
-};
+  role?: string | undefined;
+}
 
-const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
+const Navbar: DynamicRefForwardingComponent<'nav', NavbarProps> =
   React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
     const {
       bsPrefix: initialBsPrefix,
@@ -205,9 +206,8 @@ const Navbar: BsPrefixRefForwardingComponent<'nav', NavbarProps> =
         </SelectableContext.Provider>
       </NavbarContext.Provider>
     );
-  }) as typeof Navbar;
+  });
 
-Navbar.propTypes = propTypes;
 Navbar.displayName = 'Navbar';
 
 export default Object.assign(Navbar, {

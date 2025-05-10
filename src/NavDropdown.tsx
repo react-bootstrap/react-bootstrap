@@ -1,67 +1,64 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import Dropdown, { type DropdownProps } from './Dropdown';
+import Dropdown from './Dropdown';
 import type { DropdownMenuVariant } from './DropdownMenu';
 import NavLink from './NavLink';
-import type { BsPrefixRefForwardingComponent } from './helpers';
+import type { BsDropdownProps } from './types';
 
-export interface NavDropdownProps extends Omit<DropdownProps, 'title'> {
-  title: React.ReactNode;
-  disabled?: boolean;
-  active?: boolean;
-  menuRole?: string;
-  renderMenuOnMount?: boolean;
-  rootCloseEvent?: 'click' | 'mousedown';
-  menuVariant?: DropdownMenuVariant;
-}
-
-const propTypes = {
+export interface NavDropdownProps
+  extends BsDropdownProps,
+    Omit<
+      React.HTMLAttributes<HTMLElement>,
+      'onSelect' | 'children' | 'onToggle' | 'title'
+    > {
   /**
    * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
-   * @type {string}
    */
-  id: PropTypes.string,
+  id?: string | undefined;
 
-  /** An `onClick` handler passed to the Toggle component */
-  onClick: PropTypes.func,
+  /**
+   * The content of the non-toggle Button.
+   */
+  title: React.ReactNode;
 
-  /** The content of the non-toggle Button.  */
-  title: PropTypes.node.isRequired,
+  /**
+   * Disables the toggle NavLink
+   */
+  disabled?: boolean | undefined;
 
-  /** Disables the toggle NavLink  */
-  disabled: PropTypes.bool,
+  /**
+   * Style the toggle NavLink as active
+   */
+  active?: boolean | undefined;
 
-  /** Style the toggle NavLink as active  */
-  active: PropTypes.bool,
+  /**
+   * An ARIA accessible role applied to the Menu component.
+   */
+  menuRole?: string | undefined;
 
-  /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
-  menuRole: PropTypes.string,
-
-  /** Whether to render the dropdown menu in the DOM before the first time it is shown */
-  renderMenuOnMount: PropTypes.bool,
+  /**
+   * Whether to render the dropdown menu in the DOM before the first time it is shown
+   */
+  renderMenuOnMount?: boolean | undefined;
 
   /**
    *  Which event when fired outside the component will cause it to be closed.
    *
    * _see [DropdownMenu](#menu-props) for more details_
    */
-  rootCloseEvent: PropTypes.string,
+  rootCloseEvent?: 'click' | 'mousedown' | undefined;
 
   /**
    * Menu color variant.
    *
    * Omitting this will use the default light color.
    */
-  menuVariant: PropTypes.oneOf<DropdownMenuVariant>(['dark']),
+  menuVariant?: DropdownMenuVariant | undefined;
+}
 
-  /** @ignore */
-  bsPrefix: PropTypes.string,
-};
-
-const NavDropdown: BsPrefixRefForwardingComponent<'div', NavDropdownProps> =
+const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
   React.forwardRef(
     (
       {
@@ -111,10 +108,9 @@ const NavDropdown: BsPrefixRefForwardingComponent<'div', NavDropdownProps> =
         </Dropdown>
       );
     },
-  ) as typeof NavDropdown;
+  );
 
 NavDropdown.displayName = 'NavDropdown';
-NavDropdown.propTypes = propTypes;
 
 export default Object.assign(NavDropdown, {
   Item: Dropdown.Item,

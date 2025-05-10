@@ -1,13 +1,22 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface DropdownItemTextProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+  extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const DropdownItemText: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'dropdown-item-text'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const DropdownItemText: DynamicRefForwardingComponent<
   'span',
   DropdownItemTextProps
 > = React.forwardRef<HTMLElement, DropdownItemTextProps>(
@@ -21,7 +30,7 @@ const DropdownItemText: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof DropdownItemText;
+);
 
 DropdownItemText.displayName = 'DropdownItemText';
 

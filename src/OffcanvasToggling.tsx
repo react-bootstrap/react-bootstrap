@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import Transition, {
   type TransitionStatus,
@@ -7,79 +6,53 @@ import Transition, {
   ENTERING,
   EXITING,
 } from 'react-transition-group/Transition';
-import type { TransitionCallbacks } from '@restart/ui/types';
 import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
-import type { BsPrefixOnlyProps } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 import { useBootstrapPrefix } from './ThemeProvider';
+import type { TransitionCallbacks } from './types';
 
-export interface OffcanvasTogglingProps
-  extends TransitionCallbacks,
-    BsPrefixOnlyProps {
+export interface OffcanvasTogglingProps extends TransitionCallbacks {
+  /**
+   * @default 'offcanvas'
+   */
+  bsPrefix?: string | undefined;
+
   className?: string;
-  in?: boolean;
-  mountOnEnter?: boolean;
-  unmountOnExit?: boolean;
-  appear?: boolean;
-  timeout?: number;
-  children: React.ReactElement;
-}
 
-const propTypes = {
   /**
    * Show the component; triggers the fade in or fade out animation
    */
-  in: PropTypes.bool,
+  in?: boolean | string;
 
   /**
    * Wait until the first "enter" transition to mount the component (add it to the DOM)
    */
-  mountOnEnter: PropTypes.bool,
+  mountOnEnter?: boolean | undefined;
 
   /**
    * Unmount the component (remove it from the DOM) when it is faded out
    */
-  unmountOnExit: PropTypes.bool,
+  unmountOnExit?: boolean | undefined;
 
   /**
    * Run the fade in animation when the component mounts, if it is initially
    * shown
    */
-  appear: PropTypes.bool,
+  appear?: boolean | undefined;
 
   /**
    * Duration of the fade animation in milliseconds, to ensure that finishing
    * callbacks are fired even if the original browser transition end events are
    * canceled
    */
-  timeout: PropTypes.number,
+  timeout?: number | undefined;
 
   /**
-   * Callback fired before the component fades in
+   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
    */
-  onEnter: PropTypes.func,
-  /**
-   * Callback fired after the component starts to fade in
-   */
-  onEntering: PropTypes.func,
-  /**
-   * Callback fired after the has component faded in
-   */
-  onEntered: PropTypes.func,
-  /**
-   * Callback fired before the component fades out
-   */
-  onExit: PropTypes.func,
-  /**
-   * Callback fired after the component starts to fade out
-   */
-  onExiting: PropTypes.func,
-  /**
-   * Callback fired after the component has faded out
-   */
-  onExited: PropTypes.func,
-};
+  children: React.ReactElement;
+}
 
 const transitionStyles = {
   [ENTERING]: 'show',
@@ -133,7 +106,6 @@ const OffcanvasToggling = React.forwardRef<
   },
 );
 
-OffcanvasToggling.propTypes = propTypes as any;
 OffcanvasToggling.displayName = 'OffcanvasToggling';
 
 export default OffcanvasToggling;

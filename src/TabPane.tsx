@@ -1,104 +1,61 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import SelectableContext from '@restart/ui/SelectableContext';
 import TabContext from '@restart/ui/TabContext';
 import { useTabPanel } from '@restart/ui/TabPanel';
-import type { EventKey, TransitionCallbacks } from '@restart/ui/types';
+import type {
+  DynamicRefForwardingComponent,
+  EventKey,
+} from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import getTabTransitionComponent from './getTabTransitionComponent';
-import type {
-  BsPrefixProps,
-  BsPrefixRefForwardingComponent,
-  TransitionType,
-} from './helpers';
+import type { TransitionType } from './helpers';
+import type { TransitionCallbacks } from './types';
 
 export interface TabPaneProps
   extends TransitionCallbacks,
-    BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  eventKey?: EventKey;
-  active?: boolean;
-  transition?: TransitionType;
-  mountOnEnter?: boolean;
-  unmountOnExit?: boolean;
-}
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'tab-pane'
    */
-  bsPrefix: PropTypes.string,
-
-  as: PropTypes.elementType,
+  bsPrefix?: string | undefined;
 
   /**
    * A key that associates the `TabPane` with it's controlling `NavLink`.
    */
-  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  eventKey?: EventKey | undefined;
 
   /**
    * Toggles the active state of the TabPane, this is generally controlled by a
    * TabContainer.
    */
-  active: PropTypes.bool,
+  active?: boolean | undefined;
 
   /**
    * Use animation when showing or hiding `<TabPane>`s. Defaults to `<Fade>`
    * animation, else use `false` to disable or a react-transition-group
    * `<Transition/>` component.
    */
-  transition: PropTypes.oneOfType([PropTypes.bool, PropTypes.elementType]),
-
-  /**
-   * Transition onEnter callback when animation is not `false`
-   */
-  onEnter: PropTypes.func,
-
-  /**
-   * Transition onEntering callback when animation is not `false`
-   */
-  onEntering: PropTypes.func,
-
-  /**
-   * Transition onEntered callback when animation is not `false`
-   */
-  onEntered: PropTypes.func,
-
-  /**
-   * Transition onExit callback when animation is not `false`
-   */
-  onExit: PropTypes.func,
-
-  /**
-   * Transition onExiting callback when animation is not `false`
-   */
-  onExiting: PropTypes.func,
-
-  /**
-   * Transition onExited callback when animation is not `false`
-   */
-  onExited: PropTypes.func,
+  transition?: TransitionType | undefined;
 
   /**
    * Wait until the first "enter" transition to mount the tab (add it to the DOM)
    */
-  mountOnEnter: PropTypes.bool,
+  mountOnEnter?: boolean | undefined;
 
   /**
    * Unmount the tab (remove it from the DOM) when it is no longer visible
    */
-  unmountOnExit: PropTypes.bool,
+  unmountOnExit?: boolean | undefined;
+}
 
-  /** @ignore * */
-  id: PropTypes.string,
-
-  /** @ignore * */
-  'aria-labelledby': PropTypes.string,
-};
-
-const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
+const TabPane: DynamicRefForwardingComponent<'div', TabPaneProps> =
   React.forwardRef<HTMLElement, TabPaneProps>(
     ({ bsPrefix, transition, ...props }, ref) => {
       const [
@@ -153,9 +110,8 @@ const TabPane: BsPrefixRefForwardingComponent<'div', TabPaneProps> =
         </TabContext.Provider>
       );
     },
-  ) as typeof TabPane;
+  );
 
 TabPane.displayName = 'TabPane';
-TabPane.propTypes = propTypes;
 
 export default TabPane;

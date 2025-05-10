@@ -1,39 +1,29 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane, { type TabPaneProps } from './TabPane';
 
 export interface TabProps extends Omit<TabPaneProps, 'title'> {
-  title: React.ReactNode;
-  disabled?: boolean;
-  tabClassName?: string;
-  tabAttrs?: Record<string, any>;
-}
-
-const propTypes = {
-  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
   /**
    * Content for the tab title.
    */
-  title: PropTypes.node.isRequired,
+  title: React.ReactNode;
 
   /**
    * The disabled state of the tab.
    */
-  disabled: PropTypes.bool,
+  disabled?: boolean | undefined;
 
   /**
    * Class to pass to the underlying nav link.
    */
-  tabClassName: PropTypes.string,
+  tabClassName?: string | undefined;
 
   /**
    * Object containing attributes to pass to underlying nav link.
    */
-  tabAttrs: PropTypes.object,
-};
+  tabAttrs?: Record<string, any> | undefined;
+}
 
 const Tab: React.FC<TabProps> = () => {
   throw new Error(
@@ -42,8 +32,6 @@ const Tab: React.FC<TabProps> = () => {
       'For custom tabs components use TabPane and TabsContainer directly',
   );
 };
-
-Tab.propTypes = propTypes as any;
 
 export default Object.assign(Tab, {
   Container: TabContainer,

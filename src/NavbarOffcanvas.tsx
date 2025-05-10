@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import type { ModalHandle } from '@restart/ui/Modal';
 import Offcanvas, { type OffcanvasProps } from './Offcanvas';
 import NavbarContext from './NavbarContext';
 
 export type NavbarOffcanvasProps = Omit<OffcanvasProps, 'show'>;
 
-const NavbarOffcanvas = React.forwardRef<HTMLDivElement, NavbarOffcanvasProps>(
+const NavbarOffcanvas = React.forwardRef<ModalHandle, NavbarOffcanvasProps>(
   ({ onHide, ...props }, ref) => {
     const context = useContext(NavbarContext);
 

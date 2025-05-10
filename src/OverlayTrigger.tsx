@@ -1,5 +1,4 @@
 import contains from 'dom-helpers/contains';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
@@ -23,21 +22,65 @@ export type OverlayTriggerRenderProps = OverlayInjectedProps & {
 };
 
 export interface OverlayTriggerProps
-  extends Omit<OverlayProps, 'children' | 'target'> {
+  extends Omit<OverlayProps, 'children' | 'target' | 'onHide'> {
   children:
     | React.ReactElement
     | ((props: OverlayTriggerRenderProps) => React.ReactNode);
-  trigger?: OverlayTriggerType | OverlayTriggerType[];
-  delay?: OverlayDelay;
-  show?: boolean;
-  defaultShow?: boolean;
-  onToggle?: (nextShow: boolean) => void;
-  flip?: boolean;
+  /**
+   * Specify which action or actions trigger Overlay visibility
+   *
+   * The `click` trigger ignores the configured `delay`.
+   */
+  trigger?: OverlayTriggerType | OverlayTriggerType[] | undefined;
+
+  /**
+   * A millisecond delay amount to show and hide the Overlay once triggered
+   */
+  delay?: OverlayDelay | undefined;
+
+  /**
+   * The visibility of the Overlay. `show` is a _controlled_ prop so should be paired
+   * with `onToggle` to avoid breaking user interactions.
+   *
+   * Manually toggling `show` does **not** wait for `delay` to change the visibility.
+   *
+   * @controllable onToggle
+   */
+  show?: boolean | undefined;
+
+  /**
+   * The initial visibility state of the Overlay.
+   */
+  defaultShow?: boolean | undefined;
+
+  /**
+   * A callback that fires when the user triggers a change in tooltip visibility.
+   *
+   * `onToggle` is called with the desired next `show`, and generally should be passed
+   * back to the `show` prop. `onToggle` fires _after_ the configured `delay`
+   *
+   * @type {((nextShow: boolean) => void) | undefined}
+   * @controllable `show`
+   */
+  onToggle?: ((nextShow: boolean) => void) | undefined;
+
+  /**
+    The initial flip state of the Overlay. If `placement` is specified and is anything
+    other than "auto", this prop will default to `false`, otherwise the default is `true`.
+   */
+  flip?: boolean | undefined;
+
+  /**
+   * An element or text to overlay next to the target.
+   *
+   * @type {React.ReactElement<OverlayInjectedProps> | ((injected: OverlayInjectedProps) => React.ReactNode)}
+   */
   overlay: OverlayChildren;
 
-  target?: never;
-  onHide?: never;
-  placement?: Placement;
+  /**
+   * The placement of the Overlay in relation to it's `target`.
+   */
+  placement?: Placement | undefined;
 }
 
 function normalizeDelay(delay?: OverlayDelay) {
@@ -66,112 +109,6 @@ function handleMouseOverOut(
     handler(...args);
   }
 }
-
-const triggerType = PropTypes.oneOf<OverlayTriggerType>([
-  'click',
-  'hover',
-  'focus',
-]);
-
-const propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
-
-  /**
-   * Specify which action or actions trigger Overlay visibility
-   *
-   * The `click` trigger ignores the configured `delay`.
-   *
-   * @type {'hover' | 'click' |'focus' | Array<'hover' | 'click' |'focus'>}
-   */
-  trigger: PropTypes.oneOfType([
-    triggerType.isRequired,
-    PropTypes.arrayOf(triggerType.isRequired),
-  ]),
-
-  /**
-   * A millisecond delay amount to show and hide the Overlay once triggered
-   */
-  delay: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.shape({
-      show: PropTypes.number.isRequired,
-      hide: PropTypes.number.isRequired,
-    }),
-  ]),
-
-  /**
-   * The visibility of the Overlay. `show` is a _controlled_ prop so should be paired
-   * with `onToggle` to avoid breaking user interactions.
-   *
-   * Manually toggling `show` does **not** wait for `delay` to change the visibility.
-   *
-   * @controllable onToggle
-   */
-  show: PropTypes.bool,
-
-  /**
-   * The initial visibility state of the Overlay.
-   */
-  defaultShow: PropTypes.bool,
-
-  /**
-   * A callback that fires when the user triggers a change in tooltip visibility.
-   *
-   * `onToggle` is called with the desired next `show`, and generally should be passed
-   * back to the `show` prop. `onToggle` fires _after_ the configured `delay`
-   *
-   * @controllable `show`
-   */
-  onToggle: PropTypes.func,
-
-  /**
-    The initial flip state of the Overlay.
-   */
-  flip: PropTypes.bool,
-
-  /**
-   * An element or text to overlay next to the target.
-   */
-  overlay: PropTypes.oneOfType([PropTypes.func, PropTypes.element.isRequired])
-    .isRequired,
-
-  /**
-   * A Popper.js config object passed to the underlying popper instance.
-   */
-  popperConfig: PropTypes.object,
-
-  // Overridden props from `<Overlay>`.
-  /**
-   * @private
-   */
-  target: PropTypes.oneOf([null]),
-
-  /**
-   * @private
-   */
-  onHide: PropTypes.oneOf([null]),
-
-  /**
-   * The placement of the Overlay in relation to it's `target`.
-   */
-  placement: PropTypes.oneOf<Placement>([
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start',
-  ]),
-};
 
 const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   trigger = ['hover', 'focus'],
@@ -314,6 +251,6 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   );
 };
 
-OverlayTrigger.propTypes = propTypes as any;
+OverlayTrigger.displayName = 'OverlayTrigger';
 
 export default OverlayTrigger;

@@ -1,15 +1,27 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import type { BsPrefixProps } from './helpers';
+export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-export interface ModalDialogProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {
-  size?: 'sm' | 'lg' | 'xl';
+  /**
+   * @default 'modal'
+   */
+  bsPrefix?: string | undefined;
+
+  /**
+   * Render a large, extra large or small modal.
+   */
+  size?: 'sm' | 'lg' | 'xl' | undefined;
+
+  /**
+   * Renders a fullscreen modal. Specifying a breakpoint will render the modal
+   * as fullscreen __below__ the breakpoint size.
+   */
   fullscreen?:
     | true
     | string
@@ -17,42 +29,24 @@ export interface ModalDialogProps
     | 'md-down'
     | 'lg-down'
     | 'xl-down'
-    | 'xxl-down';
-  centered?: boolean;
-  scrollable?: boolean;
-  contentClassName?: string;
-}
-
-const propTypes = {
-  /** @default 'modal' */
-  bsPrefix: PropTypes.string,
-  contentClassName: PropTypes.string,
-
-  /**
-   * Render a large, extra large or small modal.
-   *
-   * @type ('sm'|'lg'|'xl')
-   */
-  size: PropTypes.string,
-
-  /**
-   * Renders a fullscreen modal. Specifying a breakpoint will render the modal
-   * as fullscreen __below__ the breakpoint size.
-   *
-   * @type (true|'sm-down'|'md-down'|'lg-down'|'xl-down'|'xxl-down')
-   */
-  fullscreen: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    | 'xxl-down'
+    | undefined;
 
   /**
    * Specify whether the Component should be vertically centered
    */
-  centered: PropTypes.bool,
+  centered?: boolean | undefined;
 
   /**
    * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
    */
-  scrollable: PropTypes.bool,
-};
+  scrollable?: boolean | undefined;
+
+  /**
+   * Additional class names for the modal content element.
+   */
+  contentClassName?: string;
+}
 
 const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
   (
@@ -99,6 +93,5 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
 );
 
 ModalDialog.displayName = 'ModalDialog';
-ModalDialog.propTypes = propTypes as any;
 
 export default ModalDialog;

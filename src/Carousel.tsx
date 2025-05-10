@@ -3,9 +3,9 @@ import useUpdateEffect from '@restart/hooks/useUpdateEffect';
 import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import Anchor from '@restart/ui/Anchor';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import classNames from 'classnames';
 import type { TransitionStatus } from 'react-transition-group/Transition';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import {
   useCallback,
@@ -22,7 +22,6 @@ import { map, forEach } from './ElementChildren';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
 import transitionEndListener from './transitionEndListener';
 import triggerBrowserReflow from './triggerBrowserReflow';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import TransitionWrapper from './TransitionWrapper';
 
 export type CarouselVariant = 'dark' | string;
@@ -34,71 +33,53 @@ export interface CarouselRef {
 }
 
 export interface CarouselProps
-  extends BsPrefixProps,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  slide?: boolean;
-  fade?: boolean;
-  controls?: boolean;
-  indicators?: boolean;
-  indicatorLabels?: string[];
-  activeIndex?: number;
-  onSelect?: (eventKey: number, event: Record<string, unknown> | null) => void;
-  defaultActiveIndex?: number;
-  onSlide?: (eventKey: number, direction: 'start' | 'end') => void;
-  onSlid?: (eventKey: number, direction: 'start' | 'end') => void;
-  interval?: number | null;
-  keyboard?: boolean;
-  pause?: 'hover' | false;
-  wrap?: boolean;
-  touch?: boolean;
-  prevIcon?: React.ReactNode;
-  prevLabel?: React.ReactNode;
-  nextIcon?: React.ReactNode;
-  nextLabel?: React.ReactNode;
-  variant?: CarouselVariant;
-  ref?:
-    | React.Ref<CarouselRef>
-    | React.MutableRefObject<CarouselRef | undefined>;
-}
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const SWIPE_THRESHOLD = 40;
-
-const propTypes = {
   /**
    * @default 'carousel'
    */
-  bsPrefix: PropTypes.string,
-  as: PropTypes.elementType,
+  bsPrefix?: string | undefined;
 
   /**
    * Enables animation on the Carousel as it transitions between slides.
    */
-  slide: PropTypes.bool,
-
-  /** Animates slides with a crossfade animation instead of the default slide animation */
-  fade: PropTypes.bool,
+  slide?: boolean | undefined;
 
   /**
-   * Show the Carousel previous and next arrows for changing the current slide
+   * Animates slides with a crossfade animation instead of the default slide animation.
    */
-  controls: PropTypes.bool,
+  fade?: boolean | undefined;
 
   /**
-   * Show a set of slide position indicators
+   * Show the Carousel previous and next arrows for changing the current slide.
    */
-  indicators: PropTypes.bool,
+  controls?: boolean | undefined;
+
+  /**
+   * Show a set of slide position indicators.
+   */
+  indicators?: boolean | undefined;
 
   /**
    * An array of labels for the indicators. Defaults to "Slide #" if not provided.
    */
-  indicatorLabels: PropTypes.array,
+  indicatorLabels?: string[] | undefined;
 
   /**
-   * Controls the current visible slide
+   * Controls the current visible slide.
    *
    * @controllable onSelect
    */
-  activeIndex: PropTypes.number,
+  activeIndex?: number | undefined;
+
+  /**
+   * The default active index that is shown when the component is first rendered.
+   */
+  defaultActiveIndex?: number | undefined;
 
   /**
    * Callback fired when the active item changes.
@@ -107,9 +88,12 @@ const propTypes = {
    * (eventKey: number, event: Object | null) => void
    * ```
    *
+   * @type {((eventKey: number, event: Record<string, unknown> | null) => void) | undefined}
    * @controllable activeIndex
    */
-  onSelect: PropTypes.func,
+  onSelect?:
+    | ((eventKey: number, event: Record<string, unknown> | null) => void)
+    | undefined;
 
   /**
    * Callback fired when a slide transition starts.
@@ -117,8 +101,12 @@ const propTypes = {
    * ```js
    * (eventKey: number, direction: 'left' | 'right') => void
    * ```
+   *
+   * @type {((eventKey: number, direction: 'left' | 'right') => void) | undefined}
    */
-  onSlide: PropTypes.func,
+  onSlide?:
+    | ((eventKey: number, direction: 'start' | 'end') => void)
+    | undefined;
 
   /**
    * Callback fired when a slide transition ends.
@@ -126,58 +114,76 @@ const propTypes = {
    * ```js
    * (eventKey: number, direction: 'left' | 'right') => void
    * ```
+   *
+   * @type {((eventKey: number, direction: 'left' | 'right') => void) | undefined}
    */
-  onSlid: PropTypes.func,
+  onSlid?: ((eventKey: number, direction: 'start' | 'end') => void) | undefined;
 
   /**
    * The amount of time to delay between automatically cycling an item. If `null`, carousel will not automatically cycle.
    */
-  interval: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
-
-  /** Whether the carousel should react to keyboard events. */
-  keyboard: PropTypes.bool,
+  interval?: number | null | undefined;
 
   /**
-   * If set to `"hover"`, pauses the cycling of the carousel on `mouseenter` and resumes the cycling of the carousel on `mouseleave`. If set to `false`, hovering over the carousel won't pause it.
-   *
-   * On touch-enabled devices, when set to `"hover"`, cycling will pause on `touchend` (once the user finished interacting with the carousel) for two intervals, before automatically resuming. Note that this is in addition to the above mouse behavior.
+   * Whether the carousel should react to keyboard events.
    */
-  pause: PropTypes.oneOf(['hover', false]),
+  keyboard?: boolean | undefined;
 
-  /** Whether the carousel should cycle continuously or have hard stops. */
-  wrap: PropTypes.bool,
+  /**
+   * If set to `"hover"`, pauses the cycling of the carousel on `mouseenter` and resumes the cycling of the carousel on
+   * `mouseleave`. If set to `false`, hovering over the carousel won't pause it.
+   *
+   * On touch-enabled devices, when set to `"hover"`, cycling will pause on `touchend` (once the user finished interacting
+   * with the carousel) for two intervals, before automatically resuming. Note that this is in addition to the above mouse
+   * behavior.
+   */
+  pause?: 'hover' | false | undefined;
+
+  /**
+   * Whether the carousel should cycle continuously or have hard stops.
+   */
+  wrap?: boolean | undefined;
 
   /**
    * Whether the carousel should support left/right swipe interactions on touchscreen devices.
    */
-  touch: PropTypes.bool,
-
-  /** Override the default button icon for the "previous" control */
-  prevIcon: PropTypes.node,
+  touch?: boolean | undefined;
 
   /**
-   * Label shown to screen readers only, can be used to show the previous element
-   * in the carousel.
-   * Set to null to deactivate.
+   * Override the default button icon for the "previous" control.
    */
-  prevLabel: PropTypes.string,
-
-  /** Override the default button icon for the "next" control */
-  nextIcon: PropTypes.node,
+  prevIcon?: React.ReactNode | undefined;
 
   /**
-   * Label shown to screen readers only, can be used to show the next element
-   * in the carousel.
+   * Label shown to screen readers only, can be used to show the previous element in the carousel.
    * Set to null to deactivate.
    */
-  nextLabel: PropTypes.string,
+  prevLabel?: React.ReactNode | undefined;
+
+  /**
+   * Override the default button icon for the "next" control
+   */
+  nextIcon?: React.ReactNode | undefined;
+
+  /**
+   * Label shown to screen readers only, can be used to show the next element in the carousel.
+   * Set to null to deactivate.
+   */
+  nextLabel?: React.ReactNode | undefined;
 
   /**
    * Color variant that controls the colors of the controls, indicators
    * and captions.
    */
-  variant: PropTypes.oneOf<CarouselVariant>(['dark']),
-};
+  variant?: CarouselVariant | undefined;
+
+  /**
+   * Carousel ref.
+   */
+  ref?: React.Ref<CarouselRef> | undefined;
+}
+
+const SWIPE_THRESHOLD = 40;
 
 function isVisible(element) {
   if (
@@ -198,8 +204,7 @@ function isVisible(element) {
   );
 }
 
-const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
-  // eslint-disable-next-line react/display-name
+const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
   React.forwardRef<CarouselRef, CarouselProps>(
     ({ defaultActiveIndex = 0, ...uncontrolledProps }, ref) => {
       const {
@@ -633,10 +638,9 @@ const Carousel: BsPrefixRefForwardingComponent<'div', CarouselProps> =
         </Component>
       );
     },
-  ) as unknown as BsPrefixRefForwardingComponent<'div', CarouselProps>;
+  );
 
 Carousel.displayName = 'Carousel';
-Carousel.propTypes = propTypes;
 
 export default Object.assign(Carousel, {
   Caption: CarouselCaption,

@@ -1,39 +1,33 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import BreadcrumbItem from './BreadcrumbItem';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface BreadcrumbProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  label?: string;
-  listProps?: React.OlHTMLAttributes<HTMLOListElement>;
-}
+export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'breadcrumb'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * ARIA label for the nav element
    * https://www.w3.org/TR/wai-aria-practices/#breadcrumb
    */
-  label: PropTypes.string,
+  label?: string | undefined;
 
   /**
    * Additional props passed as-is to the underlying `<ol>` element
    */
-  listProps: PropTypes.object,
+  listProps?: React.OlHTMLAttributes<HTMLOListElement> | undefined;
+}
 
-  as: PropTypes.elementType,
-};
-
-const Breadcrumb: BsPrefixRefForwardingComponent<'nav', BreadcrumbProps> =
+const Breadcrumb: DynamicRefForwardingComponent<'nav', BreadcrumbProps> =
   React.forwardRef<HTMLElement, BreadcrumbProps>(
     (
       {
@@ -66,10 +60,9 @@ const Breadcrumb: BsPrefixRefForwardingComponent<'nav', BreadcrumbProps> =
         </Component>
       );
     },
-  ) as typeof Breadcrumb;
+  );
 
 Breadcrumb.displayName = 'Breadcrumb';
-Breadcrumb.propTypes = propTypes;
 
 export default Object.assign(Breadcrumb, {
   Item: BreadcrumbItem,

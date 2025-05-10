@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Button, { type ButtonProps } from './Button';
@@ -8,72 +7,56 @@ export type ToggleButtonType = 'checkbox' | 'radio';
 
 export interface ToggleButtonProps
   extends Omit<ButtonProps, 'onChange' | 'type'> {
-  type?: ToggleButtonType;
-  name?: string;
-  checked?: boolean;
-  disabled?: boolean;
-  id: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  value: string | ReadonlyArray<string> | number;
-  inputRef?: React.Ref<HTMLInputElement>;
-}
-
-const noop = () => undefined;
-
-const propTypes = {
   /**
    * @default 'btn-check'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * The `<input>` element `type`
    */
-  type: PropTypes.oneOf<ToggleButtonType>(['checkbox', 'radio']),
+  type?: ToggleButtonType | undefined;
 
   /**
    * The HTML input name, used to group like checkboxes or radio buttons together
    * semantically
    */
-  name: PropTypes.string,
+  name?: string | undefined;
 
   /**
    * The checked state of the input, managed by `<ToggleButtonGroup>` automatically
    */
-  checked: PropTypes.bool,
+  checked?: boolean | undefined;
 
   /**
    * The disabled state of both the label and input
    */
-  disabled: PropTypes.bool,
+  disabled?: boolean | undefined;
 
   /**
    * `id` is required for button clicks to toggle input.
    */
-  id: PropTypes.string.isRequired,
+  id: string;
 
   /**
    * A callback fired when the underlying input element changes. This is passed
    * directly to the `<input>` so shares the same signature as a native `onChange` event.
    */
-  onChange: PropTypes.func,
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 
   /**
    * The value of the input, should be unique amongst its siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string.isRequired),
-    PropTypes.number,
-  ]).isRequired,
+  value: string | ReadonlyArray<string> | number;
 
   /**
    * A ref attached to the `<input>` element
-   * @type {ReactRef}
    */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.any]),
-};
+  inputRef?: React.Ref<HTMLInputElement> | undefined;
+}
+
+const noop = () => undefined;
 
 const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
   (
@@ -122,7 +105,6 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
   },
 );
 
-ToggleButton.propTypes = propTypes;
 ToggleButton.displayName = 'ToggleButton';
 
 export default ToggleButton;

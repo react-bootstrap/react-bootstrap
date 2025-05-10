@@ -1,13 +1,22 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface CarouselCaptionProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+  extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const CarouselCaption: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'carousel-caption'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const CarouselCaption: DynamicRefForwardingComponent<
   'div',
   CarouselCaptionProps
 > = React.forwardRef<HTMLElement, CarouselCaptionProps>(
@@ -21,7 +30,7 @@ const CarouselCaption: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof CarouselCaption;
+);
 
 CarouselCaption.displayName = 'CarouselCaption';
 

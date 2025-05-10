@@ -59,6 +59,14 @@ export default () =>
                 prop.description,
               );
 
+              if (prop.doclets.type) {
+                // Remove the surrounding braces.
+                prop.doclets.type = prop.doclets.type.substring(
+                  1,
+                  prop.doclets.type.length - 1,
+                );
+              }
+
               // Strip out the doclets from the description.
               prop.description = prop.description
                 .replace(DOCLET_PATTERN, '')
