@@ -1,3 +1,14 @@
+## [2.10.10](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.9...v2.10.10) (2025-05-11)
+
+
+### Bug Fixes
+
+* **Navbar:** add defaultExpanded type ([#6926](https://github.com/react-bootstrap/react-bootstrap/issues/6926)) ([4c64270](https://github.com/react-bootstrap/react-bootstrap/commit/4c64270e4078b8ab2a590f8ac0a04b26dcbc63aa))
+
+
+
+
+
 ## [2.10.9](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.8...v2.10.9) (2025-01-30)
 
 
