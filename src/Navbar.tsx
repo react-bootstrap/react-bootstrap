@@ -27,6 +27,7 @@ export interface NavbarProps
   onSelect?: SelectCallback;
   collapseOnSelect?: boolean;
   expanded?: boolean;
+  defaultExpanded?: boolean;
 }
 
 const propTypes = {
