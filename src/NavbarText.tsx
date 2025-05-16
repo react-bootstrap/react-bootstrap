@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavbarTextProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface NavbarTextProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const NavbarText: BsPrefixRefForwardingComponent<'span', NavbarTextProps> =
+  /**
+   * @default 'navbar-text'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const NavbarText: DynamicRefForwardingComponent<'span', NavbarTextProps> =
   React.forwardRef<HTMLElement, NavbarTextProps>(
     ({ className, bsPrefix, as: Component = 'span', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-text');
@@ -19,7 +27,7 @@ const NavbarText: BsPrefixRefForwardingComponent<'span', NavbarTextProps> =
         />
       );
     },
-  ) as typeof NavbarText;
+  );
 
 NavbarText.displayName = 'NavbarText';
 

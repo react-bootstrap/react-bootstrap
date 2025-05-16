@@ -1,13 +1,10 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 import * as React from 'react';
 import { useMemo } from 'react';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import FormCheckInput, { type FormCheckInputProps } from './FormCheckInput';
 import InputGroupContext from './InputGroupContext';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import InputGroupText from './InputGroupText';
 
 const InputGroupCheckbox = (props: FormCheckInputProps) => (
@@ -22,35 +19,31 @@ const InputGroupRadio = (props: FormCheckInputProps) => (
   </InputGroupText>
 );
 
-export interface InputGroupProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  size?: 'sm' | 'lg';
-  hasValidation?: boolean;
-}
+export interface InputGroupProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** @default 'input-group' */
-  bsPrefix: PropTypes.string,
+  /**
+   * @default 'input-group'
+   */
+  bsPrefix?: string | undefined;
 
   /**
    * Control the size of buttons and form elements from the top-level.
-   *
-   * @type {('sm'|'lg')}
    */
-  size: PropTypes.string,
+  size?: 'sm' | 'lg' | undefined;
 
   /**
    * Handles the input's rounded corners when using form validation.
    *
    * Use this when your input group contains both an input and feedback element.
    */
-  hasValidation: PropTypes.bool,
+  hasValidation?: boolean | undefined;
+}
 
-  as: PropTypes.elementType,
-};
-
-const InputGroup: BsPrefixRefForwardingComponent<'div', InputGroupProps> =
+const InputGroup: DynamicRefForwardingComponent<'div', InputGroupProps> =
   React.forwardRef<HTMLElement, InputGroupProps>(
     (
       {
@@ -85,9 +78,8 @@ const InputGroup: BsPrefixRefForwardingComponent<'div', InputGroupProps> =
         </InputGroupContext.Provider>
       );
     },
-  ) as typeof InputGroup;
+  );
 
-InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';
 
 export default Object.assign(InputGroup, {

@@ -1,7 +1,5 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -13,69 +11,64 @@ import type { Variant } from './types';
 import type { TransitionType } from './helpers';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
-  bsPrefix?: string;
-  variant?: Variant;
-  dismissible?: boolean;
-  show?: boolean;
-  onClose?: (a: any, b: any) => void;
-  closeLabel?: string;
-  closeVariant?: CloseButtonVariant;
-  transition?: TransitionType;
-}
-
-const propTypes = {
   /**
    * @default 'alert'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
-   * The Alert visual variant
+   * The Alert visual variant.
    *
-   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'}
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
    */
-  variant: PropTypes.string,
+  variant?: Variant | undefined;
 
   /**
    * Renders a properly aligned dismiss button, as well as
    * adding extra horizontal padding to the Alert.
    */
-  dismissible: PropTypes.bool,
+  dismissible?: boolean | undefined;
 
   /**
    * Controls the visual state of the Alert.
    *
    * @controllable onClose
    */
-  show: PropTypes.bool,
+  show?: boolean | undefined;
+
+  /**
+   * Default show state of the Alert.
+   */
+  defaultShow?: boolean | undefined;
 
   /**
    * Callback fired when alert is closed.
    *
+   * @type {((show: boolean, event: any) => void) | undefined}
    * @controllable show
    */
-  onClose: PropTypes.func,
+  onClose?: ((show: boolean, event: any) => void) | undefined;
 
   /**
    * Sets the text for alert close button.
    */
-  closeLabel: PropTypes.string,
+  closeLabel?: string | undefined;
 
   /**
    * Sets the variant for close button.
    */
-  closeVariant: PropTypes.oneOf<CloseButtonVariant>(['white']),
+  closeVariant?: CloseButtonVariant | undefined;
 
   /**
    * Animate the alert dismissal. Defaults to using `<Fade>` animation or use
    * `false` to disable. A custom `react-transition-group` Transition can also
    * be provided.
    */
-  transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
-};
+  transition?: TransitionType | undefined;
+}
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  (uncontrolledProps: AlertProps, ref) => {
+  (uncontrolledProps, ref) => {
     const {
       bsPrefix,
       show = true,
@@ -133,7 +126,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 );
 
 Alert.displayName = 'Alert';
-Alert.propTypes = propTypes;
 
 export default Object.assign(Alert, {
   Link: AlertLink,

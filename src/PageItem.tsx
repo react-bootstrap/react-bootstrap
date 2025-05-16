@@ -1,45 +1,47 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { ReactNode } from 'react';
 import Anchor from '@restart/ui/Anchor';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 
-export interface PageItemProps
-  extends React.HTMLAttributes<HTMLElement>,
-    BsPrefixProps {
-  disabled?: boolean;
-  active?: boolean;
-  activeLabel?: string;
-  href?: string;
-  linkStyle?: React.CSSProperties;
-  linkClassName?: string;
+export interface PageItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
+
+  /**
+   * Disables the PageItem
+   */
+  disabled?: boolean | undefined;
+
+  /**
+   * Styles PageItem as active, and renders a `<span>` instead of an `<a>`.
+   */
+  active?: boolean | undefined;
+
+  /**
+   * An accessible label indicating the active state.
+   */
+  activeLabel?: string | undefined;
+
+  /**
+   * The HTML href attribute for the `PageItem`.
+   */
+  href?: string | undefined;
+
+  /**
+   * Custom style for the inner component of the PageItem
+   */
+  linkStyle?: React.CSSProperties | undefined;
+
+  /**
+   * Custom className for the inner component of the PageItem
+   */
+  linkClassName?: string | undefined;
 }
 
-const propTypes = {
-  /** Disables the PageItem */
-  disabled: PropTypes.bool,
-
-  /** Styles PageItem as active, and renders a `<span>` instead of an `<a>`. */
-  active: PropTypes.bool,
-
-  /** An accessible label indicating the active state. */
-  activeLabel: PropTypes.string,
-
-  /** The HTML href attribute for the `PageItem`. */
-  href: PropTypes.string,
-
-  /** A callback function for when this component is clicked. */
-  onClick: PropTypes.func,
-
-  /** custom style for the inner component of the PageItem */
-  linkStyle: PropTypes.object,
-
-  /** custom className for the inner component of the PageItem */
-  linkClassName: PropTypes.string,
-};
-
-const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
+const PageItem: DynamicRefForwardingComponent<'li', PageItemProps> =
   React.forwardRef<HTMLLIElement, PageItemProps>(
     (
       {
@@ -76,9 +78,8 @@ const PageItem: BsPrefixRefForwardingComponent<'li', PageItemProps> =
         </li>
       );
     },
-  ) as typeof PageItem;
+  );
 
-PageItem.propTypes = propTypes;
 PageItem.displayName = 'PageItem';
 
 export default PageItem;

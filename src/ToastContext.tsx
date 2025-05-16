@@ -8,4 +8,6 @@ const ToastContext = React.createContext<ToastContextType>({
   onClose() {},
 });
 
+ToastContext.displayName = 'ToastContext';
+
 export default ToastContext;

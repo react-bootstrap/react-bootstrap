@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CardBody from './CardBody';
 import CardFooter from './CardFooter';
@@ -12,55 +11,48 @@ import CardLink from './CardLink';
 import CardSubtitle from './CardSubtitle';
 import CardText from './CardText';
 import CardTitle from './CardTitle';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import type { Color, Variant } from './types';
 
-export interface CardProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  bg?: Variant;
-  text?: Color;
-  border?: Variant;
-  body?: boolean;
-}
+export interface CardProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'card'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Sets card background
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   * @type {'primary' | 'secondary' | 'success' |'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
    */
-  bg: PropTypes.string,
+  bg?: Variant | undefined;
 
   /**
    * Sets card text color
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light'|'white'|'muted')}
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'white' | 'muted' | undefined}
    */
-  text: PropTypes.string,
+  text?: Color | undefined;
 
   /**
    * Sets card border color
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
    */
-  border: PropTypes.string,
+  border?: Variant | undefined;
 
   /**
    * When this prop is set, it creates a Card with a Card.Body inside
    * passing the children directly to it
    */
-  body: PropTypes.bool,
+  body?: boolean | undefined;
+}
 
-  as: PropTypes.elementType,
-};
-
-const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
+const Card: DynamicRefForwardingComponent<'div', CardProps> = React.forwardRef<
   HTMLElement,
   CardProps
 >(
@@ -97,10 +89,9 @@ const Card: BsPrefixRefForwardingComponent<'div', CardProps> = React.forwardRef<
       </Component>
     );
   },
-) as typeof Card;
+);
 
 Card.displayName = 'Card';
-Card.propTypes = propTypes;
 
 export default Object.assign(Card, {
   Img: CardImg,

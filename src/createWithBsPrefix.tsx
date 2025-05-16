@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
 import * as React from 'react';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixRefForwardingComponent } from './helpers';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 
@@ -22,7 +22,7 @@ export default function createWithBsPrefix<
     Component,
     defaultProps,
   }: BsPrefixOptions<As> = {},
-): BsPrefixRefForwardingComponent<As> {
+): DynamicRefForwardingComponent<As> {
   const BsComponent = React.forwardRef(
     (
       { className, bsPrefix, as: Tag = Component || 'div', ...props }: any,

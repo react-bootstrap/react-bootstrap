@@ -1,55 +1,54 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import warning from 'warning';
 import { useUncontrolled } from 'uncontrollable';
-import BaseNav, { NavProps as BaseNavProps } from '@restart/ui/Nav';
-import { EventKey } from '@restart/ui/types';
+import BaseNav from '@restart/ui/Nav';
+import type {
+  DynamicRefForwardingComponent,
+  EventKey,
+} from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ListGroupItem from './ListGroupItem';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BaseNavProps } from './types';
 
-export interface ListGroupProps extends BsPrefixProps, BaseNavProps {
-  variant?: 'flush' | string;
-  horizontal?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  defaultActiveKey?: EventKey;
-  numbered?: boolean;
-}
+export interface ListGroupProps extends BaseNavProps {
+  /**
+   * Element used to render the component.
+   *
+   * @default 'div'
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'list-group'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Adds a variant to the list-group
-   *
-   * @type {('flush')}
    */
-  variant: PropTypes.oneOf(['flush']),
+  variant?: 'flush' | string | undefined;
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
    * A value of `null` (the default) sets it to vertical for all breakpoints;
    * Just including the prop sets it for all breakpoints, while `{sm|md|lg|xl|xxl}`
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
-   * @type {(true|'sm'|'md'|'lg'|'xl'|'xxl')}
    */
-  horizontal: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  horizontal?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+
+  /**
+   * The default active key of the list group.
+   */
+  defaultActiveKey?: EventKey | undefined;
 
   /**
    * Generate numbered list items.
    */
-  numbered: PropTypes.bool,
+  numbered?: boolean | undefined;
+}
 
-  /**
-   * You can use a custom element type for this component.
-   */
-  as: PropTypes.elementType,
-};
-
-const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
+const ListGroup: DynamicRefForwardingComponent<'div', ListGroupProps> =
   React.forwardRef<HTMLElement, ListGroupProps>((props, ref) => {
     const {
       className,
@@ -91,9 +90,8 @@ const ListGroup: BsPrefixRefForwardingComponent<'div', ListGroupProps> =
         )}
       />
     );
-  }) as typeof ListGroup;
+  });
 
-ListGroup.propTypes = propTypes;
 ListGroup.displayName = 'ListGroup';
 
 export default Object.assign(ListGroup, {

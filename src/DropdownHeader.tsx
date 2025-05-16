@@ -1,13 +1,26 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface DropdownHeaderProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface DropdownHeaderProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const DropdownHeader: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'dropdown-header'
+   */
+  bsPrefix?: string | undefined;
+
+  /**
+   * An ARIA accessible role.
+   */
+  role?: string | undefined;
+}
+
+const DropdownHeader: DynamicRefForwardingComponent<
   'div',
   DropdownHeaderProps
 > = React.forwardRef<HTMLElement, DropdownHeaderProps>(
@@ -25,7 +38,7 @@ const DropdownHeader: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof DropdownHeader;
+);
 
 DropdownHeader.displayName = 'DropdownHeader';
 

@@ -1,25 +1,21 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixProps } from './helpers';
-
 export interface FormCheckLabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement>,
-    BsPrefixProps {}
-
-const propTypes = {
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * @default 'form-check-label'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
-  /** The HTML for attribute for associating the label with an input */
-  htmlFor: PropTypes.string,
-};
+  /**
+   * The HTML for attribute for associating the label with an input
+   */
+  htmlFor?: string | undefined;
+}
 
 const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
   ({ bsPrefix, className, htmlFor, ...props }, ref) => {
@@ -39,6 +35,5 @@ const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
 );
 
 FormCheckLabel.displayName = 'FormCheckLabel';
-FormCheckLabel.propTypes = propTypes;
 
 export default FormCheckLabel;

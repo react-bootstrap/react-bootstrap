@@ -1,60 +1,49 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 import * as React from 'react';
 import Anchor from '@restart/ui/Anchor';
-import {
-  useNavItem,
-  NavItemProps as BaseNavItemProps,
-} from '@restart/ui/NavItem';
+import { useNavItem } from '@restart/ui/NavItem';
 import { makeEventKey } from '@restart/ui/SelectableContext';
+import { DynamicRefForwardingComponent, EventKey } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import type { BaseNavItemProps } from './types';
 
-export interface NavLinkProps
-  extends BsPrefixProps,
-    Omit<BaseNavItemProps, 'as'> {}
+export interface NavLinkProps extends BaseNavItemProps {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'nav-link'
    */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * The active state of the NavItem item.
-   */
-  active: PropTypes.bool,
-
-  /**
-   * The disabled state of the NavItem item.
-   */
-  disabled: PropTypes.bool,
+  bsPrefix?: string | undefined;
 
   /**
    * The ARIA role for the `NavLink`, In the context of a 'tablist' parent Nav,
    * the role defaults to 'tab'
    * */
-  role: PropTypes.string,
+  role?: string | undefined;
 
   /**
    * The HTML href attribute for the `NavLink`. Used as the unique identifier
    * for the `NavLink` if an `eventKey` is not provided.
    */
-  href: PropTypes.string,
+  href?: string | undefined;
 
   /**
    * Uniquely identifies the `NavItem` amongst its siblings,
    * used to determine and control the active state of the parent `Nav`
    * as well as onSelect behavior of a parent `Navbar`.
    */
-  eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  eventKey?: EventKey | undefined;
 
-  /** @default 'a' */
-  as: PropTypes.elementType,
-};
+  /**
+   * Whether the link is disabled or not.
+   */
+  disabled?: boolean | undefined;
+}
 
-const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
+const NavLink: DynamicRefForwardingComponent<'a', NavLinkProps> =
   React.forwardRef<HTMLElement, NavLinkProps>(
     (
       {
@@ -91,9 +80,8 @@ const NavLink: BsPrefixRefForwardingComponent<'a', NavLinkProps> =
         />
       );
     },
-  ) as typeof NavLink;
+  );
 
 NavLink.displayName = 'NavLink';
-NavLink.propTypes = propTypes;
 
 export default NavLink;

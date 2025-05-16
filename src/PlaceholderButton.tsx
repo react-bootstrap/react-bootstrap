@@ -1,34 +1,29 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import type { BsPrefixRefForwardingComponent } from './helpers';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Button from './Button';
 import usePlaceholder, { type UsePlaceholderProps } from './usePlaceholder';
 import type { ButtonVariant } from './types';
 
 export interface PlaceholderButtonProps extends UsePlaceholderProps {
-  variant?: ButtonVariant;
-}
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'placeholder'
    */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * Changes the animation of the placeholder.
-   */
-  animation: PropTypes.oneOf(['glow', 'wave']),
-
-  size: PropTypes.oneOf(['xs', 'sm', 'lg']),
+  bsPrefix?: string | undefined;
 
   /**
    * Button variant.
+   *
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-dark' | 'outline-light'}
    */
-  variant: PropTypes.string,
-};
+  variant?: ButtonVariant | undefined;
+}
 
-const PlaceholderButton: BsPrefixRefForwardingComponent<
+const PlaceholderButton: DynamicRefForwardingComponent<
   'button',
   PlaceholderButtonProps
 > = React.forwardRef<HTMLButtonElement, PlaceholderButtonProps>(
@@ -37,9 +32,8 @@ const PlaceholderButton: BsPrefixRefForwardingComponent<
 
     return <Button {...placeholderProps} ref={ref} disabled tabIndex={-1} />;
   },
-) as typeof PlaceholderButton;
+);
 
 PlaceholderButton.displayName = 'PlaceholderButton';
-PlaceholderButton.propTypes = propTypes;
 
 export default PlaceholderButton;

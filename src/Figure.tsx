@@ -1,15 +1,23 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FigureImage from './FigureImage';
 import FigureCaption from './FigureCaption';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FigureProps
-  extends BsPrefixProps,
-    React.AnchorHTMLAttributes<HTMLElement> {}
+export interface FigureProps extends React.AnchorHTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const Figure: BsPrefixRefForwardingComponent<'figure', FigureProps> =
+  /**
+   * @default 'figure'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const Figure: DynamicRefForwardingComponent<'figure', FigureProps> =
   React.forwardRef<HTMLElement, FigureProps>(
     ({ className, bsPrefix, as: Component = 'figure', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'figure');
@@ -21,7 +29,7 @@ const Figure: BsPrefixRefForwardingComponent<'figure', FigureProps> =
         />
       );
     },
-  ) as typeof Figure;
+  );
 
 Figure.displayName = 'Figure';
 

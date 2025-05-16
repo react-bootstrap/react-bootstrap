@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FigureCaptionProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface FigureCaptionProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const FigureCaption: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'figure-caption'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const FigureCaption: DynamicRefForwardingComponent<
   'figcaption',
   FigureCaptionProps
 > = React.forwardRef<HTMLElement, FigureCaptionProps>(
@@ -21,7 +29,7 @@ const FigureCaption: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof FigureCaption;
+);
 
 FigureCaption.displayName = 'FigureCaption';
 

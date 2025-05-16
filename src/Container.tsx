@@ -1,34 +1,26 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ContainerProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  fluid?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-}
+export interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'container'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Allow the Container to fill all of its available horizontal space.
-   * @type {(true|"sm"|"md"|"lg"|"xl"|"xxl")}
    */
-  fluid: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  /**
-   * You can use a custom element for this component
-   */
-  as: PropTypes.elementType,
-};
+  fluid?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+}
 
-const Container: BsPrefixRefForwardingComponent<'div', ContainerProps> =
+const Container: DynamicRefForwardingComponent<'div', ContainerProps> =
   React.forwardRef<HTMLElement, ContainerProps>(
     (
       {
@@ -54,9 +46,8 @@ const Container: BsPrefixRefForwardingComponent<'div', ContainerProps> =
         />
       );
     },
-  ) as typeof Container;
+  );
 
 Container.displayName = 'Container';
-Container.propTypes = propTypes;
 
 export default Container;

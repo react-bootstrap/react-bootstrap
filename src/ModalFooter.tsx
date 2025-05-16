@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ModalFooterProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface ModalFooterProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const ModalFooter: BsPrefixRefForwardingComponent<'div', ModalFooterProps> =
+  /**
+   * @default 'modal-footer'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const ModalFooter: DynamicRefForwardingComponent<'div', ModalFooterProps> =
   React.forwardRef<HTMLElement, ModalFooterProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-footer');
@@ -19,7 +27,7 @@ const ModalFooter: BsPrefixRefForwardingComponent<'div', ModalFooterProps> =
         />
       );
     },
-  ) as typeof ModalFooter;
+  );
 
 ModalFooter.displayName = 'ModalFooter';
 

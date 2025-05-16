@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormCheck from './FormCheck';
 import FormControl from './FormControl';
 import FormFloating from './FormFloating';
@@ -11,55 +11,43 @@ import FormSelect from './FormSelect';
 import FormText from './FormText';
 import Switch from './Switch';
 import FloatingLabel from './FloatingLabel';
-import type { BsPrefixRefForwardingComponent, AsProp } from './helpers';
 
-export interface FormProps
-  extends React.FormHTMLAttributes<HTMLFormElement>,
-    AsProp {
-  validated?: boolean;
-}
-
-const propTypes = {
+export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   /**
-   * The Form `ref` will be forwarded to the underlying element,
-   * which means, unless it's rendered `as` a composite component,
-   * it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
+   * Element used to render the component.
    */
-  _ref: PropTypes.any,
+  as?: React.ElementType | undefined;
 
   /**
    * Mark a form as having been validated. Setting it to `true` will
    * toggle any validation styles on the forms elements.
    */
-  validated: PropTypes.bool,
-  as: PropTypes.elementType,
-};
+  validated?: boolean;
+}
 
-const Form: BsPrefixRefForwardingComponent<'form', FormProps> =
-  React.forwardRef<HTMLFormElement, FormProps>(
-    (
-      {
-        className,
-        validated,
-        // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-        as: Component = 'form',
-        ...props
-      },
-      ref,
-    ) => (
-      <Component
-        {...props}
-        ref={ref}
-        className={classNames(className, validated && 'was-validated')}
-      />
-    ),
-  ) as typeof Form;
+const Form: DynamicRefForwardingComponent<'form', FormProps> = React.forwardRef<
+  HTMLFormElement,
+  FormProps
+>(
+  (
+    {
+      className,
+      validated,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'form',
+      ...props
+    },
+    ref,
+  ) => (
+    <Component
+      {...props}
+      ref={ref}
+      className={classNames(className, validated && 'was-validated')}
+    />
+  ),
+);
 
 Form.displayName = 'Form';
-Form.propTypes = propTypes as any;
 
 export default Object.assign(Form, {
   Group: FormGroup,

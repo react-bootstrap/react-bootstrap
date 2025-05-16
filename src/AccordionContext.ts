@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export type AccordionEventKey = string | string[] | null | undefined;
+export type AccordionEventKey = string | string[] | null;
 
 export declare type AccordionSelectCallback = (
   eventKey: AccordionEventKey,
@@ -14,7 +14,7 @@ export interface AccordionContextValue {
 }
 
 export function isAccordionItemSelected(
-  activeEventKey: AccordionEventKey,
+  activeEventKey: AccordionEventKey | undefined,
   eventKey: string,
 ): boolean {
   return Array.isArray(activeEventKey)

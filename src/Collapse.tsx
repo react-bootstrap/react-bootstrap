@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/css';
-import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import Transition, {
   type TransitionStatus,
@@ -9,30 +8,74 @@ import Transition, {
   EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
-import type { TransitionCallbacks } from '@restart/ui/types';
 import { getChildRef } from '@restart/ui/utils';
 import transitionEndListener from './transitionEndListener';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
 import TransitionWrapper from './TransitionWrapper';
+import type { TransitionCallbacks } from './types';
 
 type Dimension = 'height' | 'width';
 
 export interface CollapseProps
   extends TransitionCallbacks,
-    Pick<React.HTMLAttributes<HTMLElement>, 'role'> {
-  className?: string;
-  in?: boolean;
-  mountOnEnter?: boolean;
-  unmountOnExit?: boolean;
-  appear?: boolean;
-  timeout?: number;
-  dimension?: Dimension | (() => Dimension);
-  getDimensionValue?: (dimension: Dimension, element: HTMLElement) => number;
+    Pick<React.HTMLAttributes<HTMLElement>, 'className' | 'role'> {
+  /**
+   * Show the component; triggers the expand or collapse animation
+   */
+  in?: boolean | undefined;
+
+  /**
+   * Wait until the first "enter" transition to mount the component (add it to the DOM)
+   */
+  mountOnEnter?: boolean | undefined;
+
+  /**
+   * Unmount the component (remove it from the DOM) when it is collapsed
+   */
+  unmountOnExit?: boolean | undefined;
+
+  /**
+   * Run the expand animation when the component mounts, if it is initially shown
+   */
+  appear?: boolean | undefined;
+
+  /**
+   * Duration of the collapse animation in milliseconds, to ensure that
+   * finishing callbacks are fired even if the original browser transition end
+   * events are canceled
+   */
+  timeout?: number | undefined;
+
+  /**
+   * The dimension used when collapsing, or a function that returns the
+   * dimension
+   *
+   * @type {'height' | 'width' | (() => 'height' | 'width')  | undefined}
+   */
+  dimension?: Dimension | (() => Dimension) | undefined;
+
+  /**
+   * Function that returns the height or width of the animating DOM node
+   *
+   * Allows for providing some custom logic for how much the Collapse component
+   * should animate in its specified dimension. Called with the current
+   * dimension prop value and the DOM node.
+   *
+   * @type {((dimension: Dimension, element: HTMLElement) => number) | undefined}
+   * @default element.offsetWidth | element.offsetHeight
+   */
+  getDimensionValue?:
+    | ((dimension: Dimension, element: HTMLElement) => number)
+    | undefined;
+
+  /**
+   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
+   */
   children: React.ReactElement;
 }
 
-const MARGINS: { [d in Dimension]: string[] } = {
+const MARGINS: Record<Dimension, string[]> = {
   height: ['marginTop', 'marginBottom'],
   width: ['marginLeft', 'marginRight'],
 };
@@ -59,91 +102,6 @@ const collapseStyles = {
   [EXITING]: 'collapsing',
   [ENTERING]: 'collapsing',
   [ENTERED]: 'collapse show',
-};
-
-const propTypes = {
-  /**
-   * Show the component; triggers the expand or collapse animation
-   */
-  in: PropTypes.bool,
-
-  /**
-   * Wait until the first "enter" transition to mount the component (add it to the DOM)
-   */
-  mountOnEnter: PropTypes.bool,
-
-  /**
-   * Unmount the component (remove it from the DOM) when it is collapsed
-   */
-  unmountOnExit: PropTypes.bool,
-
-  /**
-   * Run the expand animation when the component mounts, if it is initially
-   * shown
-   */
-  appear: PropTypes.bool,
-
-  /**
-   * Duration of the collapse animation in milliseconds, to ensure that
-   * finishing callbacks are fired even if the original browser transition end
-   * events are canceled
-   */
-  timeout: PropTypes.number,
-
-  /**
-   * Callback fired before the component expands
-   */
-  onEnter: PropTypes.func,
-  /**
-   * Callback fired after the component starts to expand
-   */
-  onEntering: PropTypes.func,
-  /**
-   * Callback fired after the component has expanded
-   */
-  onEntered: PropTypes.func,
-  /**
-   * Callback fired before the component collapses
-   */
-  onExit: PropTypes.func,
-  /**
-   * Callback fired after the component starts to collapse
-   */
-  onExiting: PropTypes.func,
-  /**
-   * Callback fired after the component has collapsed
-   */
-  onExited: PropTypes.func,
-
-  /**
-   * The dimension used when collapsing, or a function that returns the
-   * dimension
-   */
-  dimension: PropTypes.oneOfType([
-    PropTypes.oneOf(['height', 'width']),
-    PropTypes.func,
-  ]),
-
-  /**
-   * Function that returns the height or width of the animating DOM node
-   *
-   * Allows for providing some custom logic for how much the Collapse component
-   * should animate in its specified dimension. Called with the current
-   * dimension prop value and the DOM node.
-   *
-   * @default element.offsetWidth | element.offsetHeight
-   */
-  getDimensionValue: PropTypes.func,
-
-  /**
-   * ARIA role of collapsible element
-   */
-  role: PropTypes.string,
-
-  /**
-   * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>
-   */
-  children: PropTypes.element.isRequired,
 };
 
 const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
@@ -254,6 +212,5 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
 );
 
 Collapse.displayName = 'Collapse';
-Collapse.propTypes = propTypes as any;
 
 export default Collapse;

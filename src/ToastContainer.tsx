@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import * as React from 'react';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export type ToastPosition =
   | 'top-start'
@@ -15,39 +14,27 @@ export type ToastPosition =
   | 'bottom-center'
   | 'bottom-end';
 
-export interface ToastContainerProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  position?: ToastPosition;
-  containerPosition?: string;
-}
+export interface ToastContainerProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'toast-container'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Where the toasts will be placed within the container.
    */
-  position: PropTypes.oneOf<ToastPosition>([
-    'top-start',
-    'top-center',
-    'top-end',
-    'middle-start',
-    'middle-center',
-    'middle-end',
-    'bottom-start',
-    'bottom-center',
-    'bottom-end',
-  ]),
+  position?: ToastPosition | undefined;
 
   /**
    * Specify the positioning method for the container.
    */
-  containerPosition: PropTypes.string,
-};
+  containerPosition?: string | undefined;
+}
 
 const positionClasses = {
   'top-start': 'top-0 start-0',
@@ -61,7 +48,7 @@ const positionClasses = {
   'bottom-end': 'bottom-0 end-0',
 };
 
-const ToastContainer: BsPrefixRefForwardingComponent<
+const ToastContainer: DynamicRefForwardingComponent<
   'div',
   ToastContainerProps
 > = React.forwardRef<HTMLDivElement, ToastContainerProps>(
@@ -92,9 +79,8 @@ const ToastContainer: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof ToastContainer;
+);
 
 ToastContainer.displayName = 'ToastContainer';
-ToastContainer.propTypes = propTypes;
 
 export default ToastContainer;

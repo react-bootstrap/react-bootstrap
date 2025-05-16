@@ -1,29 +1,23 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {
   useButtonProps,
   type ButtonProps as BaseButtonProps,
 } from '@restart/ui/Button';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import type { ButtonVariant } from './types';
 
-export interface ButtonProps
-  extends BaseButtonProps,
-    Omit<BsPrefixProps, 'as'> {
-  active?: boolean;
-  variant?: ButtonVariant;
-  size?: 'sm' | 'lg';
-}
-
-export type CommonButtonProps = 'href' | 'size' | 'variant' | 'disabled';
-
-const propTypes = {
+export interface ButtonProps extends BaseButtonProps {
   /**
    * @default 'btn'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+
+  /**
+   * Manually set the visual state of the button to `:active`
+   */
+  active?: boolean | undefined;
 
   /**
    * One or more button variant combinations
@@ -35,44 +29,33 @@ const propTypes = {
    * as well as "outline" versions (prefixed by 'outline-*')
    *
    * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info', 'outline-dark', 'outline-light'`
+   *
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-dark' | 'outline-light'}
    */
-  variant: PropTypes.string,
-
-  /**
-   * Callback fired when the button is clicked.
-   */
-  onClick: PropTypes.func,
+  variant?: ButtonVariant | undefined;
 
   /**
    * Specifies a large or small button.
    *
-   * @type ('sm'|'lg')
+   * @type {'sm' | 'lg'}
    */
-  size: PropTypes.string,
-
-  /** Manually set the visual state of the button to `:active` */
-  active: PropTypes.bool,
+  size?: 'sm' | 'lg' | undefined;
 
   /**
    * Disables the Button, preventing mouse events,
    * even if the underlying component is an `<a>` element
    */
-  disabled: PropTypes.bool,
-
-  /** Providing a `href` will render an `<a>` element, _styled_ as a button. */
-  href: PropTypes.string,
+  disabled?: boolean | undefined;
 
   /**
-   * Defines HTML button type attribute.
-   *
-   * @default 'button'
+   * Providing a `href` will render an `<a>` element, _styled_ as a button.
    */
-  type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
+  href?: string | undefined;
+}
 
-  as: PropTypes.elementType,
-};
+export type CommonButtonProps = 'href' | 'size' | 'variant' | 'disabled';
 
-const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
+const Button: DynamicRefForwardingComponent<'button', ButtonProps> =
   React.forwardRef<HTMLButtonElement, ButtonProps>(
     (
       {
@@ -113,9 +96,8 @@ const Button: BsPrefixRefForwardingComponent<'button', ButtonProps> =
         />
       );
     },
-  ) as typeof Button;
+  );
 
 Button.displayName = 'Button';
-Button.propTypes = propTypes;
 
 export default Button;

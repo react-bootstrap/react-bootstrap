@@ -1,14 +1,23 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Anchor from '@restart/ui/Anchor';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AlertLinkProps
-  extends BsPrefixProps,
-    React.AnchorHTMLAttributes<HTMLElement> {}
+  extends React.AnchorHTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const AlertLink: BsPrefixRefForwardingComponent<'a', AlertLinkProps> =
+  /**
+   * @default 'alert-link'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const AlertLink: DynamicRefForwardingComponent<'a', AlertLinkProps> =
   React.forwardRef<HTMLElement, AlertLinkProps>(
     ({ className, bsPrefix, as: Component = Anchor, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'alert-link');
@@ -20,7 +29,7 @@ const AlertLink: BsPrefixRefForwardingComponent<'a', AlertLinkProps> =
         />
       );
     },
-  ) as typeof AlertLink;
+  );
 
 AlertLink.displayName = 'AlertLink';
 

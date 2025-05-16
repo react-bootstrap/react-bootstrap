@@ -1,13 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface NavItemProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface NavItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const NavItem: BsPrefixRefForwardingComponent<'div', NavItemProps> =
+  /**
+   * @default 'nav-item'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const NavItem: DynamicRefForwardingComponent<'div', NavItemProps> =
   React.forwardRef<HTMLElement, NavItemProps>(
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
@@ -19,7 +27,7 @@ const NavItem: BsPrefixRefForwardingComponent<'div', NavItemProps> =
         />
       );
     },
-  ) as typeof NavItem;
+  );
 
 NavItem.displayName = 'NavItem';
 

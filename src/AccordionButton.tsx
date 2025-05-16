@@ -1,29 +1,26 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import AccordionContext, { isAccordionItemSelected } from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useAccordionButton from './useAccordionButton';
 
 export interface AccordionButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    BsPrefixProps {}
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
-  /** Set a custom element for this component */
-  as: PropTypes.elementType,
+  /**
+   * @default 'accordion-button'
+   */
+  bsPrefix?: string | undefined;
+}
 
-  /** @default 'accordion-button' */
-  bsPrefix: PropTypes.string,
-
-  /** A callback function for when this component is clicked */
-  onClick: PropTypes.func,
-};
-
-const AccordionButton: BsPrefixRefForwardingComponent<
+const AccordionButton: DynamicRefForwardingComponent<
   'div',
   AccordionButtonProps
 > = React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
@@ -65,9 +62,8 @@ const AccordionButton: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof AccordionButton;
+);
 
-AccordionButton.propTypes = propTypes;
 AccordionButton.displayName = 'AccordionButton';
 
 export default AccordionButton;

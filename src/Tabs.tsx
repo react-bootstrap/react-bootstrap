@@ -1,6 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import { useUncontrolled } from 'uncontrollable';
 import BaseTabs, { TabsProps as BaseTabsProps } from '@restart/ui/Tabs';
 import Nav, { type NavProps } from './Nav';
@@ -14,85 +12,16 @@ import type { TransitionType } from './helpers';
 
 export interface TabsProps
   extends Omit<BaseTabsProps, 'transition'>,
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'role'>,
     NavProps {
-  transition?: TransitionType;
-}
-
-const propTypes = {
-  /**
-   * Mark the Tab with a matching `eventKey` as active.
-   *
-   * @controllable onSelect
-   */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** The default active key that is selected on start */
-  defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Navigation style
-   *
-   * @type {('tabs'| 'pills' | 'underline')}
-   */
-  variant: PropTypes.string,
-
   /**
    * Sets a default animation strategy for all children `<TabPane>`s.<tbcont
    *
    * Defaults to `<Fade>` animation, else use `false` to disable or a
    * react-transition-group `<Transition/>` component.
-   *
-   * @type {Transition | false}
-   * @default {Fade}
    */
-  transition: PropTypes.oneOfType([
-    PropTypes.oneOf([false]),
-    PropTypes.elementType,
-  ]),
-
-  /**
-   * HTML id attribute, required if no `generateChildId` prop
-   * is specified.
-   *
-   * @type {string}
-   */
-  id: PropTypes.string,
-
-  /**
-   * Callback fired when a Tab is selected.
-   *
-   * ```js
-   * function (
-   *   Any eventKey,
-   *   SyntheticEvent event?
-   * )
-   * ```
-   *
-   * @controllable activeKey
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * Wait until the first "enter" transition to mount tabs (add them to the DOM)
-   */
-  mountOnEnter: PropTypes.bool,
-
-  /**
-   * Unmount tabs (remove it from the DOM) when it is no longer visible
-   */
-  unmountOnExit: PropTypes.bool,
-
-  /**
-   * Have all `Tabs`s proportionately fill all available width.
-   */
-  fill: PropTypes.bool,
-
-  /**
-   * Have all `Tab`s evenly fill all available width.
-   */
-  justify: PropTypes.bool,
-};
+  transition?: TransitionType | undefined;
+}
 
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
@@ -178,7 +107,6 @@ const Tabs: React.FC<TabsProps> = (props) => {
   );
 };
 
-Tabs.propTypes = propTypes as any;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

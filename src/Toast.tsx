@@ -1,107 +1,74 @@
 import * as React from 'react';
 import { useEffect, useMemo, useRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import useTimeout from '@restart/hooks/useTimeout';
-import { TransitionCallbacks, TransitionComponent } from '@restart/ui/types';
+import type {
+  DynamicRefForwardingComponent,
+  TransitionComponent,
+} from '@restart/ui/types';
 import ToastFade from './ToastFade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
-import type { Variant } from './types';
+import type { TransitionCallbacks, Variant } from './types';
 
 export interface ToastProps
   extends TransitionCallbacks,
-    BsPrefixProps,
     React.HTMLAttributes<HTMLElement> {
-  animation?: boolean;
-  autohide?: boolean;
-  delay?: number;
-  onClose?: (e?: React.MouseEvent | React.KeyboardEvent) => void;
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-  show?: boolean;
-  transition?: TransitionComponent;
-  bg?: Variant;
-}
-
-const propTypes = {
   /**
    * @default 'toast'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Apply a CSS fade transition to the toast
    */
-  animation: PropTypes.bool,
+  animation?: boolean | undefined;
 
   /**
    * Auto hide the toast
    */
-  autohide: PropTypes.bool,
+  autohide?: boolean | undefined;
 
   /**
    * Delay hiding the toast (ms)
    */
-  delay: PropTypes.number,
+  delay?: number | undefined;
 
   /**
    * A Callback fired when the close button is clicked.
+   *
+   * @type {((e?: React.MouseEvent | React.KeyboardEvent) => void) | undefined}
    */
-  onClose: PropTypes.func,
-
-  /**
-   * Callback fired before the toast transitions in
-   */
-  onEnter: PropTypes.func,
-
-  /**
-   * Callback fired as the toast begins to transition in
-   */
-  onEntering: PropTypes.func,
-
-  /**
-   * Callback fired after the toast finishes transitioning in
-   */
-  onEntered: PropTypes.func,
-
-  /**
-   * Transition onExit callback when animation is not `false`
-   */
-  onExit: PropTypes.func,
-
-  /**
-   * Transition onExiting callback when animation is not `false`
-   */
-  onExiting: PropTypes.func,
-
-  /**
-   * Transition onExited callback when animation is not `false`
-   */
-  onExited: PropTypes.func,
+  onClose?: ((e?: React.MouseEvent | React.KeyboardEvent) => void) | undefined;
 
   /**
    * When `true` The toast will show itself.
    */
-  show: PropTypes.bool,
+  show?: boolean | undefined;
 
   /**
    * A `react-transition-group` Transition component used to animate the Toast on dismissal.
+   *
+   * @default ToastFade
    */
-  transition: PropTypes.elementType,
+  transition?: TransitionComponent | undefined;
 
   /**
    * Sets Toast background
    *
-   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   * @type {'primary' | 'secondary' | 'success' |'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
    */
-  bg: PropTypes.string,
-};
+  bg?: Variant | undefined;
+}
 
-const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
+const Toast: DynamicRefForwardingComponent<'div', ToastProps> =
   React.forwardRef<HTMLDivElement, ToastProps>(
     (
       {
@@ -196,9 +163,8 @@ const Toast: BsPrefixRefForwardingComponent<'div', ToastProps> =
         </ToastContext.Provider>
       );
     },
-  ) as typeof Toast;
+  );
 
-Toast.propTypes = propTypes;
 Toast.displayName = 'Toast';
 
 export default Object.assign(Toast, {

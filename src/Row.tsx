@@ -1,14 +1,11 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 import * as React from 'react';
-
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
 } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type RowColWidth =
   | number
@@ -27,85 +24,57 @@ type RowColWidth =
   | 'auto';
 type RowColumns = RowColWidth | { cols?: RowColWidth };
 
-export interface RowProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  xs?: RowColumns;
-  sm?: RowColumns;
-  md?: RowColumns;
-  lg?: RowColumns;
-  xl?: RowColumns;
-  xxl?: RowColumns;
-  [key: string]: any;
-}
+export interface RowProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
-
-const rowColumns = PropTypes.oneOfType([
-  rowColWidth,
-  PropTypes.shape({
-    cols: rowColWidth,
-  }),
-]);
-
-const propTypes = {
   /**
    * @default 'row'
    */
-  bsPrefix: PropTypes.string,
-
-  as: PropTypes.elementType,
+  bsPrefix?: string | undefined;
 
   /**
    * The number of columns that will fit next to each other on extra small devices (<576px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  xs: rowColumns,
+  xs?: RowColumns | undefined;
 
   /**
    * The number of columns that will fit next to each other on small devices (≥576px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  sm: rowColumns,
+  sm?: RowColumns | undefined;
 
   /**
    * The number of columns that will fit next to each other on medium devices (≥768px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  md: rowColumns,
+  md?: RowColumns | undefined;
 
   /**
    * The number of columns that will fit next to each other on large devices (≥992px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  lg: rowColumns,
+  lg?: RowColumns | undefined;
 
   /**
    * The number of columns that will fit next to each other on extra large devices (≥1200px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  xl: rowColumns,
+  xl?: RowColumns | undefined;
 
   /**
    * The number of columns that will fit next to each other on extra extra large devices (≥1400px).
    * Use `auto` to give columns their natural widths.
-   *
-   * @type {(number|'auto'|{ cols: number|'auto' })}
    */
-  xxl: rowColumns,
-};
+  xxl?: RowColumns | undefined;
 
-const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
+  [key: string]: any;
+}
+
+const Row: DynamicRefForwardingComponent<'div', RowProps> = React.forwardRef<
   HTMLDivElement,
   RowProps
 >(
@@ -150,9 +119,8 @@ const Row: BsPrefixRefForwardingComponent<'div', RowProps> = React.forwardRef<
       />
     );
   },
-) as typeof Row;
+);
 
 Row.displayName = 'Row';
-Row.propTypes = propTypes;
 
 export default Row;

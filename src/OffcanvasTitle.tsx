@@ -1,16 +1,24 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 const DivStyledAsH5 = divWithClassName('h5');
 
-export interface OffcanvasTitleProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface OffcanvasTitleProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const OffcanvasTitle: BsPrefixRefForwardingComponent<
+  /**
+   * @default 'offcanvas-title'
+   */
+  bsPrefix?: string | undefined;
+}
+
+const OffcanvasTitle: DynamicRefForwardingComponent<
   'div',
   OffcanvasTitleProps
 > = React.forwardRef<HTMLElement, OffcanvasTitleProps>(
@@ -24,7 +32,7 @@ const OffcanvasTitle: BsPrefixRefForwardingComponent<
       />
     );
   },
-) as typeof OffcanvasTitle;
+);
 
 OffcanvasTitle.displayName = 'OffcanvasTitle';
 

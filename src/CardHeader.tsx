@@ -1,26 +1,23 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CardHeaderContext from './CardHeaderContext';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface CardHeaderProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {}
+export interface CardHeaderProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'card-header'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
+}
 
-  as: PropTypes.elementType,
-};
-
-const CardHeader: BsPrefixRefForwardingComponent<'div', CardHeaderProps> =
+const CardHeader: DynamicRefForwardingComponent<'div', CardHeaderProps> =
   React.forwardRef<HTMLElement, CardHeaderProps>(
     (
       {
@@ -50,9 +47,8 @@ const CardHeader: BsPrefixRefForwardingComponent<'div', CardHeaderProps> =
         </CardHeaderContext.Provider>
       );
     },
-  ) as typeof CardHeader;
+  );
 
 CardHeader.displayName = 'CardHeader';
-CardHeader.propTypes = propTypes;
 
 export default CardHeader;

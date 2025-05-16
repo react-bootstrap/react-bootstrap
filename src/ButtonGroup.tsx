@@ -1,45 +1,39 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
+import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
-import type { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface ButtonGroupProps
-  extends BsPrefixProps,
-    React.HTMLAttributes<HTMLElement> {
-  size?: 'sm' | 'lg';
-  vertical?: boolean;
-}
+export interface ButtonGroupProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Element used to render the component.
+   */
+  as?: React.ElementType | undefined;
 
-const propTypes = {
   /**
    * @default 'btn-group'
    */
-  bsPrefix: PropTypes.string,
+  bsPrefix?: string | undefined;
 
   /**
    * Sets the size for all Buttons in the group.
-   *
-   * @type ('sm'|'lg')
    */
-  size: PropTypes.string,
+  size?: 'sm' | 'lg' | undefined;
 
-  /** Make the set of Buttons appear vertically stacked. */
-  vertical: PropTypes.bool,
+  /**
+   * Make the set of Buttons appear vertically stacked.
+   */
+  vertical?: boolean | undefined;
 
   /**
    * An ARIA role describing the button group. Usually the default
    * "group" role is fine. An `aria-label` or `aria-labelledby`
    * prop is also recommended.
    */
-  role: PropTypes.string,
+  role?: string | undefined;
+}
 
-  as: PropTypes.elementType,
-};
-
-const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
-  React.forwardRef(
+const ButtonGroup: DynamicRefForwardingComponent<'div', ButtonGroupProps> =
+  React.forwardRef<HTMLElement, ButtonGroupProps>(
     (
       {
         bsPrefix,
@@ -71,9 +65,8 @@ const ButtonGroup: BsPrefixRefForwardingComponent<'div', ButtonGroupProps> =
         />
       );
     },
-  ) as typeof ButtonGroup;
+  );
 
 ButtonGroup.displayName = 'ButtonGroup';
-ButtonGroup.propTypes = propTypes;
 
 export default ButtonGroup;
