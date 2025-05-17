@@ -108,7 +108,9 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
       }
     }, 300);
 
-    useEventListener(() => window, 'resize', debouncedResizeHandler);
+    const getWindowTarget = useCallback(() => window, []);
+
+    useEventListener(getWindowTarget, 'resize', debouncedResizeHandler);
 
     const modalContext = useMemo(
       () => ({
