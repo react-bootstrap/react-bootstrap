@@ -1,5 +1,7 @@
 import classNames from 'classnames';
+import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import useEventListener from '@restart/hooks/useEventListener';
 import * as React from 'react';
 import { useCallback, useMemo, useRef } from 'react';
 import BaseModal, { type ModalHandle } from '@restart/ui/Modal';
@@ -90,9 +92,22 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
     },
     ref,
   ) => {
+    const offcanvasRef = useRef<HTMLElement>(null);
     const modalManager = useRef<BootstrapModalManager>(null);
     bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas');
     const handleHide = useEventCallback(onHide);
+
+    const debouncedResizeHandler = useDebouncedCallback(() => {
+      if (
+        responsive &&
+        offcanvasRef.current &&
+        getComputedStyle(offcanvasRef.current).position !== 'fixed'
+      ) {
+        handleHide();
+      }
+    }, 300);
+
+    useEventListener(() => window, 'resize', debouncedResizeHandler);
 
     const modalContext = useMemo(
       () => ({
@@ -146,6 +161,7 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
           `${bsPrefix}-${placement}`,
         )}
         aria-labelledby={ariaLabelledby}
+        ref={offcanvasRef}
       >
         {children}
       </div>
