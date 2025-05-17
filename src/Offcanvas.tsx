@@ -99,6 +99,7 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
 
     const debouncedResizeHandler = useDebouncedCallback(() => {
       if (
+        show &&
         responsive &&
         offcanvasRef.current &&
         getComputedStyle(offcanvasRef.current).position !== 'fixed'
