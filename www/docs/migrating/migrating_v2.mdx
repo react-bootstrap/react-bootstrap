@@ -42,8 +42,16 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 
 ### Collapse
 
-- collapse now requires a child component that forwards the ref to the underlying HTML element.
+- Collapse now requires a child component that forwards the ref to the underlying HTML element.
 
 ### Fade
 
-- fade now requires a child component that forwards the ref to the underlying HTML element.
+- Fade now requires a child component that forwards the ref to the underlying HTML element.
+
+### NavbarOffcanvas
+
+- Rendering behavior has been changed. See Offcanvas notes for more details.
+
+### Offcanvas
+
+- Offcanvas will always be rendered in the DOM and not be unmounted when it is hidden.

@@ -21,7 +21,6 @@ const NavbarOffcanvas = React.forwardRef<ModalHandle, NavbarOffcanvasProps>(
         ref={ref}
         show={!!context?.expanded}
         {...props}
-        renderStaticNode
         onHide={handleHide}
       />
     );
