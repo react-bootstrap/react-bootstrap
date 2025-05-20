@@ -48,6 +48,16 @@
         "types": "./lib/*.d.ts",
         "default": "./lib/*.js"
       }
+    },
+    "./cjs/*": {
+      "require": {
+        "types": "./cjs/*.d.ts",
+        "default": "./cjs/*.js"
+      },
+      "import": {
+        "types": "./cjs/*.d.ts",
+        "default": "./cjs/*.js"
+      }
     }
   },
   "sideEffects": false,
