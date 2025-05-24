@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import warning from 'warning';
 import { useUncontrolled } from 'uncontrollable';
@@ -81,7 +81,7 @@ const ListGroup: DynamicRefForwardingComponent<'div', ListGroupProps> =
         ref={ref}
         {...controlledProps}
         as={as}
-        className={classNames(
+        className={clsx(
           className,
           bsPrefix,
           variant && `${bsPrefix}-${variant}`,

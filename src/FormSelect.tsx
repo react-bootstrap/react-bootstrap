@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -74,7 +74,7 @@ const FormSelect = React.forwardRef<HTMLSelectElement, FormSelectProps>(
         {...props}
         size={htmlSize}
         ref={ref}
-        className={classNames(
+        className={clsx(
           className,
           bsPrefix,
           size && `${bsPrefix}-${size}`,

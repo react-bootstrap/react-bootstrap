@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import BaseOverlay, { OverlayArrowProps } from '@restart/ui/Overlay';
 import { State } from '@restart/ui/usePopper';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -157,7 +157,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
             arrowProps,
             popper,
             hasDoneInitialMeasure,
-            className: classNames(
+            className: clsx(
               overlay.props.className,
               !transition && show && 'show',
             ),

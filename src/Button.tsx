@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import {
   useButtonProps,
@@ -85,7 +85,7 @@ const Button: DynamicRefForwardingComponent<'button', ButtonProps> =
           {...props}
           ref={ref}
           disabled={disabled}
-          className={classNames(
+          className={clsx(
             className,
             prefix,
             active && 'active',

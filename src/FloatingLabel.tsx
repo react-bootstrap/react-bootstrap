@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormGroup, { type FormGroupProps } from './FormGroup';
@@ -34,7 +34,7 @@ const FloatingLabel: DynamicRefForwardingComponent<'div', FloatingLabelProps> =
       return (
         <FormGroup
           ref={ref}
-          className={classNames(className, bsPrefix)}
+          className={clsx(className, bsPrefix)}
           controlId={controlId}
           {...props}
         >

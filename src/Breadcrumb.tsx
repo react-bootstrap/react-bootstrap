@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -51,10 +51,7 @@ const Breadcrumb: DynamicRefForwardingComponent<'nav', BreadcrumbProps> =
           ref={ref}
           {...props}
         >
-          <ol
-            {...listProps}
-            className={classNames(prefix, listProps?.className)}
-          >
+          <ol {...listProps} className={clsx(prefix, listProps?.className)}>
             {children}
           </ol>
         </Component>

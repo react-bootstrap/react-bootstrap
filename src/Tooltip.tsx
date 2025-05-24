@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
@@ -84,7 +84,7 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
         style={computedStyle}
         role="tooltip"
         x-placement={primaryPlacement}
-        className={classNames(className, bsPrefix, `bs-tooltip-${bsDirection}`)}
+        className={clsx(className, bsPrefix, `bs-tooltip-${bsDirection}`)}
         {...props}
       >
         <div className="tooltip-arrow" {...arrowProps} />

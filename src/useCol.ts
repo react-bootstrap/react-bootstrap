@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
@@ -51,7 +51,7 @@ export default function useCol({
   });
 
   return [
-    { ...props, className: classNames(className, ...spans, ...classes) },
+    { ...props, className: clsx(className, ...spans, ...classes) },
     {
       as,
       bsPrefix,

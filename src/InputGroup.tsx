@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -68,7 +68,7 @@ const InputGroup: DynamicRefForwardingComponent<'div', InputGroupProps> =
           <Component
             ref={ref}
             {...props}
-            className={classNames(
+            className={clsx(
               className,
               bsPrefix,
               size && `${bsPrefix}-${size}`,

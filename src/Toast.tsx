@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useMemo, useRef, useCallback } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import useTimeout from '@restart/hooks/useTimeout';
 import type {
   DynamicRefForwardingComponent,
@@ -130,7 +130,7 @@ const Toast: DynamicRefForwardingComponent<'div', ToastProps> =
         <div
           {...props}
           ref={ref}
-          className={classNames(
+          className={clsx(
             bsPrefix,
             className,
             bg && `bg-${bg}`,

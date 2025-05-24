@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -165,7 +165,7 @@ const FormCheck: DynamicRefForwardingComponent<'input', FormCheckProps> =
         <FormContext.Provider value={innerFormContext}>
           <div
             style={style}
-            className={classNames(
+            className={clsx(
               className,
               hasLabel && bsPrefix,
               inline && `${bsPrefix}-inline`,

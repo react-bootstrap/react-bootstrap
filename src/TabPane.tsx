@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import SelectableContext from '@restart/ui/SelectableContext';
 import TabContext from '@restart/ui/TabContext';
@@ -103,7 +103,7 @@ const TabPane: DynamicRefForwardingComponent<'div', TabPaneProps> =
               <Component
                 {...rest}
                 ref={ref}
-                className={classNames(className, prefix, isActive && 'active')}
+                className={clsx(className, prefix, isActive && 'active')}
               />
             </Transition>
           </SelectableContext.Provider>

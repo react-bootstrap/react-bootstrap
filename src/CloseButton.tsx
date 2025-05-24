@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 export type CloseButtonVariant = 'white' | string;
 
@@ -26,7 +26,7 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
     <button
       ref={ref}
       type="button"
-      className={classNames(
+      className={clsx(
         'btn-close',
         variant && `btn-close-${variant}`,
         className,

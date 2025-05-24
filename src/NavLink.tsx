@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import Anchor from '@restart/ui/Anchor';
 import { useNavItem } from '@restart/ui/NavItem';
@@ -71,7 +71,7 @@ const NavLink: DynamicRefForwardingComponent<'a', NavLinkProps> =
           {...navItemProps}
           ref={ref}
           disabled={disabled}
-          className={classNames(
+          className={clsx(
             className,
             bsPrefix,
             disabled && 'disabled',

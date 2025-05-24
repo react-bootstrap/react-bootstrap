@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -84,7 +84,7 @@ const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
         <Dropdown
           ref={ref}
           {...props}
-          className={classNames(className, navItemPrefix)}
+          className={clsx(className, navItemPrefix)}
         >
           <Dropdown.Toggle
             id={id}

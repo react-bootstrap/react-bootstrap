@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -59,7 +59,7 @@ const Spinner: DynamicRefForwardingComponent<'div', SpinnerProps> =
         <Component
           ref={ref}
           {...props}
-          className={classNames(
+          className={clsx(
             className,
             bsSpinnerPrefix,
             size && `${bsSpinnerPrefix}-${size}`,

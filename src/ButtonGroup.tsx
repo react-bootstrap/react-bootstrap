@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -57,11 +57,7 @@ const ButtonGroup: DynamicRefForwardingComponent<'div', ButtonGroupProps> =
           {...rest}
           ref={ref}
           role={role}
-          className={classNames(
-            className,
-            baseClass,
-            size && `${prefix}-${size}`,
-          )}
+          className={clsx(className, baseClass, size && `${prefix}-${size}`)}
         />
       );
     },

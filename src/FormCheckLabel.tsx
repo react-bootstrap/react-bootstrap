@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import FormContext from './FormContext';
@@ -28,7 +28,7 @@ const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
         {...props}
         ref={ref}
         htmlFor={htmlFor || controlId}
-        className={classNames(className, bsPrefix)}
+        className={clsx(className, bsPrefix)}
       />
     );
   },

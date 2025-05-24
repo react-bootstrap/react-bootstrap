@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -75,7 +75,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
       <div
         {...props}
         ref={ref}
-        className={classNames(
+        className={clsx(
           dialogClass,
           className,
           size && `${bsPrefix}-${size}`,
@@ -84,7 +84,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
           fullscreen && fullScreenClass,
         )}
       >
-        <div className={classNames(`${bsPrefix}-content`, contentClassName)}>
+        <div className={clsx(`${bsPrefix}-content`, contentClassName)}>
           {children}
         </div>
       </div>

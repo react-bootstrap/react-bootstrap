@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import camelize from 'dom-helpers/camelize';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -37,7 +37,7 @@ export default function createWithBsPrefix<
       return (
         <Tag
           ref={ref}
-          className={classNames(className, resolvedPrefix)}
+          className={clsx(className, resolvedPrefix)}
           {...componentProps}
         />
       );

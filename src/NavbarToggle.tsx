@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -62,7 +62,7 @@ const NavbarToggle: DynamicRefForwardingComponent<'button', NavbarToggleProps> =
           ref={ref}
           onClick={handleClick}
           aria-label={label}
-          className={classNames(className, bsPrefix, !expanded && 'collapsed')}
+          className={clsx(className, bsPrefix, !expanded && 'collapsed')}
         >
           {children || <span className={`${bsPrefix}-icon`} />}
         </Component>

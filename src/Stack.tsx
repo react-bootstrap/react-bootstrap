@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import {
@@ -58,7 +58,7 @@ const Stack: DynamicRefForwardingComponent<'span', StackProps> =
         <Component
           {...props}
           ref={ref}
-          className={classNames(
+          className={clsx(
             className,
             bsPrefix,
             ...createUtilityClassName(

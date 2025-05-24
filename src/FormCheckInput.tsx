@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -67,7 +67,7 @@ const FormCheckInput: DynamicRefForwardingComponent<
         ref={ref}
         type={type}
         id={id || controlId}
-        className={classNames(
+        className={clsx(
           className,
           bsPrefix,
           isValid && 'is-valid',

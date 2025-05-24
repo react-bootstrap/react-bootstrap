@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -50,7 +50,7 @@ const AccordionItem: DynamicRefForwardingComponent<'div', AccordionItemProps> =
           <Component
             ref={ref}
             {...props}
-            className={classNames(className, bsPrefix)}
+            className={clsx(className, bsPrefix)}
           />
         </AccordionItemContext.Provider>
       );

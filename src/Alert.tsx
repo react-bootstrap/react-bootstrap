@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -97,7 +97,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role="alert"
         {...(!Transition ? props : undefined)}
         ref={ref}
-        className={classNames(
+        className={clsx(
           className,
           prefix,
           variant && `${prefix}-${variant}`,

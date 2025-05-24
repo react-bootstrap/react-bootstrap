@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
@@ -102,7 +102,7 @@ const Nav: DynamicRefForwardingComponent<'div', NavProps> = React.forwardRef<
       as={as}
       ref={ref}
       activeKey={activeKey}
-      className={classNames(className, {
+      className={clsx(className, {
         [bsPrefix]: !isNavbar,
         [`${navbarBsPrefix}-nav`]: isNavbar,
         [`${navbarBsPrefix}-nav-scroll`]: isNavbar && navbarScroll,

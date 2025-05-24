@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 
 import Image, { type ImageProps } from './Image';
@@ -9,7 +9,7 @@ const FigureImage = React.forwardRef<HTMLImageElement, ImageProps>(
       ref={ref}
       {...props}
       fluid={fluid}
-      className={classNames(className, 'figure-img')}
+      className={clsx(className, 'figure-img')}
     />
   ),
 );

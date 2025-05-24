@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -47,7 +47,7 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
       <img
         ref={ref}
         {...props}
-        className={classNames(
+        className={clsx(
           className,
           fluid && `${bsPrefix}-fluid`,
           rounded && `rounded`,

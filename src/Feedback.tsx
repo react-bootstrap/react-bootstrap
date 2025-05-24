@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 
@@ -37,7 +37,7 @@ const Feedback: DynamicRefForwardingComponent<'div', FeedbackProps> =
       <Component
         {...props}
         ref={ref}
-        className={classNames(
+        className={clsx(
           className,
           `${type}-${tooltip ? 'tooltip' : 'feedback'}`,
         )}

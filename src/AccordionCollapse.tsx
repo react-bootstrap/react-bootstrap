@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -50,7 +50,7 @@ const AccordionCollapse: DynamicRefForwardingComponent<
         ref={ref}
         in={isAccordionItemSelected(activeEventKey, eventKey)}
         {...props}
-        className={classNames(className, bsPrefix)}
+        className={clsx(className, bsPrefix)}
       >
         <Component>{React.Children.only(children)}</Component>
       </Collapse>

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { cloneElement } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -88,7 +88,7 @@ function renderProgressBar(
       ref={ref}
       {...props}
       role="progressbar"
-      className={classNames(className, `${bsPrefix}-bar`, {
+      className={clsx(className, `${bsPrefix}-bar`, {
         [`bg-${variant}`]: variant,
         [`${bsPrefix}-bar-animated`]: animated,
         [`${bsPrefix}-bar-striped`]: animated || striped,
@@ -140,11 +140,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
     } = props;
 
     return (
-      <div
-        ref={ref}
-        {...wrapperProps}
-        className={classNames(className, bsPrefix)}
-      >
+      <div ref={ref} {...wrapperProps} className={clsx(className, bsPrefix)}>
         {children
           ? map(children, (child) => cloneElement(child, { isChild: true }))
           : renderProgressBar(

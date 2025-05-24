@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -22,11 +22,7 @@ const CardImgOverlay: DynamicRefForwardingComponent<
   ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'card-img-overlay');
     return (
-      <Component
-        ref={ref}
-        className={classNames(className, bsPrefix)}
-        {...props}
-      />
+      <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
     );
   },
 );

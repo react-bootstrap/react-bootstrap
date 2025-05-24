@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -39,10 +39,7 @@ const Container: DynamicRefForwardingComponent<'div', ContainerProps> =
         <Component
           ref={ref}
           {...props}
-          className={classNames(
-            className,
-            fluid ? `${prefix}${suffix}` : prefix,
-          )}
+          className={clsx(className, fluid ? `${prefix}${suffix}` : prefix)}
         />
       );
     },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 import divWithClassName from './divWithClassName';
@@ -24,11 +24,7 @@ const AlertHeading: DynamicRefForwardingComponent<'div', AlertHeadingProps> =
     ({ className, bsPrefix, as: Component = DivStyledAsH4, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'alert-heading');
       return (
-        <Component
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-          {...props}
-        />
+        <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
       );
     },
   );

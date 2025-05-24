@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -70,7 +70,7 @@ const ToastContainer: DynamicRefForwardingComponent<
       <Component
         ref={ref}
         {...props}
-        className={classNames(
+        className={clsx(
           bsPrefix,
           position && positionClasses[position],
           containerPosition && `position-${containerPosition}`,
