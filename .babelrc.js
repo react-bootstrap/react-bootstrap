@@ -35,7 +35,11 @@ module.exports = (api) => {
           modules,
           removePropTypes: !dev,
           setUseClient,
-          customClientImports: ['useBootstrapPrefix', 'createWithBsPrefix'],
+          customClientImports: [
+            'useBootstrapPrefix',
+            'createWithBsPrefix',
+            'useCol',
+          ],
         },
       ],
       '@babel/preset-typescript',
