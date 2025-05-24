@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import {
@@ -203,7 +203,7 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
           {...((alignClasses.length || isNavbar) && {
             'data-bs-popper': 'static',
           })}
-          className={classNames(
+          className={clsx(
             className,
             prefix,
             show && 'show',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -33,7 +33,7 @@ const DropdownDivider: DynamicRefForwardingComponent<
     return (
       <Component
         ref={ref}
-        className={classNames(className, bsPrefix)}
+        className={clsx(className, bsPrefix)}
         role={role}
         {...props}
       />

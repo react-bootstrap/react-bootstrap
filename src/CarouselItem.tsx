@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -32,7 +32,7 @@ const CarouselItem: DynamicRefForwardingComponent<'div', CarouselItemProps> =
       },
       ref,
     ) => {
-      const finalClassName = classNames(
+      const finalClassName = clsx(
         className,
         useBootstrapPrefix(bsPrefix, 'carousel-item'),
       );

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import { useUncontrolled } from 'uncontrollable';
@@ -89,7 +89,7 @@ const Accordion: DynamicRefForwardingComponent<'div', AccordionProps> =
         <Component
           ref={ref}
           {...controlledProps}
-          className={classNames(className, prefix, flush && `${prefix}-flush`)}
+          className={clsx(className, prefix, flush && `${prefix}-flush`)}
         />
       </AccordionContext.Provider>
     );

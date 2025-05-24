@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import addEventListener from 'dom-helpers/addEventListener';
 import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
@@ -288,7 +288,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       (backdropProps) => (
         <div
           {...backdropProps}
-          className={classNames(
+          className={clsx(
             `${bsPrefix}-backdrop`,
             backdropClassName,
             !animation && 'show',
@@ -309,7 +309,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
         role="dialog"
         {...dialogProps}
         style={baseModalStyle}
-        className={classNames(
+        className={clsx(
           className,
           bsPrefix,
           animateStaticModal && `${bsPrefix}-static`,

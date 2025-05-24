@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useCallback } from 'react';
 import Transition, {
@@ -89,7 +89,7 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children as any, {
             ...innerProps,
-            className: classNames(
+            className: clsx(
               'fade',
               className,
               (children.props as any).className,

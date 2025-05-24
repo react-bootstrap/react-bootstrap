@@ -4,7 +4,7 @@ import useCommittedRef from '@restart/hooks/useCommittedRef';
 import useTimeout from '@restart/hooks/useTimeout';
 import Anchor from '@restart/ui/Anchor';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { TransitionStatus } from 'react-transition-group/Transition';
 import * as React from 'react';
 import {
@@ -544,7 +544,7 @@ const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={classNames(
+          className={clsx(
             className,
             prefix,
             slide && 'slide',
@@ -593,7 +593,7 @@ const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
                   ) =>
                     React.cloneElement(child, {
                       ...innerProps,
-                      className: classNames(
+                      className: clsx(
                         child.props.className,
                         isActive && status !== 'entered' && orderClassName,
                         (status === 'entered' || status === 'exiting') &&
@@ -606,10 +606,7 @@ const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
                 </TransitionWrapper>
               ) : (
                 React.cloneElement(child, {
-                  className: classNames(
-                    child.props.className,
-                    isActive && 'active',
-                  ),
+                  className: clsx(child.props.className, isActive && 'active'),
                 })
               );
             })}

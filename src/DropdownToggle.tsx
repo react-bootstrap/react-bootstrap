@@ -2,7 +2,7 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import DropdownContext from '@restart/ui/DropdownContext';
 import { useDropdownToggle } from '@restart/ui/DropdownToggle';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import Button, { type ButtonProps, type CommonButtonProps } from './Button';
@@ -74,7 +74,7 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     // underlying component, to allow it to render size and style variants.
     return (
       <Component
-        className={classNames(
+        className={clsx(
           className,
           prefix,
           split && `${prefix}-split`,

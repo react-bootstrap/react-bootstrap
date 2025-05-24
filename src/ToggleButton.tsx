@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Button, { type ButtonProps } from './Button';
@@ -94,7 +94,7 @@ const ToggleButton = React.forwardRef<HTMLLabelElement, ToggleButtonProps>(
         <Button
           {...props}
           ref={ref}
-          className={classNames(className, disabled && 'disabled')}
+          className={clsx(className, disabled && 'disabled')}
           type={undefined}
           role={undefined}
           as="label"

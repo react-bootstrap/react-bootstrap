@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FormCheck from './FormCheck';
@@ -42,7 +42,7 @@ const Form: DynamicRefForwardingComponent<'form', FormProps> = React.forwardRef<
     <Component
       {...props}
       ref={ref}
-      className={classNames(className, validated && 'was-validated')}
+      className={clsx(className, validated && 'was-validated')}
     />
   ),
 );

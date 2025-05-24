@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AbstractModalHeader, {
@@ -28,7 +28,7 @@ const OffcanvasHeader = React.forwardRef<HTMLDivElement, OffcanvasHeaderProps>(
       <AbstractModalHeader
         ref={ref}
         {...props}
-        className={classNames(className, bsPrefix)}
+        className={clsx(className, bsPrefix)}
         closeLabel={closeLabel}
         closeButton={closeButton}
       />

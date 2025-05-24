@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode } from 'react';
 import Anchor from '@restart/ui/Anchor';
@@ -63,10 +63,10 @@ const PageItem: DynamicRefForwardingComponent<'li', PageItemProps> =
         <li
           ref={ref}
           style={style}
-          className={classNames(className, 'page-item', { active, disabled })}
+          className={clsx(className, 'page-item', { active, disabled })}
         >
           <Component
-            className={classNames('page-link', linkClassName)}
+            className={clsx('page-link', linkClassName)}
             style={linkStyle}
             {...props}
           >

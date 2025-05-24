@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useDropdownItem } from '@restart/ui/DropdownItem';
 import Anchor from '@restart/ui/Anchor';
@@ -69,7 +69,7 @@ const DropdownItem: DynamicRefForwardingComponent<'a', DropdownItemProps> =
           {...props}
           {...dropdownItemProps}
           ref={ref}
-          className={classNames(
+          className={clsx(
             className,
             prefix,
             meta.isActive && 'active',

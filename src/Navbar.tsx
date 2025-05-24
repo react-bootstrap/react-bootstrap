@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import SelectableContext from '@restart/ui/SelectableContext';
@@ -193,7 +193,7 @@ const Navbar: DynamicRefForwardingComponent<'nav', NavbarProps> =
           <Component
             ref={ref}
             {...controlledProps}
-            className={classNames(
+            className={clsx(
               className,
               bsPrefix,
               expand && expandClass,

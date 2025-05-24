@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import useCol from './useCol';
@@ -83,7 +83,7 @@ const Col: DynamicRefForwardingComponent<'div', ColProps> = React.forwardRef<
       <Component
         {...colProps}
         ref={ref}
-        className={classNames(className, !spans.length && bsPrefix)}
+        className={clsx(className, !spans.length && bsPrefix)}
       />
     );
   },

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
 import BaseDropdown, { ToggleMetadata } from '@restart/ui/Dropdown';
@@ -119,7 +119,7 @@ const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
             <Component
               {...props}
               ref={ref}
-              className={classNames(
+              className={clsx(
                 className,
                 show && 'show',
                 directionClasses[drop!],

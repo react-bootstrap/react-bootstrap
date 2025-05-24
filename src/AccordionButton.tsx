@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import AccordionContext, { isAccordionItemSelected } from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
@@ -54,7 +54,7 @@ const AccordionButton: DynamicRefForwardingComponent<
             ? activeEventKey.includes(eventKey)
             : eventKey === activeEventKey
         }
-        className={classNames(
+        className={clsx(
           className,
           bsPrefix,
           !isAccordionItemSelected(activeEventKey, eventKey) && 'collapsed',

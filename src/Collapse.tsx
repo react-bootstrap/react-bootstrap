@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import css from 'dom-helpers/css';
 import React, { useMemo } from 'react';
 import Transition, {
@@ -198,7 +198,7 @@ const Collapse = React.forwardRef<Transition<any>, CollapseProps>(
         {(state: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children as any, {
             ...innerProps,
-            className: classNames(
+            className: clsx(
               className,
               (children.props as any).className,
               collapseStyles[state],

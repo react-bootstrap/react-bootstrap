@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import warning from 'warning';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -98,7 +98,7 @@ const ListGroupItem: DynamicRefForwardingComponent<'a', ListGroupItemProps> =
           {...props}
           {...navItemProps}
           onClick={handleClick}
-          className={classNames(
+          className={clsx(
             className,
             bsPrefix,
             meta.isActive && 'active',

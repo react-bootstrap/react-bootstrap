@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -23,11 +23,7 @@ const ModalTitle: DynamicRefForwardingComponent<'span', ModalTitleProps> =
     ({ className, bsPrefix, as: Component = DivStyledAsH4, ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-title');
       return (
-        <Component
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-          {...props}
-        />
+        <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
       );
     },
   );

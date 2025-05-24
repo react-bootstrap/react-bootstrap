@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -52,7 +52,7 @@ const ToastHeader = React.forwardRef<HTMLDivElement, ToastHeaderProps>(
     });
 
     return (
-      <div ref={ref} {...props} className={classNames(bsPrefix, className)}>
+      <div ref={ref} {...props} className={clsx(bsPrefix, className)}>
         {children}
 
         {closeButton && (

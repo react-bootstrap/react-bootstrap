@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import useDebouncedCallback from '@restart/hooks/useDebouncedCallback';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useEventListener from '@restart/hooks/useEventListener';
@@ -148,7 +148,7 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
       (backdropProps) => (
         <div
           {...backdropProps}
-          className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
+          className={clsx(`${bsPrefix}-backdrop`, backdropClassName)}
         />
       ),
       [backdropClassName, bsPrefix],
@@ -158,7 +158,7 @@ const Offcanvas = React.forwardRef<ModalHandle, OffcanvasProps>(
       <div
         {...dialogProps}
         {...props}
-        className={classNames(
+        className={clsx(
           className,
           responsive ? `${bsPrefix}-${responsive}` : bsPrefix,
           `${bsPrefix}-${placement}`,

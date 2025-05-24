@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
@@ -117,7 +117,7 @@ const FormControl: DynamicRefForwardingComponent<'input', FormControlProps> =
           ref={ref}
           readOnly={readOnly}
           id={id || controlId}
-          className={classNames(
+          className={clsx(
             className,
             plaintext ? `${bsPrefix}-plaintext` : bsPrefix,
             size && `${bsPrefix}-${size}`,

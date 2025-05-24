@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -46,7 +46,7 @@ const Ratio = React.forwardRef<HTMLDivElement, RatioProps>(
             '--bs-aspect-ratio': toPercent(aspectRatio as number),
           }),
         }}
-        className={classNames(
+        className={clsx(
           bsPrefix,
           className,
           !isCustomRatio && `${bsPrefix}-${aspectRatio}`,

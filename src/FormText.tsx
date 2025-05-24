@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -34,7 +34,7 @@ const FormText: DynamicRefForwardingComponent<'small', FormTextProps> =
         <Component
           {...props}
           ref={ref}
-          className={classNames(className, bsPrefix, muted && 'text-muted')}
+          className={clsx(className, bsPrefix, muted && 'text-muted')}
         />
       );
     },

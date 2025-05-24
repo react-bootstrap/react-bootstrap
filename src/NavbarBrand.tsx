@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -28,11 +28,7 @@ const NavbarBrand: DynamicRefForwardingComponent<'a', NavbarBrandProps> =
       const Component = as || (props.href ? 'a' : 'span');
 
       return (
-        <Component
-          {...props}
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-        />
+        <Component {...props} ref={ref} className={clsx(className, bsPrefix)} />
       );
     },
   );

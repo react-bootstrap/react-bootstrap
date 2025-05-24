@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { useBootstrapPrefix } from './ThemeProvider';
 import type { ColProps } from './Col';
 import useCol from './useCol';
@@ -38,7 +38,7 @@ export default function usePlaceholder({
 
   return {
     ...colProps,
-    className: classNames(
+    className: clsx(
       className,
       animation ? `${bsPrefix}-${animation}` : bsPrefix,
       size && `${bsPrefix}-${size}`,

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -39,10 +39,7 @@ const CardImg: DynamicRefForwardingComponent<'img', CardImgProps> =
       return (
         <Component
           ref={ref}
-          className={classNames(
-            variant ? `${prefix}-${variant}` : prefix,
-            className,
-          )}
+          className={clsx(variant ? `${prefix}-${variant}` : prefix, className)}
           {...props}
         />
       );

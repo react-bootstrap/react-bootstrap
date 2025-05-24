@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -72,7 +72,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');
 
-    const classes = classNames(
+    const classes = clsx(
       className,
       decoratedBsPrefix,
       variant && `${decoratedBsPrefix}-${variant}`,

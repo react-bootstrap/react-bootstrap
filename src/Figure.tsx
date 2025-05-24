@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import FigureImage from './FigureImage';
 import FigureCaption from './FigureCaption';
@@ -22,11 +22,7 @@ const Figure: DynamicRefForwardingComponent<'figure', FigureProps> =
     ({ className, bsPrefix, as: Component = 'figure', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'figure');
       return (
-        <Component
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-          {...props}
-        />
+        <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
       );
     },
   );

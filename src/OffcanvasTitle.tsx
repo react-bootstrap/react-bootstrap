@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -25,11 +25,7 @@ const OffcanvasTitle: DynamicRefForwardingComponent<
   ({ className, bsPrefix, as: Component = DivStyledAsH5, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'offcanvas-title');
     return (
-      <Component
-        ref={ref}
-        className={classNames(className, bsPrefix)}
-        {...props}
-      />
+      <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
     );
   },
 );

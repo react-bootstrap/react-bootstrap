@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Anchor from '@restart/ui/Anchor';
@@ -73,7 +73,7 @@ const BreadcrumbItem: DynamicRefForwardingComponent<'li', BreadcrumbItemProps> =
         <Component
           ref={ref}
           {...props}
-          className={classNames(prefix, className, { active })}
+          className={clsx(prefix, className, { active })}
           aria-current={active ? 'page' : undefined}
         >
           {active ? (

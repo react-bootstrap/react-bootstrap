@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -20,11 +20,7 @@ const PopoverBody: DynamicRefForwardingComponent<'div', PopoverBodyProps> =
     ({ className, bsPrefix, as: Component = 'div', ...props }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, 'popover-body');
       return (
-        <Component
-          ref={ref}
-          className={classNames(className, bsPrefix)}
-          {...props}
-        />
+        <Component ref={ref} className={clsx(className, bsPrefix)} {...props} />
       );
     },
   );

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
@@ -28,7 +28,7 @@ const Pagination = React.forwardRef<HTMLUListElement, PaginationProps>(
       <ul
         ref={ref}
         {...props}
-        className={classNames(
+        className={clsx(
           className,
           decoratedBsPrefix,
           size && `${decoratedBsPrefix}-${size}`,

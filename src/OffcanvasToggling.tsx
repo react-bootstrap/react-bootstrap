@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import Transition, {
   type TransitionStatus,
@@ -92,7 +92,7 @@ const OffcanvasToggling = React.forwardRef<
         {(status: TransitionStatus, innerProps: Record<string, unknown>) =>
           React.cloneElement(children as any, {
             ...innerProps,
-            className: classNames(
+            className: clsx(
               className,
               (children.props as any).className,
               (status === ENTERING || status === EXITING) &&

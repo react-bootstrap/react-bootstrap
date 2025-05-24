@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -39,11 +39,7 @@ const CardHeader: DynamicRefForwardingComponent<'div', CardHeaderProps> =
 
       return (
         <CardHeaderContext.Provider value={contextValue}>
-          <Component
-            ref={ref}
-            {...props}
-            className={classNames(className, prefix)}
-          />
+          <Component ref={ref} {...props} className={clsx(className, prefix)} />
         </CardHeaderContext.Provider>
       );
     },

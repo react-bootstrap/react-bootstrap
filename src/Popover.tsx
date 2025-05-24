@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
@@ -90,7 +90,7 @@ const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
         role="tooltip"
         style={computedStyle}
         x-placement={primaryPlacement}
-        className={classNames(
+        className={clsx(
           className,
           decoratedBsPrefix,
           primaryPlacement && `bs-popover-${bsDirection}`,

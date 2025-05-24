@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
@@ -71,7 +71,7 @@ const FormLabel: DynamicRefForwardingComponent<'label', FormLabelProps> =
       if (typeof column === 'string')
         columnClass = `${columnClass} ${columnClass}-${column}`;
 
-      const classes = classNames(
+      const classes = clsx(
         className,
         bsPrefix,
         visuallyHidden && 'visually-hidden',

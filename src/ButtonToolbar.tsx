@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
@@ -24,7 +24,7 @@ const ButtonToolbar = React.forwardRef<HTMLDivElement, ButtonToolbarProps>(
       <div
         {...props}
         ref={ref}
-        className={classNames(className, prefix)}
+        className={clsx(className, prefix)}
         role={role}
       />
     );

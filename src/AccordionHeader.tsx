@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -37,11 +37,7 @@ const AccordionHeader: DynamicRefForwardingComponent<
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-header');
 
     return (
-      <Component
-        ref={ref}
-        {...props}
-        className={classNames(className, bsPrefix)}
-      >
+      <Component ref={ref} {...props} className={clsx(className, bsPrefix)}>
         <AccordionButton onClick={onClick} aria-controls={ariaControls}>
           {children}
         </AccordionButton>
