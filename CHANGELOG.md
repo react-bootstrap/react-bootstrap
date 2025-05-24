@@ -1,3 +1,14 @@
+# [3.0.0-beta.2](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2025-05-24)
+
+
+### Bug Fixes
+
+* **Col:** add missing use client directive ([#6930](https://github.com/react-bootstrap/react-bootstrap/issues/6930)) ([ce56013](https://github.com/react-bootstrap/react-bootstrap/commit/ce56013668f988b141726a71b752ed05cf26c781))
+
+
+
+
+
 # [3.0.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.9...v3.0.0-beta.1) (2025-05-24)
 
 
