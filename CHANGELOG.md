@@ -1,3 +1,27 @@
+# [3.0.0-beta.1](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.9...v3.0.0-beta.1) (2025-05-24)
+
+
+* feat!: migrate to clsx (#6929) ([bd80db2](https://github.com/react-bootstrap/react-bootstrap/commit/bd80db2f502df3b4122aec0b263fc4ca479db928)), closes [#6929](https://github.com/react-bootstrap/react-bootstrap/issues/6929)
+* feat(Offcanvas)!: change rendering behavior (#6927) ([36e824c](https://github.com/react-bootstrap/react-bootstrap/commit/36e824cf6433734016fca71dd8284f2fc49cf136)), closes [#6927](https://github.com/react-bootstrap/react-bootstrap/issues/6927)
+* feat!: remove prop types (#6920) ([393dac8](https://github.com/react-bootstrap/react-bootstrap/commit/393dac852f1f85d7315ad8c7eaefe1a02e57e04e)), closes [#6920](https://github.com/react-bootstrap/react-bootstrap/issues/6920)
+* feat!: extract hooks from component files (#6915) ([8747836](https://github.com/react-bootstrap/react-bootstrap/commit/874783655635c9c9b90bb084dd99b17a8f47c29e)), closes [#6915](https://github.com/react-bootstrap/react-bootstrap/issues/6915)
+* feat!: update to react 19 (#6912) ([c707a3c](https://github.com/react-bootstrap/react-bootstrap/commit/c707a3c0132d81077c2ba242972297c8f38693ba)), closes [#6912](https://github.com/react-bootstrap/react-bootstrap/issues/6912)
+* feat!: add exports map (#6901) ([20c8687](https://github.com/react-bootstrap/react-bootstrap/commit/20c86879c99972e5ad8e6f3dee5e451f81c90931)), closes [#6901](https://github.com/react-bootstrap/react-bootstrap/issues/6901)
+
+
+### BREAKING CHANGES
+
+* Switch from classnames to clsx
+* Offcanvas will always be rendered inline in the DOM and not at the body using a portal
+* Remove prop-types
+* Extract the useCol and useAccordionButton from Col.tsx and AccordionButton.tsx so the CJS default export is consistent with other components
+* Support only React 18+.  Updates internal code for React 19 and remove deprecated methods.
+* Add package.json exports map and remove proxy directories. Removes SSR utilities.
+
+
+
+
+
 ## [2.10.9](https://github.com/react-bootstrap/react-bootstrap/compare/v2.10.8...v2.10.9) (2025-01-30)
 
 
