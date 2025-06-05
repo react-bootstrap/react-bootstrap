@@ -323,11 +323,7 @@ describe('<Modal>', () => {
       const { rerender } = render(<Component />);
       rerender(<Modal show={false}>Foo</Modal>);
 
-      expect(offSpy).toHaveBeenCalledWith(
-        'resize',
-        expect.anything(),
-        undefined,
-      );
+      expect(offSpy).toHaveBeenCalledWith('resize', expect.anything());
     });
   });
 

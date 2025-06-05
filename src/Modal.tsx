@@ -1,8 +1,6 @@
 import clsx from 'clsx';
-import addEventListener from 'dom-helpers/addEventListener';
 import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-import removeEventListener from 'dom-helpers/removeEventListener';
 import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -192,7 +190,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     });
 
     useWillUnmount(() => {
-      removeEventListener(window as any, 'resize', handleWindowResize);
+      window.removeEventListener('resize', handleWindowResize);
       removeStaticModalAnimationRef.current?.();
     });
 
@@ -273,7 +271,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       onEntering?.(node, isAppearing);
 
       // FIXME: This should work even when animation is disabled.
-      addEventListener(window as any, 'resize', handleWindowResize);
+      window.addEventListener('resize', handleWindowResize);
     };
 
     const handleExited = (node) => {
@@ -281,7 +279,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       onExited?.(node);
 
       // FIXME: This should work even when animation is disabled.
-      removeEventListener(window as any, 'resize', handleWindowResize);
+      window.removeEventListener('resize', handleWindowResize);
     };
 
     const renderBackdrop = useCallback(

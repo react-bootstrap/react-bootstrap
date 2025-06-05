@@ -1,4 +1,3 @@
-import contains from 'dom-helpers/contains';
 import * as React from 'react';
 import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
@@ -105,7 +104,7 @@ function handleMouseOverOut(
   const target = e.currentTarget;
   const related = e.relatedTarget || e.nativeEvent[relatedNative];
 
-  if ((!related || related !== target) && !contains(target, related)) {
+  if ((!related || related !== target) && !target.contains(related)) {
     handler(...args);
   }
 }

@@ -1,7 +1,5 @@
-import addClass from 'dom-helpers/addClass';
 import css from 'dom-helpers/css';
 import qsa from 'dom-helpers/querySelectorAll';
-import removeClass from 'dom-helpers/removeClass';
 import ModalManager, {
   type ContainerState,
   type ModalManagerOptions,
@@ -42,7 +40,7 @@ class BootstrapModalManager extends ModalManager {
     super.setContainerStyle(containerState);
 
     const container = this.getElement();
-    addClass(container, 'modal-open');
+    container.classList.add('modal-open');
 
     if (!containerState.scrollBarWidth) return;
 
@@ -64,7 +62,7 @@ class BootstrapModalManager extends ModalManager {
     super.removeContainerStyle(containerState);
 
     const container = this.getElement();
-    removeClass(container, 'modal-open');
+    container.classList.remove('modal-open');
 
     const paddingProp = this.isRTL ? 'paddingLeft' : 'paddingRight';
     const marginProp = this.isRTL ? 'marginLeft' : 'marginRight';

@@ -1,5 +1,4 @@
 import { useMemo, useRef } from 'react';
-import hasClass from 'dom-helpers/hasClass';
 import { Offset, Options } from '@restart/ui/usePopper';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Popover from './Popover';
@@ -24,11 +23,11 @@ export default function useOverlayOffset(
           }
 
           if (overlayRef.current) {
-            if (hasClass(overlayRef.current, popoverClass)) {
+            if (overlayRef.current.classList.contains(popoverClass)) {
               return Popover.POPPER_OFFSET;
             }
 
-            if (hasClass(overlayRef.current, tooltipClass)) {
+            if (overlayRef.current.classList.contains(tooltipClass)) {
               return Tooltip.TOOLTIP_OFFSET;
             }
           }
