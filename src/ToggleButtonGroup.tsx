@@ -2,10 +2,10 @@ import * as React from 'react';
 import invariant from 'invariant';
 import { useUncontrolled } from 'uncontrollable';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import chainFunction from './createChainedFunction';
-import { map } from './ElementChildren';
-import ButtonGroup, { type ButtonGroupProps } from './ButtonGroup';
-import ToggleButton from './ToggleButton';
+import chainFunction from './createChainedFunction.js';
+import { map } from './ElementChildren.js';
+import ButtonGroup, { type ButtonGroupProps } from './ButtonGroup.js';
+import ToggleButton from './ToggleButton.js';
 
 type BaseToggleButtonProps = Omit<
   ButtonGroupProps,

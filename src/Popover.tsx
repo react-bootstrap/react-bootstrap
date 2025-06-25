@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
-import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import PopoverHeader from './PopoverHeader';
-import PopoverBody from './PopoverBody';
-import type { Placement, PopperRef } from './types';
-import { getOverlayDirection } from './helpers';
-import getInitialPopperStyles from './getInitialPopperStyles';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import PopoverHeader from './PopoverHeader.js';
+import PopoverBody from './PopoverBody.js';
+import type { Placement, PopperRef } from './types.js';
+import { getOverlayDirection } from './helpers.js';
+import getInitialPopperStyles from './getInitialPopperStyles.js';
 
 export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useContext } from 'react';
 import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import AccordionContext, { isAccordionItemSelected } from './AccordionContext';
-import AccordionItemContext from './AccordionItemContext';
-import { useBootstrapPrefix } from './ThemeProvider';
-import useAccordionButton from './useAccordionButton';
+import AccordionContext, {
+  isAccordionItemSelected,
+} from './AccordionContext.js';
+import AccordionItemContext from './AccordionItemContext.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import useAccordionButton from './useAccordionButton.js';
 
 export interface AccordionButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

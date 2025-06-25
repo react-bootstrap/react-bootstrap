@@ -1,17 +1,17 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import CardBody from './CardBody';
-import CardFooter from './CardFooter';
-import CardHeader from './CardHeader';
-import CardImg from './CardImg';
-import CardImgOverlay from './CardImgOverlay';
-import CardLink from './CardLink';
-import CardSubtitle from './CardSubtitle';
-import CardText from './CardText';
-import CardTitle from './CardTitle';
-import type { Color, Variant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import CardBody from './CardBody.js';
+import CardFooter from './CardFooter.js';
+import CardHeader from './CardHeader.js';
+import CardImg from './CardImg.js';
+import CardImgOverlay from './CardImgOverlay.js';
+import CardLink from './CardLink.js';
+import CardSubtitle from './CardSubtitle.js';
+import CardText from './CardText.js';
+import CardTitle from './CardTitle.js';
+import type { Color, Variant } from './types.js';
 
 export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   /**

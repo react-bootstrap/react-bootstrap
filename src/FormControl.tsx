@@ -3,9 +3,9 @@ import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import Feedback from './Feedback';
-import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import Feedback from './Feedback.js';
+import FormContext from './FormContext.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 

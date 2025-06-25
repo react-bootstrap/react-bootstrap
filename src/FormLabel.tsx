@@ -3,9 +3,9 @@ import * as React from 'react';
 import { useContext } from 'react';
 import warning from 'warning';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import Col, { type ColProps } from './Col';
-import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import Col, { type ColProps } from './Col.js';
+import FormContext from './FormContext.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 interface FormLabelBaseProps extends React.HTMLAttributes<HTMLElement> {
   /**

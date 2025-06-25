@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import CloseButton, { type CloseButtonVariant } from './CloseButton';
-import ModalContext from './ModalContext';
+import CloseButton, { type CloseButtonVariant } from './CloseButton.js';
+import ModalContext from './ModalContext.js';
 
 export interface AbstractModalHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import useCol from './useCol';
+import useCol from './useCol.js';
 
 export type NumberAttr =
   | number

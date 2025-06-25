@@ -3,9 +3,11 @@ import * as React from 'react';
 import { useContext } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { Transition } from 'react-transition-group';
-import { useBootstrapPrefix } from './ThemeProvider';
-import Collapse, { type CollapseProps } from './Collapse';
-import AccordionContext, { isAccordionItemSelected } from './AccordionContext';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import Collapse, { type CollapseProps } from './Collapse.js';
+import AccordionContext, {
+  isAccordionItemSelected,
+} from './AccordionContext.js';
 
 export interface AccordionCollapseProps extends CollapseProps {
   /**

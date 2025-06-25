@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Anchor from '@restart/ui/Anchor';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface BreadcrumbItemProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {

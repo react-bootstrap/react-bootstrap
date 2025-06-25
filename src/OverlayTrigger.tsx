@@ -5,8 +5,8 @@ import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import { getChildRef } from '@restart/ui/utils';
-import Overlay, { type OverlayChildren, type OverlayProps } from './Overlay';
-import type { Placement } from './types';
+import Overlay, { type OverlayChildren, type OverlayProps } from './Overlay.js';
+import type { Placement } from './types.js';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
 

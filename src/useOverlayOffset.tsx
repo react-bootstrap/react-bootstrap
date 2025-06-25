@@ -1,8 +1,8 @@
 import { useMemo, useRef } from 'react';
 import { Offset, Options } from '@restart/ui/usePopper';
-import { useBootstrapPrefix } from './ThemeProvider';
-import Popover from './Popover';
-import Tooltip from './Tooltip';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import Popover from './Popover.js';
+import Tooltip from './Tooltip.js';
 
 // This is meant for internal use.
 // This applies a custom offset to the overlay if it's a popover or tooltip.

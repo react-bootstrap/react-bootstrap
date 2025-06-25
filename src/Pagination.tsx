@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
-import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem.js';
 
 export interface PaginationProps
   extends React.HTMLAttributes<HTMLUListElement> {

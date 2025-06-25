@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import Feedback, { type FeedbackType } from './Feedback';
-import FormCheckInput from './FormCheckInput';
-import FormCheckLabel from './FormCheckLabel';
-import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
-import { hasChildOfType } from './ElementChildren';
+import Feedback, { type FeedbackType } from './Feedback.js';
+import FormCheckInput from './FormCheckInput.js';
+import FormCheckLabel from './FormCheckLabel.js';
+import FormContext from './FormContext.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import { hasChildOfType } from './ElementChildren.js';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 

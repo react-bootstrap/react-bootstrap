@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import FormCheckInput, { type FormCheckInputProps } from './FormCheckInput';
-import InputGroupContext from './InputGroupContext';
-import InputGroupText from './InputGroupText';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import FormCheckInput, { type FormCheckInputProps } from './FormCheckInput.js';
+import InputGroupContext from './InputGroupContext.js';
+import InputGroupText from './InputGroupText.js';
 
 const InputGroupCheckbox = (props: FormCheckInputProps) => (
   <InputGroupText>

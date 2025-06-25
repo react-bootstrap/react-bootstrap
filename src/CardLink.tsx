@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface CardLinkProps extends React.AnchorHTMLAttributes<HTMLElement> {
   /**

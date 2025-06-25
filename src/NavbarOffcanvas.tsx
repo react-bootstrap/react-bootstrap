@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import type { ModalHandle } from '@restart/ui/Modal';
-import Offcanvas, { type OffcanvasProps } from './Offcanvas';
-import NavbarContext from './NavbarContext';
+import Offcanvas, { type OffcanvasProps } from './Offcanvas.js';
+import NavbarContext from './NavbarContext.js';
 
 export type NavbarOffcanvasProps = Omit<OffcanvasProps, 'show'>;
 

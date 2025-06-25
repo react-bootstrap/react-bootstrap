@@ -3,16 +3,16 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import AccordionBody from './AccordionBody';
-import AccordionButton from './AccordionButton';
-import AccordionCollapse from './AccordionCollapse';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import AccordionBody from './AccordionBody.js';
+import AccordionButton from './AccordionButton.js';
+import AccordionCollapse from './AccordionCollapse.js';
 import AccordionContext, {
   type AccordionSelectCallback,
   type AccordionEventKey,
-} from './AccordionContext';
-import AccordionHeader from './AccordionHeader';
-import AccordionItem from './AccordionItem';
+} from './AccordionContext.js';
+import AccordionHeader from './AccordionHeader.js';
+import AccordionItem from './AccordionItem.js';
 
 export interface AccordionProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
