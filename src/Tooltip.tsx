@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { OverlayArrowProps } from '@restart/ui/Overlay';
-import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import type { Placement, PopperRef } from './types';
-import { getOverlayDirection } from './helpers';
-import getInitialPopperStyles from './getInitialPopperStyles';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import type { Placement, PopperRef } from './types.js';
+import { getOverlayDirection } from './helpers.js';
+import getInitialPopperStyles from './getInitialPopperStyles.js';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

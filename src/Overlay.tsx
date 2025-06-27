@@ -6,15 +6,15 @@ import { State } from '@restart/ui/usePopper';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import useOverlayOffset from './useOverlayOffset';
-import Fade from './Fade';
-import type { TransitionType } from './helpers';
+import useOverlayOffset from './useOverlayOffset.js';
+import Fade from './Fade.js';
+import type { TransitionType } from './helpers.js';
 import type {
   BaseOverlayProps,
   Placement,
   PopperRef,
   RootCloseEvent,
-} from './types';
+} from './types.js';
 
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;

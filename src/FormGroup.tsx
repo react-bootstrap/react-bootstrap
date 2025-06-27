@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FormContext from './FormContext';
+import FormContext from './FormContext.js';
 
 export interface FormGroupProps extends React.HTMLAttributes<HTMLElement> {
   /**

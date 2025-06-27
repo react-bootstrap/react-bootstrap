@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface ButtonToolbarProps extends React.HTMLAttributes<HTMLElement> {
   /**

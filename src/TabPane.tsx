@@ -7,11 +7,11 @@ import type {
   DynamicRefForwardingComponent,
   EventKey,
 } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import Fade from './Fade';
-import getTabTransitionComponent from './getTabTransitionComponent';
-import type { TransitionType } from './helpers';
-import type { TransitionCallbacks } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import Fade from './Fade.js';
+import getTabTransitionComponent from './getTabTransitionComponent.js';
+import type { TransitionType } from './helpers.js';
+import type { TransitionCallbacks } from './types.js';
 
 export interface TabPaneProps
   extends TransitionCallbacks,

@@ -3,8 +3,8 @@ import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
-} from './ThemeProvider';
-import type { ColProps, ColOrder, ColSize, NumberAttr } from './Col';
+} from './ThemeProvider.js';
+import type { ColProps, ColOrder, ColSize, NumberAttr } from './Col.js';
 
 export interface UseColMetadata {
   as?: React.ElementType;

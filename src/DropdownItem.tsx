@@ -6,7 +6,7 @@ import type {
   DynamicRefForwardingComponent,
   EventKey,
 } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface DropdownItemProps extends React.HTMLAttributes<HTMLElement> {
   /**

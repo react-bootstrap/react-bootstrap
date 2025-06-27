@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import AccordionContext, { type AccordionEventKey } from './AccordionContext';
+import AccordionContext, {
+  type AccordionEventKey,
+} from './AccordionContext.js';
 
 type EventHandler = React.EventHandler<React.SyntheticEvent>;
 

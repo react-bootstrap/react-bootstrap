@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import AccordionCollapse from './AccordionCollapse';
-import AccordionItemContext from './AccordionItemContext';
-import type { TransitionCallbacks } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import AccordionCollapse from './AccordionCollapse.js';
+import AccordionItemContext from './AccordionItemContext.js';
+import type { TransitionCallbacks } from './types.js';
 
 export interface AccordionBodyProps
   extends TransitionCallbacks,

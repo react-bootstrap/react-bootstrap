@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { cloneElement } from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
-import { map } from './ElementChildren';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import { map } from './ElementChildren.js';
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

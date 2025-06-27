@@ -5,8 +5,8 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import { useNavItem } from '@restart/ui/NavItem';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { makeEventKey } from '@restart/ui/SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { BaseNavItemProps, Variant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { BaseNavItemProps, Variant } from './types.js';
 
 export interface ListGroupItemProps extends BaseNavItemProps {
   /**

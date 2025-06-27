@@ -6,12 +6,12 @@ import type {
   DynamicRefForwardingComponent,
   TransitionComponent,
 } from '@restart/ui/types';
-import ToastFade from './ToastFade';
-import ToastHeader from './ToastHeader';
-import ToastBody from './ToastBody';
-import { useBootstrapPrefix } from './ThemeProvider';
-import ToastContext from './ToastContext';
-import type { TransitionCallbacks, Variant } from './types';
+import ToastFade from './ToastFade.js';
+import ToastHeader from './ToastHeader.js';
+import ToastBody from './ToastBody.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import ToastContext from './ToastContext.js';
+import type { TransitionCallbacks, Variant } from './types.js';
 
 export interface ToastProps
   extends TransitionCallbacks,

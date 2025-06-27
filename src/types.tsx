@@ -8,7 +8,7 @@ import type {
 import type { ToggleMetadata } from '@restart/ui/Dropdown';
 import type ModalManager from '@restart/ui/ModalManager';
 import type { EventKey, SelectCallback } from '@restart/ui/types';
-import type { DropDirection } from './DropdownContext';
+import type { DropDirection } from './DropdownContext.js';
 
 export type DOMContainer<T extends HTMLElement | VirtualElement = HTMLElement> =
 

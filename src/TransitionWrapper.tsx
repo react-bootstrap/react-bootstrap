@@ -1,11 +1,8 @@
 import React, { useCallback, useRef } from 'react';
-import Transition, {
-  type TransitionProps,
-  type TransitionStatus,
-} from 'react-transition-group/Transition';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 
-export type TransitionWrapperProps = TransitionProps & {
+export type TransitionWrapperProps = React.ComponentProps<typeof Transition> & {
   childRef?: React.Ref<unknown>;
   children:
     | React.ReactElement

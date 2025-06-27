@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FormCheck, { FormCheckProps } from './FormCheck';
+import FormCheck, { FormCheckProps } from './FormCheck.js';
 
 type SwitchProps = Omit<FormCheckProps, 'type'>;
 

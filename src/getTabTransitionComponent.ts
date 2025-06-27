@@ -1,7 +1,7 @@
 import { TransitionComponent } from '@restart/ui/types';
 import NoopTransition from '@restart/ui/NoopTransition';
-import Fade from './Fade';
-import type { TransitionType } from './helpers';
+import Fade from './Fade.js';
+import type { TransitionType } from './helpers.js';
 
 export default function getTabTransitionComponent(
   transition?: TransitionType,
