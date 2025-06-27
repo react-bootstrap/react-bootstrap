@@ -15,6 +15,11 @@ export interface AccordionHeaderProps
    * @default 'accordion-header'
    */
   bsPrefix?: string | undefined;
+
+  /**
+   * Disables the button in the header.
+   */
+  disabled?: boolean | undefined;
 }
 
 const AccordionHeader: DynamicRefForwardingComponent<
@@ -29,6 +34,7 @@ const AccordionHeader: DynamicRefForwardingComponent<
       bsPrefix,
       className,
       children,
+      disabled,
       onClick,
       ...props
     },
@@ -38,7 +44,11 @@ const AccordionHeader: DynamicRefForwardingComponent<
 
     return (
       <Component ref={ref} {...props} className={clsx(className, bsPrefix)}>
-        <AccordionButton onClick={onClick} aria-controls={ariaControls}>
+        <AccordionButton
+          onClick={onClick}
+          aria-controls={ariaControls}
+          disabled={disabled}
+        >
           {children}
         </AccordionButton>
       </Component>
