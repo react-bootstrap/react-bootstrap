@@ -4,7 +4,7 @@ import Navbar from '../src/Navbar';
 import Offcanvas from '../src/Offcanvas';
 
 describe('<NavbarOffcanvas>', () => {
-  it('should should open the offcanvas', () => {
+  it('should open the offcanvas', () => {
     render(
       <Navbar>
         <Navbar.Toggle data-testid="toggle" />
