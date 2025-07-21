@@ -28,7 +28,7 @@ export interface NavbarProps
   bsPrefix?: string | undefined;
 
   /**
-   * The general visual variant a the Navbar.
+   * The general visual variant of the Navbar.
    * Use in combination with the `bg` prop, `background-color` utilities,
    * or your own background styles.
    */
