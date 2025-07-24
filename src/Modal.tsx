@@ -10,16 +10,16 @@ import transitionEnd from 'dom-helpers/transitionEnd';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import BaseModal, { type ModalHandle } from '@restart/ui/Modal';
-import { getSharedManager } from './BootstrapModalManager';
-import Fade from './Fade';
-import ModalBody from './ModalBody';
-import ModalContext from './ModalContext';
-import ModalDialog from './ModalDialog';
-import ModalFooter from './ModalFooter';
-import ModalHeader from './ModalHeader';
-import ModalTitle from './ModalTitle';
-import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import type { BaseModalProps } from './types';
+import { getSharedManager } from './BootstrapModalManager.js';
+import Fade from './Fade.js';
+import ModalBody from './ModalBody.js';
+import ModalContext from './ModalContext.js';
+import ModalDialog from './ModalDialog.js';
+import ModalFooter from './ModalFooter.js';
+import ModalHeader from './ModalHeader.js';
+import ModalTitle from './ModalTitle.js';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import type { BaseModalProps } from './types.js';
 
 export interface ModalProps extends BaseModalProps {
   /**

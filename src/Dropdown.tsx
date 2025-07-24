@@ -5,16 +5,16 @@ import BaseDropdown, { ToggleMetadata } from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import DropdownContext from './DropdownContext';
-import DropdownDivider from './DropdownDivider';
-import DropdownHeader from './DropdownHeader';
-import DropdownItem from './DropdownItem';
-import DropdownItemText from './DropdownItemText';
-import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu';
-import DropdownToggle from './DropdownToggle';
-import InputGroupContext from './InputGroupContext';
-import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import type { BsDropdownProps } from './types';
+import DropdownContext from './DropdownContext.js';
+import DropdownDivider from './DropdownDivider.js';
+import DropdownHeader from './DropdownHeader.js';
+import DropdownItem from './DropdownItem.js';
+import DropdownItemText from './DropdownItemText.js';
+import DropdownMenu, { getDropdownMenuPlacement } from './DropdownMenu.js';
+import DropdownToggle from './DropdownToggle.js';
+import InputGroupContext from './InputGroupContext.js';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import type { BsDropdownProps } from './types.js';
 
 export interface DropdownProps
   extends BsDropdownProps,

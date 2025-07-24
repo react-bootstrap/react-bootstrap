@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import { useBootstrapPrefix } from './ThemeProvider';
-import CloseButton, { type CloseButtonVariant } from './CloseButton';
-import ToastContext from './ToastContext';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import CloseButton, { type CloseButtonVariant } from './CloseButton.js';
+import ToastContext from './ToastContext.js';
 
 export interface ToastHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

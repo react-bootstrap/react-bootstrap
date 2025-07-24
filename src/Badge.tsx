@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { Color, Variant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { Color, Variant } from './types.js';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
   /**

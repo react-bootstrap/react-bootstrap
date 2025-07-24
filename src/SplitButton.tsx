@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Button from './Button';
-import ButtonGroup from './ButtonGroup';
-import Dropdown from './Dropdown';
-import type { PropsFromToggle } from './DropdownToggle';
-import { BsDropdownProps } from './types';
+import Button from './Button.js';
+import ButtonGroup from './ButtonGroup.js';
+import Dropdown from './Dropdown.js';
+import type { PropsFromToggle } from './DropdownToggle.js';
+import { BsDropdownProps } from './types.js';
 
 export interface SplitButtonProps
   extends BsDropdownProps,

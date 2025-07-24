@@ -1,16 +1,11 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import Transition, {
-  type TransitionStatus,
-  ENTERED,
-  ENTERING,
-  EXITING,
-} from 'react-transition-group/Transition';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 import { getChildRef } from '@restart/ui/utils';
-import transitionEndListener from './transitionEndListener';
-import TransitionWrapper from './TransitionWrapper';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { TransitionCallbacks } from './types';
+import transitionEndListener from './transitionEndListener.js';
+import TransitionWrapper from './TransitionWrapper.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { TransitionCallbacks } from './types.js';
 
 export interface OffcanvasTogglingProps extends TransitionCallbacks {
   /**
@@ -55,8 +50,8 @@ export interface OffcanvasTogglingProps extends TransitionCallbacks {
 }
 
 const transitionStyles = {
-  [ENTERING]: 'show',
-  [ENTERED]: 'show',
+  entering: 'show',
+  entered: 'show',
 };
 
 const OffcanvasToggling = React.forwardRef<
@@ -95,7 +90,7 @@ const OffcanvasToggling = React.forwardRef<
             className: clsx(
               className,
               (children.props as any).className,
-              (status === ENTERING || status === EXITING) &&
+              (status === 'entering' || status === 'exiting') &&
                 `${bsPrefix}-toggling`,
               transitionStyles[status],
             ),

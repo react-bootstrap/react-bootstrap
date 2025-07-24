@@ -5,17 +5,17 @@ import useEventListener from '@restart/hooks/useEventListener';
 import * as React from 'react';
 import { useCallback, useMemo, useRef } from 'react';
 import BaseModal, { type ModalHandle } from '@restart/ui/Modal';
-import Fade from './Fade';
-import OffcanvasBody from './OffcanvasBody';
-import OffcanvasToggling from './OffcanvasToggling';
-import ModalContext from './ModalContext';
-import OffcanvasHeader from './OffcanvasHeader';
-import OffcanvasTitle from './OffcanvasTitle';
-import { useBootstrapPrefix } from './ThemeProvider';
+import Fade from './Fade.js';
+import OffcanvasBody from './OffcanvasBody.js';
+import OffcanvasToggling from './OffcanvasToggling.js';
+import ModalContext from './ModalContext.js';
+import OffcanvasHeader from './OffcanvasHeader.js';
+import OffcanvasTitle from './OffcanvasTitle.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 import BootstrapModalManager, {
   getSharedManager,
-} from './BootstrapModalManager';
-import type { BaseModalProps } from './types';
+} from './BootstrapModalManager.js';
+import type { BaseModalProps } from './types.js';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 

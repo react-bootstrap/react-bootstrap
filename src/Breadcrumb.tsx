@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import BreadcrumbItem from './BreadcrumbItem';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import BreadcrumbItem from './BreadcrumbItem.js';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   /**

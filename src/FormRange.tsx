@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
-import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import FormContext from './FormContext.js';
 
 export interface FormRangeProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {

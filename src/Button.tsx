@@ -5,8 +5,8 @@ import {
   type ButtonProps as BaseButtonProps,
 } from '@restart/ui/Button';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { ButtonVariant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { ButtonVariant } from './types.js';
 
 export interface ButtonProps extends BaseButtonProps {
   /**

@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import Dropdown from './Dropdown';
-import type { DropdownMenuVariant } from './DropdownMenu';
-import NavLink from './NavLink';
-import type { BsDropdownProps } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import Dropdown from './Dropdown.js';
+import type { DropdownMenuVariant } from './DropdownMenu.js';
+import NavLink from './NavLink.js';
+import type { BsDropdownProps } from './types.js';
 
 export interface NavDropdownProps
   extends BsDropdownProps,

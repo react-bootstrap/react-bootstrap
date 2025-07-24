@@ -4,8 +4,8 @@ import Anchor from '@restart/ui/Anchor';
 import { useNavItem } from '@restart/ui/NavItem';
 import { makeEventKey } from '@restart/ui/SelectableContext';
 import { DynamicRefForwardingComponent, EventKey } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { BaseNavItemProps } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { BaseNavItemProps } from './types.js';
 
 export interface NavLinkProps extends BaseNavItemProps {
   /**

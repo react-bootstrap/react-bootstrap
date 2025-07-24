@@ -27,6 +27,9 @@ export default () =>
           alias: {
             'react-bootstrap': path.resolve(__dirname, '../../src'),
           },
+          extensionAlias: {
+            '.js': ['.ts', '.tsx', '.js'],
+          },
         },
         plugins: [
           new currentBundler.instance.DefinePlugin({

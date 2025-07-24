@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { ColProps } from './Col';
-import useCol from './useCol';
-import type { Variant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { ColProps } from './Col.js';
+import useCol from './useCol.js';
+import type { Variant } from './types.js';
 
 export type PlaceholderAnimation = 'glow' | 'wave';
 export type PlaceholderSize = 'xs' | 'sm' | 'lg';

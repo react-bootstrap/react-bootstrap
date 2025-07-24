@@ -1,7 +1,7 @@
 import Tabs from '@restart/ui/Tabs';
 import type { EventKey, SelectCallback } from '@restart/ui/types';
-import getTabTransitionComponent from './getTabTransitionComponent';
-import type { TransitionType } from './helpers';
+import getTabTransitionComponent from './getTabTransitionComponent.js';
+import type { TransitionType } from './helpers.js';
 
 export interface TabContainerProps {
   /**

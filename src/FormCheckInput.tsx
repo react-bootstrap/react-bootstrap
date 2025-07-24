@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import FormContext from './FormContext.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 

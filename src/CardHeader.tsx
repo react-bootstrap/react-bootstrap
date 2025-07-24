@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import CardHeaderContext from './CardHeaderContext';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import CardHeaderContext from './CardHeaderContext.js';
 
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**

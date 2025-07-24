@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface PopoverHeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**

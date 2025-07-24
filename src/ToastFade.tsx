@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Transition, {
-  ENTERING,
-  EXITING,
-} from 'react-transition-group/Transition';
-import Fade, { type FadeProps } from './Fade';
+import { Transition } from 'react-transition-group';
+import Fade, { type FadeProps } from './Fade.js';
 
 const fadeStyles = {
-  [ENTERING]: 'showing',
-  [EXITING]: 'showing show',
+  entering: 'showing',
+  exiting: 'showing show',
 };
 
 const ToastFade = React.forwardRef<Transition<any>, FadeProps>((props, ref) => (

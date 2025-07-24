@@ -1,7 +1,7 @@
 import * as React from 'react';
-import TabContainer from './TabContainer';
-import TabContent from './TabContent';
-import TabPane, { type TabPaneProps } from './TabPane';
+import TabContainer from './TabContainer.js';
+import TabContent from './TabContent.js';
+import TabPane, { type TabPaneProps } from './TabPane.js';
 
 export interface TabProps extends Omit<TabPaneProps, 'title'> {
   /**

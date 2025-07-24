@@ -5,7 +5,7 @@ import useTimeout from '@restart/hooks/useTimeout';
 import Anchor from '@restart/ui/Anchor';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import clsx from 'clsx';
-import type { TransitionStatus } from 'react-transition-group/Transition';
+import type { TransitionStatus } from 'react-transition-group';
 import * as React from 'react';
 import {
   useCallback,
@@ -16,13 +16,13 @@ import {
   useState,
 } from 'react';
 import { useUncontrolled } from 'uncontrollable';
-import CarouselCaption from './CarouselCaption';
-import CarouselItem from './CarouselItem';
-import { map, forEach } from './ElementChildren';
-import { useBootstrapPrefix, useIsRTL } from './ThemeProvider';
-import transitionEndListener from './transitionEndListener';
-import triggerBrowserReflow from './triggerBrowserReflow';
-import TransitionWrapper from './TransitionWrapper';
+import CarouselCaption from './CarouselCaption.js';
+import CarouselItem from './CarouselItem.js';
+import { map, forEach } from './ElementChildren.js';
+import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import transitionEndListener from './transitionEndListener.js';
+import triggerBrowserReflow from './triggerBrowserReflow.js';
+import TransitionWrapper from './TransitionWrapper.js';
 
 export type CarouselVariant = 'dark' | string;
 

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FormGroup, { type FormGroupProps } from './FormGroup';
-import { useBootstrapPrefix } from './ThemeProvider';
+import FormGroup, { type FormGroupProps } from './FormGroup.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface FloatingLabelProps extends FormGroupProps {
   /**

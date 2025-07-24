@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 import AbstractModalHeader, {
   type AbstractModalHeaderProps,
-} from './AbstractModalHeader';
+} from './AbstractModalHeader.js';
 
 export interface ModalHeaderProps extends AbstractModalHeaderProps {
   /**

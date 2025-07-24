@@ -7,9 +7,9 @@ import type {
   DynamicRefForwardingComponent,
   EventKey,
 } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import ListGroupItem from './ListGroupItem';
-import type { BaseNavProps } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import ListGroupItem from './ListGroupItem.js';
+import type { BaseNavProps } from './types.js';
 
 export interface ListGroupProps extends BaseNavProps {
   /**
