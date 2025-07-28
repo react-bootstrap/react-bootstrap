@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-import { useBootstrapPrefix } from './ThemeProvider';
-import AlertHeading from './AlertHeading';
-import AlertLink from './AlertLink';
-import Fade from './Fade';
-import CloseButton, { type CloseButtonVariant } from './CloseButton';
-import type { Variant } from './types';
-import type { TransitionType } from './helpers';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import AlertHeading from './AlertHeading.js';
+import AlertLink from './AlertLink.js';
+import Fade from './Fade.js';
+import CloseButton, { type CloseButtonVariant } from './CloseButton.js';
+import type { Variant } from './types.js';
+import type { TransitionType } from './helpers.js';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

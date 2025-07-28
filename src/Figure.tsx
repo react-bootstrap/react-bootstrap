@@ -1,9 +1,9 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FigureImage from './FigureImage';
-import FigureCaption from './FigureCaption';
-import { useBootstrapPrefix } from './ThemeProvider';
+import FigureImage from './FigureImage.js';
+import FigureCaption from './FigureCaption.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface FigureProps extends React.AnchorHTMLAttributes<HTMLElement> {
   /**

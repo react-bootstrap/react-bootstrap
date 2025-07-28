@@ -1,16 +1,12 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useCallback } from 'react';
-import Transition, {
-  TransitionStatus,
-  ENTERED,
-  ENTERING,
-} from 'react-transition-group/Transition';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 import { getChildRef } from '@restart/ui/utils';
-import transitionEndListener from './transitionEndListener';
-import triggerBrowserReflow from './triggerBrowserReflow';
-import TransitionWrapper from './TransitionWrapper';
-import type { TransitionCallbacks } from './types';
+import transitionEndListener from './transitionEndListener.js';
+import triggerBrowserReflow from './triggerBrowserReflow.js';
+import TransitionWrapper from './TransitionWrapper.js';
+import type { TransitionCallbacks } from './types.js';
 
 export interface FadeProps extends TransitionCallbacks {
   className?: string;
@@ -55,8 +51,8 @@ export interface FadeProps extends TransitionCallbacks {
 }
 
 const fadeStyles = {
-  [ENTERING]: 'show',
-  [ENTERED]: 'show',
+  entering: 'show',
+  entered: 'show',
 };
 
 const Fade = React.forwardRef<Transition<any>, FadeProps>(

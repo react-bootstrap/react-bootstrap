@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 import AccordionItemContext, {
   type AccordionItemContextValue,
-} from './AccordionItemContext';
+} from './AccordionItemContext.js';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLElement> {
   /**

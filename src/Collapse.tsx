@@ -1,19 +1,13 @@
 import clsx from 'clsx';
 import css from 'dom-helpers/css';
 import React, { useMemo } from 'react';
-import Transition, {
-  type TransitionStatus,
-  ENTERED,
-  ENTERING,
-  EXITED,
-  EXITING,
-} from 'react-transition-group/Transition';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 import { getChildRef } from '@restart/ui/utils';
-import transitionEndListener from './transitionEndListener';
-import createChainedFunction from './createChainedFunction';
-import triggerBrowserReflow from './triggerBrowserReflow';
-import TransitionWrapper from './TransitionWrapper';
-import type { TransitionCallbacks } from './types';
+import transitionEndListener from './transitionEndListener.js';
+import createChainedFunction from './createChainedFunction.js';
+import triggerBrowserReflow from './triggerBrowserReflow.js';
+import TransitionWrapper from './TransitionWrapper.js';
+import type { TransitionCallbacks } from './types.js';
 
 type Dimension = 'height' | 'width';
 
@@ -98,10 +92,10 @@ function getDefaultDimensionValue(
 }
 
 const collapseStyles = {
-  [EXITED]: 'collapse',
-  [EXITING]: 'collapsing',
-  [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse show',
+  exited: 'collapse',
+  exiting: 'collapsing',
+  entering: 'collapsing',
+  entered: 'collapse show',
 };
 
 const Collapse = React.forwardRef<Transition<any>, CollapseProps>(

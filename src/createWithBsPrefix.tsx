@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import camelize from 'dom-helpers/camelize';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 

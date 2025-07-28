@@ -5,9 +5,9 @@ import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
-import Button, { type ButtonProps, type CommonButtonProps } from './Button';
-import { useBootstrapPrefix } from './ThemeProvider';
-import useWrappedRefWithWarning from './useWrappedRefWithWarning';
+import Button, { type ButtonProps, type CommonButtonProps } from './Button.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import useWrappedRefWithWarning from './useWrappedRefWithWarning.js';
 
 export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
   /**

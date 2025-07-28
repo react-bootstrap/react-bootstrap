@@ -959,6 +959,11 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.27.1":
+  version "7.27.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.6.tgz#ec4070a04d76bae8ddbb10770ba55714a417b7c6"
+  integrity sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==
+
 "@babel/template@^7.25.9", "@babel/template@^7.26.9", "@babel/template@^7.27.0":
   version "7.27.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.27.0.tgz#b253e5406cc1df1c57dcd18f11760c2dbf40c0b4"
@@ -1346,17 +1351,17 @@
   dependencies:
     dequal "^2.0.3"
 
-"@restart/ui@^2.0.0-beta.3":
-  version "2.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-2.0.0-beta.3.tgz#8bbd4de1cc8b9deb6bd9d0f64da49fb2f8c42ff5"
-  integrity sha512-wY3TBYjxmuwMgYwjfl5up3Iu0AGgiDKB6uLSXUpecjgDXEc6Ebjl5Sv2apsJiJGRC3NHfX82REJ/Mn3Qh8nZDA==
+"@restart/ui@^2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-2.0.0-beta.6.tgz#3709835c8aad84986e6a04799a12b98253c14fbf"
+  integrity sha512-jUFhsN4F6ZXwFzwrp1+weJ6CIaoN1H/YYksOQPLJIurIYeEc1OYDugoRfU1ixSzc655V3YrLD6eC4eQjqxIfwQ==
   dependencies:
     "@babel/runtime" "^7.26.7"
     "@popperjs/core" "^2.11.8"
     "@restart/hooks" "^0.6.2"
     "@types/warning" "^3.0.3"
     dequal "^2.0.3"
-    dom-helpers "^5.2.0"
+    dom-helpers "^6.0.1"
     uncontrollable "^9.0.0"
     warning "^4.0.3"
 
@@ -2815,7 +2820,7 @@ cross-spawn@^7.0.3, cross-spawn@^7.0.6:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-csstype@^3.0.2:
+csstype@^3.0.2, csstype@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
@@ -2982,13 +2987,21 @@ dom-accessibility-api@^0.5.9:
   resolved "https://registry.yarnpkg.com/dom-accessibility-api/-/dom-accessibility-api-0.5.16.tgz#5a7429e6066eb3664d911e33fb0e45de8eb08453"
   integrity sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==
 
-dom-helpers@^5.0.1, dom-helpers@^5.2.0, dom-helpers@^5.2.1:
+dom-helpers@^5.0.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.1.tgz#d9400536b2bf8225ad98fe052e029451ac40e902"
   integrity sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==
   dependencies:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
+
+dom-helpers@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-6.0.1.tgz#f56400eb45770e3dd4fa014513739e6b670e6362"
+  integrity sha512-IKySryuFwseGkrCA/pIqlwUPOD50w1Lj/B2Yief3vBOP18k5y4t+hTqKh55gULDVeJMRitcozve+g/wVFf4sFQ==
+  dependencies:
+    "@babel/runtime" "^7.27.1"
+    csstype "^3.1.3"
 
 dot-prop@^5.1.0:
   version "5.3.0"

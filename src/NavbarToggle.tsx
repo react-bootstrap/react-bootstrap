@@ -3,8 +3,8 @@ import * as React from 'react';
 import { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import NavbarContext from './NavbarContext';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import NavbarContext from './NavbarContext.js';
 
 export interface NavbarToggleProps extends React.HTMLAttributes<HTMLElement> {
   /**

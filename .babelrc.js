@@ -1,4 +1,4 @@
-module.exports = (api) => {
+export default (api) => {
   const env = api.env();
 
   let dev = false;

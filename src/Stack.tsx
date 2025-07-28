@@ -5,11 +5,11 @@ import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
-} from './ThemeProvider';
-import type { GapValue } from './types';
+} from './ThemeProvider.js';
+import type { GapValue } from './types.js';
 import createUtilityClassName, {
   type ResponsiveUtilityValue,
-} from './createUtilityClasses';
+} from './createUtilityClasses.js';
 
 export type StackDirection = 'horizontal' | 'vertical';
 

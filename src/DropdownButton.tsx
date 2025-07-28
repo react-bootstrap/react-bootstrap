@@ -1,9 +1,9 @@
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import Dropdown from './Dropdown';
-import DropdownToggle, { type PropsFromToggle } from './DropdownToggle';
-import DropdownMenu, { type DropdownMenuVariant } from './DropdownMenu';
-import type { BsDropdownProps } from './types';
+import Dropdown from './Dropdown.js';
+import DropdownToggle, { type PropsFromToggle } from './DropdownToggle.js';
+import DropdownMenu, { type DropdownMenuVariant } from './DropdownMenu.js';
+import type { BsDropdownProps } from './types.js';
 
 export interface DropdownButtonProps
   extends BsDropdownProps,

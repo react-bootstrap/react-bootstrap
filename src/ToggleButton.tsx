@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useBootstrapPrefix } from './ThemeProvider';
-import Button, { type ButtonProps } from './Button';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import Button, { type ButtonProps } from './Button.js';
 
 export type ToggleButtonType = 'checkbox' | 'radio';
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import divWithClassName from './divWithClassName';
-import { useBootstrapPrefix } from './ThemeProvider';
+import divWithClassName from './divWithClassName.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
 
 const DivStyledAsH5 = divWithClassName('h5');
 

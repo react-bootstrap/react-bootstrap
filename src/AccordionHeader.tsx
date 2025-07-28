@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import AccordionButton from './AccordionButton';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import AccordionButton from './AccordionButton.js';
 
 export interface AccordionHeaderProps
   extends React.HTMLAttributes<HTMLElement> {

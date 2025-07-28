@@ -1,16 +1,16 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import FormCheck from './FormCheck';
-import FormControl from './FormControl';
-import FormFloating from './FormFloating';
-import FormGroup from './FormGroup';
-import FormLabel from './FormLabel';
-import FormRange from './FormRange';
-import FormSelect from './FormSelect';
-import FormText from './FormText';
-import Switch from './Switch';
-import FloatingLabel from './FloatingLabel';
+import FormCheck from './FormCheck.js';
+import FormControl from './FormControl.js';
+import FormFloating from './FormFloating.js';
+import FormGroup from './FormGroup.js';
+import FormLabel from './FormLabel.js';
+import FormRange from './FormRange.js';
+import FormSelect from './FormSelect.js';
+import FormText from './FormText.js';
+import Switch from './Switch.js';
+import FloatingLabel from './FloatingLabel.js';
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   /**

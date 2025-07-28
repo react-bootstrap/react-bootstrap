@@ -7,13 +7,13 @@ import {
   SelectCallback,
 } from '@restart/ui/types';
 import { useUncontrolled } from 'uncontrollable';
-import NavbarBrand from './NavbarBrand';
-import NavbarCollapse from './NavbarCollapse';
-import NavbarToggle from './NavbarToggle';
-import NavbarOffcanvas from './NavbarOffcanvas';
-import { useBootstrapPrefix } from './ThemeProvider';
-import NavbarContext, { type NavbarContextType } from './NavbarContext';
-import NavbarText from './NavbarText';
+import NavbarBrand from './NavbarBrand.js';
+import NavbarCollapse from './NavbarCollapse.js';
+import NavbarToggle from './NavbarToggle.js';
+import NavbarOffcanvas from './NavbarOffcanvas.js';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import NavbarContext, { type NavbarContextType } from './NavbarContext.js';
+import NavbarText from './NavbarText.js';
 
 export interface NavbarProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'> {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import usePlaceholder, { type UsePlaceholderProps } from './usePlaceholder';
-import PlaceholderButton from './PlaceholderButton';
+import usePlaceholder, { type UsePlaceholderProps } from './usePlaceholder.js';
+import PlaceholderButton from './PlaceholderButton.js';
 
 export interface PlaceholderProps extends UsePlaceholderProps {
   /**

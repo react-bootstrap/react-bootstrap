@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import BaseTabs, { TabsProps as BaseTabsProps } from '@restart/ui/Tabs';
-import Nav, { type NavProps } from './Nav';
-import NavLink from './NavLink';
-import NavItem from './NavItem';
-import TabContent from './TabContent';
-import TabPane from './TabPane';
-import { forEach, map } from './ElementChildren';
-import getTabTransitionComponent from './getTabTransitionComponent';
-import type { TransitionType } from './helpers';
+import Nav, { type NavProps } from './Nav.js';
+import NavLink from './NavLink.js';
+import NavItem from './NavItem.js';
+import TabContent from './TabContent.js';
+import TabPane from './TabPane.js';
+import { forEach, map } from './ElementChildren.js';
+import getTabTransitionComponent from './getTabTransitionComponent.js';
+import type { TransitionType } from './helpers.js';
 
 export interface TabsProps
   extends Omit<BaseTabsProps, 'transition'>,

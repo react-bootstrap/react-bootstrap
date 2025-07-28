@@ -4,12 +4,12 @@ import { useContext } from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import BaseNav from '@restart/ui/Nav';
 import { DynamicRefForwardingComponent, EventKey } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import NavbarContext from './NavbarContext';
-import CardHeaderContext from './CardHeaderContext';
-import NavItem from './NavItem';
-import NavLink from './NavLink';
-import type { BaseNavProps } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import NavbarContext from './NavbarContext.js';
+import CardHeaderContext from './CardHeaderContext.js';
+import NavItem from './NavItem.js';
+import NavLink from './NavLink.js';
+import type { BaseNavProps } from './types.js';
 
 export interface NavProps extends BaseNavProps {
   /**

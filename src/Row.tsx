@@ -5,7 +5,7 @@ import {
   useBootstrapPrefix,
   useBootstrapBreakpoints,
   useBootstrapMinBreakpoint,
-} from './ThemeProvider';
+} from './ThemeProvider.js';
 
 type RowColWidth =
   | number

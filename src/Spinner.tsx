@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
-import { useBootstrapPrefix } from './ThemeProvider';
-import type { Variant } from './types';
+import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { Variant } from './types.js';
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLElement> {
   /**
