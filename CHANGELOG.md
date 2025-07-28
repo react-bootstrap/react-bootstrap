@@ -1,3 +1,15 @@
+# [3.0.0-beta.3](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2025-07-28)
+
+
+### Features
+
+* **AccordionHeader:** add disabled prop ([#6940](https://github.com/react-bootstrap/react-bootstrap/issues/6940)) ([376c9ae](https://github.com/react-bootstrap/react-bootstrap/commit/376c9aeda3bf86ce88f36e42e6f78c66eb8ced4f))
+* add better ESM support ([#6939](https://github.com/react-bootstrap/react-bootstrap/issues/6939)) ([e9e9457](https://github.com/react-bootstrap/react-bootstrap/commit/e9e9457c9b4d4d677d33c8fb664f7082fc0da304))
+
+
+
+
+
 # [3.0.0-beta.2](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2025-05-24)
 
 
