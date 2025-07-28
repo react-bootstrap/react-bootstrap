@@ -71,7 +71,7 @@
     "release": "rollout",
     "start": "yarn --cwd www start",
     "tdd": "vitest",
-    "test": "npm run lint && npm run test-browser",
+    "test": "npm run lint && npm run test-browser -- --browser=chromium",
     "test-browser": "vitest --run",
     "prepare": "husky"
   },
