@@ -1351,10 +1351,10 @@
   dependencies:
     dequal "^2.0.3"
 
-"@restart/ui@^2.0.0-beta.5":
-  version "2.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-2.0.0-beta.5.tgz#8119502c08f498bd27f6500bf9877b3ee164a2cd"
-  integrity sha512-AdOcsU8JaIz+EKvJSEfc4zRabJcmpjCjV9WZKKM3OuwopzcV/vUS3aqZX8vr+IbdKxtszUEhqzeqDE3JomNQ0Q==
+"@restart/ui@^2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-2.0.0-beta.6.tgz#3709835c8aad84986e6a04799a12b98253c14fbf"
+  integrity sha512-jUFhsN4F6ZXwFzwrp1+weJ6CIaoN1H/YYksOQPLJIurIYeEc1OYDugoRfU1ixSzc655V3YrLD6eC4eQjqxIfwQ==
   dependencies:
     "@babel/runtime" "^7.26.7"
     "@popperjs/core" "^2.11.8"
