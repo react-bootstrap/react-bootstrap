@@ -128,6 +128,9 @@ const Toast: DynamicRefForwardingComponent<'div', ToastProps> =
 
       const toast = (
         <div
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
           {...props}
           ref={ref}
           className={clsx(
@@ -136,9 +139,6 @@ const Toast: DynamicRefForwardingComponent<'div', ToastProps> =
             bg && `bg-${bg}`,
             !hasAnimation && (show ? 'show' : 'hide'),
           )}
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
         />
       );
 
