@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import Toast from '../src/Toast';
 
 const getToast = ({
@@ -56,6 +56,14 @@ describe('<Toast>', () => {
           .textContent,
       ).toEqual(attrVal),
     );
+  });
+
+  it('should allow attribute overrides', () => {
+    render(<Toast role="status" aria-live="polite" />);
+
+    const toast = screen.getByRole('status');
+    expect(toast).toBeDefined();
+    expect(toast.getAttribute('aria-live')).toEqual('polite');
   });
 
   it('should render without transition if animation is false', () => {
