@@ -1,3 +1,20 @@
+# [3.0.0-beta.4](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-09-04)
+
+
+### Bug Fixes
+
+* fix exit animations for various transitions ([#6954](https://github.com/react-bootstrap/react-bootstrap/issues/6954)) ([dcfe5da](https://github.com/react-bootstrap/react-bootstrap/commit/dcfe5dab70d12da3473d1a3b26fbfa2460fde65c))
+* **Toast:** allow attribute overrides ([#6957](https://github.com/react-bootstrap/react-bootstrap/issues/6957)) ([3ccb86e](https://github.com/react-bootstrap/react-bootstrap/commit/3ccb86ed6fab79b1367c5fc477edc4efb7f60e9c))
+
+
+### Features
+
+* update @restart/ui to v2.0.0-beta.10 ([#6959](https://github.com/react-bootstrap/react-bootstrap/issues/6959)) ([4c69866](https://github.com/react-bootstrap/react-bootstrap/commit/4c69866208bda15f18ed18cfb86c412dc42dad2a))
+
+
+
+
+
 # [3.0.0-beta.3](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2025-07-28)
 
 
