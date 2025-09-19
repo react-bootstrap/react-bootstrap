@@ -89,6 +89,10 @@ const config: Config = {
           label: `v${packageJson.version} (Bootstrap 5)`,
           items: [
             {
+              label: 'v2.10.10 (Bootstrap 5)',
+              href: 'https://react-bootstrap-v2-bs5.netlify.app/',
+            },
+            {
               label: 'v1.6.1 (Bootstrap 4)',
               href: 'https://react-bootstrap-v4.netlify.app/',
             },
