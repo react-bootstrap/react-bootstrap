@@ -956,7 +956,9 @@ const MegaComponent = () => (
       onSelect={noop}
       transition={false}
       unmountOnExit
-    />
+    >
+      <div />
+    </Tab.Container>
     <Tab.Content id="id" as="div" bsPrefix="prefix" style={style} />
     <Tab.Pane
       active

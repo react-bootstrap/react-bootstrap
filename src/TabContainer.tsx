@@ -3,7 +3,7 @@ import type { EventKey, SelectCallback } from '@restart/ui/types';
 import getTabTransitionComponent from './getTabTransitionComponent.js';
 import type { TransitionType } from './helpers.js';
 
-export interface TabContainerProps {
+export interface TabContainerProps extends React.PropsWithChildren {
   /**
    * ID of the TabContainer.
    */
