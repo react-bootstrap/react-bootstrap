@@ -1,3 +1,14 @@
+# [3.0.0-beta.5](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2025-09-22)
+
+
+### Bug Fixes
+
+* **TabContainer:** fix children prop type ([#6965](https://github.com/react-bootstrap/react-bootstrap/issues/6965)) ([5c87f93](https://github.com/react-bootstrap/react-bootstrap/commit/5c87f931b6c1c87cb7bf8872d0ca3a4a626272f7))
+
+
+
+
+
 # [3.0.0-beta.4](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-09-04)
 
 
