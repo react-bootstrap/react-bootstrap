@@ -158,6 +158,9 @@ const FormCheck: DynamicRefForwardingComponent<'input', FormCheckProps> =
           isInvalid={isInvalid}
           disabled={disabled}
           as={as}
+          // add title to input directly if we are not 
+          // rendering the label alongside it
+          title={hasLabel ? undefined : title}
         />
       );
 
