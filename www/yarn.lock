@@ -1414,10 +1414,10 @@
     fs-extra "^11.1.1"
     tslib "^2.6.0"
 
-"@docusaurus/babel@^3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/babel/-/babel-3.8.1.tgz#db329ac047184214e08e2dbc809832c696c18506"
-  integrity sha512-3brkJrml8vUbn9aeoZUlJfsI/GqyFcDgQJwQkmBtclJgWDEQBKKeagZfOgx0WfUQhagL1sQLNW0iBdxnI863Uw==
+"@docusaurus/babel@^3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/babel/-/babel-3.9.1.tgz#5297195ab34df9e184e3e2fe20de1a2e1b2a22e8"
+  integrity sha512-/uoi3oG+wvbVWNBRfPrzrEslOSeLxrQEyWMywK51TLDFTANqIRivzkMusudh5bdDty8fXzCYUT+tg5t697jYqg==
   dependencies:
     "@babel/core" "^7.25.9"
     "@babel/generator" "^7.25.9"
@@ -1429,8 +1429,8 @@
     "@babel/runtime" "^7.25.9"
     "@babel/runtime-corejs3" "^7.25.9"
     "@babel/traverse" "^7.25.9"
-    "@docusaurus/logger" "3.8.1"
-    "@docusaurus/utils" "3.8.1"
+    "@docusaurus/logger" "3.9.1"
+    "@docusaurus/utils" "3.9.1"
     babel-plugin-dynamic-import-node "^2.3.3"
     fs-extra "^11.1.1"
     tslib "^2.6.0"
@@ -1532,10 +1532,10 @@
     chalk "^4.1.2"
     tslib "^2.6.0"
 
-"@docusaurus/logger@3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/logger/-/logger-3.8.1.tgz#45321b2e2e14695d0dbd8b4104ea7b0fbaa98700"
-  integrity sha512-2wjeGDhKcExEmjX8k1N/MRDiPKXGF2Pg+df/bDDPnnJWHXnVEZxXj80d6jcxp1Gpnksl0hF8t/ZQw9elqj2+ww==
+"@docusaurus/logger@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/logger/-/logger-3.9.1.tgz#0209c4c1044ee35d89dbf676e3cbb5dc8b59c82b"
+  integrity sha512-C9iFzXwHzwvGlisE4bZx+XQE0JIqlGAYAd5LzpR7fEDgjctu7yL8bE5U4nTNywXKHURDzMt4RJK8V6+stFHVkA==
   dependencies:
     chalk "^4.1.2"
     tslib "^2.6.0"
@@ -1583,12 +1583,12 @@
     react-helmet-async "npm:@slorber/react-helmet-async@*"
     react-loadable "npm:@docusaurus/react-loadable@6.0.0"
 
-"@docusaurus/module-type-aliases@^3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/module-type-aliases/-/module-type-aliases-3.8.1.tgz#454de577bd7f50b5eae16db0f76b49ca5e4e281a"
-  integrity sha512-6xhvAJiXzsaq3JdosS7wbRt/PwEPWHr9eM4YNYqVlbgG1hSK3uQDXTVvQktasp3VO6BmfYWPozueLWuj4gB+vg==
+"@docusaurus/module-type-aliases@^3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/module-type-aliases/-/module-type-aliases-3.9.1.tgz#201959a22e7b30881cf879a21d2ae5b26415b705"
+  integrity sha512-YBce3GbJGGcMbJTyHcnEOMvdXqg41pa5HsrMCGA5Rm4z0h0tHS6YtEldj0mlfQRhCG7Y0VD66t2tb87Aom+11g==
   dependencies:
-    "@docusaurus/types" "3.8.1"
+    "@docusaurus/types" "3.9.1"
     "@types/history" "^4.7.11"
     "@types/react" "*"
     "@types/react-router-config" "*"
@@ -1844,10 +1844,10 @@
     fs-extra "^11.1.1"
     tslib "^2.6.0"
 
-"@docusaurus/tsconfig@^3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/tsconfig/-/tsconfig-3.8.1.tgz#a1f7daadfc93455289200647f4ee10cdca540f7b"
-  integrity sha512-XBWCcqhRHhkhfolnSolNL+N7gj3HVE3CoZVqnVjfsMzCoOsuQw2iCLxVVHtO+rePUUfouVZHURDgmqIySsF66A==
+"@docusaurus/tsconfig@^3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/tsconfig/-/tsconfig-3.9.1.tgz#a39cb74021f16dd4794db9182de812303817528e"
+  integrity sha512-stdzM1dNDgRO0OvxeznXlE3N1igUoeHPNJjiKqyffLizgpVgNXJBAWeG6fuoYiCH4udGUBqy2dyM+1+kG2/UPQ==
 
 "@docusaurus/types@3.7.0":
   version "3.7.0"
@@ -1864,13 +1864,14 @@
     webpack "^5.95.0"
     webpack-merge "^5.9.0"
 
-"@docusaurus/types@3.8.1", "@docusaurus/types@^3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-3.8.1.tgz#83ab66c345464e003b576a49f78897482061fc26"
-  integrity sha512-ZPdW5AB+pBjiVrcLuw3dOS6BFlrG0XkS2lDGsj8TizcnREQg3J8cjsgfDviszOk4CweNfwo1AEELJkYaMUuOPg==
+"@docusaurus/types@3.9.1", "@docusaurus/types@^3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-3.9.1.tgz#e4fdaf0b91ea014a6aae0d8b62d59f3f020117b6"
+  integrity sha512-ElekJ29sk39s5LTEZMByY1c2oH9FMtw7KbWFU3BtuQ1TytfIK39HhUivDEJvm5KCLyEnnfUZlvSNDXeyk0vzAA==
   dependencies:
     "@mdx-js/mdx" "^3.0.0"
     "@types/history" "^4.7.11"
+    "@types/mdast" "^4.0.2"
     "@types/react" "*"
     commander "^5.1.0"
     joi "^17.9.2"
@@ -1887,12 +1888,12 @@
     "@docusaurus/types" "3.7.0"
     tslib "^2.6.0"
 
-"@docusaurus/utils-common@3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-3.8.1.tgz#c369b8c3041afb7dcd595d4172beb1cc1015c85f"
-  integrity sha512-zTZiDlvpvoJIrQEEd71c154DkcriBecm4z94OzEE9kz7ikS3J+iSlABhFXM45mZ0eN5pVqqr7cs60+ZlYLewtg==
+"@docusaurus/utils-common@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-3.9.1.tgz#202778391caed923c2527a166a3aae3a22b2dcad"
+  integrity sha512-4M1u5Q8Zn2CYL2TJ864M51FV4YlxyGyfC3x+7CLuR6xsyTVNBNU4QMcPgsTHRS9J2+X6Lq7MyH6hiWXyi/sXUQ==
   dependencies:
-    "@docusaurus/types" "3.8.1"
+    "@docusaurus/types" "3.9.1"
     tslib "^2.6.0"
 
 "@docusaurus/utils-validation@3.7.0":
@@ -1935,14 +1936,14 @@
     utility-types "^3.10.0"
     webpack "^5.88.1"
 
-"@docusaurus/utils@3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-3.8.1.tgz#2ac1e734106e2f73dbd0f6a8824d525f9064e9f0"
-  integrity sha512-P1ml0nvOmEFdmu0smSXOqTS1sxU5tqvnc0dA4MTKV39kye+bhQnjkIKEE18fNOvxjyB86k8esoCIFM3x4RykOQ==
+"@docusaurus/utils@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-3.9.1.tgz#9b78849a2be5e3023580b800409aae36a0da6dc8"
+  integrity sha512-YAL4yhhWLl9DXuf5MVig260a6INz4MehrBGFU/CZu8yXmRiYEuQvRFWh9ZsjfAOyaG7za1MNmBVZ4VVAi/CiJA==
   dependencies:
-    "@docusaurus/logger" "3.8.1"
-    "@docusaurus/types" "3.8.1"
-    "@docusaurus/utils-common" "3.8.1"
+    "@docusaurus/logger" "3.9.1"
+    "@docusaurus/types" "3.9.1"
+    "@docusaurus/utils-common" "3.9.1"
     escape-string-regexp "^4.0.0"
     execa "5.1.1"
     file-loader "^6.2.0"
