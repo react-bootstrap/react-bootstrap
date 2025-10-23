@@ -40,12 +40,12 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
-    "@docusaurus/babel": "^3.8.1",
-    "@docusaurus/module-type-aliases": "^3.8.1",
-    "@docusaurus/tsconfig": "^3.8.1",
-    "@docusaurus/types": "^3.8.1",
+    "@docusaurus/babel": "^3.9.2",
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/tsconfig": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
     "cross-env": "^7.0.3",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "browserslist": {
     "production": [
