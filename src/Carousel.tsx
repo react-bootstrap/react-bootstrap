@@ -311,7 +311,7 @@ const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
               return;
             }
 
-            nextActiveIndex = numChildren - 1;
+            nextActiveIndex = numChildren > 0 ? numChildren - 1 : 0;
           }
 
           nextDirectionRef.current = 'prev';
