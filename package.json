@@ -116,7 +116,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.4.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.2",
+    "lint-staged": "^16.2.6",
     "playwright": "^1.55.0",
     "prettier": "^3.6.2",
     "react": "^19.2.0",
