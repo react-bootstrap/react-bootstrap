@@ -44,7 +44,7 @@
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/tsconfig": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.1.0",
     "typescript": "^5.9.3"
   },
   "browserslist": {
