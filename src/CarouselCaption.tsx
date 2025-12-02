@@ -3,8 +3,7 @@ import clsx from 'clsx';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
-export interface CarouselCaptionProps
-  extends React.HTMLAttributes<HTMLElement> {
+export interface CarouselCaptionProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */

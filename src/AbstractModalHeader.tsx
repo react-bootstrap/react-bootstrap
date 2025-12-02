@@ -4,8 +4,7 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import CloseButton, { type CloseButtonVariant } from './CloseButton.js';
 import ModalContext from './ModalContext.js';
 
-export interface AbstractModalHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface AbstractModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Provides an accessible label for the close
    * button. It is used for Assistive Technology when the label text is not

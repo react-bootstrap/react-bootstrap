@@ -14,8 +14,10 @@ import AccordionContext, {
 import AccordionHeader from './AccordionHeader.js';
 import AccordionItem from './AccordionItem.js';
 
-export interface AccordionProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface AccordionProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  'onSelect'
+> {
   /**
    * Element used to render the component.
    */

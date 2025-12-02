@@ -14,8 +14,7 @@ import ToastContext from './ToastContext.js';
 import type { TransitionCallbacks, Variant } from './types.js';
 
 export interface ToastProps
-  extends TransitionCallbacks,
-    React.HTMLAttributes<HTMLElement> {
+  extends TransitionCallbacks, React.HTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */

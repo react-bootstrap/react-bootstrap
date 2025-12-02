@@ -17,7 +17,8 @@ import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
 import type { BsDropdownProps } from './types.js';
 
 export interface DropdownProps
-  extends BsDropdownProps,
+  extends
+    BsDropdownProps,
     Omit<
       React.HTMLAttributes<HTMLElement>,
       'onSelect' | 'children' | 'onToggle'

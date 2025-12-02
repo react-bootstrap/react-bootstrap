@@ -4,8 +4,7 @@ import { useContext } from 'react';
 import FormContext from './FormContext.js';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
-export interface FormCheckLabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface FormCheckLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * @default 'form-check-label'
    */

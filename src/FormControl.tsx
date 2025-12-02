@@ -9,8 +9,10 @@ import { useBootstrapPrefix } from './ThemeProvider.js';
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
-export interface FormControlProps
-  extends Omit<React.InputHTMLAttributes<FormControlElement>, 'size'> {
+export interface FormControlProps extends Omit<
+  React.InputHTMLAttributes<FormControlElement>,
+  'size'
+> {
   /**
    * Element used to render the component.
    */

@@ -4,8 +4,10 @@ import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import FormContext from './FormContext.js';
 
-export interface FormSelectProps
-  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+export interface FormSelectProps extends Omit<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  'size'
+> {
   /**
    * @default 'form-select'
    */

@@ -3,8 +3,7 @@ import clsx from 'clsx';
 
 export type CloseButtonVariant = 'white' | string;
 
-export interface CloseButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * An accessible label indicating the relevant information about the Close Button.
    */

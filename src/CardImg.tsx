@@ -3,8 +3,7 @@ import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
-export interface CardImgProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface CardImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /**
    * Element used to render the component.
    */

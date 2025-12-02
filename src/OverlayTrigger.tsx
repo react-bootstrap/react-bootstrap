@@ -20,8 +20,10 @@ export type OverlayTriggerRenderProps = OverlayInjectedProps & {
   ref: React.Ref<any>;
 };
 
-export interface OverlayTriggerProps
-  extends Omit<OverlayProps, 'children' | 'target' | 'onHide'> {
+export interface OverlayTriggerProps extends Omit<
+  OverlayProps,
+  'children' | 'target' | 'onHide'
+> {
   children:
     | React.ReactElement
     | ((props: OverlayTriggerRenderProps) => React.ReactNode);

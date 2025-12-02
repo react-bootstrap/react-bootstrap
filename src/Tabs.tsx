@@ -11,7 +11,8 @@ import getTabTransitionComponent from './getTabTransitionComponent.js';
 import type { TransitionType } from './helpers.js';
 
 export interface TabsProps
-  extends Omit<BaseTabsProps, 'transition'>,
+  extends
+    Omit<BaseTabsProps, 'transition'>,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'role'>,
     NavProps {
   /**

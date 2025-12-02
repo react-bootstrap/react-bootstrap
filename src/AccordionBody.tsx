@@ -8,8 +8,7 @@ import AccordionItemContext from './AccordionItemContext.js';
 import type { TransitionCallbacks } from './types.js';
 
 export interface AccordionBodyProps
-  extends TransitionCallbacks,
-    React.HTMLAttributes<HTMLElement> {
+  extends TransitionCallbacks, React.HTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */
