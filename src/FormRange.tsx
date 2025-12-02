@@ -4,8 +4,10 @@ import { useContext } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import FormContext from './FormContext.js';
 
-export interface FormRangeProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface FormRangeProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'type'
+> {
   /**
    * Element used to render the component.
    */

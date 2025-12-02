@@ -12,7 +12,8 @@ import type { TransitionCallbacks } from './types.js';
 type Dimension = 'height' | 'width';
 
 export interface CollapseProps
-  extends TransitionCallbacks,
+  extends
+    TransitionCallbacks,
     Pick<React.HTMLAttributes<HTMLElement>, 'className' | 'role'> {
   /**
    * Show the component; triggers the expand or collapse animation

@@ -32,8 +32,10 @@ export interface CarouselRef {
   next: (e?: React.SyntheticEvent) => void;
 }
 
-export interface CarouselProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface CarouselProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  'onSelect'
+> {
   /**
    * Element used to render the component.
    */

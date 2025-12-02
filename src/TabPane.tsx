@@ -14,8 +14,7 @@ import type { TransitionType } from './helpers.js';
 import type { TransitionCallbacks } from './types.js';
 
 export interface TabPaneProps
-  extends TransitionCallbacks,
-    React.HTMLAttributes<HTMLElement> {
+  extends TransitionCallbacks, React.HTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */

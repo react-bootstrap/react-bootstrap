@@ -4,8 +4,7 @@ import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import AccordionButton from './AccordionButton.js';
 
-export interface AccordionHeaderProps
-  extends React.HTMLAttributes<HTMLElement> {
+export interface AccordionHeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */

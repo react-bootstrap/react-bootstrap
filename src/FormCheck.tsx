@@ -11,8 +11,7 @@ import { hasChildOfType } from './ElementChildren.js';
 
 export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
-export interface FormCheckProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface FormCheckProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Element used to render the component.
    */

@@ -5,7 +5,8 @@ import { useBootstrapPrefix } from './ThemeProvider.js';
 import NavbarContext from './NavbarContext.js';
 
 export interface NavbarCollapseProps
-  extends Omit<CollapseProps, 'children'>,
+  extends
+    Omit<CollapseProps, 'children'>,
     React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default 'navbar-collapse'

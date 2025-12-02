@@ -7,8 +7,7 @@ import { useBootstrapPrefix } from './ThemeProvider.js';
 
 type FormCheckInputType = 'checkbox' | 'radio';
 
-export interface FormCheckInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface FormCheckInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Element used to render the component.
    */

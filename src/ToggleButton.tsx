@@ -5,8 +5,10 @@ import Button, { type ButtonProps } from './Button.js';
 
 export type ToggleButtonType = 'checkbox' | 'radio';
 
-export interface ToggleButtonProps
-  extends Omit<ButtonProps, 'onChange' | 'type'> {
+export interface ToggleButtonProps extends Omit<
+  ButtonProps,
+  'onChange' | 'type'
+> {
   /**
    * @default 'btn-check'
    */

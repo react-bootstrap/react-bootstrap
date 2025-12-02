@@ -6,7 +6,8 @@ import type { PropsFromToggle } from './DropdownToggle.js';
 import { BsDropdownProps } from './types.js';
 
 export interface SplitButtonProps
-  extends BsDropdownProps,
+  extends
+    BsDropdownProps,
     PropsFromToggle,
     Omit<
       React.HTMLAttributes<HTMLElement>,

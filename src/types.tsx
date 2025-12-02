@@ -11,11 +11,10 @@ import type { EventKey, SelectCallback } from '@restart/ui/types';
 import type { DropDirection } from './DropdownContext.js';
 
 export type DOMContainer<T extends HTMLElement | VirtualElement = HTMLElement> =
-
-    | T
-    | React.RefObject<T | null>
-    | null
-    | (() => T | React.RefObject<T | null> | null);
+  | T
+  | React.RefObject<T | null>
+  | null
+  | (() => T | React.RefObject<T | null> | null);
 
 export type Variant =
   | 'primary'
@@ -186,8 +185,10 @@ export interface BaseDropdownProps {
   children: React.ReactNode;
 }
 
-export interface BaseNavProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
+export interface BaseNavProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  'onSelect'
+> {
   /**
    * Key for the currently active NavItem.
    *

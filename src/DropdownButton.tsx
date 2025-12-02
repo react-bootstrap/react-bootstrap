@@ -6,7 +6,8 @@ import DropdownMenu, { type DropdownMenuVariant } from './DropdownMenu.js';
 import type { BsDropdownProps } from './types.js';
 
 export interface DropdownButtonProps
-  extends BsDropdownProps,
+  extends
+    BsDropdownProps,
     PropsFromToggle,
     Omit<
       React.HTMLAttributes<HTMLElement>,

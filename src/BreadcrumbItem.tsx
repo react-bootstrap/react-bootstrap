@@ -4,8 +4,10 @@ import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Anchor from '@restart/ui/Anchor';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
-export interface BreadcrumbItemProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
+export interface BreadcrumbItemProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  'title'
+> {
   /**
    * Element used to render the component.
    */

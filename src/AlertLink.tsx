@@ -4,8 +4,7 @@ import Anchor from '@restart/ui/Anchor';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
-export interface AlertLinkProps
-  extends React.AnchorHTMLAttributes<HTMLElement> {
+export interface AlertLinkProps extends React.AnchorHTMLAttributes<HTMLElement> {
   /**
    * Element used to render the component.
    */

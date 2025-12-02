@@ -15,8 +15,10 @@ import { useBootstrapPrefix } from './ThemeProvider.js';
 import NavbarContext, { type NavbarContextType } from './NavbarContext.js';
 import NavbarText from './NavbarText.js';
 
-export interface NavbarProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'> {
+export interface NavbarProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  'onSelect' | 'onToggle'
+> {
   /**
    * Element used to render the component.
    */

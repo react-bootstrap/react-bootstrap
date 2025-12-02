@@ -3,8 +3,7 @@ import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem.js';
 
-export interface PaginationProps
-  extends React.HTMLAttributes<HTMLUListElement> {
+export interface PaginationProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Element used to render the component.
    */

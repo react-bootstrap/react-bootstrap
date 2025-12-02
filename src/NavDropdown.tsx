@@ -8,7 +8,8 @@ import NavLink from './NavLink.js';
 import type { BsDropdownProps } from './types.js';
 
 export interface NavDropdownProps
-  extends BsDropdownProps,
+  extends
+    BsDropdownProps,
     Omit<
       React.HTMLAttributes<HTMLElement>,
       'onSelect' | 'children' | 'onToggle' | 'title'

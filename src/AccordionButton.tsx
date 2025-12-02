@@ -9,8 +9,7 @@ import AccordionItemContext from './AccordionItemContext.js';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import useAccordionButton from './useAccordionButton.js';
 
-export interface AccordionButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AccordionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Element used to render the component.
    */
