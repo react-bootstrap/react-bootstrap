@@ -107,8 +107,8 @@
     "@types/react-dom": "^19.2.3",
     "@types/warning": "^3.0.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/browser": "^3.2.4",
-    "@vitest/coverage-istanbul": "^3.2.4",
+    "@vitest/browser": "^4.0.15",
+    "@vitest/coverage-istanbul": "^4.0.15",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -124,7 +124,7 @@
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "peerDependencies": {
     "@types/react": ">=18.3.12",
