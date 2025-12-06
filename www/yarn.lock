@@ -6026,10 +6026,10 @@ markdown-table@^3.0.0:
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-3.0.4.tgz#fe44d6d410ff9d6f2ea1797a3f60aa4d2b631c2a"
   integrity sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==
 
-markdown-to-jsx@^7.7.6:
-  version "7.7.6"
-  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.7.6.tgz#db67500bbc381b2a03cc6485aecf916adc56fe7f"
-  integrity sha512-/PWFFoKKMidk4Ut06F5hs5sluq1aJ0CGvUJWsnCK6hx/LPM8vlhvKAxtGHJ+U+V2Il2wmnfO6r81ICD3xZRVaw==
+markdown-to-jsx@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-9.3.2.tgz#8dfa9b8f5f64166f9b496ccfe0ed4d614b992f07"
+  integrity sha512-82v6mZYfkcHZ5ZemJb3VheseNzN5wH1qNgy0RLn8hln6iEOdd7DfRxtTowqA/nkYltohczFrWvdOFt0PlNFtgQ==
 
 math-intrinsics@^1.1.0:
   version "1.1.0"
