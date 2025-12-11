@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:
-          node-version: 22.21.1
+          node-version: 24.12.0
           cache: yarn
 
       - name: Install Dependencies
@@ -55,7 +55,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:
-          node-version: 22.21.1
+          node-version: 24.12.0
 
       - name: Install Dependencies
         run: yarn --network-timeout 100000
