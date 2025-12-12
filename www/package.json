@@ -29,7 +29,7 @@
     "formik": "^2.4.6",
     "holderjs": "^2.9.9",
     "lodash.camelcase": "^4.3.0",
-    "markdown-to-jsx": "^7.7.6",
+    "markdown-to-jsx": "^9.3.5",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.1.0",
