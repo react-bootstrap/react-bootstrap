@@ -43,7 +43,7 @@ jobs:
           BROWSER: ${{ matrix.browser }}
 
       - name: Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
 
   build-lint:
     name: Build and lint
