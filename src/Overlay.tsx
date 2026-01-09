@@ -151,6 +151,13 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
               hasDoneInitialMeasure,
             });
 
+          // React.Fragment cannot receive props like style, className, etc.
+          // In React 19, passing invalid props to Fragment throws an error.
+          // Return the Fragment as-is to avoid this issue.
+          if (overlay.type === React.Fragment) {
+            return overlay;
+          }
+
           return React.cloneElement(overlay, {
             ...overlayProps,
             placement: updatedPlacement,
