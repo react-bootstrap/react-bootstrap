@@ -209,9 +209,16 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
     [handleHide],
   );
 
+  const child =
+    typeof children !== 'function' ? React.Children.only(children) : null;
+  const isFunctionComponent =
+    child &&
+    typeof child.type === 'function' &&
+    !(child.type as any).prototype?.isReactComponent;
+
   const triggers: string[] = trigger == null ? [] : [].concat(trigger as any);
   const triggerProps: any = {
-    ref: mergedRef,
+    ...(!isFunctionComponent && { ref: mergedRef }),
   };
 
   if (triggers.indexOf('click') !== -1) {
