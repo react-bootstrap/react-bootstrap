@@ -70,6 +70,11 @@ function wrapRefs(props, arrowProps) {
   arrowProps.ref = aRef.__wrapped || (aRef.__wrapped = (r) => aRef(r));
 }
 
+function clearPopperCache(popperRef: Partial<PopperRef>) {
+  popperRef.state = undefined;
+  popperRef.scheduleUpdate = undefined;
+}
+
 const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
   (
     {
@@ -108,8 +113,16 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
     useEffect(() => {
       if (!outerShow) {
         setFirstRenderedState(null);
+        clearPopperCache(popperRef.current);
       }
     }, [outerShow]);
+
+    useEffect(
+      () => () => {
+        clearPopperCache(popperRef.current);
+      },
+      [],
+    );
 
     return (
       <BaseOverlay
