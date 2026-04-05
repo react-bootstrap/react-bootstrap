@@ -84,7 +84,9 @@ describe('<Overlay>', () => {
 
     fireEvent.click(screen.getByTestId('target'));
 
-    await waitFor(() => expect(screen.queryByTestId('test-overlay')).toBeNull());
+    await waitFor(() =>
+      expect(screen.queryByTestId('test-overlay')).toBeNull(),
+    );
     await waitFor(() => expect(capturedPopper.state).toBeUndefined());
     expect(capturedPopper.scheduleUpdate).toBeUndefined();
   });
