@@ -40,10 +40,10 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
-    "@docusaurus/babel": "^3.9.2",
-    "@docusaurus/module-type-aliases": "^3.9.2",
-    "@docusaurus/tsconfig": "^3.9.2",
-    "@docusaurus/types": "^3.9.2",
+    "@docusaurus/babel": "^3.10.0",
+    "@docusaurus/module-type-aliases": "^3.10.0",
+    "@docusaurus/tsconfig": "^3.10.0",
+    "@docusaurus/types": "^3.10.0",
     "cross-env": "^10.1.0",
     "typescript": "^5.9.3"
   },
