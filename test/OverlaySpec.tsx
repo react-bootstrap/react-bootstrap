@@ -102,7 +102,7 @@ describe('<Overlay>', () => {
           <button ref={target} type="button" data-testid="target">
             toggle
           </button>
-          <Overlay show transition={false} target={target.current}>
+          <Overlay show transition={false} target={() => target.current}>
             {(props) => {
               capturedPopper = props.popper;
 
