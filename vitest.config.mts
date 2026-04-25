@@ -1,4 +1,5 @@
 import { coverageConfigDefaults, defineConfig } from 'vitest/config';
+import { playwright } from '@vitest/browser-playwright';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -11,19 +12,13 @@ export default defineConfig({
     setupFiles: ['vitest.setup.ts'],
     browser: {
       enabled: true,
-      provider: 'playwright',
+      provider: playwright(),
       instances: [
         {
           browser: 'chromium',
-          context: {
-            hasTouch: true,
-          },
         },
         {
           browser: 'firefox',
-          context: {
-            hasTouch: true,
-          },
         },
       ],
     },
