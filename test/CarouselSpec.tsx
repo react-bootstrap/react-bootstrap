@@ -772,10 +772,10 @@ describe('<Carousel>', () => {
   describe('touch events', () => {
     let clock: ReturnType<typeof vi.useFakeTimers>,
       carousel: HTMLElement,
-      onSelectSpy: ReturnType<typeof vi.fn>,
-      onTouchStartSpy: ReturnType<typeof vi.fn>,
-      onTouchMoveSpy: ReturnType<typeof vi.fn>,
-      onTouchEndSpy: ReturnType<typeof vi.fn>;
+      onSelectSpy: ReturnType<typeof vi.fn<(...args: any[]) => any>>,
+      onTouchStartSpy: ReturnType<typeof vi.fn<(...args: any[]) => any>>,
+      onTouchMoveSpy: ReturnType<typeof vi.fn<(...args: any[]) => any>>,
+      onTouchEndSpy: ReturnType<typeof vi.fn<(...args: any[]) => any>>;
 
     beforeEach(() => {
       onSelectSpy = vi.fn();
