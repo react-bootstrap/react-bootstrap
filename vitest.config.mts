@@ -12,7 +12,11 @@ export default defineConfig({
     setupFiles: ['vitest.setup.ts'],
     browser: {
       enabled: true,
-      provider: playwright(),
+      provider: playwright({
+        contextOptions: {
+          hasTouch: true,
+        },
+      }),
       instances: [
         {
           browser: 'chromium',
