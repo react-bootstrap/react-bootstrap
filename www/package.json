@@ -35,7 +35,7 @@
     "react": "^19.1.0",
     "react-docgen": "^8.0.3",
     "react-dom": "^19.1.0",
-    "react-live": "^2.4.1",
+    "react-live": "^4.1.8",
     "sass": "^1.99.0",
     "yup": "^1.7.1"
   },
