@@ -186,7 +186,7 @@ function processAdmonitionProps(props: Props): Props {
   };
 }
 
-export default function Admonition(props: Props): JSX.Element {
+export default function Admonition(props: Props): React.JSX.Element {
   const {
     children,
     type,

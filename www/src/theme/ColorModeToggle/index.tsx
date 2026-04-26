@@ -13,11 +13,13 @@ function ColorModeToggle({
   buttonClassName,
   value,
   onChange,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const isBrowser = useIsBrowser();
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-bs-theme', value);
+    if (value) {
+      document.documentElement.setAttribute('data-bs-theme', value);
+    }
   }, [value]);
 
   const title = translate(

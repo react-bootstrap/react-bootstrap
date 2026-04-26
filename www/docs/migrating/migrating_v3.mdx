@@ -1,0 +1,38 @@
+---
+title: Migrating to v3
+sidebar_label: Migrating to v3
+sidebar_position: 7
+---
+
+## Summary of breaking changes from v2.x
+
+Below is a _rough_ account of the breaking API changes as well as the minimal change to migrate
+
+### General
+
+- React >= 18.3.1 is now required
+- `prop-types` has been removed
+
+### AccordionButton
+
+- `useAccordionButton` is now exported from its own file. You can now import via
+
+```ts
+import useAccordionButton from 'react-bootstrap/useAccordionButton';
+```
+
+### Collapse
+
+- Collapse now requires a child component that forwards the ref to the underlying HTML element.
+
+### Fade
+
+- Fade now requires a child component that forwards the ref to the underlying HTML element.
+
+### NavbarOffcanvas
+
+- Rendering behavior has been changed. See Offcanvas notes for more details.
+
+### Offcanvas
+
+- Offcanvas will always be rendered in the DOM and not be unmounted when it is hidden.

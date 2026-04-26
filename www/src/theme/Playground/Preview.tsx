@@ -11,11 +11,12 @@ export interface PreviewProps {
 }
 
 const Preview: React.FC<PreviewProps> = ({ className }) => {
-  const exampleRef = useRef(null);
+  const exampleRef = useRef<HTMLDivElement>(null);
   const [hjs, setHjs] = useState(null);
   const live = useContext(LiveContext);
 
   useEffect(() => {
+    // @ts-expect-error missing TS type.
     import('holderjs').then(({ default: hjsModule }) => {
       hjsModule.addTheme('gray', {
         bg: '#373940',
@@ -32,9 +33,10 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
       return;
     }
 
+    // @ts-expect-error missing TS type.
     hjs.run({
       theme: 'gray',
-      images: qsa(exampleRef.current, 'img'),
+      images: exampleRef.current ? qsa(exampleRef.current, 'img') : [],
     });
   }, [hjs, (live as any).element]);
 
@@ -46,7 +48,8 @@ const Preview: React.FC<PreviewProps> = ({ className }) => {
     },
     (mutations) => {
       mutations.forEach((mutation) => {
-        if (hjs && mutation.addedNodes.length > 0) {
+        if (hjs && exampleRef.current && mutation.addedNodes.length > 0) {
+          // @ts-expect-error missing TS type.
           hjs.run({
             theme: 'gray',
             images: qsa(exampleRef.current, 'img'),

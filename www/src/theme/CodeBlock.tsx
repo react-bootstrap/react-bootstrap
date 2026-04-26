@@ -11,10 +11,6 @@ function transformCode(rawCode: string) {
 
 type Props = WrapperProps<typeof CodeBlockType>;
 
-export default function CodeBlockWrapper(props: Props): JSX.Element {
-  return (
-    <>
-      <CodeBlock {...props} transformCode={transformCode} />
-    </>
-  );
+export default function CodeBlockWrapper(props: Props): React.JSX.Element {
+  return <CodeBlock {...props} transformCode={transformCode} />;
 }

@@ -8,7 +8,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import { usePrismTheme } from '@docusaurus/theme-common';
 import type { Props } from '@theme/Playground';
 import type { ThemeConfig } from '@docusaurus/theme-live-codeblock';
-import CopyButton from '@theme-original/CodeBlock/CopyButton';
+import CopyButton from './CopyButton';
 import Preview from './Preview';
 import EditorInfoMessage from './EditorInfoMessage';
 
@@ -58,13 +58,13 @@ function ThemedLiveEditor() {
   const [ignoreTab, setIgnoreTab] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
   const mouseDownRef = useRef(false);
-  const idRef = useRef(null);
+  const idRef = useRef<string | null>(null);
 
   if (idRef.current === null) idRef.current = `described-by-${++uid}`;
   const id = idRef.current;
 
   const handleKeyDown = useCallback(
-    (e) => {
+    (e: React.KeyboardEvent) => {
       if (ignoreTab) {
         if (e.key !== 'Tab' && e.key !== 'Shift') {
           if (e.key === 'Enter') e.preventDefault();
@@ -113,7 +113,7 @@ function ThemedLiveEditor() {
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
-        aria-describedby={showMessage ? id : null}
+        aria-describedby={showMessage ? id : undefined}
         {...props}
       />
       <div className={clsx(styles.editorToolbar)}>
@@ -131,7 +131,7 @@ function ThemedLiveEditor() {
           </EditorInfoMessage>
         )}
         <div className={styles.buttonGroup}>
-          <CopyButton code={code} />
+          {code && <CopyButton code={code} />}
         </div>
       </div>
     </div>
@@ -173,8 +173,9 @@ export default function Playground({
   return (
     <div className={styles.playgroundContainer}>
       <LiveProvider
-        code={children.replace(/\n$/, '')}
+        code={children?.replace(/\n$/, '')}
         noInline={noInline}
+        // @ts-ignore upstream type is wrong.
         transformCode={transformCode ?? ((code) => `${code};`)}
         theme={prismTheme}
         {...props}
