@@ -340,6 +340,96 @@ describe('<OverlayTrigger>', () => {
     expect(overlay).toBeDefined();
   });
 
+  describe('interactiveOverlay', () => {
+    it('Should keep overlay visible when hovering over overlay content', async () => {
+      render(
+        <OverlayTrigger
+          trigger={['hover', 'focus']}
+          overlay={<TemplateDiv>interactive content</TemplateDiv>}
+          interactiveOverlay
+        >
+          <span data-testid="test-hover">hover me</span>
+        </OverlayTrigger>,
+      );
+
+      const hoverElem = screen.getByTestId('test-hover');
+
+      // Hover trigger to show overlay
+      fireEvent.mouseOver(hoverElem);
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).not.toBeNull(),
+      );
+
+      const overlayElem = screen.getByTestId('test-overlay');
+
+      // Move mouse to overlay content — should stay visible
+      fireEvent.mouseOut(hoverElem);
+      fireEvent.mouseOver(overlayElem);
+
+      // Overlay should still be visible
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).not.toBeNull(),
+      );
+    });
+
+    it('Should hide overlay when mouse leaves overlay content', async () => {
+      render(
+        <OverlayTrigger
+          trigger={['hover', 'focus']}
+          overlay={<TemplateDiv>interactive content</TemplateDiv>}
+          interactiveOverlay
+        >
+          <span data-testid="test-hover">hover me</span>
+        </OverlayTrigger>,
+      );
+
+      const hoverElem = screen.getByTestId('test-hover');
+
+      // Hover trigger to show overlay
+      fireEvent.mouseOver(hoverElem);
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).not.toBeNull(),
+      );
+
+      const overlayElem = screen.getByTestId('test-overlay');
+
+      // Move mouse to overlay, then leave overlay
+      fireEvent.mouseOut(hoverElem);
+      fireEvent.mouseOver(overlayElem);
+      fireEvent.mouseOut(overlayElem);
+
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).toBeNull(),
+      );
+    });
+
+    it('Should not add overlay hover handlers when interactiveOverlay is false', async () => {
+      render(
+        <OverlayTrigger
+          trigger={['hover', 'focus']}
+          overlay={<TemplateDiv>content</TemplateDiv>}
+        >
+          <span data-testid="test-hover">hover me</span>
+        </OverlayTrigger>,
+      );
+
+      const hoverElem = screen.getByTestId('test-hover');
+
+      // Hover trigger to show overlay
+      fireEvent.mouseOver(hoverElem);
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).not.toBeNull(),
+      );
+
+      // Mouse out should hide overlay (default behavior)
+      fireEvent.mouseOut(hoverElem);
+
+      await waitFor(() =>
+        expect(screen.queryByTestId('test-overlay')).toBeNull(),
+      );
+    });
+  });
+
   describe('rootClose', () => {
     [
       {
