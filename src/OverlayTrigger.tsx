@@ -82,6 +82,17 @@ export interface OverlayTriggerProps extends Omit<
    * The placement of the Overlay in relation to it's `target`.
    */
   placement?: Placement | undefined;
+
+  /**
+   * Keep the overlay visible when the cursor moves from the trigger onto the
+   * overlay content. Only applies when `trigger` includes `'hover'`.
+   *
+   * This is useful for interactive overlays where users need to click links
+   * or copy text inside a tooltip or popover.
+   *
+   * @default false
+   */
+  interactiveOverlay?: boolean | undefined;
 }
 
 function normalizeDelay(delay?: OverlayDelay) {
@@ -124,6 +135,7 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   delay: propsDelay,
   placement,
   flip = placement && placement.indexOf('auto') !== -1,
+  interactiveOverlay = false,
   ...props
 }: OverlayTriggerProps) => {
   const triggerNodeRef = useRef(null);
@@ -223,7 +235,9 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
     triggerProps.onBlur = handleBlur;
   }
 
-  if (triggers.indexOf('hover') !== -1) {
+  const hasHoverTrigger = triggers.indexOf('hover') !== -1;
+
+  if (hasHoverTrigger) {
     warning(
       triggers.length > 1,
       '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibility of the overlay to just mouse users. Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.',
@@ -231,6 +245,35 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
     triggerProps.onMouseOver = handleMouseOver;
     triggerProps.onMouseOut = handleMouseOut;
   }
+
+  // Wrap overlay with mouse handlers to keep it visible when hovered
+  const wrappedOverlay = useCallback(
+    (injected: any) => {
+      const rendered =
+        typeof overlay === 'function'
+          ? overlay(injected)
+          : cloneElement(overlay, injected);
+
+      if (!interactiveOverlay || !hasHoverTrigger) return rendered;
+
+      return (
+        <div
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+          style={{ display: 'contents' }}
+        >
+          {rendered}
+        </div>
+      );
+    },
+    [
+      overlay,
+      interactiveOverlay,
+      hasHoverTrigger,
+      handleMouseOver,
+      handleMouseOut,
+    ],
+  );
 
   return (
     <>
@@ -246,7 +289,7 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
         popperConfig={popperConfig}
         target={triggerNodeRef.current}
       >
-        {overlay}
+        {wrappedOverlay}
       </Overlay>
     </>
   );
