@@ -135,6 +135,7 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
         }}
         transition={actualTransition}
         rootClose={rootClose}
+        rootCloseEvent="mouseup"
         placement={placement}
         show={outerShow}
       >
