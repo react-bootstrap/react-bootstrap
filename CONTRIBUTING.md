@@ -22,7 +22,7 @@ _Note: Occasionally issues are opened that are unclear, or we cannot verify them
 
 ## Tests
 
-All commits that fix bugs or add features need a test. You can run `npm run tdd MyComponentName` for component specific tests.
+All commits that fix bugs or add features need a test. Follow the instructions at [Local Setup](https://github.com/react-bootstrap/react-bootstrap#local-setup) to configure your enivronment and how to run the test commands.
 
 ## API Design
 
