@@ -11,7 +11,7 @@ function Example() {
       <Button variant="danger" ref={target} onClick={() => setShow(!show)}>
         Click me to see
       </Button>
-      <Overlay target={target} show={show} placement="right">
+      <Overlay target={() => target} show={show} placement="right">
         {({
           placement: _placement,
           arrowProps: _arrowProps,
