@@ -2891,11 +2891,6 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@trysound/sax@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
-  integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
-
 "@types/babel__core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"
@@ -8976,6 +8971,11 @@ sax@^1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.1.tgz#44cc8988377f126304d3b3fc1010c733b929ef0f"
   integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
 
+sax@^1.5.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.6.0.tgz#da59637629307b97e7c4cb28e080a7bc38560d5b"
+  integrity sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==
+
 scheduler@^0.26.0:
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.26.0.tgz#4ce8a8c2a2095f13ea11bf9a445be50c555d6337"
@@ -9533,17 +9533,17 @@ svg-parser@^2.0.4:
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
 
 svgo@^3.0.2, svgo@^3.2.0:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/svgo/-/svgo-3.3.2.tgz#ad58002652dffbb5986fc9716afe52d869ecbda8"
-  integrity sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/svgo/-/svgo-3.3.4.tgz#fd2aa10ff585b3bd2b83ce3602f5582bc0718bb5"
+  integrity sha512-GsNRis4e8jxn2Y9ENz/8lbJ93CstG8svtMnuRaHbiF2LTJ5tK0/q3t/URPq9Zc7zVWBJnNnJMIp6bevK7bSmNg==
   dependencies:
-    "@trysound/sax" "0.2.0"
     commander "^7.2.0"
     css-select "^5.1.0"
     css-tree "^2.3.1"
     css-what "^6.1.0"
     csso "^5.0.5"
     picocolors "^1.0.0"
+    sax "^1.5.0"
 
 tapable@^2.0.0, tapable@^2.1.1, tapable@^2.2.0, tapable@^2.2.1:
   version "2.2.1"
