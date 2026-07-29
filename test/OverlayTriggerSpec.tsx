@@ -185,6 +185,30 @@ describe('<OverlayTrigger>', () => {
     );
   });
 
+  it('Should warn only once for hover-only triggers', () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
+    render(
+      <>
+        <OverlayTrigger trigger="hover" overlay={<TemplateDiv />}>
+          <span>hover one</span>
+        </OverlayTrigger>
+        <OverlayTrigger trigger="hover" overlay={<TemplateDiv />}>
+          <span>hover two</span>
+        </OverlayTrigger>
+      </>,
+    );
+
+    expect(consoleErrorSpy).toHaveBeenCalledOnce();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Specifying only the `"hover"` trigger'),
+    );
+
+    consoleErrorSpy.mockRestore();
+  });
+
   it('Should not set aria-describedby if the state is not show', () => {
     render(
       <OverlayTrigger trigger="click" overlay={<TemplateDiv />}>

@@ -93,6 +93,8 @@ function normalizeDelay(delay?: OverlayDelay) {
       };
 }
 
+let hasWarnedAboutHoverOnly = false;
+
 // Simple implementation of mouseEnter and mouseLeave.
 // React's built version is broken: https://github.com/facebook/react/issues/4251
 // for cases when the trigger is disabled and mouseOut/Over can cause flicker
@@ -224,10 +226,14 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   }
 
   if (triggers.indexOf('hover') !== -1) {
-    warning(
-      triggers.length > 1,
-      '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibility of the overlay to just mouse users. Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.',
-    );
+    if (triggers.length === 1 && !hasWarnedAboutHoverOnly) {
+      hasWarnedAboutHoverOnly = true;
+      warning(
+        false,
+        '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibility of the overlay to just mouse users. Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.',
+      );
+    }
+
     triggerProps.onMouseOver = handleMouseOver;
     triggerProps.onMouseOut = handleMouseOut;
   }
