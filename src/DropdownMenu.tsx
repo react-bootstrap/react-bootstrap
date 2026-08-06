@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useState, useCallback } from 'react';
 import {
   useDropdownMenu,
   UseDropdownMenuOptions,
@@ -125,6 +125,9 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
     ) => {
       let alignEnd = false;
       const isNavbar = useContext(NavbarContext);
+      const [isNavbarExpanded, setIsNavbarExpanded] = useState(
+        isNavbar ? (isNavbar.expand === true || !('matchMedia' in window)) : false,
+      );
       const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
       const { align: contextAlign, drop, isRTL } = useContext(DropdownContext);
       align = align || contextAlign;
@@ -156,11 +159,13 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
 
       const placement = getDropdownMenuPlacement(alignEnd, drop, isRTL);
 
+      const isNavbarElementExpanded = isNavbarExpanded;
+
       const [menuProps, { hasShown, popper, show, toggle }] = useDropdownMenu({
         flip,
         rootCloseEvent,
         show: showProps,
-        usePopper: !isNavbar && alignClasses.length === 0,
+        usePopper: (!isNavbar || isNavbarElementExpanded) && alignClasses.length === 0,
         offset: [0, 2],
         popperConfig,
         placement,
@@ -176,6 +181,29 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
         // renderOnMount=true. Need to call update() to correct it.
         if (show) popper?.update();
       }, [show]);
+
+      useIsomorphicEffect(() => {
+        if (!isNavbar) return;
+        const { expand } = isNavbar;
+        if (expand === true) {
+          setIsNavbarExpanded(true);
+          return;
+        }
+        const breakpointMap: Record<string, string> = {
+          sm: '576px',
+          md: '768px',
+          lg: '992px',
+          xl: '1200px',
+          xxl: '1400px',
+        };
+        const bp = typeof expand === 'string' ? breakpointMap[expand] : undefined;
+        if (!bp) return;
+        const mql = window.matchMedia(`(min-width: ${bp})`);
+        const handler = () => setIsNavbarExpanded(mql.matches);
+        handler();
+        mql.addEventListener('change', handler);
+        return () => mql.removeEventListener('change', handler);
+      }, [isNavbar]);
 
       if (!hasShown && !renderOnMount && !isInputGroup) return null;
 
@@ -200,7 +228,7 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
           {...menuProps}
           style={style}
           // Bootstrap css requires this data attrib to style responsive menus.
-          {...((alignClasses.length || isNavbar) && {
+          {...((alignClasses.length || (isNavbar && !isNavbarElementExpanded)) && {
             'data-bs-popper': 'static',
           })}
           className={clsx(
