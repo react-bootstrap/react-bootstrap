@@ -142,7 +142,7 @@ const Navbar: DynamicRefForwardingComponent<'nav', NavbarProps> =
     const {
       bsPrefix: initialBsPrefix,
       expand = true,
-      variant = 'light',
+      variant,
       bg,
       fixed,
       sticky,
