@@ -1,5 +1,5 @@
 export default function getInitialPopperStyles(
-  position: React.CSSProperties['position'] = 'absolute',
+  position: React.CSSProperties['position'] = 'fixed',
 ): Partial<React.CSSProperties> {
   return {
     position,
