@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import getInitialPopperStyles from '../src/getInitialPopperStyles';
 
 describe('getInitialPopperStyles', () => {
-  it('defaults to absolute positioning when no strategy is provided', () => {
+  it('defaults to fixed positioning when no strategy is provided', () => {
     expect(getInitialPopperStyles()).toEqual({
-      position: 'absolute',
+      position: 'fixed',
       top: '0',
       left: '0',
       opacity: '0',
