@@ -99,6 +99,7 @@ const ToggleButtonGroup: DynamicRefForwardingComponent<
     value,
     onChange,
     vertical = false,
+    onKeyDown,
     ...controlledProps
   } = useUncontrolled(props, {
     value: 'onChange',
@@ -128,6 +129,43 @@ const ToggleButtonGroup: DynamicRefForwardingComponent<
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (type === 'radio') {
+      const childValues = React.Children.map(
+        children,
+        (child: any) => child?.props?.value,
+      );
+      if (!childValues) {
+        onKeyDown?.(event);
+        return;
+      }
+
+      const currentIndex = childValues.indexOf(value);
+      let nextIndex = currentIndex;
+
+      switch (event.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          nextIndex = (currentIndex + 1) % childValues.length;
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          nextIndex =
+            (currentIndex - 1 + childValues.length) % childValues.length;
+          break;
+        default:
+          onKeyDown?.(event);
+          return;
+      }
+
+      event.preventDefault();
+      if (nextIndex !== currentIndex && childValues[nextIndex] !== undefined) {
+        onChange?.(childValues[nextIndex], event);
+      }
+    }
+    onKeyDown?.(event);
+  };
+
   invariant(
     type !== 'radio' || !!name,
     'A `name` is required to group the toggle buttons when the `type` ' +
@@ -135,17 +173,24 @@ const ToggleButtonGroup: DynamicRefForwardingComponent<
   );
 
   return (
-    <ButtonGroup {...controlledProps} ref={ref as any} vertical={vertical}>
+    <ButtonGroup
+      {...controlledProps}
+      ref={ref as any}
+      vertical={vertical}
+      onKeyDown={handleKeyDown}
+    >
       {map(children, (child) => {
         const values = getValues();
         const { value: childVal, onChange: childOnChange } = child.props;
         const handler = (e) => handleToggle(childVal, e);
+        const isChecked = values.indexOf(childVal) !== -1;
 
         return React.cloneElement(child, {
           type,
           name: (child as any).name || name,
-          checked: values.indexOf(childVal) !== -1,
+          checked: isChecked,
           onChange: chainFunction(childOnChange, handler),
+          tabIndex: type === 'radio' ? (isChecked ? 0 : -1) : undefined,
         });
       })}
     </ButtonGroup>
