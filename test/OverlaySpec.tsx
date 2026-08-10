@@ -128,4 +128,15 @@ describe('<Overlay>', () => {
     expect(capturedPopper.state).toBeUndefined();
     expect(capturedPopper.scheduleUpdate).toBeUndefined();
   });
+
+  it('should not throw when overlay is a React Fragment', () => {
+    const ref = React.createRef<any>();
+    expect(() => {
+      render(
+        <Overlay show target={ref.current}>
+          <></>
+        </Overlay>,
+      );
+    }).not.toThrow();
+  });
 });
