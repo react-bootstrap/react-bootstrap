@@ -164,6 +164,11 @@ const Overlay = React.forwardRef<HTMLElement, OverlayProps>(
               hasDoneInitialMeasure,
             });
 
+          if (overlay.type === React.Fragment) {
+            // React.Fragment does not accept style, className, or custom props
+            return React.cloneElement(overlay, { key: overlay.key });
+          }
+
           return React.cloneElement(overlay, {
             ...overlayProps,
             placement: updatedPlacement,
