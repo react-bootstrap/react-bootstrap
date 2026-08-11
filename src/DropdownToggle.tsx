@@ -1,4 +1,5 @@
 import useMergedRefs from '@restart/hooks/useMergedRefs';
+import useEventCallback from '@restart/hooks/useEventCallback';
 import DropdownContext from '@restart/ui/DropdownContext';
 import { useDropdownToggle } from '@restart/ui/DropdownToggle';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -64,6 +65,21 @@ const DropdownToggle: DropdownToggleComponent = React.forwardRef(
     }
 
     const [toggleProps] = useDropdownToggle();
+
+    // Prevent a Ctrl/Cmd+click from opening the dropdown menu. Holding a
+    // modifier key (Ctrl on Windows/Linux, Cmd on macOS) signals an intent to
+    // open the target in a new tab/window rather than interact with the
+    // control itself, so it should not toggle the menu. Without this guard,
+    // Ctrl+clicking several toggles on the same page leaves every menu open
+    // simultaneously (https://github.com/react-bootstrap/react-bootstrap/issues/6834).
+    const originalOnClick = toggleProps.onClick;
+    const handleClick = useEventCallback(
+      (e: React.MouseEvent<Element, MouseEvent>) => {
+        if (e.ctrlKey || e.metaKey) return;
+        originalOnClick?.(e);
+      },
+    );
+    toggleProps.onClick = handleClick;
 
     toggleProps.ref = useMergedRefs(
       toggleProps.ref,
