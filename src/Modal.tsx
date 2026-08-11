@@ -15,6 +15,7 @@ import Fade from './Fade.js';
 import ModalBody from './ModalBody.js';
 import ModalContext from './ModalContext.js';
 import ModalDialog from './ModalDialog.js';
+import NavbarContext from './NavbarContext.js';
 import ModalFooter from './ModalFooter.js';
 import ModalHeader from './ModalHeader.js';
 import ModalTitle from './ModalTitle.js';
@@ -320,14 +321,16 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
         aria-labelledby={ariaLabelledby}
         aria-describedby={ariaDescribedby}
       >
-        <Dialog
-          {...props}
-          onMouseDown={handleDialogMouseDown}
-          className={dialogClassName}
-          contentClassName={contentClassName}
-        >
-          {children}
-        </Dialog>
+        <NavbarContext.Provider value={null}>
+          <Dialog
+            {...props}
+            onMouseDown={handleDialogMouseDown}
+            className={dialogClassName}
+            contentClassName={contentClassName}
+          >
+            {children}
+          </Dialog>
+        </NavbarContext.Provider>
       </div>
     );
 
