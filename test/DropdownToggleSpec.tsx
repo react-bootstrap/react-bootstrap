@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import DropdownToggle from '../src/DropdownToggle';
+import Dropdown from '../src/Dropdown';
 
 describe('<DropdownToggle>', () => {
   it('renders toggle button', () => {
@@ -55,5 +56,54 @@ describe('<DropdownToggle>', () => {
       'my-custom-bsPrefix',
     );
     expect(container.firstElementChild!.classList).toContain('btn');
+  });
+});
+
+describe('DropdownToggle Ctrl+click', () => {
+  it('does not open the dropdown on Ctrl+click', () => {
+    const { container } = render(
+      <Dropdown>
+        <Dropdown.Toggle id="test-id">Toggle</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item>Item</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    );
+
+    const toggle = screen.getByText('Toggle');
+    expect(container.firstElementChild!.classList).not.toContain('show');
+
+    fireEvent.click(toggle, { ctrlKey: true });
+    expect(container.firstElementChild!.classList).not.toContain('show');
+  });
+
+  it('does not open the dropdown on Cmd+click (macOS)', () => {
+    const { container } = render(
+      <Dropdown>
+        <Dropdown.Toggle id="test-id">Toggle</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item>Item</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    );
+
+    const toggle = screen.getByText('Toggle');
+    fireEvent.click(toggle, { metaKey: true });
+    expect(container.firstElementChild!.classList).not.toContain('show');
+  });
+
+  it('still opens the dropdown on a plain click', () => {
+    const { container } = render(
+      <Dropdown>
+        <Dropdown.Toggle id="test-id">Toggle</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item>Item</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    );
+
+    const toggle = screen.getByText('Toggle');
+    fireEvent.click(toggle);
+    expect(container.firstElementChild!.classList).toContain('show');
   });
 });
