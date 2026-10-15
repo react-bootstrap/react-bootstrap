@@ -163,8 +163,12 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       return getSharedManager({ isRTL });
     }
 
-    function updateDialogStyle(node) {
-      if (!canUseDOM) return;
+    /**
+     * Updates the modal padding style to account for scrollbar width differences
+     * between the container and modal dialog when viewport or content resizes.
+     */
+    function updateDialogStyle(node: HTMLElement | null | undefined) {
+      if (!canUseDOM || !node) return;
 
       const containerIsOverflowing = getModalManager().getScrollbarWidth() > 0;
 
@@ -184,7 +188,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     }
 
     const handleWindowResize = useEventCallback(() => {
-      if (modal) {
+      if (modal?.dialog) {
         updateDialogStyle(modal.dialog);
       }
     });
@@ -210,12 +214,14 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
 
     const handleStaticModalAnimation = () => {
       setAnimateStaticModal(true);
-      removeStaticModalAnimationRef.current = transitionEnd(
-        modal!.dialog as any,
-        () => {
-          setAnimateStaticModal(false);
-        },
-      );
+      if (modal?.dialog) {
+        removeStaticModalAnimationRef.current = transitionEnd(
+          modal.dialog as any,
+          () => {
+            setAnimateStaticModal(false);
+          },
+        );
+      }
     };
 
     const handleStaticBackdropClick = (e) => {

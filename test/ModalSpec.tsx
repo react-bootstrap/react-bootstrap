@@ -489,4 +489,91 @@ describe('<Modal>', () => {
 
     await waitFor(() => expect(addSpy).toHaveBeenCalled());
   });
+
+  it('Should not crash on window resize when modal.dialog is null', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show ref={ref}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(ref.current?.dialog).toBeDefined();
+    ref.current!.dialog = null;
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
+
+  it('Should handle window resize cleanly after modal is closed', () => {
+    const { rerender } = render(
+      <Modal show>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    rerender(
+      <Modal show={false}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
+
+  it('Should update dialog style on window resize when dialog is mounted', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show ref={ref}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const dialog = ref.current?.dialog;
+    expect(dialog).toBeDefined();
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+
+    expect(dialog?.classList).toContain('modal');
+  });
+
+  it('Should safely handle resize during modal exit transition', () => {
+    const onHideSpy = vi.fn();
+    const { rerender } = render(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    rerender(
+      <Modal show={false} onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
+
+  it('Should not throw when static backdrop is clicked with null dialog', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show backdrop="static" ref={ref} data-testid="modal">
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    ref.current!.dialog = null;
+
+    expect(() => {
+      fireEvent.click(screen.getByTestId('modal'));
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
 });
