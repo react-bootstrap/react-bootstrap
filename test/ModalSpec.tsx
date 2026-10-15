@@ -541,4 +541,23 @@ describe('<Modal>', () => {
 
     expect(dialog?.classList).toContain('modal');
   });
+
+  it('Should safely handle resize during modal exit transition', () => {
+    const onHideSpy = vi.fn();
+    const { rerender } = render(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    rerender(
+      <Modal show={false} onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
 });
