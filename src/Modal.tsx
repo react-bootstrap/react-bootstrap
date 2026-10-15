@@ -163,6 +163,10 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       return getSharedManager({ isRTL });
     }
 
+    /**
+     * Updates the modal padding style to account for scrollbar width differences
+     * between the container and modal dialog when viewport or content resizes.
+     */
     function updateDialogStyle(node: HTMLElement | null | undefined) {
       if (!canUseDOM || !node) return;
 
