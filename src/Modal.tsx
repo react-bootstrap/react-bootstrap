@@ -184,7 +184,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     }
 
     const handleWindowResize = useEventCallback(() => {
-      if (modal) {
+      if (modal?.dialog) {
         updateDialogStyle(modal.dialog);
       }
     });
