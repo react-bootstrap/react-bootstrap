@@ -164,7 +164,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     }
 
     function updateDialogStyle(node) {
-      if (!canUseDOM) return;
+      if (!canUseDOM || !node) return;
 
       const containerIsOverflowing = getModalManager().getScrollbarWidth() > 0;
 
