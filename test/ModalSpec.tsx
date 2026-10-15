@@ -523,4 +523,22 @@ describe('<Modal>', () => {
       window.dispatchEvent(new Event('resize'));
     }).not.toThrow();
   });
+
+  it('Should update dialog style on window resize when dialog is mounted', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show ref={ref}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const dialog = ref.current?.dialog;
+    expect(dialog).toBeDefined();
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+
+    expect(dialog?.classList).toContain('modal');
+  });
 });
