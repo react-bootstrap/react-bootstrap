@@ -489,4 +489,20 @@ describe('<Modal>', () => {
 
     await waitFor(() => expect(addSpy).toHaveBeenCalled());
   });
+
+  it('Should not crash on window resize when modal.dialog is null', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show ref={ref}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(ref.current?.dialog).toBeDefined();
+    ref.current!.dialog = null;
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
 });
