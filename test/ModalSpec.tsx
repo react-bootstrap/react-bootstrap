@@ -560,4 +560,20 @@ describe('<Modal>', () => {
       window.dispatchEvent(new Event('resize'));
     }).not.toThrow();
   });
+
+  it('Should not throw when static backdrop is clicked with null dialog', () => {
+    const ref = React.createRef<ModalHandle>();
+    render(
+      <Modal show backdrop="static" ref={ref} data-testid="modal">
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    ref.current!.dialog = null;
+
+    expect(() => {
+      fireEvent.click(screen.getByTestId('modal'));
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
 });
