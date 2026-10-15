@@ -505,4 +505,22 @@ describe('<Modal>', () => {
       window.dispatchEvent(new Event('resize'));
     }).not.toThrow();
   });
+
+  it('Should handle window resize cleanly after modal is closed', () => {
+    const { rerender } = render(
+      <Modal show>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    rerender(
+      <Modal show={false}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    expect(() => {
+      window.dispatchEvent(new Event('resize'));
+    }).not.toThrow();
+  });
 });
