@@ -163,7 +163,7 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       return getSharedManager({ isRTL });
     }
 
-    function updateDialogStyle(node) {
+    function updateDialogStyle(node: HTMLElement | null | undefined) {
       if (!canUseDOM || !node) return;
 
       const containerIsOverflowing = getModalManager().getScrollbarWidth() > 0;
