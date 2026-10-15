@@ -210,12 +210,14 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
 
     const handleStaticModalAnimation = () => {
       setAnimateStaticModal(true);
-      removeStaticModalAnimationRef.current = transitionEnd(
-        modal!.dialog as any,
-        () => {
-          setAnimateStaticModal(false);
-        },
-      );
+      if (modal?.dialog) {
+        removeStaticModalAnimationRef.current = transitionEnd(
+          modal.dialog as any,
+          () => {
+            setAnimateStaticModal(false);
+          },
+        );
+      }
     };
 
     const handleStaticBackdropClick = (e) => {
