@@ -1,3 +1,14 @@
+# [3.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2026-10-22)
+
+
+### Bug Fixes
+
+* **Carousel:** ensure nextActiveIndex is non-negative when no children are present ([#6972](https://github.com/react-bootstrap/react-bootstrap/issues/6972)) ([b652b00](https://github.com/react-bootstrap/react-bootstrap/commit/b652b00c7fdd993c3a3f283703ce5fbd8cd16145))
+
+
+
+
+
 # [3.0.0-beta.5](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2025-09-22)
 
 
