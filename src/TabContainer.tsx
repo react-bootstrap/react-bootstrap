@@ -39,8 +39,7 @@ export interface TabContainerProps extends React.PropsWithChildren {
    * @defaultValue (eventKey, type) => `${props.id}-${type}-${eventKey}`
    */
   generateChildId?:
-    | ((eventKey: EventKey, type: 'tab' | 'pane') => string)
-    | undefined;
+    ((eventKey: EventKey, type: 'tab' | 'pane') => string) | undefined;
 
   /**
    * A callback fired when a tab is selected.

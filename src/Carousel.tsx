@@ -107,8 +107,7 @@ export interface CarouselProps extends Omit<
    * @type {((eventKey: number, direction: 'left' | 'right') => void) | undefined}
    */
   onSlide?:
-    | ((eventKey: number, direction: 'start' | 'end') => void)
-    | undefined;
+    ((eventKey: number, direction: 'start' | 'end') => void) | undefined;
 
   /**
    * Callback fired when a slide transition ends.

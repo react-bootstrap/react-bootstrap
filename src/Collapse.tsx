@@ -61,8 +61,7 @@ export interface CollapseProps
    * @default element.offsetWidth | element.offsetHeight
    */
   getDimensionValue?:
-    | ((dimension: Dimension, element: HTMLElement) => number)
-    | undefined;
+    ((dimension: Dimension, element: HTMLElement) => number) | undefined;
 
   /**
    * You must provide a single JSX child element to this component and that element cannot be a \<React.Fragment\>

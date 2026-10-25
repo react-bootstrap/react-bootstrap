@@ -2,12 +2,7 @@ import * as React from 'react';
 import type { AlignType } from './types.js';
 
 export type DropDirection =
-  | 'up'
-  | 'up-centered'
-  | 'start'
-  | 'end'
-  | 'down'
-  | 'down-centered';
+  'up' | 'up-centered' | 'start' | 'end' | 'down' | 'down-centered';
 
 export type DropdownContextValue = {
   align?: AlignType;

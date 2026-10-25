@@ -46,14 +46,7 @@ export interface NavbarProps extends Omit<
    * Default expanded state of the Navbar.
    */
   defaultExpand?:
-    | boolean
-    | string
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | 'xxl'
-    | undefined;
+    boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
