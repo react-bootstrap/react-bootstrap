@@ -85,8 +85,7 @@ export interface ToggleButtonCheckboxProps<T> extends BaseToggleButtonProps {
 }
 
 export type ToggleButtonGroupProps<T> =
-  | ToggleButtonRadioProps<T>
-  | ToggleButtonCheckboxProps<T>;
+  ToggleButtonRadioProps<T> | ToggleButtonCheckboxProps<T>;
 
 const ToggleButtonGroup: DynamicRefForwardingComponent<
   'a',

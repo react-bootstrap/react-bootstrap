@@ -22,8 +22,7 @@ export type ColOrderNumber = number | '1' | '2' | '3' | '4' | '5';
 export type ColOrder = ColOrderNumber | 'first' | 'last';
 export type ColSize = boolean | 'auto' | NumberAttr;
 export type ColSpec =
-  | ColSize
-  | { span?: ColSize | null; offset?: NumberAttr; order?: ColOrder };
+  ColSize | { span?: ColSize | null; offset?: NumberAttr; order?: ColOrder };
 
 export interface ColProps extends React.HTMLAttributes<HTMLElement> {
   /**
