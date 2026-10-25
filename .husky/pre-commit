@@ -1,1 +1,1 @@
-yarn lint-staged
+npm exec -- lint-staged

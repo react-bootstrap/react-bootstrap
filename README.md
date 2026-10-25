@@ -38,15 +38,14 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 
 ## Local setup
 
-Yarn is our package manager of choice here. Check out setup
-instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
-After that you can run `yarn run bootstrap` to install all the needed dependencies.
+Install [Node.js](https://nodejs.org/), which includes npm, then run
+`npm run bootstrap` to install dependencies for both the library and docs site.
 
 From there you can:
 
-- Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
-- Start a local copy of the docs site with `yarn start`
-- Or build a local copy of the library with `yarn run build`
+- Run the tests once with `npm test` (or run them in watch mode with `npm run tdd`).
+- Start a local copy of the docs site with `npm start`.
+- Or build a local copy of the library with `npm run build`.
 
 ## CodeSandbox Examples
 

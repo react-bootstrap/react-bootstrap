@@ -21,24 +21,22 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: 22.23.4
-          cache: yarn
+          node-version: 24.22.1
+          cache: npm
 
       - name: Install Dependencies
-        run: yarn --network-timeout 100000
-        env:
-          YARN_CACHE_FOLDER: .cache/yarn
+        run: npm ci
 
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
+        run: npm exec -- playwright install --with-deps
 
       - name: Run Tests
-        run: yarn test-browser --browser.name=${{ env.BROWSER }} --browser.headless --coverage
+        run: npm run test-browser -- --browser.name=${{ env.BROWSER }} --browser.headless --coverage
         env:
           BROWSER: ${{ matrix.browser }}
 
@@ -55,16 +53,16 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:
-          node-version: 22.23.4
+          node-version: 24.22.1
 
       - name: Install Dependencies
-        run: yarn --network-timeout 100000
+        run: npm ci
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Check types
-        run: yarn check-types
+        run: npm run check-types
 
       - name: Build Project
-        run: yarn build
+        run: npm run build
