@@ -15,28 +15,27 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.0",
-    "@docusaurus/preset-classic": "^3.10.0",
-    "@docusaurus/theme-common": "^3.10.0",
-    "@docusaurus/theme-live-codeblock": "^3.10.0",
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@docusaurus/theme-common": "^3.10.2",
+    "@docusaurus/theme-live-codeblock": "^3.10.2",
     "@mdx-js/react": "^3.1.1",
     "@restart/hooks": "^0.6.2",
-    "ast-types": "^0.14.2",
     "bootstrap": "^5.3.8",
     "clsx": "^2.1.1",
-    "docusaurus-plugin-sass": "^0.2.6",
+    "docusaurus-plugin-sass": "^0.2.7",
     "dom-helpers": "^6.0.1",
     "formik": "^2.4.9",
     "holderjs": "^2.9.9",
     "lodash.camelcase": "^4.3.0",
-    "markdown-to-jsx": "^7.7.17",
+    "markdown-to-jsx": "^9.10.3",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.1.0",
-    "react-docgen": "^8.0.3",
-    "react-dom": "^19.1.0",
+    "react": "^19.3.1",
+    "react-docgen": "^8.0.4",
+    "react-dom": "^19.3.1",
     "react-live": "^2.4.1",
-    "sass": "^1.99.0",
+    "sass": "^1.106.1",
     "yup": "^1.7.1"
   },
   "devDependencies": {
@@ -44,8 +43,9 @@
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/tsconfig": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
+    "@types/react": "^19.3.0",
     "cross-env": "^10.1.0",
-    "typescript": "^5.9.3"
+    "typescript": "~6.0.2"
   },
   "browserslist": {
     "production": [
@@ -60,6 +60,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }
