@@ -12,7 +12,7 @@ const Selector = {
 };
 
 class BootstrapModalManager extends ModalManager {
-  private adjustAndStore<T extends keyof CSSStyleDeclaration>(
+  private adjustAndStore<T extends Extract<keyof CSSStyleDeclaration, string>>(
     prop: T,
     element: HTMLElement,
     adjust: number,
@@ -25,7 +25,7 @@ class BootstrapModalManager extends ModalManager {
     });
   }
 
-  private restore<T extends keyof CSSStyleDeclaration>(
+  private restore<T extends Extract<keyof CSSStyleDeclaration, string>>(
     prop: T,
     element: HTMLElement,
   ) {

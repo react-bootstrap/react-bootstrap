@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface ToastContextType {
-  onClose?: (e?: React.MouseEvent | React.KeyboardEvent) => void;
+  onClose?: ((e?: React.MouseEvent | React.KeyboardEvent) => void) | undefined;
 }
 
 const ToastContext = React.createContext<ToastContextType>({

@@ -72,7 +72,7 @@ export interface PopperRef {
   state: State | undefined;
   outOfBoundaries: boolean;
   placement: Placement | undefined;
-  scheduleUpdate?: () => void;
+  scheduleUpdate?: (() => void) | undefined;
   strategy: UsePopperOptions['strategy'];
 }
 
@@ -206,7 +206,7 @@ export interface BaseNavProps extends Omit<
    *
    * @type {((eventKey: string | null, e: React.SyntheticEvent<any>) => void) | undefined}
    */
-  onSelect?: SelectCallback;
+  onSelect?: SelectCallback | undefined;
 }
 
 export interface BaseNavItemProps extends React.HTMLAttributes<HTMLElement> {
