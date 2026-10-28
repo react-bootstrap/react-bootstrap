@@ -7,7 +7,7 @@ import {
 import type { ColProps, ColOrder, ColSize, NumberAttr } from './Col.js';
 
 export interface UseColMetadata {
-  as?: React.ElementType;
+  as?: React.ElementType | undefined;
   bsPrefix: string;
   spans: string[];
 }

@@ -8,9 +8,9 @@ export declare type AccordionSelectCallback = (
 ) => void;
 
 export interface AccordionContextValue {
-  activeEventKey?: AccordionEventKey;
-  onSelect?: AccordionSelectCallback;
-  alwaysOpen?: boolean;
+  activeEventKey?: AccordionEventKey | undefined;
+  onSelect?: AccordionSelectCallback | undefined;
+  alwaysOpen?: boolean | undefined;
 }
 
 export function isAccordionItemSelected(

@@ -25,13 +25,13 @@ export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
   /**
    * Renders a split button dropdown toggle.
    */
-  split?: boolean;
+  split?: boolean | undefined;
 
   /**
    * To passthrough to the underlying button or whatever from DropdownButton
    * @private
    */
-  childBsPrefix?: string;
+  childBsPrefix?: string | undefined;
 }
 
 type DropdownToggleComponent = DynamicRefForwardingComponent<
