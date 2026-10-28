@@ -10,7 +10,7 @@ describe('<Navbar>', () => {
 
     expect(navbarElem.classList).toContain('navbar');
     expect(navbarElem.classList).toContain('navbar-expand');
-    expect(navbarElem.classList).toContain('navbar-light');
+    expect(navbarElem.classList).not.toContain('navbar-light');
   });
 
   it('Should add "navigation" role when not using a `<nav>`', () => {
