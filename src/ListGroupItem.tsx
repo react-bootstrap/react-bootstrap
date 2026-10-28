@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import warning from 'warning';
+import { warn } from './internal/warning.js';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import { useNavItem } from '@restart/ui/NavItem';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
@@ -87,8 +87,8 @@ const ListGroupItem: DynamicRefForwardingComponent<'a', ListGroupItemProps> =
 
       const Component = as || (action ? (props.href ? 'a' : 'button') : 'div');
 
-      warning(
-        as || !(!action && props.href),
+      warn(
+        !!as || !(!action && props.href),
         '`action=false` and `href` should not be used together.',
       );
 
