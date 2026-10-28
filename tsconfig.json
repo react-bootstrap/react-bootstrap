@@ -4,6 +4,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "lib": ["esnext", "dom"],
+    "types": ["node"],
     "target": "esnext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",

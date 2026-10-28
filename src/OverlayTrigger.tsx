@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cloneElement, useCallback, useRef } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
-import warning from 'warning';
+import { warnOnce } from './internal/warning.js';
 import { useUncontrolledProp } from 'uncontrollable';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import { getChildRef } from '@restart/ui/utils';
@@ -224,7 +224,7 @@ const OverlayTrigger: React.FC<OverlayTriggerProps> = ({
   }
 
   if (triggers.indexOf('hover') !== -1) {
-    warning(
+    warnOnce(
       triggers.length > 1,
       '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibility of the overlay to just mouse users. Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.',
     );

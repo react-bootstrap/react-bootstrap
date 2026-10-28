@@ -8,7 +8,7 @@ import {
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import warning from 'warning';
+import { warn } from './internal/warning.js';
 import DropdownContext, { type DropDirection } from './DropdownContext.js';
 import InputGroupContext from './InputGroupContext.js';
 import NavbarContext from './NavbarContext.js';
@@ -135,7 +135,7 @@ const DropdownMenu: DynamicRefForwardingComponent<'div', DropdownMenuProps> =
         if (typeof align === 'object') {
           const keys = Object.keys(align);
 
-          warning(
+          warn(
             keys.length === 1,
             'There should only be 1 breakpoint when passing an object to `align`',
           );

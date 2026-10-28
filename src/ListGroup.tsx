@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import warning from 'warning';
+import { warn } from './internal/warning.js';
 import { useUncontrolled } from 'uncontrollable';
 import BaseNav from '@restart/ui/Nav';
 import type {
@@ -71,7 +71,7 @@ const ListGroup: DynamicRefForwardingComponent<'div', ListGroupProps> =
         horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
     }
 
-    warning(
+    warn(
       !(horizontal && variant === 'flush'),
       '`variant="flush"` and `horizontal` should not be used together.',
     );

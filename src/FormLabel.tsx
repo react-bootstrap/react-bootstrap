@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
-import warning from 'warning';
+import { warn } from './internal/warning.js';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Col, { type ColProps } from './Col.js';
 import FormContext from './FormContext.js';
@@ -78,7 +78,7 @@ const FormLabel: DynamicRefForwardingComponent<'label', FormLabelProps> =
         column && columnClass,
       );
 
-      warning(
+      warn(
         controlId == null || !htmlFor,
         '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
       );

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useContext } from 'react';
-import warning from 'warning';
+import { warn } from './internal/warning.js';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import Feedback from './Feedback.js';
 import FormContext from './FormContext.js';
@@ -106,7 +106,7 @@ const FormControl: DynamicRefForwardingComponent<'input', FormControlProps> =
 
       bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
 
-      warning(
+      warn(
         controlId == null || !id,
         '`controlId` is ignored on `<FormControl>` when `id` is specified.',
       );
