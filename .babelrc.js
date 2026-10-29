@@ -8,10 +8,11 @@ export default (api) => {
   switch (env) {
     case 'docs':
     case 'test':
-    case 'dist-dev':
       dev = true;
       modules = false;
       break;
+    // dist builds target production React, which has no jsxDEV
+    case 'dist-dev':
     case 'dist-prod':
       modules = false;
       break;

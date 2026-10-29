@@ -22,7 +22,8 @@
   "files": [
     "CHANGELOG.md",
     "lib",
-    "cjs"
+    "cjs",
+    "dist"
   ],
   "type": "module",
   "main": "cjs/index.js",
@@ -58,9 +59,10 @@
   },
   "scripts": {
     "bootstrap": "npm install && npm install --prefix www",
-    "build": "rimraf lib && npm run build:esm && npm run build:esm:types && npm run build:cjs && npm run build:cjs:types",
+    "build": "rimraf lib && npm run build:esm && npm run build:esm:types && npm run build:cjs && npm run build:cjs:types && npm run build:dist",
     "build:esm": "babel src --out-dir lib --delete-dir-on-start --env-name esm --extensions .ts,.tsx --ignore '**/*.d.ts'",
     "build:cjs": "babel src --out-dir cjs --env-name cjs --delete-dir-on-start --extensions .ts,.tsx --ignore '**/*.d.ts' && echo '{\"type\": \"commonjs\"}' > cjs/package.json",
+    "build:dist": "node ./scripts/buildDist.ts",
     "build:esm:types": "tsc --emitDeclarationOnly",
     "build:cjs:types": "tsc --emitDeclarationOnly --outDir cjs",
     "build-docs": "npm run build --prefix www",
@@ -111,6 +113,7 @@
     "@vitest/browser": "^5.0.5",
     "@vitest/browser-playwright": "^5.0.5",
     "@vitest/coverage-istanbul": "^5.0.5",
+    "babel-loader": "^10.1.1",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
@@ -127,7 +130,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.72.0",
     "vite": "^8.3.4",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "webpack": "^5.112.2"
   },
   "peerDependencies": {
     "@types/react": ">=18.3.12",

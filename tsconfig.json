@@ -17,5 +17,5 @@
     "noImplicitAny": false,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "scripts"]
 }
