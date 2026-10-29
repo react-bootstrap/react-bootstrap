@@ -1,5 +1,6 @@
 lib/
 cjs/
+dist/
 coverage/
 www/.cache/
 www/public/
