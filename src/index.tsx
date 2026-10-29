@@ -168,6 +168,9 @@ export type { ImageProps } from './Image.js';
 export { default as InputGroup } from './InputGroup.js';
 export type { InputGroupProps } from './InputGroup.js';
 
+export { default as InputGroupText } from './InputGroupText.js';
+export type { InputGroupTextProps } from './InputGroupText.js';
+
 export { default as ListGroup } from './ListGroup.js';
 export type { ListGroupProps } from './ListGroup.js';
 
