@@ -72,7 +72,7 @@
     "prepublishOnly": "npm run build",
     "release": "rollout",
     "start": "npm run start --prefix www",
-    "tdd": "vitest",
+    "tdd": "vitest --browser=chromium",
     "test": "npm run lint && npm run test-browser -- --browser=chromium",
     "test-browser": "vitest --run",
     "prepare": "husky"

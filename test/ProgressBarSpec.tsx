@@ -11,7 +11,7 @@ describe('<ProgressBar>', () => {
 
     expect(progressElem.classList).toContain('progress');
     expect(innerProgressElem.classList).toContain('progress-bar');
-    expect(innerProgressElem.getAttribute('role')).toEqual('progressbar');
+    expect(progressElem.getAttribute('role')).toEqual('progressbar');
   });
 
   ['success', 'warning', 'info', 'danger'].forEach((variant) => {
@@ -32,9 +32,9 @@ describe('<ProgressBar>', () => {
 
   it('Should default to min:0, max:100', () => {
     render(<ProgressBar data-testid="test" now={5} />);
-    const innerProgressElem = screen.getByTestId('test').firstElementChild!;
-    expect(innerProgressElem.getAttribute('aria-valuemin')).toEqual('0');
-    expect(innerProgressElem.getAttribute('aria-valuemax')).toEqual('100');
+    const progressElem = screen.getByTestId('test');
+    expect(progressElem.getAttribute('aria-valuemin')).toEqual('0');
+    expect(progressElem.getAttribute('aria-valuemax')).toEqual('100');
   });
 
   it('Should have 0% computed width', () => {
@@ -165,14 +165,15 @@ describe('<ProgressBar>', () => {
     );
     const innerProgressElem = screen.getByTestId('test');
 
-    const bar1 = innerProgressElem.firstElementChild!;
-    const bar2 = innerProgressElem.lastElementChild!;
+    // In stacked mode the width lives on each child's outer .progress element
+    const progress1 = innerProgressElem.firstElementChild as HTMLElement;
+    const progress2 = innerProgressElem.lastElementChild as HTMLElement;
 
-    expect(bar1.classList).toContain('progress-bar');
-    expect((bar1 as HTMLElement).style.width).toEqual('50%');
+    expect(progress1.firstElementChild!.classList).toContain('progress-bar');
+    expect(progress1.style.width).toEqual('50%');
 
-    expect(bar2.classList).toContain('progress-bar');
-    expect((bar2 as HTMLElement).style.width).toEqual('30%');
+    expect(progress2.firstElementChild!.classList).toContain('progress-bar');
+    expect(progress2.style.width).toEqual('30%');
   });
 
   it('Should render animated and striped children in stacked bar too', () => {
@@ -184,8 +185,8 @@ describe('<ProgressBar>', () => {
     );
     const innerProgressElem = screen.getByTestId('test');
 
-    const bar1 = innerProgressElem.firstElementChild!;
-    const bar2 = innerProgressElem.lastElementChild!;
+    const bar1 = innerProgressElem.firstElementChild!.firstElementChild!;
+    const bar2 = innerProgressElem.lastElementChild!.firstElementChild!;
 
     expect(bar1.classList).toContain('progress-bar');
     expect(bar1.classList).toContain('progress-bar-striped');
@@ -208,7 +209,25 @@ describe('<ProgressBar>', () => {
     const bar1 = innerProgressElem.firstElementChild!;
     const bar2 = innerProgressElem.lastElementChild!;
 
-    expect(bar1.classList).toContain('progress-bar');
+    expect(bar1.classList).toContain('bar1');
     expect((bar2 as HTMLElement).style.minWidth).toEqual('10px');
+  });
+
+  it('Should forward className, id and style on a single bar', () => {
+    render(
+      <ProgressBar
+        data-testid="test"
+        now={50}
+        id="my-bar"
+        className="custom"
+        style={{ minWidth: 10 }}
+      />,
+    );
+    const progressElem = screen.getByTestId('test');
+
+    expect(progressElem.id).toEqual('my-bar');
+    expect(progressElem.classList).toContain('custom');
+    expect(progressElem.classList).toContain('progress');
+    expect(progressElem.style.minWidth).toEqual('10px');
   });
 });
