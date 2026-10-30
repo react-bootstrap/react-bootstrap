@@ -55,6 +55,7 @@ export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /**
    * @private
+   * @internal
    */
   isChild?: boolean | undefined;
 }

@@ -32,11 +32,13 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /**
    * @private
+   * @internal
    */
   show?: boolean;
 
   /**
    * @private
+   * @internal
    */
   popper?: PopperRef | undefined;
 
@@ -44,6 +46,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
    * Whether or not Popper has done its initial measurement and positioning.
    *
    * @private
+   * @internal
    */
   hasDoneInitialMeasure?: boolean | undefined;
 }

@@ -30,6 +30,7 @@ export interface DropdownToggleProps extends Omit<ButtonProps, 'as'> {
   /**
    * To passthrough to the underlying button or whatever from DropdownButton
    * @private
+   * @internal
    */
   childBsPrefix?: string | undefined;
 }
