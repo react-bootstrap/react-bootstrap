@@ -463,6 +463,7 @@ export interface BsDropdownProps extends BaseDropdownProps {
 
   /**
    * @private
+   * @internal
    */
   navbar?: boolean | undefined;
 }

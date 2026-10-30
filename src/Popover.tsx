@@ -38,11 +38,13 @@ export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /**
    * @private
+   * @internal
    */
   popper?: PopperRef | undefined;
 
   /**
    * @private
+   * @internal
    */
   show?: boolean | undefined;
 
@@ -50,6 +52,7 @@ export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
    * Whether or not Popper has done its initial measurement and positioning.
    *
    * @private
+   * @internal
    */
   hasDoneInitialMeasure?: boolean | undefined;
 }
