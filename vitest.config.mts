@@ -27,6 +27,7 @@ export default defineConfig({
       ],
     },
     coverage: {
+      enabled: true,
       provider: 'istanbul',
       exclude: [
         ...coverageConfigDefaults.exclude,
