@@ -9,7 +9,7 @@ import NavbarContext from './NavbarContext.js';
 import CardHeaderContext from './CardHeaderContext.js';
 import NavItem from './NavItem.js';
 import NavLink from './NavLink.js';
-import type { BaseNavProps } from './types.js';
+import type { BaseNavProps, LiteralUnion } from './types.js';
 
 export interface NavProps extends BaseNavProps {
   /**
@@ -25,7 +25,7 @@ export interface NavProps extends BaseNavProps {
   /**
    * The visual variant of the nav items.
    */
-  variant?: 'tabs' | 'pills' | 'underline' | string | undefined;
+  variant?: LiteralUnion<'tabs' | 'pills' | 'underline', string> | undefined;
 
   /**
    * The default active key that is selected on start.

@@ -15,8 +15,9 @@ import NavbarContext from './NavbarContext.js';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning.js';
 import type { AlignType, AlignDirection, Placement } from './types.js';
+import type { LiteralUnion } from './types.js';
 
-export type DropdownMenuVariant = 'dark' | string;
+export type DropdownMenuVariant = LiteralUnion<'dark', string>;
 
 export interface DropdownMenuProps extends React.HTMLAttributes<HTMLElement> {
   /**

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { LiteralUnion } from './types.js';
 
 export interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -17,7 +18,10 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Allow the Container to fill all of its available horizontal space.
    */
-  fluid?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+  fluid?:
+    | boolean
+    | LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string>
+    | undefined;
 }
 
 const Container: DynamicRefForwardingComponent<'div', ContainerProps> =

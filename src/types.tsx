@@ -10,13 +10,21 @@ import type ModalManager from '@restart/ui/ModalManager';
 import type { EventKey, SelectCallback } from '@restart/ui/types';
 import type { DropDirection } from './DropdownContext.js';
 
+// https://github.com/sindresorhus/type-fest/blob/main/source/primitive.d.ts
+export type Primitive =
+  null | undefined | string | number | boolean | symbol | bigint;
+
+// https://github.com/sindresorhus/type-fest/blob/main/source/literal-union.d.ts
+export type LiteralUnion<LiteralType, BaseType extends Primitive> =
+  LiteralType | (BaseType & Record<never, never>);
+
 export type DOMContainer<T extends HTMLElement | VirtualElement = HTMLElement> =
   | T
   | React.RefObject<T | null>
   | null
   | (() => T | React.RefObject<T | null> | null);
 
-export type Variant =
+export type Variant = LiteralUnion<
   | 'primary'
   | 'secondary'
   | 'success'
@@ -24,8 +32,9 @@ export type Variant =
   | 'warning'
   | 'info'
   | 'dark'
-  | 'light'
-  | (string & {});
+  | 'light',
+  string
+>;
 export type ButtonVariant =
   | Variant
   | 'link'
@@ -37,7 +46,7 @@ export type ButtonVariant =
   | 'outline-info'
   | 'outline-dark'
   | 'outline-light';
-export type Color =
+export type Color = LiteralUnion<
   | 'primary'
   | 'secondary'
   | 'success'
@@ -47,8 +56,9 @@ export type Color =
   | 'dark'
   | 'light'
   | 'white'
-  | 'muted'
-  | (string & {});
+  | 'muted',
+  string
+>;
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 
@@ -66,7 +76,7 @@ export type AlignType = AlignDirection | ResponsiveAlignProp;
 
 export type RootCloseEvent = 'click' | 'mousedown';
 
-export type GapValue = 0 | 1 | 2 | 3 | 4 | 5 | number;
+export type GapValue = LiteralUnion<0 | 1 | 2 | 3 | 4 | 5, number>;
 
 export interface PopperRef {
   state: State | undefined;

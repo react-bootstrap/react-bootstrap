@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { LiteralUnion } from './types.js';
 
-export type AspectRatio = '1x1' | '4x3' | '16x9' | '21x9' | string;
+export type AspectRatio = LiteralUnion<'1x1' | '4x3' | '16x9' | '21x9', string>;
 
 export interface RatioProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

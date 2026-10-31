@@ -15,7 +15,7 @@ import { useBootstrapPrefix } from './ThemeProvider.js';
 import BootstrapModalManager, {
   getSharedManager,
 } from './BootstrapModalManager.js';
-import type { BaseModalProps } from './types.js';
+import type { BaseModalProps, LiteralUnion } from './types.js';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -43,7 +43,8 @@ export interface OffcanvasProps extends BaseModalProps {
   /**
    * Hide content outside the viewport from a specified breakpoint and down.
    */
-  responsive?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string | undefined;
+  responsive?:
+    LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string> | undefined;
 
   [other: string]: any;
 }

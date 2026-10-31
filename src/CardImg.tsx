@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
+import type { LiteralUnion } from './types.js';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 
 export interface CardImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -17,7 +18,7 @@ export interface CardImgProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   /**
    * Defines image position inside the card.
    */
-  variant?: 'top' | 'bottom' | string;
+  variant?: LiteralUnion<'top' | 'bottom', string>;
 }
 
 const CardImg: DynamicRefForwardingComponent<'img', CardImgProps> =

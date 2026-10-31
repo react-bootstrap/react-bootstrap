@@ -23,8 +23,9 @@ import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
 import transitionEndListener from './transitionEndListener.js';
 import triggerBrowserReflow from './triggerBrowserReflow.js';
 import TransitionWrapper from './TransitionWrapper.js';
+import type { LiteralUnion } from './types.js';
 
-export type CarouselVariant = 'dark' | string;
+export type CarouselVariant = LiteralUnion<'dark', string>;
 
 export interface CarouselRef {
   element?: HTMLElement | null;
