@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
+import type { LiteralUnion } from './types.js';
 
 export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -24,12 +25,10 @@ export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   fullscreen?:
     | true
-    | string
-    | 'sm-down'
-    | 'md-down'
-    | 'lg-down'
-    | 'xl-down'
-    | 'xxl-down'
+    | LiteralUnion<
+        'sm-down' | 'md-down' | 'lg-down' | 'xl-down' | 'xxl-down',
+        string
+      >
     | undefined;
 
   /**

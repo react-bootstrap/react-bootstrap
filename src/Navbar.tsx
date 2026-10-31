@@ -14,6 +14,7 @@ import NavbarOffcanvas from './NavbarOffcanvas.js';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import NavbarContext, { type NavbarContextType } from './NavbarContext.js';
 import NavbarText from './NavbarText.js';
+import type { LiteralUnion } from './types.js';
 
 export interface NavbarProps extends Omit<
   React.HTMLAttributes<HTMLElement>,
@@ -34,19 +35,24 @@ export interface NavbarProps extends Omit<
    * Use in combination with the `bg` prop, `background-color` utilities,
    * or your own background styles.
    */
-  variant?: 'light' | 'dark' | string | undefined;
+  variant?: LiteralUnion<'light' | 'dark', string> | undefined;
 
   /**
    * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
-  expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+  expand?:
+    | boolean
+    | LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string>
+    | undefined;
 
   /**
    * Default expanded state of the Navbar.
    */
   defaultExpand?:
-    boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+    | boolean
+    | LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string>
+    | undefined;
 
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.

@@ -19,7 +19,7 @@ import ModalFooter from './ModalFooter.js';
 import ModalHeader from './ModalHeader.js';
 import ModalTitle from './ModalTitle.js';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
-import type { BaseModalProps } from './types.js';
+import type { BaseModalProps, LiteralUnion } from './types.js';
 
 export interface ModalProps extends BaseModalProps {
   /**
@@ -39,12 +39,10 @@ export interface ModalProps extends BaseModalProps {
    */
   fullscreen?:
     | true
-    | string
-    | 'sm-down'
-    | 'md-down'
-    | 'lg-down'
-    | 'xl-down'
-    | 'xxl-down'
+    | LiteralUnion<
+        'sm-down' | 'md-down' | 'lg-down' | 'xl-down' | 'xxl-down',
+        string
+      >
     | undefined;
 
   /**

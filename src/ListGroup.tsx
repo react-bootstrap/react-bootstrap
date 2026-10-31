@@ -9,7 +9,7 @@ import type {
 } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import ListGroupItem from './ListGroupItem.js';
-import type { BaseNavProps } from './types.js';
+import type { BaseNavProps, LiteralUnion } from './types.js';
 
 export interface ListGroupProps extends BaseNavProps {
   /**
@@ -27,7 +27,7 @@ export interface ListGroupProps extends BaseNavProps {
   /**
    * Adds a variant to the list-group
    */
-  variant?: 'flush' | string | undefined;
+  variant?: LiteralUnion<'flush', string> | undefined;
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
@@ -35,7 +35,10 @@ export interface ListGroupProps extends BaseNavProps {
    * Just including the prop sets it for all breakpoints, while `{sm|md|lg|xl|xxl}`
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
    */
-  horizontal?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | undefined;
+  horizontal?:
+    | boolean
+    | LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string>
+    | undefined;
 
   /**
    * The default active key of the list group.

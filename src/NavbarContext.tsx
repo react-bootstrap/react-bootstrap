@@ -1,11 +1,12 @@
 import * as React from 'react';
+import type { LiteralUnion } from './types.js';
 
 // TODO: check
 export interface NavbarContextType {
   onToggle: () => void;
   bsPrefix?: string;
   expanded: boolean;
-  expand?: boolean | string | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  expand?: boolean | LiteralUnion<'sm' | 'md' | 'lg' | 'xl' | 'xxl', string>;
 }
 
 const context = React.createContext<NavbarContextType | null>(null);

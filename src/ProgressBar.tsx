@@ -3,6 +3,7 @@ import * as React from 'react';
 import { cloneElement } from 'react';
 import { useBootstrapPrefix } from './ThemeProvider.js';
 import { map } from './ElementChildren.js';
+import type { LiteralUnion } from './types.js';
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -51,7 +52,8 @@ export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * @type {'success' | 'danger' | 'warning' | 'info' | string | undefined}
    */
-  variant?: 'success' | 'danger' | 'warning' | 'info' | string | undefined;
+  variant?:
+    LiteralUnion<'success' | 'danger' | 'warning' | 'info', string> | undefined;
 
   /**
    * @private

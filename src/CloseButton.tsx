@@ -1,7 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import type { LiteralUnion } from './types.js';
 
-export type CloseButtonVariant = 'white' | string;
+export type CloseButtonVariant = LiteralUnion<'white', string>;
 
 export interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
