@@ -932,6 +932,7 @@ const MegaComponent = () => (
       defaultActiveKey="profile"
       id="uncontrolled-tab-example"
       mountOnEnter
+      manualActivation
       onSelect={noop}
       transition={false}
       unmountOnExit
