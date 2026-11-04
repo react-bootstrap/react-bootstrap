@@ -118,6 +118,37 @@ describe('<Carousel>', () => {
     }
   });
 
+  it('should use default labels for indicators without a custom label', () => {
+    render(
+      <Carousel interval={null} indicatorLabels={['First slide']}>
+        {items}
+      </Carousel>,
+    );
+
+    expect(screen.getByRole('button', { name: 'First slide' })).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Slide 2' })).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Slide 3' })).toBeDefined();
+  });
+
+  it('should use a default label when an item is added', () => {
+    const indicatorLabels = ['First slide', 'Second slide'];
+    const { rerender } = render(
+      <Carousel interval={null} indicatorLabels={indicatorLabels}>
+        {items.slice(0, 2)}
+      </Carousel>,
+    );
+
+    rerender(
+      <Carousel interval={null} indicatorLabels={indicatorLabels}>
+        {items}
+      </Carousel>,
+    );
+
+    expect(screen.getByRole('button', { name: 'First slide' })).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Second slide' })).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Slide 3' })).toBeDefined();
+  });
+
   it('should render variant', () => {
     render(
       <Carousel
