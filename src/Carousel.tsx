@@ -68,7 +68,7 @@ export interface CarouselProps extends Omit<
   indicators?: boolean | undefined;
 
   /**
-   * An array of labels for the indicators. Defaults to "Slide #" if not provided.
+   * An array of labels for the indicators. Missing entries default to "Slide #".
    */
   indicatorLabels?: string[] | undefined;
 
@@ -561,11 +561,7 @@ const Carousel: DynamicRefForwardingComponent<'div', CarouselProps> =
                   key={index}
                   type="button"
                   data-bs-target="" // Bootstrap requires this in their css.
-                  aria-label={
-                    indicatorLabels?.length
-                      ? indicatorLabels[index]
-                      : `Slide ${index + 1}`
-                  }
+                  aria-label={indicatorLabels?.[index] ?? `Slide ${index + 1}`}
                   className={
                     index === renderedActiveIndex ? 'active' : undefined
                   }
