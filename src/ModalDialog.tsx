@@ -50,6 +50,7 @@ export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
   (
     {
+      as: Component = 'div',
       bsPrefix,
       className,
       contentClassName,
@@ -71,7 +72,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
         : `${bsPrefix}-fullscreen`;
 
     return (
-      <div
+      <Component
         {...props}
         ref={ref}
         className={clsx(
@@ -86,7 +87,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
         <div className={clsx(`${bsPrefix}-content`, contentClassName)}>
           {children}
         </div>
-      </div>
+      </Component>
     );
   },
 );
