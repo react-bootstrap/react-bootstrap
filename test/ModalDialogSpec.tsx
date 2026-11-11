@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { render } from '@testing-library/react';
-import ModalDialog from '../src/ModalDialog';
+import ModalDialog, { type ModalDialogProps } from '../src/ModalDialog';
 
 describe('<ModalDialog>', () => {
   it('keeps the default element, classes, content and ref', () => {
@@ -39,49 +39,7 @@ describe('<ModalDialog>', () => {
     expect(dialog.querySelector('strong')!.textContent).toEqual('Content');
   });
 
-  it('renders the element requested by as', () => {
-    const ref = React.createRef<HTMLDivElement>();
-    const { getByTestId } = render(
-      <ModalDialog as="section" ref={ref} data-testid="dialog">
-        <strong>Content</strong>
-      </ModalDialog>,
-    );
-    const dialog = getByTestId('dialog');
-    expect(dialog.tagName).toEqual('SECTION');
-    expect(dialog.hasAttribute('as')).toBe(false);
-    expect(dialog.classList).toContain('modal-dialog');
-    expect(ref.current).toEqual(dialog);
-    expect(dialog.querySelector('.modal-content strong')!.textContent).toEqual(
-      'Content',
-    );
-  });
-
-  it('renders a custom component and forwards its props and ref', () => {
-    const CustomDialog = React.forwardRef<
-      HTMLDivElement,
-      React.HTMLAttributes<HTMLDivElement>
-    >((props, ref) => <div {...props} ref={ref} data-custom-dialog="true" />);
-    const ref = React.createRef<HTMLDivElement>();
-    const { getByTestId } = render(
-      <ModalDialog
-        as={CustomDialog}
-        ref={ref}
-        data-testid="dialog"
-        className="custom-class"
-        title="Dialog title"
-      >
-        <strong>Content</strong>
-      </ModalDialog>,
-    );
-    const dialog = getByTestId('dialog');
-    expect(dialog.getAttribute('data-custom-dialog')).toEqual('true');
-    expect(dialog.getAttribute('title')).toEqual('Dialog title');
-    expect(dialog.hasAttribute('as')).toBe(false);
-    expect(dialog.classList).toContain('modal-dialog');
-    expect(dialog.classList).toContain('custom-class');
-    expect(ref.current).toEqual(dialog);
-    expect(dialog.querySelector('.modal-content strong')!.textContent).toEqual(
-      'Content',
-    );
+  it('does not expose an as prop for its fixed dialog root', () => {
+    expectTypeOf<ModalDialogProps>().not.toHaveProperty('as');
   });
 });

@@ -5,11 +5,6 @@ import type { LiteralUnion } from './types.js';
 
 export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Element used to render the component.
-   */
-  as?: React.ElementType | undefined;
-
-  /**
    * @default 'modal'
    */
   bsPrefix?: string | undefined;
@@ -50,7 +45,6 @@ export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
   (
     {
-      as: Component = 'div',
       bsPrefix,
       className,
       contentClassName,
@@ -72,7 +66,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
         : `${bsPrefix}-fullscreen`;
 
     return (
-      <Component
+      <div
         {...props}
         ref={ref}
         className={clsx(
@@ -87,7 +81,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
         <div className={clsx(`${bsPrefix}-content`, contentClassName)}>
           {children}
         </div>
-      </Component>
+      </div>
     );
   },
 );
