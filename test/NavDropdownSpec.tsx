@@ -89,6 +89,71 @@ describe('<NavDropdown>', () => {
     expect(document.querySelector('.dropdown-menu-dark')).toBeDefined();
   });
 
+  describe('tabIndex', () => {
+    it('should forward tabIndex to the toggle element', () => {
+      render(
+        <NavDropdown id="test-id" title="Title" tabIndex={3} data-testid="test">
+          <DropdownItem eventKey="1">Item 1</DropdownItem>
+        </NavDropdown>,
+      );
+      const toggle = screen.getByTestId('test').firstElementChild!;
+      expect(toggle.getAttribute('tabindex')).toEqual('3');
+    });
+
+    it('should forward tabIndex={-1} to the toggle element', () => {
+      render(
+        <NavDropdown
+          id="test-id"
+          title="Title"
+          tabIndex={-1}
+          data-testid="test"
+        >
+          <DropdownItem eventKey="1">Item 1</DropdownItem>
+        </NavDropdown>,
+      );
+      const toggle = screen.getByTestId('test').firstElementChild!;
+      expect(toggle.getAttribute('tabindex')).toEqual('-1');
+    });
+
+    it('should forward tabIndex={0} to the toggle element', () => {
+      render(
+        <NavDropdown id="test-id" title="Title" tabIndex={0} data-testid="test">
+          <DropdownItem eventKey="1">Item 1</DropdownItem>
+        </NavDropdown>,
+      );
+      const toggle = screen.getByTestId('test').firstElementChild!;
+      expect(toggle.getAttribute('tabindex')).toEqual('0');
+    });
+
+    it('should use default tabIndex when not specified', () => {
+      render(
+        <NavDropdown id="test-id" title="Title" data-testid="test">
+          <DropdownItem eventKey="1">Item 1</DropdownItem>
+        </NavDropdown>,
+      );
+      const toggle = screen.getByTestId('test').firstElementChild!;
+      // useButtonProps in @restart/ui defaults tabIndex to 0 for anchor elements
+      expect(toggle.getAttribute('tabindex')).toEqual('0');
+    });
+
+    it('should not apply tabIndex to toggle when disabled', () => {
+      render(
+        <NavDropdown
+          id="test-id"
+          title="Title"
+          disabled
+          tabIndex={5}
+          data-testid="test"
+        >
+          <DropdownItem eventKey="1">Item 1</DropdownItem>
+        </NavDropdown>,
+      );
+      const toggle = screen.getByTestId('test').firstElementChild!;
+      // useButtonProps removes tabIndex from disabled elements
+      expect(toggle.getAttribute('tabindex')).toBeNull();
+    });
+  });
+
   it('sets data-bs-popper attribute on dropdown menu', () => {
     render(
       <Navbar>
