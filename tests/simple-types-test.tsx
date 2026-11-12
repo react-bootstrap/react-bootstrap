@@ -50,6 +50,7 @@ import {
   ModalDialog,
 } from '../src';
 import BootstrapModalManager from '../src/BootstrapModalManager';
+import { classTextMonospace } from '../src/Utility';
 
 import { CarouselRef } from '../src/Carousel';
 
@@ -1014,6 +1015,7 @@ const MegaComponent = () => (
       direction="vertical"
       gap={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
     />
+    <div className={classTextMonospace} />
     {/* // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError? */}
     {/*
     <Tabs invalidProp="2" />; // $ExpectError
