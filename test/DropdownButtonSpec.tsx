@@ -2,6 +2,38 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import DropdownButton from '../src/DropdownButton';
 import DropdownItem from '../src/DropdownItem';
+import NavDropdown from '../src/NavDropdown';
+import SplitButton from '../src/SplitButton';
+
+describe.each([
+  ['DropdownButton', DropdownButton, 'Choice'],
+  ['NavDropdown', NavDropdown, 'Choice'],
+  ['SplitButton', SplitButton, 'Toggle dropdown'],
+] as const)('%s', (_name, Button, toggleName) => {
+  it('closes an open menu when disabled', () => {
+    const onSelect = vi.fn();
+    const button = (disabled: boolean) => (
+      <Button title="Choice" disabled={disabled} onSelect={onSelect}>
+        <DropdownItem eventKey="bravo">Bravo</DropdownItem>
+      </Button>
+    );
+    const { rerender } = render(button(false));
+    const toggle = () => screen.getByRole('button', { name: toggleName });
+
+    fireEvent.click(toggle());
+    expect(toggle().getAttribute('aria-expanded')).toBe('true');
+
+    rerender(button(true));
+    expect(toggle().getAttribute('aria-expanded')).toBe('false');
+    expect(onSelect).not.toHaveBeenCalled();
+
+    rerender(button(false));
+    expect(toggle().getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(toggle());
+    fireEvent.click(screen.getByText('Bravo'));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+});
 
 describe('<DropdownButton>', () => {
   it('renders a toggle with the title prop', () => {

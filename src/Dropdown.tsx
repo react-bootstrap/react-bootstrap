@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import BaseDropdown, { ToggleMetadata } from '@restart/ui/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
@@ -24,12 +24,15 @@ export interface DropdownProps
       'onSelect' | 'children' | 'onToggle'
     > {}
 
-const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
-  React.forwardRef<HTMLElement, DropdownProps>((pProps, ref) => {
+type DropdownInternalProps = DropdownProps & { disableMenu?: boolean };
+
+const DropdownInternal = React.forwardRef<HTMLElement, DropdownInternalProps>(
+  (pProps, ref) => {
     const {
       bsPrefix,
       drop = 'down',
-      show,
+      show: requestedShow,
+      disableMenu,
       className,
       align = 'start',
       onSelect,
@@ -41,6 +44,17 @@ const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
       autoClose = true,
       ...props
     } = useUncontrolled(pProps, { show: 'onToggle' });
+
+    const show = !disableMenu && requestedShow;
+    const closeDisabledMenu = useEventCallback(() => {
+      if (requestedShow) {
+        onToggle?.(false, { source: 'disabled', originalEvent: undefined });
+      }
+    });
+
+    useEffect(() => {
+      if (disableMenu) closeDisabledMenu();
+    }, [disableMenu, closeDisabledMenu]);
 
     const isInputGroup = useContext(InputGroupContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
@@ -61,6 +75,8 @@ const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
 
     const handleToggle = useEventCallback(
       (nextShow: boolean, meta: ToggleMetadata) => {
+        if (disableMenu) return;
+
         /** Checking if target of event is ToggleButton,
          * if it is then nullify mousedown event
          */
@@ -130,8 +146,13 @@ const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
         </BaseDropdown>
       </DropdownContext.Provider>
     );
-  });
+  },
+);
 
+export { DropdownInternal };
+
+const Dropdown: DynamicRefForwardingComponent<'div', DropdownProps> =
+  DropdownInternal;
 Dropdown.displayName = 'Dropdown';
 
 export default Object.assign(Dropdown, {

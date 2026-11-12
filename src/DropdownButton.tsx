@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
-import Dropdown from './Dropdown.js';
+import { DropdownInternal } from './Dropdown.js';
 import DropdownToggle, { type PropsFromToggle } from './DropdownToggle.js';
 import DropdownMenu, { type DropdownMenuVariant } from './DropdownMenu.js';
 import type { BsDropdownProps } from './types.js';
@@ -91,7 +91,7 @@ const DropdownButton: DynamicRefForwardingComponent<
     },
     ref,
   ) => (
-    <Dropdown ref={ref} {...props}>
+    <DropdownInternal ref={ref} {...props} disableMenu={disabled}>
       <DropdownToggle
         id={id}
         href={href}
@@ -111,7 +111,7 @@ const DropdownButton: DynamicRefForwardingComponent<
       >
         {children}
       </DropdownMenu>
-    </Dropdown>
+    </DropdownInternal>
   ),
 );
 
