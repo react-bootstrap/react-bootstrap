@@ -89,6 +89,16 @@ describe('<NavDropdown>', () => {
     expect(document.querySelector('.dropdown-menu-dark')).toBeDefined();
   });
 
+  it('should forward tabIndex to the toggle element', () => {
+    render(
+      <NavDropdown id="test-id" title="Title" tabIndex={3} data-testid="test">
+        <DropdownItem eventKey="1">Item 1</DropdownItem>
+      </NavDropdown>,
+    );
+    const toggle = screen.getByTestId('test').firstElementChild!;
+    expect(toggle.getAttribute('tabindex')).toEqual('3');
+  });
+
   it('sets data-bs-popper attribute on dropdown menu', () => {
     render(
       <Navbar>

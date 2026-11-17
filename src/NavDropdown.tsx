@@ -57,6 +57,11 @@ export interface NavDropdownProps
    * Omitting this will use the default light color.
    */
   menuVariant?: DropdownMenuVariant | undefined;
+
+  /**
+   * An optional tabIndex for the toggle element.
+   */
+  tabIndex?: number | undefined;
 }
 
 const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
@@ -74,6 +79,7 @@ const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
         active,
         renderMenuOnMount,
         menuVariant,
+        tabIndex,
         ...props
       }: NavDropdownProps,
       ref,
@@ -94,6 +100,7 @@ const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
             disabled={disabled}
             childBsPrefix={bsPrefix}
             as={NavLink}
+            tabIndex={tabIndex}
           >
             {title}
           </Dropdown.Toggle>
