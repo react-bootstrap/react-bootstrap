@@ -1,4 +1,4 @@
-import transitionEnd from 'dom-helpers/transitionEnd';
+import transitionEnd from './internal/transitionEnd.js';
 
 export function parseDuration(
   node: HTMLElement,
