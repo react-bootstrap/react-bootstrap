@@ -13,7 +13,7 @@ describe('Badge', () => {
     const badge = screen.getByTestId('test');
     expect(badge.innerText).toEqual('Message');
     expect(badge.classList).toContain('badge');
-    expect(badge.classList).toContain('bg-primary');
+    expect(badge.classList).toContain('text-bg-primary');
     expect(badge.classList).toContain('rounded-pill');
   });
 
@@ -33,7 +33,7 @@ describe('Badge', () => {
     render(<Badge data-testid="test">Message</Badge>);
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList).toContain('bg-primary');
+    expect(badge.classList).toContain('text-bg-primary');
   });
 
   it('Should use bg class', () => {
@@ -44,7 +44,7 @@ describe('Badge', () => {
     );
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList).toContain('bg-danger');
+    expect(badge.classList).toContain('text-bg-danger');
   });
 
   it('Should not have bg class when bg=null', () => {
@@ -55,6 +55,6 @@ describe('Badge', () => {
     );
 
     const badge = screen.getByTestId('test');
-    expect(badge.classList).not.toContain('bg-primary');
+    expect(badge.classList).not.toContain('text-bg-primary');
   });
 });

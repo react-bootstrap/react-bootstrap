@@ -8,13 +8,9 @@ function VariationsExample() {
       <Badge bg="secondary">Secondary</Badge>
       <Badge bg="success">Success</Badge>
       <Badge bg="danger">Danger</Badge>
-      <Badge bg="warning" text="dark">
-        Warning
-      </Badge>
+      <Badge bg="warning">Warning</Badge>
       <Badge bg="info">Info</Badge>
-      <Badge bg="light" text="dark">
-        Light
-      </Badge>
+      <Badge bg="light">Light</Badge>
       <Badge bg="dark">Dark</Badge>
     </Stack>
   );

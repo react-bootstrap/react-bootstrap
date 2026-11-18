@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import type { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
-import type { Color, Variant } from './types.js';
+import type { Variant } from './types.js';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -26,13 +26,6 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
    * Make badges more rounded with some additional horizontal padding
    */
   pill?: boolean | undefined;
-
-  /**
-   * Sets badge text color
-   *
-   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'white' | 'muted' | undefined}
-   */
-  text?: Color | undefined;
 }
 
 const Badge: DynamicRefForwardingComponent<'span', BadgeProps> =
@@ -42,7 +35,6 @@ const Badge: DynamicRefForwardingComponent<'span', BadgeProps> =
         bsPrefix,
         bg = 'primary',
         pill = false,
-        text,
         className,
         as: Component = 'span',
         ...props
@@ -58,8 +50,7 @@ const Badge: DynamicRefForwardingComponent<'span', BadgeProps> =
             className,
             prefix,
             pill && `rounded-pill`,
-            text && `text-${text}`,
-            bg && `bg-${bg}`,
+            bg && `text-bg-${bg}`,
           )}
         />
       );
