@@ -22,7 +22,7 @@ export interface AccordionButtonProps extends React.ButtonHTMLAttributes<HTMLBut
 }
 
 const AccordionButton: DynamicRefForwardingComponent<
-  'div',
+  'button',
   AccordionButtonProps
 > = React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
   (
