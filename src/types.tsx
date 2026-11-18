@@ -46,19 +46,6 @@ export type ButtonVariant =
   | 'outline-info'
   | 'outline-dark'
   | 'outline-light';
-export type Color = LiteralUnion<
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'dark'
-  | 'light'
-  | 'white'
-  | 'muted',
-  string
->;
 
 export type Placement = import('@restart/ui/usePopper').Placement;
 

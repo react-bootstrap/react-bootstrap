@@ -11,7 +11,7 @@ import CardLink from './CardLink.js';
 import CardSubtitle from './CardSubtitle.js';
 import CardText from './CardText.js';
 import CardTitle from './CardTitle.js';
-import type { Color, Variant } from './types.js';
+import type { Variant } from './types.js';
 
 export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -30,13 +30,6 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
    * @type {'primary' | 'secondary' | 'success' |'danger' | 'warning' | 'info' | 'dark' | 'light' | undefined}
    */
   bg?: Variant | undefined;
-
-  /**
-   * Sets card text color
-   *
-   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'white' | 'muted' | undefined}
-   */
-  text?: Color | undefined;
 
   /**
    * Sets card border color
@@ -61,7 +54,6 @@ const Card: DynamicRefForwardingComponent<'div', CardProps> = React.forwardRef<
       bsPrefix,
       className,
       bg,
-      text,
       border,
       body = false,
       children,
@@ -80,8 +72,7 @@ const Card: DynamicRefForwardingComponent<'div', CardProps> = React.forwardRef<
         className={clsx(
           className,
           prefix,
-          bg && `bg-${bg}`,
-          text && `text-${text}`,
+          bg && `text-bg-${bg}`,
           border && `border-${border}`,
         )}
       >

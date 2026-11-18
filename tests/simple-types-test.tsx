@@ -184,7 +184,6 @@ const MegaComponent = () => (
       bg="primary"
       body
       border="primary"
-      text="primary"
       bsPrefix="card"
       style={{ width: '18rem' }}
     >

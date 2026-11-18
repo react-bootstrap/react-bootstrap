@@ -16,7 +16,6 @@ function BgColorExample() {
         <Card
           bg={variant.toLowerCase()}
           key={variant}
-          text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
           style={{ width: '18rem' }}
           className="mb-2"
         >
