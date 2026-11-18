@@ -16,13 +16,13 @@ function PillExample() {
       <Badge pill bg="danger">
         Danger
       </Badge>
-      <Badge pill bg="warning" text="dark">
+      <Badge pill bg="warning">
         Warning
       </Badge>
       <Badge pill bg="info">
         Info
       </Badge>
-      <Badge pill bg="light" text="dark">
+      <Badge pill bg="light">
         Light
       </Badge>
       <Badge pill bg="dark">
