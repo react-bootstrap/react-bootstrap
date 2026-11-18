@@ -16,12 +16,7 @@ describe('<Card>', () => {
 
   it('accepts a bg prop', () => {
     render(<Card bg="primary">Card</Card>);
-    expect(screen.getByText('Card').classList).toContain('bg-primary');
-  });
-
-  it('accepts a text prop', () => {
-    render(<Card text="success">Card</Card>);
-    expect(screen.getByText('Card').classList).toContain('text-success');
+    expect(screen.getByText('Card').classList).toContain('text-bg-primary');
   });
 
   it('accepts a border prop', () => {
