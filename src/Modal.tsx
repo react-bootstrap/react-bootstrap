@@ -191,9 +191,14 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
       }
     });
 
+    const cleanupStaticModalAnimation = () => {
+      removeStaticModalAnimationRef.current?.();
+      removeStaticModalAnimationRef.current = null;
+    };
+
     useWillUnmount(() => {
       window.removeEventListener('resize', handleWindowResize);
-      removeStaticModalAnimationRef.current?.();
+      cleanupStaticModalAnimation();
     });
 
     // We prevent the modal from closing during a drag by detecting where the
@@ -213,10 +218,12 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     const handleStaticModalAnimation = () => {
       setAnimateStaticModal(true);
       if (modal?.dialog) {
+        cleanupStaticModalAnimation();
         removeStaticModalAnimationRef.current = transitionEnd(
           modal.dialog as any,
           () => {
             setAnimateStaticModal(false);
+            cleanupStaticModalAnimation();
           },
         );
       }
@@ -267,7 +274,8 @@ const Modal = React.forwardRef<ModalHandle, ModalProps>(
     };
 
     const handleExit = (node) => {
-      removeStaticModalAnimationRef.current?.();
+      cleanupStaticModalAnimation();
+      setAnimateStaticModal(false);
       onExit?.(node);
     };
 
