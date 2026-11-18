@@ -6,7 +6,6 @@ import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import useWillUnmount from '@restart/hooks/useWillUnmount';
-import transitionEnd from 'dom-helpers/transitionEnd';
 import * as React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import BaseModal, { type ModalHandle } from '@restart/ui/Modal';
@@ -19,6 +18,7 @@ import ModalFooter from './ModalFooter.js';
 import ModalHeader from './ModalHeader.js';
 import ModalTitle from './ModalTitle.js';
 import { useBootstrapPrefix, useIsRTL } from './ThemeProvider.js';
+import transitionEnd from './internal/transitionEnd.js';
 import type { BaseModalProps, LiteralUnion } from './types.js';
 
 export interface ModalProps extends BaseModalProps {
