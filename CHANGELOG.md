@@ -1,3 +1,41 @@
+# [3.0.0-beta.7](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.6...v3.0.0-beta.7) (2026-11-19)
+
+
+### Bug Fixes
+
+* **AccordionButton:** correct default ref type ([#7064](https://github.com/react-bootstrap/react-bootstrap/issues/7064)) ([686ac54](https://github.com/react-bootstrap/react-bootstrap/commit/686ac545d0e57053c9e08e99f5d7cbc04f8b6622))
+* **Modal:** fix memory leak ([#7075](https://github.com/react-bootstrap/react-bootstrap/issues/7075)) ([c24500d](https://github.com/react-bootstrap/react-bootstrap/commit/c24500dab5612bfe742b5b2d7e855ae309274a6e))
+* **Modal:** fix race condition on close ([#7074](https://github.com/react-bootstrap/react-bootstrap/issues/7074)) ([b586425](https://github.com/react-bootstrap/react-bootstrap/commit/b58642581a1ecacc82f70054431574cdaf6b6cd4))
+* **Modal:** prevent null scrollHeight error on window resize ([#7048](https://github.com/react-bootstrap/react-bootstrap/issues/7048)) ([455bb94](https://github.com/react-bootstrap/react-bootstrap/commit/455bb94b8f78d8644808644edb1887c8a6bea213))
+* **NavDropdown:** forward tabIndex to toggle element ([#7071](https://github.com/react-bootstrap/react-bootstrap/issues/7071)) ([f58a22c](https://github.com/react-bootstrap/react-bootstrap/commit/f58a22ce698fbea2aa4723c9100786dcf01b2da9))
+* **OverlayTrigger:** warn once on hover trigger warning ([#7055](https://github.com/react-bootstrap/react-bootstrap/issues/7055)) ([6519809](https://github.com/react-bootstrap/react-bootstrap/commit/6519809c7bc05a903e657ecec6c188354367bfe1))
+* restore CDN build ([#7059](https://github.com/react-bootstrap/react-bootstrap/issues/7059)) ([d18052c](https://github.com/react-bootstrap/react-bootstrap/commit/d18052c84a8b868328356174890ff86d06b361c3))
+* **ToggleButton:** do not render tab index on label ([#7054](https://github.com/react-bootstrap/react-bootstrap/issues/7054)) ([1d0a6e4](https://github.com/react-bootstrap/react-bootstrap/commit/1d0a6e4bc6a182aedbf9ed000075dbae240a8b1d))
+* **types:** add undefined to optional props ([#7053](https://github.com/react-bootstrap/react-bootstrap/issues/7053)) ([3855589](https://github.com/react-bootstrap/react-bootstrap/commit/38555891f2827d54012513b9bf70265f1269e132))
+* **types:** hide private types from d.ts files ([#7062](https://github.com/react-bootstrap/react-bootstrap/issues/7062)) ([94517ea](https://github.com/react-bootstrap/react-bootstrap/commit/94517eae720813c9b83eeac628e3a29dc333d19b))
+
+
+* feat(Card)!: remove text prop (#7077) ([44933ac](https://github.com/react-bootstrap/react-bootstrap/commit/44933ac64efeb2d533ba4ff75c1539f36278b10c)), closes [#7077](https://github.com/react-bootstrap/react-bootstrap/issues/7077)
+* feat(Badge)!: remove text prop (#7076) ([1252b0a](https://github.com/react-bootstrap/react-bootstrap/commit/1252b0a4ea1f53888e19a05c788114965bfd7aac)), closes [#7076](https://github.com/react-bootstrap/react-bootstrap/issues/7076)
+* fix(ProgressBar)!: render progress container for stacked progress bars (#7061) ([525290f](https://github.com/react-bootstrap/react-bootstrap/commit/525290ff082b4707c36f7eb5f9bac7d6e7eba899)), closes [#7061](https://github.com/react-bootstrap/react-bootstrap/issues/7061)
+
+
+### Features
+
+* **InputGroupText:** export InputGroupText from index ([#7060](https://github.com/react-bootstrap/react-bootstrap/issues/7060)) ([2b7216b](https://github.com/react-bootstrap/react-bootstrap/commit/2b7216bf69b6a345c366e938b267ee8ef1ad562e))
+* **types:** use LiteralUnion for better IDE experience ([#7063](https://github.com/react-bootstrap/react-bootstrap/issues/7063)) ([6a286bc](https://github.com/react-bootstrap/react-bootstrap/commit/6a286bc64b492e4cf9d1c039f87dbbbeee05e64e))
+
+
+### BREAKING CHANGES
+
+* Remove text prop
+* Remove text prop
+* Change rendering to match upstream Bootstrap
+
+
+
+
+
 # [3.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2026-10-22)
 
 
