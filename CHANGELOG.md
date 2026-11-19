@@ -15,11 +15,6 @@
 * **types:** hide private types from d.ts files ([#7062](https://github.com/react-bootstrap/react-bootstrap/issues/7062)) ([94517ea](https://github.com/react-bootstrap/react-bootstrap/commit/94517eae720813c9b83eeac628e3a29dc333d19b))
 
 
-* feat(Card)!: remove text prop (#7077) ([44933ac](https://github.com/react-bootstrap/react-bootstrap/commit/44933ac64efeb2d533ba4ff75c1539f36278b10c)), closes [#7077](https://github.com/react-bootstrap/react-bootstrap/issues/7077)
-* feat(Badge)!: remove text prop (#7076) ([1252b0a](https://github.com/react-bootstrap/react-bootstrap/commit/1252b0a4ea1f53888e19a05c788114965bfd7aac)), closes [#7076](https://github.com/react-bootstrap/react-bootstrap/issues/7076)
-* fix(ProgressBar)!: render progress container for stacked progress bars (#7061) ([525290f](https://github.com/react-bootstrap/react-bootstrap/commit/525290ff082b4707c36f7eb5f9bac7d6e7eba899)), closes [#7061](https://github.com/react-bootstrap/react-bootstrap/issues/7061)
-
-
 ### Features
 
 * **InputGroupText:** export InputGroupText from index ([#7060](https://github.com/react-bootstrap/react-bootstrap/issues/7060)) ([2b7216b](https://github.com/react-bootstrap/react-bootstrap/commit/2b7216bf69b6a345c366e938b267ee8ef1ad562e))
@@ -28,9 +23,9 @@
 
 ### BREAKING CHANGES
 
-* Remove text prop
-* Remove text prop
-* Change rendering to match upstream Bootstrap
+* **Badge:** Remove text prop
+* **Card:** Remove text prop
+* **ProgressBar:** Change rendering to match upstream Bootstrap
 
 
 
