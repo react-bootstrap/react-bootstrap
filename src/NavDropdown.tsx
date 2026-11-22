@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { DynamicRefForwardingComponent } from '@restart/ui/types';
 import { useBootstrapPrefix } from './ThemeProvider.js';
-import Dropdown from './Dropdown.js';
+import Dropdown, { DropdownInternal } from './Dropdown.js';
 import type { DropdownMenuVariant } from './DropdownMenu.js';
 import NavLink from './NavLink.js';
 import type { BsDropdownProps } from './types.js';
@@ -65,7 +65,7 @@ export interface NavDropdownProps
 }
 
 const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
-  React.forwardRef(
+  React.forwardRef<HTMLElement, NavDropdownProps>(
     (
       {
         id,
@@ -88,9 +88,10 @@ const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
       const navItemPrefix = useBootstrapPrefix(undefined, 'nav-item');
 
       return (
-        <Dropdown
+        <DropdownInternal
           ref={ref}
           {...props}
+          disableMenu={disabled}
           className={clsx(className, navItemPrefix)}
         >
           <Dropdown.Toggle
@@ -113,7 +114,7 @@ const NavDropdown: DynamicRefForwardingComponent<'div', NavDropdownProps> =
           >
             {children}
           </Dropdown.Menu>
-        </Dropdown>
+        </DropdownInternal>
       );
     },
   );

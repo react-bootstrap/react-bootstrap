@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from './Button.js';
 import ButtonGroup from './ButtonGroup.js';
-import Dropdown from './Dropdown.js';
+import Dropdown, { DropdownInternal } from './Dropdown.js';
 import type { PropsFromToggle } from './DropdownToggle.js';
 import { BsDropdownProps } from './types.js';
 
@@ -90,15 +90,21 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       renderMenuOnMount,
       rootCloseEvent,
       flip,
+      disabled,
       ...props
     },
     ref,
   ) => (
-    <Dropdown ref={ref} {...props} as={ButtonGroup}>
+    <DropdownInternal
+      ref={ref}
+      {...props}
+      as={ButtonGroup}
+      disableMenu={disabled}
+    >
       <Button
         size={size}
         variant={variant}
-        disabled={props.disabled}
+        disabled={disabled}
         bsPrefix={bsPrefix}
         href={href}
         target={target}
@@ -112,7 +118,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
         id={id}
         size={size}
         variant={variant}
-        disabled={props.disabled}
+        disabled={disabled}
         childBsPrefix={bsPrefix}
       >
         <span className="visually-hidden">{toggleLabel}</span>
@@ -126,7 +132,7 @@ const SplitButton = React.forwardRef<HTMLElement, SplitButtonProps>(
       >
         {children}
       </Dropdown.Menu>
-    </Dropdown>
+    </DropdownInternal>
   ),
 );
 
