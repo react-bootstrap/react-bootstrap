@@ -5,11 +5,6 @@ import type { LiteralUnion } from './types.js';
 
 export interface ModalDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Element used to render the component.
-   */
-  as?: React.ElementType | undefined;
-
-  /**
    * @default 'modal'
    */
   bsPrefix?: string | undefined;
