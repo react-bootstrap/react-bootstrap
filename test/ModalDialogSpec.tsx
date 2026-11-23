@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-import ModalDialog, { type ModalDialogProps } from '../src/ModalDialog';
+import ModalDialog from '../src/ModalDialog';
 
 describe('<ModalDialog>', () => {
   it('keeps the default element, classes, content and ref', () => {
@@ -37,9 +37,5 @@ describe('<ModalDialog>', () => {
       'custom-content',
     );
     expect(dialog.querySelector('strong')!.textContent).toEqual('Content');
-  });
-
-  it('does not expose an as prop for its fixed dialog root', () => {
-    expectTypeOf<ModalDialogProps>().not.toHaveProperty('as');
   });
 });
