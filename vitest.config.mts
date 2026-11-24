@@ -33,6 +33,7 @@ export default defineConfig({
         ...coverageConfigDefaults.exclude,
         'www/**',
         'tools/**',
+        'type-tests/**',
         '**/*.js',
       ],
     },

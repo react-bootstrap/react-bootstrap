@@ -20,8 +20,7 @@ type Dimension = 'height' | 'width';
 
 export interface CollapseProps
   extends TransitionCallbacks,
-    Pick<React.HTMLAttributes<HTMLElement>, 'role'> {
-  className?: string;
+    Pick<React.HTMLAttributes<HTMLElement>, 'className' | 'role'> {
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
