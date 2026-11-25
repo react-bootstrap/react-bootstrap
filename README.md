@@ -9,7 +9,34 @@
 [![Discord][discord-badge]][discord]
 [![Netlify][netlify-badge]][netlify]
 
-## Bootstrap compatibility
+## Usage
+
+```bash
+npm install react-bootstrap bootstrap
+```
+Example usage:
+```js
+// React-Bootstrap packages need bootsrap to be available.
+// Also it can be imported once in index.js.
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card';
+
+function MyCard() {
+    return (
+            <Card>
+                <Card.Header>
+                    <h2>Hi!</h2>
+                </Card.Header>
+            </Card>
+    )
+}
+```
+
+**Note:** The current package needs [bootstrap](https://getbootstrap.com) as a peer dependency and does NOT come with any default version of it; so make sure to have bootstrap available in your pages.  
+
+To ensure that the `react-bootstrap` version is compatible with the used `bootstrap`, see the below section.  
+
+### Bootstrap compatibility
 
 React-Bootstrap is compatible with various versions of Bootstrap.  As such, you need to ensure you are using the correct combination of versions.  
 
