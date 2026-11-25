@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
 
@@ -92,6 +93,47 @@ describe('<Tabs>', () => {
 
     fireEvent.click(screen.getByText('Tab 2'));
     expect(onSelectSpy).toHaveBeenCalledWith('2', expect.anything());
+  });
+
+  it('Should keep manual activation tabs inactive until selected from keyboard', async () => {
+    const user = userEvent.setup();
+    const onSelectSpy = vi.fn();
+
+    render(
+      <Tabs
+        id="test"
+        defaultActiveKey={1}
+        onSelect={onSelectSpy}
+        manualActivation
+      >
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
+
+    const firstTabButton = screen.getByRole('tab', { name: 'Tab 1' });
+    const secondTabButton = screen.getByRole('tab', { name: 'Tab 2' });
+    const firstTabContent = screen.getByText('Tab 1 content');
+
+    await user.tab();
+    expect(document.activeElement).toBe(firstTabButton);
+
+    await user.keyboard('{ArrowRight}');
+
+    expect(document.activeElement).toBe(secondTabButton);
+    expect(onSelectSpy).not.toHaveBeenCalled();
+    expect(firstTabButton.classList).toContain('active');
+    expect(firstTabContent.classList).toContain('active');
+    expect(secondTabButton.classList).not.toContain('active');
+
+    await user.keyboard('{Enter}');
+
+    expect(onSelectSpy).toHaveBeenCalledWith('2', expect.anything());
+    expect(secondTabButton.classList).toContain('active');
   });
 
   it('Should have children with the correct DOM properties', () => {
